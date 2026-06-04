@@ -191,7 +191,7 @@ const EDITIONS = [
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "프로모션 영상 보기", url: "https://drive.google.com/file/d/1F3PssuwdFkcWaiT6fZHgQlz44As0I2nq/view?usp=sharing", tags: ["Generative AI", "Video", "Audio Branding"] },
   { n: "04", color: "var(--butter)", Icon: Newspaper, title: "6·3 지방선거\nAI 카드뉴스 & 시네마틱 영상",
     desc: "GPT Image-2·Suno AI·ElevenLabs를 수직 통합해 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 나레이션 영상을 제작. 사회학적 인사이트를 2030 세대가 소비하는 포맷으로 번역한 생성형 AI 풀스택 미디어 프로젝트.",
-    status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/14xs4evtpvj6GymrTlcDSGH-ehSsmSLkg/view?usp=sharing", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
+    status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
 ];
 
 function Artifacts() {
