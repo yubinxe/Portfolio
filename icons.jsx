@@ -21,8 +21,9 @@ const BarChart     = (p) => <Ic {...p}><line x1="12" y1="20" x2="12" y2="10" /><
 const Quote        = (p) => <Ic {...p}><path d="M9 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2-1 3-3 4" /><path d="M19 11h-3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2-1 3-3 4" /></Ic>;
 const MapPin       = (p) => <Ic {...p}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></Ic>;
 const Award        = (p) => <Ic {...p}><circle cx="12" cy="8" r="6" /><path d="M15.5 13 17 22l-5-3-5 3 1.5-9" /></Ic>;
+const Newspaper    = (p) => <Ic {...p}><path d="M4 3h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" /><path d="M8 7h5M8 11h8M8 15h5" /><path d="M17 3v4h2" /></Ic>;
 
 Object.assign(window, {
   ArrowUpRight, ArrowRight, ArrowDown, ExternalLink, Sparkle, Scale,
-  Cpu, LayoutGrid, Mail, PlayCircle, BarChart, Quote, MapPin, Award,
+  Cpu, LayoutGrid, Mail, PlayCircle, BarChart, Quote, MapPin, Award, Newspaper,
 });
