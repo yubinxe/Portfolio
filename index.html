@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yubin Kim — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#111111",
+  "pastels": [
+    "#FFD23F",
+    "#7ED957",
+    "#5B9DF0",
+    "#B26BE8",
+    "#FF7EC4"
+  ],
+  "motion": "bouncy",
+  "heroCase": "stacked"
+}/*EDITMODE-END*/;
+
+const PALETTES = {
+  "Original pastels": ["#F4D970", "#A6D86A", "#8FB8F2", "#C7AEE8", "#F4A8D0"],
+  "Muted sorbet":     ["#EFCB8B", "#BFD6A0", "#A9C2D8", "#C9B8DC", "#E6B9C8"],
+  "Bold candy":       ["#FFD23F", "#7ED957", "#5B9DF0", "#B26BE8", "#FF7EC4"],
+};
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    const r = document.documentElement;
+    r.style.setProperty("--accent", t.accent);
+    const p = t.pastels || PALETTES["Original pastels"];
+    ["--butter", "--apple", "--sky", "--lilac", "--pink"].forEach((v, i) => r.style.setProperty(v, p[i]));
+    document.body.classList.toggle("motion-calm", t.motion === "calm");
+  }, [t.accent, t.pastels, t.motion]);
+
+  const palName = Object.keys(PALETTES).find(k => JSON.stringify(PALETTES[k]) === JSON.stringify(t.pastels)) || "Original pastels";
+
+  return (
+    <div id="top">
+      <Nav />
+      <main>
+        <Hero />
+        <Marquee />
+        <Trajectory />
+        <Artifacts />
+        <About />
+        <Contact />
+      </main>
+
+      <TweaksPanel>
+        <TweakSection label="Palette" />
+        <TweakSelect label="Pastel set" value={palName}
+          options={Object.keys(PALETTES)}
+          onChange={(v) => setTweak("pastels", PALETTES[v])} />
+        <TweakColor label="Accent" value={t.accent}
+          options={["#111111", "#3A3631", "#7A5230", "#2B4A6F", "#6A4E8C"]}
+          onChange={(v) => setTweak("accent", v)} />
+        <TweakSection label="Motion" />
+        <TweakRadio label="Interaction" value={t.motion}
+          options={["bouncy", "calm"]}
+          onChange={(v) => setTweak("motion", v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

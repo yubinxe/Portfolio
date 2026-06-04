@@ -1,0 +1,366 @@
+/* ============================================================
+   ETHAN KIM — Portfolio
+   Fusion: Miu Miu (high-contrast type) × London Bagel Museum
+   (warm ecru archive) × Knotted (bouncy witty micro-interactions)
+   ============================================================ */
+
+:root {
+  --ecru: #F9F6F0;
+  --ecru-deep: #F1EBDD;
+  --paper: #FFFFFF;
+  --ink: #111111;
+  --ink-soft: #3A3631;
+  --line: #2A2722;
+
+  /* pastel pops (from the reference stickers) */
+  --butter: #F4D970;
+  --apple:  #A6D86A;
+  --sky:    #8FB8F2;
+  --lilac:  #C7AEE8;
+  --pink:   #F4A8D0;
+
+  /* accent — driven by tweaks */
+  --accent: #111111;
+  --accent-soft: #DCD2BD;
+
+  /* motion */
+  --bounce: cubic-bezier(.34, 1.56, .64, 1);
+  --pastel-strength: 1;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ecru);
+  color: var(--ink);
+  font-family: "Inter", "Pretendard", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--accent); color: var(--ecru); }
+
+/* ---------- type helpers ---------- */
+.font-serif   { font-family: "Playfair Display", "Pretendard", serif; }
+.font-sans    { font-family: "Inter", "Pretendard", sans-serif; }
+.font-ko      { font-family: "Pretendard", sans-serif; }
+.font-play    { font-family: "Fredoka", "Pretendard", sans-serif; }
+.font-myeongjo { font-family: "Nanum Myeongjo", "Playfair Display", serif; }
+
+/* ---------- About: portrait + statement ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: clamp(36px, 5vw, 76px);
+  align-items: center;
+}
+.about-photo { position: relative; justify-self: center; width: 100%; max-width: 400px; }
+.about-photo__frame {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1.5px solid var(--ink);
+  box-shadow: 0 28px 60px -22px rgba(17,17,17,.5), 0 3px 0 rgba(17,17,17,.12);
+  transform: rotate(-1.6deg);
+  transition: transform .5s var(--bounce);
+}
+.about-photo:hover .about-photo__frame { transform: rotate(0deg) scale(1.015); }
+.about-photo__frame img { display: block; width: 100%; height: auto; }
+.about-photo__tag {
+  position: absolute;
+  z-index: 3;
+  bottom: -14px; left: -14px;
+  transform: rotate(-6deg);
+}
+.about-photo__dot {
+  position: absolute;
+  z-index: 2;
+  top: -18px; right: -10px;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: #163A63;
+  border: 1.5px solid var(--ink);
+}
+@media (max-width: 820px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { margin: 16px auto 0; max-width: 320px; }
+}
+
+.eyebrow {
+  font-family: "Inter", "Pretendard", sans-serif;
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-size: clamp(10px, 1vw, 13px);
+}
+
+/* ============================================================
+   ORGANIC BLOB BACKGROUND (London Bagel archive texture)
+   ============================================================ */
+.blob-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.blob {
+  position: absolute;
+  background: var(--ecru-deep);
+  border-radius: 46% 54% 60% 40% / 52% 44% 56% 48%;
+  filter: blur(.3px);
+  opacity: .9;
+}
+
+/* leopard/organic speckle layer */
+.speckle {
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .5;
+  background-image:
+    radial-gradient(ellipse 38px 30px at 12% 22%, var(--ecru-deep) 60%, transparent 62%),
+    radial-gradient(ellipse 26px 34px at 28% 64%, var(--ecru-deep) 60%, transparent 62%),
+    radial-gradient(ellipse 44px 28px at 62% 18%, var(--ecru-deep) 60%, transparent 62%),
+    radial-gradient(ellipse 30px 40px at 82% 48%, var(--ecru-deep) 60%, transparent 62%),
+    radial-gradient(ellipse 34px 26px at 48% 86%, var(--ecru-deep) 60%, transparent 62%),
+    radial-gradient(ellipse 24px 30px at 90% 82%, var(--ecru-deep) 60%, transparent 62%);
+  background-repeat: no-repeat;
+}
+
+/* ============================================================
+   STICKERS / SPEECH BUBBLES (Knotted wit)
+   ============================================================ */
+.sticker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  font-family: "Fredoka", "Pretendard", sans-serif;
+  font-weight: 600;
+  color: var(--ink);
+  padding: .62em 1.05em;
+  border-radius: 999px;
+  line-height: 1.15;
+  box-shadow: 0 6px 0 rgba(17,17,17,.10), 0 10px 22px rgba(17,17,17,.10);
+  white-space: nowrap;
+}
+.sticker--bubble { border-radius: 26px; padding: .85em 1.15em; }
+.sticker--butter { background: var(--butter); }
+.sticker--apple  { background: var(--apple); }
+.sticker--sky    { background: var(--sky); }
+.sticker--lilac  { background: var(--lilac); }
+.sticker--pink   { background: var(--pink); }
+.sticker--ink    { background: var(--ink); color: var(--ecru); }
+
+/* little tail for speech bubbles */
+.sticker--bubble::after {
+  content: "";
+  position: absolute;
+  left: 22px; bottom: -9px;
+  width: 18px; height: 18px;
+  background: inherit;
+  border-radius: 0 0 6px 0;
+  transform: rotate(20deg);
+}
+
+/* floating animation */
+.float    { animation: float 6s ease-in-out infinite; }
+.float-2  { animation: float 7.5s ease-in-out infinite; animation-delay: -2s; }
+.float-3  { animation: float 8.5s ease-in-out infinite; animation-delay: -4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-14px) rotate(calc(var(--rot, 0deg) + 1.5deg)); }
+}
+
+/* hand-drawn squiggle */
+.squiggle { stroke: var(--ink); fill: none; stroke-width: 4; stroke-linecap: round; }
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--ecru);
+}
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2.5rem;
+  padding: .85rem 1.25rem;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+.marquee__track span { display: inline-flex; align-items: center; gap: 2.5rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+/* ============================================================
+   BUTTONS (Knotted bouncy)
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  font-family: "Inter", "Pretendard", sans-serif;
+  font-weight: 600;
+  font-size: .95rem;
+  letter-spacing: .01em;
+  padding: .85em 1.4em;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--ecru);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .35s var(--bounce), box-shadow .35s var(--bounce), background .25s ease;
+  box-shadow: 0 5px 0 rgba(17,17,17,.18);
+}
+.btn:hover { transform: translateY(-4px) scale(1.035); box-shadow: 0 11px 0 rgba(17,17,17,.16); }
+.btn:active { transform: translateY(-1px) scale(.99); box-shadow: 0 3px 0 rgba(17,17,17,.18); }
+.btn--ghost { background: transparent; color: var(--ink); box-shadow: 0 5px 0 rgba(17,17,17,.10); }
+.btn--ghost:hover { background: var(--ink); color: var(--ecru); }
+.btn svg { transition: transform .35s var(--bounce); }
+.btn:hover svg { transform: translate(3px, -3px); }
+
+/* nav link bouncy underline */
+.navlink {
+  position: relative;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  padding: .2em 0;
+  transition: color .2s ease;
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s var(--bounce);
+}
+.navlink:hover::after { transform: scaleX(1); }
+
+/* ============================================================
+   TIMELINE (THE TRAJECTORY)
+   ============================================================ */
+.timeline { position: relative; }
+.timeline__spine {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1.5px;
+  background: var(--ink);
+  opacity: .85;
+}
+.tl-row { position: relative; padding-left: clamp(28px, 5vw, 64px); }
+.tl-node {
+  position: absolute;
+  left: -7px; top: .55em;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--ecru);
+  border: 2.5px solid var(--ink);
+  transition: transform .4s var(--bounce), background .3s ease;
+}
+.tl-row:hover .tl-node { transform: scale(1.45); background: var(--accent-fill, var(--butter)); }
+.tl-year {
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ============================================================
+   EDITION CARDS (THE ARTIFACTS) — Knotted hover
+   ============================================================ */
+.edition {
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 26px;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  transition: transform .45s var(--bounce), box-shadow .45s var(--bounce);
+  box-shadow: 0 2px 0 rgba(17,17,17,.10);
+  overflow: hidden;
+}
+.edition:hover {
+  transform: translateY(-12px) rotate(-.6deg) scale(1.015);
+  box-shadow: 0 26px 50px -18px rgba(17,17,17,.4), 0 2px 0 rgba(17,17,17,.12);
+}
+.edition__chip {
+  position: absolute;
+  top: 1.3rem; right: 1.3rem;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: .72rem;
+  padding: .35em .8em;
+  border-radius: 999px;
+  background: var(--ecru-deep);
+  color: var(--ink-soft);
+  transition: transform .4s var(--bounce);
+}
+.edition:hover .edition__chip { transform: scale(1.08) rotate(3deg); }
+.edition__num {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  line-height: .9;
+  color: var(--accent-fill, var(--ink));
+  -webkit-text-stroke: 1px var(--ink);
+}
+.edition__index-band {
+  height: 6px; width: 56px; border-radius: 999px;
+  background: var(--accent-fill, var(--butter));
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s var(--bounce); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============================================================
+   MOTION-CALM tweak
+   ============================================================ */
+.motion-calm .float, .motion-calm .float-2, .motion-calm .float-3 { animation: none !important; }
+.motion-calm .marquee__track { animation-duration: 60s; }
+.motion-calm .edition:hover { transform: translateY(-6px); }
+.motion-calm .btn:hover { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .float, .float-2, .float-3, .marquee__track { animation: none !important; }
+  .reveal { transition: none; opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
+
+@media (max-width: 640px) {
+  .sticker { font-size: .82rem; }
+  .marquee__track { gap: 1.5rem; }
+  .marquee__track span { gap: 1.5rem; }
+}
+
+@media (max-width: 760px) {
+  .nav-desktop { display: none !important; }
+}
