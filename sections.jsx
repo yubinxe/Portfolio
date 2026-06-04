@@ -141,6 +141,8 @@ function Marquee() {
 const TRAJECTORY = [
   { year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서울시민기자단 & 서울청년파트너스 위원 활동",
     desc: "공공 레벨의 미디어 에디팅과 거시적 시정(市政) 트렌드 분석, 트렌디한 정책 제안 프로세스를 주도합니다." },
+  { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 활용 마케팅 기획자 양성 과정 4기 수료",
+    desc: "AI 기술을 활용한 부동산 시장 데이터 분석 및 타겟 세그먼트 도출 프로세스를 이해 및 매체별 디지털 마케팅 전략 수립 및 자동화 솔루션 기획 역량을 종합적으로 체화." },
   { year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
