@@ -194,6 +194,12 @@ const EDITIONS = [
   { n: "04", color: "var(--butter)", Icon: Newspaper, title: "6·3 지방선거\nAI 카드뉴스 & 시네마틱 영상",
     desc: "GPT Image-2·Suno AI·ElevenLabs를 수직 통합해 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 나레이션 영상을 제작. 사회학적 인사이트를 2030 세대가 소비하는 포맷으로 번역한 생성형 AI 풀스택 미디어 프로젝트.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
+  { n: "05", color: "var(--lilac)", Icon: Sparkle, title: "Veo 3 × Google Vids\n르엘 성수 브랜드 필름",
+    desc: "Google Vids에 탑재된 Veo 3 모델을 활용해 프리미엄 주거 브랜드 '르엘 성수'의 공간 가치와 무드를 시네마틱 영상 언어로 번역한 브랜드 홍보 필름. 텍스트 프롬프트만으로 고품질 무빙 이미지를 생성·편집하며 부동산 영상 제작 워크플로우를 재정의한 생성형 AI 프로젝트.",
+    status: "Google Drive 스트리밍 자산 구축 완료", cta: "홍보 영상 보기", url: "https://drive.google.com/file/d/1NQRlbAKrxlap8Nfdec3hAdx0pN3ewDhN/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Brand Film"] },
+  { n: "06", color: "var(--sky)", Icon: Award, title: "루이비통\nVeo 3 시네마틱 캠페인 필름",
+    desc: "동일한 Veo 3 파이프라인으로 메종 '루이비통'의 헤리티지와 장인정신을 무드 중심의 시네마틱 광고로 재해석한 럭셔리 브랜드 캠페인 필름. 생성형 AI만으로 하이엔드 패션 광고 특유의 질감과 톤을 구현해 브랜디드 콘텐츠 제작의 새로운 방식을 제안한 프로젝트.",
+    status: "Google Drive 스트리밍 자산 구축 완료", cta: "캠페인 영상 보기", url: "https://drive.google.com/file/d/1mIEmvwjPfZwuXYZRkWW9FzZU3uvCUq69/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Luxury Film"] },
 ];
 
 function Artifacts() {
@@ -201,7 +207,7 @@ function Artifacts() {
   return (
     <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
       <div className="wrap">
-        <SectionHead eyebrow="03 — Limited Editions" titleEn="The Artifacts" titleKo="KREMA AI 교육 과정 4개의 결과물" />
+        <SectionHead eyebrow="03 — Limited Editions" titleEn="The Artifacts" titleKo="KREMA AI 교육 과정 6개의 결과물" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "clamp(22px,3vw,34px)", marginTop: 64 }}>
           {EDITIONS.map((e, i) => (
             <article key={i} className="edition reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
