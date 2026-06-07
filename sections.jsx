@@ -274,7 +274,7 @@ function Contact() {
           새로운 협업과 프로젝트 또는 간단한 인사도 환영합니다.<br />함께 일하고 싶은 분들은 언제든 Contact 해주세요.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="mailto:hello@ethankim.dev" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
+          <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
             <Mail size={18} /> 인사 건네기
           </a>
           <a href="#artifacts" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "0 5px 0 rgba(249,246,240,.18)" }}>
