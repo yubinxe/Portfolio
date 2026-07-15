@@ -364,3 +364,85 @@ body {
 @media (max-width: 760px) {
   .nav-desktop { display: none !important; }
 }
+
+/* ============================================================
+   PRESS CARD — 연합뉴스TV 인터뷰 (법의 품격 × 미디어 아카이브)
+   ============================================================ */
+.press-card {
+  position: relative;
+  margin-top: 34px;
+  max-width: 480px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 22px;
+  padding: 18px 22px 16px;
+  transform: rotate(-1.2deg);
+  box-shadow: 0 3px 0 rgba(17,17,17,.12), 0 18px 40px -20px rgba(17,17,17,.35);
+  transition: transform .5s var(--bounce), box-shadow .5s var(--bounce);
+}
+.press-card:hover {
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 0 6px 0 rgba(17,17,17,.10), 0 26px 50px -20px rgba(17,17,17,.4);
+}
+.press-card__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+.press-card__live {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #D9382E;
+  flex-shrink: 0;
+  animation: onair 2.2s ease-in-out infinite;
+}
+@keyframes onair {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217,56,46,.45); }
+  50%      { box-shadow: 0 0 0 6px rgba(217,56,46,0); }
+}
+.press-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 13px;
+  border: 1px solid rgba(17,17,17,.14);
+  margin-top: 13px;
+}
+.press-card__quote {
+  margin: 14px 0 0;
+  font-weight: 700;
+  font-size: clamp(.98rem, 1.5vw, 1.08rem);
+  line-height: 1.62;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.press-card__caption {
+  margin: 9px 0 0;
+  font-size: .78rem;
+  color: var(--ink-soft);
+  opacity: .85;
+}
+.motion-calm .press-card__live { animation: none; }
+@media (prefers-reduced-motion: reduce) { .press-card__live { animation: none; } }
+
+/* ============================================================
+   SCROLL INK — 상단 진행 라인 (경국 네이비)
+   ============================================================ */
+.scroll-ink {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  background: var(--accent, #1F2D6B);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* marquee — 호버 시 정지 (읽는 이에 대한 예의) */
+.marquee:hover .marquee__track { animation-play-state: paused; }

@@ -26,8 +26,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["Manifesto", "#manifesto"], ["Trajectory", "#trajectory"],
-    ["Artifacts", "#artifacts"], ["About", "#about"], ["Contact", "#contact"],
+    ["선언", "#manifesto"], ["궤적", "#trajectory"],
+    ["작업", "#artifacts"], ["소개", "#about"], ["연락", "#contact"],
   ];
   return (
     <header style={{
@@ -39,8 +39,8 @@ function Nav() {
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
-          <span className="font-serif" style={{ fontWeight: 900, fontSize: 26, letterSpacing: "-.02em" }}>YK</span>
-          <span className="sticker sticker--butter" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>Portfolio ’26</span>
+          <img src="images/favicon.svg" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
+          <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>포트폴리오 ’26</span>
         </a>
         <nav style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
           <div className="nav-desktop" style={{ display: "flex", gap: "clamp(14px,2.4vw,32px)" }}>
@@ -143,6 +143,8 @@ const TRAJECTORY = [
     desc: "공공 레벨의 미디어 에디팅과 거시적 시정(市政) 트렌드 분석, 트렌디한 정책 제안 프로세스를 주도합니다." },
   { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 활용 마케팅 기획자 양성 과정 4기 수료",
     desc: "AI 기술을 활용한 부동산 시장 데이터 분석 및 타겟 세그먼트 도출 프로세스를 이해 및 매체별 디지털 마케팅 전략 수립 및 자동화 솔루션 기획 역량을 종합적으로 체화." },
+  { year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
+    desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
@@ -249,6 +251,29 @@ function About() {
             <p className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.5rem,3vw,2.55rem)", lineHeight: 1.45, letterSpacing: "-.01em", margin: "22px 0 0", textWrap: "balance" }}>
               법(法)의 품격과 코드의 정교함,<br />그 경계에서 일합니다. 송무·사무 프로세스를 AI로 다시 설계하고, 복잡한 제도를 누구나 이해할 수 있는 디지털 경험으로 번역합니다.
             </p>
+
+            <div className="font-ko" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 30 }}>
+              {["품격", "정교함", "질서"].map((k) => (
+                <span key={k} style={{ fontSize: ".8rem", fontWeight: 600, padding: ".38em .95em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{k}</span>
+              ))}
+            </div>
+
+            <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 22, fontSize: ".9rem", color: "var(--ink-soft)" }}>
+              <MapPin size={15} /> 서울 강남구 — 법무법인 경국
+            </div>
+
+            <div className="press-card font-ko">
+              <div className="press-card__head">
+                <span className="press-card__live" />
+                <span>연합뉴스TV 인터뷰 — 〈함께 빚어낸 특별한 밥상〉</span>
+              </div>
+              <img src="images/press-yonhap.png" alt="연합뉴스TV 인터뷰 — 김유빈, 서울 강남구" loading="lazy"
+                   onError={(e) => { e.currentTarget.style.display = "none"; }} />
+              <p className="press-card__quote font-myeongjo">
+                “새로운 분들하고 처음 얘기하고 하면,<br />그런 부분들이 굉장히 좋은 것 같습니다.”
+              </p>
+              <p className="press-card__caption">김유빈 · 서울 강남구 — 방송 인터뷰 중</p>
+            </div>
           </div>
           <div className="about-photo">
             <span className="about-photo__dot float-2" />
