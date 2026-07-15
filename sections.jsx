@@ -265,18 +265,7 @@ function About() {
             </div>
 
             <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" }}>
-              <MapPin size={15} /> 서울 강남구 — 법무법인 경국
-            </div>
-
-            <div className="press-card font-ko">
-              <div className="press-card__head">
-                <span className="press-card__live" />
-                <span>연합뉴스TV — 〈함께 빚어낸 특별한 밥상〉</span>
-              </div>
-              <p className="press-card__quote font-myeongjo">
-                “새로운 분들하고 처음 얘기하고 하면,<br />그런 부분들이 굉장히 좋은 것 같습니다.”
-              </p>
-              <p className="press-card__caption">김유빈 · 강남1인가구센터 인터뷰</p>
+              <MapPin size={15} /> 서울 서초구 — 법무법인 경국
             </div>
 
             <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -292,11 +281,11 @@ function About() {
             </figure>
             <figure className="photo-card reveal" style={{ transitionDelay: "90ms" }}>
               <img src="images/press-yonhap.jpg" alt="연합뉴스TV 인터뷰 — 강남1인가구센터" loading="lazy" />
-              <figcaption className="font-ko"><span className="photo-card__chip photo-card__chip--red">ON AIR</span>연합뉴스TV 인터뷰 — 강남1인가구센터</figcaption>
+              <figcaption className="font-ko"><span className="photo-card__chip photo-card__chip--red">ON AIR</span>연합뉴스TV 인터뷰</figcaption>
             </figure>
             <figure className="photo-card reveal" style={{ transitionDelay: "180ms" }}>
               <img src="images/ssafy-presentation.jpg" alt="SSAFY 13기 프로젝트 발표" loading="lazy" />
-              <figcaption className="font-ko"><span className="photo-card__chip">SSAFY 13기</span>프로젝트 발표 현장</figcaption>
+              <figcaption className="font-ko"><span className="photo-card__chip">SSAFY 13기</span>프로젝트 발표</figcaption>
             </figure>
           </div>
         </div>
