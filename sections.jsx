@@ -26,8 +26,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["선언", "#manifesto"], ["궤적", "#trajectory"],
-    ["작업", "#artifacts"], ["소개", "#about"], ["연락", "#contact"],
+    ["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"],
+    ["갤러리", "gallery.html"], ["경력", "career.html"], ["연락", "#contact"],
   ];
   return (
     <header style={{
@@ -139,12 +139,12 @@ function Marquee() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
-  { year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서울시민기자단 & 서울청년파트너스 위원 활동",
+  { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
+    desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
+  { year: "2026", color: "var(--apple)", title: "서울시민기자단 & 서울청년파트너스 위원 활동",
     desc: "공공 레벨의 미디어 에디팅과 거시적 시정(市政) 트렌드 분석, 트렌디한 정책 제안 프로세스를 주도합니다." },
   { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 활용 마케팅 기획자 양성 과정 4기 수료",
     desc: "AI 기술을 활용한 부동산 시장 데이터 분석 및 타겟 세그먼트 도출 프로세스를 이해 및 매체별 디지털 마케팅 전략 수립 및 자동화 솔루션 기획 역량을 종합적으로 체화." },
-  { year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
-    desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
@@ -248,41 +248,56 @@ function About() {
         <div className="about-grid">
           <div>
             <Quote size={46} style={{ color: "var(--ink)" }} />
-            <p className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.5rem,3vw,2.55rem)", lineHeight: 1.45, letterSpacing: "-.01em", margin: "22px 0 0", textWrap: "balance" }}>
-              법(法)의 품격과 코드의 정교함,<br />그 경계에서 일합니다. 송무·사무 프로세스를 AI로 다시 설계하고, 복잡한 제도를 누구나 이해할 수 있는 디지털 경험으로 번역합니다.
+            <h3 className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" }}>
+              법(法)의 품격과 코드의 정교함,<br />그 경계에서 일합니다.
+            </h3>
+            <p className="font-ko" style={{ margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
+              송무·사무 프로세스를 AI로 다시 설계하고, 복잡한 제도를 누구나 이해할 수 있는 디지털 경험으로 번역합니다.
+            </p>
+            <p className="font-ko" style={{ margin: "12px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
+              강의실과 사무실, 카메라 앞을 오가며 쌓아온 시간을 기록으로 남깁니다. 말보다 결과물이 먼저 증명하도록.
             </p>
 
-            <div className="font-ko" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 30 }}>
+            <div className="font-ko" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 26 }}>
               {["품격", "정교함", "질서"].map((k) => (
                 <span key={k} style={{ fontSize: ".8rem", fontWeight: 600, padding: ".38em .95em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{k}</span>
               ))}
             </div>
 
-            <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 22, fontSize: ".9rem", color: "var(--ink-soft)" }}>
+            <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" }}>
               <MapPin size={15} /> 서울 강남구 — 법무법인 경국
             </div>
 
             <div className="press-card font-ko">
               <div className="press-card__head">
                 <span className="press-card__live" />
-                <span>연합뉴스TV 인터뷰 — 〈함께 빚어낸 특별한 밥상〉</span>
+                <span>연합뉴스TV — 〈함께 빚어낸 특별한 밥상〉</span>
               </div>
-              <img src="images/press-yonhap.png" alt="연합뉴스TV 인터뷰 — 김유빈, 서울 강남구" loading="lazy"
-                   onError={(e) => { e.currentTarget.style.display = "none"; }} />
               <p className="press-card__quote font-myeongjo">
                 “새로운 분들하고 처음 얘기하고 하면,<br />그런 부분들이 굉장히 좋은 것 같습니다.”
               </p>
-              <p className="press-card__caption">김유빈 · 서울 강남구 — 방송 인터뷰 중</p>
+              <p className="press-card__caption">김유빈 · 강남1인가구센터 인터뷰</p>
+            </div>
+
+            <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a href="gallery.html" className="btn btn--ghost" style={{ fontSize: ".88rem" }}>활동 갤러리 <ArrowUpRight size={15} /></a>
+              <a href="career.html" className="btn btn--ghost" style={{ fontSize: ".88rem" }}>경력 상세 <ArrowUpRight size={15} /></a>
             </div>
           </div>
-          <div className="about-photo">
-            <span className="about-photo__dot float-2" />
-            <div className="about-photo__frame">
-              <img src="images/yubin.png" alt="김유빈 — Yubin Kim" loading="lazy" />
-            </div>
-            <div className="about-photo__tag float">
-              <span className="sticker sticker--butter" style={{ fontSize: ".82rem" }}>Yubin Kim · 김유빈</span>
-            </div>
+
+          <div className="about-gallery">
+            <figure className="photo-card photo-card--tall reveal">
+              <img src="images/profile-formal.jpg" alt="김유빈 공식 프로필" loading="lazy" />
+              <figcaption className="font-ko"><span className="photo-card__chip">PROFILE</span>김유빈 · Yubin Kim</figcaption>
+            </figure>
+            <figure className="photo-card reveal" style={{ transitionDelay: "90ms" }}>
+              <img src="images/press-yonhap.jpg" alt="연합뉴스TV 인터뷰 — 강남1인가구센터" loading="lazy" />
+              <figcaption className="font-ko"><span className="photo-card__chip photo-card__chip--red">ON AIR</span>연합뉴스TV 인터뷰 — 강남1인가구센터</figcaption>
+            </figure>
+            <figure className="photo-card reveal" style={{ transitionDelay: "180ms" }}>
+              <img src="images/ssafy-presentation.jpg" alt="SSAFY 13기 프로젝트 발표" loading="lazy" />
+              <figcaption className="font-ko"><span className="photo-card__chip">SSAFY 13기</span>프로젝트 발표 현장</figcaption>
+            </figure>
           </div>
         </div>
       </div>
