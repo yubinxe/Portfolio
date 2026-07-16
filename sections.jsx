@@ -78,7 +78,7 @@ function Hero() {
       </svg>
 
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-        <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>The Manifesto — Portfolio 2026</p>
+        <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto ’26</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
           YUBIN<br />KIM
         </h1>
@@ -89,7 +89,7 @@ function Hero() {
           기술의 정교함과 제도의 품격을 결합하여,<br />디지털 세계의 새로운 질서를 디자인합니다.
         </p>
 
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 28px", marginTop: 40 }} className="font-ko">
+        <div className="letterhead font-ko" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 34px", marginTop: 40 }}>
           {[
             ["김유빈", "Yubin Kim · 2004"],
             ["법무법인 경국", "Legal Firm Kyung-guk · 인턴"],
@@ -121,7 +121,7 @@ function Sticker({ cls = "", style = {}, children }) {
 
 /* ============================================================ MARQUEE */
 function Marquee() {
-  const items = ["TECHNICAL PRECISION", "LEGAL DIGNITY", "AI PROCESS INNOVATION", "DIGITAL MARKETING", "DATA INFRASTRUCTURE", "김유빈 · ETHAN KIM"];
+  const items = ["YUBIN KIM OFFICE", "TECHNICAL PRECISION", "LEGAL DIGNITY", "AI PROCESS INNOVATION", "DIGITAL MARKETING", "DATA INFRASTRUCTURE", "김유빈 · ETHAN KIM"];
   const Row = () => (
     <span>{items.map((t, i) => (
       <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "2.5rem" }}>
@@ -300,8 +300,21 @@ function Contact() {
   return (
     <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(80px,12vw,150px) 0 0", overflow: "hidden" }}>
       <Sticker cls="sticker--butter float" style={{ top: "12%", right: "8%", "--rot": "6deg" }}>같이 작업해요 ✦</Sticker>
+      <div className="seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path id="sealArc" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0" fill="none" />
+          </defs>
+          <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" strokeWidth="1.3" />
+          <circle cx="60" cy="60" r="32" fill="none" stroke="currentColor" strokeWidth="0.9" />
+          <text fontSize="9.2" letterSpacing="2.2" fill="currentColor" fontFamily="Inter, Pretendard, sans-serif" fontWeight="600">
+            <textPath href="#sealArc">YUBIN KIM OFFICE · LEGAL DIGNITY · TECHNICAL PRECISION ·</textPath>
+          </text>
+          <text x="60" y="68.5" textAnchor="middle" fontFamily="Playfair Display, serif" fontWeight="900" fontSize="25" fill="currentColor">YK</text>
+        </svg>
+      </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
-        <p className="eyebrow" style={{ color: "rgba(249,246,240,.6)", marginBottom: 24 }}>05 — Contact</p>
+        <p className="eyebrow" style={{ color: "rgba(249,246,240,.6)", marginBottom: 24 }}>05 — Consultation</p>
         <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.6rem,9vw,7rem)", lineHeight: .92, letterSpacing: "-.03em", margin: 0 }}>
           Let’s design<br />the next order.
         </h2>
