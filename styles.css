@@ -681,3 +681,79 @@ body {
   .seal svg { animation: none; }
   .sticker { translate: none !important; }
 }
+
+/* ============================================================
+   OFFICE MONOCHROME — Dark · White · Navy (Bar Guilty mood)
+   3색 절제 · 에디토리얼 헤어라인 · 콘덴스드 티커
+   ============================================================ */
+:root {
+  --ecru: #F4F5F8;
+  --ecru-deep: #E9EBF0;
+  --paper: #FFFFFF;
+  --ink: #10131C;
+  --ink-soft: #3C4354;
+  --line: #232A3C;
+  --butter: #E9EBF3;
+  --apple:  #E3ECE8;
+  --sky:    #DCE6F2;
+  --lilac:  #E9E6F0;
+  --pink:   #F0E7EA;
+  --accent: #1F2D6B;
+  --accent-soft: #D7DCEA;
+}
+
+/* condensed display + diamond hairline utilities */
+.font-cond { font-family: "Anton", "Pretendard", sans-serif; font-weight: 400; letter-spacing: .04em; }
+.menu-rule { display: flex; align-items: center; width: 100%; color: var(--ink); opacity: .5; }
+.menu-rule::before, .menu-rule::after {
+  content: ""; width: 6px; height: 6px; background: currentColor;
+  transform: rotate(45deg); flex: none;
+}
+.menu-rule i { flex: 1; height: 1px; background: currentColor; margin: 0 9px; }
+
+/* stickers → refined monochrome outline (no candy) */
+.sticker {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.4px solid var(--ink);
+  font-family: "Inter", "Pretendard", sans-serif;
+  font-weight: 600;
+  letter-spacing: .02em;
+  box-shadow: 0 2px 12px rgba(16,19,28,.10);
+}
+.sticker--butter, .sticker--apple, .sticker--sky, .sticker--lilac, .sticker--pink { background: var(--paper); color: var(--ink); }
+.sticker--ink { background: var(--ink); color: var(--ecru); border-color: var(--ink); }
+.sticker--bubble::after { display: none; }
+
+/* buttons → navy primary, refined shadow */
+.btn { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 2px 12px rgba(16,19,28,.18); }
+.btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 24px -8px rgba(31,45,107,.5); }
+.btn:active { transform: translateY(-1px) scale(.99); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); box-shadow: none; }
+.btn--ghost:hover { background: var(--ink); color: var(--ecru); }
+
+/* cards → soft editorial shadow instead of chunky offset */
+.edition { border-radius: 20px; box-shadow: 0 1px 0 rgba(16,19,28,.06), 0 14px 34px -22px rgba(16,19,28,.34); }
+.edition:hover { transform: translateY(-8px) scale(1.008); box-shadow: 0 26px 50px -24px rgba(16,19,28,.42); }
+.edition__index-band { background: var(--accent); }
+.edition__chip { background: var(--ecru-deep); color: var(--ink-soft); }
+.edition__num { color: var(--accent-fill, var(--accent)); }
+.photo-card, .press-card, .stat-card, .practice-card { box-shadow: 0 2px 16px rgba(16,19,28,.10); }
+.photo-card:hover, .press-card:hover { box-shadow: 0 22px 44px -24px rgba(16,19,28,.4); }
+.photo-card__chip--red { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* marquee → condensed menu ticker */
+.marquee { border-color: var(--ink); background: var(--ink); }
+.marquee .font-serif { font-family: "Anton", "Playfair Display", serif; font-weight: 400; letter-spacing: .08em; font-size: 1.3rem; }
+
+/* nav active state = navy */
+.navlink.active { color: var(--accent); }
+.navlink.active::after { transform: scaleX(1); background: var(--accent); }
+
+/* quieter organic texture for a graver mood */
+.blob { opacity: .5; }
+.speckle { opacity: .28; }
+
+/* practice-card band + stat num = navy */
+.practice-card .band { background: var(--accent-fill, var(--accent)); }
+.stat-card .num { color: var(--accent); }
