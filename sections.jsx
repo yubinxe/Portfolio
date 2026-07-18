@@ -65,6 +65,7 @@ function Hero() {
         <div className="blob" style={{ width: 480, height: 420, top: "-8%", left: "-6%" }} />
         <div className="blob" style={{ width: 380, height: 360, bottom: "-10%", right: "-4%" }} />
       </div>
+      <span className="watermark font-myeongjo" aria-hidden="true">法</span>
 
       {/* floating stickers — corners, above the name */}
       <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW</Sticker>
@@ -81,7 +82,9 @@ function Hero() {
         <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 22px" }}><i /></div>
         <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto ’26</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
-          YUBIN<br />KIM
+          {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
+          <br />
+          {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
         <p className="font-sans" style={{ fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", fontSize: "clamp(.8rem, 2vw, 1.25rem)", marginTop: 28, marginBottom: 22 }}>
           Technical Precision Meets Legal Dignity.
@@ -131,10 +134,47 @@ function Marquee() {
       </span>
     ))}</span>
   );
+  const RowOutline = () => (
+    <span>{items.map((t, i) => (
+      <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "2.5rem" }}>
+        <span className="font-cond m-outline" style={{ fontSize: "1.15rem" }}>{t}</span>
+        <Sparkle size={14} style={{ opacity: .55 }} />
+      </span>
+    ))}</span>
+  );
   return (
-    <div className="marquee">
-      <div className="marquee__track"><Row /><Row /></div>
+    <div className="marquee" style={{ flexDirection: "column" }}>
+      <div className="marquee__line"><div className="marquee__track"><Row /><Row /></div></div>
+      <div className="marquee__line marquee__line--rev"><div className="marquee__track marquee__track--rev"><RowOutline /><RowOutline /></div></div>
     </div>
+  );
+}
+
+/* ============================================================ LEDGER — at a glance */
+function Ledger() {
+  const ref = useReveal();
+  const ITEMS = [
+    ["6", "수행 프로젝트", "Editions"],
+    ["4", "전문 교육 이수", "Programs"],
+    ["1", "창업경진 수상", "Award"],
+    ["1", "방송 인터뷰", "On Air"],
+  ];
+  return (
+    <section ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(54px,7vw,84px) 0" }}>
+      <div className="wrap reveal">
+        <div className="menu-rule" style={{ color: "rgba(244,245,248,.45)", marginBottom: 8 }}><i /></div>
+        <p className="eyebrow" style={{ color: "rgba(244,245,248,.55)", margin: "18px 0 30px" }}>04 — The Ledger · 한눈에 보는 기록</p>
+        <div className="ledger-grid">
+          {ITEMS.map(([n, ko, en], i) => (
+            <div key={i} className="ledger-item" style={{ transitionDelay: `${i * 70}ms` }}>
+              <div className="ledger-num font-serif" data-count={n}>0</div>
+              <div className="font-ko" style={{ fontWeight: 700, fontSize: ".95rem", marginTop: 10 }}>{ko}</div>
+              <div className="font-sans" style={{ fontSize: ".72rem", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(244,245,248,.5)", marginTop: 4 }}>{en}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -369,4 +409,4 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
   );
 }
 
-Object.assign(window, { Nav, Hero, Marquee, Trajectory, Artifacts, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, Hero, Marquee, Ledger, Trajectory, Artifacts, About, Contact, Footer, SectionHead });

@@ -757,3 +757,142 @@ body {
 /* practice-card band + stat num = navy */
 .practice-card .band { background: var(--accent-fill, var(--accent)); }
 .stat-card .num { color: var(--accent); }
+
+/* ============================================================
+   PREMIUM LAYER — kinetic type · cursor · ledger · lightbox
+   ============================================================ */
+/* hero kinetic letters */
+.h-ltr {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(.38em) rotate(2.5deg);
+  animation: hltr .75s var(--bounce) forwards;
+  transition: transform .3s var(--bounce), color .3s ease;
+}
+.h-ltr:hover { transform: translateY(-.05em); color: var(--accent); }
+@keyframes hltr { to { opacity: 1; transform: none; } }
+
+/* 法 watermark */
+.watermark {
+  position: absolute;
+  z-index: 0;
+  right: -3%;
+  top: 4%;
+  font-size: clamp(220px, 34vw, 540px);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(31,45,107,.12);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* custom cursor */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 200;
+  border-radius: 50%;
+}
+.cursor-dot { width: 6px; height: 6px; background: var(--accent); }
+.cursor-ring {
+  width: 34px; height: 34px;
+  border: 1.3px solid var(--accent);
+  opacity: .55;
+  transition: width .28s var(--bounce), height .28s var(--bounce), opacity .28s ease, background .28s ease;
+  margin: 0;
+}
+.cursor-ring.is-hover { width: 58px; height: 58px; opacity: .3; background: rgba(31,45,107,.07); }
+@media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
+
+/* smart nav hide */
+header.nav-hide { transform: translateY(-100%); }
+
+/* reveal → blur-up */
+.reveal { filter: blur(9px); }
+.reveal.in { filter: blur(0); }
+
+/* marquee dual line */
+.marquee__line { display: flex; overflow: hidden; }
+.marquee__line--rev { border-top: 1px solid rgba(244,245,248,.22); }
+.marquee__track--rev { animation-direction: reverse; animation-duration: 38s; padding: .55rem 1.25rem; }
+.m-outline { color: transparent; -webkit-text-stroke: 1px rgba(244,245,248,.5); letter-spacing: .14em; }
+
+/* ledger band */
+.ledger-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: clamp(18px, 3vw, 40px);
+}
+.ledger-item {
+  padding: 6px 4px 2px;
+  border-left: 1px solid rgba(244,245,248,.2);
+  padding-left: clamp(14px, 1.6vw, 24px);
+}
+.ledger-num {
+  font-weight: 900;
+  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+  line-height: 1;
+  color: var(--ecru);
+}
+.ledger-item:hover .ledger-num { color: #AAB4DC; transition: color .35s ease; }
+
+/* edition shine sweep */
+.edition::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -85%;
+  width: 55%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  z-index: 1;
+  transition: left .75s ease;
+}
+.edition:hover::before { left: 135%; }
+
+/* photos — monochrome discipline, color on hover */
+.photo-card img, .g-card img {
+  filter: grayscale(.5) contrast(1.03);
+  transition: filter .55s ease, transform .6s var(--bounce);
+}
+.photo-card:hover img, .g-card:hover img { filter: grayscale(0) contrast(1); }
+
+/* gallery lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: rgba(16,19,28,.93);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  cursor: zoom-out;
+}
+.lightbox.on { opacity: 1; pointer-events: auto; }
+.lightbox img {
+  max-width: 92vw;
+  max-height: 86vh;
+  border-radius: 10px;
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,.8);
+}
+.lightbox__hint {
+  position: absolute;
+  bottom: 26px; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(244,245,248,.55);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  font-family: "Pretendard", sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h-ltr { animation: none; opacity: 1; transform: none; }
+  .reveal { filter: none; }
+  .cursor-dot, .cursor-ring { display: none; }
+  .edition::before { display: none; }
+}
+@media (max-width: 700px) { .watermark { display: none; } }
