@@ -896,3 +896,11 @@ header.nav-hide { transform: translateY(-100%); }
   .edition::before { display: none; }
 }
 @media (max-width: 700px) { .watermark { display: none; } }
+
+/* ============================================================
+   NATIVE CURSOR OFF — 커스텀 커서만 노출 (데스크톱)
+   ============================================================ */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html, body, a, button, .btn, .navlink, .edition, .g-card, .photo-card,
+  .stat-card, .practice-card, .lightbox, .sticker, .tl-row, .seal { cursor: none !important; }
+}

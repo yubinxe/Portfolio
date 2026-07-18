@@ -39,7 +39,7 @@ function Nav() {
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
-          <img src="images/favicon.svg" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
+          <img src="images/favicon.svg?v=2" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
           <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>포트폴리오 ’26</span>
         </a>
         <nav style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
@@ -96,7 +96,7 @@ function Hero() {
         <div className="letterhead font-ko" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 34px", marginTop: 40 }}>
           {[
             ["김유빈", "Yubin Kim · 2004"],
-            ["법무법인 경국", "Legal Firm Kyung-guk · 인턴"],
+            ["법무법인 경국", "Legal Firm Kyung-guk · 사원"],
             ["AI Process Innovation", "송무·사무 PI & 디지털 마케팅 전략"],
           ].map(([a, b], i) => (
             <div key={i} style={{ textAlign: "left", padding: "0 4px" }}>
