@@ -112,8 +112,9 @@ function Hero() {
         </div>
       </div>
 
-      <a href="#trajectory" style={{ position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)", color: "var(--ink-soft)", textDecoration: "none" }} className="float">
-        <ArrowDown size={24} />
+      <a href="#trajectory" className="scroll-cue" style={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", textDecoration: "none" }}>
+        <span className="font-sans" style={{ fontSize: ".64rem", letterSpacing: ".3em", fontWeight: 600 }}>SCROLL</span>
+        <i />
       </a>
     </section>
   );
@@ -211,6 +212,7 @@ function Trajectory() {
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "8px 18px" }}>
                   <span className="tl-year" style={{ fontSize: "clamp(2rem,5vw,3.4rem)" }}>{e.year}</span>
                   {e.tag && <span className="sticker sticker--apple" style={{ fontSize: ".72rem", padding: ".3em .7em", boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>{e.tag}</span>}
+                  <span className="tl-idx font-cond">{String(i + 1).padStart(2, "0")}</span>
                 </div>
                 <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.15rem,2.2vw,1.6rem)", margin: "10px 0 8px", letterSpacing: "-.01em" }}>{e.title}</h3>
                 <p className="font-ko" style={{ maxWidth: 720, color: "var(--ink-soft)", lineHeight: 1.75, fontSize: "clamp(.95rem,1.4vw,1.05rem)" }}>{e.desc}</p>
@@ -366,9 +368,12 @@ function Contact() {
           <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
             <Mail size={18} /> 인사 건네기
           </a>
-          <a href="#artifacts" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "0 5px 0 rgba(249,246,240,.18)" }}>
+          <a href="#artifacts" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
             작업 보기 <ArrowUpRight size={16} />
           </a>
+          <button type="button" id="copyMail" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
+            이메일 복사
+          </button>
         </div>
       </div>
       <Footer />
@@ -379,6 +384,12 @@ function Contact() {
 function Footer() {
   return (
     <footer style={{ borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 }}>
+      <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" }}>
+        {[["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"], ["갤러리", "gallery.html"], ["경력", "career.html"]].map(([t, h]) => (
+          <a key={t} href={h}>{t}</a>
+        ))}
+        <a href="mailto:yubin120866@gmail.com" style={{ marginLeft: "auto" }}>yubin120866@gmail.com</a>
+      </div>
       <div className="wrap" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "26px 0" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }} className="font-serif">
           <span style={{ fontWeight: 900, fontSize: 22 }}>YK</span>

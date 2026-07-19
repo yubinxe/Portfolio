@@ -904,3 +904,144 @@ header.nav-hide { transform: translateY(-100%); }
   html, body, a, button, .btn, .navlink, .edition, .g-card, .photo-card,
   .stat-card, .practice-card, .lightbox, .sticker, .tl-row, .seal { cursor: none !important; }
 }
+
+/* ============================================================
+   S-TIER POLISH — preloader · rail · cue · toast · transitions
+   ============================================================ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: var(--ink);
+  color: var(--ecru);
+  display: grid;
+  place-items: center;
+  transition: transform .75s cubic-bezier(.77, 0, .18, 1);
+}
+.preloader.done { transform: translateY(-101%); }
+.preloader__mark { text-align: center; animation: preIn .6s ease both; }
+.preloader .menu-rule { color: rgba(244,245,248,.6); }
+.preloader .menu-rule i { transform-origin: left; animation: ruleGrow .7s .15s cubic-bezier(.77,0,.18,1) both; }
+@keyframes preIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes ruleGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+body { animation: pageIn .45s ease both; }
+body.page-out { opacity: 0; transition: opacity .24s ease; }
+@keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* section dot rail */
+.rail {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.rail a {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(16,19,28,.3);
+  box-shadow: 0 0 0 3px rgba(244,245,248,.55);
+  position: relative;
+  transition: transform .3s var(--bounce), background .25s ease;
+}
+.rail a.on { background: var(--accent); transform: scale(1.5); }
+.rail a:hover { transform: scale(1.5); }
+.rail a::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  translate: 0 -50%;
+  background: var(--ink);
+  color: var(--ecru);
+  font-family: "Pretendard", sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  padding: .34em .8em;
+  border-radius: 7px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, translate .25s var(--bounce);
+}
+.rail a:hover::after { opacity: 1; translate: -4px -50%; }
+@media (max-width: 980px) { .rail { display: none; } }
+
+/* trajectory index numerals */
+.tl-idx {
+  margin-left: auto;
+  font-size: .92rem;
+  letter-spacing: .2em;
+  color: rgba(16,19,28,.26);
+  transition: color .3s ease;
+}
+.tl-row:hover .tl-idx { color: var(--accent); }
+
+/* scroll cue */
+.scroll-cue {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink-soft);
+}
+.scroll-cue i {
+  width: 1.5px;
+  height: 46px;
+  background: currentColor;
+  display: block;
+  animation: cueLine 2s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes cueLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  48% { transform: scaleY(1); transform-origin: top; }
+  52% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* toast */
+.toast {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  translate: -50% 18px;
+  z-index: 350;
+  background: var(--ink);
+  color: var(--ecru);
+  font-size: .88rem;
+  font-weight: 600;
+  padding: .85em 1.5em;
+  border-radius: 999px;
+  box-shadow: 0 18px 40px -14px rgba(16,19,28,.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease, translate .35s var(--bounce);
+}
+.toast.on { opacity: 1; translate: -50% 0; }
+
+/* footer sitemap */
+.f-links a {
+  color: rgba(249,246,240,.6);
+  text-decoration: none;
+  font-size: .84rem;
+  font-weight: 500;
+  transition: color .25s ease;
+}
+.f-links a:hover { color: var(--ecru); }
+
+/* a11y — keyboard focus ring */
+:focus-visible {
+  outline: 2.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader { display: none; }
+  body { animation: none; }
+  .scroll-cue i { animation: none; transform: scaleY(1); }
+}
