@@ -121,11 +121,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
 
 <script>
-/* ===== micro-interactions (성수동 감성 · 절제된 모션) ===== */
+/* ===== micro-interactions (오피스 모션 시스템) ===== */
 (function () {
   var fine = window.matchMedia("(pointer: fine)").matches;
   var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* scroll progress ink */
   var bar = document.createElement("div");
   bar.className = "scroll-ink";
   document.body.appendChild(bar);
@@ -141,69 +142,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     });
   }, { passive: true });
 
-  if (!fine || calm) return;
-
-  document.addEventListener("mousemove", function (e) {
-    var card = e.target.closest && e.target.closest(".edition");
-    if (!card) return;
-    var r = card.getBoundingClientRect();
-    var rx = ((e.clientY - r.top) / r.height - 0.5) * -4;
-    var ry = ((e.clientX - r.left) / r.width - 0.5) * 4;
-    card.style.transform = "translateY(-12px) scale(1.015) perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg)";
-  }, { passive: true });
-  document.addEventListener("mouseout", function (e) {
-    var card = e.target.closest && e.target.closest(".edition");
-    if (card && !(e.relatedTarget && card.contains(e.relatedTarget))) card.style.transform = "";
-  }, { passive: true });
-
-  /* hero parallax — 스티커가 시선을 따라 미세하게 */
-  document.addEventListener("mousemove", function (e) {
-    var hero = document.getElementById("manifesto");
-    if (!hero) return;
-    var r = hero.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > innerHeight) return;
-    var dx = e.clientX / innerWidth - 0.5;
-    var dy = e.clientY / innerHeight - 0.5;
-    var st = hero.querySelectorAll(".sticker");
-    for (var i = 0; i < st.length; i++) {
-      var d = i % 2 ? 12 : 20;
-      st[i].style.translate = (dx * d).toFixed(1) + "px " + (dy * d).toFixed(1) + "px";
-    }
-  }, { passive: true });
-
-  /* custom cursor — navy dot & trailing ring */
-  var dot = document.createElement("div"); dot.className = "cursor-dot";
-  var ring = document.createElement("div"); ring.className = "cursor-ring";
-  document.body.appendChild(dot); document.body.appendChild(ring);
-  var cx = innerWidth / 2, cy = innerHeight / 2, rx = cx, ry = cy;
-  document.addEventListener("mousemove", function (e) {
-    cx = e.clientX; cy = e.clientY;
-    dot.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
-  }, { passive: true });
-  (function loop() {
-    rx += (cx - rx) * 0.16; ry += (cy - ry) * 0.16;
-    ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
-    requestAnimationFrame(loop);
-  })();
-  document.addEventListener("mouseover", function (e) {
-    var t = e.target.closest && e.target.closest("a, button, .edition, .photo-card, .g-card, .stat-card");
-    ring.classList.toggle("is-hover", !!t);
-  }, { passive: true });
-
-  /* magnetic buttons — 자기장처럼 살짝 끌림 */
-  document.addEventListener("mousemove", function (e) {
-    var b = e.target.closest && e.target.closest(".btn");
-    if (!b) return;
-    var r = b.getBoundingClientRect();
-    var mx = ((e.clientX - r.left) / r.width - 0.5) * 10;
-    var my = ((e.clientY - r.top) / r.height - 0.5) * 8;
-    b.style.translate = mx.toFixed(1) + "px " + my.toFixed(1) + "px";
-  }, { passive: true });
-  document.addEventListener("mouseout", function (e) {
-    var b = e.target.closest && e.target.closest(".btn");
-    if (b && !(e.relatedTarget && b.contains(e.relatedTarget))) b.style.translate = "";
-  }, { passive: true });
-
   /* smart nav — 내릴 땐 숨고 올릴 땐 나타남 */
   var lastY = 0;
   window.addEventListener("scroll", function () {
@@ -215,7 +153,28 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     lastY = y;
   }, { passive: true });
 
-  /* scrollspy + timeline progress — React 마운트 대기 */
+  /* preloader — 잉크 커튼 (세션 1회) */
+  try {
+    if (!calm && !sessionStorage.getItem("yk_intro")) {
+      sessionStorage.setItem("yk_intro", "1");
+      var pre = document.createElement("div");
+      pre.className = "preloader";
+      pre.innerHTML = '<div class="preloader__mark"><div class="font-serif" style="font-weight:900;font-size:3.2rem;letter-spacing:-.02em">YK</div><div class="menu-rule" style="width:150px;margin:14px auto"><i></i></div><div class="eyebrow" style="letter-spacing:.3em;font-size:10px;opacity:.65">YUBIN KIM OFFICE</div></div>';
+      document.body.appendChild(pre);
+      setTimeout(function () { pre.classList.add("done"); setTimeout(function () { pre.remove(); }, 800); }, 950);
+    }
+  } catch (err) {}
+
+  /* page fade transition */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href$=".html"]');
+    if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
+    document.body.classList.add("page-out");
+    setTimeout(function () { location.href = a.getAttribute("href"); }, 240);
+  });
+
+  /* React 마운트 대기 — scrollspy · rail · fill · count-up · hero exit · toast */
   var tries = 0;
   var timer = setInterval(function () {
     if (++tries > 80) return clearInterval(timer);
@@ -251,7 +210,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
       onTl();
     }
 
-    /* ledger count-up */
     var ioC = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
         if (!en.isIntersecting) return;
@@ -268,7 +226,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     }, { threshold: 0.5 });
     document.querySelectorAll("[data-count]").forEach(function (n) { ioC.observe(n); });
 
-    /* section dot rail */
     var RAIL = [["manifesto", "선언"], ["trajectory", "궤적"], ["artifacts", "작업"], ["about", "소개"], ["contact", "연락"]];
     var rail = document.createElement("nav");
     rail.className = "rail";
@@ -290,19 +247,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     }, { rootMargin: "-38% 0px -55% 0px" });
     RAIL.forEach(function (r) { var s = document.getElementById(r[0]); if (s) railSpy.observe(s); });
 
-    /* hero scroll exit — 스크롤 시 서서히 물러남 */
-    var heroWrap = document.querySelector("#manifesto .wrap");
-    if (heroWrap) {
-      window.addEventListener("scroll", function () {
-        var y = window.scrollY;
-        if (y > innerHeight * 1.2) return;
-        var p = Math.min(1, y / (innerHeight * 0.9));
-        heroWrap.style.opacity = (1 - p * 0.75).toFixed(3);
-        heroWrap.style.transform = "translateY(" + (y * 0.16).toFixed(1) + "px) scale(" + (1 - p * 0.04).toFixed(4) + ")";
-      }, { passive: true });
+    if (!calm) {
+      var heroWrap = document.querySelector("#manifesto .wrap");
+      if (heroWrap) {
+        window.addEventListener("scroll", function () {
+          var y = window.scrollY;
+          if (y > innerHeight * 1.2) return;
+          var p = Math.min(1, y / (innerHeight * 0.9));
+          heroWrap.style.opacity = (1 - p * 0.75).toFixed(3);
+          heroWrap.style.transform = "translateY(" + (y * 0.16).toFixed(1) + "px) scale(" + (1 - p * 0.04).toFixed(4) + ")";
+        }, { passive: true });
+      }
     }
 
-    /* email copy + toast */
     var toast = document.createElement("div");
     toast.className = "toast font-ko";
     toast.textContent = "이메일 주소가 복사되었습니다 ✓";
@@ -316,27 +273,66 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     });
   }, 150);
 
-  /* preloader — 잉크 커튼 (세션 1회) */
-  try {
-    if (!sessionStorage.getItem("yk_intro")) {
-      sessionStorage.setItem("yk_intro", "1");
-      var pre = document.createElement("div");
-      pre.className = "preloader";
-      pre.innerHTML = '<div class="preloader__mark"><div class="font-serif" style="font-weight:900;font-size:3.2rem;letter-spacing:-.02em">YK</div><div class="menu-rule" style="width:150px;margin:14px auto"><i></i></div><div class="eyebrow" style="letter-spacing:.3em;font-size:10px;opacity:.65">YUBIN KIM OFFICE</div></div>';
-      document.body.appendChild(pre);
-      var lift = function () { pre.classList.add("done"); setTimeout(function () { pre.remove(); }, 800); };
-      setTimeout(lift, 950);
-    }
-  } catch (err) {}
+  /* ---- 이하 포인터 전용 효과 ---- */
+  if (!fine || calm) return;
 
-  /* page fade transition */
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest && e.target.closest('a[href$=".html"]');
-    if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey) return;
-    e.preventDefault();
-    document.body.classList.add("page-out");
-    setTimeout(function () { location.href = a.getAttribute("href"); }, 240);
-  });
+  document.addEventListener("mousemove", function (e) {
+    var card = e.target.closest && e.target.closest(".edition");
+    if (!card) return;
+    var r = card.getBoundingClientRect();
+    var rx = ((e.clientY - r.top) / r.height - 0.5) * -4;
+    var ry = ((e.clientX - r.left) / r.width - 0.5) * 4;
+    card.style.transform = "translateY(-12px) scale(1.015) perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg)";
+  }, { passive: true });
+  document.addEventListener("mouseout", function (e) {
+    var card = e.target.closest && e.target.closest(".edition");
+    if (card && !(e.relatedTarget && card.contains(e.relatedTarget))) card.style.transform = "";
+  }, { passive: true });
+
+  document.addEventListener("mousemove", function (e) {
+    var hero = document.getElementById("manifesto");
+    if (!hero) return;
+    var r = hero.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    var dx = e.clientX / innerWidth - 0.5;
+    var dy = e.clientY / innerHeight - 0.5;
+    var st = hero.querySelectorAll(".sticker");
+    for (var i = 0; i < st.length; i++) {
+      var d = i % 2 ? 12 : 20;
+      st[i].style.translate = (dx * d).toFixed(1) + "px " + (dy * d).toFixed(1) + "px";
+    }
+  }, { passive: true });
+
+  var dot = document.createElement("div"); dot.className = "cursor-dot";
+  var ring = document.createElement("div"); ring.className = "cursor-ring";
+  document.body.appendChild(dot); document.body.appendChild(ring);
+  var cx = innerWidth / 2, cy = innerHeight / 2, rx2 = cx, ry2 = cy;
+  document.addEventListener("mousemove", function (e) {
+    cx = e.clientX; cy = e.clientY;
+    dot.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
+  }, { passive: true });
+  (function loop() {
+    rx2 += (cx - rx2) * 0.16; ry2 += (cy - ry2) * 0.16;
+    ring.style.transform = "translate(" + rx2 + "px," + ry2 + "px) translate(-50%,-50%)";
+    requestAnimationFrame(loop);
+  })();
+  document.addEventListener("mouseover", function (e) {
+    var t = e.target.closest && e.target.closest("a, button, .edition, .photo-card, .g-card, .stat-card");
+    ring.classList.toggle("is-hover", !!t);
+  }, { passive: true });
+
+  document.addEventListener("mousemove", function (e) {
+    var b = e.target.closest && e.target.closest(".btn");
+    if (!b) return;
+    var r = b.getBoundingClientRect();
+    var mx = ((e.clientX - r.left) / r.width - 0.5) * 10;
+    var my = ((e.clientY - r.top) / r.height - 0.5) * 8;
+    b.style.translate = mx.toFixed(1) + "px " + my.toFixed(1) + "px";
+  }, { passive: true });
+  document.addEventListener("mouseout", function (e) {
+    var b = e.target.closest && e.target.closest(".btn");
+    if (b && !(e.relatedTarget && b.contains(e.relatedTarget))) b.style.translate = "";
+  }, { passive: true });
 })();
 </script>
 </body>
