@@ -97,7 +97,7 @@ function Hero() {
           {[
             ["김유빈", "Yubin Kim · 2004"],
             ["법무법인 경국", "Legal Firm Kyung-guk · 사원"],
-            ["AI Process Innovation", "송무·사무 PI & 디지털 마케팅 전략"],
+            ["AI Process Innovation", "법무 · 법률 송무 & AI · 마케팅 기획"],
           ].map(([a, b], i) => (
             <div key={i} style={{ textAlign: "left", padding: "0 4px" }}>
               <div style={{ fontWeight: 700, fontSize: ".98rem" }}>{a}</div>
