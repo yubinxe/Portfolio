@@ -1045,3 +1045,67 @@ body.page-out { opacity: 0; transition: opacity .24s ease; }
   body { animation: none; }
   .scroll-cue i { animation: none; transform: scaleY(1); }
 }
+
+/* ============================================================
+   WOW LAYER — constellation · aurora · ripple · clock
+   ============================================================ */
+.hero-net {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.aurora {
+  position: absolute;
+  z-index: 0;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: .5;
+}
+.aurora--a {
+  top: -18%; left: -12%;
+  background: radial-gradient(circle at 40% 40%, rgba(31,45,107,.16), transparent 65%);
+  animation: auDrift 19s ease-in-out infinite alternate;
+}
+.aurora--b {
+  bottom: -22%; right: -14%;
+  background: radial-gradient(circle at 60% 60%, rgba(60,80,150,.13), transparent 65%);
+  animation: auDrift 23s ease-in-out infinite alternate-reverse;
+}
+@keyframes auDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(6vw, 4vh) scale(1.12); }
+}
+
+.ripple {
+  position: fixed;
+  z-index: 95;
+  width: 8px; height: 8px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  translate: -50% -50%;
+  pointer-events: none;
+  animation: rip .7s cubic-bezier(.2,.6,.35,1) forwards;
+}
+@keyframes rip {
+  from { width: 10px; height: 10px; opacity: .75; }
+  to   { width: 210px; height: 210px; opacity: 0; }
+}
+
+.clock-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  animation: onair 2.2s ease-in-out infinite;
+}
+
+#manifesto h1 { transition: transform .25s ease-out; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .hero-net, .ripple { display: none; }
+}

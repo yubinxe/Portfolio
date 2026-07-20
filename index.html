@@ -41,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-<link rel="stylesheet" href="styles.css?v=14" />
+<link rel="stylesheet" href="styles.css?v=16" />
 </head>
 <body>
 <div id="root"></div>
@@ -52,7 +52,7 @@
 
 <script type="text/babel" src="tweaks-panel.jsx?v=3"></script>
 <script type="text/babel" src="icons.jsx?v=3"></script>
-<script type="text/babel" src="sections.jsx?v=15"></script>
+<script type="text/babel" src="sections.jsx?v=16"></script>
 
 <script type="text/babel">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -174,6 +174,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     setTimeout(function () { location.href = a.getAttribute("href"); }, 240);
   });
 
+  /* ink ripple on click */
+  if (!calm) document.addEventListener("click", function (e) {
+    var rp = document.createElement("span");
+    rp.className = "ripple";
+    rp.style.left = e.clientX + "px";
+    rp.style.top = e.clientY + "px";
+    document.body.appendChild(rp);
+    setTimeout(function () { rp.remove(); }, 720);
+  });
+
   /* React 마운트 대기 — scrollspy · rail · fill · count-up · hero exit · toast */
   var tries = 0;
   var timer = setInterval(function () {
@@ -271,6 +281,120 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
         setTimeout(function () { toast.classList.remove("on"); }, 1900);
       });
     });
+
+    /* ===== 서울 라이브 시계 — 오피스 상태 ===== */
+    var lh = document.querySelector(".letterhead");
+    if (lh) {
+      var cell = document.createElement("div");
+      cell.style.textAlign = "left";
+      cell.style.padding = "0 4px";
+      cell.innerHTML = '<div style="font-weight:700;font-size:.98rem;display:flex;align-items:center;gap:7px"><span class="clock-dot"></span>SEOUL, KR</div><div style="font-size:.82rem;color:var(--ink-soft);opacity:.85"><span id="seoulClock">--:--:--</span> KST · <span id="officeState">—</span></div>';
+      lh.appendChild(cell);
+      var tick = function () {
+        var now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+        var p2 = function (n) { return String(n).padStart(2, "0"); };
+        var el = document.getElementById("seoulClock");
+        if (el) el.textContent = p2(now.getHours()) + ":" + p2(now.getMinutes()) + ":" + p2(now.getSeconds());
+        var st = document.getElementById("officeState");
+        if (st) st.textContent = (now.getHours() >= 9 && now.getHours() < 19) ? "OFFICE OPEN" : "AFTER HOURS";
+      };
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    /* ===== 태그라인 스크램블 디코드 ===== */
+    if (!calm) {
+      var tag = document.querySelector("#manifesto p.font-sans");
+      if (tag) {
+        var FIN = tag.textContent;
+        var POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ§·&/#";
+        var t0 = null;
+        var DUR = 1300;
+        tag.style.minHeight = tag.offsetHeight + "px";
+        function scr(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / DUR);
+          var reveal = Math.floor(FIN.length * p);
+          var out = "";
+          for (var i = 0; i < FIN.length; i++) {
+            var ch = FIN[i];
+            if (i < reveal || ch === " " || ch === ".") out += ch;
+            else out += POOL[(Math.random() * POOL.length) | 0];
+          }
+          tag.textContent = out;
+          if (p < 1) requestAnimationFrame(scr);
+          else tag.textContent = FIN;
+        }
+        setTimeout(function () { requestAnimationFrame(scr); }, 500);
+      }
+    }
+
+    /* ===== 히어로 파티클 성좌 캔버스 ===== */
+    if (!calm) {
+      var heroSec = document.getElementById("manifesto");
+      var cv = document.createElement("canvas");
+      cv.className = "hero-net";
+      heroSec.appendChild(cv);
+      var ctx = cv.getContext("2d");
+      var W, H, pts = [];
+      var mx = -9999, my = -9999;
+      function sizeNet() {
+        W = cv.width = heroSec.offsetWidth;
+        H = cv.height = heroSec.offsetHeight;
+        var n = Math.min(72, Math.floor(W / 22));
+        pts = [];
+        for (var i = 0; i < n; i++) {
+          pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35, r: 1 + Math.random() * 1.6 });
+        }
+      }
+      sizeNet();
+      window.addEventListener("resize", sizeNet);
+      if (fine) heroSec.addEventListener("mousemove", function (e) {
+        var r = heroSec.getBoundingClientRect();
+        mx = e.clientX - r.left; my = e.clientY - r.top;
+      }, { passive: true });
+      heroSec.addEventListener("mouseleave", function () { mx = my = -9999; });
+      (function net() {
+        requestAnimationFrame(net);
+        if (document.hidden || window.scrollY > innerHeight * 1.25) return;
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < pts.length; i++) {
+          var a = pts[i];
+          a.x += a.vx; a.y += a.vy;
+          if (a.x < 0 || a.x > W) a.vx *= -1;
+          if (a.y < 0 || a.y > H) a.vy *= -1;
+          var dxm = a.x - mx, dym = a.y - my;
+          var dm = Math.sqrt(dxm * dxm + dym * dym);
+          if (dm < 130 && dm > 0.1) { a.x += (dxm / dm) * 0.8; a.y += (dym / dm) * 0.8; }
+          ctx.beginPath();
+          ctx.arc(a.x, a.y, a.r, 0, 6.2832);
+          ctx.fillStyle = "rgba(31,45,107,.5)";
+          ctx.fill();
+          for (var j = i + 1; j < pts.length; j++) {
+            var b = pts[j];
+            var dx = a.x - b.x, dy = a.y - b.y;
+            var d2 = dx * dx + dy * dy;
+            if (d2 < 15600) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = "rgba(31,45,107," + (0.16 * (1 - d2 / 15600)).toFixed(3) + ")";
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+      })();
+    }
+
+    /* ===== 오로라 드리프트 ===== */
+    if (!calm) {
+      var au1 = document.createElement("div"); au1.className = "aurora aurora--a";
+      var au2 = document.createElement("div"); au2.className = "aurora aurora--b";
+      var hs = document.getElementById("manifesto");
+      hs.insertBefore(au1, hs.firstChild);
+      hs.insertBefore(au2, hs.firstChild);
+    }
   }, 150);
 
   /* ---- 이하 포인터 전용 효과 ---- */
@@ -301,6 +425,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
       var d = i % 2 ? 12 : 20;
       st[i].style.translate = (dx * d).toFixed(1) + "px " + (dy * d).toFixed(1) + "px";
     }
+    var h1 = hero.querySelector("h1");
+    if (h1) h1.style.transform = "perspective(950px) rotateX(" + (-dy * 4).toFixed(2) + "deg) rotateY(" + (dx * 4).toFixed(2) + "deg)";
   }, { passive: true });
 
   var dot = document.createElement("div"); dot.className = "cursor-dot";
