@@ -39,7 +39,7 @@ function Nav() {
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
-          <img src="images/favicon.svg?v=2" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
+          <img src="images/favicon.svg?v=3" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
           <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>포트폴리오 ’26</span>
         </a>
         <nav style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
@@ -59,7 +59,7 @@ function Nav() {
 function Hero() {
   const ref = useReveal();
   return (
-    <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 60 }}>
+    <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
       <div className="speckle" />
       <div className="blob-field">
         <div className="blob" style={{ width: 480, height: 420, top: "-8%", left: "-6%" }} />
@@ -390,13 +390,13 @@ function Footer() {
         ))}
         <a href="mailto:yubin120866@gmail.com" style={{ marginLeft: "auto" }}>yubin120866@gmail.com</a>
       </div>
-      <div className="wrap" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "26px 0" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }} className="font-serif">
+      <div className="wrap footer-grid" style={{ padding: "26px 0" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">
           <span style={{ fontWeight: 900, fontSize: 22 }}>YK</span>
           <span className="font-ko" style={{ fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 }}>YubinKim · 김유빈 — 법무법인 경국</span>
         </div>
-        <div className="font-sans" style={{ fontSize: ".78rem", color: "rgba(249,246,240,.5)" }}>© 2026 Yubin Kim. Crafted with technical precision.</div>
-        <a href="#top" className="font-sans" style={{ fontSize: ".8rem", color: "var(--ecru)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
+        <div className="font-sans" style={{ fontSize: ".78rem", color: "rgba(249,246,240,.5)", justifySelf: "center", textAlign: "center" }}>© 2026 Yubin Kim. Crafted with technical precision.</div>
+        <a href="#top" className="font-sans" style={{ fontSize: ".8rem", color: "var(--ecru)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, justifySelf: "end" }}>
           맨 위로 <span style={{ display: "inline-block", transform: "rotate(-45deg)" }}><ArrowUpRight size={15} /></span>
         </a>
       </div>

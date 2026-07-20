@@ -1109,3 +1109,18 @@ body.page-out { opacity: 0; transition: opacity .24s ease; }
 @media (prefers-reduced-motion: reduce) {
   .aurora, .hero-net, .ripple { display: none; }
 }
+
+/* footer 3-col grid — © 완전 중앙 */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+@media (max-width: 720px) {
+  .footer-grid { grid-template-columns: 1fr; justify-items: center; row-gap: 12px; }
+  .footer-grid > * { justify-self: center !important; }
+}
+
+/* nav logo — 테두리 없는 투명 마크 */
+header img[alt^="YK"] { border-radius: 0; }
