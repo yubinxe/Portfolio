@@ -181,80 +181,153 @@ function Ledger() {
 
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
-  { n: "01", ko: "법무 · 송무", en: "Legal Affairs",
-    desc: "법무법인 경국에서 송무·사무 실무를 수행하며 제도의 문법과 리스크 감각을 체득했습니다.",
+  { n: "01", ko: "법무 · 송무", short: "법무", en: "Legal Affairs",
+    desc: "법무법인 경국에서 송무·사무 실무를 수행하며 제도의 문법과 리스크 감각을 체득했습니다. 규범을 읽어내는 눈은 어떤 기술을 얹어도 흔들리지 않는 기준선이 됩니다.",
     tags: ["법무법인 경국", "송무·사무 실무"] },
-  { n: "02", ko: "AI 엔지니어링", en: "AI Engineering",
-    desc: "SSAFY 13기와 서울대 AIED 4기를 거쳐 모델의 작동 원리와 프롬프트 아키텍처를 구현 수준에서 다룹니다.",
+  { n: "02", ko: "AI 엔지니어링", short: "AI", en: "AI Engineering",
+    desc: "SSAFY 13기와 서울대 AIED 4기를 거쳐 모델의 작동 원리와 프롬프트 아키텍처를 구현 수준에서 다룹니다. 도구를 쓰는 사람이 아니라 설계하는 사람의 자리에 섭니다.",
     tags: ["SSAFY 13기", "서울대 AIED 4기"] },
-  { n: "03", ko: "마케팅 기획", en: "Marketing Strategy",
-    desc: "KREMA 4기에서 데이터 기반 세그먼트 도출과 매체별 전략을 훈련하고, 캠페인 산출물로 검증했습니다.",
+  { n: "03", ko: "마케팅 기획", short: "마케팅", en: "Marketing Strategy",
+    desc: "KREMA 4기에서 데이터 기반 세그먼트 도출과 매체별 전략을 훈련하고, 실제 캠페인 산출물로 검증했습니다. 기획은 취향이 아니라 근거로 증명되어야 합니다.",
     tags: ["KREMA 4기", "브랜드 캠페인"] },
-  { n: "04", ko: "데이터 · 인프라", en: "Data Infrastructure",
-    desc: "공공데이터 API와 Google Workspace를 연동해 의사결정 가능한 대시보드를 직접 설계하고 배포합니다.",
+  { n: "04", ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
+    desc: "공공데이터 API와 Google Workspace를 연동해 의사결정 가능한 대시보드를 직접 설계하고 배포합니다. 숫자는 화면 위에 놓일 때 비로소 판단이 됩니다.",
     tags: ["공공데이터 API", "GWS 연동"] },
-  { n: "05", ko: "공간 · 건설", en: "Built Environment",
-    desc: "건국대 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산·건설을 데이터의 언어로 읽습니다.",
+  { n: "05", ko: "공간 · 건설", short: "건설", en: "Built Environment",
+    desc: "건국대 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산과 건설을 데이터의 언어로 읽습니다. 물리적 자산도 결국 하나의 데이터 구조입니다.",
     tags: ["건국대 스마트건설", "BIM · 드론 측량"] },
-  { n: "06", ko: "미디어 · 커뮤니케이션", en: "Media & Comms",
-    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작으로 메시지를 대중의 언어로 옮깁니다.",
+  { n: "06", ko: "미디어 · 커뮤니케이션", short: "미디어", en: "Media & Comms",
+    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작으로 메시지를 대중의 언어로 옮깁니다. 전달되지 않은 성과는 존재하지 않은 것과 같습니다.",
     tags: ["서울시민기자단", "연합뉴스TV"] },
 ];
 
-const ARSENAL = ["GPT Image-2", "Suno AI", "ElevenLabs", "Veo 3", "Google Vids", "Hyperframe",
-  "GWS API", "공공데이터 API", "BIM", "React", "Vercel", "Prompt Architecture"];
+const ARSENAL = [
+  ["생성형 AI", ["GPT Image-2", "Suno AI", "ElevenLabs", "Veo 3", "Google Vids", "Hyperframe"]],
+  ["데이터 · 개발", ["공공데이터 API", "GWS API", "React", "Vercel", "Prompt Architecture"]],
+  ["도메인", ["BIM · 드론 측량", "송무 프로세스", "청약 · 부동산 데이터"]],
+];
 
 const THESIS = [
   ["교차점의 희소성", "법률의 엄밀함과 AI의 속도를 동시에 구사하는 사람은 드뭅니다. 대체 불가능성은 한 우물의 깊이가 아니라 우물과 우물 사이에서 만들어집니다."],
-  ["실행으로 증명", "배운 것을 배포된 결과물로 옮겼습니다. 여섯 개의 프로젝트는 전부 열리는 링크로 존재합니다."],
+  ["실행으로 증명", "배운 것을 배포된 결과물로 옮겼습니다. 여섯 개의 프로젝트는 설명이 아니라 열리는 링크로 존재합니다."],
   ["번역의 기술", "제도의 언어, 기술의 언어, 대중의 언어를 오가며 조직 안에서 벌어지는 간극을 메웁니다."],
 ];
 
+const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
+const LABEL = [
+  { x: 200, y: 46, a: "middle" }, { x: 334, y: 128, a: "start" }, { x: 334, y: 278, a: "start" },
+  { x: 200, y: 360, a: "middle" }, { x: 66, y: 278, a: "end" }, { x: 66, y: 128, a: "end" },
+];
+
+function ConvergenceMap({ active, onPick }) {
+  return (
+    <svg className="cmap" viewBox="0 0 400 400" role="img" aria-label="여섯 도메인이 하나로 수렴하는 융합 역량 다이어그램">
+      <polygon className="cmap__ring" points={NODE.map((p) => p.join(",")).join(" ")} />
+      {NODE.map((p, i) => (
+        <line key={"s" + i} className={"cmap__spoke" + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
+      ))}
+      <circle className="cmap__halo" cx="200" cy="200" r="60" />
+      <circle className="cmap__core" cx="200" cy="200" r="46" />
+      <text className="cmap__coreT font-serif" x="200" y="197" textAnchor="middle">YK</text>
+      <text className="cmap__coreS" x="200" y="215" textAnchor="middle">COMPOSITE</text>
+      {NODE.map((p, i) => (
+        <circle key={"n" + i} className={"cmap__node" + (i === active ? " on" : "")}
+          cx={p[0]} cy={p[1]} r={i === active ? 9.5 : 5.5}
+          onMouseEnter={() => onPick(i)} />
+      ))}
+      {DOMAINS.map((d, i) => (
+        <text key={"t" + i} className={"cmap__label" + (i === active ? " on" : "")}
+          x={LABEL[i].x} y={LABEL[i].y} textAnchor={LABEL[i].a}
+          onMouseEnter={() => onPick(i)}>{d.short}</text>
+      ))}
+    </svg>
+  );
+}
+
 function Composite() {
   const ref = useReveal();
+  const [active, setActive] = React.useState(0);
+  const rows = React.useRef([]);
+
+  React.useEffect(() => {
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => { if (e.isIntersecting) setActive(Number(e.target.getAttribute("data-i"))); }),
+      { rootMargin: "-42% 0px -46% 0px" }
+    );
+    rows.current.forEach((n) => n && io.observe(n));
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", overflow: "hidden" }}>
-      <div className="speckle" style={{ opacity: .22 }} />
+    <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(90px,13vw,170px)" }}>
+      <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
         <SectionHead eyebrow="02 — The Composite" titleEn="The Composite" titleKo="AI 시대의 융합 역량" />
 
-        <p className="font-myeongjo reveal" style={{ fontWeight: 800, fontSize: "clamp(1.25rem,2.6vw,2rem)", lineHeight: 1.5, letterSpacing: "-.01em", margin: "44px 0 0", maxWidth: 880, textWrap: "balance" }}>
-          AI는 도구를 대체하지, 맥락을 대체하지 않습니다.<br />
-          제도를 읽는 눈과 기술을 다루는 손을 함께 가진 사람이 다음 질서를 씁니다.
-        </p>
+        <div className="comp-thesis reveal">
+          <p className="font-myeongjo">
+            AI는 도구를 대체하지, 맥락을 대체하지 않습니다.
+          </p>
+          <p className="font-ko comp-thesis__sub">
+            제도를 읽는 눈과 기술을 다루는 손을 함께 가진 사람이 다음 질서를 씁니다.
+            여섯 개의 도메인은 각각의 이력이 아니라, 하나의 판단력으로 수렴합니다.
+          </p>
+        </div>
 
-        <div className="comp-grid">
-          {DOMAINS.map((d, i) => (
-            <article key={d.n} className="comp-card reveal" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="comp-card__head">
-                <span className="comp-card__n font-cond">{d.n}</span>
-                <span className="comp-card__bar" />
-              </div>
-              <h3 className="font-ko comp-card__ko">{d.ko}</h3>
-              <p className="font-sans comp-card__en">{d.en}</p>
-              <p className="font-ko comp-card__desc">{d.desc}</p>
-              <div className="comp-card__tags font-ko">
-                {d.tags.map((t) => <span key={t}>{t}</span>)}
-              </div>
-            </article>
-          ))}
+        <div className="comp-stage">
+          <div className="comp-stage__sticky reveal">
+            <ConvergenceMap active={active} onPick={setActive} />
+            <div className="cmap__cap">
+              <span className="font-cond">{DOMAINS[active].n}</span>
+              <strong className="font-ko">{DOMAINS[active].ko}</strong>
+              <em className="font-sans">{DOMAINS[active].en}</em>
+            </div>
+          </div>
+
+          <div className="comp-track">
+            {DOMAINS.map((d, i) => (
+              <article
+                key={d.n}
+                data-i={i}
+                ref={(el) => (rows.current[i] = el)}
+                className={"comp-row reveal" + (i === active ? " on" : "")}
+                onMouseEnter={() => setActive(i)}
+              >
+                <div className="comp-row__head">
+                  <span className="comp-row__n font-cond">{d.n}</span>
+                  <span className="comp-row__rule" />
+                  <span className="comp-row__en font-sans">{d.en}</span>
+                </div>
+                <h3 className="font-ko">{d.ko}</h3>
+                <p className="font-ko">{d.desc}</p>
+                <div className="comp-row__tags font-ko">
+                  {d.tags.map((t) => <span key={t}>{t}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
         <div className="arsenal reveal">
-          <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 18 }}>The Arsenal — 실무에서 다루는 도구</p>
-          <div className="arsenal__chips font-sans">
-            {ARSENAL.map((t) => <span key={t}>{t}</span>)}
-          </div>
+          <div className="menu-rule" style={{ marginBottom: 24 }}><i /></div>
+          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 26 }}>The Arsenal — 실무에서 다루는 도구</p>
+          {ARSENAL.map(([label, tools]) => (
+            <div key={label} className="arsenal__row">
+              <span className="arsenal__label font-ko">{label}</span>
+              <div className="arsenal__chips font-sans">
+                {tools.map((t) => <span key={t}>{t}</span>)}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="thesis reveal">
           <div className="menu-rule" style={{ marginBottom: 26 }}><i /></div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 30 }}>Why Composite — 왜 융합인가</p>
+          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 34 }}>Why Composite — 왜 융합인가</p>
           <div className="thesis__grid">
             {THESIS.map(([t, b], i) => (
               <div key={t} className="thesis__item">
-                <span className="thesis__idx font-cond">{String(i + 1).padStart(2, "0")}</span>
+                <span className="thesis__idx font-serif">{String(i + 1).padStart(2, "0")}</span>
                 <h4 className="font-ko">{t}</h4>
                 <p className="font-ko">{b}</p>
               </div>
