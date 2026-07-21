@@ -213,8 +213,20 @@ const THESIS = [
   ["번역의 기술", "제도의 언어, 기술의 언어, 대중의 언어를 오가며 조직 안에서 벌어지는 간극을 메웁니다."],
 ];
 
-const REPLACED = ["반복되는 문서 작성", "정형화된 자료 조사", "초안과 변형안 생성", "규칙 기반 분류"];
-const RETAINED = ["판단에 대한 책임", "맥락과 예외의 해석", "이해관계의 조정", "최종 결정과 그 근거"];
+const CASES = [
+  { n: "01", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
+    manual: "사람이 메일함을 열어 하나씩 읽고 우선순위를 매기던 일.",
+    auto: "Workspace API가 실시간으로 수집하고, 분류 알고리즘이 1차로 걸러냅니다.",
+    judge: "무엇을 리스크로 볼 것인가. 이 기준선은 법무 감각에서 나옵니다." },
+  { n: "02", title: "청약 인사이트 대시보드", tag: "공공데이터 API",
+    manual: "흩어진 공고를 찾아 표로 옮기던 일.",
+    auto: "API가 데이터를 끌어오고, 대시보드가 스스로 갱신합니다.",
+    judge: "어떤 지표를 나란히 놓아야 의미가 생기는가. 이 설계는 시장 이해에서 나옵니다." },
+  { n: "03", title: "브랜드 캠페인 필름", tag: "Veo 3 · ElevenLabs",
+    manual: "외주에 발주하고 수정을 반복하던 일.",
+    auto: "생성형 AI가 영상과 내레이션을 직접 만들어냅니다.",
+    judge: "어떤 톤이 그 브랜드의 격을 지키는가. 이 감각은 위임되지 않습니다." },
+];
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
 const LABEL = [
@@ -335,39 +347,48 @@ function Composite() {
         <p className="eyebrow reveal">Why Composite — 왜 융합인가</p>
 
         <h2 className="whyc__lead font-myeongjo reveal">
-          대체되는 일과 대체되지 않는 일.<br />
-          <em>그 사이에 제 자리가 있습니다.</em>
+          도구는 빌릴 수 있습니다.<br />
+          <em>기준은 빌릴 수 없습니다.</em>
         </h2>
 
-        <div className="whyc__split reveal">
-          <div className="whyc__col whyc__col--out">
-            <span className="whyc__coltag font-sans">AI가 대신하는 일</span>
-            <ul className="font-ko">
-              {REPLACED.map((t) => <li key={t}>{t}</li>)}
-            </ul>
-          </div>
-          <div className="whyc__col whyc__col--keep">
-            <span className="whyc__coltag on font-sans">사람이 책임지는 일</span>
-            <ul className="font-ko">
-              {RETAINED.map((t) => <li key={t}>{t}</li>)}
-            </ul>
-          </div>
-        </div>
-
-        <p className="whyc__bridge font-ko reveal">
-          오른쪽 열은 도메인을 아는 사람만 감당할 수 있고, 왼쪽 열은 기술을 아는 사람만 통제할 수 있습니다.
-          그래서 둘 다 필요합니다.
+        <p className="whyc__intro font-ko reveal">
+          제가 만든 세 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
+          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다.
         </p>
 
-        <div className="whyc__args">
-          {THESIS.map(([t, b], i) => (
-            <div key={t} className="whyc__arg reveal" style={{ transitionDelay: `${i * 90}ms` }}>
-              <span className="whyc__argn font-serif">{String(i + 1).padStart(2, "0")}</span>
-              <h4 className="font-ko">{t}</h4>
-              <p className="font-ko">{b}</p>
-            </div>
+        <div className="wcases">
+          {CASES.map((c, i) => (
+            <article key={c.n} className="wcase reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+              <div className="wcase__head">
+                <span className="wcase__n font-serif">{c.n}</span>
+                <h4 className="wcase__t font-ko">{c.title}</h4>
+                <span className="wcase__tag font-sans">{c.tag}</span>
+              </div>
+              <div className="wcase__flow">
+                <div className="wcase__cell">
+                  <span className="wcase__lbl font-sans">사람이 하던 일</span>
+                  <p className="font-ko">{c.manual}</p>
+                </div>
+                <div className="wcase__cell wcase__cell--auto">
+                  <span className="wcase__lbl font-sans">도구가 대신하는 일</span>
+                  <p className="font-ko">{c.auto}</p>
+                </div>
+                <div className="wcase__cell wcase__cell--judge">
+                  <span className="wcase__lbl font-sans">사람이 정하는 일</span>
+                  <p className="font-ko">{c.judge}</p>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
+
+        <p className="whyc__close font-myeongjo reveal">
+          세 번 모두 사람이 남은 자리는 같았습니다.<br />
+          <em>도구에 무엇을 시킬지 정하는 자리.</em>
+        </p>
+        <p className="whyc__closesub font-ko reveal">
+          그 자리에 서려면 기술과 도메인을 동시에 알아야 합니다. 융합은 취향이 아니라 조건입니다.
+        </p>
       </div>
     </section>
   </React.Fragment>
