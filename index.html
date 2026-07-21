@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>김유빈 Yubin Kim — AI Process Innovation Portfolio</title>
+<title>김유빈 Yubin Kim — AI 시대의 융합 역량 · Legal × AI × Marketing</title>
 
 <!-- ===== Primary Meta ===== -->
-<meta name="description" content="법(法)의 품격과 코드의 정교함, 그 경계에서. 법무법인 경국 · AI 기반 송무·사무 프로세스 혁신과 디지털 마케팅 전략 포트폴리오." />
+<meta name="description" content="법무·송무, AI 엔지니어링, 마케팅 기획, 데이터 인프라, 스마트건설, 미디어까지 — AI 시대에 도메인과 기술을 잇는 융합형 인재 김유빈의 포트폴리오." />
 <meta name="author" content="Yubin Kim 김유빈" />
 <meta name="theme-color" content="#1F2D6B" />
 <link rel="canonical" href="https://yubinxe.github.io/Portfolio/" />
@@ -22,8 +22,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Yubin Kim — Portfolio" />
 <meta property="og:url" content="https://yubinxe.github.io/Portfolio/" />
-<meta property="og:title" content="김유빈 Yubin Kim — AI Process Innovation Portfolio" />
-<meta property="og:description" content="법(法)의 품격과 코드의 정교함, 그 경계에서. 법무법인 경국 · AI 기반 송무·사무 프로세스 혁신과 디지털 마케팅 전략." />
+<meta property="og:title" content="김유빈 Yubin Kim — AI 시대의 융합 역량" />
+<meta property="og:description" content="법무 × AI × 마케팅 × 데이터 × 건설 × 미디어 — 여섯 도메인을 잇는 융합형 인재. 배포된 결과물로 증명합니다." />
 <meta property="og:image" content="https://yubinxe.github.io/Portfolio/images/og-image.png?v=2" />
 <meta property="og:image:secure_url" content="https://yubinxe.github.io/Portfolio/images/og-image.png?v=2" />
 <meta property="og:image:type" content="image/png" />
@@ -34,14 +34,14 @@
 
 <!-- ===== Twitter / X ===== -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="김유빈 Yubin Kim — AI Process Innovation Portfolio" />
-<meta name="twitter:description" content="법(法)의 품격과 코드의 정교함, 그 경계에서. 법무법인 경국 · AI 기반 송무·사무 프로세스 혁신." />
+<meta name="twitter:title" content="김유빈 Yubin Kim — AI 시대의 융합 역량" />
+<meta name="twitter:description" content="법무 × AI × 마케팅 × 데이터 × 건설 × 미디어 — 여섯 도메인을 잇는 융합형 인재." />
 <meta name="twitter:image" content="https://yubinxe.github.io/Portfolio/images/og-image.png?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-<link rel="stylesheet" href="styles.css?v=17" />
+<link rel="stylesheet" href="styles.css?v=18" />
 </head>
 <body>
 <div id="root"></div>
@@ -52,7 +52,7 @@
 
 <script type="text/babel" src="tweaks-panel.jsx?v=3"></script>
 <script type="text/babel" src="icons.jsx?v=3"></script>
-<script type="text/babel" src="sections.jsx?v=17"></script>
+<script type="text/babel" src="sections.jsx?v=18"></script>
 
 <script type="text/babel">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -93,6 +93,7 @@ function App() {
       <main>
         <Hero />
         <Marquee />
+        <Composite />
         <Trajectory />
         <Artifacts />
         <Ledger />
@@ -200,7 +201,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
         }
       });
     }, { rootMargin: "-38% 0px -55% 0px" });
-    ["manifesto", "trajectory", "artifacts", "about", "contact"].forEach(function (id) {
+    ["manifesto", "composite", "trajectory", "artifacts", "about", "contact"].forEach(function (id) {
       var s = document.getElementById(id);
       if (s) spy.observe(s);
     });
@@ -236,7 +237,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     }, { threshold: 0.5 });
     document.querySelectorAll("[data-count]").forEach(function (n) { ioC.observe(n); });
 
-    var RAIL = [["manifesto", "선언"], ["trajectory", "궤적"], ["artifacts", "작업"], ["about", "소개"], ["contact", "연락"]];
+    var RAIL = [["manifesto", "선언"], ["composite", "역량"], ["trajectory", "궤적"], ["artifacts", "작업"], ["about", "소개"], ["contact", "연락"]];
     var rail = document.createElement("nav");
     rail.className = "rail";
     RAIL.forEach(function (r) {

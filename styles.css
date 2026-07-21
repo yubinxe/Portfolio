@@ -1124,3 +1124,96 @@ body.page-out { opacity: 0; transition: opacity .24s ease; }
 
 /* nav logo — 테두리 없는 투명 마크 */
 header img[alt^="YK"] { border-radius: 0; }
+
+/* ============================================================
+   THE COMPOSITE — 융합 역량 매트릭스 · 아스널 · 논거
+   ============================================================ */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: clamp(16px, 2.2vw, 26px);
+  margin-top: clamp(40px, 5vw, 62px);
+}
+.comp-card {
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 18px;
+  padding: clamp(1.4rem, 2.4vw, 1.9rem);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 16px rgba(16,19,28,.08);
+  transition: transform .45s var(--bounce), box-shadow .45s var(--bounce);
+  overflow: hidden;
+}
+.comp-card::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px; height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .45s cubic-bezier(.77,0,.18,1);
+}
+.comp-card:hover { transform: translateY(-7px); box-shadow: 0 24px 46px -24px rgba(16,19,28,.4); }
+.comp-card:hover::after { transform: scaleY(1); }
+.comp-card__head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.comp-card__n { font-size: 1.05rem; letter-spacing: .18em; color: var(--accent); }
+.comp-card__bar { flex: 1; height: 1px; background: rgba(16,19,28,.2); }
+.comp-card__ko { margin: 0; font-weight: 800; font-size: clamp(1.1rem, 1.7vw, 1.32rem); letter-spacing: -.01em; }
+.comp-card__en {
+  margin: 5px 0 14px;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: .7;
+}
+.comp-card__desc { margin: 0; flex-grow: 1; color: var(--ink-soft); line-height: 1.74; font-size: .94rem; }
+.comp-card__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.comp-card__tags span {
+  font-size: .71rem;
+  font-weight: 600;
+  padding: .3em .72em;
+  border-radius: 999px;
+  border: 1px solid rgba(16,19,28,.25);
+  color: var(--ink-soft);
+}
+
+/* arsenal */
+.arsenal { margin-top: clamp(52px, 7vw, 84px); }
+.arsenal__chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.arsenal__chips span {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  padding: .5em 1em;
+  border-radius: 999px;
+  border: 1.4px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  transition: background .25s ease, color .25s ease, transform .35s var(--bounce);
+}
+.arsenal__chips span:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+
+/* thesis */
+.thesis { margin-top: clamp(52px, 7vw, 84px); }
+.thesis__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(22px, 3vw, 44px);
+}
+.thesis__item { position: relative; padding-top: 20px; border-top: 1.5px solid var(--ink); }
+.thesis__idx {
+  position: absolute;
+  top: -13px; left: 0;
+  background: var(--ecru);
+  padding-right: 10px;
+  font-size: .85rem;
+  letter-spacing: .2em;
+  color: var(--accent);
+}
+.thesis__item h4 { margin: 12px 0 10px; font-weight: 800; font-size: 1.06rem; letter-spacing: -.01em; }
+.thesis__item p { margin: 0; color: var(--ink-soft); line-height: 1.78; font-size: .93rem; }

@@ -26,8 +26,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"],
-    ["갤러리", "gallery.html"], ["경력", "career.html"], ["연락", "#contact"],
+    ["선언", "#manifesto"], ["역량", "#composite"], ["궤적", "#trajectory"],
+    ["작업", "#artifacts"], ["갤러리", "gallery.html"], ["경력", "career.html"],
   ];
   return (
     <header style={{
@@ -126,7 +126,7 @@ function Sticker({ cls = "", style = {}, children }) {
 
 /* ============================================================ MARQUEE */
 function Marquee() {
-  const items = ["YUBIN KIM OFFICE", "TECHNICAL PRECISION", "LEGAL DIGNITY", "AI PROCESS INNOVATION", "DIGITAL MARKETING", "DATA INFRASTRUCTURE", "김유빈 · ETHAN KIM"];
+  const items = ["YUBIN KIM OFFICE", "LEGAL × AI × MARKETING", "TECHNICAL PRECISION", "LEGAL DIGNITY", "COMPOSITE TALENT", "DATA INFRASTRUCTURE", "김유빈 · ETHAN KIM"];
   const Row = () => (
     <span>{items.map((t, i) => (
       <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "2.5rem" }}>
@@ -164,7 +164,7 @@ function Ledger() {
     <section ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(54px,7vw,84px) 0" }}>
       <div className="wrap reveal">
         <div className="menu-rule" style={{ color: "rgba(244,245,248,.45)", marginBottom: 8 }}><i /></div>
-        <p className="eyebrow" style={{ color: "rgba(244,245,248,.55)", margin: "18px 0 30px" }}>04 — The Ledger · 한눈에 보는 기록</p>
+        <p className="eyebrow" style={{ color: "rgba(244,245,248,.55)", margin: "18px 0 30px" }}>05 — The Ledger · 한눈에 보는 기록</p>
         <div className="ledger-grid">
           {ITEMS.map(([n, ko, en], i) => (
             <div key={i} className="ledger-item" style={{ transitionDelay: `${i * 70}ms` }}>
@@ -173,6 +173,93 @@ function Ledger() {
               <div className="font-sans" style={{ fontSize: ".72rem", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(244,245,248,.5)", marginTop: 4 }}>{en}</div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================ COMPOSITE — 융합 역량 */
+const DOMAINS = [
+  { n: "01", ko: "법무 · 송무", en: "Legal Affairs",
+    desc: "법무법인 경국에서 송무·사무 실무를 수행하며 제도의 문법과 리스크 감각을 체득했습니다.",
+    tags: ["법무법인 경국", "송무·사무 실무"] },
+  { n: "02", ko: "AI 엔지니어링", en: "AI Engineering",
+    desc: "SSAFY 13기와 서울대 AIED 4기를 거쳐 모델의 작동 원리와 프롬프트 아키텍처를 구현 수준에서 다룹니다.",
+    tags: ["SSAFY 13기", "서울대 AIED 4기"] },
+  { n: "03", ko: "마케팅 기획", en: "Marketing Strategy",
+    desc: "KREMA 4기에서 데이터 기반 세그먼트 도출과 매체별 전략을 훈련하고, 캠페인 산출물로 검증했습니다.",
+    tags: ["KREMA 4기", "브랜드 캠페인"] },
+  { n: "04", ko: "데이터 · 인프라", en: "Data Infrastructure",
+    desc: "공공데이터 API와 Google Workspace를 연동해 의사결정 가능한 대시보드를 직접 설계하고 배포합니다.",
+    tags: ["공공데이터 API", "GWS 연동"] },
+  { n: "05", ko: "공간 · 건설", en: "Built Environment",
+    desc: "건국대 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산·건설을 데이터의 언어로 읽습니다.",
+    tags: ["건국대 스마트건설", "BIM · 드론 측량"] },
+  { n: "06", ko: "미디어 · 커뮤니케이션", en: "Media & Comms",
+    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작으로 메시지를 대중의 언어로 옮깁니다.",
+    tags: ["서울시민기자단", "연합뉴스TV"] },
+];
+
+const ARSENAL = ["GPT Image-2", "Suno AI", "ElevenLabs", "Veo 3", "Google Vids", "Hyperframe",
+  "GWS API", "공공데이터 API", "BIM", "React", "Vercel", "Prompt Architecture"];
+
+const THESIS = [
+  ["교차점의 희소성", "법률의 엄밀함과 AI의 속도를 동시에 구사하는 사람은 드뭅니다. 대체 불가능성은 한 우물의 깊이가 아니라 우물과 우물 사이에서 만들어집니다."],
+  ["실행으로 증명", "배운 것을 배포된 결과물로 옮겼습니다. 여섯 개의 프로젝트는 전부 열리는 링크로 존재합니다."],
+  ["번역의 기술", "제도의 언어, 기술의 언어, 대중의 언어를 오가며 조직 안에서 벌어지는 간극을 메웁니다."],
+];
+
+function Composite() {
+  const ref = useReveal();
+  return (
+    <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", overflow: "hidden" }}>
+      <div className="speckle" style={{ opacity: .22 }} />
+      <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow="02 — The Composite" titleEn="The Composite" titleKo="AI 시대의 융합 역량" />
+
+        <p className="font-myeongjo reveal" style={{ fontWeight: 800, fontSize: "clamp(1.25rem,2.6vw,2rem)", lineHeight: 1.5, letterSpacing: "-.01em", margin: "44px 0 0", maxWidth: 880, textWrap: "balance" }}>
+          AI는 도구를 대체하지, 맥락을 대체하지 않습니다.<br />
+          제도를 읽는 눈과 기술을 다루는 손을 함께 가진 사람이 다음 질서를 씁니다.
+        </p>
+
+        <div className="comp-grid">
+          {DOMAINS.map((d, i) => (
+            <article key={d.n} className="comp-card reveal" style={{ transitionDelay: `${i * 70}ms` }}>
+              <div className="comp-card__head">
+                <span className="comp-card__n font-cond">{d.n}</span>
+                <span className="comp-card__bar" />
+              </div>
+              <h3 className="font-ko comp-card__ko">{d.ko}</h3>
+              <p className="font-sans comp-card__en">{d.en}</p>
+              <p className="font-ko comp-card__desc">{d.desc}</p>
+              <div className="comp-card__tags font-ko">
+                {d.tags.map((t) => <span key={t}>{t}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="arsenal reveal">
+          <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
+          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 18 }}>The Arsenal — 실무에서 다루는 도구</p>
+          <div className="arsenal__chips font-sans">
+            {ARSENAL.map((t) => <span key={t}>{t}</span>)}
+          </div>
+        </div>
+
+        <div className="thesis reveal">
+          <div className="menu-rule" style={{ marginBottom: 26 }}><i /></div>
+          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 30 }}>Why Composite — 왜 융합인가</p>
+          <div className="thesis__grid">
+            {THESIS.map(([t, b], i) => (
+              <div key={t} className="thesis__item">
+                <span className="thesis__idx font-cond">{String(i + 1).padStart(2, "0")}</span>
+                <h4 className="font-ko">{t}</h4>
+                <p className="font-ko">{b}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -202,7 +289,7 @@ function Trajectory() {
   return (
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
-        <SectionHead eyebrow="02 — Archive" titleEn="The Trajectory" titleKo="걸어온 궤적" />
+        <SectionHead eyebrow="03 — Archive" titleEn="The Trajectory" titleKo="걸어온 궤적" />
         <div className="timeline" style={{ marginTop: 64 }}>
           <div className="timeline__spine" />
           <div style={{ display: "flex", flexDirection: "column", gap: "clamp(36px,5vw,58px)" }}>
@@ -252,7 +339,7 @@ function Artifacts() {
   return (
     <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
       <div className="wrap">
-        <SectionHead eyebrow="03 — Limited Editions" titleEn="The Artifacts" titleKo="KREMA AI 교육 과정 6개의 결과물" />
+        <SectionHead eyebrow="04 — Limited Editions" titleEn="The Artifacts" titleKo="KREMA AI 교육 과정 6개의 결과물" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "clamp(22px,3vw,34px)", marginTop: 64 }}>
           {EDITIONS.map((e, i) => (
             <article key={i} className="edition reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
@@ -357,7 +444,7 @@ function Contact() {
         </svg>
       </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
-        <p className="eyebrow" style={{ color: "rgba(249,246,240,.6)", marginBottom: 24 }}>05 — Consultation</p>
+        <p className="eyebrow" style={{ color: "rgba(249,246,240,.6)", marginBottom: 24 }}>06 — Consultation</p>
         <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.6rem,9vw,7rem)", lineHeight: .92, letterSpacing: "-.03em", margin: 0 }}>
           Let’s design<br />the next order.
         </h2>
@@ -420,4 +507,4 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
   );
 }
 
-Object.assign(window, { Nav, Hero, Marquee, Ledger, Trajectory, Artifacts, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, About, Contact, Footer, SectionHead });
