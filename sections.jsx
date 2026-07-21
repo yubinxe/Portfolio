@@ -96,7 +96,7 @@ function Hero() {
         <div className="letterhead font-ko" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 34px", marginTop: 40 }}>
           {[
             ["김유빈", "Yubin Kim · 2004"],
-            ["법무법인 경국", "Legal Firm Kyung-guk · 사원"],
+            ["법무법인 경국", "Legal Firm · 법률사무원"],
             ["AI Process Innovation", "법무 · 법률 송무 & AI · 마케팅 기획"],
           ].map(([a, b], i) => (
             <div key={i} style={{ textAlign: "left", padding: "0 4px" }}>
@@ -213,6 +213,9 @@ const THESIS = [
   ["번역의 기술", "제도의 언어, 기술의 언어, 대중의 언어를 오가며 조직 안에서 벌어지는 간극을 메웁니다."],
 ];
 
+const REPLACED = ["반복되는 문서 작성", "정형화된 자료 조사", "초안과 변형안 생성", "규칙 기반 분류"];
+const RETAINED = ["판단에 대한 책임", "맥락과 예외의 해석", "이해관계의 조정", "최종 결정과 그 근거"];
+
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
 const LABEL = [
   { x: 200, y: 46, a: "middle" }, { x: 334, y: 128, a: "start" }, { x: 334, y: 278, a: "start" },
@@ -246,6 +249,7 @@ function ConvergenceMap({ active, onPick }) {
 
 function Composite() {
   const ref = useReveal();
+  const bandRef = useReveal();
   const [active, setActive] = React.useState(0);
   const rows = React.useRef([]);
 
@@ -259,7 +263,8 @@ function Composite() {
   }, []);
 
   return (
-    <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(90px,13vw,170px)" }}>
+    <React.Fragment>
+    <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
         <SectionHead eyebrow="02 — The Composite" titleEn="The Composite" titleKo="AI 시대의 융합 역량" />
@@ -321,21 +326,51 @@ function Composite() {
           ))}
         </div>
 
-        <div className="thesis reveal">
-          <div className="menu-rule" style={{ marginBottom: 26 }}><i /></div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 34 }}>Why Composite — 왜 융합인가</p>
-          <div className="thesis__grid">
-            {THESIS.map(([t, b], i) => (
-              <div key={t} className="thesis__item">
-                <span className="thesis__idx font-serif">{String(i + 1).padStart(2, "0")}</span>
-                <h4 className="font-ko">{t}</h4>
-                <p className="font-ko">{b}</p>
-              </div>
-            ))}
+      </div>
+    </section>
+
+    <section className="whyc" ref={bandRef}>
+      <div className="wrap">
+        <div className="menu-rule reveal" style={{ marginBottom: 26 }}><i /></div>
+        <p className="eyebrow reveal">Why Composite — 왜 융합인가</p>
+
+        <h2 className="whyc__lead font-myeongjo reveal">
+          대체되는 일과 대체되지 않는 일.<br />
+          <em>그 사이에 제 자리가 있습니다.</em>
+        </h2>
+
+        <div className="whyc__split reveal">
+          <div className="whyc__col whyc__col--out">
+            <span className="whyc__coltag font-sans">AI가 대신하는 일</span>
+            <ul className="font-ko">
+              {REPLACED.map((t) => <li key={t}>{t}</li>)}
+            </ul>
           </div>
+          <div className="whyc__col whyc__col--keep">
+            <span className="whyc__coltag on font-sans">사람이 책임지는 일</span>
+            <ul className="font-ko">
+              {RETAINED.map((t) => <li key={t}>{t}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <p className="whyc__bridge font-ko reveal">
+          오른쪽 열은 도메인을 아는 사람만 감당할 수 있고, 왼쪽 열은 기술을 아는 사람만 통제할 수 있습니다.
+          그래서 둘 다 필요합니다.
+        </p>
+
+        <div className="whyc__args">
+          {THESIS.map(([t, b], i) => (
+            <div key={t} className="whyc__arg reveal" style={{ transitionDelay: `${i * 90}ms` }}>
+              <span className="whyc__argn font-serif">{String(i + 1).padStart(2, "0")}</span>
+              <h4 className="font-ko">{t}</h4>
+              <p className="font-ko">{b}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
+  </React.Fragment>
   );
 }
 
