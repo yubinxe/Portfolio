@@ -1354,3 +1354,13 @@ header img[alt^="YK"] { border-radius: 0; }
 }
 .thesis__item h4 { margin: 0 0 14px; font-weight: 800; font-size: 1.1rem; letter-spacing: -.01em; line-height: 1.4; }
 .thesis__item p { margin: 0; color: var(--ink-soft); line-height: 1.85; font-size: .95rem; }
+
+/* ============================================================
+   REVEAL GUARD — 활성 디밍 구역은 블러 페이드 제외
+   ============================================================ */
+.comp-row,
+.comp-stage__sticky,
+.comp-stage .reveal {
+  filter: none !important;
+}
+.comp-stage__sticky { opacity: 1; transform: none; }

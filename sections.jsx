@@ -275,7 +275,7 @@ function Composite() {
         </div>
 
         <div className="comp-stage">
-          <div className="comp-stage__sticky reveal">
+          <div className="comp-stage__sticky">
             <ConvergenceMap active={active} onPick={setActive} />
             <div className="cmap__cap">
               <span className="font-cond">{DOMAINS[active].n}</span>
@@ -290,7 +290,7 @@ function Composite() {
                 key={d.n}
                 data-i={i}
                 ref={(el) => (rows.current[i] = el)}
-                className={"comp-row reveal" + (i === active ? " on" : "")}
+                className={"comp-row" + (i === active ? " on" : "")}
                 onMouseEnter={() => setActive(i)}
               >
                 <div className="comp-row__head">
