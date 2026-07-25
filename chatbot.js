@@ -23,7 +23,7 @@
   var ds = (scriptEl && scriptEl.dataset) || {};
   var CFG = Object.assign(
     {
-      endpoint: "/api/chat",
+      endpoint: "https://yubinkim-portfolio.vercel.app/api/chat",
       accent: "", // 비우면 사이트의 --accent 상속
       brandKo: "유빈 AI",
       brandEn: "Yubin Kim Office",
