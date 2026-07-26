@@ -68,9 +68,9 @@ function Hero() {
       <span className="watermark font-myeongjo" aria-hidden="true">法</span>
 
       {/* floating stickers — corners, above the name */}
-      <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW × Real Estate</Sticker>
-      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>EST. 2004.05.18</Sticker>
-      <Sticker cls="sticker--lilac float-3"  style={{ bottom: "15%", left: "5%", "--rot": "6deg" }}>SNU AIED 4기</Sticker>
+      <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW</Sticker>
+      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>EST. 2004</Sticker>
+      <Sticker cls="sticker--lilac float-3"  style={{ bottom: "15%", left: "5%", "--rot": "6deg" }}>서울대 AIED 4기</Sticker>
       <Sticker cls="sticker--pink float"     style={{ bottom: "18%", right: "5%", "--rot": "-6deg" }}>SSAFY 13기</Sticker>
 
       {/* squiggle accents */}
@@ -96,7 +96,7 @@ function Hero() {
         <div className="letterhead font-ko" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 34px", marginTop: 40 }}>
           {[
             ["김유빈", "Yubin Kim · 2004"],
-            ["법무법인 경국", "Legal Firm · 사원(Staff)"],
+            ["법무법인 경국", "Legal Firm · 법률사무원"],
             ["AI Process Innovation", "법무 · 법률 송무 & AI · 마케팅 기획"],
           ].map(([a, b], i) => (
             <div key={i} style={{ textAlign: "left", padding: "0 4px" }}>
@@ -157,7 +157,7 @@ function Ledger() {
   const ITEMS = [
     ["6", "수행 프로젝트", "Editions"],
     ["4", "전문 교육 이수", "Programs"],
-    ["1", "창업경진 수상", "Award"],
+    ["2", "수상 · 표창", "Awards"],
     ["1", "방송 인터뷰", "On Air"],
   ];
   return (
@@ -205,6 +205,11 @@ const ARSENAL = [
   ["생성형 AI", ["GPT Image-2", "Suno AI", "ElevenLabs", "Veo 3", "Google Vids", "Hyperframe"]],
   ["데이터 · 개발", ["공공데이터 API", "GWS API", "React", "Vercel", "Prompt Architecture"]],
   ["도메인", ["BIM · 드론 측량", "송무 프로세스", "청약 · 부동산 데이터"]],
+];
+
+const CREDS = [
+  { name: "TESAT", ko: "경제이해력검증시험", by: "한국경제신문 주관" },
+  { name: "분양대행자", ko: "부동산 분양 실무 자격", by: "주택·상가 분양 대행" },
 ];
 
 const THESIS = [
@@ -338,6 +343,20 @@ function Composite() {
           ))}
         </div>
 
+        <div className="creds reveal">
+          <div className="menu-rule" style={{ marginBottom: 24 }}><i /></div>
+          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 26 }}>The Credentials — 보유 자격</p>
+          <div className="creds__grid">
+            {CREDS.map((c) => (
+              <div key={c.name} className="cred">
+                <span className="cred__name font-serif">{c.name}</span>
+                <span className="cred__ko font-ko">{c.ko}</span>
+                <span className="cred__by font-sans">{c.by}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -397,7 +416,7 @@ function Composite() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
-  { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트 건설기술인 법정 직무교육 이수",
+  { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { year: "2026", color: "var(--apple)", title: "서울시민기자단 & 서울청년파트너스 위원 활동",
     desc: "공공 레벨의 미디어 에디팅과 거시적 시정(市政) 트렌드 분석, 트렌디한 정책 제안 프로세스를 주도합니다." },
@@ -411,6 +430,8 @@ const TRAJECTORY = [
     desc: "최신 소프트웨어 아키텍처와 하이테크 AI 융합 알고리즘 실무 프로젝트로 엔지니어링 역량을 내재화." },
   { year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
     desc: "HVAC 기술 기반 리스크 관리 혁신 아이디어 제안 및 구조화된 비즈니스 모델(BM) 유효성의 공식 검증." },
+  { year: "2022", color: "var(--sky)", title: "육군정보통신학교장 표창 · 군 특성화고 현장실습 우수",
+    desc: "군 특성화고 현장 실습 기간 중 위국헌신·책임완수의 가치를 실천하고 학업성적이 우수하여 타의 모범이 되어 육군정보통신학교장(준장) 표창을 수여." },
   { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall 해외 연수",
     desc: "유럽 선진 기업의 인프라 시스템과 글로벌 비즈니스 스탠다드를 조기에 체득한 글로벌 역량의 시초." },
 ];

@@ -1495,3 +1495,50 @@ header img[alt^="YK"] { border-radius: 0; }
   .wcase__tag { margin-left: 0; width: 100%; }
   .wcase__cell--judge { padding-left: 18px; }
 }
+
+/* ============================================================
+   THE CREDENTIALS — 보유 자격
+   ============================================================ */
+.creds { margin-top: clamp(46px, 6vw, 70px); }
+.creds__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+}
+.cred {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 16px;
+  padding: clamp(1.15rem, 2vw, 1.5rem) clamp(1.2rem, 2.2vw, 1.6rem);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(16,19,28,.07);
+  transition: transform .4s var(--bounce), box-shadow .4s var(--bounce);
+}
+.cred::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px; height: 100%;
+  background: var(--accent);
+}
+.cred:hover { transform: translateY(-6px); box-shadow: 0 22px 44px -24px rgba(16,19,28,.4); }
+.cred__name {
+  font-weight: 900;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  letter-spacing: -.01em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.cred__ko { font-weight: 700; font-size: .95rem; color: var(--ink); margin-top: 3px; }
+.cred__by {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink-soft);
+  opacity: .8;
+  margin-top: 4px;
+}
