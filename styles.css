@@ -1542,3 +1542,36 @@ header img[alt^="YK"] { border-radius: 0; }
   opacity: .8;
   margin-top: 4px;
 }
+
+/* ============================================================
+   GALLERY SECTIONS — 상훈 / 인터뷰 / 기록 + 문서(상장) 크롭 방지
+   ============================================================ */
+.g-sec { margin-top: clamp(50px, 6.5vw, 84px); }
+.g-sec:first-of-type { margin-top: clamp(30px, 4vw, 50px); }
+.g-sec__label {
+  color: var(--ink-soft);
+  margin: 18px 0 clamp(22px, 3vw, 32px);
+}
+
+/* 상장·표창: 전체가 보이도록 contain + 종이 배경 (절대 크롭 안 함) */
+.gallery-grid--doc {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 420px));
+  justify-content: start;
+}
+.g-card--doc a {
+  background: var(--ecru-deep);
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 1.6vw, 18px);
+}
+.g-card--doc img {
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  filter: none;
+  transform: none;
+}
+.g-card--doc:hover img { transform: none; }
+
+/* 인터뷰: 방송 캡처는 16:9 가로 */
+.g-card--wide { max-width: 640px; }
+.g-card--wide img { aspect-ratio: 16 / 9; }
