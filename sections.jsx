@@ -68,9 +68,9 @@ function Hero() {
       <span className="watermark font-myeongjo" aria-hidden="true">法</span>
 
       {/* floating stickers — corners, above the name */}
-      <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW</Sticker>
-      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>EST. 2004</Sticker>
-      <Sticker cls="sticker--lilac float-3"  style={{ bottom: "15%", left: "5%", "--rot": "6deg" }}>서울대 AIED 4기</Sticker>
+      <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW × Real Estate</Sticker>
+      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>EST. 2004.05.18</Sticker>
+      <Sticker cls="sticker--lilac float-3"  style={{ bottom: "15%", left: "5%", "--rot": "6deg" }}>SNU AIED 4기</Sticker>
       <Sticker cls="sticker--pink float"     style={{ bottom: "18%", right: "5%", "--rot": "-6deg" }}>SSAFY 13기</Sticker>
 
       {/* squiggle accents */}
@@ -397,7 +397,7 @@ function Composite() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
-  { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
+  { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트 건설기술인 법정 직무교육 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { year: "2026", color: "var(--apple)", title: "서울시민기자단 & 서울청년파트너스 위원 활동",
     desc: "공공 레벨의 미디어 에디팅과 거시적 시정(市政) 트렌드 분석, 트렌디한 정책 제안 프로세스를 주도합니다." },
