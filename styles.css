@@ -1575,3 +1575,76 @@ header img[alt^="YK"] { border-radius: 0; }
 /* 인터뷰: 방송 캡처는 16:9 가로 */
 .g-card--wide { max-width: 640px; }
 .g-card--wide img { aspect-ratio: 16 / 9; }
+
+/* ============================================================
+   GALLERY MASONRY — 자연 비율(크롭 없음) + 기고 기사 카드
+   ============================================================ */
+.g-mason {
+  columns: 3;
+  column-gap: clamp(16px, 2.2vw, 26px);
+}
+.g-mason--2 { columns: 2; }
+@media (max-width: 1080px) { .g-mason { columns: 2; } }
+@media (max-width: 640px) { .g-mason, .g-mason--2 { columns: 1; } }
+
+.g-mason .g-card {
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 clamp(16px, 2.2vw, 26px);
+  vertical-align: top;
+}
+/* 자연 비율: aspect-ratio·crop 완전 해제 */
+.g-mason .g-card img,
+.g-mason .g-card--portrait img,
+.g-mason .g-card--doc img {
+  aspect-ratio: auto !important;
+  height: auto !important;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* 기고 기사 카드 */
+.press-cite {
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 clamp(16px, 2.2vw, 26px);
+  padding: clamp(1.5rem, 2.6vw, 2.1rem);
+  background: var(--ink);
+  color: var(--ecru);
+  border: 1.5px solid var(--ink);
+  border-radius: 20px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform .45s var(--bounce), box-shadow .45s var(--bounce);
+}
+.press-cite:hover { transform: translateY(-6px); box-shadow: 0 26px 48px -24px rgba(16,19,28,.5); }
+.press-cite__tag {
+  font-size: .68rem; font-weight: 700; letter-spacing: .16em;
+  color: #9AA8D6;
+}
+.press-cite__outlet {
+  font-size: .74rem; font-weight: 600; letter-spacing: .04em;
+  color: rgba(244,245,248,.55);
+}
+.press-cite__title {
+  font-weight: 800;
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  margin: 6px 0 4px;
+  text-wrap: balance;
+}
+.press-cite__meta { font-size: .84rem; color: rgba(244,245,248,.6); line-height: 1.6; }
+.press-cite__cta {
+  margin-top: 10px;
+  font-size: .82rem; font-weight: 700; letter-spacing: .02em;
+  color: var(--ecru);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.press-cite__cta b { transition: transform .35s var(--bounce); display: inline-block; }
+.press-cite:hover .press-cite__cta b { transform: translate(3px, -3px); }
