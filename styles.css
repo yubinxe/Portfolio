@@ -1648,3 +1648,24 @@ header img[alt^="YK"] { border-radius: 0; }
 }
 .press-cite__cta b { transition: transform .35s var(--bounce); display: inline-block; }
 .press-cite:hover .press-cite__cta b { transform: translate(3px, -3px); }
+
+/* press-cite: 상단 이미지 헤더로 연합뉴스 카드와 무게 정렬 */
+.press-cite { padding: 0; overflow: hidden; }
+.press-cite__thumb { display: block; width: 100%; line-height: 0; }
+.press-cite__thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-bottom: 1.5px solid rgba(244,245,248,.14);
+  transition: transform .6s var(--bounce);
+}
+.press-cite:hover .press-cite__thumb img { transform: scale(1.04); }
+.press-cite__body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: clamp(1.3rem, 2.4vw, 1.8rem) clamp(1.4rem, 2.6vw, 2rem) clamp(1.5rem, 2.6vw, 1.9rem);
+}
+.press-cite__body .press-cite__title { margin: 4px 0 2px; }
