@@ -75,7 +75,7 @@ function Hero() {
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
         <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"법무법인 경국 · 사원 (Staff) · AI 개발"}
+          {"법무법인 경국 · 사원 (Staff) · 법무 송무 | AI 개발"}
         </p>
         <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
           기술의 정교함과 제도의 품격을 결합하여,<br />디지털 세계의 새로운 질서를 디자인합니다.
@@ -529,12 +529,6 @@ function About() {
               강의실과 사무실, 카메라 앞을 오가며 쌓아온 시간을 기록으로 남깁니다. 말보다 결과물이 먼저 증명하도록.
             </p>
 
-            <div className="font-ko" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 26 }}>
-              {["품격", "정교함", "질서"].map((k) => (
-                <span key={k} style={{ fontSize: ".8rem", fontWeight: 600, padding: ".38em .95em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{k}</span>
-              ))}
-            </div>
-
             <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" }}>
               <MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국
             </div>
@@ -547,7 +541,7 @@ function About() {
 
           <div className="about-gallery">
             <figure className="photo-card photo-card--tall reveal">
-              <img src="images/yubin2.png?v=1" alt="김유빈 — 법무법인 경국 공식 프로필" loading="lazy" />
+              <img src="images/profile-yubin.jpg?v=1" alt="김유빈 — 법무법인 경국 공식 프로필" width="896" height="1195" loading="lazy" />
               <figcaption className="font-ko"><span className="photo-card__chip">PROFILE</span>김유빈 · Yubin Kim</figcaption>
             </figure>
             <figure className="photo-card reveal" style={{ transitionDelay: "90ms" }}>
