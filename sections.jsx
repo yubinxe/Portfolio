@@ -74,15 +74,11 @@ function Hero() {
           <br />
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
-        <p className="font-sans" style={{ fontWeight: 600, letterSpacing: ".18em", textTransform: "uppercase", fontSize: "clamp(.8rem, 2vw, 1.25rem)", marginTop: 28, marginBottom: 22 }}>
-          Technical Precision Meets Legal Dignity.
+        <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
+          {"법무법인 경국 · 사원 (Staff) · 법무 · 송무 & AI · 마케팅 기획"}
         </p>
         <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
           기술의 정교함과 제도의 품격을 결합하여,<br />디지털 세계의 새로운 질서를 디자인합니다.
-        </p>
-
-        <p className="letterhead-line font-ko" style={{ marginTop: 36, fontSize: "clamp(.9rem,1.4vw,1.04rem)", color: "var(--ink-soft)", letterSpacing: ".01em", fontWeight: 500 }}>
-          {"법무법인 경국 · 사원 (Staff)  ·  법무 · 송무 & AI · 마케팅 기획"}
         </p>
 
         <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
@@ -134,7 +130,7 @@ function Marquee() {
 function Ledger() {
   const ref = useReveal();
   const ITEMS = [
-    ["7", "수행 프로젝트", "Projects"],
+    ["8", "수행 프로젝트", "Projects"],
     ["4", "전문 교육 이수", "Programs"],
     ["2", "수상 · 표창", "Awards"],
     ["1", "방송 인터뷰", "On Air"],
@@ -161,22 +157,22 @@ function Ledger() {
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
   { n: "01", ko: "법무 · 송무", short: "법무", en: "Legal Affairs",
-    desc: "법무법인 경국에서 송무·사무 실무를 담당하며 법 제도의 구조와 리스크 판단 기준을 체득하였다. 규범을 해석하는 역량은 어떠한 기술을 접목하더라도 유지되는 기준선으로 기능한다.",
+    desc: "법무법인 경국에서 송무·사무 실무를 담당하며 법 제도의 구조와 리스크 판단의 기준을 체득. 규범을 해석하는 역량은 어떠한 기술을 접목하더라도 유지되는 기준선.",
     tags: ["법무법인 경국", "송무·사무 실무"] },
   { n: "02", ko: "AI 엔지니어링", short: "AI", en: "AI Engineering",
-    desc: "SSAFY 13기와 서울대학교 AIED 4기를 이수하며 모델의 작동 원리와 프롬프트 설계를 구현 수준에서 다룬다. 도구의 사용자에 머무르지 않고 설계자의 관점에서 접근한다.",
+    desc: "SSAFY 13기와 서울대학교 AIED 4기를 이수하며 모델의 작동 원리와 프롬프트 설계를 구현 수준에서 소화. 도구의 사용자에 머무르지 않고 설계자의 관점에서 접근.",
     tags: ["SSAFY 13기", "서울대 AIED 4기"] },
   { n: "03", ko: "마케팅 기획", short: "마케팅", en: "Marketing Strategy",
-    desc: "KREMA 4기에서 데이터 기반의 세그먼트 도출과 매체별 전략 수립을 학습하고, 실제 캠페인 산출물로 이를 검증하였다. 기획은 취향이 아니라 근거로 뒷받침되어야 한다.",
+    desc: "KREMA 4기에서 데이터 기반의 세그먼트 도출과 매체별 전략 수립을 학습하고, 실제 캠페인 산출물로 검증. 기획은 취향이 아니라 근거로 증명되는 영역.",
     tags: ["KREMA 4기", "브랜드 캠페인"] },
   { n: "04", ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
-    desc: "공공데이터 API와 Google Workspace를 연동하여 의사결정에 활용 가능한 대시보드를 직접 설계·배포한다. 데이터는 구조화되어 제시될 때 비로소 판단의 근거가 된다.",
+    desc: "공공데이터 API와 Google Workspace를 연동하여 의사결정에 활용 가능한 대시보드를 직접 설계·배포. 데이터는 구조화되어 제시될 때 비로소 판단의 근거.",
     tags: ["공공데이터 API", "GWS 연동"] },
   { n: "05", ko: "공간 · 건설", short: "건설", en: "Built Environment",
-    desc: "건국대학교 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산과 건설을 데이터의 관점에서 해석한다. 물리적 자산 또한 하나의 데이터 구조로 환원된다.",
+    desc: "건국대학교 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산과 건설을 데이터의 관점에서 해석. 물리적 자산 또한 하나의 데이터 구조.",
     tags: ["건국대 스마트건설", "BIM · 드론 측량"] },
   { n: "06", ko: "미디어 · 커뮤니케이션", short: "미디어", en: "Media & Comms",
-    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작을 통해 전문적 내용을 대중의 언어로 전달한다. 전달되지 않은 성과는 기록되지 않은 것과 다르지 않다.",
+    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작을 통해 전문적 내용을 대중의 언어로 전달. 전달되지 않은 성과는 기록되지 않은 것과 다름없음.",
     tags: ["서울시민기자단", "연합뉴스TV"] },
 ];
 
@@ -194,24 +190,24 @@ const CREDS = [
 ];
 
 const THESIS = [
-  ["교차점의 희소성", "법률의 엄밀함과 인공지능의 구현 역량을 함께 갖춘 인력은 많지 않다. 대체 불가능성은 한 분야의 깊이가 아니라 서로 다른 분야가 만나는 경계에서 형성된다."],
-  ["실행을 통한 증명", "학습한 내용을 배포 가능한 결과물로 구현하였다. 여섯 건의 프로젝트는 서술이 아니라 접근 가능한 산출물로 존재한다."],
-  ["언어의 매개", "제도의 언어와 기술의 언어, 대중의 언어를 오가며 조직 내부에서 발생하는 소통의 간극을 조정한다."],
+  ["교차점의 희소성", "법률의 엄밀함과 인공지능의 구현 역량을 함께 갖춘 인력은 많지 않다. 대체 불가능성은 한 분야의 깊이가 아니라 서로 다른 분야가 만나는 경계에서 형성."],
+  ["실행을 통한 증명", "학습한 내용을 배포 가능한 결과물로 구현. 여섯 건의 프로젝트는 서술이 아니라 접근 가능한 산출물로 존재."],
+  ["언어의 매개", "제도의 언어와 기술의 언어, 대중의 언어를 오가며 조직 내부에서 발생하는 소통의 간극을 조정."],
 ];
 
 const CASES = [
   { n: "01", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
     manual: "담당자가 메일함을 직접 확인하며 사안의 우선순위를 판단하던 업무.",
-    auto: "Workspace API가 실시간으로 데이터를 수집하고, 분류 알고리즘이 1차 선별을 수행한다.",
-    judge: "무엇을 리스크로 규정할 것인가. 이 기준의 설정은 법무적 판단에 근거한다." },
+    auto: "Workspace API가 실시간으로 데이터를 수집하고, 분류 알고리즘이 1차 선별을 수행.",
+    judge: "무엇을 리스크로 규정할 것인가. 이 기준의 설정은 법무적 판단의 영역." },
   { n: "02", title: "청약 인사이트 대시보드", tag: "공공데이터 API",
     manual: "분산된 공고를 수집하여 표로 정리하던 업무.",
-    auto: "API가 데이터를 수집하고, 대시보드가 자동으로 갱신된다.",
-    judge: "어떤 지표를 병렬하여야 의미가 형성되는가. 이 설계는 시장에 대한 이해에서 비롯된다." },
+    auto: "API가 데이터를 수집하고, 대시보드가 자동으로 갱신.",
+    judge: "어떤 지표를 병렬하여야 의미가 형성되는가. 이 설계는 시장에 대한 이해의 산물." },
   { n: "03", title: "브랜드 캠페인 필름", tag: "Veo 3 · ElevenLabs",
     manual: "외주에 의뢰하고 수정을 반복하던 업무.",
-    auto: "생성형 AI가 영상과 내레이션을 직접 생성한다.",
-    judge: "어떤 톤이 브랜드의 격을 유지하는가. 이 판단은 위임되지 않는다." },
+    auto: "생성형 AI가 영상과 내레이션을 직접 생성.",
+    judge: "어떤 톤이 브랜드의 격을 유지하는가. 이 판단은 위임되지 않는 영역." },
 ];
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
@@ -399,24 +395,24 @@ function Composite() {
 const TRAJECTORY = [
   { year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
     desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
-  { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
+  { year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
-    desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여하였다." },
-  { year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 활동",
-    desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장하였다." },
+    desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
+  { year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
+    desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
   { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
-    desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득하였다." },
+    desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
   { year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
-    desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화하였다." },
+    desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
   { year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
-    desc: "HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증받았다." },
+    desc: "HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
   { year: "2022", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
-    desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)으로부터 상장을 수여받았다." },
-  { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Berlin · Vattenfall 해외 연수",
-    desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험이다." },
+    desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
+  { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
+    desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." },
 ];
 
 function Trajectory() {
@@ -433,7 +429,7 @@ function Trajectory() {
                 <span className="tl-node" />
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "8px 18px" }}>
                   <span className="tl-year" style={{ fontSize: "clamp(2rem,5vw,3.4rem)" }}>{e.year}</span>
-                  {e.tag && <span className="sticker sticker--apple" style={{ fontSize: ".72rem", padding: ".3em .7em", boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>{e.tag}</span>}
+                  {e.tag && <span className="sticker sticker--apple" style={{ fontSize: ".72rem", padding: ".3em .7em", boxShadow: "0 3px 0 rgba(17,17,17,.12)", alignSelf: "center", transform: "translateY(-0.14em)" }}>{e.tag}</span>}
                   <span className="tl-idx font-cond">{String(i + 1).padStart(2, "0")}</span>
                 </div>
                 <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.15rem,2.2vw,1.6rem)", margin: "10px 0 8px", letterSpacing: "-.01em" }}>{e.title}</h3>
@@ -450,26 +446,29 @@ function Trajectory() {
 /* ============================================================ ARTIFACTS */
 const EDITIONS = [
   { n: "01", color: "var(--sky)", Icon: BarChart, title: "공공데이터 API 활용\n청약 인사이트 대시보드",
-    desc: "대한민국 부동산 청약 시장의 거시 데이터를 수집·시각화한 데이터 대시보드이다. 시장의 자금 흐름을 분석하여 지표 중심의 화면으로 구성하였다.",
+    desc: "대한민국 부동산 청약 시장의 거시 데이터를 수집·시각화한 데이터 대시보드. 시장의 자금 흐름을 분석하여 지표 중심의 화면으로 구성.",
     status: "Vercel 배포 완료", cta: "대시보드 바로가기", url: "https://cheongak-dashboard-opal.vercel.app", tags: ["Public Data API", "Dashboard", "Data Viz"] },
   { n: "02", color: "var(--apple)", Icon: Cpu, title: "GWS 연동 VOC 분석\n트리아지(Triage) 시스템",
-    desc: "Google Workspace API를 연동하여 고객 피드백을 실시간으로 집계하고, 자체 분류 알고리즘으로 업무 우선순위를 자동화한 백오피스 대시보드이다.",
+    desc: "Google Workspace API를 연동하여 고객 피드백을 실시간으로 집계하고, 자체 분류 알고리즘으로 업무 우선순위를 자동화한 백오피스 대시보드.",
     status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["GWS API", "AI Triage", "Back-office"] },
   { n: "03", color: "var(--pink)", Icon: PlayCircle, title: "Hyperframe × ElevenLabs\n멀티미디어 프로모션",
-    desc: "복수의 생성형 AI 도구를 활용하여 부동산 청약 데이터와 플랫폼 사용성을 대중이 이해하기 쉽도록 구성한 영상·오디오 브랜딩 프로젝트이다.",
+    desc: "복수의 생성형 AI 도구를 활용하여 부동산 청약 데이터와 플랫폼 사용성을 대중이 이해하기 쉽도록 구성한 영상·오디오 브랜딩 프로젝트.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "프로모션 영상 보기", url: "https://drive.google.com/file/d/1F3PssuwdFkcWaiT6fZHgQlz44As0I2nq/view?usp=sharing", tags: ["Generative AI", "Video", "Audio Branding"] },
   { n: "04", color: "var(--butter)", Icon: Newspaper, title: "6·3 지방선거\nAI 카드뉴스 & 시네마틱 영상",
-    desc: "GPT Image-2, Suno AI, ElevenLabs를 결합하여 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 내레이션 영상이다. 사회학적 분석을 2030 세대의 소비 포맷으로 옮긴 생성형 AI 미디어 작업이다.",
+    desc: "GPT Image-2, Suno AI, ElevenLabs를 결합하여 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 내레이션 영상. 사회학적 분석을 2030 세대의 소비 포맷으로 옮긴 생성형 AI 미디어 작업.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
   { n: "05", color: "var(--lilac)", Icon: Sparkle, title: "Veo 3 × Google Vids\n르엘 성수 브랜드 필름",
-    desc: "Google Vids의 Veo 3 모델을 활용하여 주거 브랜드 '르엘 성수'의 공간 가치를 영상 언어로 구성한 브랜드 필름이다. 텍스트 프롬프트만으로 영상을 생성·편집하여 부동산 영상 제작 과정을 간소화하였다.",
+    desc: "Google Vids의 Veo 3 모델을 활용하여 주거 브랜드 '르엘 성수'의 공간 가치를 영상 언어로 구성한 브랜드 필름. 텍스트 프롬프트만으로 영상을 생성·편집하여 부동산 영상 제작 과정을 간소화.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "홍보 영상 보기", url: "https://drive.google.com/file/d/1NQRlbAKrxlap8Nfdec3hAdx0pN3ewDhN/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Brand Film"] },
   { n: "06", color: "var(--sky)", Icon: Award, title: "루이비통\nVeo 3 시네마틱 캠페인 필름",
-    desc: "동일한 Veo 3 파이프라인으로 '루이비통'의 헤리티지와 장인정신을 무드 중심의 광고 영상으로 재구성한 브랜드 캠페인 필름이다. 생성형 AI만으로 하이엔드 광고 특유의 질감과 톤을 구현하였다.",
+    desc: "동일한 Veo 3 파이프라인으로 '루이비통'의 헤리티지와 장인정신을 무드 중심의 광고 영상으로 재구성한 브랜드 캠페인 필름. 생성형 AI만으로 하이엔드 광고 특유의 질감과 톤을 구현.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "캠페인 영상 보기", url: "https://drive.google.com/file/d/1mIEmvwjPfZwuXYZRkWW9FzZU3uvCUq69/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Luxury Film"] },
   { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
-    desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램이다. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 낮추었다.",
+    desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
     status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"] },
+  { n: "08", color: "var(--sky)", Icon: Cpu, title: "누리장터 크롤링 연동\n정비사업 용역비 자동 수집 프로그램",
+    desc: "정비사업 정보 플랫폼 '누리장터'에서 조합 대상 용역 입찰과 용역비 데이터를 자동으로 수집하는 크롤링 프로그램. 흩어진 공고를 정기적으로 수집·정형화하여 시장 단가 비교와 사업성 검토를 위한 데이터셋을 구축.",
+    status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["웹 크롤링", "정비사업 데이터", "업무 자동화"] },
 ];
 
 function Artifacts() {

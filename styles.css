@@ -1693,15 +1693,15 @@ header img[alt^="YK"] { border-radius: 0; }
 .hero-photo__scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(180deg,
-    var(--ecru) 0%, var(--ecru) 40%,
-    rgba(249,246,240,.6) 55%,
-    rgba(249,246,240,.2) 70%,
-    rgba(249,246,240,.5) 88%,
+    var(--ecru) 0%, var(--ecru) 30%,
+    rgba(249,246,240,.62) 44%,
+    rgba(249,246,240,.22) 62%,
+    rgba(249,246,240,.5) 86%,
     var(--ecru) 100%);
 }
 @media (max-width: 700px) {
   .hero-photo { height: 46vh; }
-  .hero-photo__scrim { background: linear-gradient(180deg, var(--ecru) 0%, var(--ecru) 46%, rgba(249,246,240,.55) 62%, rgba(249,246,240,.28) 76%, var(--ecru) 100%); }
+  .hero-photo__scrim { background: linear-gradient(180deg, var(--ecru) 0%, var(--ecru) 36%, rgba(249,246,240,.55) 52%, rgba(249,246,240,.28) 70%, var(--ecru) 100%); }
 }
 
 /* ---- Korean typography 품격: 어절 보존 · 정제된 리듬 ---- */
