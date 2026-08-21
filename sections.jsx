@@ -515,7 +515,7 @@ function Artifacts() {
 function About() {
   const ref = useReveal();
   return (
-    <section id="about" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", overflow: "hidden" }}>
+    <section id="about" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(40px,6vw,72px)", overflow: "hidden" }}>
       <div className="speckle" style={{ opacity: .35 }} />
       <div className="wrap reveal" style={{ position: "relative", zIndex: 1 }}>
         <div className="about-grid">
@@ -565,8 +565,8 @@ function About() {
 function Contact() {
   const ref = useReveal();
   return (
-    <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(52px,7vw,96px) 0 0", overflow: "hidden" }}>
-      <div className="contact-photo" aria-hidden="true"><img src="images/footer-seoul.jpg?v=1" alt="" /></div>
+    <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(104px,15vw,196px) 0 0", overflow: "hidden" }}>
+      <div className="contact-photo" aria-hidden="true"><img src="images/footer-seoul.jpg?v=2" alt="" /></div>
       <div className="contact-photo__scrim" aria-hidden="true" />
       <div className="seal" aria-hidden="true">
         <svg viewBox="0 0 120 120">
@@ -586,7 +586,7 @@ function Contact() {
           Let’s design<br />the next order.
         </h2>
         <p className="font-ko" style={{ color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" }}>
-          새로운 협업과 프로젝트 또는 Recruiter분들 환영합니다.
+          새로운 협업과 프로젝트 또는 Recruiter분들 환영합니다.<br />언제든 편하게 연락주세요!
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>

@@ -1679,11 +1679,11 @@ header img[alt^="YK"] { border-radius: 0; }
 .hero-photo {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: min(60vh, 600px);
+  height: min(66vh, 660px);
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 100%);
-          mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 15%, #000 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 15%, #000 100%);
 }
 .hero-photo img {
   width: 100%; height: 100%;
@@ -1693,15 +1693,15 @@ header img[alt^="YK"] { border-radius: 0; }
 .hero-photo__scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(180deg,
-    var(--ecru) 0%, var(--ecru) 30%,
-    rgba(249,246,240,.62) 44%,
-    rgba(249,246,240,.22) 62%,
+    var(--ecru) 0%, var(--ecru) 20%,
+    rgba(249,246,240,.55) 36%,
+    rgba(249,246,240,.2) 58%,
     rgba(249,246,240,.5) 86%,
     var(--ecru) 100%);
 }
 @media (max-width: 700px) {
-  .hero-photo { height: 46vh; }
-  .hero-photo__scrim { background: linear-gradient(180deg, var(--ecru) 0%, var(--ecru) 36%, rgba(249,246,240,.55) 52%, rgba(249,246,240,.28) 70%, var(--ecru) 100%); }
+  .hero-photo { height: 52vh; }
+  .hero-photo__scrim { background: linear-gradient(180deg, var(--ecru) 0%, var(--ecru) 26%, rgba(249,246,240,.5) 44%, rgba(249,246,240,.24) 66%, var(--ecru) 100%); }
 }
 
 /* ---- Korean typography 품격: 어절 보존 · 정제된 리듬 ---- */
@@ -1770,20 +1770,21 @@ body { text-underline-offset: .18em; }
    v33 — 푸터 야경 배경 + 고급 마감 (premium designer polish)
    ============================================================ */
 .contact-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; opacity: .7; }
+.contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; display: block; opacity: .95; }
 .contact-photo__scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(180deg,
-    rgba(17,17,17,.86) 0%,
-    rgba(17,17,17,.5) 24%,
-    rgba(17,17,17,.38) 54%,
-    rgba(17,17,17,.72) 100%);
+    rgba(17,17,17,.62) 0%,
+    rgba(17,17,17,.3) 28%,
+    rgba(17,17,17,.28) 60%,
+    rgba(17,17,17,.66) 100%);
 }
 #contact .wrap, #contact footer { position: relative; z-index: 2; }
 #contact .seal { z-index: 1; opacity: .5; }
 
 /* 고급 타이포 마감 */
-#contact h2 { text-shadow: 0 2px 40px rgba(0,0,0,.45); letter-spacing: -.035em; }
+#contact h2 { text-shadow: 0 2px 40px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.5); letter-spacing: -.035em; }
+#contact .wrap > p { text-shadow: 0 1px 14px rgba(0,0,0,.55); }
 #contact .btn { backdrop-filter: saturate(140%) blur(2px); }
 .font-serif, .font-myeongjo { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
 h1, h2, h3 { text-rendering: optimizeLegibility; }
