@@ -75,7 +75,7 @@ function Hero() {
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
         <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"법무법인 경국 · 사원 (Staff) · 법무 · 송무 & AI · 마케팅 기획"}
+          {"법무법인 경국 · 사원 (Staff) · AI 개발"}
         </p>
         <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
           기술의 정교함과 제도의 품격을 결합하여,<br />디지털 세계의 새로운 질서를 디자인합니다.
@@ -536,7 +536,7 @@ function About() {
             </div>
 
             <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" }}>
-              <MapPin size={15} /> 서울 서초구 서초동 — 법무법인 경국
+              <MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국
             </div>
 
             <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -547,7 +547,7 @@ function About() {
 
           <div className="about-gallery">
             <figure className="photo-card photo-card--tall reveal">
-              <img src="images/profile-formal.jpg" alt="김유빈 공식 프로필" loading="lazy" />
+              <img src="images/yubin2.png?v=1" alt="김유빈 — 법무법인 경국 공식 프로필" loading="lazy" />
               <figcaption className="font-ko"><span className="photo-card__chip">PROFILE</span>김유빈 · Yubin Kim</figcaption>
             </figure>
             <figure className="photo-card reveal" style={{ transitionDelay: "90ms" }}>
@@ -593,7 +593,7 @@ function Contact() {
           새로운 협업과 프로젝트 또는 간단한 인사도 환영합니다.<br />함께 일하고 싶은 분들은 언제든 Contact 해주세요.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
+          <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
             <Mail size={18} /> 인사 건네기
           </a>
           <a href="#artifacts" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
@@ -616,7 +616,7 @@ function Footer() {
         {[["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"], ["갤러리", "gallery.html"], ["경력", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
-        <a href="mailto:yubin120866@gmail.com" style={{ marginLeft: "auto" }}>yubin120866@gmail.com</a>
+        <a href="mailto:ybkim@gyunggook.com" style={{ marginLeft: "auto" }}>ybkim@gyunggook.com</a>
       </div>
       <div className="wrap footer-grid" style={{ padding: "26px 0" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">
