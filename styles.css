@@ -1765,3 +1765,31 @@ body { text-underline-offset: .18em; }
 @media (prefers-reduced-motion: reduce) {
   .edition, .btn, .cred, .hero-skyline svg { transition: none !important; }
 }
+
+/* ============================================================
+   v33 — 푸터 야경 배경 + 고급 마감 (premium designer polish)
+   ============================================================ */
+.contact-photo { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; opacity: .7; }
+.contact-photo__scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(17,17,17,.86) 0%,
+    rgba(17,17,17,.5) 24%,
+    rgba(17,17,17,.38) 54%,
+    rgba(17,17,17,.72) 100%);
+}
+#contact .wrap, #contact footer { position: relative; z-index: 2; }
+#contact .seal { z-index: 1; opacity: .5; }
+
+/* 고급 타이포 마감 */
+#contact h2 { text-shadow: 0 2px 40px rgba(0,0,0,.45); letter-spacing: -.035em; }
+#contact .btn { backdrop-filter: saturate(140%) blur(2px); }
+.font-serif, .font-myeongjo { font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
+h1, h2, h3 { text-rendering: optimizeLegibility; }
+
+/* 이미지 공통: 은은한 톤·부드러운 로드 */
+.photo-card img, .press-cite__thumb img, .g-mason img { image-rendering: auto; }
+
+/* 링크 언더라인 오프셋(정교함) */
+a { text-underline-offset: .2em; }

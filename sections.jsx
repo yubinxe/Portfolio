@@ -132,7 +132,7 @@ function Ledger() {
   const ITEMS = [
     ["8", "수행 프로젝트", "Projects"],
     ["4", "전문 교육 이수", "Programs"],
-    ["2", "수상 · 표창", "Awards"],
+    ["3", "수상 · 표창", "Awards"],
     ["1", "방송 인터뷰", "On Air"],
   ];
   return (
@@ -407,9 +407,11 @@ const TRAJECTORY = [
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
     desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
-  { year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
+  { year: "2024", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
     desc: "HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
-  { year: "2022", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
+  { year: "2023", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
+    desc: "군 복무 기간 중 직무 수행 역량과 성실성을 인정받아 육군정보통신학교장(준장)으로부터 상장을 수상." },
+  { year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
     desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
   { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
     desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." },
@@ -563,8 +565,9 @@ function About() {
 function Contact() {
   const ref = useReveal();
   return (
-    <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(80px,12vw,150px) 0 0", overflow: "hidden" }}>
-      <Sticker cls="sticker--butter float" style={{ top: "12%", right: "8%", "--rot": "6deg" }}>같이 작업해요 ✦</Sticker>
+    <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(52px,7vw,96px) 0 0", overflow: "hidden" }}>
+      <div className="contact-photo" aria-hidden="true"><img src="images/footer-seoul.jpg?v=1" alt="" /></div>
+      <div className="contact-photo__scrim" aria-hidden="true" />
       <div className="seal" aria-hidden="true">
         <svg viewBox="0 0 120 120">
           <defs>
@@ -579,12 +582,11 @@ function Contact() {
         </svg>
       </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
-        <p className="eyebrow" style={{ color: "rgba(249,246,240,.6)", marginBottom: 24 }}>06 — Consultation</p>
         <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.6rem,9vw,7rem)", lineHeight: .92, letterSpacing: "-.03em", margin: 0 }}>
           Let’s design<br />the next order.
         </h2>
         <p className="font-ko" style={{ color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" }}>
-          새로운 협업과 프로젝트 또는 간단한 인사도 환영합니다.<br />함께 일하고 싶은 분들은 언제든 Contact 해주세요.
+          새로운 협업과 프로젝트 또는 Recruiter분들 환영합니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
