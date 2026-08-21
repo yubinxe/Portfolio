@@ -1794,3 +1794,9 @@ h1, h2, h3 { text-rendering: optimizeLegibility; }
 
 /* 링크 언더라인 오프셋(정교함) */
 a { text-underline-offset: .2em; }
+
+
+/* v34 — Contact 풀-뷰포트(하단 흰색 제거) */
+#contact { min-height: 100svh; display: flex; flex-direction: column; }
+#contact > .wrap { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; }
+#contact > footer { flex: 0 0 auto; }

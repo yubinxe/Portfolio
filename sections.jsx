@@ -565,7 +565,7 @@ function About() {
 function Contact() {
   const ref = useReveal();
   return (
-    <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(104px,15vw,196px) 0 0", overflow: "hidden" }}>
+    <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(40px,7vw,84px) 0 0", overflow: "hidden" }}>
       <div className="contact-photo" aria-hidden="true"><img src="images/footer-seoul.jpg?v=2" alt="" /></div>
       <div className="contact-photo__scrim" aria-hidden="true" />
       <div className="seal" aria-hidden="true">
