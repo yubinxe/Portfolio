@@ -1669,3 +1669,85 @@ header img[alt^="YK"] { border-radius: 0; }
   padding: clamp(1.3rem, 2.4vw, 1.8rem) clamp(1.4rem, 2.6vw, 2rem) clamp(1.5rem, 2.6vw, 1.9rem);
 }
 .press-cite__body .press-cite__title { margin: 4px 0 2px; }
+
+/* ============================================================
+   v30 — 품격 리파인먼트 레이어 (Seoul skyline · 타이포 · 심도 · 인터랙션)
+   김앤장 무드: 절제된 네이비, 여백, 하이라인, 정제된 모션
+   ============================================================ */
+
+/* ---- Hero: Seoul skyline backdrop (법 · 부동산 · 서울) ---- */
+.hero-skyline {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: min(54vh, 480px);
+  z-index: 0;
+  color: var(--accent);
+  opacity: .13;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 42%, #000 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 42%, #000 100%);
+}
+.hero-skyline svg { display: block; width: 100%; height: 100%; }
+@media (max-width: 700px) { .hero-skyline { opacity: .1; height: 40vh; } }
+
+/* ---- Korean typography 품격: 어절 보존 · 정제된 리듬 ---- */
+.font-ko, .font-myeongjo { word-break: keep-all; overflow-wrap: break-word; }
+body { text-underline-offset: .18em; }
+
+/* ---- 정제된 디스플레이 세리프 ---- */
+.font-serif { font-feature-settings: "kern" 1, "liga" 1; }
+.eyebrow { font-variant: all-small-caps; letter-spacing: .2em; }
+
+/* ---- Focus-visible: 접근성 + 폴리시 ---- */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+:where(a, button):focus:not(:focus-visible) { outline: none; }
+
+/* ---- 정제된 스크롤바 (모던 · 절제) ---- */
+* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--accent) 55%, transparent) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  border: 3px solid var(--ecru);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ---- 심도: 카드 그림자 정제 (부드럽고 품격 있게) ---- */
+.edition {
+  box-shadow: 0 1px 0 rgba(16,19,28,.05),
+              0 2px 6px -3px rgba(16,19,28,.14),
+              0 22px 44px -28px rgba(16,19,28,.4);
+  transition: transform .5s var(--bounce), box-shadow .5s var(--bounce);
+}
+.edition:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 1px 0 rgba(16,19,28,.06),
+              0 4px 10px -4px rgba(16,19,28,.18),
+              0 34px 60px -30px rgba(16,19,28,.46);
+}
+
+/* ---- 버튼: 정제된 트래킹 · 은은한 모션 ---- */
+.btn { letter-spacing: .01em; transition: transform .4s var(--bounce), box-shadow .4s var(--bounce), background .3s ease, color .3s ease; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px -10px rgba(16,19,28,.5); }
+
+/* ---- 스티커: 그림자 부드럽게 (경박함 완화) ---- */
+.sticker { box-shadow: 0 2px 10px -4px rgba(17,17,17,.22) !important; }
+
+/* ---- 자격 카드: 하이라인 정제 ---- */
+.cred { transition: transform .4s var(--bounce), border-color .3s ease; }
+.cred:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+/* ---- 이미지: 품격 있는 채도·명암 ---- */
+.photo-card img, .press-cite__thumb img { filter: saturate(.94) contrast(1.02); }
+
+/* ---- 섹션 리듬: 문단 최대폭 정제 (가독성) ---- */
+.comp-row p, .wcase__cell p { text-wrap: pretty; }
+
+/* ---- reduced-motion 존중 ---- */
+@media (prefers-reduced-motion: reduce) {
+  .edition, .btn, .cred, .hero-skyline svg { transition: none !important; }
+}

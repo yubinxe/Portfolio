@@ -40,7 +40,7 @@ function Nav() {
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
           <img src="images/favicon.svg?v=3" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
-          <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>포트폴리오 ’26</span>
+          <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>Portfolio</span>
         </a>
         <nav style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
           <div className="nav-desktop" style={{ display: "flex", gap: "clamp(14px,2.4vw,32px)" }}>
@@ -61,6 +61,46 @@ function Hero() {
   return (
     <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
       <div className="speckle" />
+
+      {/* Seoul skyline — 전통 궁궐 지붕 · 남산 · 도심 마천루 (법 × 부동산 × 서울) */}
+      <div className="hero-skyline" aria-hidden="true">
+        <svg viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" width="100%" height="100%">
+          <g fill="currentColor">
+            <g fillOpacity="0.4">
+              <rect x="90" y="272" width="48" height="148" />
+              <rect x="150" y="300" width="40" height="120" />
+              <rect x="640" y="292" width="44" height="128" />
+              <rect x="1240" y="250" width="46" height="170" />
+              <rect x="1296" y="292" width="40" height="128" />
+              <rect x="1352" y="270" width="60" height="150" />
+            </g>
+            <path fillOpacity="0.5" d="M330,420 Q470,180 640,420 Z" />
+            <g fillOpacity="0.85">
+              <rect x="465" y="250" width="9" height="52" />
+              <rect x="456" y="250" width="27" height="11" />
+            </g>
+            <line x1="469.5" y1="250" x2="469.5" y2="214" stroke="currentColor" strokeWidth="3" strokeOpacity="0.85" />
+            <g fillOpacity="0.82">
+              <rect x="40" y="250" width="58" height="170" />
+              <rect x="210" y="212" width="70" height="208" />
+              <rect x="228" y="186" width="34" height="30" />
+              <rect x="300" y="300" width="40" height="120" />
+            </g>
+            <line x1="69" y1="250" x2="69" y2="222" stroke="currentColor" strokeWidth="2" strokeOpacity="0.7" />
+            <g fillOpacity="0.9">
+              <rect x="700" y="372" width="330" height="20" />
+              <rect x="716" y="352" width="298" height="22" fillOpacity="0.8" />
+              <path d="M686,356 C726,350 748,336 772,332 C812,300 918,300 958,332 C982,336 1004,350 1044,356 L1044,362 C1004,356 982,352 958,352 L772,352 C748,352 726,356 686,362 Z" />
+            </g>
+            <path fillOpacity="0.88" d="M1120,420 L1128,150 L1150,95 L1172,150 L1198,420 Z" />
+            <g stroke="currentColor" strokeOpacity="0.1" strokeWidth="2">
+              <line x1="470" y1="0" x2="470" y2="420" />
+              <line x1="1000" y1="0" x2="1000" y2="420" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
       <div className="blob-field">
         <div className="blob" style={{ width: 480, height: 420, top: "-8%", left: "-6%" }} />
         <div className="blob" style={{ width: 380, height: 360, bottom: "-10%", right: "-4%" }} />
@@ -69,7 +109,7 @@ function Hero() {
 
       {/* floating stickers — corners, above the name */}
       <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW</Sticker>
-      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>EST. 2004</Sticker>
+      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>서초청년네트워크 9기</Sticker>
       <Sticker cls="sticker--lilac float-3"  style={{ bottom: "15%", left: "5%", "--rot": "6deg" }}>서울대 AIED 4기</Sticker>
       <Sticker cls="sticker--pink float"     style={{ bottom: "18%", right: "5%", "--rot": "-6deg" }}>SSAFY 13기</Sticker>
 
@@ -79,7 +119,8 @@ function Hero() {
       </svg>
 
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-        <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 22px" }}><i /></div>
+        <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 18px" }}><i /></div>
+        <p className="font-sans" style={{ letterSpacing: ".34em", textTransform: "uppercase", fontSize: ".7rem", fontWeight: 600, color: "var(--ink-soft)", opacity: .82, margin: "0 0 14px" }}>Seoul, Seocho · 37.49°N 127.01°E</p>
         <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto ’26</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
           {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
@@ -182,22 +223,22 @@ function Ledger() {
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
   { n: "01", ko: "법무 · 송무", short: "법무", en: "Legal Affairs",
-    desc: "법무법인 경국에서 송무·사무 실무를 수행하며 제도의 문법과 리스크 감각을 체득했습니다. 규범을 읽어내는 눈은 어떤 기술을 얹어도 흔들리지 않는 기준선이 됩니다.",
+    desc: "법무법인 경국에서 송무·사무 실무를 담당하며 법 제도의 구조와 리스크 판단 기준을 체득하였다. 규범을 해석하는 역량은 어떠한 기술을 접목하더라도 유지되는 기준선으로 기능한다.",
     tags: ["법무법인 경국", "송무·사무 실무"] },
   { n: "02", ko: "AI 엔지니어링", short: "AI", en: "AI Engineering",
-    desc: "SSAFY 13기와 서울대 AIED 4기를 거쳐 모델의 작동 원리와 프롬프트 아키텍처를 구현 수준에서 다룹니다. 도구를 쓰는 사람이 아니라 설계하는 사람의 자리에 섭니다.",
+    desc: "SSAFY 13기와 서울대학교 AIED 4기를 이수하며 모델의 작동 원리와 프롬프트 설계를 구현 수준에서 다룬다. 도구의 사용자에 머무르지 않고 설계자의 관점에서 접근한다.",
     tags: ["SSAFY 13기", "서울대 AIED 4기"] },
   { n: "03", ko: "마케팅 기획", short: "마케팅", en: "Marketing Strategy",
-    desc: "KREMA 4기에서 데이터 기반 세그먼트 도출과 매체별 전략을 훈련하고, 실제 캠페인 산출물로 검증했습니다. 기획은 취향이 아니라 근거로 증명되어야 합니다.",
+    desc: "KREMA 4기에서 데이터 기반의 세그먼트 도출과 매체별 전략 수립을 학습하고, 실제 캠페인 산출물로 이를 검증하였다. 기획은 취향이 아니라 근거로 뒷받침되어야 한다.",
     tags: ["KREMA 4기", "브랜드 캠페인"] },
   { n: "04", ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
-    desc: "공공데이터 API와 Google Workspace를 연동해 의사결정 가능한 대시보드를 직접 설계하고 배포합니다. 숫자는 화면 위에 놓일 때 비로소 판단이 됩니다.",
+    desc: "공공데이터 API와 Google Workspace를 연동하여 의사결정에 활용 가능한 대시보드를 직접 설계·배포한다. 데이터는 구조화되어 제시될 때 비로소 판단의 근거가 된다.",
     tags: ["공공데이터 API", "GWS 연동"] },
   { n: "05", ko: "공간 · 건설", short: "건설", en: "Built Environment",
-    desc: "건국대 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산과 건설을 데이터의 언어로 읽습니다. 물리적 자산도 결국 하나의 데이터 구조입니다.",
+    desc: "건국대학교 스마트건설기술교육에서 BIM 데이터와 드론 측량을 다루며 부동산과 건설을 데이터의 관점에서 해석한다. 물리적 자산 또한 하나의 데이터 구조로 환원된다.",
     tags: ["건국대 스마트건설", "BIM · 드론 측량"] },
   { n: "06", ko: "미디어 · 커뮤니케이션", short: "미디어", en: "Media & Comms",
-    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작으로 메시지를 대중의 언어로 옮깁니다. 전달되지 않은 성과는 존재하지 않은 것과 같습니다.",
+    desc: "서울시민기자단 활동과 방송 인터뷰, 생성형 AI 영상 제작을 통해 전문적 내용을 대중의 언어로 전달한다. 전달되지 않은 성과는 기록되지 않은 것과 다르지 않다.",
     tags: ["서울시민기자단", "연합뉴스TV"] },
 ];
 
@@ -209,28 +250,30 @@ const ARSENAL = [
 
 const CREDS = [
   { name: "TESAT", ko: "경제이해력검증시험", by: "한국경제신문 주관" },
+  { name: "OPIc IH", ko: "영어 말하기 (Intermediate High)", by: "ACTFL 공인 등급" },
+  { name: "전기기능사", ko: "국가기술자격", by: "한국산업인력공단" },
   { name: "분양대행자", ko: "부동산 분양 실무 자격", by: "주택·상가 분양 대행" },
 ];
 
 const THESIS = [
-  ["교차점의 희소성", "법률의 엄밀함과 AI의 속도를 동시에 구사하는 사람은 드뭅니다. 대체 불가능성은 한 우물의 깊이가 아니라 우물과 우물 사이에서 만들어집니다."],
-  ["실행으로 증명", "배운 것을 배포된 결과물로 옮겼습니다. 여섯 개의 프로젝트는 설명이 아니라 열리는 링크로 존재합니다."],
-  ["번역의 기술", "제도의 언어, 기술의 언어, 대중의 언어를 오가며 조직 안에서 벌어지는 간극을 메웁니다."],
+  ["교차점의 희소성", "법률의 엄밀함과 인공지능의 구현 역량을 함께 갖춘 인력은 많지 않다. 대체 불가능성은 한 분야의 깊이가 아니라 서로 다른 분야가 만나는 경계에서 형성된다."],
+  ["실행을 통한 증명", "학습한 내용을 배포 가능한 결과물로 구현하였다. 여섯 건의 프로젝트는 서술이 아니라 접근 가능한 산출물로 존재한다."],
+  ["언어의 매개", "제도의 언어와 기술의 언어, 대중의 언어를 오가며 조직 내부에서 발생하는 소통의 간극을 조정한다."],
 ];
 
 const CASES = [
   { n: "01", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
-    manual: "사람이 메일함을 열어 하나씩 읽고 우선순위를 매기던 일.",
-    auto: "Workspace API가 실시간으로 수집하고, 분류 알고리즘이 1차로 걸러냅니다.",
-    judge: "무엇을 리스크로 볼 것인가. 이 기준선은 법무 감각에서 나옵니다." },
+    manual: "담당자가 메일함을 직접 확인하며 사안의 우선순위를 판단하던 업무.",
+    auto: "Workspace API가 실시간으로 데이터를 수집하고, 분류 알고리즘이 1차 선별을 수행한다.",
+    judge: "무엇을 리스크로 규정할 것인가. 이 기준의 설정은 법무적 판단에 근거한다." },
   { n: "02", title: "청약 인사이트 대시보드", tag: "공공데이터 API",
-    manual: "흩어진 공고를 찾아 표로 옮기던 일.",
-    auto: "API가 데이터를 끌어오고, 대시보드가 스스로 갱신합니다.",
-    judge: "어떤 지표를 나란히 놓아야 의미가 생기는가. 이 설계는 시장 이해에서 나옵니다." },
+    manual: "분산된 공고를 수집하여 표로 정리하던 업무.",
+    auto: "API가 데이터를 수집하고, 대시보드가 자동으로 갱신된다.",
+    judge: "어떤 지표를 병렬하여야 의미가 형성되는가. 이 설계는 시장에 대한 이해에서 비롯된다." },
   { n: "03", title: "브랜드 캠페인 필름", tag: "Veo 3 · ElevenLabs",
-    manual: "외주에 발주하고 수정을 반복하던 일.",
-    auto: "생성형 AI가 영상과 내레이션을 직접 만들어냅니다.",
-    judge: "어떤 톤이 그 브랜드의 격을 지키는가. 이 감각은 위임되지 않습니다." },
+    manual: "외주에 의뢰하고 수정을 반복하던 업무.",
+    auto: "생성형 AI가 영상과 내레이션을 직접 생성한다.",
+    judge: "어떤 톤이 브랜드의 격을 유지하는가. 이 판단은 위임되지 않는다." },
 ];
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
@@ -416,26 +459,26 @@ function Composite() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
+  { year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
+    desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
   { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
-  { year: "2026", color: "var(--apple)", title: "서울시민기자단 & 서울청년파트너스 위원 활동",
-    desc: "공공 레벨의 미디어 에디팅과 거시적 시정(市政) 트렌드 분석, 트렌디한 정책 제안 프로세스를 주도합니다." },
-  { year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 수료",
-    desc: "금융과 기술의 접점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하며, 데이터 기반 금융 도메인으로 융합 역량의 지평을 확장." },
-  { year: "2026", color: "var(--apple)", title: "서초 청년 네트워크 9기 활동",
-    desc: "지역 청년 정책의 의제 발굴과 네트워킹에 참여하며, 현장의 목소리를 제도로 연결하는 공공 협력 프로세스를 경험." },
-  { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 활용 마케팅 기획자 양성 과정 4기 수료",
-    desc: "AI 기술을 활용한 부동산 시장 데이터 분석 및 타겟 세그먼트 도출 프로세스를 이해 및 매체별 디지털 마케팅 전략 수립 및 자동화 솔루션 기획 역량을 종합적으로 체화." },
+  { year: "2026", color: "var(--apple)", title: "서울시민기자단 위원 활동",
+    desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여하였다." },
+  { year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 활동",
+    desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장하였다." },
+  { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
+    desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득하였다." },
   { year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
-    desc: "최신 소프트웨어 아키텍처와 하이테크 AI 융합 알고리즘 실무 프로젝트로 엔지니어링 역량을 내재화." },
+    desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화하였다." },
   { year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
-    desc: "HVAC 기술 기반 리스크 관리 혁신 아이디어 제안 및 구조화된 비즈니스 모델(BM) 유효성의 공식 검증." },
-  { year: "2022", color: "var(--sky)", title: "육군정보통신학교장 표창 · 군 특성화고 현장실습 우수",
-    desc: "군 특성화고 현장 실습 기간 중 위국헌신·책임완수의 가치를 실천하고 학업성적이 우수하여 타의 모범이 되어 육군정보통신학교장(준장) 표창을 수여." },
-  { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall 해외 연수",
-    desc: "유럽 선진 기업의 인프라 시스템과 글로벌 비즈니스 스탠다드를 조기에 체득한 글로벌 역량의 시초." },
+    desc: "HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증받았다." },
+  { year: "2022", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
+    desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)으로부터 상장을 수여받았다." },
+  { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Berlin · Vattenfall 해외 연수",
+    desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험이다." },
 ];
 
 function Trajectory() {
@@ -469,22 +512,22 @@ function Trajectory() {
 /* ============================================================ ARTIFACTS */
 const EDITIONS = [
   { n: "01", color: "var(--sky)", Icon: BarChart, title: "공공데이터 API 활용\n청약 인사이트 대시보드",
-    desc: "대한민국 부동산 청약 시장의 거시 데이터와 트렌드를 직관적으로 시각화한 데이터 인프라 솔루션. 시장의 자본 흐름을 분석해 명료하고 정교한 대시보드로 구현했습니다.",
+    desc: "대한민국 부동산 청약 시장의 거시 데이터를 수집·시각화한 데이터 대시보드이다. 시장의 자금 흐름을 분석하여 지표 중심의 화면으로 구성하였다.",
     status: "Vercel 배포 완료", cta: "대시보드 바로가기", url: "https://cheongak-dashboard-opal.vercel.app", tags: ["Public Data API", "Dashboard", "Data Viz"] },
   { n: "02", color: "var(--apple)", Icon: Cpu, title: "GWS 연동 VOC 분석\n트리아지(Triage) 시스템",
-    desc: "Google Workspace(GWS) API를 연동해 고객 피드백을 실시간 어그리게이션하고, 자체 AI 분류 알고리즘으로 리스크 업무 우선순위를 자동화한 백오피스 혁신 대시보드.",
+    desc: "Google Workspace API를 연동하여 고객 피드백을 실시간으로 집계하고, 자체 분류 알고리즘으로 업무 우선순위를 자동화한 백오피스 대시보드이다.",
     status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["GWS API", "AI Triage", "Back-office"] },
   { n: "03", color: "var(--pink)", Icon: PlayCircle, title: "Hyperframe × ElevenLabs\n멀티미디어 프로모션",
-    desc: "다양한 생성형 AI 툴을 고도로 복합 활용해 복잡한 부동산 청약 데이터와 플랫폼 활용성을 대중이 직관적으로 이해하도록 설계한 고품질 영상·시네마틱 오디오 브랜딩 프로젝트.",
+    desc: "복수의 생성형 AI 도구를 활용하여 부동산 청약 데이터와 플랫폼 사용성을 대중이 이해하기 쉽도록 구성한 영상·오디오 브랜딩 프로젝트이다.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "프로모션 영상 보기", url: "https://drive.google.com/file/d/1F3PssuwdFkcWaiT6fZHgQlz44As0I2nq/view?usp=sharing", tags: ["Generative AI", "Video", "Audio Branding"] },
   { n: "04", color: "var(--butter)", Icon: Newspaper, title: "6·3 지방선거\nAI 카드뉴스 & 시네마틱 영상",
-    desc: "GPT Image-2·Suno AI·ElevenLabs를 수직 통합해 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 나레이션 영상을 제작. 사회학적 인사이트를 2030 세대가 소비하는 포맷으로 번역한 생성형 AI 풀스택 미디어 프로젝트.",
+    desc: "GPT Image-2, Suno AI, ElevenLabs를 결합하여 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 내레이션 영상이다. 사회학적 분석을 2030 세대의 소비 포맷으로 옮긴 생성형 AI 미디어 작업이다.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
   { n: "05", color: "var(--lilac)", Icon: Sparkle, title: "Veo 3 × Google Vids\n르엘 성수 브랜드 필름",
-    desc: "Google Vids에 탑재된 Veo 3 모델을 활용해 프리미엄 주거 브랜드 '르엘 성수'의 공간 가치와 무드를 시네마틱 영상 언어로 번역한 브랜드 홍보 필름. 텍스트 프롬프트만으로 고품질 무빙 이미지를 생성·편집하며 부동산 영상 제작 워크플로우를 재정의한 생성형 AI 프로젝트.",
+    desc: "Google Vids의 Veo 3 모델을 활용하여 주거 브랜드 '르엘 성수'의 공간 가치를 영상 언어로 구성한 브랜드 필름이다. 텍스트 프롬프트만으로 영상을 생성·편집하여 부동산 영상 제작 과정을 간소화하였다.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "홍보 영상 보기", url: "https://drive.google.com/file/d/1NQRlbAKrxlap8Nfdec3hAdx0pN3ewDhN/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Brand Film"] },
   { n: "06", color: "var(--sky)", Icon: Award, title: "루이비통\nVeo 3 시네마틱 캠페인 필름",
-    desc: "동일한 Veo 3 파이프라인으로 메종 '루이비통'의 헤리티지와 장인정신을 무드 중심의 시네마틱 광고로 재해석한 럭셔리 브랜드 캠페인 필름. 생성형 AI만으로 하이엔드 패션 광고 특유의 질감과 톤을 구현해 브랜디드 콘텐츠 제작의 새로운 방식을 제안한 프로젝트.",
+    desc: "동일한 Veo 3 파이프라인으로 '루이비통'의 헤리티지와 장인정신을 무드 중심의 광고 영상으로 재구성한 브랜드 캠페인 필름이다. 생성형 AI만으로 하이엔드 광고 특유의 질감과 톤을 구현하였다.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "캠페인 영상 보기", url: "https://drive.google.com/file/d/1mIEmvwjPfZwuXYZRkWW9FzZU3uvCUq69/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Luxury Film"] },
 ];
 
@@ -536,7 +579,7 @@ function About() {
               법(法)의 품격과 코드의 정교함,<br />그 경계에서 일합니다.
             </h3>
             <p className="font-ko" style={{ margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
-              송무·사무 프로세스를 AI로 다시 설계하고, 복잡한 제도를 누구나 이해할 수 있는 디지털 경험으로 번역합니다.
+              송무·사무 프로세스를 인공지능으로 재설계하고, 복잡한 제도를 이해하기 쉬운 형태로 옮기는 일을 합니다.
             </p>
             <p className="font-ko" style={{ margin: "12px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
               강의실과 사무실, 카메라 앞을 오가며 쌓아온 시간을 기록으로 남깁니다. 말보다 결과물이 먼저 증명하도록.
@@ -549,7 +592,7 @@ function About() {
             </div>
 
             <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" }}>
-              <MapPin size={15} /> 서울 서초구 — 법무법인 경국
+              <MapPin size={15} /> 서울 서초구 서초동 — 법무법인 경국
             </div>
 
             <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
