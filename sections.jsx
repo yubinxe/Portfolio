@@ -60,68 +60,15 @@ function Hero() {
   const ref = useReveal();
   return (
     <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
-      <div className="speckle" />
-
-      {/* Seoul skyline — 전통 궁궐 지붕 · 남산 · 도심 마천루 (법 × 부동산 × 서울) */}
-      <div className="hero-skyline" aria-hidden="true">
-        <svg viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" width="100%" height="100%">
-          <g fill="currentColor">
-            <g fillOpacity="0.4">
-              <rect x="90" y="272" width="48" height="148" />
-              <rect x="150" y="300" width="40" height="120" />
-              <rect x="640" y="292" width="44" height="128" />
-              <rect x="1240" y="250" width="46" height="170" />
-              <rect x="1296" y="292" width="40" height="128" />
-              <rect x="1352" y="270" width="60" height="150" />
-            </g>
-            <path fillOpacity="0.5" d="M330,420 Q470,180 640,420 Z" />
-            <g fillOpacity="0.85">
-              <rect x="465" y="250" width="9" height="52" />
-              <rect x="456" y="250" width="27" height="11" />
-            </g>
-            <line x1="469.5" y1="250" x2="469.5" y2="214" stroke="currentColor" strokeWidth="3" strokeOpacity="0.85" />
-            <g fillOpacity="0.82">
-              <rect x="40" y="250" width="58" height="170" />
-              <rect x="210" y="212" width="70" height="208" />
-              <rect x="228" y="186" width="34" height="30" />
-              <rect x="300" y="300" width="40" height="120" />
-            </g>
-            <line x1="69" y1="250" x2="69" y2="222" stroke="currentColor" strokeWidth="2" strokeOpacity="0.7" />
-            <g fillOpacity="0.9">
-              <rect x="700" y="372" width="330" height="20" />
-              <rect x="716" y="352" width="298" height="22" fillOpacity="0.8" />
-              <path d="M686,356 C726,350 748,336 772,332 C812,300 918,300 958,332 C982,336 1004,350 1044,356 L1044,362 C1004,356 982,352 958,352 L772,352 C748,352 726,356 686,362 Z" />
-            </g>
-            <path fillOpacity="0.88" d="M1120,420 L1128,150 L1150,95 L1172,150 L1198,420 Z" />
-            <g stroke="currentColor" strokeOpacity="0.1" strokeWidth="2">
-              <line x1="470" y1="0" x2="470" y2="420" />
-              <line x1="1000" y1="0" x2="1000" y2="420" />
-            </g>
-          </g>
-        </svg>
+      <div className="hero-photo" aria-hidden="true">
+        <img src="images/hero-gangnam.jpg?v=1" alt="" />
       </div>
-
-      <div className="blob-field">
-        <div className="blob" style={{ width: 480, height: 420, top: "-8%", left: "-6%" }} />
-        <div className="blob" style={{ width: 380, height: 360, bottom: "-10%", right: "-4%" }} />
-      </div>
-      <span className="watermark font-myeongjo" aria-hidden="true">法</span>
-
-      {/* floating stickers — corners, above the name */}
-      <Sticker cls="sticker--apple float"   style={{ top: "15%", left: "5%", "--rot": "-5deg" }}>AI × LAW</Sticker>
-      <Sticker cls="sticker--sky float-2"    style={{ top: "19%", right: "5%", "--rot": "4deg" }}>서초청년네트워크 9기</Sticker>
-      <Sticker cls="sticker--lilac float-3"  style={{ bottom: "15%", left: "5%", "--rot": "6deg" }}>서울대 AIED 4기</Sticker>
-      <Sticker cls="sticker--pink float"     style={{ bottom: "18%", right: "5%", "--rot": "-6deg" }}>SSAFY 13기</Sticker>
-
-      {/* squiggle accents */}
-      <svg width="110" height="54" viewBox="0 0 120 60" style={{ position: "absolute", top: "30%", left: "11%", opacity: .7, zIndex: 3 }} className="float-2">
-        <path className="squiggle" d="M5 40 C 25 5, 45 5, 60 30 S 100 55, 115 18" />
-      </svg>
+      <div className="hero-photo__scrim" aria-hidden="true" />
 
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 18px" }}><i /></div>
-        <p className="font-sans" style={{ letterSpacing: ".34em", textTransform: "uppercase", fontSize: ".7rem", fontWeight: 600, color: "var(--ink-soft)", opacity: .82, margin: "0 0 14px" }}>Seoul, Seocho · 37.49°N 127.01°E</p>
-        <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto ’26</p>
+        <p className="font-sans" style={{ letterSpacing: ".34em", textTransform: "uppercase", fontSize: ".7rem", fontWeight: 600, color: "var(--ink-soft)", opacity: .82, margin: "0 0 14px" }}>SEOUL, Seocho</p>
+        <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
           {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
           <br />
@@ -134,18 +81,9 @@ function Hero() {
           기술의 정교함과 제도의 품격을 결합하여,<br />디지털 세계의 새로운 질서를 디자인합니다.
         </p>
 
-        <div className="letterhead font-ko" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 34px", marginTop: 40 }}>
-          {[
-            ["김유빈", "Yubin Kim · 2004"],
-            ["법무법인 경국", "Legal Firm · 사원 (Staff)"],
-            ["AI Process Innovation", "법무 · 법률 송무 & AI · 마케팅 기획"],
-          ].map(([a, b], i) => (
-            <div key={i} style={{ textAlign: "left", padding: "0 4px" }}>
-              <div style={{ fontWeight: 700, fontSize: ".98rem" }}>{a}</div>
-              <div style={{ fontSize: ".82rem", color: "var(--ink-soft)", opacity: .85 }}>{b}</div>
-            </div>
-          ))}
-        </div>
+        <p className="letterhead-line font-ko" style={{ marginTop: 36, fontSize: "clamp(.9rem,1.4vw,1.04rem)", color: "var(--ink-soft)", letterSpacing: ".01em", fontWeight: 500 }}>
+          {"법무법인 경국 · 사원 (Staff)  ·  법무 · 송무 & AI · 마케팅 기획"}
+        </p>
 
         <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#artifacts" className="btn"><Sparkle size={17} /> 프로젝트 보기</a>
@@ -196,7 +134,7 @@ function Marquee() {
 function Ledger() {
   const ref = useReveal();
   const ITEMS = [
-    ["6", "수행 프로젝트", "Editions"],
+    ["7", "수행 프로젝트", "Projects"],
     ["4", "전문 교육 이수", "Programs"],
     ["2", "수상 · 표창", "Awards"],
     ["1", "방송 인터뷰", "On Air"],
@@ -463,7 +401,7 @@ const TRAJECTORY = [
     desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
   { year: "2026", tag: "PRESENT", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
-  { year: "2026", color: "var(--apple)", title: "서울시민기자단 위원 활동",
+  { year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
     desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여하였다." },
   { year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 활동",
     desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장하였다." },
@@ -529,6 +467,9 @@ const EDITIONS = [
   { n: "06", color: "var(--sky)", Icon: Award, title: "루이비통\nVeo 3 시네마틱 캠페인 필름",
     desc: "동일한 Veo 3 파이프라인으로 '루이비통'의 헤리티지와 장인정신을 무드 중심의 광고 영상으로 재구성한 브랜드 캠페인 필름이다. 생성형 AI만으로 하이엔드 광고 특유의 질감과 톤을 구현하였다.",
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "캠페인 영상 보기", url: "https://drive.google.com/file/d/1mIEmvwjPfZwuXYZRkWW9FzZU3uvCUq69/view?usp=sharing", tags: ["Veo 3", "Google Vids", "Luxury Film"] },
+  { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
+    desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램이다. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 낮추었다.",
+    status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"] },
 ];
 
 function Artifacts() {
@@ -536,7 +477,7 @@ function Artifacts() {
   return (
     <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
       <div className="wrap">
-        <SectionHead eyebrow="04 — Limited Editions" titleEn="The Artifacts" titleKo="KREMA AI 교육 과정 6개의 결과물" />
+        <SectionHead eyebrow="04 — Selected Works" titleEn="The Artifacts" titleKo="직접 만들고 배포한 결과물" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "clamp(22px,3vw,34px)", marginTop: 64 }}>
           {EDITIONS.map((e, i) => (
             <article key={i} className="edition reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
@@ -554,9 +495,13 @@ function Artifacts() {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
                 {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
               </div>
-              <a href={e.url} target="_blank" rel="noreferrer" className="btn" style={{ alignSelf: "flex-start" }}>
-                {e.cta} <ExternalLink size={16} />
-              </a>
+              {e.url ? (
+                <a href={e.url} target="_blank" rel="noreferrer" className="btn" style={{ alignSelf: "flex-start" }}>
+                  {e.cta} <ExternalLink size={16} />
+                </a>
+              ) : (
+                <span className="btn btn--ghost" style={{ alignSelf: "flex-start", cursor: "default", pointerEvents: "none" }}>{e.cta}</span>
+              )}
             </article>
           ))}
         </div>

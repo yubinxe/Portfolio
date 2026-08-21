@@ -1675,20 +1675,34 @@ header img[alt^="YK"] { border-radius: 0; }
    김앤장 무드: 절제된 네이비, 여백, 하이라인, 정제된 모션
    ============================================================ */
 
-/* ---- Hero: Seoul skyline backdrop (법 · 부동산 · 서울) ---- */
-.hero-skyline {
+/* ---- Hero: 강남 전경 사진 배경 (법 × 부동산 × 서울) ---- */
+.hero-photo {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: min(54vh, 480px);
+  height: min(60vh, 600px);
   z-index: 0;
-  color: var(--accent);
-  opacity: .13;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 42%, #000 100%);
-          mask-image: linear-gradient(180deg, transparent 0, #000 42%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 24%, #000 100%);
 }
-.hero-skyline svg { display: block; width: 100%; height: 100%; }
-@media (max-width: 700px) { .hero-skyline { opacity: .1; height: 40vh; } }
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center bottom;
+  display: block; opacity: .92;
+}
+.hero-photo__scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg,
+    var(--ecru) 0%, var(--ecru) 40%,
+    rgba(249,246,240,.6) 55%,
+    rgba(249,246,240,.2) 70%,
+    rgba(249,246,240,.5) 88%,
+    var(--ecru) 100%);
+}
+@media (max-width: 700px) {
+  .hero-photo { height: 46vh; }
+  .hero-photo__scrim { background: linear-gradient(180deg, var(--ecru) 0%, var(--ecru) 46%, rgba(249,246,240,.55) 62%, rgba(249,246,240,.28) 76%, var(--ecru) 100%); }
+}
 
 /* ---- Korean typography 품격: 어절 보존 · 정제된 리듬 ---- */
 .font-ko, .font-myeongjo { word-break: keep-all; overflow-wrap: break-word; }
