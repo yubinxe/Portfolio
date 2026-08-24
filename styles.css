@@ -1800,3 +1800,61 @@ a { text-underline-offset: .2em; }
 #contact { min-height: 100svh; display: flex; flex-direction: column; }
 #contact > .wrap { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; }
 #contact > footer { flex: 0 0 auto; }
+
+/* ============================================================
+   v35 — 영상 라이트박스 플레이어 (톤앤매너: 다크·네이비·격조)
+   ============================================================ */
+.vlightbox {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center;
+  padding: clamp(16px, 4vw, 56px);
+  background: rgba(10,11,15,.88);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+          backdrop-filter: blur(12px) saturate(120%);
+  animation: vlb-fade .32s ease both;
+}
+.vlightbox__frame {
+  position: relative;
+  width: min(1040px, 100%);
+  background: #0c0d11;
+  border: 1px solid rgba(249,246,240,.14);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 50px 120px -34px rgba(0,0,0,.75);
+  animation: vlb-rise .42s var(--bounce) both;
+}
+.vlightbox__meta {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 15px 20px;
+  color: var(--ecru);
+  border-bottom: 1px solid rgba(249,246,240,.1);
+}
+.vlightbox__meta .font-play {
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent, #8FB8F2); opacity: .9;
+}
+.vlightbox__meta h4 { margin: 0; font-size: 1rem; font-weight: 700; letter-spacing: -.01em; }
+.vlightbox__video {
+  display: block; width: 100%; height: auto;
+  max-height: 74vh; background: #000;
+}
+.vlightbox__close {
+  position: absolute; top: 12px; right: 14px; z-index: 3;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(12,13,17,.7); color: var(--ecru);
+  border: 1px solid rgba(249,246,240,.28);
+  font-size: 15px; cursor: pointer;
+  transition: transform .35s var(--bounce), background .3s ease;
+}
+.vlightbox__close:hover { transform: rotate(90deg) scale(1.08); background: rgba(12,13,17,.95); }
+.vlightbox__fallback {
+  display: block; text-align: center;
+  padding: 12px 16px 16px;
+  font-size: .8rem; color: rgba(249,246,240,.6);
+  text-decoration: none;
+}
+.vlightbox__fallback:hover { color: var(--ecru); }
+@keyframes vlb-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes vlb-rise { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .vlightbox, .vlightbox__frame { animation: none; } }
