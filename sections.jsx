@@ -288,6 +288,7 @@ function Composite() {
               <article
                 key={d.n}
                 data-i={i}
+                id={"dom-" + d.n}
                 ref={(el) => (rows.current[i] = el)}
                 className={"comp-row" + (i === active ? " on" : "")}
                 onMouseEnter={() => setActive(i)}
@@ -307,7 +308,7 @@ function Composite() {
           </div>
         </div>
 
-        <div className="arsenal reveal">
+        <div className="arsenal reveal" id="arsenal">
           <div className="menu-rule" style={{ marginBottom: 24 }}><i /></div>
           <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 26 }}>The Arsenal — 실무에서 다루는 도구</p>
           {ARSENAL.map(([label, tools]) => (
@@ -320,12 +321,12 @@ function Composite() {
           ))}
         </div>
 
-        <div className="creds reveal">
+        <div className="creds reveal" id="credentials">
           <div className="menu-rule" style={{ marginBottom: 24 }}><i /></div>
           <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 26 }}>The Credentials — 보유 자격</p>
           <div className="creds__grid">
             {CREDS.map((c) => (
-              <div key={c.name} className="cred">
+              <div key={c.name} id={"cred-" + c.name.toLowerCase().replace(/[^a-z0-9가-힣]+/g, "-")} className="cred">
                 <span className="cred__name font-serif">{c.name}</span>
                 <span className="cred__ko font-ko">{c.ko}</span>
                 <span className="cred__by font-sans">{c.by}</span>
@@ -393,29 +394,33 @@ function Composite() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
-  { year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
+  { id: "tl-seocho", year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
     desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
-  { year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
+  { id: "tl-youth-day", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
+    desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류." },
+  { id: "tl-youth-panel", year: "2026", color: "var(--pink)", title: "국무조정실 온라인 청년참여단 활동",
+    desc: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달." },
+  { id: "tl-konkuk", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
-  { year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
+  { id: "tl-seoul-press", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
     desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-  { year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
+  { id: "tl-fintech", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
     desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
-  { year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
+  { id: "tl-krema", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
     desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
-  { year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
+  { id: "tl-snu-aied", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
-  { year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
+  { id: "tl-ssafy", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
     desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
-  { year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
+  { id: "tl-ssafy-ambassador", year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
     desc: "SSAFY 공식 홍보 앰배서더로 교육 과정과 성과를 콘텐츠로 알리고, 지원자 대상 커뮤니케이션과 대외 홍보 활동을 수행." },
-  { year: "2024", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
-    desc: "HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
-  { year: "2023", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
-    desc: "군 복무 기간 중 직무 수행 역량과 성실성을 인정받아 육군정보통신학교장(준장)으로부터 상장을 수상." },
-  { year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
+  { id: "tl-army-startup", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
+    desc: "軍·官·學 주관 2023 강원열린군대 스타트업 프로그램 성취도평가에서 팀 Home_Ally로 2위 입상(2023. 12. 31). HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
+  { id: "tl-army-training", year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
     desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
-  { year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
+  { id: "tl-army-signal", year: "2022", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
+    desc: "軍 특성화고 현장실습 기간 중 희생정신과 학업성적 우수로 타의 모범이 되어 육군정보통신학교장(준장)으로부터 상장을 수상(2022. 7. 1, 제183호)." },
+  { id: "tl-vattenfall", year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
     desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." },
 ];
 
@@ -429,7 +434,7 @@ function Trajectory() {
           <div className="timeline__spine" />
           <div style={{ display: "flex", flexDirection: "column", gap: "clamp(36px,5vw,58px)" }}>
             {TRAJECTORY.map((e, i) => (
-              <div key={i} className="tl-row reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 60}ms` }}>
+              <div key={i} id={e.id} className="tl-row reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 60}ms` }}>
                 <span className="tl-node" />
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "8px 18px" }}>
                   <span className="tl-year" style={{ fontSize: "clamp(2rem,5vw,3.4rem)" }}>{e.year}</span>
@@ -492,7 +497,7 @@ function Artifacts() {
         <SectionHead eyebrow="04 — Selected Works" titleEn="The Artifacts" titleKo="직접 기획·제작한 콘텐츠와 시스템" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "clamp(22px,3vw,34px)", marginTop: 64 }}>
           {EDITIONS.map((e, i) => (
-            <article key={i} className="edition reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
+            <article key={i} id={"ed-" + e.n} className="edition reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
               <div className="edition__chip">{e.status}</div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
                 <span className="edition__num">{e.n}</span>

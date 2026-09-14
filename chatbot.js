@@ -1,14 +1,19 @@
 /* ============================================================================
  * chatbot.js — 유빈 AI · Yubin Kim Office 포트폴리오 컨시어지 위젯
  * ----------------------------------------------------------------------------
- * · 순수 JavaScript, 의존성 0. <script src="chatbot.js" defer></script> 한 줄로 탑재.
+ * · 순수 JavaScript, 의존성 0. <script src="kb.js" defer></script>
+ *   <script src="chatbot.js" defer></script> 두 줄로 탑재. (kb.js 는 지식카드 원장)
  * · 사이트 디자인 시스템(navy #1F2D6B · ink · ecru · Pretendard/Playfair · bounce)에
  *   맞춰 자체 스타일을 주입합니다. --accent 등 사이트 CSS 변수를 그대로 상속합니다.
  * · 백엔드 /api/chat 스트리밍을 실시간 수신. 백엔드가 없으면(예: GitHub Pages)
- *   내장 지식으로 자동 폴백해 언제나 답변합니다.
+ *   내장 지식카드로 자동 폴백해 언제나 답변합니다.
+ * · 딥링크 엔진: 답변의 CTA/링크가 사이트 내부(페이지#앵커)를 가리키면
+ *   같은 페이지 → 스크롤 + 스포트라이트, 다른 페이지 → 이동 후 자동 하이라이트.
+ * · 무료 상담(리드) 흐름: 상담 내용을 정리해 /api/lead 로 전송. 서버 실패 시
+ *   상담 내용이 그대로 채워진 문의 폼(mailto)으로 이어져 리드가 유실되지 않습니다.
  *
  * 선택적 설정:
- *   window.YUBIN_CHAT_CONFIG = { endpoint:"/api/chat", greeting:"...", accent:"#1F2D6B" }
+ *   window.YUBIN_CHAT_CONFIG = { endpoint:"/api/chat", leadEndpoint:"/api/lead", accent:"#1F2D6B" }
  *   또는 <script src="chatbot.js" data-endpoint="/api/chat" data-accent="#1F2D6B">
  * ========================================================================== */
 (function () {
@@ -24,13 +29,14 @@
   var CFG = Object.assign(
     {
       endpoint: "/api/chat",
+      leadEndpoint: "/api/lead",
       accent: "", // 비우면 사이트의 --accent 상속
       brandKo: "유빈 AI",
       brandEn: "Yubin Kim Office",
       title: "무엇이든 물어보세요",
       subtitle: "김유빈 님의 역량 · 프로젝트 · 경력을 안내합니다",
       greeting:
-        "안녕하세요. **김유빈 님의 포트폴리오**를 안내하는 컨시어지 **유빈 AI**입니다.\n핵심 역량, 대표 프로젝트, 경력, 협업 방법까지 무엇이든 물어보세요.",
+        "안녕하세요. **김유빈 님의 포트폴리오**를 안내하는 컨시어지 **유빈 AI**입니다.\n핵심 역량, 대표 프로젝트, 경력, 자격, 협업 방법까지 무엇이든 물어보세요. 답변의 버튼을 누르면 해당 위치로 바로 안내합니다.",
       teaser: "궁금한 점이 있으신가요?",
       email: "yubin120866@gmail.com",
       model: "gpt-4o-mini",
@@ -40,41 +46,47 @@
     },
     window.YUBIN_CHAT_CONFIG || {},
     ds.endpoint ? { endpoint: ds.endpoint } : {},
+    ds.leadEndpoint ? { leadEndpoint: ds.leadEndpoint } : {},
     ds.accent ? { accent: ds.accent } : {},
     ds.model ? { model: ds.model } : {}
   );
 
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var STORE_KEY = "yk_chat_history_v1";
+  var STORE_KEY = "yk_chat_history_v2";
+  var DEEPLINK_KEY = "yk_deeplink";
 
-  /* ------------------------------------------------ 내장 지식 (폴백 전용) */
+  /* ------------------------------------------------ 지식 원장 (kb.js 우선) */
+  var EXT = window.YUBIN_KB || null;
   var PROFILE = {
     nameKo: "김유빈",
-    email: "yubin120866@gmail.com",
-    site: "https://yubinxe.github.io/Portfolio/",
+    email: (EXT && EXT.email) || CFG.email,
+    site: (EXT && EXT.site) || "https://yubinxe.github.io/Portfolio/",
   };
-  var SUGGESTIONS = [
+  var SUGGESTIONS = (EXT && EXT.suggestions) || [
     { label: "핵심 역량 요약", query: "김유빈 님의 핵심 역량을 한눈에 요약해 주세요." },
     { label: "대표 프로젝트 3선", query: "가장 대표적인 프로젝트 3가지를 링크와 함께 소개해 주세요." },
     { label: "경력·이력 타임라인", query: "지금까지의 경력과 교육 이력을 최신순으로 정리해 주세요." },
-    { label: "협업·연락 방법", query: "협업을 제안하려면 어떻게 연락하면 되나요?" },
+    { label: "무료 상담 신청", query: "__consult__" },
   ];
-  var KB = [
-    { tags: ["소개", "누구", "김유빈", "yubin", "about", "이름", "나이"], title: "인물 개요",
-      body: "김유빈(Yubin Kim, 별칭 Ethan Kim) · 2004년생. 법무법인 경국 법률사무원으로 'AI Process Innovation'을 담당하며 서울 서초구에서 일합니다. 슬로건은 'Technical Precision Meets Legal Dignity' — 법(法)의 품격과 코드의 정교함, 그 경계에서 일합니다. 법무·AI·마케팅·데이터·건설·미디어 여섯 도메인을 하나의 판단력으로 잇는 융합형 인재입니다." },
-    { tags: ["역량", "강점", "융합", "핵심", "composite", "무엇", "잘"], title: "융합 역량",
-      body: "여섯 도메인의 융합이 핵심입니다.\n- **법무·송무**: 법무법인 경국에서 송무·사무 실무\n- **AI 엔지니어링**: SSAFY 13기 · 서울대 AIED 4기\n- **마케팅 기획**: 한국부동산마케팅협회(KREMA) 4기\n- **데이터·인프라**: 공공데이터 API · GWS 연동 대시보드\n- **공간·건설**: 건국대 스마트건설 · BIM·드론 측량\n- **미디어**: 서울시민기자단 · 연합뉴스TV 인터뷰\n\"AI는 도구를 대체하지, 맥락을 대체하지 않는다\"가 그의 명제입니다." },
-    { tags: ["도구", "스택", "기술", "arsenal", "툴"], title: "실무 도구",
-      body: "- 생성형 AI: GPT Image-2, Suno AI, ElevenLabs, Veo 3, Google Vids, Hyperframe\n- 데이터·개발: 공공데이터 API, GWS API, React, Vercel, Prompt Architecture\n- 도메인: BIM·드론 측량, 송무 프로세스, 청약·부동산 데이터" },
-    { tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든"], title: "대표 프로젝트",
-      body: "실제 배포된 6개의 결과물입니다.\n- [청약 인사이트 대시보드](https://cheongak-dashboard-opal.vercel.app) — 공공데이터 API 기반 부동산 청약 시각화\n- [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — GWS API + AI 분류로 리스크 우선순위 자동화\n- [Hyperframe × ElevenLabs 프로모션](https://drive.google.com/file/d/1F3PssuwdFkcWaiT6fZHgQlz44As0I2nq/view?usp=sharing)\n- [6·3 지방선거 AI 카드뉴스·영상](https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing)\n- [르엘 성수 Veo 3 브랜드 필름](https://drive.google.com/file/d/1NQRlbAKrxlap8Nfdec3hAdx0pN3ewDhN/view?usp=sharing)\n- [루이비통 Veo 3 캠페인 필름](https://drive.google.com/file/d/1mIEmvwjPfZwuXYZRkWW9FzZU3uvCUq69/view?usp=sharing)" },
-    { tags: ["경력", "이력", "타임라인", "교육", "궤적", "수상", "career", "연혁"], title: "경력·교육",
-      body: "최신순 기록입니다.\n- 2026 건국대 스마트건설기술교육 이수\n- 2026 서울시민기자단 · 서울청년파트너스 위원\n- 2026 서울광역청년센터 나눔서포터즈 · CJ제일제당 나눔냉장고 운영\n- 2026 한국부동산마케팅협회(KREMA) AI 마케팅 기획자 4기 수료\n- 2026 서울대 AI 교육 전문가 과정(AIED) 4기 수료\n- 2025 삼성청년SW아카데미(SSAFY) 13기 이수\n- 2023 육군창업경진대회 2군단장상 수상\n- 2022 대구광역시교육청 · 독일 Vattenfall 해외 연수" },
-    { tags: ["미디어", "방송", "인터뷰", "연합뉴스", "언론"], title: "미디어",
-      body: "연합뉴스TV 〈함께 빚어낸 특별한 밥상〉에 인터뷰로 출연했습니다(강남1인가구센터 관련)." },
-    { tags: ["연락", "이메일", "협업", "채용", "contact", "제안", "문의", "메일"], title: "연락·협업",
-      body: "협업·채용·프로젝트 문의는 이메일로 받습니다: [yubin120866@gmail.com](mailto:yubin120866@gmail.com).\n포트폴리오: [yubinxe.github.io/Portfolio](https://yubinxe.github.io/Portfolio/) · 경력 상세는 career.html, 활동 갤러리는 gallery.html에서 볼 수 있습니다." },
+  /* kb.js 가 없을 때의 최소 폴백 카드 (kb.js 가 정본) */
+  var KB = (EXT && EXT.cards) || [
+    { id: "profile", tags: ["소개", "누구", "김유빈", "about"], title: "인물 개요",
+      body: "김유빈(Yubin Kim) · 2004년생. 법무법인 경국 사원으로 대외협력 · 마케팅 · 개발을 맡아 AI Process Innovation을 담당합니다.",
+      primary: { label: "선언 보기", href: "index.html#manifesto" }, secondary: null },
+    { id: "contact", tags: ["연락", "이메일", "협업", "채용", "문의"], title: "연락·협업",
+      body: "협업·채용·프로젝트 문의: [" + PROFILE.email + "](mailto:" + PROFILE.email + ")",
+      primary: { label: "연락 섹션", href: "index.html#contact" }, secondary: null },
   ];
+  var CONSULT = (EXT && EXT.consult) || {
+    trigger: ["상담", "견적", "의뢰", "제안", "채용", "협업", "문의"],
+    steps: [
+      { key: "need", ask: "어떤 과제를 함께 풀고 싶으신가요?" },
+      { key: "context", ask: "조직과 현재 상황을 한 줄로 알려주세요." },
+      { key: "contact", ask: "회신받으실 이메일(또는 연락처)을 남겨주세요." },
+    ],
+    closing: "정리한 내용을 김유빈 님께 전달했습니다.",
+    fallbackClosing: "서버 전송이 어려워 이메일 작성 화면으로 연결했습니다. 정리된 상담 내용이 그대로 담겨 있으니 '보내기'만 누르시면 됩니다.",
+  };
 
   /* --------------------------------------------------------------- helpers */
   function el(tag, cls, html) {
@@ -88,6 +100,29 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
+  function isExternal(href) { return /^(https?:|mailto:|tel:)/i.test(href || ""); }
+  /* 현재 페이지 파일명. 확장자 없는 clean URL(/gallery)도 gallery.html 로 해석 */
+  function pageOf(pathname) {
+    var f = (pathname || "").split("/").pop();
+    if (!f) return "index.html";
+    if (/\.html$/i.test(f)) return f.toLowerCase();
+    if (/\.[a-z0-9]+$/i.test(f)) return "index.html"; // 다른 확장자 → 기준은 index
+    return f.toLowerCase() + ".html";
+  }
+  /* "career.html#cv-ssafy" → { page, hash } · "#trajectory" → 현재 페이지 */
+  function parseInternal(href) {
+    var m = /^(?:([\w.-]+\.html))?(?:#([\w-]+))?$/.exec(href || "");
+    if (!m || (!m[1] && !m[2])) return null;
+    return { page: (m[1] || pageOf(location.pathname)).toLowerCase(), hash: m[2] || "" };
+  }
+  function absUrl(href) {
+    if (isExternal(href)) return href;
+    var p = parseInternal(href);
+    if (!p) return href;
+    var base = location.pathname.replace(/[^/]*$/, "");
+    return base + (p.page === "index.html" && /\/$/.test(location.pathname) ? "" : p.page) + (p.hash ? "#" + p.hash : "");
+  }
+
   /* 안전한 마크다운-라이트 렌더: 링크 · 굵게 · 불릿 · 자동링크 */
   function mdLite(text) {
     var safe = escapeHtml(text);
@@ -96,13 +131,20 @@
       var body = line.replace(/^\s*[-·•*]\s+/, "");
       // [text](url)
       body = body.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, t, u) {
-        var safeUrl = /^(https?:|mailto:|#|\/)/.test(u) ? u : "#";
+        var safeUrl = /^(https?:|mailto:|#|\/|[\w.-]+\.html)/.test(u) ? u : "#";
+        var internal = !isExternal(safeUrl) && parseInternal(safeUrl);
+        if (internal) return '<a href="' + escapeHtml(absUrl(safeUrl)) + '" data-yk-go="' + escapeHtml(safeUrl) + '">' + t + "</a>";
         return '<a href="' + safeUrl + '" target="_blank" rel="noopener noreferrer">' + t + "</a>";
       });
       // 남은 순수 URL 자동 링크 (href 내부 제외)
       body = body.replace(/(^|[^"'>=\]])(https?:\/\/[^\s<)]+)(?![^<]*<\/a>)/g, function (m, pre, url) {
         var clean = url.replace(/[.,;)]+$/, "");
         var tail = url.slice(clean.length);
+        var site = PROFILE.site.replace(/\/$/, "");
+        if (clean.indexOf(site) === 0) { // 사이트 내부 절대 URL → 딥링크
+          var rel = clean.slice(site.length).replace(/^\//, "") || "index.html";
+          return pre + '<a href="' + clean + '" data-yk-go="' + escapeHtml(rel) + '">' + clean + "</a>" + tail;
+        }
         return pre + '<a href="' + clean + '" target="_blank" rel="noopener noreferrer">' + clean + "</a>" + tail;
       });
       // **bold**
@@ -112,23 +154,94 @@
     return lines.join("<br>");
   }
 
+  /* ------------------------------------------------------------ 딥링크 엔진 */
+  var SPOT_MS = 2600;
+  function spotlight(target) {
+    if (!target) return;
+    target.classList.add("in"); // reveal 블러 즉시 해제
+    target.classList.add("yk-spotlight");
+    setTimeout(function () { target.classList.remove("yk-spotlight"); }, SPOT_MS);
+  }
+  function scrollToHash(hash, tries) {
+    var t = hash && document.getElementById(hash);
+    if (!t) {
+      // React(index.html) 마운트 대기 — 최대 ~4초
+      if ((tries || 0) < 40) return setTimeout(function () { scrollToHash(hash, (tries || 0) + 1); }, 100);
+      return false;
+    }
+    var header = document.querySelector("header");
+    var offset = (header ? header.offsetHeight : 72) + 18;
+    var y = t.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, y), behavior: REDUCED ? "auto" : "smooth" });
+    setTimeout(function () { spotlight(t); }, REDUCED ? 0 : 420);
+    return true;
+  }
+  /* 내부 링크 이동: 같은 페이지면 스크롤+스포트라이트, 아니면 페이지 이동(플래그 저장) */
+  function goTo(href) {
+    if (isExternal(href)) { window.open(href, "_blank", "noopener"); return; }
+    var p = parseInternal(href);
+    if (!p) return;
+    var here = pageOf(location.pathname);
+    if (p.page === here) {
+      if (p.hash) scrollToHash(p.hash);
+      else window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" });
+      if (window.innerWidth <= 480) close(); // 모바일: 패널이 화면을 가리므로 닫음
+      return;
+    }
+    try { sessionStorage.setItem(DEEPLINK_KEY, p.hash || ""); } catch (e) {}
+    document.body.classList.add("page-out");
+    setTimeout(function () { location.href = p.page + (p.hash ? "#" + p.hash : ""); }, 220);
+  }
+  /* 페이지 진입 시: 딥링크 플래그 또는 해시가 있으면 자동 하이라이트 */
+  function resumeDeepLink() {
+    var flagged = null;
+    try { flagged = sessionStorage.getItem(DEEPLINK_KEY); sessionStorage.removeItem(DEEPLINK_KEY); } catch (e) {}
+    var hash = (location.hash || "").replace(/^#/, "");
+    if (flagged !== null || hash) {
+      var h = hash || flagged;
+      if (h) setTimeout(function () { scrollToHash(h); }, 260);
+    }
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("[data-yk-go]");
+    if (!a || e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
+    goTo(a.getAttribute("data-yk-go"));
+  });
+
   /* ---------------------------------------------------- 로컬 폴백 답변 엔진 */
+  function scoreCards(query) {
+    var q = (query || "").toLowerCase();
+    return KB.map(function (c) {
+      var s = 0;
+      (c.tags || []).forEach(function (t) { if (q.indexOf(String(t).toLowerCase()) > -1) s += 2; });
+      if (c.title && q.indexOf(c.title.toLowerCase()) > -1) s += 3;
+      return { c: c, s: s };
+    }).sort(function (a, b) { return b.s - a.s; });
+  }
+  /* → { text, ctas:[{label,href}] } */
   function localAnswer(query) {
     var q = (query || "").toLowerCase();
     if (/(안녕|하이|hello|hi|반가|누구|소개)/.test(q) && q.length < 12) {
-      return "안녕하세요. 김유빈 님의 포트폴리오를 안내하는 **유빈 AI**입니다. 핵심 역량, 프로젝트, 경력, 협업 방법 중 무엇이 궁금하신가요?";
+      return { text: "안녕하세요. 김유빈 님의 포트폴리오를 안내하는 **유빈 AI**입니다. 핵심 역량, 프로젝트, 경력, 자격, 협업 방법 중 무엇이 궁금하신가요?", ctas: [] };
     }
-    var scored = KB.map(function (c) {
-      var s = 0;
-      c.tags.forEach(function (t) { if (q.indexOf(t.toLowerCase()) > -1) s += 2; });
-      return { c: c, s: s };
-    }).sort(function (a, b) { return b.s - a.s; });
-
-    if (scored[0].s === 0) {
-      return "그 내용은 포트폴리오에 담겨 있지 않습니다. **[" + PROFILE.email + "](mailto:" + PROFILE.email + ")** 로 문의하시면 김유빈 님이 직접 답변드립니다. 그 밖에 역량·프로젝트·경력은 얼마든지 안내해 드릴게요.";
+    var scored = scoreCards(q);
+    if (!scored.length || scored[0].s === 0) {
+      return {
+        text: "그 내용은 포트폴리오에 담겨 있지 않습니다. **[" + PROFILE.email + "](mailto:" + PROFILE.email + ")** 로 문의하시면 김유빈 님이 직접 답변드립니다. 그 밖에 역량·프로젝트·경력·자격은 얼마든지 안내해 드릴게요.",
+        ctas: [{ label: "무료 상담 신청", href: "__consult__" }],
+      };
     }
     var top = scored.filter(function (x) { return x.s > 0; }).slice(0, 2);
-    return top.map(function (x) { return x.c.body; }).join("\n\n");
+    var ctas = [];
+    top.forEach(function (x) {
+      [x.c.primary, x.c.secondary].forEach(function (cta) {
+        if (!cta || !cta.href) return;
+        if (ctas.some(function (y) { return y.href === cta.href; })) return;
+        ctas.push(cta);
+      });
+    });
+    return { text: top.map(function (x) { return "**" + x.c.title + "**\n" + x.c.body; }).join("\n\n"), ctas: ctas.slice(0, 3) };
   }
 
   /* ------------------------------------------------------ session storage */
@@ -157,6 +270,17 @@
   --yk-bounce: cubic-bezier(.34,1.56,.64,1);
   ${accentRule}
   font-family:"Pretendard","Inter",system-ui,-apple-system,sans-serif;
+}
+/* ---- 딥링크 스포트라이트 (페이지 요소에 부여) ---- */
+.yk-spotlight{
+  animation:yk-spot 2.6s ease-out both;
+  border-radius:16px;
+}
+@keyframes yk-spot{
+  0%{ box-shadow:0 0 0 0 rgba(31,45,107,.0), 0 0 0 9999px rgba(16,19,28,0); }
+  12%{ box-shadow:0 0 0 6px rgba(31,45,107,.55), 0 0 0 9999px rgba(16,19,28,.22); }
+  70%{ box-shadow:0 0 0 6px rgba(31,45,107,.35), 0 0 0 9999px rgba(16,19,28,.10); }
+  100%{ box-shadow:0 0 0 0 rgba(31,45,107,0), 0 0 0 9999px rgba(16,19,28,0); }
 }
 /* ---- FAB ---- */
 .yk-fab{
@@ -234,6 +358,7 @@
 @keyframes yk-in{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
 .yk-msg__ava{ width:27px; height:27px; border-radius:8px; background:var(--yk-accent); color:#fff; flex:none;
   display:grid; place-items:center; font-family:"Playfair Display",serif; font-weight:900; font-size:11px; margin-top:2px; }
+.yk-msg__col{ min-width:0; display:flex; flex-direction:column; gap:7px; }
 .yk-msg__bubble{ padding:11px 13px; border-radius:14px; font-size:14px; line-height:1.66; letter-spacing:-.006em; word-break:break-word; }
 .yk-msg.bot .yk-msg__bubble{ background:var(--yk-paper); color:var(--yk-ink); border:1px solid rgba(16,19,28,.12); border-top-left-radius:5px;
   box-shadow:0 2px 10px rgba(16,19,28,.05); }
@@ -245,6 +370,23 @@
 .yk-li{ display:block; padding-left:14px; position:relative; }
 .yk-li::before{ content:"·"; position:absolute; left:3px; color:var(--yk-accent); font-weight:900; }
 .yk-msg.me .yk-li::before{ color:rgba(255,255,255,.7); }
+/* ---- CTA (딥링크 버튼) ---- */
+.yk-cta{ display:flex; flex-wrap:wrap; gap:6px; }
+.yk-cta__btn{ font:inherit; font-size:12.5px; font-weight:700; color:#fff; background:var(--yk-accent);
+  border:1.3px solid var(--yk-accent); border-radius:999px; padding:6px 12px; cursor:pointer;
+  display:inline-flex; align-items:center; gap:5px; transition:transform .3s var(--yk-bounce), background .2s; }
+.yk-cta__btn:hover{ transform:translateY(-2px); }
+.yk-cta__btn--ghost{ background:var(--yk-paper); color:var(--yk-accent); }
+.yk-cta__btn svg{ width:13px; height:13px; }
+/* ---- 리드 폼 ---- */
+.yk-form{ background:var(--yk-paper); border:1px solid rgba(16,19,28,.12); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px; }
+.yk-form label{ font-size:11.5px; font-weight:700; color:var(--yk-ink-soft); letter-spacing:.02em; }
+.yk-form input,.yk-form textarea{ width:100%; font:inherit; font-size:13.5px; border:1.3px solid rgba(16,19,28,.16); border-radius:10px;
+  padding:8px 10px; background:var(--yk-ecru); color:var(--yk-ink); outline:none; cursor:auto !important; }
+.yk-form input:focus,.yk-form textarea:focus{ border-color:var(--yk-accent); }
+.yk-form textarea{ resize:vertical; min-height:74px; }
+.yk-form__row{ display:flex; gap:8px; justify-content:flex-end; margin-top:2px; }
+.yk-form__err{ font-size:12px; color:#A02B23; font-weight:600; }
 /* typing */
 .yk-typing{ display:inline-flex; gap:4px; padding:3px 0; }
 .yk-typing span{ width:7px; height:7px; border-radius:50%; background:var(--yk-accent); opacity:.4; animation:yk-bounce2 1.2s infinite; }
@@ -256,6 +398,7 @@
   border:1.3px solid var(--yk-ink); border-radius:999px; padding:6px 12px; cursor:pointer;
   transition:background .22s,color .22s,transform .3s var(--yk-bounce); }
 .yk-chip:hover{ background:var(--yk-accent); border-color:var(--yk-accent); color:#fff; transform:translateY(-2px); }
+.yk-chip--accent{ background:var(--yk-accent); border-color:var(--yk-accent); color:#fff; }
 /* ---- input ---- */
 .yk-input{ border-top:1px solid rgba(16,19,28,.1); background:var(--yk-paper); padding:11px 12px 12px;
   display:flex; align-items:flex-end; gap:8px; }
@@ -274,8 +417,9 @@
   .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ display:none; }
 }
 @media (prefers-reduced-motion:reduce){
-  .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser{ transition:none !important; animation:none !important; }
+  .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser,.yk-cta__btn{ transition:none !important; animation:none !important; }
   .yk-fab__ping::after,.yk-dot,.yk-typing span{ animation:none !important; }
+  .yk-spotlight{ animation:none; box-shadow:0 0 0 4px rgba(31,45,107,.5); }
 }
 `;
     var style = el("style");
@@ -291,10 +435,15 @@
     '<svg class="yk-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
   var ICON_SEND =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+  var ICON_ARROW =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+  var ICON_PIN =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>';
 
   /* ----------------------------------------------------------- build DOM */
   var history = loadHistory();
   var root, panel, body, quick, textarea, sendBtn, teaser, busy = false, localMode = false, greeted = false;
+  var consult = null; // { step, data:{} } — 진행 중 상담 흐름
 
   function build() {
     injectStyles();
@@ -343,9 +492,10 @@
 
     quick = el("div", "yk-quick");
     SUGGESTIONS.forEach(function (s) {
-      var chip = el("button", "yk-chip", escapeHtml(s.label));
+      var isConsult = s.query === "__consult__";
+      var chip = el("button", "yk-chip" + (isConsult ? " yk-chip--accent" : ""), escapeHtml(s.label));
       chip.type = "button";
-      chip.addEventListener("click", function () { send(s.query); });
+      chip.addEventListener("click", function () { isConsult ? startConsult() : send(s.query); });
       quick.appendChild(chip);
     });
 
@@ -381,7 +531,7 @@
     // 저장된 대화 복원
     if (history.length) {
       greeted = true;
-      history.forEach(function (m) { renderMessage(m.role === "user" ? "me" : "bot", m.content); });
+      history.forEach(function (m) { renderMessage(m.role === "user" ? "me" : "bot", m.content, m.ctas); });
       hideQuick();
     }
 
@@ -393,6 +543,8 @@
     if (!REDUCED && !history.length) {
       setTimeout(function () { if (!root.classList.contains("open")) showTeaser(); }, 2600);
     }
+
+    resumeDeepLink();
   }
 
   /* ------------------------------------------------------------ behaviors */
@@ -420,15 +572,35 @@
 
   function scrollBottom() { if (body) body.scrollTop = body.scrollHeight; }
 
-  function renderMessage(kind, text) {
+  function renderCtas(col, ctas) {
+    if (!ctas || !ctas.length) return;
+    var row = el("div", "yk-cta");
+    ctas.forEach(function (c, i) {
+      var b = el("button", "yk-cta__btn" + (i ? " yk-cta__btn--ghost" : ""));
+      b.type = "button";
+      b.innerHTML = escapeHtml(c.label) + (c.href === "__consult__" ? "" : (isExternal(c.href) ? ICON_ARROW : ICON_PIN));
+      b.addEventListener("click", function () {
+        if (c.href === "__consult__") startConsult();
+        else goTo(c.href);
+      });
+      row.appendChild(b);
+    });
+    col.appendChild(row);
+  }
+
+  function renderMessage(kind, text, ctas) {
     var msg = el("div", "yk-msg " + kind);
     var ava = el("div", "yk-msg__ava", kind === "me" ? "나" : "YK");
+    var col = el("div", "yk-msg__col");
     var bubble = el("div", "yk-msg__bubble");
     bubble.innerHTML = mdLite(text);
+    col.appendChild(bubble);
+    renderCtas(col, ctas);
     msg.appendChild(ava);
-    msg.appendChild(bubble);
+    msg.appendChild(col);
     body.appendChild(msg);
     scrollBottom();
+    bubble.__col = col;
     return bubble;
   }
 
@@ -443,20 +615,28 @@
     return { msg: msg, bubble: bubble };
   }
 
+  function pushBot(text, ctas) {
+    history.push({ role: "assistant", content: text, ctas: ctas || [] });
+    saveHistory(history);
+  }
+
   /* --------------------------------------------------------------- send */
   function send(preset) {
     if (busy) return;
     var text = (preset != null ? preset : textarea.value).trim();
     if (!text) return;
+    if (text === "__consult__") { startConsult(); return; }
 
     hideTeaser(); hideQuick();
     renderMessage("me", text);
     history.push({ role: "user", content: text });
     saveHistory(history);
-
     textarea.value = ""; autosize();
-    busy = true; sendBtn.disabled = true;
 
+    if (consult) { consultStep(text); return; }
+    if (isConsultIntent(text)) { startConsult(text); return; }
+
+    busy = true; sendBtn.disabled = true;
     var typing = renderTyping();
     respond(text, typing);
   }
@@ -480,25 +660,30 @@
       scrollBottom();
     }
     function finish() {
-      if (!started) { // 토큰이 하나도 안 온 경우
+      if (!started) { // 토큰이 하나도 안 온 경우 → 로컬 답변
         typing.msg.remove();
-        bubble = renderMessage("bot", acc || localAnswer(text));
-        acc = bubble.textContent;
+        var la = localAnswer(text);
+        bubble = renderMessage("bot", la.text, la.ctas);
+        acc = la.text;
+        pushBot(acc, la.ctas);
+      } else {
+        // 서버 답변에도 관련 카드의 딥링크 CTA 를 덧붙임 (근거 위치 안내)
+        var ctas = localAnswer(text).ctas.filter(function (c) { return c.href !== "__consult__"; }).slice(0, 2);
+        renderCtas(bubble.__col, ctas);
+        pushBot(acc, ctas);
       }
-      history.push({ role: "assistant", content: acc });
-      saveHistory(history);
       busy = false; sendBtn.disabled = false;
       textarea.focus();
     }
     function fallback() {
       // 서버 실패 → 로컬 지식으로 타이핑 효과
       localMode = true;
-      var answer = localAnswer(text);
+      var la = localAnswer(text);
       ensureBubble();
-      typeOut(bubble, answer, function () {
-        acc = answer;
-        history.push({ role: "assistant", content: acc });
-        saveHistory(history);
+      typeOut(bubble, la.text, function () {
+        acc = la.text;
+        renderCtas(bubble.__col, la.ctas);
+        pushBot(acc, la.ctas);
         busy = false; sendBtn.disabled = false;
       });
     }
@@ -528,16 +713,127 @@
     try { return localStorage.getItem("YUBIN_OPENAI_KEY") || ""; } catch (e) { return ""; }
   }
   function isStaticHost() {
-    try { return /(^|\.)github\.io$/.test(location.hostname) && CFG.endpoint === "/api/chat"; }
+    try { return (/(^|\.)github\.io$/.test(location.hostname) || location.protocol === "file:") && CFG.endpoint === "/api/chat"; }
     catch (e) { return false; }
+  }
+
+  /* ------------------------------------------------------- 무료 상담 흐름 */
+  function isConsultIntent(text) {
+    var q = (text || "").toLowerCase();
+    return (CONSULT.trigger || []).some(function (t) { return q.indexOf(String(t).toLowerCase()) > -1; }) &&
+      /(신청|하고 싶|원해|가능|할 수|받고|부탁|드리|주세요|요청|want|request|book)/.test(q);
+  }
+  function startConsult(firstText) {
+    hideTeaser(); hideQuick();
+    open();
+    consult = { step: 0, data: {}, page: pageOf(location.pathname) };
+    if (firstText) consult.data.opening = firstText;
+    var intro = "**무료 상담 신청**을 도와드리겠습니다. 세 가지만 여쭙겠습니다.\n" + CONSULT.steps[0].ask;
+    renderMessage("bot", intro);
+    pushBot(intro);
+    setTimeout(function () { textarea && textarea.focus(); }, 200);
+  }
+  function consultStep(answer) {
+    var step = CONSULT.steps[consult.step];
+    consult.data[step.key] = answer;
+    consult.step += 1;
+    if (consult.step < CONSULT.steps.length) {
+      var ask = CONSULT.steps[consult.step].ask;
+      renderMessage("bot", ask);
+      pushBot(ask);
+      return;
+    }
+    // 모든 단계 완료 → 확인 폼 (수정 가능) 표시
+    var data = consult.data; consult = null;
+    renderLeadForm(data);
+  }
+  function summarize(data) {
+    return [
+      data.opening ? "첫 메시지: " + data.opening : "",
+      "과제: " + (data.need || ""),
+      "상황: " + (data.context || ""),
+      "연락처: " + (data.contact || ""),
+    ].filter(Boolean).join("\n");
+  }
+  function renderLeadForm(data) {
+    var msg = el("div", "yk-msg bot");
+    msg.appendChild(el("div", "yk-msg__ava", "YK"));
+    var col = el("div", "yk-msg__col");
+    var bubble = el("div", "yk-msg__bubble", mdLite("아래 내용으로 김유빈 님께 전달하겠습니다. 수정 후 **보내기**를 눌러주세요."));
+    col.appendChild(bubble);
+    var form = el("form", "yk-form");
+    form.innerHTML =
+      '<label>성함 / 소속</label><input name="name" placeholder="홍길동 · ○○법무법인" required />' +
+      '<label>회신 이메일 또는 연락처</label><input name="contact" value="' + escapeHtml(data.contact || "") + '" required />' +
+      '<label>상담 내용</label><textarea name="message">' + escapeHtml(summarize(data)) + "</textarea>" +
+      '<div class="yk-form__err" hidden></div>' +
+      '<div class="yk-form__row"><button type="button" class="yk-cta__btn yk-cta__btn--ghost" data-cancel>취소</button><button type="submit" class="yk-cta__btn">보내기</button></div>';
+    col.appendChild(form);
+    msg.appendChild(col);
+    body.appendChild(msg);
+    scrollBottom();
+    form.querySelector("[data-cancel]").addEventListener("click", function () {
+      form.remove();
+      var t = "상담 신청을 취소했습니다. 언제든 다시 요청하실 수 있습니다.";
+      renderMessage("bot", t); pushBot(t);
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var lead = {
+        name: form.name.value.trim(),
+        contact: form.contact.value.trim(),
+        message: form.message.value.trim(),
+        need: data.need || "", context: data.context || "",
+        page: location.href,
+        history: history.slice(-10).map(function (m) { return { role: m.role, content: m.content }; }),
+        ua: navigator.userAgent,
+      };
+      var err = form.querySelector(".yk-form__err");
+      if (!lead.name || !lead.contact) { err.hidden = false; err.textContent = "성함과 연락처는 필수입니다."; return; }
+      err.hidden = true;
+      var btn = form.querySelector('[type="submit"]');
+      btn.disabled = true; btn.textContent = "전송 중…";
+      submitLead(lead).then(function (res) {
+        form.remove();
+        var t = CONSULT.closing + (res && res.notified === false ? "\n(알림 발송은 지연될 수 있으나 접수는 완료되었습니다.)" : "");
+        renderMessage("bot", t, [{ label: "연락 섹션", href: "index.html#contact" }]);
+        pushBot(t, [{ label: "연락 섹션", href: "index.html#contact" }]);
+      }).catch(function () {
+        // ★ 폴백: 서버 실패 → 상담 내용이 그대로 채워진 mailto 문의 폼으로 (리드 유실 방지)
+        form.remove();
+        var subject = "[포트폴리오 상담] " + lead.name;
+        var bodyTxt = "성함/소속: " + lead.name + "\n연락처: " + lead.contact + "\n\n" + lead.message + "\n\n(페이지: " + lead.page + ")";
+        var mailto = "mailto:" + PROFILE.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(bodyTxt);
+        var t = CONSULT.fallbackClosing;
+        renderMessage("bot", t, [{ label: "이메일로 보내기", href: mailto }]);
+        pushBot(t, [{ label: "이메일로 보내기", href: mailto }]);
+        try { location.href = mailto; } catch (e2) {}
+      });
+    });
+  }
+  function submitLead(lead) {
+    if (isStaticHost() || !CFG.leadEndpoint) return Promise.reject(new Error("no_lead_endpoint"));
+    var controller = new AbortController();
+    var killed = setTimeout(function () { controller.abort(); }, 12000);
+    return fetch(CFG.leadEndpoint, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(lead), signal: controller.signal,
+    }).then(function (res) {
+      clearTimeout(killed);
+      if (!res.ok) throw new Error("lead_" + res.status);
+      return res.json().catch(function () { return { ok: true }; });
+    }).then(function (j) {
+      if (!j || j.ok === false) throw new Error("lead_rejected");
+      return j;
+    }).catch(function (e) { clearTimeout(killed); throw e; });
   }
 
   /* 프론트에서 직접 쓰는 시스템 프롬프트 (백엔드 규칙과 동일) */
   function frontSystemPrompt() {
-    var knowledge = KB.map(function (c) { return "### " + c.title + "\n" + c.body; }).join("\n\n");
+    var knowledge = EXT && EXT.toKnowledge ? EXT.toKnowledge() : KB.map(function (c) { return "### " + c.title + "\n" + c.body; }).join("\n\n");
     return [
       "당신은 '유빈 AI'입니다 — 김유빈(Yubin Kim)의 포트폴리오를 방문객(주로 채용·협업 담당자)에게 안내하는 격조 있는 컨시어지입니다. 김유빈 님을 3인칭으로 소개합니다.",
-      "[규칙] 1) 아래 <지식> 안의 사실만 근거로 답하고 없는 사실·수치·URL은 지어내지 않습니다. 2) 지식에 없으면 '그 내용은 포트폴리오에 담겨 있지 않습니다. " + PROFILE.email + " 로 문의하시면 김유빈 님이 직접 답변드립니다.' 라고 안내합니다. 3) 링크는 <지식>의 URL만 사용, 법률·세무 판단은 '전문가 상담이 필요합니다'로 안내, 공개 이메일 외 개인정보는 제공하지 않습니다. 4) 무관한 잡담은 정중히 포트폴리오 주제로 유도합니다. 5) 절제되고 품격 있게, 과장 없이. 기본 한국어(영어로 물으면 영어), 3~6문장, 필요시 짧은 불릿, 프로젝트는 [이름](URL) 링크로, 이모지 금지.",
+      "[규칙] 1) 아래 <지식> 안의 사실만 근거로 답하고 없는 사실·수치·URL은 지어내지 않습니다. 2) 지식에 없으면 '그 내용은 포트폴리오에 담겨 있지 않습니다. " + PROFILE.email + " 로 문의하시면 김유빈 님이 직접 답변드립니다.' 라고 안내합니다. 3) 링크는 <지식>의 URL만 사용, 법률·세무 판단은 '전문가 상담이 필요합니다'로 안내, 공개 이메일 외 개인정보는 제공하지 않습니다. 4) 무관한 잡담은 정중히 포트폴리오 주제로 유도합니다. 5) 절제되고 품격 있게, 과장 없이. 기본 한국어(영어로 물으면 영어), 3~6문장, 필요시 짧은 불릿, 프로젝트는 [이름](URL) 링크로, 이모지 금지. 6) 사이트 내부 위치를 안내할 때는 [라벨](페이지.html#앵커) 형식의 링크를 사용합니다.",
       "<지식>",
       knowledge,
       "</지식>",
@@ -550,7 +846,7 @@
     if (!key) { onError(); return; }
     var controller = new AbortController();
     var killed = setTimeout(function () { controller.abort(); }, 40000);
-    var msgs = [{ role: "system", content: frontSystemPrompt() }].concat(hist.slice(-12));
+    var msgs = [{ role: "system", content: frontSystemPrompt() }].concat(hist.slice(-12).map(function (m) { return { role: m.role, content: m.content }; }));
     fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
@@ -594,7 +890,7 @@
     fetch(CFG.endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: hist.slice(-12), stream: true }),
+      body: JSON.stringify({ messages: hist.slice(-12).map(function (m) { return { role: m.role, content: m.content }; }), stream: true }),
       signal: controller.signal,
     })
       .then(function (res) {
@@ -635,6 +931,10 @@
     open: function () { open(); },
     close: function () { close(); },
     send: function (t) { open(); send(t); },
+    goTo: goTo,                 // 딥링크: YubinChat.goTo("career.html#cv-ssafy")
+    consult: function () { startConsult(); },
+    answer: localAnswer,        // 로컬 엔진 디버그
+    kb: KB,
     // 이 브라우저(localStorage)에만 키 저장 — 레포/깃엔 절대 올라가지 않습니다.
     setKey: function (k) {
       try { localStorage.setItem("YUBIN_OPENAI_KEY", String(k || "").trim()); localMode = false; } catch (e) {}

@@ -1,0 +1,14 @@
+{
+  "name": "yubin-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "김유빈 포트폴리오 — 정적 사이트 + 유빈 AI 컨시어지(지식카드 · 딥링크 · 무료상담 리드)",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "seed:build": "node build-seed.mjs",
+    "seed": "node build-seed.mjs && node seed-airtable.js",
+    "seed:dry": "node build-seed.mjs && node seed-airtable.js --dry-run",
+    "serve": "npx --yes serve -l 8080 ."
+  },
+  "engines": { "node": ">=18" }
+}
