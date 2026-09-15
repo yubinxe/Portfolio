@@ -89,7 +89,7 @@ test("sitemap 이 실제 파일을 가리키고 robots 가 sitemap 을 알린다
 });
 
 test("비공개·레거시 페이지는 색인에서 제외된다", () => {
-  for (const f of ["admin.html", "Ethan Kim Portfolio.html"]) {
+  for (const f of ["admin.html", "Ethan Kim Portfolio.html", "404.html"]) {
     assert.match(read(f), /<meta name="robots" content="noindex/, f + " noindex 누락");
   }
   for (const f of PAGES) {
@@ -165,4 +165,15 @@ test("갤러리·경력의 사진 alt 에 이름 맥락이 담긴다", () => {
     const without = alts.filter((a) => !a.includes("김유빈"));
     assert.deepEqual(without, [], f + " — 이름 맥락 없는 alt: " + without.join(" | "));
   }
+});
+
+/* 404 — 끊긴 링크로 들어온 방문자를 사이트 안에 붙잡아 둔다.
+ * GitHub Pages 는 저장소 루트의 404.html 을 자동으로 사용한다. */
+test("404 페이지가 주요 경로와 챗봇으로 연결된다", () => {
+  const s = read("404.html");
+  for (const href of ["index.html", "lecture.html", "career.html", "gallery.html"]) {
+    assert.ok(s.includes(`href="${href}"`), "404 에 " + href + " 링크 누락");
+  }
+  assert.ok(s.includes("chatbot.js"), "404 에 챗봇 위젯 누락");
+  assert.match(s, /<meta name="robots" content="noindex, follow"/, "404 는 noindex, follow");
 });

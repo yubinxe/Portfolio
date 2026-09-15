@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>페이지를 찾을 수 없습니다 — 김유빈 Yubin Kim 포트폴리오</title>
+<meta name="description" content="요청하신 주소에 해당하는 문서가 없습니다. 김유빈(Yubin Kim) 포트폴리오의 메인·경력·강의·갤러리로 이동하실 수 있습니다." />
+<meta name="robots" content="noindex, follow" />
+<meta name="theme-color" content="#1F2D6B" />
+<link rel="icon" href="favicon.ico?v=4" sizes="48x48" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg?v=4" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=4" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<link rel="stylesheet" href="styles.css?v=31" />
+<style>
+  .nf { min-height: 100svh; display: grid; place-items: center; padding: 96px 20px 72px; position: relative; }
+  .nf__in { position: relative; z-index: 1; max-width: 640px; text-align: center; }
+  .nf__code { font-family: "Anton", "Playfair Display", serif; font-size: clamp(5rem, 18vw, 11rem);
+    line-height: .92; letter-spacing: -.02em; color: var(--ink); margin: 0; }
+  .nf__ko { font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 800; margin: 18px 0 0; letter-spacing: -.01em; }
+  .nf__sub { margin: 14px auto 0; max-width: 460px; line-height: 1.8; color: var(--ink-soft); font-size: .98rem; }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 30px; }
+  .nf__path { display: inline-block; margin-top: 22px; font-size: .84rem; color: var(--ink-soft);
+    background: rgba(17,17,17,.05); border-radius: 8px; padding: .5em .8em; word-break: break-all; }
+</style>
+</head>
+<body class="font-ko">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(249,246,240,.86);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(17,17,17,.10)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:72px">
+    <a href="index.html" style="text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px">
+      <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="34" height="34" style="display:block;border-radius:9px" />
+      <span class="sticker sticker--sky" style="padding:.25em .6em;font-size:11px;box-shadow:0 3px 0 rgba(17,17,17,.12)">404 — Not Found</span>
+    </a>
+    <nav aria-label="주요 메뉴" style="display:flex;align-items:center;gap:clamp(14px,2.4vw,32px)">
+      <div class="nav-desktop" style="display:flex;gap:clamp(14px,2.4vw,32px)">
+        <a class="navlink" href="index.html">메인</a>
+        <a class="navlink" href="lecture.html">강의</a>
+        <a class="navlink" href="gallery.html">갤러리</a>
+        <a class="navlink" href="career.html">경력</a>
+      </div>
+      <a href="mailto:yubin120866@gmail.com" class="btn" style="padding:.55em 1.1em;font-size:.85rem">연락하기</a>
+    </nav>
+  </div>
+</header>
+
+<main class="nf">
+  <div class="speckle" style="opacity:.3"></div>
+  <div class="nf__in">
+    <div class="menu-rule" style="max-width:200px;margin:0 auto 22px"><i></i></div>
+    <p class="eyebrow" style="color:var(--ink-soft)">Not Found — 404</p>
+    <h1 class="nf__code">404</h1>
+    <p class="nf__ko">요청하신 페이지가 없습니다.</p>
+    <p class="nf__sub">
+      주소가 바뀌었거나 삭제된 문서일 수 있습니다. 아래에서 바로 이동하시거나,
+      오른쪽 아래 <strong>유빈 AI</strong> 에게 찾으시는 내용을 물어보시면 해당 위치로 안내해 드립니다.
+    </p>
+    <div class="nf__links">
+      <a href="index.html" class="btn">메인으로</a>
+      <a href="lecture.html" class="btn btn--ghost">강의 프로그램</a>
+      <a href="career.html" class="btn btn--ghost">경력 상세</a>
+      <a href="gallery.html" class="btn btn--ghost">활동 갤러리</a>
+    </div>
+    <p class="nf__path" id="nf-path" hidden></p>
+  </div>
+</main>
+
+<footer style="background:var(--ink);color:var(--ecru)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:26px 0">
+    <span style="font-size:.82rem;color:rgba(249,246,240,.6)">YubinKim · 김유빈 — 법무법인 경국</span>
+    <span style="font-size:.78rem;color:rgba(249,246,240,.5)">© 2026 Yubin Kim. Crafted with technical precision.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* 어떤 주소에서 왔는지 보여준다 — 오타인지 옛 링크인지 방문자가 바로 안다 */
+  var el = document.getElementById("nf-path");
+  var p = location.pathname + location.search;
+  if (el && p && p !== "/404.html") { el.textContent = "요청한 주소: " + p; el.hidden = false; }
+})();
+</script>
+  <!-- 유빈 AI 포트폴리오 챗봇 위젯 -->
+  <script src="kb.js" defer></script>
+  <script src="chatbot.js" defer></script>
+</body>
+</html>
