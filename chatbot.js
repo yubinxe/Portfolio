@@ -449,6 +449,9 @@
     injectStyles();
     root = el("div", "yk-chat");
     root.setAttribute("data-yk", "");
+    // 랜드마크 안에 두어 스크린리더가 위젯 전체를 하나의 영역으로 인식하게 한다
+    root.setAttribute("role", "complementary");
+    root.setAttribute("aria-label", CFG.brandKo + " 포트폴리오 안내 챗봇");
 
     // FAB
     var fab = el("button", "yk-fab");
@@ -460,6 +463,7 @@
 
     // teaser
     teaser = el("div", "yk-teaser");
+    teaser.setAttribute("role", "status");
     teaser.innerHTML =
       '<button class="yk-teaser__close" aria-label="닫기">&times;</button>' +
       escapeHtml(CFG.teaser);

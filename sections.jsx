@@ -39,10 +39,10 @@ function Nav() {
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
-          <img src="images/favicon.svg?v=3" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
+          <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
           <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>Portfolio</span>
         </a>
-        <nav style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
+        <nav aria-label="주요 메뉴" style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
           <div className="nav-desktop" style={{ display: "flex", gap: "clamp(14px,2.4vw,32px)" }}>
             {links.map(([t, h]) => <a key={t} className="navlink" href={h}>{t}</a>)}
           </div>
@@ -429,16 +429,16 @@ function Composite() {
     <section className="whyc" ref={bandRef}>
       <div className="wrap">
         <div className="menu-rule reveal" style={{ marginBottom: 26 }}><i /></div>
-        <p className="eyebrow reveal">Why It Matters — 전문성보다 전달</p>
+        <p className="eyebrow reveal">Why It Matters — 도구가 아니라 우선순위</p>
 
         <h2 className="whyc__lead font-myeongjo reveal">
-          전문성은 콘텐츠의 시작일 뿐입니다.<br />
-          <em>닿지 않으면, 성과가 아닙니다.</em>
+          도구는 빨라졌습니다.<br />
+          <em>무엇을 먼저 할지는 여전히 사람이 정합니다.</em>
         </h2>
 
         <p className="whyc__intro font-ko reveal">
-          제가 만든 세 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
-          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다.
+          직접 만들어 운영한 세 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
+          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다. 그 자리가 전략기획입니다.
         </p>
 
         <div className="wcases">
@@ -446,7 +446,7 @@ function Composite() {
             <article key={c.n} className="wcase reveal" style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="wcase__head">
                 <span className="wcase__n font-serif">{c.n}</span>
-                <h4 className="wcase__t font-ko">{c.title}</h4>
+                <h3 className="wcase__t font-ko">{c.title}</h3>
                 <span className="wcase__tag font-sans">{c.tag}</span>
               </div>
               <div className="wcase__flow">
@@ -472,7 +472,8 @@ function Composite() {
           <em>도구에 무엇을 시킬지 정하는 일.</em>
         </p>
         <p className="whyc__closesub font-ko reveal">
-          그래서 전문성과 전달력을 함께 갖춘 사람이 필요합니다. 제가 준비해 온 자리입니다.
+          기준을 세우는 사람과 그것을 실행까지 옮기는 사람이 다르면 속도가 죽습니다.
+          둘을 한 사람이 하도록 준비해 왔습니다.
         </p>
       </div>
     </section>
