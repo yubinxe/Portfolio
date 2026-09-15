@@ -12,4 +12,15 @@ Disallow: /Ethan%20Kim%20Portfolio.html
 Disallow: /uploads/
 Disallow: /screenshots/
 
+# 네이버 Yeti · 다음 Daumoa — 한국 검색 노출을 위해 명시적으로 허용
+User-agent: Yeti
+Allow: /
+Disallow: /admin.html
+Disallow: /Ethan%20Kim%20Portfolio.html
+
+User-agent: Daumoa
+Allow: /
+Disallow: /admin.html
+Disallow: /Ethan%20Kim%20Portfolio.html
+
 Sitemap: https://yubinxe.github.io/Portfolio/sitemap.xml

@@ -153,3 +153,16 @@ test("모든 페이지가 같은 styles.css 캐시 버전을 요청한다", () =
   const uniq = new Set(vs.values());
   assert.equal(uniq.size, 1, "버전이 갈렸습니다: " + JSON.stringify([...vs]));
 });
+
+/* 이미지 검색 — "김유빈" 으로 걸리려면 alt 에 이름 맥락이 있어야 한다.
+ * 갤러리는 이 사이트에서 이미지가 가장 많은 페이지이고, 인물 검색의 이미지 탭은
+ * 텍스트 결과와 별개의 노출 경로다. */
+test("갤러리·경력의 사진 alt 에 이름 맥락이 담긴다", () => {
+  for (const f of ["gallery.html", "career.html"]) {
+    const alts = [...read(f).matchAll(/<img[^>]*alt="([^"]+)"/g)].map((m) => m[1])
+      .filter((a) => a !== "확대 이미지" && !a.includes("CI"));
+    assert.ok(alts.length >= 2, f + " 이미지가 없습니다");
+    const without = alts.filter((a) => !a.includes("김유빈"));
+    assert.deepEqual(without, [], f + " — 이름 맥락 없는 alt: " + without.join(" | "));
+  }
+});
