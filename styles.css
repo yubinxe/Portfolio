@@ -2037,3 +2037,13 @@ a { text-underline-offset: .2em; }
 
 /* 강의 카드 하단 링크 — 사례 증빙과 과정 상세를 나란히 */
 .lec-card__links { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+
+/* 라이트박스 닫기 버튼 — 마우스·키보드 모두를 위한 명시적 컨트롤 */
+.lightbox__close {
+  position: absolute; top: max(16px, env(safe-area-inset-top)); right: 16px; z-index: 2;
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(249, 246, 240, .35);
+  background: rgba(17, 17, 17, .55); color: #F9F6F0; font-size: 26px; line-height: 1;
+  display: grid; place-items: center; cursor: pointer;
+}
+.lightbox__close:hover { background: rgba(17, 17, 17, .78); }
+.lightbox__close:focus-visible, .lightbox:focus-visible { outline: 3px solid #8FB8F2; outline-offset: 3px; }
