@@ -41,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-<link rel="stylesheet" href="styles.css?v=29" />
+<link rel="stylesheet" href="styles.css?v=30" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -376,7 +376,7 @@
 
 <script type="text/babel" src="tweaks-panel.jsx?v=4"></script>
 <script type="text/babel" src="icons.jsx?v=4"></script>
-<script type="text/babel" src="sections.jsx?v=29"></script>
+<script type="text/babel" src="sections.jsx?v=31"></script>
 
 <script type="text/babel">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -615,6 +615,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
     var toast = document.createElement("div");
     toast.className = "toast font-ko";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
     toast.textContent = "이메일 주소가 복사되었습니다 ✓";
     document.body.appendChild(toast);
     var cm = document.getElementById("copyMail");

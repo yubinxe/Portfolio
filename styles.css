@@ -607,7 +607,7 @@ body {
 }
 .cv-row:hover { background: rgba(255,255,255,.55); }
 .cv-row .yr { font-family: "Playfair Display", serif; font-weight: 800; font-size: 1.25rem; }
-.cv-row h4 { margin: 0 0 6px; font-size: 1.02rem; font-weight: 800; letter-spacing: -.01em; }
+.cv-row h3 { margin: 0 0 6px; font-size: 1.02rem; font-weight: 800; letter-spacing: -.01em; }
 .cv-row p { margin: 0; font-size: .9rem; color: var(--ink-soft); line-height: 1.7; max-width: 640px; }
 @media (max-width: 560px) { .cv-row { grid-template-columns: 1fr; } }
 
@@ -977,7 +977,7 @@ body.page-out { opacity: 0; transition: opacity .24s ease; }
   margin-left: auto;
   font-size: .92rem;
   letter-spacing: .2em;
-  color: rgba(16,19,28,.26);
+  color: rgba(16,19,28,.62);
   transition: color .3s ease;
 }
 .tl-row:hover .tl-idx { color: var(--accent); }
@@ -1436,7 +1436,7 @@ header img[alt^="YK"] { border-radius: 0; }
   font-weight: 600;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: rgba(244,245,248,.42);
+  color: rgba(244,245,248,.68);
 }
 
 .wcase__flow {
@@ -1452,15 +1452,15 @@ header img[alt^="YK"] { border-radius: 0; }
   letter-spacing: .18em;
   text-transform: uppercase;
   margin-bottom: 13px;
-  color: rgba(244,245,248,.38);
+  color: rgba(244,245,248,.68);
 }
 .wcase__cell p {
   margin: 0;
   line-height: 1.75;
   font-size: clamp(.9rem, 1.3vw, .97rem);
-  color: rgba(244,245,248,.46);
+  color: rgba(244,245,248,.72);
 }
-.wcase__cell--auto p { color: rgba(244,245,248,.72); }
+.wcase__cell--auto p { color: rgba(244,245,248,.84); }
 .wcase__cell--judge {
   padding-left: clamp(18px, 2.2vw, 28px);
   border-left: 2.5px solid #9AA8D6;
