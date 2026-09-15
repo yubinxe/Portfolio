@@ -7,7 +7,7 @@
 
 | 파일 | 역할 |
 |---|---|
-| `index.html` + `sections.jsx` | 메인. React(Babel standalone). 궤적 `TRAJECTORY`, 작업 `EDITIONS`, 역량 `DOMAINS`, 자격 `CREDS`, **강의 `LECTURE_TRACKS`/`LECTURES`/`LECTURE_BASIS`** 데이터가 여기 있음 |
+| `index.html` + `sections.jsx` · `app.jsx` | 메인. React 18(UMD 프로덕션 빌드). **JSX 는 빌드 시점에 컴파일**해 `dist/*.js` 로 커밋합니다 — 브라우저는 Babel 을 내려받지 않습니다. 궤적 `TRAJECTORY`, 작업 `EDITIONS`, 역량 `DOMAINS`, 자격 `CREDS`, **강의 `LECTURE_TRACKS`/`LECTURES`/`LECTURE_BASIS`** 데이터가 여기 있음 |
 | `career.html` | 경력 상세 + **`#lectures` 강의 역량**. 모든 행·섹션에 `id` 앵커 (`#cv-ssafy`, `#experience`, `#lec-vibe` …) |
 | `gallery.html` | 활동 갤러리 + **`#credentials` 자격·교육·상훈 섹션**(상장 원본 · SSAFY 기업탐방 · 멘토 특강) |
 | `kb.js` | **지식 원장(단일 진실 원천)** — 지식카드 · 서비스 카탈로그 3안 · 무료상담 스크립트 · 추천 칩. 브라우저(`window.YUBIN_KB`)와 Node(`require`) 공용 |
@@ -16,6 +16,7 @@
 | `api/lead.js` | 리드 접수. **알림 실패가 저장을 막지 않는다**(5초 타임아웃) |
 | `admin.html` | 리드 인박스(상태 변경 · CSV) + 지식카드 검수. PAT 는 브라우저 localStorage 에만 |
 | `build-seed.mjs` → `seed/seed.json` → `seed-airtable.js` | Airtable 시드(결정론적 빌드 → upsert) |
+| `scripts/build-jsx.mjs` → `dist/` | `npm run build`. `*.jsx` 를 컴파일해 `dist/*.js` 생성. **JSX 를 고쳤으면 반드시 실행**(빌드를 잊으면 `npm test` 가 잡아냄) |
 | `test/` | `npm test` — 리드 계약 · 카드 무결성 · 딥링크 앵커 존재 검증 |
 
 ## 지식카드 스키마 (`kb.js`)
@@ -68,9 +69,13 @@ AIRTABLE_PAT=pat… AIRTABLE_BASE_ID=app… npm run seed   # KnowledgeCards · P
 ## 검증
 
 ```bash
-npm test          # node --test test/
+npm install       # 최초 1회 (빌드·테스트용 devDependencies)
+npm run build     # *.jsx → dist/*.js — JSX 를 고쳤다면 필수
+npm test          # node --test test/ (dist 최신 여부까지 검증)
 node -e "require('./kb.js')" && node --check chatbot.js
 ```
+
+> `dist/*.js` 는 자동 생성물입니다. 직접 고치지 말고 `*.jsx` 를 고친 뒤 `npm run build` 를 실행하세요.
 
 ## 강의 프로그램 (2 트랙 8과정)
 

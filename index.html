@@ -370,15 +370,16 @@
   </div>
 </noscript>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 
-<script type="text/babel" src="tweaks-panel.jsx?v=4"></script>
-<script type="text/babel" src="icons.jsx?v=4"></script>
-<script type="text/babel" src="sections.jsx?v=31"></script>
+<!-- JSX 는 빌드 시점에 컴파일합니다(npm run build). 원본: *.jsx · 결과물: dist/*.js -->
+<script src="dist/tweaks-panel.js?v=1"></script>
+<script src="dist/icons.js?v=1"></script>
+<script src="dist/sections.js?v=1"></script>
 
-<script type="text/babel">
+<script>
+/* 테마 기본값 · 팔레트 — 편집 패널이 EDITMODE 블록을 그대로 덮어쓰므로 인라인 유지 */
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#1F2D6B",
   "pastels": [
@@ -397,54 +398,8 @@ const PALETTES = {
   "Slate mono":  ["#E8EAEF", "#E3E6EB", "#DDE2EA", "#E7E8ED", "#ECEAEC"],
   "Ink & steel": ["#DFE3EE", "#D8DEEA", "#D2DAEC", "#DDDCE8", "#E2DEE8"],
 };
-
-function App() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-
-  React.useEffect(() => {
-    const r = document.documentElement;
-    r.style.setProperty("--accent", t.accent);
-    const p = t.pastels || PALETTES["Original pastels"];
-    ["--butter", "--apple", "--sky", "--lilac", "--pink"].forEach((v, i) => r.style.setProperty(v, p[i]));
-    document.body.classList.toggle("motion-calm", t.motion === "calm");
-  }, [t.accent, t.pastels, t.motion]);
-
-  const palName = Object.keys(PALETTES).find(k => JSON.stringify(PALETTES[k]) === JSON.stringify(t.pastels)) || "Original pastels";
-
-  return (
-    <div id="top">
-      <Nav />
-      <main>
-        <Hero />
-        <Marquee />
-        <Composite />
-        <Trajectory />
-        <Artifacts />
-        <Lectures />
-        <Ledger />
-        <About />
-        <Contact />
-      </main>
-
-      <TweaksPanel>
-        <TweakSection label="Palette" />
-        <TweakSelect label="Pastel set" value={palName}
-          options={Object.keys(PALETTES)}
-          onChange={(v) => setTweak("pastels", PALETTES[v])} />
-        <TweakColor label="Accent" value={t.accent}
-          options={["#1F2D6B", "#111111", "#3A3631", "#7A5230", "#6A4E8C"]}
-          onChange={(v) => setTweak("accent", v)} />
-        <TweakSection label="Motion" />
-        <TweakRadio label="Interaction" value={t.motion}
-          options={["bouncy", "calm"]}
-          onChange={(v) => setTweak("motion", v)} />
-      </TweaksPanel>
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
+<script src="dist/app.js?v=1"></script>
 
 <script>
 /* ===== micro-interactions (오피스 모션 시스템) ===== */
