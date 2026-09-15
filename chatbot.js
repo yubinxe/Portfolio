@@ -573,8 +573,12 @@
     scrollBottom();
   }
   function close() {
+    var fab = root.querySelector(".yk-fab");
+    /* 패널 안에 초점이 있었다면 여는 버튼으로 돌려준다 — 키보드 사용자가 제자리를 잃지 않도록 */
+    var inside = root.contains(document.activeElement) && document.activeElement !== fab;
     root.classList.remove("open");
-    root.querySelector(".yk-fab").setAttribute("aria-expanded", "false");
+    fab.setAttribute("aria-expanded", "false");
+    if (inside) fab.focus();
   }
 
   function scrollBottom() { if (body) body.scrollTop = body.scrollHeight; }
