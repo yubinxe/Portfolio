@@ -40,9 +40,10 @@ test("서비스 proof 가 실제 카드 id 를 가리킨다", () => {
   assert.deepEqual(bad, []);
 });
 
-test("강의 카드가 존재하고 index.html#lectures 로 연결된다", () => {
+test("강의 카드가 존재하고 강의 상세 페이지로 연결된다", () => {
   const lec = KB.cards.filter((c) => c.cat === "강의");
   assert.ok(lec.length >= 5, "강의 카드 수: " + lec.length);
-  assert.ok(KB.cards.some((c) => c.primary.href === "index.html#lectures"));
+  assert.ok(KB.cards.some((c) => c.primary.href === "lecture.html"), "강의 총괄 카드가 상세 페이지를 가리켜야 합니다");
+  assert.ok(lec.filter((c) => /^lecture\.html#lec-\d\d$/.test(c.primary.href)).length === 8, "과정 카드 8장이 각 앵커로 연결되어야 합니다");
   assert.ok(KB.services.some((s) => s.id === "svc-lecture"));
 });
