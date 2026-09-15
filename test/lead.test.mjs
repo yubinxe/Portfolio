@@ -69,7 +69,7 @@ test("필수 필드 누락은 400", async () => {
 
 test("kb.js 카드 무결성: id 유일 · CTA href 형식 · 보조 CTA 가 주 CTA 와 중복되지 않음", () => {
   const ids = new Set();
-  const HREF = /^(https?:\/\/|mailto:|(index|career|gallery)\.html#[\w-]+$)/;
+  const HREF = /^(https?:\/\/|mailto:|(index|career|gallery|lecture)\.html(#[\w-]+)?$)/;
   for (const c of KB.cards) {
     assert.ok(!ids.has(c.id), "dup id " + c.id); ids.add(c.id);
     assert.ok(c.primary && HREF.test(c.primary.href), "bad primary " + c.id + " " + (c.primary && c.primary.href));

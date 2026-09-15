@@ -2034,3 +2034,6 @@ a { text-underline-offset: .2em; }
 .g-card img,
 .photo-card img,
 .press-card img { height: auto; }
+
+/* 강의 카드 하단 링크 — 사례 증빙과 과정 상세를 나란히 */
+.lec-card__links { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }

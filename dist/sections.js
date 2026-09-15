@@ -684,8 +684,13 @@ function Lectures() {
     l.modules.map((m) => /*#__PURE__*/React.createElement("li", { key: m }, m))
     ), /*#__PURE__*/
     React.createElement("p", { className: "lec-card__basis font-ko" }, /*#__PURE__*/React.createElement(GraduationCap, { size: 14 }), " ", l.basis), /*#__PURE__*/
+    React.createElement("div", { className: "lec-card__links" }, /*#__PURE__*/
     React.createElement("a", { href: l.proof.href, className: "lec-card__proof font-sans" },
     l.proof.label, " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })
+    ), /*#__PURE__*/
+    React.createElement("a", { href: "lecture.html#" + l.id, className: "lec-card__proof font-sans" }, "\uACFC\uC815 \uC0C1\uC138 ", /*#__PURE__*/
+    React.createElement(ArrowUpRight, { size: 14 })
+    )
     )
     )
     )
@@ -706,6 +711,7 @@ function Lectures() {
     ), /*#__PURE__*/
     React.createElement("div", { style: { marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" } }, /*#__PURE__*/
     React.createElement("a", { href: "mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D", className: "btn" }, /*#__PURE__*/React.createElement(Mail, { size: 16 }), " \uAC15\uC758 \uBB38\uC758"), /*#__PURE__*/
+    React.createElement("a", { href: "lecture.html", className: "btn btn--ghost" }, "\uACFC\uC815\uBCC4 \uC0C1\uC138 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "career.html#lectures", className: "btn btn--ghost" }, "\uAC15\uC758 \uC5ED\uB7C9 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
     )
     )

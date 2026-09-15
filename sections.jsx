@@ -683,9 +683,14 @@ function Lectures() {
                     {l.modules.map((m) => <li key={m}>{m}</li>)}
                   </ul>
                   <p className="lec-card__basis font-ko"><GraduationCap size={14} /> {l.basis}</p>
-                  <a href={l.proof.href} className="lec-card__proof font-sans">
-                    {l.proof.label} <ArrowUpRight size={14} />
-                  </a>
+                  <div className="lec-card__links">
+                    <a href={l.proof.href} className="lec-card__proof font-sans">
+                      {l.proof.label} <ArrowUpRight size={14} />
+                    </a>
+                    <a href={"lecture.html#" + l.id} className="lec-card__proof font-sans">
+                      과정 상세 <ArrowUpRight size={14} />
+                    </a>
+                  </div>
                 </article>
               ))}
             </div>
@@ -705,6 +710,7 @@ function Lectures() {
           </div>
           <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
             <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" className="btn"><Mail size={16} /> 강의 문의</a>
+            <a href="lecture.html" className="btn btn--ghost">과정별 상세 보기 <ArrowUpRight size={15} /></a>
             <a href="career.html#lectures" className="btn btn--ghost">강의 역량 상세 <ArrowUpRight size={15} /></a>
           </div>
         </div>
