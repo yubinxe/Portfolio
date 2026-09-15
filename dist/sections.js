@@ -62,7 +62,7 @@ function Hero() {
   return (/*#__PURE__*/
     React.createElement("section", { id: "manifesto", ref: ref, style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
     React.createElement("div", { className: "hero-photo", "aria-hidden": "true" }, /*#__PURE__*/
-    React.createElement("img", { src: "images/hero-gangnam.jpg?v=1", alt: "", fetchpriority: "high", decoding: "async" })
+    React.createElement("img", { src: "images/hero-gangnam-1000.jpg?v=1", srcSet: "images/hero-gangnam-1000.jpg?v=1 1000w, images/hero-gangnam.jpg?v=1 1978w", sizes: "100vw", alt: "", fetchpriority: "high", decoding: "async" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-photo__scrim", "aria-hidden": "true" }), /*#__PURE__*/
 
@@ -752,15 +752,15 @@ function About() {
 
     React.createElement("div", { className: "about-gallery" }, /*#__PURE__*/
     React.createElement("figure", { className: "photo-card photo-card--tall reveal" }, /*#__PURE__*/
-    React.createElement("img", { src: "images/profile-yubin.jpg?v=1", alt: "\uAE40\uC720\uBE48 \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uACF5\uC2DD \uD504\uB85C\uD544", width: "896", height: "1195", loading: "lazy" }), /*#__PURE__*/
+    React.createElement("img", { src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w", sizes: "(max-width: 720px) 40vw, 18vw", alt: "\uAE40\uC720\uBE48 \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uACF5\uC2DD \uD504\uB85C\uD544", width: "450", height: "600", loading: "lazy" }), /*#__PURE__*/
     React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "photo-card__chip" }, "PROFILE"), "\uAE40\uC720\uBE48 \xB7 Yubin Kim")
     ), /*#__PURE__*/
     React.createElement("figure", { className: "photo-card reveal", style: { transitionDelay: "90ms" } }, /*#__PURE__*/
-    React.createElement("img", { src: "images/press-yonhap.jpg", alt: "\uC5F0\uD569\uB274\uC2A4TV \uC778\uD130\uBDF0 \u2014 \uAC15\uB0A81\uC778\uAC00\uAD6C\uC13C\uD130", loading: "lazy" }), /*#__PURE__*/
+    React.createElement("img", { src: "images/press-yonhap-500.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w", sizes: "(max-width: 720px) 45vw, 20vw", alt: "\uAE40\uC720\uBE48 \uC5F0\uD569\uB274\uC2A4TV \uC778\uD130\uBDF0 \u2014 \uAC15\uB0A81\uC778\uAC00\uAD6C\uC13C\uD130 \uCDE8\uC7AC", width: "500", height: "281", loading: "lazy" }), /*#__PURE__*/
     React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "photo-card__chip photo-card__chip--red" }, "ON AIR"), "\uC5F0\uD569\uB274\uC2A4TV \uC778\uD130\uBDF0")
     ), /*#__PURE__*/
     React.createElement("figure", { className: "photo-card reveal", style: { transitionDelay: "180ms" } }, /*#__PURE__*/
-    React.createElement("img", { src: "images/ssafy-presentation.jpg", alt: "SSAFY 13\uAE30 \uD504\uB85C\uC81D\uD2B8 \uBC1C\uD45C", loading: "lazy" }), /*#__PURE__*/
+    React.createElement("img", { src: "images/ssafy-presentation-500.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w", sizes: "(max-width: 720px) 45vw, 20vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 \uC0BC\uC131\uCCAD\uB144SW\uC544\uCE74\uB370\uBBF8(SSAFY) 13\uAE30 \uD504\uB85C\uC81D\uD2B8 \uBC1C\uD45C", width: "500", height: "500", loading: "lazy" }), /*#__PURE__*/
     React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "photo-card__chip" }, "SSAFY 13\uAE30"), "\uD504\uB85C\uC81D\uD2B8 \uBC1C\uD45C")
     )
     )
@@ -775,7 +775,7 @@ function Contact() {
   const ref = useReveal();
   return (/*#__PURE__*/
     React.createElement("section", { id: "contact", ref: ref, style: { position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(40px,7vw,84px) 0 0", overflow: "hidden" } }, /*#__PURE__*/
-    React.createElement("div", { className: "contact-photo", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("img", { src: "images/footer-seoul.jpg?v=2", alt: "" })), /*#__PURE__*/
+    React.createElement("div", { className: "contact-photo", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("img", { src: "images/footer-seoul-1000.jpg?v=2", srcSet: "images/footer-seoul-1000.jpg?v=2 1000w, images/footer-seoul.jpg?v=2 1920w", sizes: "100vw", alt: "", loading: "lazy" })), /*#__PURE__*/
     React.createElement("div", { className: "contact-photo__scrim", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("div", { className: "seal", "aria-hidden": "true" }, /*#__PURE__*/
     React.createElement("svg", { viewBox: "0 0 120 120" }, /*#__PURE__*/

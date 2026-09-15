@@ -61,7 +61,7 @@ function Hero() {
   return (
     <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
       <div className="hero-photo" aria-hidden="true">
-        <img src="images/hero-gangnam.jpg?v=1" alt="" fetchpriority="high" decoding="async" />
+        <img src="images/hero-gangnam-1000.jpg?v=1" srcSet="images/hero-gangnam-1000.jpg?v=1 1000w, images/hero-gangnam.jpg?v=1 1978w" sizes="100vw" alt="" fetchpriority="high" decoding="async" />
       </div>
       <div className="hero-photo__scrim" aria-hidden="true" />
 
@@ -751,15 +751,15 @@ function About() {
 
           <div className="about-gallery">
             <figure className="photo-card photo-card--tall reveal">
-              <img src="images/profile-yubin.jpg?v=1" alt="김유빈 — 법무법인 경국 공식 프로필" width="896" height="1195" loading="lazy" />
+              <img src="images/profile-yubin-450.jpg?v=1" srcSet="images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w" sizes="(max-width: 720px) 40vw, 18vw" alt="김유빈 — 법무법인 경국 공식 프로필" width="450" height="600" loading="lazy" />
               <figcaption className="font-ko"><span className="photo-card__chip">PROFILE</span>김유빈 · Yubin Kim</figcaption>
             </figure>
             <figure className="photo-card reveal" style={{ transitionDelay: "90ms" }}>
-              <img src="images/press-yonhap.jpg" alt="연합뉴스TV 인터뷰 — 강남1인가구센터" loading="lazy" />
+              <img src="images/press-yonhap-500.jpg" srcSet="images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w" sizes="(max-width: 720px) 45vw, 20vw" alt="김유빈 연합뉴스TV 인터뷰 — 강남1인가구센터 취재" width="500" height="281" loading="lazy" />
               <figcaption className="font-ko"><span className="photo-card__chip photo-card__chip--red">ON AIR</span>연합뉴스TV 인터뷰</figcaption>
             </figure>
             <figure className="photo-card reveal" style={{ transitionDelay: "180ms" }}>
-              <img src="images/ssafy-presentation.jpg" alt="SSAFY 13기 프로젝트 발표" loading="lazy" />
+              <img src="images/ssafy-presentation-500.jpg" srcSet="images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w" sizes="(max-width: 720px) 45vw, 20vw" alt="김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표" width="500" height="500" loading="lazy" />
               <figcaption className="font-ko"><span className="photo-card__chip">SSAFY 13기</span>프로젝트 발표</figcaption>
             </figure>
           </div>
@@ -774,7 +774,7 @@ function Contact() {
   const ref = useReveal();
   return (
     <section id="contact" ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(40px,7vw,84px) 0 0", overflow: "hidden" }}>
-      <div className="contact-photo" aria-hidden="true"><img src="images/footer-seoul.jpg?v=2" alt="" /></div>
+      <div className="contact-photo" aria-hidden="true"><img src="images/footer-seoul-1000.jpg?v=2" srcSet="images/footer-seoul-1000.jpg?v=2 1000w, images/footer-seoul.jpg?v=2 1920w" sizes="100vw" alt="" loading="lazy" /></div>
       <div className="contact-photo__scrim" aria-hidden="true" />
       <div className="seal" aria-hidden="true">
         <svg viewBox="0 0 120 120">
