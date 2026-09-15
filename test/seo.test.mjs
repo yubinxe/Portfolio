@@ -140,3 +140,16 @@ test("vercel.json 이 빌드 없이 루트를 서빙하도록 고정한다", () 
   assert.equal(v.outputDirectory, ".", "outputDirectory 는 저장소 루트");
   assert.ok(v.functions["api/*.js"], "api 서버리스 함수 설정 유지");
 });
+
+/* CSS 캐시 버전 — styles.css 를 고치고 한 페이지의 ?v= 만 올리면, 나머지 페이지의
+ * 재방문자는 옛 CSS 를 계속 받는다(폰트 스택·새 클래스가 적용되지 않음). */
+test("모든 페이지가 같은 styles.css 캐시 버전을 요청한다", () => {
+  const vs = new Map();
+  for (const f of PAGES) {
+    const m = /styles\.css\?v=(\d+)/.exec(read(f));
+    assert.ok(m, f + " 에 styles.css 링크 없음");
+    vs.set(f, m[1]);
+  }
+  const uniq = new Set(vs.values());
+  assert.equal(uniq.size, 1, "버전이 갈렸습니다: " + JSON.stringify([...vs]));
+});
