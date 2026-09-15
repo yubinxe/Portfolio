@@ -18,7 +18,7 @@
 | `admin.html` | 리드 인박스(상태 변경 · CSV) + 지식카드 검수. PAT 는 브라우저 localStorage 에만 |
 | `build-seed.mjs` → `seed/seed.json` → `seed-airtable.js` | Airtable 시드(결정론적 빌드 → upsert) |
 | `scripts/build-jsx.mjs` → `dist/` | `npm run build`. `*.jsx` 를 컴파일해 `dist/*.js` 생성. **JSX 를 고쳤으면 반드시 실행**(빌드를 잊으면 `npm test` 가 잡아냄) |
-| `test/` | `npm test` — 리드 계약 · 카드 무결성 · 딥링크 앵커 존재 검증 |
+| `test/` | `npm test` (29건). `lead.test.mjs` 리드 계약·카드 무결성, `anchors.test.mjs` 딥링크 앵커, `seo.test.mjs` 구조화 데이터·canonical·폰트·CSS 캐시 버전·alt·Vercel 계약, `kb-rank.test.mjs` 챗봇 답변 품질(질문 40개), `links.test.mjs` 내부 링크·`@id` 참조, `dist.test.mjs` 빌드 최신 여부 |
 
 ## 지식카드 스키마 (`kb.js`)
 
@@ -28,6 +28,17 @@
   secondary: { label, href } | null }
 ```
 - 본문에 없는 사실·수치·URL 은 넣지 않는다. 카드 추가 시 `npm test` 로 앵커 존재 여부가 검증된다.
+
+### 답변 랭킹 (`KB.rank(query)`)
+챗봇이 어떤 카드로 답할지 고르는 점수식은 **`kb.js` 한 곳에만** 있습니다(`chatbot.js` 는 이를 호출).
+
+| 규칙 | 이유 |
+|---|---|
+| 태그 점수 = `2 + min(태그 길이, 12)` | `"교육"`(2자)과 `"바이브 코딩"`(6자)이 같은 무게면 구체적인 질문이 일반 카드로 샌다 |
+| 질문 의도와 카드 분류가 맞으면 +4 | 강의·자격·경력·연락·미디어·프로젝트·역량 |
+| 동점이면 더 긴 태그가 맞은 카드 우선 | 배열 순서로 갈리면 결과가 자의적이다 |
+
+새 카드를 넣었으면 `test/kb-rank.test.mjs` 의 질문 목록에 대표 질문 하나를 추가하세요. 태그만 늘리고 확인하지 않으면 다른 카드를 밀어냅니다.
 - 딥링크 규칙: 같은 페이지 → 스크롤 + 스포트라이트, 다른 페이지 → 이동 후 자동 하이라이트(`sessionStorage yk_deeplink`).
 - 앵커 목록: index `#manifesto #composite #dom-01~06 #arsenal #credentials #cred-* #trajectory #tl-* #artifacts #ed-01~08 #lectures #lec-01~08 #about #contact` · career `#practice(-strategy/-ai/-marketing/-data) #composite #experience #cv-* #lectures #lec-* #media #media-yonhap` · gallery `#archive #g-* #credentials #cred-*`.
 
@@ -39,6 +50,14 @@
 4. **서버 실패/정적 호스팅 → 상담 내용이 그대로 채워진 `mailto:` 로 연결** (리드 유실 없음)
 
 ## 배포
+
+| 대상 | 방식 | 주의 |
+|---|---|---|
+| GitHub Pages | `main` 푸시 시 자동(`pages build and deployment`) | 저장소 루트를 그대로 서빙 |
+| Vercel | `main`·PR 브랜치 자동 | `vercel.json` 의 `buildCommand: ""` · `outputDirectory: "."` 로 **빌드를 건너뛰고** 루트를 서빙. 이 두 줄을 지우면 Vercel 이 `package.json` 의 `build` 를 실행한 뒤 `public/` 을 찾다가 배포 실패한다(테스트가 막아 둠) |
+
+`dist/*.js` 를 커밋하는 이유가 여기 있습니다 — 두 호스팅 모두 빌드 단계 없이 정적 파일만 서빙합니다.
+Pages 만 초록이고 Vercel 이 조용히 깨진 적이 있으므로, 배포 관련 변경 뒤에는 **두 곳을 다 확인**하세요.
 
 ### GitHub Pages(현재)
 그대로 push. 챗봇은 내장 지식으로 동작하고, 상담은 mailto 폴백으로 접수된다.
@@ -67,15 +86,6 @@ AIRTABLE_PAT=pat… AIRTABLE_BASE_ID=app… npm run seed   # KnowledgeCards · P
 - PAT 스코프: `data.records:read`, `data.records:write`. 403 이면 스코프/베이스 접근 권한 문제(스크립트가 안내 출력).
 - `Leads` 테이블 필드: `Name, Contact, Message, Need, Context, Page, UserAgent, Status(New/Contacted/Closed), History, ReceivedAt`.
 
-## 배포
-
-| 대상 | 방식 | 주의 |
-|---|---|---|
-| GitHub Pages | `main` 푸시 시 자동(`pages build and deployment`) | 저장소 루트를 그대로 서빙 |
-| Vercel | `main`·PR 브랜치 자동 | `vercel.json` 의 `buildCommand: ""` · `outputDirectory: "."` 로 **빌드를 건너뛰고** 루트를 서빙. 이 두 줄을 지우면 Vercel 이 `package.json` 의 `build` 를 실행한 뒤 `public/` 을 찾다가 배포 실패한다(테스트가 막아 둠) |
-
-`dist/*.js` 를 커밋하는 이유가 여기 있습니다 — 두 호스팅 모두 빌드 단계 없이 정적 파일만 서빙합니다.
-
 ## 검증
 
 ```bash
@@ -103,6 +113,8 @@ node -e "require('./kb.js')" && node --check chatbot.js
 각 카드의 `basis` 는 실제 이수·수행 기록만 적습니다. 강의 이력(출강 실적)은 아직 사이트에 없으며, 생기면 `career.html#lectures` 에 연도와 함께 추가하세요.
 
 ## 콘텐츠 갱신 체크리스트
+
+> 사진을 추가하면 `alt` 에 **이름 맥락**을 넣으세요(`김유빈 활동 기록 — …`). 인물 이미지 검색 노출 경로이며 테스트가 강제합니다. 사진에 누가 찍혀 있는지 단정하는 표현은 쓰지 않습니다.
 - 궤적 항목 추가: `sections.jsx TRAJECTORY`(id 부여) → `career.html cv-row`(id) → `kb.js` 카드/`trajectory` 요약 → `npm test`
 - 사진 추가: `images/` 에 넣고 `gallery.html` figure(`g-card`, 문서형은 `g-card--doc`) + `id`
 - 자격 추가: `sections.jsx CREDS` + `gallery.html #credentials` 카드 + `kb.js creds`
@@ -114,14 +126,17 @@ node -e "require('./kb.js')" && node --check chatbot.js
 
 | 파일 | 역할 |
 |---|---|
-| `robots.txt` | 전체 허용 + `sitemap.xml` 위치 안내. `admin.html`·레거시 페이지·`uploads/`·`screenshots/` 는 색인 제외 |
-| `sitemap.xml` | 공개 3개 페이지 + 대표 이미지(`image:image`) |
-| `index.html` JSON-LD | `ProfilePage` · `WebSite` · **`Person`(정본)** · 강의 `ItemList`(Course 8) |
+| `robots.txt` | 전체 허용 + 네이버 `Yeti`·다음 `Daumoa` 명시 허용 + `sitemap.xml` 위치 안내. `admin.html`·레거시 페이지·`uploads/`·`screenshots/` 는 색인 제외 |
+| `sitemap.xml` | 공개 4개 페이지(메인·경력·**강의**·갤러리) + 대표 이미지(`image:image`) |
+| `index.html` JSON-LD | `ProfilePage` · `WebSite` · **`Person`(정본)** · 강의 `ItemList`(Course 8, `@id` 는 `lecture.html#lec-NN`) |
+| `lecture.html` JSON-LD | **`Course` 8건의 정본**(`teaches`·`audience`·`timeRequired`·`hasCourseInstance`) + `WebPage`·`BreadcrumbList`·`ImageObject`(전용 공유 카드) |
 | `career.html` / `gallery.html` JSON-LD | `ProfilePage`/`CollectionPage` + `BreadcrumbList`. Person 은 `@id` 로만 참조 |
 | `index.html` `<noscript>` | 자바스크립트 없이도 이름·역량·프로젝트·강의·교육과 내부 링크가 읽히는 폴백 |
 | `.sr-only` | 라틴 로고타입 `h1` 에 한글 이름 맥락을 더해 스크린리더와 크롤러가 "김유빈"을 읽도록 |
+| 이미지 `alt` | 갤러리·경력 사진에 이름 맥락(`김유빈 활동 기록 — …`). 인물 이미지 검색 노출 경로 |
+| `images/og-lecture.png` | 강의 페이지 전용 공유 카드(1200×630). 링크 미리보기에서 8과정이 보이도록 |
 
-`Person` 은 **`index.html` 에서만 정의**하고 다른 페이지는 `@id`(`…/#person`)로 참조합니다. 엔티티가 쪼개지지 않도록 하기 위한 것이며 `npm test` 가 이 규칙을 강제합니다.
+`Person` 은 **`index.html` 에서만 정의**하고 다른 페이지는 `@id`(`…/#person`)로 참조합니다. 같은 원칙을 `Course` 에도 적용해 **정본은 `lecture.html`**, 메인의 `ItemList` 는 같은 `@id` 를 가리킵니다. 엔티티가 쪼개지지 않도록 하기 위한 것이며 `npm test` 가 이 규칙을 강제합니다(`@id` 참조가 정의 없는 곳을 가리키면 실패).
 
 ### 사람이 직접 해야 하는 일 (이게 실제로 순위를 만듭니다)
 
