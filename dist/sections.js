@@ -730,10 +730,10 @@ function About() {
     React.createElement("div", { className: "about-grid" }, /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/
     React.createElement(Quote, { size: 46, style: { color: "var(--ink)" } }), /*#__PURE__*/
-    React.createElement("h3", { className: "font-myeongjo", style: { fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" } }, "\uC0AC\uB78C\uACFC \uC870\uC9C1, \uBE0C\uB79C\uB4DC\uB97C \uC787\uB294", /*#__PURE__*/
-    React.createElement("br", null), "\uB300\uC678\uD611\uB825\uC758 \uC790\uB9AC\uC5D0\uC11C \uC77C\uD569\uB2C8\uB2E4."
+    React.createElement("h3", { className: "font-myeongjo", style: { fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" } }, "\uD310\uB2E8\uC758 \uADFC\uAC70\uB97C \uB9CC\uB4E4\uACE0,", /*#__PURE__*/
+    React.createElement("br", null), "\uC2E4\uD589\uAE4C\uC9C0 \uCC45\uC784\uC9C0\uB294 \uC790\uB9AC\uC5D0\uC11C \uC77C\uD569\uB2C8\uB2E4."
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko", style: { margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" } }, "\uBC95\uB960\uACFC \uB370\uC774\uD130\uB97C \uB300\uC911\uC774 \uC774\uD574\uD558\uB294 \uC5B8\uC5B4\uB85C \uC62E\uAE30\uACE0, \uC2E0\uB8B0\uB97C \uC313\uB294 \uB300\uC678\uD611\uB825\xB7\uD64D\uBCF4 \uCF58\uD150\uCE20\uB97C \uAE30\uD68D\uD569\uB2C8\uB2E4."
+    React.createElement("p", { className: "font-ko", style: { margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" } }, "\uD769\uC5B4\uC9C4 \uC2DC\uC7A5\xB7\uC5C5\uBB34 \uB370\uC774\uD130\uB97C \uBAA8\uC544 \uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0 \uC815\uD558\uACE0, \uADF8 \uACB0\uC815\uC744 \uC790\uB3D9\uD654\uC640 \uCF58\uD150\uCE20\uB85C \uC2E4\uD589\uC5D0 \uC62E\uAE41\uB2C8\uB2E4. \uBC95\uB960\uACFC \uB370\uC774\uD130\uB97C \uB300\uC911\uC774 \uC774\uD574\uD558\uB294 \uC5B8\uC5B4\uB85C \uC62E\uAE30\uB294 \uC77C\uB3C4 \uAC19\uC740 \uC790\uB9AC\uC5D0\uC11C \uD569\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { margin: "12px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" } }, "\uAC15\uC758\uC2E4\uACFC \uC0AC\uBB34\uC2E4, \uCE74\uBA54\uB77C \uC55E\uC744 \uC624\uAC00\uBA70 \uC313\uC544\uC628 \uC2DC\uAC04\uC744 \uAE30\uB85D\uC73C\uB85C \uB0A8\uAE41\uB2C8\uB2E4. \uB9D0\uBCF4\uB2E4 \uACB0\uACFC\uBB3C\uC774 \uBA3C\uC800 \uC99D\uBA85\uD558\uB3C4\uB85D."
