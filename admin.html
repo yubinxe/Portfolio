@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>관리자 — 유빈 AI 리드 · 지식카드</title>
+<link rel="icon" href="favicon.ico?v=3" sizes="48x48" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{ --ink:#10131C; --ink-soft:#3C4354; --ecru:#F4F5F8; --ecru-deep:#E9EBF0; --paper:#fff; --accent:#1F2D6B; --red:#A02B23; --green:#1E6B3A; }
+  *{ box-sizing:border-box; } body{ margin:0; font-family:"Pretendard",system-ui,sans-serif; background:var(--ecru); color:var(--ink); font-size:14px; }
+  header{ background:var(--ink); color:var(--ecru); padding:14px 22px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  header b{ font-size:16px; } header small{ opacity:.6; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:22px 16px 60px; }
+  .card{ background:var(--paper); border:1.5px solid var(--ink); border-radius:16px; padding:16px 18px; margin-bottom:18px; box-shadow:0 2px 12px rgba(16,19,28,.06); }
+  h2{ font-size:15px; margin:0 0 12px; letter-spacing:-.01em; } h2 span{ font-weight:500; color:var(--ink-soft); font-size:12.5px; margin-left:8px; }
+  label{ display:block; font-size:12px; font-weight:700; color:var(--ink-soft); margin:8px 0 4px; }
+  input,select,textarea{ font:inherit; border:1.3px solid rgba(16,19,28,.18); border-radius:10px; padding:8px 10px; background:var(--ecru); color:var(--ink); width:100%; }
+  input:focus,select:focus{ outline:none; border-color:var(--accent); }
+  .row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; align-items:end; }
+  .btn{ font:inherit; font-weight:700; border:1.3px solid var(--accent); background:var(--accent); color:#fff; border-radius:999px; padding:8px 14px; cursor:pointer; }
+  .btn--ghost{ background:var(--paper); color:var(--accent); } .btn:disabled{ opacity:.5; cursor:default; }
+  table{ width:100%; border-collapse:collapse; font-size:13px; } th,td{ text-align:left; padding:9px 8px; border-bottom:1px solid rgba(16,19,28,.1); vertical-align:top; }
+  th{ font-size:11.5px; letter-spacing:.04em; color:var(--ink-soft); text-transform:uppercase; }
+  .tbl{ overflow-x:auto; }
+  .status{ font-size:11.5px; font-weight:700; border-radius:999px; padding:3px 9px; border:1px solid; display:inline-block; }
+  .st-New{ color:var(--accent); border-color:var(--accent); } .st-Contacted{ color:#7A5230; border-color:#7A5230; } .st-Closed{ color:var(--green); border-color:var(--green); }
+  .msg{ white-space:pre-wrap; max-width:420px; color:var(--ink-soft); }
+  .kpi{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; }
+  .kpi div{ background:var(--ecru-deep); border-radius:12px; padding:12px 14px; } .kpi b{ font-size:24px; display:block; } .kpi span{ font-size:12px; color:var(--ink-soft); }
+  .note{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; } .err{ color:var(--red); font-weight:700; }
+  .chip{ display:inline-block; font-size:11.5px; border:1px solid rgba(16,19,28,.25); border-radius:999px; padding:2px 8px; margin:2px 3px 0 0; color:var(--ink-soft); }
+  details summary{ cursor:pointer; font-weight:700; }
+</style>
+</head>
+<body>
+<header><b>YK 관리자</b><small>유빈 AI · 리드 인박스 · 지식카드 검수</small><span style="margin-left:auto;font-size:12px;opacity:.7" id="who">—</span></header>
+<div class="wrap">
+
+  <div class="card">
+    <h2>연결 <span>PAT 는 이 브라우저(localStorage)에만 저장됩니다. 레포에 올리지 마세요.</span></h2>
+    <div class="row">
+      <div><label>Airtable PAT</label><input id="pat" type="password" placeholder="pat…" autocomplete="off" /></div>
+      <div><label>Base ID</label><input id="base" placeholder="app…" /></div>
+      <div><label>Leads 테이블</label><input id="table" value="Leads" /></div>
+      <div style="display:flex;gap:8px"><button class="btn" id="connect">불러오기</button><button class="btn btn--ghost" id="forget">연결 삭제</button></div>
+    </div>
+    <p class="note" id="connMsg"></p>
+  </div>
+
+  <div class="card">
+    <h2>리드 인박스 <span id="leadCount"></span></h2>
+    <div class="row" style="margin-bottom:10px">
+      <div><label>상태 필터</label><select id="filter"><option value="">전체</option><option>New</option><option>Contacted</option><option>Closed</option></select></div>
+      <div><label>검색</label><input id="q" placeholder="이름 · 연락처 · 내용" /></div>
+      <div style="display:flex;gap:8px"><button class="btn btn--ghost" id="csv">CSV 내보내기</button><button class="btn btn--ghost" id="reload">새로고침</button></div>
+    </div>
+    <div class="tbl"><table><thead><tr><th>접수</th><th>성함/소속</th><th>연락처</th><th>상담 내용</th><th>페이지</th><th>상태</th></tr></thead><tbody id="leads"><tr><td colspan="6" class="note">연결 후 표시됩니다.</td></tr></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h2>지식카드 (kb.js) <span>사이트에 배포된 정본 · 서버/프론트 공용</span></h2>
+    <div class="kpi" id="kpi"></div>
+    <details style="margin-top:12px"><summary>카드 목록 · 딥링크 검수</summary>
+      <div class="tbl" style="margin-top:10px"><table><thead><tr><th>ID</th><th>분류</th><th>제목</th><th>주 CTA</th><th>보조 CTA</th><th>태그</th></tr></thead><tbody id="cards"></tbody></table></div>
+    </details>
+    <p class="note" style="margin-top:10px">Airtable 적재: 터미널에서 <code>npm run seed:dry</code> (본문 확인) → <code>AIRTABLE_PAT=… AIRTABLE_BASE_ID=… npm run seed</code>. 시드는 <code>build-seed.mjs</code> 가 kb.js 에서 결정론적으로 생성합니다.</p>
+  </div>
+
+</div>
+
+<script src="kb.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var LS = "yk_admin_airtable";
+  var state = { leads: [], cfg: null };
+
+  /* ---- 연결 정보 ---- */
+  try { var saved = JSON.parse(localStorage.getItem(LS) || "null"); if (saved) { $("pat").value = saved.pat || ""; $("base").value = saved.base || ""; $("table").value = saved.table || "Leads"; } } catch (e) {}
+  function cfg() { return { pat: $("pat").value.trim(), base: $("base").value.trim(), table: $("table").value.trim() || "Leads" }; }
+  $("connect").addEventListener("click", function () { state.cfg = cfg(); try { localStorage.setItem(LS, JSON.stringify(state.cfg)); } catch (e) {} load(); });
+  $("forget").addEventListener("click", function () { try { localStorage.removeItem(LS); } catch (e) {} $("pat").value = ""; $("connMsg").textContent = "연결 정보를 삭제했습니다."; });
+  $("reload").addEventListener("click", load);
+  $("filter").addEventListener("change", render); $("q").addEventListener("input", render);
+
+  function api(path, opts) {
+    var c = state.cfg || cfg();
+    return fetch("https://api.airtable.com/v0/" + c.base + "/" + encodeURIComponent(c.table) + (path || ""), Object.assign({ headers: { Authorization: "Bearer " + c.pat, "Content-Type": "application/json" } }, opts || {}))
+      .then(function (r) { if (r.status === 403 || r.status === 401) throw new Error("권한 오류(" + r.status + ") — PAT 스코프 data.records:read/write 와 베이스 접근 권한을 확인하세요."); if (!r.ok) return r.text().then(function (t) { throw new Error(r.status + " " + t.slice(0, 160)); }); return r.json(); });
+  }
+  function load() {
+    var c = cfg(); if (!c.pat || !c.base) { $("connMsg").innerHTML = '<span class="err">PAT 와 Base ID 를 입력하세요.</span>'; return; }
+    state.cfg = c; $("connMsg").textContent = "불러오는 중…"; state.leads = [];
+    (function page(offset) {
+      return api("?pageSize=100&sort%5B0%5D%5Bfield%5D=ReceivedAt&sort%5B0%5D%5Bdirection%5D=desc" + (offset ? "&offset=" + offset : "")).then(function (j) {
+        state.leads = state.leads.concat(j.records || []);
+        if (j.offset) return page(j.offset);
+      });
+    })().then(function () { $("connMsg").textContent = "연결됨 · " + state.leads.length + "건"; $("who").textContent = c.base + " / " + c.table; render(); })
+      .catch(function (e) { $("connMsg").innerHTML = '<span class="err">' + esc(e.message) + "</span>"; });
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (m) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]; }); }
+  function render() {
+    var f = $("filter").value, q = $("q").value.trim().toLowerCase();
+    var rows = state.leads.filter(function (r) {
+      var x = r.fields || {};
+      if (f && (x.Status || "New") !== f) return false;
+      if (q && ([x.Name, x.Contact, x.Message, x.Need].join(" ").toLowerCase().indexOf(q) < 0)) return false;
+      return true;
+    });
+    $("leadCount").textContent = rows.length + " / " + state.leads.length;
+    if (!rows.length) { $("leads").innerHTML = '<tr><td colspan="6" class="note">표시할 리드가 없습니다.</td></tr>'; return; }
+    $("leads").innerHTML = rows.map(function (r) {
+      var x = r.fields || {}, st = x.Status || "New";
+      var when = x.ReceivedAt ? new Date(x.ReceivedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" }) : "";
+      return "<tr><td>" + esc(when) + "</td><td><b>" + esc(x.Name) + "</b></td><td>" + esc(x.Contact) + "</td><td class='msg'>" + esc(x.Message || x.Need) + "</td><td style='max-width:160px;word-break:break-all;font-size:11.5px'>" + esc((x.Page || "").replace(/^https?:\/\//, "")) + "</td>" +
+        "<td><span class='status st-" + st + "'>" + st + "</span><br><select data-id='" + r.id + "' style='margin-top:6px;width:auto'>" + ["New", "Contacted", "Closed"].map(function (s) { return "<option" + (s === st ? " selected" : "") + ">" + s + "</option>"; }).join("") + "</select></td></tr>";
+    }).join("");
+  }
+  $("leads").addEventListener("change", function (e) {
+    var sel = e.target.closest("select[data-id]"); if (!sel) return;
+    sel.disabled = true;
+    api("", { method: "PATCH", body: JSON.stringify({ records: [{ id: sel.getAttribute("data-id"), fields: { Status: sel.value } }], typecast: true }) })
+      .then(function () { var r = state.leads.find(function (x) { return x.id === sel.getAttribute("data-id"); }); if (r) r.fields.Status = sel.value; render(); })
+      .catch(function (err) { alert(err.message); sel.disabled = false; });
+  });
+  $("csv").addEventListener("click", function () {
+    var head = ["ReceivedAt", "Name", "Contact", "Need", "Message", "Page", "Status"];
+    var lines = [head.join(",")].concat(state.leads.map(function (r) { return head.map(function (k) { return '"' + String((r.fields || {})[k] || "").replace(/"/g, '""') + '"'; }).join(","); }));
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + lines.join("\n")], { type: "text/csv" })); a.download = "leads.csv"; a.click();
+  });
+
+  /* ---- 지식카드 검수 ---- */
+  var KB = window.YUBIN_KB;
+  if (KB) {
+    var cats = {}; KB.cards.forEach(function (c) { cats[c.cat] = (cats[c.cat] || 0) + 1; });
+    var withSec = KB.cards.filter(function (c) { return c.secondary; }).length;
+    $("kpi").innerHTML = "<div><b>" + KB.cards.length + "</b><span>지식카드</span></div><div><b>" + withSec + "</b><span>보조 CTA 보유</span></div><div><b>" + KB.services.length + "</b><span>서비스 안</span></div><div><b>" + KB.consult.steps.length + "</b><span>상담 단계</span></div><div><b>" + esc(KB.version) + "</b><span>버전</span></div>";
+    $("cards").innerHTML = KB.cards.map(function (c) {
+      var link = function (x) { return x ? "<a href='" + esc(x.href) + "' target='_blank' rel='noopener'>" + esc(x.label) + "</a><br><small style='color:var(--ink-soft)'>" + esc(x.href) + "</small>" : "<span class='note'>—</span>"; };
+      return "<tr><td><code>" + esc(c.id) + "</code></td><td>" + esc(c.cat) + "</td><td>" + esc(c.title) + "</td><td>" + link(c.primary) + "</td><td>" + link(c.secondary) + "</td><td>" + c.tags.slice(0, 6).map(function (t) { return "<span class='chip'>" + esc(t) + "</span>"; }).join("") + "</td></tr>";
+    }).join("");
+  }
+  if (state.cfg === null && $("pat").value && $("base").value) { state.cfg = cfg(); load(); }
+})();
+</script>
+</body>
+</html>
