@@ -22,6 +22,10 @@
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://yubinxe.github.io/Portfolio/images/og-lecture.png</image:loc>
+      <image:title>김유빈 전략기획 × AI 강의 — 2 트랙 8과정</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://yubinxe.github.io/Portfolio/gallery.html</loc>
