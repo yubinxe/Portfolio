@@ -1,0 +1,15 @@
+# https://yubinxe.github.io/Portfolio/
+User-agent: *
+Allow: /
+
+# 관리자 화면과 레거시 페이지는 색인 제외
+Disallow: /Portfolio/admin.html
+Disallow: /Portfolio/Ethan%20Kim%20Portfolio.html
+Disallow: /Portfolio/uploads/
+Disallow: /Portfolio/screenshots/
+Disallow: /admin.html
+Disallow: /Ethan%20Kim%20Portfolio.html
+Disallow: /uploads/
+Disallow: /screenshots/
+
+Sitemap: https://yubinxe.github.io/Portfolio/sitemap.xml

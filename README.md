@@ -93,6 +93,37 @@ node -e "require('./kb.js')" && node --check chatbot.js
 - 자격 추가: `sections.jsx CREDS` + `gallery.html #credentials` 카드 + `kb.js creds`
 - 강의 추가: `sections.jsx LECTURES`(id `lec-NN`) → `career.html#lectures` 행 → `kb.js` `lec-NN` 카드 → `npm test`
 
+## 검색 노출 (SEO)
+
+사이트에서 할 수 있는 기술적 조치는 끝냈습니다. 파일과 역할은 아래와 같습니다.
+
+| 파일 | 역할 |
+|---|---|
+| `robots.txt` | 전체 허용 + `sitemap.xml` 위치 안내. `admin.html`·레거시 페이지·`uploads/`·`screenshots/` 는 색인 제외 |
+| `sitemap.xml` | 공개 3개 페이지 + 대표 이미지(`image:image`) |
+| `index.html` JSON-LD | `ProfilePage` · `WebSite` · **`Person`(정본)** · 강의 `ItemList`(Course 8) |
+| `career.html` / `gallery.html` JSON-LD | `ProfilePage`/`CollectionPage` + `BreadcrumbList`. Person 은 `@id` 로만 참조 |
+| `index.html` `<noscript>` | 자바스크립트 없이도 이름·역량·프로젝트·강의·교육과 내부 링크가 읽히는 폴백 |
+| `.sr-only` | 라틴 로고타입 `h1` 에 한글 이름 맥락을 더해 스크린리더와 크롤러가 "김유빈"을 읽도록 |
+
+`Person` 은 **`index.html` 에서만 정의**하고 다른 페이지는 `@id`(`…/#person`)로 참조합니다. 엔티티가 쪼개지지 않도록 하기 위한 것이며 `npm test` 가 이 규칙을 강제합니다.
+
+### 사람이 직접 해야 하는 일 (이게 실제로 순위를 만듭니다)
+
+"김유빈"은 동명이인이 많은 흔한 이름이라, 사이트 내부 조치만으로는 상위 노출이 되지 않습니다. 아래는 코드로 할 수 없는 항목입니다.
+
+1. **Google Search Console 등록** — `https://search.google.com/search-console` 에서 `https://yubinxe.github.io/Portfolio/` 를 URL 접두어로 추가하고, HTML 태그 방식 인증 시 발급된 `<meta name="google-site-verification" ...>` 를 `index.html` 의 `<head>` 에 넣으십시오. 등록 후 `sitemap.xml` 제출과 주요 URL "색인 생성 요청".
+2. **네이버 서치어드바이저** — 국내 검색에서는 네이버 비중이 큽니다. `https://searchadvisor.naver.com` 에 동일하게 사이트 등록 및 사이트맵 제출.
+3. **외부 신호(백링크)** — 검색엔진이 "이 김유빈"을 식별하려면 같은 이름을 쓰는 다른 프로필이 이 사이트를 가리켜야 합니다. LinkedIn, GitHub 프로필 소개란, 브런치·티스토리, 발표·기고 이력에 포트폴리오 URL을 넣으십시오. 넣은 프로필 URL 은 `kb.js` 가 아니라 `index.html` 의 `Person.sameAs` 배열에 추가해야 구조화 데이터로 연결됩니다.
+4. **커스텀 도메인** — `yubinxe.github.io/Portfolio/` 는 하위 경로라 도메인 권위가 잡히지 않습니다. `yubinkim.kr` 같은 개인 도메인을 붙이면 이름 검색에서 유리합니다. 도메인을 바꾸면 `robots.txt`·`sitemap.xml`·모든 `canonical`·JSON-LD 의 절대 URL을 함께 바꿔야 하며, `test/seo.test.mjs` 의 `SITE` 상수도 수정 대상입니다.
+5. **연합뉴스TV 인터뷰 원본 링크** — 언론 보도 URL 이 있으면 `Person.subjectOf` 에 `NewsArticle` 로 추가하십시오. 이름 검색에서 가장 강한 신호 중 하나입니다.
+
+### 확인 방법
+
+- 구조화 데이터: https://search.google.com/test/rich-results 에 URL 입력
+- 색인 여부: 구글에 `site:yubinxe.github.io/Portfolio` 검색
+- 반영까지는 보통 며칠에서 2주가 걸립니다. 색인 생성 요청으로 앞당길 수 있습니다.
+
 ## 사실 정정 이력 (상장 원본 대조)
 - 육군정보통신학교장 상장: **2022. 7. 1**(제183호, 軍 특성화고 현장실습) — 궤적 연도 2023→2022 정정
 - 강원열린군대 스타트업 프로그램 2군단장상: **2023. 12. 31**, 2위, 팀 Home_Ally — 궤적 연도 2024→2023 정정
