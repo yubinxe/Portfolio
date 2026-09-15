@@ -2047,3 +2047,20 @@ a { text-underline-offset: .2em; }
 }
 .lightbox__close:hover { background: rgba(17, 17, 17, .78); }
 .lightbox__close:focus-visible, .lightbox:focus-visible { outline: 3px solid #8FB8F2; outline-offset: 3px; }
+
+/* ===== 인쇄 · PDF (강의 제안서로 내보낼 때) ===== */
+@media print {
+  header, footer, .yk-chat, .rail, .cursor-dot, .cursor-ring, .scroll-ink, .speckle, .toast { display: none !important; }
+  html, body { background: #fff !important; }
+  .page-main { padding: 0 !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .lec-track { break-inside: avoid; }
+  .lec-card { break-inside: avoid; box-shadow: none !important; border: 1px solid #C9CEDB !important; }
+  .lec-grid { gap: 12px !important; }
+  .page-head h1 { font-size: 40pt !important; }
+  .lec-basis { break-before: page; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+  .lec-card__proof::after, .navlink::after { content: "" !important; }
+  .print-only { display: block !important; }
+}
+.print-only { display: none; }
