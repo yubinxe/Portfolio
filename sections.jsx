@@ -27,7 +27,7 @@ function Nav() {
   }, []);
   const links = [
     ["선언", "#manifesto"], ["역량", "#composite"], ["궤적", "#trajectory"],
-    ["작업", "#artifacts"], ["갤러리", "gallery.html"], ["경력", "career.html"],
+    ["작업", "#artifacts"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력", "career.html"],
   ];
   return (
     <header style={{
@@ -75,14 +75,15 @@ function Hero() {
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
         <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"법무법인 경국 · 사원 (Staff) · 대외협력 | Marketing | Developer"}
+          {"전략기획 × AI · 법무법인 경국 — Strategy · Automation · Teaching"}
         </p>
         <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
-          법률의 언어를 대중의 언어로 옮기고,<br />신뢰를 쌓는 대외협력과 홍보를 설계합니다.
+          데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.
         </p>
 
         <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#artifacts" className="btn"><Sparkle size={17} /> 프로젝트 보기</a>
+          <a href="#lectures" className="btn btn--ghost">강의 프로그램 <ArrowUpRight size={16} /></a>
           <a href="#trajectory" className="btn btn--ghost">걸어온 궤적 <ArrowDown size={16} /></a>
         </div>
       </div>
@@ -101,7 +102,7 @@ function Sticker({ cls = "", style = {}, children }) {
 
 /* ============================================================ MARQUEE */
 function Marquee() {
-  const items = ["YUBIN KIM OFFICE", "대외협력 × MARKETING", "EXTERNAL RELATIONS", "BRAND · COMMUNICATION", "COMPOSITE TALENT", "AI × STORYTELLING", "김유빈 · ETHAN KIM"];
+  const items = ["YUBIN KIM OFFICE", "전략기획 × AI", "STRATEGIC PLANNING", "PROCESS AUTOMATION", "DATA-DRIVEN DECISIONS", "AI 강의 · LECTURES", "김유빈 · ETHAN KIM"];
   const Row = () => (
     <span>{items.map((t, i) => (
       <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "2.5rem" }}>
@@ -131,6 +132,7 @@ function Ledger() {
   const ref = useReveal();
   const ITEMS = [
     ["8", "수행 프로젝트", "Projects"],
+    ["8", "강의 프로그램", "Lectures"],
     ["4", "전문 교육 이수", "Programs"],
     ["3", "수상 · 표창", "Awards"],
     ["1", "방송 인터뷰", "On Air"],
@@ -139,7 +141,7 @@ function Ledger() {
     <section ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(54px,7vw,84px) 0" }}>
       <div className="wrap reveal">
         <div className="menu-rule" style={{ color: "rgba(244,245,248,.45)", marginBottom: 8 }}><i /></div>
-        <p className="eyebrow" style={{ color: "rgba(244,245,248,.55)", margin: "18px 0 30px" }}>05 — The Ledger · 한눈에 보는 기록</p>
+        <p className="eyebrow" style={{ color: "rgba(244,245,248,.55)", margin: "18px 0 30px" }}>06 — The Ledger · 한눈에 보는 기록</p>
         <div className="ledger-grid">
           {ITEMS.map(([n, ko, en], i) => (
             <div key={i} className="ledger-item" style={{ transitionDelay: `${i * 70}ms` }}>
@@ -156,24 +158,109 @@ function Ledger() {
 
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
-  { n: "01", ko: "마케팅 기획", short: "마케팅", en: "Marketing Strategy",
-    desc: "KREMA 4기에서 데이터 기반 타깃 세그먼트 도출과 매체별 전략 수립을 익히고, 실제 캠페인 산출물로 검증.",
-    tags: ["KREMA 4기", "브랜드 캠페인"] },
-  { n: "02", ko: "미디어 · 커뮤니케이션", short: "미디어", en: "Media & Comms",
-    desc: "서울시민기자단 취재와 방송 인터뷰, 생성형 AI 영상 제작으로 전문적 내용을 대중의 언어로 전달.",
-    tags: ["서울시민기자단", "연합뉴스TV"] },
-  { n: "03", ko: "법무 · 송무", short: "법무", en: "Legal Affairs",
-    desc: "법무법인 경국 송무·사무 실무로 다진 신뢰와 정확성의 기반.",
-    tags: ["법무법인 경국", "송무·사무 실무"] },
-  { n: "04", ko: "AI 엔지니어링", short: "AI", en: "AI Engineering",
-    desc: "SSAFY·서울대 AIED에서 익힌 생성형 AI 콘텐츠 제작 역량.",
+  { n: "01", ko: "전략기획", short: "전략", en: "Strategic Planning",
+    desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하는 일. 정비사업 용역비 수집으로 시장 단가 비교와 사업성 검토의 기준선을 만들었습니다.",
+    tags: ["사업성 검토", "우선순위 설계"] },
+  { n: "02", ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
+    desc: "사람이 반복하던 판단의 앞단을 AI에 맡기고, 사람은 기준을 정하는 자리에 남깁니다. SSAFY·서울대 AIED에서 구조를 익혔습니다.",
     tags: ["SSAFY 13기", "서울대 AIED 4기"] },
-  { n: "05", ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
-    desc: "공공데이터·대시보드로 다진 데이터 감각.",
+  { n: "03", ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
+    desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다.",
     tags: ["공공데이터 API", "GWS 연동"] },
-  { n: "06", ko: "공간 · 건설", short: "건설", en: "Built Environment",
-    desc: "건국대 스마트건설에서 넓힌 부동산·산업 이해.",
-    tags: ["건국대 스마트건설", "BIM · 드론 측량"] },
+  { n: "04", ko: "마케팅 · 커뮤니케이션", short: "마케팅", en: "Marketing & Comms",
+    desc: "KREMA 4기의 세그먼트 전략과 생성형 AI 제작 역량으로 전략을 시장에 닿는 언어로 옮깁니다.",
+    tags: ["KREMA 4기", "연합뉴스TV · 서울시민기자단"] },
+  { n: "05", ko: "교육 · 강의", short: "강의", en: "Teaching",
+    desc: "서울대 AIED 4기에서 교수법을 체화하고, 실무에서 만든 시스템을 강의 모듈로 옮깁니다.",
+    tags: ["서울대 AIED 4기", "SSAFY 홍보 앰배서더"] },
+  { n: "06", ko: "도메인 — 법무 · 부동산 · 공공", short: "도메인", en: "Domain Expertise",
+    desc: "법무법인 경국의 송무·사무, 건국대 스마트건설의 부동산 이해, 청년 정책 거버넌스의 공공 감각이 판단의 바탕입니다.",
+    tags: ["법무법인 경국", "스마트건설 · 청년정책"] },
+];
+
+/* ============================================================ LECTURES — 강의 프로그램 */
+const LECTURE_TRACKS = [
+  { key: "foundation", label: "Track A — AI 파운데이션", ko: "도구를 쓰는 사람에서, 도구를 설계하는 사람으로",
+    desc: "개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다." },
+  { key: "domain", label: "Track B — 도메인 적용", ko: "만들어 본 사람만 가르칠 수 있는 것",
+    desc: "직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
+];
+
+const LECTURES = [
+  /* ---- Track A — AI 파운데이션 ---- */
+  { id: "lec-01", n: "01", track: "foundation", color: "var(--sky)", Icon: Cpu,
+    title: "AI 기초 개념 — 무엇이 되고 무엇이 안 되는가",
+    lead: "모델이 어떻게 답을 만드는지 알면, 어디까지 맡길지 판단할 수 있습니다.",
+    who: "전 직군 입문자 · 도입을 검토하는 관리자",
+    hours: "2시간",
+    modules: ["토큰·맥락창·환각이 생기는 자리", "생성형 AI가 잘하는 일과 못하는 일의 경계", "업무에 붙일 때의 검수 기준"],
+    basis: "서울대 AIED 4기 — AI 교육 전문가 과정",
+    proof: { label: "교육 이수 기록", href: "career.html#cv-snu-aied" } },
+  { id: "lec-02", n: "02", track: "foundation", color: "var(--lilac)", Icon: Sparkle,
+    title: "프롬프트 엔지니어링 — 문장이 아니라 구조로",
+    lead: "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.",
+    who: "기획 · 마케팅 · 사무 실무자",
+    hours: "3시간(실습 포함)",
+    modules: ["역할·제약·예시·출력형식의 네 기둥", "재사용 가능한 프롬프트 템플릿 설계", "평가와 개선 루프 만들기"],
+    basis: "서울대 AIED 4기 — 구조화된 프롬프트 아키텍처",
+    proof: { label: "브랜드 필름 적용 사례", href: "#ed-02" } },
+  { id: "lec-03", n: "03", track: "foundation", color: "var(--apple)", Icon: Code,
+    title: "바이브 코딩 — 코드를 몰라도 만들고 배포하기",
+    lead: "아이디어에서 배포까지, AI와 대화하며 실제 도구를 완성하는 과정입니다.",
+    who: "비개발 직군 · 사내 도구를 직접 만들고 싶은 실무자",
+    hours: "4시간(제작 실습)",
+    modules: ["요구사항을 AI가 이해하는 단위로 쪼개기", "고쳐가며 만드는 반복 루프와 검증", "Vercel 배포와 운영 감각"],
+    basis: "SSAFY 13기 — 소프트웨어 아키텍처 실무 프로젝트",
+    proof: { label: "직접 배포한 대시보드", href: "#ed-05" } },
+  { id: "lec-04", n: "04", track: "foundation", color: "var(--pink)", Icon: Cpu,
+    title: "하네스 엔지니어링 — 에이전트에 손과 발을 달기",
+    lead: "모델 자체보다, 모델에 무엇을 쥐여주느냐가 결과를 가릅니다.",
+    who: "사내 자동화를 설계하는 실무자 · 개발 인접 직군",
+    hours: "4시간",
+    modules: ["도구 연결과 권한 경계 설계", "맥락 주입과 실패 시 폴백 설계", "사람이 승인해야 할 지점 정하기"],
+    basis: "GWS · NAVER WORKS API 연동과 크롤링 파이프라인 구축 경험",
+    proof: { label: "VOC 트리아지 시스템", href: "#ed-06" } },
+
+  /* ---- Track B — 도메인 적용 ---- */
+  { id: "lec-05", n: "05", track: "domain", color: "var(--sky)", Icon: BarChart,
+    title: "실무자를 위한 전략기획 AI",
+    lead: "반복 업무를 진단하고, 무엇을 자동화할지 정하는 기준을 세웁니다.",
+    who: "백오피스 · 기획 · 전문직 사무소 실무자",
+    hours: "3시간 / 6시간(실습 포함)",
+    modules: ["업무 흐름 진단과 병목 찾기", "자동화 우선순위 매트릭스", "사람이 남아야 할 판단의 자리"],
+    basis: "법무법인 경국 — 송무·사무 프로세스 혁신 실무",
+    proof: { label: "VOC 트리아지 사례", href: "#ed-06" } },
+  { id: "lec-06", n: "06", track: "domain", color: "var(--apple)", Icon: BarChart,
+    title: "공공데이터로 시장을 읽는 법",
+    lead: "공개된 데이터를 의사결정이 가능한 화면으로 바꾸는 과정을 처음부터 끝까지 다룹니다.",
+    who: "부동산 · 마케팅 · 정비사업 데이터 담당자",
+    hours: "4시간(대시보드 실습)",
+    modules: ["공공데이터 API 수집 설계", "나란히 놓아야 의미가 생기는 지표", "배포와 갱신 자동화"],
+    basis: "KREMA 4기 — AI 기반 부동산 시장 데이터 분석",
+    proof: { label: "청약 인사이트 대시보드", href: "#ed-05" } },
+  { id: "lec-07", n: "07", track: "domain", color: "var(--lilac)", Icon: Sparkle,
+    title: "생성형 AI 브랜드 필름 제작",
+    lead: "프롬프트 구조로 영상을 만들고, 톤을 지키는 판단은 사람이 합니다.",
+    who: "마케팅 · 홍보 · 브랜드 담당자",
+    hours: "3시간(제작 실습)",
+    modules: ["영상 프롬프트 아키텍처", "영상·내레이션·사운드 결합", "브랜드 톤 검수 기준"],
+    basis: "KREMA 4기 — 매체별 디지털 마케팅 전략",
+    proof: { label: "르엘 성수 브랜드 필름", href: "#ed-02" } },
+  { id: "lec-08", n: "08", track: "domain", color: "var(--pink)", Icon: Newspaper,
+    title: "제도의 언어를 대중의 언어로",
+    lead: "전문적인 내용이 닿지 않으면 없는 것과 같습니다. 전달의 문법을 다룹니다.",
+    who: "공공기관 · 청년 조직 · 협회",
+    hours: "2시간",
+    modules: ["대상에 맞춘 메시지 재구성", "카드뉴스·영상 포맷 설계", "정책 제안으로 잇는 커뮤니케이션"],
+    basis: "서울시민기자단 · 연합뉴스TV · 청년 정책 거버넌스",
+    proof: { label: "지방선거 카드뉴스", href: "#ed-01" } },
+];
+
+const LECTURE_BASIS = [
+  ["삼성청년SW아카데미 13기", "소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다."],
+  ["서울대학교 AIED 4기", "AI 교육 전문가 과정에서 구조화된 프롬프트 아키텍처와 교수법을 체화했습니다."],
+  ["한국부동산마케팅협회 4기", "AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립을 익혔습니다."],
+  ["배포된 결과물 8건", "강의 사례는 전부 직접 만들어 운영 중인 산출물입니다. 시연 가능한 화면으로 수업합니다."],
 ];
 
 const ARSENAL = [
@@ -261,15 +348,15 @@ function Composite() {
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="02 — The Composite" titleEn="The Composite" titleKo="전문성을 전하는 융합 역량" />
+        <SectionHead eyebrow="02 — The Composite" titleEn="The Composite" titleKo="전략기획을 중심에 둔 융합 역량" />
 
         <div className="comp-thesis reveal">
           <p className="font-myeongjo">
-            아무리 좋은 전문성도, 전해지지 않으면 없는 것과 같습니다.
+            전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.
           </p>
           <p className="font-ko comp-thesis__sub">
-            법률과 데이터를 사람들이 이해하는 언어로 옮기는 일 — 그 전달의 감각으로
-            대외협력과 마케팅을 중심에 두고, 나머지 전문성이 그 전달을 뒷받침합니다.
+            데이터에서 판단의 근거를 꺼내 우선순위를 세우는 전략기획을 중심에 두고,
+            자동화·데이터·커뮤니케이션·강의가 그 판단을 실행과 전달로 잇습니다.
           </p>
         </div>
 
@@ -550,6 +637,80 @@ function Artifacts() {
   );
 }
 
+/* ============================================================ LECTURES */
+function Lectures() {
+  const ref = useReveal();
+  return (
+    <section id="lectures" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
+      <div className="speckle" style={{ opacity: .22 }} />
+      <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow="05 — Lectures & Workshops" titleEn="The Lectures" titleKo="강의로 전하는 전략기획 AI" />
+
+        <div className="lec-intro reveal">
+          <p className="font-myeongjo">
+            만들어 본 사람만 가르칠 수 있는 것이 있습니다.
+          </p>
+          <p className="font-ko lec-intro__sub">
+            SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처와 교수법,
+            KREMA 4기의 시장 데이터 전략 — 배운 것을 실제로 만들어 운영해 본 뒤에 강의 모듈로 옮겼습니다.
+            여덟 과정 모두 조직 상황에 맞춰 시간과 실습 비중을 조정합니다.
+          </p>
+        </div>
+
+        {LECTURE_TRACKS.map((tr) => (
+          <div key={tr.key} className="lec-track">
+            <div className="lec-track__head reveal">
+              <span className="lec-track__label font-sans">{tr.label}</span>
+              <h3 className="font-ko">{tr.ko}</h3>
+              <p className="font-ko">{tr.desc}</p>
+            </div>
+            <div className="lec-grid">
+              {LECTURES.filter((l) => l.track === tr.key).map((l, i) => (
+                <article key={l.id} id={l.id} className="lec-card reveal" style={{ "--accent-fill": l.color, transitionDelay: `${i * 70}ms` }}>
+                  <div className="lec-card__head">
+                    <span className="lec-card__n font-cond">{l.n}</span>
+                    <span className="lec-card__icon" style={{ background: l.color }}><l.Icon size={20} /></span>
+                  </div>
+                  <h3 className="font-ko">{l.title}</h3>
+                  <p className="lec-card__lead font-ko">{l.lead}</p>
+                  <dl className="lec-card__meta font-ko">
+                    <div><dt>대상</dt><dd>{l.who}</dd></div>
+                    <div><dt>구성</dt><dd>{l.hours}</dd></div>
+                  </dl>
+                  <ul className="lec-card__mods font-ko">
+                    {l.modules.map((m) => <li key={m}>{m}</li>)}
+                  </ul>
+                  <p className="lec-card__basis font-ko"><GraduationCap size={14} /> {l.basis}</p>
+                  <a href={l.proof.href} className="lec-card__proof font-sans">
+                    {l.proof.label} <ArrowUpRight size={14} />
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div className="lec-basis reveal">
+          <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
+          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>무엇을 근거로 가르치는가</p>
+          <div className="lec-basis__grid">
+            {LECTURE_BASIS.map(([t, d]) => (
+              <div key={t} className="lec-basis__item">
+                <strong className="font-ko">{t}</strong>
+                <span className="font-ko">{d}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" className="btn"><Mail size={16} /> 강의 문의</a>
+            <a href="career.html#lectures" className="btn btn--ghost">강의 역량 상세 <ArrowUpRight size={15} /></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ============================================================ ABOUT */
 function About() {
   const ref = useReveal();
@@ -648,7 +809,7 @@ function Footer() {
   return (
     <footer style={{ borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 }}>
       <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" }}>
-        {[["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"], ["갤러리", "gallery.html"], ["경력", "career.html"]].map(([t, h]) => (
+        {[["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
         <a href="mailto:ybkim@gyunggook.com" style={{ marginLeft: "auto" }}>ybkim@gyunggook.com</a>
@@ -683,4 +844,4 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
   );
 }
 
-Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, Lectures, About, Contact, Footer, SectionHead });

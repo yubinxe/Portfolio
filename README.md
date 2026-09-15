@@ -1,13 +1,14 @@
 # 김유빈 포트폴리오 — 인수인계 문서
 
-정적 사이트(GitHub Pages) + **유빈 AI** 컨시어지(지식카드 · 딥링크 · 무료상담 리드) + 선택형 서버리스 백엔드(Vercel).
+**포지셔닝: 전략기획 × AI.** 데이터로 판단의 근거를 만들고, AI로 실행의 속도를 만듭니다.
+정적 사이트(GitHub Pages / Vercel) + **유빈 AI** 컨시어지(지식카드 · 딥링크 · 무료상담 리드) + 선택형 서버리스 백엔드.
 
 ## 구조
 
 | 파일 | 역할 |
 |---|---|
-| `index.html` + `sections.jsx` | 메인. React(Babel standalone). 궤적 `TRAJECTORY`, 작업 `EDITIONS`, 자격 `CREDS` 데이터가 여기 있음 |
-| `career.html` | 경력 상세. 모든 행·섹션에 `id` 앵커 (`#cv-ssafy`, `#experience` …) |
+| `index.html` + `sections.jsx` | 메인. React(Babel standalone). 궤적 `TRAJECTORY`, 작업 `EDITIONS`, 역량 `DOMAINS`, 자격 `CREDS`, **강의 `LECTURE_TRACKS`/`LECTURES`/`LECTURE_BASIS`** 데이터가 여기 있음 |
+| `career.html` | 경력 상세 + **`#lectures` 강의 역량**. 모든 행·섹션에 `id` 앵커 (`#cv-ssafy`, `#experience`, `#lec-vibe` …) |
 | `gallery.html` | 활동 갤러리 + **`#credentials` 자격·교육·상훈 섹션**(상장 원본 · SSAFY 기업탐방 · 멘토 특강) |
 | `kb.js` | **지식 원장(단일 진실 원천)** — 지식카드 · 서비스 카탈로그 3안 · 무료상담 스크립트 · 추천 칩. 브라우저(`window.YUBIN_KB`)와 Node(`require`) 공용 |
 | `chatbot.js` | 위젯. `/api/chat` 스트리밍 → 브라우저 키 직접 호출 → 내장 지식 폴백. 딥링크 엔진 · 상담 폼 · mailto 폴백 |
@@ -26,7 +27,7 @@
 ```
 - 본문에 없는 사실·수치·URL 은 넣지 않는다. 카드 추가 시 `npm test` 로 앵커 존재 여부가 검증된다.
 - 딥링크 규칙: 같은 페이지 → 스크롤 + 스포트라이트, 다른 페이지 → 이동 후 자동 하이라이트(`sessionStorage yk_deeplink`).
-- 앵커 목록: index `#manifesto #composite #dom-01~06 #arsenal #credentials #cred-* #trajectory #tl-* #artifacts #ed-01~08 #about #contact` · career `#practice(-ai/-marketing/-data) #composite #experience #cv-* #media #media-yonhap` · gallery `#archive #g-* #credentials #cred-*`.
+- 앵커 목록: index `#manifesto #composite #dom-01~06 #arsenal #credentials #cred-* #trajectory #tl-* #artifacts #ed-01~08 #lectures #lec-01~08 #about #contact` · career `#practice(-strategy/-ai/-marketing/-data) #composite #experience #cv-* #lectures #lec-* #media #media-yonhap` · gallery `#archive #g-* #credentials #cred-*`.
 
 ## 무료상담(리드) 흐름
 
@@ -71,10 +72,26 @@ npm test          # node --test test/
 node -e "require('./kb.js')" && node --check chatbot.js
 ```
 
+## 강의 프로그램 (2 트랙 8과정)
+
+`sections.jsx`의 `LECTURES` 가 정본이고, `career.html#lectures` 와 `kb.js` 의 `lec-*` 카드가 같은 내용을 반복합니다. 셋을 함께 고치세요.
+
+| 트랙 | 과정 | 근거 |
+|---|---|---|
+| A 파운데이션 | 01 AI 기초 개념 · 02 프롬프트 엔지니어링 | 서울대 AIED 4기 |
+| A 파운데이션 | 03 바이브 코딩 | SSAFY 13기 |
+| A 파운데이션 | 04 하네스 엔지니어링 | GWS · NAVER WORKS API 연동, 크롤링 |
+| B 도메인 적용 | 05 전략기획 AI | 법무법인 경국 실무 |
+| B 도메인 적용 | 06 공공데이터 · 07 브랜드 필름 | KREMA 4기 |
+| B 도메인 적용 | 08 커뮤니케이션 | 서울시민기자단 · 연합뉴스TV |
+
+각 카드의 `basis` 는 실제 이수·수행 기록만 적습니다. 강의 이력(출강 실적)은 아직 사이트에 없으며, 생기면 `career.html#lectures` 에 연도와 함께 추가하세요.
+
 ## 콘텐츠 갱신 체크리스트
 - 궤적 항목 추가: `sections.jsx TRAJECTORY`(id 부여) → `career.html cv-row`(id) → `kb.js` 카드/`trajectory` 요약 → `npm test`
 - 사진 추가: `images/` 에 넣고 `gallery.html` figure(`g-card`, 문서형은 `g-card--doc`) + `id`
 - 자격 추가: `sections.jsx CREDS` + `gallery.html #credentials` 카드 + `kb.js creds`
+- 강의 추가: `sections.jsx LECTURES`(id `lec-NN`) → `career.html#lectures` 행 → `kb.js` `lec-NN` 카드 → `npm test`
 
 ## 사실 정정 이력 (상장 원본 대조)
 - 육군정보통신학교장 상장: **2022. 7. 1**(제183호, 軍 특성화고 현장실습) — 궤적 연도 2023→2022 정정
