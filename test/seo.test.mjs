@@ -113,3 +113,20 @@ test("h1 에 한글 이름 맥락이 포함된다", () => {
   assert.ok(read("gallery.html").includes('<span class="sr-only">김유빈'), "gallery h1");
   assert.ok(read("styles.css").includes(".sr-only"), "sr-only 스타일 누락");
 });
+
+/* 폰트 — Pretendard 는 가변 폰트 + 동적 서브셋만 쓴다.
+ * 정적 전체 웨이트(pretendard.min.css)는 쓰는 굵기마다 780KB 급 한글 폰트를 통째로
+ * 내려받게 되어 첫 화면에서 수 MB 가 나간다. 되돌아가는 것을 막기 위한 테스트. */
+test("모든 페이지가 Pretendard 가변 동적 서브셋을 쓴다", () => {
+  for (const f of ["index.html", "career.html", "gallery.html", "admin.html"]) {
+    const html = read(f);
+    assert.ok(
+      html.includes("pretendardvariable-dynamic-subset.css"),
+      `${f} — 가변 동적 서브셋 링크 누락`,
+    );
+    assert.ok(
+      !html.includes("static/pretendard.min.css"),
+      `${f} — 정적 전체 웨이트 CSS 가 남아 있습니다`,
+    );
+  }
+});
