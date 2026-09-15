@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>김유빈 전략기획 AI 강의 — 프롬프트 · 바이브 코딩 · 하네스 8과정</title>
+<meta name="description" content="김유빈(Yubin Kim)의 전략기획 AI 강의 프로그램. AI 기초 개념·프롬프트 엔지니어링·바이브 코딩·하네스 엔지니어링의 파운데이션 4과정과 전략기획·공공데이터·브랜드 필름·정책 커뮤니케이션의 도메인 적용 4과정. SSAFY 13기, 서울대 AIED 4기, KREMA 4기 이수와 직접 배포해 운영 중인 산출물을 근거로 강의합니다." />
+<meta name="theme-color" content="#1F2D6B" />
+<link rel="icon" href="favicon.ico?v=4" sizes="48x48" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg?v=4" />
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=4" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<link rel="stylesheet" href="styles.css?v=31" />
+<link rel="canonical" href="https://yubinxe.github.io/Portfolio/lecture.html" />
+<meta name="author" content="김유빈 Yubin Kim" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Yubin Kim — Portfolio" />
+<meta property="og:url" content="https://yubinxe.github.io/Portfolio/lecture.html" />
+<meta property="og:title" content="김유빈 전략기획 AI 강의 — 8과정 커리큘럼" />
+<meta property="og:description" content="AI 기초·프롬프트 엔지니어링·바이브 코딩·하네스 엔지니어링부터 공공데이터·브랜드 필름까지, 만들어 본 사람이 가르치는 8과정." />
+<meta property="og:image" content="https://yubinxe.github.io/Portfolio/images/og-image.png" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="김유빈 전략기획 AI 강의 — 8과정 커리큘럼" />
+<meta name="twitter:description" content="AI 파운데이션 4과정 · 도메인 적용 4과정. 직접 배포해 운영 중인 시스템을 사례로 수업합니다." />
+<meta name="twitter:image" content="https://yubinxe.github.io/Portfolio/images/og-image.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://yubinxe.github.io/Portfolio/lecture.html#webpage",
+      "url": "https://yubinxe.github.io/Portfolio/lecture.html",
+      "name": "김유빈 전략기획 AI 강의 프로그램",
+      "inLanguage": "ko-KR",
+      "about": {
+        "@id": "https://yubinxe.github.io/Portfolio/#person"
+      },
+      "isPartOf": {
+        "@id": "https://yubinxe.github.io/Portfolio/#website"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://yubinxe.github.io/Portfolio/images/og-image.png"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://yubinxe.github.io/Portfolio/lecture.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "메인",
+          "item": "https://yubinxe.github.io/Portfolio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "강의",
+          "item": "https://yubinxe.github.io/Portfolio/lecture.html"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://yubinxe.github.io/Portfolio/#lectures",
+      "name": "김유빈 전략기획 AI 강의 프로그램",
+      "description": "AI 파운데이션 4과정과 도메인 적용 4과정으로 구성된 강의 프로그램.",
+      "numberOfItems": 8,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-01",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-01",
+            "name": "AI 기초 개념 — 무엇이 되고 무엇이 안 되는가",
+            "description": "모델이 어떻게 답을 만드는지 알면, 어디까지 맡길지 판단할 수 있습니다. 대상: 전 직군 입문자 · 도입을 검토하는 관리자. 구성: 2시간.",
+            "teaches": [
+              "토큰·맥락창·환각이 생기는 자리",
+              "생성형 AI가 잘하는 일과 못하는 일의 경계",
+              "업무에 붙일 때의 검수 기준"
+            ],
+            "timeRequired": "PT2H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "전 직군 입문자 · 도입을 검토하는 관리자"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT2H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-02",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-02",
+            "name": "프롬프트 엔지니어링 — 문장이 아니라 구조로",
+            "description": "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다. 대상: 기획 · 마케팅 · 사무 실무자. 구성: 3시간(실습 포함).",
+            "teaches": [
+              "역할·제약·예시·출력형식의 네 기둥",
+              "재사용 가능한 프롬프트 템플릿 설계",
+              "평가와 개선 루프 만들기"
+            ],
+            "timeRequired": "PT3H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "기획 · 마케팅 · 사무 실무자"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT3H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-03",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-03",
+            "name": "바이브 코딩 — 코드를 몰라도 만들고 배포하기",
+            "description": "아이디어에서 배포까지, AI와 대화하며 실제 도구를 완성하는 과정입니다. 대상: 비개발 직군 · 사내 도구를 직접 만들고 싶은 실무자. 구성: 4시간(제작 실습).",
+            "teaches": [
+              "요구사항을 AI가 이해하는 단위로 쪼개기",
+              "고쳐가며 만드는 반복 루프와 검증",
+              "Vercel 배포와 운영 감각"
+            ],
+            "timeRequired": "PT4H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "비개발 직군 · 사내 도구를 직접 만들고 싶은 실무자"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT4H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-04",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-04",
+            "name": "하네스 엔지니어링 — 에이전트에 손과 발을 달기",
+            "description": "모델 자체보다, 모델에 무엇을 쥐여주느냐가 결과를 가릅니다. 대상: 사내 자동화를 설계하는 실무자 · 개발 인접 직군. 구성: 4시간.",
+            "teaches": [
+              "도구 연결과 권한 경계 설계",
+              "맥락 주입과 실패 시 폴백 설계",
+              "사람이 승인해야 할 지점 정하기"
+            ],
+            "timeRequired": "PT4H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "사내 자동화를 설계하는 실무자 · 개발 인접 직군"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT4H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-05",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-05",
+            "name": "실무자를 위한 전략기획 AI",
+            "description": "반복 업무를 진단하고, 무엇을 자동화할지 정하는 기준을 세웁니다. 대상: 백오피스 · 기획 · 전문직 사무소 실무자. 구성: 3시간 / 6시간(실습 포함).",
+            "teaches": [
+              "업무 흐름 진단과 병목 찾기",
+              "자동화 우선순위 매트릭스",
+              "사람이 남아야 할 판단의 자리"
+            ],
+            "timeRequired": "PT3H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "백오피스 · 기획 · 전문직 사무소 실무자"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT3H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-06",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-06",
+            "name": "공공데이터로 시장을 읽는 법",
+            "description": "공개된 데이터를 의사결정이 가능한 화면으로 바꾸는 과정을 처음부터 끝까지 다룹니다. 대상: 부동산 · 마케팅 · 정비사업 데이터 담당자. 구성: 4시간(대시보드 실습).",
+            "teaches": [
+              "공공데이터 API 수집 설계",
+              "나란히 놓아야 의미가 생기는 지표",
+              "배포와 갱신 자동화"
+            ],
+            "timeRequired": "PT4H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "부동산 · 마케팅 · 정비사업 데이터 담당자"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT4H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-07",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-07",
+            "name": "생성형 AI 브랜드 필름 제작",
+            "description": "프롬프트 구조로 영상을 만들고, 톤을 지키는 판단은 사람이 합니다. 대상: 마케팅 · 홍보 · 브랜드 담당자. 구성: 3시간(제작 실습).",
+            "teaches": [
+              "영상 프롬프트 아키텍처",
+              "영상·내레이션·사운드 결합",
+              "브랜드 톤 검수 기준"
+            ],
+            "timeRequired": "PT3H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "마케팅 · 홍보 · 브랜드 담당자"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT3H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "Course",
+            "@id": "https://yubinxe.github.io/Portfolio/lecture.html#lec-08",
+            "url": "https://yubinxe.github.io/Portfolio/lecture.html#lec-08",
+            "name": "제도의 언어를 대중의 언어로",
+            "description": "전문적인 내용이 닿지 않으면 없는 것과 같습니다. 전달의 문법을 다룹니다. 대상: 공공기관 · 청년 조직 · 협회. 구성: 2시간.",
+            "teaches": [
+              "대상에 맞춘 메시지 재구성",
+              "카드뉴스·영상 포맷 설계",
+              "정책 제안으로 잇는 커뮤니케이션"
+            ],
+            "timeRequired": "PT2H",
+            "inLanguage": "ko-KR",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "공공기관 · 청년 조직 · 협회"
+            },
+            "provider": {
+              "@id": "https://yubinxe.github.io/Portfolio/#person"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseWorkload": "PT2H",
+              "inLanguage": "ko-KR"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="font-ko">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(249,246,240,.86);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(17,17,17,.10)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:72px">
+    <a href="index.html" style="text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px">
+      <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="34" height="34" style="display:block;border-radius:9px" />
+      <span class="sticker sticker--sky" style="padding:.25em .6em;font-size:11px;box-shadow:0 3px 0 rgba(17,17,17,.12)">강의 — Lectures</span>
+    </a>
+    <nav aria-label="주요 메뉴" style="display:flex;align-items:center;gap:clamp(14px,2.4vw,32px)">
+      <div class="nav-desktop" style="display:flex;gap:clamp(14px,2.4vw,32px)">
+        <a class="navlink" href="index.html">메인</a>
+        <a class="navlink" href="index.html#trajectory">궤적</a>
+        <a class="navlink" href="index.html#artifacts">작업</a>
+        <a class="navlink" href="gallery.html">갤러리</a>
+        <a class="navlink" href="career.html">경력</a>
+      </div>
+      <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" class="btn" style="padding:.55em 1.1em;font-size:.85rem">강의 문의</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-main">
+  <div class="speckle" style="opacity:.3"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+
+    <div class="page-head reveal">
+      <div class="menu-rule" style="max-width:240px;margin-bottom:20px"><i></i></div>
+      <p class="eyebrow" style="color:var(--ink-soft);margin-bottom:16px">Lectures &amp; Workshops — 전략기획 AI</p>
+      <h1><span class="sr-only">김유빈 전략기획 AI 강의 — </span>THE<br />LECTURES</h1>
+      <p class="ko-sub">만들어 본 사람만 가르칠 수 있는 것이 있습니다.</p>
+    </div>
+
+    <div class="lec-intro reveal">
+      <p class="font-myeongjo">배운 것을 실제로 만들어 운영해 본 뒤에, 강의 모듈로 옮겼습니다.</p>
+      <p class="font-ko lec-intro__sub">
+        SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처와 교수법, KREMA 4기의 시장 데이터 전략이
+        각 과정의 근거입니다. 사례로 다루는 시스템은 전부 직접 기획·배포해 운영 중인 산출물이라
+        화면을 열어 보이며 수업합니다. 여덟 과정 모두 조직 상황에 맞춰 시간과 실습 비중을 조정합니다.
+      </p>
+    </div>
+
+      <div class="lec-track">
+        <div class="lec-track__head reveal">
+          <span class="lec-track__label font-sans">Track A — AI 파운데이션</span>
+          <h3 class="font-ko">도구를 쓰는 사람에서, 도구를 설계하는 사람으로</h3>
+          <p class="font-ko">개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다.</p>
+        </div>
+        <div class="lec-grid">
+        <article id="lec-01" class="lec-card reveal" style="--accent-fill:var(--sky)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">01</span>
+            <span class="lec-card__icon" style="background:var(--sky)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></span>
+          </div>
+          <h3 class="font-ko">AI 기초 개념 — 무엇이 되고 무엇이 안 되는가</h3>
+          <p class="lec-card__lead font-ko">모델이 어떻게 답을 만드는지 알면, 어디까지 맡길지 판단할 수 있습니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>전 직군 입문자 · 도입을 검토하는 관리자</dd></div>
+            <div><dt>구성</dt><dd>2시간</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>토큰·맥락창·환각이 생기는 자리</li>
+            <li>생성형 AI가 잘하는 일과 못하는 일의 경계</li>
+            <li>업무에 붙일 때의 검수 기준</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 서울대 AIED 4기 — AI 교육 전문가 과정</p>
+          <a href="career.html#cv-snu-aied" class="lec-card__proof font-sans">교육 이수 기록 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article id="lec-02" class="lec-card reveal" style="--accent-fill:var(--lilac)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">02</span>
+            <span class="lec-card__icon" style="background:var(--lilac)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg></span>
+          </div>
+          <h3 class="font-ko">프롬프트 엔지니어링 — 문장이 아니라 구조로</h3>
+          <p class="lec-card__lead font-ko">좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>기획 · 마케팅 · 사무 실무자</dd></div>
+            <div><dt>구성</dt><dd>3시간(실습 포함)</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>역할·제약·예시·출력형식의 네 기둥</li>
+            <li>재사용 가능한 프롬프트 템플릿 설계</li>
+            <li>평가와 개선 루프 만들기</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 서울대 AIED 4기 — 구조화된 프롬프트 아키텍처</p>
+          <a href="index.html#ed-02" class="lec-card__proof font-sans">브랜드 필름 적용 사례 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article id="lec-03" class="lec-card reveal" style="--accent-fill:var(--apple)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">03</span>
+            <span class="lec-card__icon" style="background:var(--apple)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/><path d="m14 4-4 16"/></svg></span>
+          </div>
+          <h3 class="font-ko">바이브 코딩 — 코드를 몰라도 만들고 배포하기</h3>
+          <p class="lec-card__lead font-ko">아이디어에서 배포까지, AI와 대화하며 실제 도구를 완성하는 과정입니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>비개발 직군 · 사내 도구를 직접 만들고 싶은 실무자</dd></div>
+            <div><dt>구성</dt><dd>4시간(제작 실습)</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>요구사항을 AI가 이해하는 단위로 쪼개기</li>
+            <li>고쳐가며 만드는 반복 루프와 검증</li>
+            <li>Vercel 배포와 운영 감각</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> SSAFY 13기 — 소프트웨어 아키텍처 실무 프로젝트</p>
+          <a href="index.html#ed-05" class="lec-card__proof font-sans">직접 배포한 대시보드 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article id="lec-04" class="lec-card reveal" style="--accent-fill:var(--pink)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">04</span>
+            <span class="lec-card__icon" style="background:var(--pink)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></span>
+          </div>
+          <h3 class="font-ko">하네스 엔지니어링 — 에이전트에 손과 발을 달기</h3>
+          <p class="lec-card__lead font-ko">모델 자체보다, 모델에 무엇을 쥐여주느냐가 결과를 가릅니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>사내 자동화를 설계하는 실무자 · 개발 인접 직군</dd></div>
+            <div><dt>구성</dt><dd>4시간</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>도구 연결과 권한 경계 설계</li>
+            <li>맥락 주입과 실패 시 폴백 설계</li>
+            <li>사람이 승인해야 할 지점 정하기</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> GWS · NAVER WORKS API 연동과 크롤링 파이프라인 구축 경험</p>
+          <a href="index.html#ed-06" class="lec-card__proof font-sans">VOC 트리아지 시스템 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        </div>
+      </div>
+      <div class="lec-track">
+        <div class="lec-track__head reveal">
+          <span class="lec-track__label font-sans">Track B — 도메인 적용</span>
+          <h3 class="font-ko">만들어 본 사람만 가르칠 수 있는 것</h3>
+          <p class="font-ko">직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다.</p>
+        </div>
+        <div class="lec-grid">
+        <article id="lec-05" class="lec-card reveal" style="--accent-fill:var(--sky)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">05</span>
+            <span class="lec-card__icon" style="background:var(--sky)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>
+          </div>
+          <h3 class="font-ko">실무자를 위한 전략기획 AI</h3>
+          <p class="lec-card__lead font-ko">반복 업무를 진단하고, 무엇을 자동화할지 정하는 기준을 세웁니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>백오피스 · 기획 · 전문직 사무소 실무자</dd></div>
+            <div><dt>구성</dt><dd>3시간 / 6시간(실습 포함)</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>업무 흐름 진단과 병목 찾기</li>
+            <li>자동화 우선순위 매트릭스</li>
+            <li>사람이 남아야 할 판단의 자리</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 법무법인 경국 — 송무·사무 프로세스 혁신 실무</p>
+          <a href="index.html#ed-06" class="lec-card__proof font-sans">VOC 트리아지 사례 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article id="lec-06" class="lec-card reveal" style="--accent-fill:var(--apple)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">06</span>
+            <span class="lec-card__icon" style="background:var(--apple)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>
+          </div>
+          <h3 class="font-ko">공공데이터로 시장을 읽는 법</h3>
+          <p class="lec-card__lead font-ko">공개된 데이터를 의사결정이 가능한 화면으로 바꾸는 과정을 처음부터 끝까지 다룹니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>부동산 · 마케팅 · 정비사업 데이터 담당자</dd></div>
+            <div><dt>구성</dt><dd>4시간(대시보드 실습)</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>공공데이터 API 수집 설계</li>
+            <li>나란히 놓아야 의미가 생기는 지표</li>
+            <li>배포와 갱신 자동화</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> KREMA 4기 — AI 기반 부동산 시장 데이터 분석</p>
+          <a href="index.html#ed-05" class="lec-card__proof font-sans">청약 인사이트 대시보드 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article id="lec-07" class="lec-card reveal" style="--accent-fill:var(--lilac)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">07</span>
+            <span class="lec-card__icon" style="background:var(--lilac)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg></span>
+          </div>
+          <h3 class="font-ko">생성형 AI 브랜드 필름 제작</h3>
+          <p class="lec-card__lead font-ko">프롬프트 구조로 영상을 만들고, 톤을 지키는 판단은 사람이 합니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>마케팅 · 홍보 · 브랜드 담당자</dd></div>
+            <div><dt>구성</dt><dd>3시간(제작 실습)</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>영상 프롬프트 아키텍처</li>
+            <li>영상·내레이션·사운드 결합</li>
+            <li>브랜드 톤 검수 기준</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> KREMA 4기 — 매체별 디지털 마케팅 전략</p>
+          <a href="index.html#ed-02" class="lec-card__proof font-sans">르엘 성수 브랜드 필름 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article id="lec-08" class="lec-card reveal" style="--accent-fill:var(--pink)">
+          <div class="lec-card__head">
+            <span class="lec-card__n font-cond">08</span>
+            <span class="lec-card__icon" style="background:var(--pink)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M8 7h5M8 11h8M8 15h5"/><path d="M17 3v4h2"/></svg></span>
+          </div>
+          <h3 class="font-ko">제도의 언어를 대중의 언어로</h3>
+          <p class="lec-card__lead font-ko">전문적인 내용이 닿지 않으면 없는 것과 같습니다. 전달의 문법을 다룹니다.</p>
+          <dl class="lec-card__meta font-ko">
+            <div><dt>대상</dt><dd>공공기관 · 청년 조직 · 협회</dd></div>
+            <div><dt>구성</dt><dd>2시간</dd></div>
+          </dl>
+          <ul class="lec-card__mods font-ko">
+            <li>대상에 맞춘 메시지 재구성</li>
+            <li>카드뉴스·영상 포맷 설계</li>
+            <li>정책 제안으로 잇는 커뮤니케이션</li>
+          </ul>
+          <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 서울시민기자단 · 연합뉴스TV · 청년 정책 거버넌스</p>
+          <a href="index.html#ed-01" class="lec-card__proof font-sans">지방선거 카드뉴스 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        </div>
+      </div>
+
+    <section class="lec-basis reveal" id="basis" aria-labelledby="basis-h">
+      <div class="menu-rule" style="margin-bottom:22px"><i></i></div>
+      <p class="eyebrow" id="basis-h" style="color:var(--ink-soft);margin-bottom:22px">무엇을 근거로 가르치는가</p>
+      <div class="lec-basis__grid">
+          <div class="lec-basis__item">
+            <strong class="font-ko">삼성청년SW아카데미 13기</strong>
+            <span class="font-ko">소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다. <a href="career.html#cv-ssafy" class="font-sans" style="white-space:nowrap">근거 보기 →</a></span>
+          </div>
+          <div class="lec-basis__item">
+            <strong class="font-ko">서울대학교 AIED 4기</strong>
+            <span class="font-ko">AI 교육 전문가 과정에서 구조화된 프롬프트 아키텍처와 교수법을 체화했습니다. <a href="career.html#cv-snu-aied" class="font-sans" style="white-space:nowrap">근거 보기 →</a></span>
+          </div>
+          <div class="lec-basis__item">
+            <strong class="font-ko">한국부동산마케팅협회 4기</strong>
+            <span class="font-ko">AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립을 익혔습니다. <a href="career.html#cv-krema" class="font-sans" style="white-space:nowrap">근거 보기 →</a></span>
+          </div>
+          <div class="lec-basis__item">
+            <strong class="font-ko">배포된 결과물 8건</strong>
+            <span class="font-ko">강의 사례는 전부 직접 만들어 운영 중인 산출물입니다. 시연 가능한 화면으로 수업합니다. <a href="index.html#artifacts" class="font-sans" style="white-space:nowrap">근거 보기 →</a></span>
+          </div>
+      </div>
+      <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> 강의 문의</a>
+        <a href="career.html#lectures" class="btn btn--ghost">강의 역량 상세 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a href="index.html#lectures" class="btn btn--ghost">메인의 강의 섹션 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer style="background:var(--ink);color:var(--ecru)">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:26px 0">
+    <span style="font-size:.82rem;color:rgba(249,246,240,.6)">YubinKim · 김유빈 — 법무법인 경국</span>
+    <span style="font-size:.78rem;color:rgba(249,246,240,.5)">© 2026 Yubin Kim. Crafted with technical precision.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach(function (n) { io.observe(n); });
+
+  /* custom cursor (shared) */
+  if (window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var dot = document.createElement("div"); dot.className = "cursor-dot";
+    var ring = document.createElement("div"); ring.className = "cursor-ring";
+    document.body.appendChild(dot); document.body.appendChild(ring);
+    var cx = innerWidth / 2, cy = innerHeight / 2, rx = cx, ry = cy;
+    document.addEventListener("mousemove", function (e) {
+      cx = e.clientX; cy = e.clientY;
+      dot.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
+    }, { passive: true });
+    (function loop() {
+      rx += (cx - rx) * 0.16; ry += (cy - ry) * 0.16;
+      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
+      requestAnimationFrame(loop);
+    })();
+    document.addEventListener("mouseover", function (e) {
+      var t = e.target.closest && e.target.closest("a, button, .lec-card");
+      ring.classList.toggle("is-hover", !!t);
+    }, { passive: true });
+  }
+
+  /* page fade transition */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href$=".html"], a[href="index.html"]');
+    if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey) return;
+    e.preventDefault();
+    document.body.classList.add("page-out");
+    setTimeout(function () { location.href = a.getAttribute("href"); }, 240);
+  });
+})();
+</script>
+  <!-- 유빈 AI 포트폴리오 챗봇 위젯 -->
+  <script src="kb.js" defer></script>
+  <script src="chatbot.js" defer></script>
+</body>
+</html>

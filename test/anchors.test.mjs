@@ -12,7 +12,7 @@ function idsOf(file) {
   for (const m of src.matchAll(/\bid=["']([\w-]+)["']/g)) ids.add(m[1]);
   return ids;
 }
-const PAGES = { "index.html": idsOf("sections.jsx"), "career.html": idsOf("career.html"), "gallery.html": idsOf("gallery.html") };
+const PAGES = { "index.html": idsOf("sections.jsx"), "career.html": idsOf("career.html"), "gallery.html": idsOf("gallery.html"), "lecture.html": idsOf("lecture.html") };
 // sections.jsx 에서 템플릿으로 생성되는 id
 const sections = readFileSync(new URL("../sections.jsx", import.meta.url), "utf8");
 for (const m of sections.matchAll(/id: "(tl-[\w-]+)"/g)) PAGES["index.html"].add(m[1]);
@@ -24,7 +24,7 @@ PAGES["index.html"].add("arsenal"); PAGES["index.html"].add("credentials");
 test("모든 카드 딥링크 앵커가 실제 페이지에 존재", () => {
   const missing = [];
   const check = (href, who) => {
-    const m = /^(index|career|gallery)\.html#([\w-]+)$/.exec(href || "");
+    const m = /^(index|career|gallery|lecture)\.html#([\w-]+)$/.exec(href || "");
     if (!m) return;
     if (!PAGES[m[1] + ".html"].has(m[2])) missing.push(who + " → " + href);
   };

@@ -9,6 +9,7 @@
 |---|---|
 | `index.html` + `sections.jsx` · `app.jsx` | 메인. React 18(UMD 프로덕션 빌드). **JSX 는 빌드 시점에 컴파일**해 `dist/*.js` 로 커밋합니다 — 브라우저는 Babel 을 내려받지 않습니다. 궤적 `TRAJECTORY`, 작업 `EDITIONS`, 역량 `DOMAINS`, 자격 `CREDS`, **강의 `LECTURE_TRACKS`/`LECTURES`/`LECTURE_BASIS`** 데이터가 여기 있음 |
 | `career.html` | 경력 상세 + **`#lectures` 강의 역량**. 모든 행·섹션에 `id` 앵커 (`#cv-ssafy`, `#experience`, `#lec-vibe` …) |
+| `lecture.html` | **강의 랜딩(정본 상세)**. 8과정 카드 + 가르치는 근거 + 섭외 CTA. 각 과정 앵커 `#lec-01`~`#lec-08`, Course 구조화 데이터의 `@id` 가 여기를 가리킴 |
 | `gallery.html` | 활동 갤러리 + **`#credentials` 자격·교육·상훈 섹션**(상장 원본 · SSAFY 기업탐방 · 멘토 특강) |
 | `kb.js` | **지식 원장(단일 진실 원천)** — 지식카드 · 서비스 카탈로그 3안 · 무료상담 스크립트 · 추천 칩. 브라우저(`window.YUBIN_KB`)와 Node(`require`) 공용 |
 | `chatbot.js` | 위젯. `/api/chat` 스트리밍 → 브라우저 키 직접 호출 → 내장 지식 폴백. 딥링크 엔진 · 상담 폼 · mailto 폴백 |
@@ -79,7 +80,7 @@ node -e "require('./kb.js')" && node --check chatbot.js
 
 ## 강의 프로그램 (2 트랙 8과정)
 
-`sections.jsx`의 `LECTURES` 가 정본이고, `career.html#lectures` 와 `kb.js` 의 `lec-*` 카드가 같은 내용을 반복합니다. 셋을 함께 고치세요.
+`sections.jsx`의 `LECTURES` 가 정본이고, `lecture.html` · `career.html#lectures` · `kb.js` 의 `lec-*` 카드가 같은 내용을 반복합니다. 넷을 함께 고치세요. `lecture.html` 은 `/tmp` 스크립트가 아니라 직접 편집합니다(정적 파일).
 
 | 트랙 | 과정 | 근거 |
 |---|---|---|
@@ -96,7 +97,7 @@ node -e "require('./kb.js')" && node --check chatbot.js
 - 궤적 항목 추가: `sections.jsx TRAJECTORY`(id 부여) → `career.html cv-row`(id) → `kb.js` 카드/`trajectory` 요약 → `npm test`
 - 사진 추가: `images/` 에 넣고 `gallery.html` figure(`g-card`, 문서형은 `g-card--doc`) + `id`
 - 자격 추가: `sections.jsx CREDS` + `gallery.html #credentials` 카드 + `kb.js creds`
-- 강의 추가: `sections.jsx LECTURES`(id `lec-NN`) → `career.html#lectures` 행 → `kb.js` `lec-NN` 카드 → `npm test`
+- 강의 추가: `sections.jsx LECTURES`(id `lec-NN`) → `lecture.html` 카드와 JSON-LD → `career.html#lectures` 행 → `kb.js` `lec-NN` 카드 → `npm run build` → `npm test`
 
 ## 검색 노출 (SEO)
 
