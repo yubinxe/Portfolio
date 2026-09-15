@@ -37,7 +37,7 @@
       body: "\"전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.\" 세 개의 시스템(VOC 트리아지 · 청약 대시보드 · 브랜드 캠페인 필름)에서 사람이 하던 일이 도구로 넘어갈 때마다 사람이 남아야 할 자리가 또렷해졌고, 그 자리는 언제나 '도구에 무엇을 시킬지 정하는 일' — 곧 전략기획이었습니다.",
       primary: { label: "Why It Matters", href: "index.html#composite" },
       secondary: { label: "강의 프로그램", href: "index.html#lectures" } },
-    { id: "office", cat: "인물", tags: ["법무법인", "경국", "직장", "회사", "소속", "근무", "위치", "서초", "주소"],
+    { id: "office", cat: "인물", tags: ["법무법인", "경국", "직장", "회사", "소속", "근무", "근무지", "어디", "사무실", "위치", "서초", "주소"],
       title: "소속 — 법무법인 경국",
       body: "법무법인 경국(서울 서초구 서초대로 264 법조타워 15F) 사원. 업무 영역은 네 가지입니다.\n- 전략기획 · 사업성 검토 — 시장 단가 비교와 우선순위 설계\n- AI 프로세스 혁신 — 송무·사무 워크플로우 자동화\n- 마케팅 기획 · 브랜드 필름\n- 데이터 인프라 · 대시보드",
       primary: { label: "업무 영역", href: "career.html#practice" },
@@ -84,7 +84,7 @@
       body: "- 생성형 AI: GPT Image-2, Suno AI, ElevenLabs, Veo 3, Google Vids, Hyperframe\n- 데이터 · 개발: 공공데이터 API, GWS API, React, Vercel, Prompt Architecture\n- 도메인: BIM · 드론 측량, 송무 프로세스, 청약 · 부동산 데이터",
       primary: { label: "도구 목록", href: "index.html#arsenal" },
       secondary: null },
-    { id: "creds", cat: "자격", tags: ["자격", "자격증", "증명", "credential", "tesat", "opic", "전기기능사", "분양대행자", "영어", "경제"],
+    { id: "creds", cat: "자격", tags: ["자격", "자격증", "증명", "credential", "tesat", "opic", "전기기능사", "분양대행자", "영어", "경제", "수상", "상훈", "수상 경력", "보유 자격"],
       title: "보유 자격 (The Credentials)",
       body: "- TESAT — 경제이해력검증시험 (한국경제신문 주관)\n- OPIc IH — 영어 말하기 Intermediate High (ACTFL 공인 등급)\n- 전기기능사 — 국가기술자격 (한국산업인력공단)\n- 분양대행자 — 부동산 분양 실무 자격 (주택·상가 분양 대행)\n상장·교육 기록 원본은 갤러리의 자격 섹션에서 확인할 수 있습니다.",
       primary: { label: "자격 · 상훈 갤러리", href: "gallery.html#credentials" },
@@ -96,22 +96,22 @@
       body: "\"만들어 본 사람만 가르칠 수 있는 것이 있습니다.\" SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처·교수법, KREMA 4기의 시장 데이터 전략을 실제로 만들어 운영한 뒤 강의 모듈로 옮겼습니다.\n**Track A — AI 파운데이션**\n- 01 AI 기초 개념 — 무엇이 되고 무엇이 안 되는가 (2시간)\n- 02 프롬프트 엔지니어링 — 문장이 아니라 구조로 (3시간)\n- 03 바이브 코딩 — 코드를 몰라도 만들고 배포하기 (4시간)\n- 04 하네스 엔지니어링 — 에이전트에 손과 발을 달기 (4시간)\n**Track B — 도메인 적용**\n- 05 실무자를 위한 전략기획 AI (3–6시간)\n- 06 공공데이터로 시장을 읽는 법 (4시간)\n- 07 생성형 AI 브랜드 필름 제작 (3시간)\n- 08 제도의 언어를 대중의 언어로 (2시간)\n강의 문의는 [" + EMAIL_OFFICE + "](mailto:" + EMAIL_OFFICE + ") 로 받습니다.",
       primary: { label: "강의 프로그램 보기", href: "index.html#lectures" },
       secondary: { label: "강의 역량 상세", href: "career.html#lectures" } },
-    { id: "lec-01", cat: "강의", tags: ["ai 기초", "기초 개념", "입문", "환각", "맥락창", "토큰", "도입 검토"],
+    { id: "lec-01", cat: "강의", tags: ["ai 기초", "ai 기초 개념", "기초 개념", "입문", "환각", "맥락창", "토큰", "도입 검토"],
       title: "강의 01 — AI 기초 개념: 무엇이 되고 무엇이 안 되는가",
       body: "모델이 어떻게 답을 만드는지 알면 어디까지 맡길지 판단할 수 있습니다.\n- 토큰·맥락창·환각이 생기는 자리\n- 생성형 AI가 잘하는 일과 못하는 일의 경계\n- 업무에 붙일 때의 검수 기준\n대상은 전 직군 입문자와 도입을 검토하는 관리자, 2시간 구성입니다. 근거는 서울대 AI 교육 전문가 과정(AIED) 4기입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-01" },
       secondary: { label: "서울대 AIED 기록", href: "career.html#cv-snu-aied" } },
-    { id: "lec-02", cat: "강의", tags: ["프롬프트", "프롬프트 엔지니어링", "prompt", "템플릿", "구조화", "아키텍처"],
+    { id: "lec-02", cat: "강의", tags: ["프롬프트", "프롬프트 엔지니어링", "prompt engineering", "prompt", "템플릿", "구조화", "프롬프트 아키텍처"],
       title: "강의 02 — 프롬프트 엔지니어링: 문장이 아니라 구조로",
       body: "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.\n- 역할·제약·예시·출력형식의 네 기둥\n- 재사용 가능한 프롬프트 템플릿 설계\n- 평가와 개선 루프 만들기\n대상은 기획·마케팅·사무 실무자, 3시간 실습 포함입니다. 근거는 서울대 AIED 4기의 구조화된 프롬프트 아키텍처입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-02" },
       secondary: { label: "브랜드 필름 적용 사례", href: "index.html#ed-02" } },
-    { id: "lec-03", cat: "강의", tags: ["바이브 코딩", "vibe coding", "비개발", "노코드", "사내 도구", "배포", "vercel"],
+    { id: "lec-03", cat: "강의", tags: ["바이브 코딩", "바이브코딩", "vibe coding", "비개발", "노코드", "사내 도구", "직접 만들", "배포", "vercel"],
       title: "강의 03 — 바이브 코딩: 코드를 몰라도 만들고 배포하기",
       body: "아이디어에서 배포까지, AI와 대화하며 실제 도구를 완성하는 과정입니다.\n- 요구사항을 AI가 이해하는 단위로 쪼개기\n- 고쳐가며 만드는 반복 루프와 검증\n- Vercel 배포와 운영 감각\n대상은 비개발 직군과 사내 도구를 직접 만들고 싶은 실무자, 4시간 제작 실습입니다. 근거는 SSAFY 13기의 소프트웨어 아키텍처 실무 프로젝트입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-03" },
       secondary: { label: "직접 배포한 대시보드", href: "index.html#ed-05" } },
-    { id: "lec-04", cat: "강의", tags: ["하네스", "harness", "에이전트", "agent", "도구 연결", "권한", "자동화 설계", "폴백"],
+    { id: "lec-04", cat: "강의", tags: ["하네스", "하네스 엔지니어링", "harness", "에이전트", "agent", "도구 연결", "권한 경계", "자동화 설계", "폴백"],
       title: "강의 04 — 하네스 엔지니어링: 에이전트에 손과 발을 달기",
       body: "모델 자체보다, 모델에 무엇을 쥐여주느냐가 결과를 가릅니다.\n- 도구 연결과 권한 경계 설계\n- 맥락 주입과 실패 시 폴백 설계\n- 사람이 승인해야 할 지점 정하기\n대상은 사내 자동화를 설계하는 실무자와 개발 인접 직군, 4시간 구성입니다. 근거는 GWS·NAVER WORKS API 연동과 크롤링 파이프라인 구축 경험입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-04" },
@@ -121,12 +121,12 @@
       body: "반복 업무를 진단하고 무엇을 자동화할지 정하는 기준을 세웁니다.\n- 업무 흐름 진단과 병목 찾기\n- 자동화 우선순위 매트릭스\n- 사람이 남아야 할 판단의 자리\n대상은 백오피스·기획·전문직 사무소 실무자이고 3시간 또는 실습 포함 6시간입니다. 근거는 법무법인 경국의 송무·사무 프로세스 혁신 실무입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-05" },
       secondary: { label: "VOC 트리아지 사례", href: "index.html#ed-06" } },
-    { id: "lec-06", cat: "강의", tags: ["데이터 강의", "공공데이터 강의", "대시보드 실습", "지표", "부동산 데이터"],
+    { id: "lec-06", cat: "강의", tags: ["공공데이터로 시장", "데이터 강의", "공공데이터 강의", "대시보드 실습", "지표 설계", "부동산 데이터"],
       title: "강의 06 — 공공데이터로 시장을 읽는 법",
       body: "공개된 데이터를 의사결정이 가능한 화면으로 바꾸는 과정을 처음부터 끝까지 다룹니다.\n- 공공데이터 API 수집 설계\n- 나란히 놓아야 의미가 생기는 지표\n- 배포와 갱신 자동화\n대상은 부동산·마케팅·정비사업 데이터 담당자, 4시간 대시보드 실습입니다. 근거는 KREMA 4기의 AI 기반 부동산 시장 데이터 분석입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-06" },
       secondary: { label: "청약 대시보드 사례", href: "index.html#ed-05" } },
-    { id: "lec-07", cat: "강의", tags: ["브랜드 필름 강의", "생성형 ai 강의", "veo", "영상 제작", "마케팅 강의"],
+    { id: "lec-07", cat: "강의", tags: ["브랜드 필름 제작", "브랜드 필름 강의", "생성형 ai 강의", "veo", "영상 제작", "마케팅 강의"],
       title: "강의 07 — 생성형 AI 브랜드 필름 제작",
       body: "프롬프트 구조로 영상을 만들고, 톤을 지키는 판단은 사람이 합니다.\n- 영상 프롬프트 아키텍처\n- 영상·내레이션·사운드 결합\n- 브랜드 톤 검수 기준\n대상은 마케팅·홍보·브랜드 담당자, 3시간 제작 실습입니다. 근거는 KREMA 4기의 매체별 디지털 마케팅 전략입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-07" },
@@ -136,7 +136,7 @@
       body: "전문적인 내용이 닿지 않으면 없는 것과 같습니다. 전달의 문법을 다룹니다.\n- 대상에 맞춘 메시지 재구성\n- 카드뉴스·영상 포맷 설계\n- 정책 제안으로 잇는 커뮤니케이션\n대상은 공공기관·청년 조직·협회, 2시간 구성입니다. 근거는 서울시민기자단과 연합뉴스TV, 청년 정책 거버넌스 경험입니다.",
       primary: { label: "강의 카드", href: "index.html#lec-08" },
       secondary: { label: "지방선거 카드뉴스", href: "index.html#ed-01" } },
-    { id: "lec-basis", cat: "강의", tags: ["강의 자격", "강사 자격", "근거", "교수법", "왜 강의", "aied", "ssafy", "krema"],
+    { id: "lec-basis", cat: "강의", tags: ["강의 자격", "강사 자격", "무엇을 근거로", "근거", "교수법", "왜 강의", "자격이 있"],
       title: "무엇을 근거로 가르치는가",
       body: "- 삼성청년SW아카데미 13기 — 소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 공식 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행\n- 서울대학교 AIED 4기 — AI 교육 전문가 과정에서 구조화된 프롬프트 아키텍처와 교수법을 체화\n- 한국부동산마케팅협회 4기 — AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립\n- 배포된 결과물 8건 — 강의 사례는 전부 직접 만들어 운영 중인 산출물이며 시연 가능한 화면으로 수업합니다",
       primary: { label: "강의 역량 상세", href: "career.html#lectures" },
@@ -245,12 +245,12 @@
       body: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습해 엔지니어링 역량을 내재화했습니다(13기 이수). 2024년에는 SSAFY 공식 홍보 앰배서더로 교육 과정과 성과를 콘텐츠로 알렸습니다. 프로젝트 발표·코드 리뷰·기업탐방 사진이 갤러리에 있습니다.",
       primary: { label: "SSAFY 갤러리", href: "gallery.html#g-ssafy-presentation" },
       secondary: { label: "궤적에서 보기", href: "index.html#tl-ssafy" } },
-    { id: "tl-army-startup", cat: "궤적", tags: ["육군창업경진대회", "강원열린군대", "스타트업", "2군단장", "hvac", "창업", "home_ally"],
+    { id: "tl-army-startup", cat: "궤적", tags: ["육군창업경진대회", "강원열린군대", "스타트업", "2군단장", "수상", "상장", "입상", "hvac", "창업", "home_ally"],
       title: "2023 — 강원열린군대 스타트업 프로그램 2군단장상 (2위)",
       body: "軍·官·學이 주관한 2023년 강원열린군대 스타트업 프로그램 성취도평가에서 팀 Home_Ally로 2위에 입상해 제2군단장(중장) 상장을 받았습니다. HVAC 기술 기반 리스크 관리 아이디어와 비즈니스 모델의 타당성을 공식 심사에서 검증한 기록입니다.",
       primary: { label: "상장 원본 보기", href: "gallery.html#cred-award-2023" },
       secondary: { label: "궤적에서 보기", href: "index.html#tl-army-startup" } },
-    { id: "tl-army", cat: "궤적", tags: ["육군", "군 복무", "정보통신학교", "훈련소", "최우수 분대", "상장", "군대"],
+    { id: "tl-army", cat: "궤적", tags: ["육군", "군 복무", "정보통신학교", "훈련소", "최우수 분대", "수상", "상장", "표창", "군대"],
       title: "2022–2023 — 육군 표창 기록",
       body: "- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n- 육군훈련소 최우수 분대 선정 · 훈련소장(소장) 상장 (2023)\n상장 원본은 갤러리 자격 섹션에 있습니다.",
       primary: { label: "상장 원본 보기", href: "gallery.html#cred-award-2022" },
@@ -310,6 +310,49 @@
       cta: { label: "강의 프로그램", href: "index.html#lectures" } },
   ];
 
+  /* ------------------------------------------------- 로컬 검색(랭킹) 엔진 */
+  /* 챗봇 폴백 답변과 서버 답변이 같은 기준으로 카드를 고르도록 여기 한 곳에만 둡니다.
+   * 원칙 1. 긴 태그 = 구체적인 태그 → 가중치를 더 준다 ("바이브 코딩" > "교육")
+   * 원칙 2. 질문의 의도(강의를 찾는지, 경력을 찾는지)와 카드 분류가 맞으면 가산점
+   * 원칙 3. 동점이면 더 긴 태그가 맞은 카드를 앞에 둔다 */
+  var INTENTS = [
+    { cat: "강의", re: /(강의|특강|워크숍|워크샵|커리큘럼|수업|출강|강사|세미나|교육|클래스|수강|배우)/ },
+    { cat: "프로젝트", re: /(프로젝트|사례|포트폴리오|만든|만들|제작|구축|결과물|산출물)/ },
+    { cat: "자격", re: /(자격증|자격|수상|상훈|표창|인증|어워드)/ },
+    { cat: "궤적", re: /(경력|이력|타임라인|연혁|커리어|수료|이수|재직|학력)/ },
+    { cat: "연락", re: /(연락|문의|이메일|메일|컨택|채용|협업|상담|견적)/ },
+    { cat: "미디어", re: /(방송|언론|보도|인터뷰|뉴스|출연|사진|갤러리)/ },
+    { cat: "역량", re: /(역량|강점|잘하|전문성|스킬|능력)/ },
+  ];
+
+  function rank(query, cards) {
+    var q = String(query || "").toLowerCase();
+    var list = (cards && cards.length) ? cards : CARDS;
+    var bonus = {};
+    INTENTS.forEach(function (it) { if (it.re.test(q)) bonus[it.cat] = 4; });
+
+    return list.map(function (c, idx) {
+      var s = 0, longest = 0;
+      (c.tags || []).forEach(function (t) {
+        t = String(t).toLowerCase();
+        if (!t || q.indexOf(t) === -1) return;
+        s += 2 + Math.min(t.length, 12);
+        if (t.length > longest) longest = t.length;
+      });
+      var title = String(c.title || "").toLowerCase();
+      if (title && q.indexOf(title) > -1) s += 6;
+      else {
+        var tok = 0;
+        title.split(/[^0-9a-z가-힣]+/).forEach(function (w) {
+          if (w.length >= 2 && q.indexOf(w) > -1) tok += 2;
+        });
+        s += Math.min(tok, 6);
+      }
+      if (s > 0 && bonus[c.cat]) s += bonus[c.cat];
+      return { c: c, s: s, l: longest, i: idx };
+    }).sort(function (a, b) { return (b.s - a.s) || (b.l - a.l) || (a.i - b.i); });
+  }
+
   /* --------------------------------------------- 무료상담 스크립트 (단계) */
   var CONSULT = {
     trigger: ["상담", "견적", "의뢰", "제안", "채용", "협업", "문의", "미팅", "연락", "함께", "가능한가요", "강의", "특강", "워크숍", "출강", "consult", "hire"],
@@ -332,9 +375,10 @@
   ];
 
   return {
-    version: "2026.09.15",
+    version: "2026.09.15c",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
+    rank: rank,
     /* 시스템 프롬프트용 지식 직렬화 (서버·프론트 공용) */
     toKnowledge: function () {
       var k = CARDS.map(function (c) {
