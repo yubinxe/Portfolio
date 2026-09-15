@@ -2023,3 +2023,14 @@ a { text-underline-offset: .2em; }
   white-space: nowrap;
   border: 0;
 }
+
+/* ============================================================
+   IMG width/height 속성과 CSS aspect-ratio 공존
+   ------------------------------------------------------------
+   <img width height> 는 presentational hint 로 height 를 픽셀 고정해
+   aspect-ratio 로 잡은 비율을 덮어쓴다. height:auto 로 무력화하되
+   속성 자체는 남겨 브라우저가 로드 전 공간을 예약(CLS 방지)하도록 한다.
+   ============================================================ */
+.g-card img,
+.photo-card img,
+.press-card img { height: auto; }
