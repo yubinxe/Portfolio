@@ -766,7 +766,12 @@
     var msg = el("div", "yk-msg bot");
     msg.appendChild(el("div", "yk-msg__ava", "YK"));
     var col = el("div", "yk-msg__col");
-    var bubble = el("div", "yk-msg__bubble", mdLite("아래 내용으로 김유빈 님께 전달하겠습니다. 수정 후 **보내기**를 눌러주세요."));
+    /* 접수 서버가 없는 정적 호스팅(GitHub Pages)에서는 어차피 메일 폴백으로 간다.
+       "전송 중…" 을 보여줬다가 메일 앱으로 튀는 대신, 처음부터 그렇게 말한다. */
+    var viaMail = isStaticHost() || !CFG.leadEndpoint;
+    var bubble = el("div", "yk-msg__bubble", mdLite(viaMail
+      ? "아래 내용으로 김유빈 님께 전달하겠습니다. 수정 후 **이메일로 보내기**를 누르시면 내용이 그대로 담긴 메일 작성 화면이 열립니다."
+      : "아래 내용으로 김유빈 님께 전달하겠습니다. 수정 후 **보내기**를 눌러주세요."));
     col.appendChild(bubble);
     var form = el("form", "yk-form");
     form.innerHTML =
@@ -774,7 +779,7 @@
       '<label>회신 이메일 또는 연락처</label><input name="contact" value="' + escapeHtml(data.contact || "") + '" required />' +
       '<label>상담 내용</label><textarea name="message">' + escapeHtml(summarize(data)) + "</textarea>" +
       '<div class="yk-form__err" hidden></div>' +
-      '<div class="yk-form__row"><button type="button" class="yk-cta__btn yk-cta__btn--ghost" data-cancel>취소</button><button type="submit" class="yk-cta__btn">보내기</button></div>';
+      '<div class="yk-form__row"><button type="button" class="yk-cta__btn yk-cta__btn--ghost" data-cancel>취소</button><button type="submit" class="yk-cta__btn">' + (viaMail ? "이메일로 보내기" : "보내기") + '</button></div>';
     col.appendChild(form);
     msg.appendChild(col);
     body.appendChild(msg);
@@ -799,7 +804,7 @@
       if (!lead.name || !lead.contact) { err.hidden = false; err.textContent = "성함과 연락처는 필수입니다."; return; }
       err.hidden = true;
       var btn = form.querySelector('[type="submit"]');
-      btn.disabled = true; btn.textContent = "전송 중…";
+      btn.disabled = true; btn.textContent = viaMail ? "메일 작성 화면 여는 중…" : "전송 중…";
       submitLead(lead).then(function (res) {
         form.remove();
         var t = CONSULT.closing + (res && res.notified === false ? "\n(알림 발송은 지연될 수 있으나 접수는 완료되었습니다.)" : "");
