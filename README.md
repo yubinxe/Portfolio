@@ -67,6 +67,15 @@ AIRTABLE_PAT=pat… AIRTABLE_BASE_ID=app… npm run seed   # KnowledgeCards · P
 - PAT 스코프: `data.records:read`, `data.records:write`. 403 이면 스코프/베이스 접근 권한 문제(스크립트가 안내 출력).
 - `Leads` 테이블 필드: `Name, Contact, Message, Need, Context, Page, UserAgent, Status(New/Contacted/Closed), History, ReceivedAt`.
 
+## 배포
+
+| 대상 | 방식 | 주의 |
+|---|---|---|
+| GitHub Pages | `main` 푸시 시 자동(`pages build and deployment`) | 저장소 루트를 그대로 서빙 |
+| Vercel | `main`·PR 브랜치 자동 | `vercel.json` 의 `buildCommand: ""` · `outputDirectory: "."` 로 **빌드를 건너뛰고** 루트를 서빙. 이 두 줄을 지우면 Vercel 이 `package.json` 의 `build` 를 실행한 뒤 `public/` 을 찾다가 배포 실패한다(테스트가 막아 둠) |
+
+`dist/*.js` 를 커밋하는 이유가 여기 있습니다 — 두 호스팅 모두 빌드 단계 없이 정적 파일만 서빙합니다.
+
 ## 검증
 
 ```bash
