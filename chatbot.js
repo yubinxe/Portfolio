@@ -71,7 +71,7 @@
   /* kb.js 가 없을 때의 최소 폴백 카드 (kb.js 가 정본) */
   var KB = (EXT && EXT.cards) || [
     { id: "profile", tags: ["소개", "누구", "김유빈", "about"], title: "인물 개요",
-      body: "김유빈(Yubin Kim) · 2004년생. 법무법인 경국 사원으로 대외협력 · 마케팅 · 개발을 맡아 AI Process Innovation을 담당합니다.",
+      body: "김유빈(Yubin Kim) · 2004년생. 법무법인 경국에서 전략기획과 AI 프로세스 혁신을 담당합니다.",
       primary: { label: "선언 보기", href: "index.html#manifesto" }, secondary: null },
     { id: "contact", tags: ["연락", "이메일", "협업", "채용", "문의"], title: "연락·협업",
       body: "협업·채용·프로젝트 문의: [" + PROFILE.email + "](mailto:" + PROFILE.email + ")",

@@ -730,10 +730,10 @@ function About() {
           <div>
             <Quote size={46} style={{ color: "var(--ink)" }} />
             <h3 className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" }}>
-              사람과 조직, 브랜드를 잇는<br />대외협력의 자리에서 일합니다.
+              판단의 근거를 만들고,<br />실행까지 책임지는 자리에서 일합니다.
             </h3>
             <p className="font-ko" style={{ margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
-              법률과 데이터를 대중이 이해하는 언어로 옮기고, 신뢰를 쌓는 대외협력·홍보 콘텐츠를 기획합니다.
+              흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다. 법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
             </p>
             <p className="font-ko" style={{ margin: "12px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
               강의실과 사무실, 카메라 앞을 오가며 쌓아온 시간을 기록으로 남깁니다. 말보다 결과물이 먼저 증명하도록.
