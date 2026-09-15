@@ -18,7 +18,7 @@
 | `admin.html` | 리드 인박스(상태 변경 · CSV) + 지식카드 검수. PAT 는 브라우저 localStorage 에만 |
 | `build-seed.mjs` → `seed/seed.json` → `seed-airtable.js` | Airtable 시드(결정론적 빌드 → upsert) |
 | `scripts/build-jsx.mjs` → `dist/` | `npm run build`. `*.jsx` 를 컴파일해 `dist/*.js` 생성. **JSX 를 고쳤으면 반드시 실행**(빌드를 잊으면 `npm test` 가 잡아냄) |
-| `test/` | `npm test` (29건). `lead.test.mjs` 리드 계약·카드 무결성, `anchors.test.mjs` 딥링크 앵커, `seo.test.mjs` 구조화 데이터·canonical·폰트·CSS 캐시 버전·alt·Vercel 계약, `kb-rank.test.mjs` 챗봇 답변 품질(질문 40개), `links.test.mjs` 내부 링크·`@id` 참조, `dist.test.mjs` 빌드 최신 여부, `chat.test.mjs` 서버리스 챗 프록시(CORS·키 미설정 503·스트림 파싱·역할 주입 차단) |
+| `test/` | `npm test` (29건). `lead.test.mjs` 리드 계약·카드 무결성, `anchors.test.mjs` 딥링크 앵커, `seo.test.mjs` 구조화 데이터·canonical·폰트·CSS 캐시 버전·alt·Vercel 계약, `kb-rank.test.mjs` 챗봇 답변 품질(질문 40개), `links.test.mjs` 내부 링크·`@id` 참조, `dist.test.mjs` 빌드 최신 여부, `chat.test.mjs` 서버리스 챗 프록시(CORS·키 미설정 503·스트림 파싱·역할 주입 차단), `seed.test.mjs` 시드 최신 여부 |
 
 ## 지식카드 스키마 (`kb.js`)
 
@@ -95,7 +95,7 @@ npm test          # node --test test/ (dist 최신 여부까지 검증)
 node -e "require('./kb.js')" && node --check chatbot.js
 ```
 
-> `dist/*.js` 는 자동 생성물입니다. 직접 고치지 말고 `*.jsx` 를 고친 뒤 `npm run build` 를 실행하세요.
+> `dist/*.js` 와 `seed/seed.json` 은 자동 생성물입니다. 직접 고치지 말고 원본(`*.jsx` · `kb.js`)을 고친 뒤 `npm run build` · `npm run seed:build` 를 실행하세요. 둘 다 최신이 아니면 `npm test` 가 실패합니다.
 
 ## 강의 프로그램 (2 트랙 8과정)
 
@@ -118,7 +118,7 @@ node -e "require('./kb.js')" && node --check chatbot.js
 - 궤적 항목 추가: `sections.jsx TRAJECTORY`(id 부여) → `career.html cv-row`(id) → `kb.js` 카드/`trajectory` 요약 → `npm test`
 - 사진 추가: `images/` 에 넣고 `gallery.html` figure(`g-card`, 문서형은 `g-card--doc`) + `id`
 - 자격 추가: `sections.jsx CREDS` + `gallery.html #credentials` 카드 + `kb.js creds`
-- 강의 추가: `sections.jsx LECTURES`(id `lec-NN`) → `lecture.html` 카드와 JSON-LD → `career.html#lectures` 행 → `kb.js` `lec-NN` 카드 → `npm run build` → `npm test`
+- 강의 추가: `sections.jsx LECTURES`(id `lec-NN`) → `lecture.html` 카드와 JSON-LD → `career.html#lectures` 행 → `kb.js` `lec-NN` 카드 → `npm run build` → `npm run seed:build` → `npm test`
 
 ## 검색 노출 (SEO)
 
