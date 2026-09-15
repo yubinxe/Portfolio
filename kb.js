@@ -94,8 +94,8 @@
     { id: "lectures", cat: "강의", tags: ["강의", "강사", "교육", "워크숍", "세미나", "특강", "수업", "커리큘럼", "출강", "lecture", "teaching", "training"],
       title: "강의 프로그램 — 2개 트랙 8과정",
       body: "\"만들어 본 사람만 가르칠 수 있는 것이 있습니다.\" SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처·교수법, KREMA 4기의 시장 데이터 전략을 실제로 만들어 운영한 뒤 강의 모듈로 옮겼습니다.\n**Track A — AI 파운데이션**\n- 01 AI 기초 개념 — 무엇이 되고 무엇이 안 되는가 (2시간)\n- 02 프롬프트 엔지니어링 — 문장이 아니라 구조로 (3시간)\n- 03 바이브 코딩 — 코드를 몰라도 만들고 배포하기 (4시간)\n- 04 하네스 엔지니어링 — 에이전트에 손과 발을 달기 (4시간)\n**Track B — 도메인 적용**\n- 05 실무자를 위한 전략기획 AI (3–6시간)\n- 06 공공데이터로 시장을 읽는 법 (4시간)\n- 07 생성형 AI 브랜드 필름 제작 (3시간)\n- 08 제도의 언어를 대중의 언어로 (2시간)\n강의 문의는 [" + EMAIL_OFFICE + "](mailto:" + EMAIL_OFFICE + ") 로 받습니다.",
-      primary: { label: "강의 프로그램 보기", href: "index.html#lectures" },
-      secondary: { label: "과정별 상세 페이지", href: "lecture.html" } },
+      primary: { label: "강의 프로그램 상세", href: "lecture.html" },
+      secondary: { label: "메인의 강의 섹션", href: "index.html#lectures" } },
     { id: "lec-01", cat: "강의", tags: ["ai 기초", "ai 기초 개념", "기초 개념", "입문", "환각", "맥락창", "토큰", "도입 검토"],
       title: "강의 01 — AI 기초 개념: 무엇이 되고 무엇이 안 되는가",
       body: "모델이 어떻게 답을 만드는지 알면 어디까지 맡길지 판단할 수 있습니다.\n- 토큰·맥락창·환각이 생기는 자리\n- 생성형 AI가 잘하는 일과 못하는 일의 경계\n- 업무에 붙일 때의 검수 기준\n대상은 전 직군 입문자와 도입을 검토하는 관리자, 2시간 구성입니다. 근거는 서울대 AI 교육 전문가 과정(AIED) 4기입니다.",
@@ -375,7 +375,7 @@
   ];
 
   return {
-    version: "2026.09.15d",
+    version: "2026.09.15e",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
     rank: rank,
