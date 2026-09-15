@@ -210,12 +210,15 @@
   });
 
   /* ---------------------------------------------------- 로컬 폴백 답변 엔진 */
+  /* 랭킹은 kb.js 한 곳에서만 정의합니다(test/kb-rank.test.mjs 가 품질을 고정).
+   * kb.js 로드 실패로 내장 축약본을 쓰는 경우에만 아래 단순 점수식으로 내려갑니다. */
   function scoreCards(query) {
     var q = (query || "").toLowerCase();
+    if (EXT && typeof EXT.rank === "function") return EXT.rank(q, KB);
     return KB.map(function (c) {
       var s = 0;
-      (c.tags || []).forEach(function (t) { if (q.indexOf(String(t).toLowerCase()) > -1) s += 2; });
-      if (c.title && q.indexOf(c.title.toLowerCase()) > -1) s += 3;
+      (c.tags || []).forEach(function (t) { if (q.indexOf(String(t).toLowerCase()) > -1) s += 2 + Math.min(String(t).length, 12); });
+      if (c.title && q.indexOf(c.title.toLowerCase()) > -1) s += 6;
       return { c: c, s: s };
     }).sort(function (a, b) { return b.s - a.s; });
   }
