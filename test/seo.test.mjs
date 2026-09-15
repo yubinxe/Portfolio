@@ -130,3 +130,13 @@ test("모든 페이지가 Pretendard 가변 동적 서브셋을 쓴다", () => {
     );
   }
 });
+
+/* Vercel 배포 계약 — package.json 에 build 스크립트가 있으면 Vercel 이 그걸 실행한 뒤
+ * 출력 디렉터리(public)를 찾다가 없으면 배포가 실패한다. dist/*.js 는 커밋되므로
+ * 빌드 없이 루트를 그대로 서빙해야 한다. 이 두 줄이 빠지면 Vercel 만 조용히 깨진다. */
+test("vercel.json 이 빌드 없이 루트를 서빙하도록 고정한다", () => {
+  const v = JSON.parse(read("vercel.json"));
+  assert.equal(v.buildCommand, "", "buildCommand 가 비어 있어야 Vercel 이 빌드를 건너뛴다");
+  assert.equal(v.outputDirectory, ".", "outputDirectory 는 저장소 루트");
+  assert.ok(v.functions["api/*.js"], "api 서버리스 함수 설정 유지");
+});
