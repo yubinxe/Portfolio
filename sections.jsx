@@ -61,7 +61,7 @@ function Hero() {
   return (
     <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
       <div className="hero-photo" aria-hidden="true">
-        <img src="images/hero-gangnam.jpg?v=1" alt="" />
+        <img src="images/hero-gangnam.jpg?v=1" alt="" fetchpriority="high" decoding="async" />
       </div>
       <div className="hero-photo__scrim" aria-hidden="true" />
 
@@ -70,6 +70,7 @@ function Hero() {
         <p className="font-sans" style={{ letterSpacing: ".34em", textTransform: "uppercase", fontSize: ".7rem", fontWeight: 600, color: "var(--ink-soft)", opacity: .82, margin: "0 0 14px" }}>SEOUL, Seocho</p>
         <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
+          <span className="sr-only">김유빈 Yubin Kim — 전략기획 × AI</span>
           {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
           <br />
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
@@ -812,6 +813,7 @@ function Footer() {
         {[["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
+        <a href="https://github.com/yubinxe" rel="me noopener" target="_blank">GitHub</a>
         <a href="mailto:ybkim@gyunggook.com" style={{ marginLeft: "auto" }}>ybkim@gyunggook.com</a>
       </div>
       <div className="wrap footer-grid" style={{ padding: "26px 0" }}>
