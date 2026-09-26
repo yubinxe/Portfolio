@@ -765,13 +765,13 @@ function Lectures() {
     <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Side Practice — 준비 중" titleEn="The Lectures" titleKo="부업으로 준비 중인 AI 강의" />
+        <SectionHead eyebrow="Side Practice — 준비 중" titleEn="The Lectures" titleKo="준비 중인 AI 강의 프로그램" />
 
         <div className="side-note reveal">
           <span className="side-note__badge font-sans">In Preparation</span>
           <p className="font-ko">
             본업은 <strong>AI 전략기획</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
-            <strong> 부업으로 준비하고 있는 프로그램</strong>이며, 아직 출강 이력은 없습니다.
+            <strong> 별도로 준비하고 있는 프로그램</strong>이며, 아직 출강 이력은 없습니다.
             커리큘럼과 근거를 미리 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다.
           </p>
         </div>

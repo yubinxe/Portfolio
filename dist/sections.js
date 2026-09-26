@@ -766,13 +766,13 @@ function Lectures() {
     React.createElement("section", { id: "lectures", ref: ref, className: "side-practice", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .22 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 \uC900\uBE44 \uC911", titleEn: "The Lectures", titleKo: "\uBD80\uC5C5\uC73C\uB85C \uC900\uBE44 \uC911\uC778 AI \uAC15\uC758" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 \uC900\uBE44 \uC911", titleEn: "The Lectures", titleKo: "\uC900\uBE44 \uC911\uC778 AI \uAC15\uC758 \uD504\uB85C\uADF8\uB7A8" }), /*#__PURE__*/
 
     React.createElement("div", { className: "side-note reveal" }, /*#__PURE__*/
     React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, "\uBCF8\uC5C5\uC740 ", /*#__PURE__*/
     React.createElement("strong", null, "AI \uC804\uB7B5\uAE30\uD68D"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
-    React.createElement("strong", null, " \uBD80\uC5C5\uC73C\uB85C \uC900\uBE44\uD558\uACE0 \uC788\uB294 \uD504\uB85C\uADF8\uB7A8"), "\uC774\uBA70, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBBF8\uB9AC \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4."
+    React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC900\uBE44\uD558\uACE0 \uC788\uB294 \uD504\uB85C\uADF8\uB7A8"), "\uC774\uBA70, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBBF8\uB9AC \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4."
 
     )
     ), /*#__PURE__*/
