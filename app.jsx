@@ -22,8 +22,8 @@ function App() {
         <Composite />
         <Artifacts />
         <Trajectory />
-        <Lectures />
         <About />
+        <Lectures />
         <Contact />
       </main>
 

@@ -27,7 +27,7 @@ function Nav() {
   }, []);
   const links = [
     ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-    ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
+    ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["강의", "#lectures"],
   ];
   return (
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
@@ -137,7 +137,6 @@ function Ledger() {
     ["8", "AI · 자동화 결과물", "Projects"],
     ["4", "배포 · 사내 운영 시스템", "In Operation"],
     ["4", "AI · 데이터 전문교육", "Programs"],
-    ["8", "강의 프로그램", "Lectures"],
     ["3", "수상 · 표창", "Awards"],
   ];
   return (
@@ -763,10 +762,19 @@ function Artifacts() {
 function Lectures() {
   const ref = useReveal();
   return (
-    <section id="lectures" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
+    <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="04 — Lectures & Workshops" titleEn="The Lectures" titleKo="강의로 전하는 전략기획 AI" />
+        <SectionHead eyebrow="Side Practice — 준비 중" titleEn="The Lectures" titleKo="부업으로 준비 중인 AI 강의" />
+
+        <div className="side-note reveal">
+          <span className="side-note__badge font-sans">In Preparation</span>
+          <p className="font-ko">
+            본업은 <strong>AI 전략기획</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
+            <strong> 부업으로 준비하고 있는 프로그램</strong>이며, 아직 출강 이력은 없습니다.
+            커리큘럼과 근거를 미리 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다.
+          </p>
+        </div>
 
         <div className="lec-intro reveal">
           <p className="font-myeongjo">
@@ -775,7 +783,7 @@ function Lectures() {
           <p className="font-ko lec-intro__sub">
             SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처와 교수법,
             KREMA 4기의 시장 데이터 전략 — 배운 것을 실제로 만들어 운영해 본 뒤에 강의 모듈로 옮겼습니다.
-            여덟 과정 모두 조직 상황에 맞춰 시간과 실습 비중을 조정합니다.
+            현재 두 트랙, 여덟 과정의 커리큘럼을 설계해 두었습니다.
           </p>
         </div>
 
@@ -838,7 +846,7 @@ function Lectures() {
             ))}
           </div>
           <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" className="btn"><Mail size={16} /> 강의 문의</a>
+            <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" className="btn btn--ghost"><Mail size={16} /> 강의 관련 문의</a>
             <a href="lecture.html" className="btn btn--ghost">과정별 상세 보기 <ArrowUpRight size={15} /></a>
             <a href="career.html#lectures" className="btn btn--ghost">강의 역량 상세 <ArrowUpRight size={15} /></a>
           </div>
@@ -857,7 +865,7 @@ function About() {
       <div className="wrap reveal" style={{ position: "relative", zIndex: 1 }}>
         <div className="about-grid">
           <div>
-            <p className="eyebrow" style={{ marginBottom: 6 }}>05 — Profile</p>
+            <p className="eyebrow" style={{ marginBottom: 6 }}>04 — Profile</p>
             <h3 className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" }}>
               판단의 근거를 만들고,<br />실행까지 책임지는 자리에서 일합니다.
             </h3>

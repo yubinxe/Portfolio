@@ -28,7 +28,7 @@ function Nav() {
   }, []);
   const links = [
   ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-  ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]];
+  ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["강의", "#lectures"]];
 
   return (/*#__PURE__*/
     React.createElement("header", { className: "hnav" + (solid ? " is-solid" : ""), style: {
@@ -138,7 +138,6 @@ function Ledger() {
   ["8", "AI · 자동화 결과물", "Projects"],
   ["4", "배포 · 사내 운영 시스템", "In Operation"],
   ["4", "AI · 데이터 전문교육", "Programs"],
-  ["8", "강의 프로그램", "Lectures"],
   ["3", "수상 · 표창", "Awards"]];
 
   return (/*#__PURE__*/
@@ -764,16 +763,25 @@ function Artifacts() {
 function Lectures() {
   const ref = useReveal();
   return (/*#__PURE__*/
-    React.createElement("section", { id: "lectures", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
+    React.createElement("section", { id: "lectures", ref: ref, className: "side-practice", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .22 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "04 \u2014 Lectures & Workshops", titleEn: "The Lectures", titleKo: "\uAC15\uC758\uB85C \uC804\uD558\uB294 \uC804\uB7B5\uAE30\uD68D AI" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 \uC900\uBE44 \uC911", titleEn: "The Lectures", titleKo: "\uBD80\uC5C5\uC73C\uB85C \uC900\uBE44 \uC911\uC778 AI \uAC15\uC758" }), /*#__PURE__*/
+
+    React.createElement("div", { className: "side-note reveal" }, /*#__PURE__*/
+    React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko" }, "\uBCF8\uC5C5\uC740 ", /*#__PURE__*/
+    React.createElement("strong", null, "AI \uC804\uB7B5\uAE30\uD68D"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
+    React.createElement("strong", null, " \uBD80\uC5C5\uC73C\uB85C \uC900\uBE44\uD558\uACE0 \uC788\uB294 \uD504\uB85C\uADF8\uB7A8"), "\uC774\uBA70, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBBF8\uB9AC \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4."
+
+    )
+    ), /*#__PURE__*/
 
     React.createElement("div", { className: "lec-intro reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "font-myeongjo" }, "\uB9CC\uB4E4\uC5B4 \uBCF8 \uC0AC\uB78C\uB9CC \uAC00\uB974\uCE60 \uC218 \uC788\uB294 \uAC83\uC774 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 4\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uC5EC\uB35F \uACFC\uC815 \uBAA8\uB450 \uC870\uC9C1 \uC0C1\uD669\uC5D0 \uB9DE\uCDB0 \uC2DC\uAC04\uACFC \uC2E4\uC2B5 \uBE44\uC911\uC744 \uC870\uC815\uD569\uB2C8\uB2E4."
+    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 4\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uD604\uC7AC \uB450 \uD2B8\uB799, \uC5EC\uB35F \uACFC\uC815\uC758 \uCEE4\uB9AC\uD058\uB7FC\uC744 \uC124\uACC4\uD574 \uB450\uC5C8\uC2B5\uB2C8\uB2E4."
 
 
 
@@ -839,7 +847,7 @@ function Lectures() {
     )
     ), /*#__PURE__*/
     React.createElement("div", { style: { marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" } }, /*#__PURE__*/
-    React.createElement("a", { href: "mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D", className: "btn" }, /*#__PURE__*/React.createElement(Mail, { size: 16 }), " \uAC15\uC758 \uBB38\uC758"), /*#__PURE__*/
+    React.createElement("a", { href: "mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D", className: "btn btn--ghost" }, /*#__PURE__*/React.createElement(Mail, { size: 16 }), " \uAC15\uC758 \uAD00\uB828 \uBB38\uC758"), /*#__PURE__*/
     React.createElement("a", { href: "lecture.html", className: "btn btn--ghost" }, "\uACFC\uC815\uBCC4 \uC0C1\uC138 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "career.html#lectures", className: "btn btn--ghost" }, "\uAC15\uC758 \uC5ED\uB7C9 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
     )
@@ -858,7 +866,7 @@ function About() {
     React.createElement("div", { className: "wrap reveal", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
     React.createElement("div", { className: "about-grid" }, /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/
-    React.createElement("p", { className: "eyebrow", style: { marginBottom: 6 } }, "05 \u2014 Profile"), /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow", style: { marginBottom: 6 } }, "04 \u2014 Profile"), /*#__PURE__*/
     React.createElement("h3", { className: "font-myeongjo", style: { fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" } }, "\uD310\uB2E8\uC758 \uADFC\uAC70\uB97C \uB9CC\uB4E4\uACE0,", /*#__PURE__*/
     React.createElement("br", null), "\uC2E4\uD589\uAE4C\uC9C0 \uCC45\uC784\uC9C0\uB294 \uC790\uB9AC\uC5D0\uC11C \uC77C\uD569\uB2C8\uB2E4."
     ), /*#__PURE__*/
