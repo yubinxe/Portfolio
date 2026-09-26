@@ -26,28 +26,27 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["선언", "#manifesto"], ["역량", "#composite"], ["궤적", "#trajectory"],
-    ["작업", "#artifacts"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력", "career.html"],
+    ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
+    ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
-    <header style={{
+    <header className={"hnav" + (solid ? " is-solid" : "")} style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-      transition: "all .4s ease",
-      background: solid ? "rgba(249,246,240,.82)" : "transparent",
-      backdropFilter: solid ? "saturate(180%) blur(12px)" : "none",
-      borderBottom: solid ? "1px solid rgba(17,17,17,.10)" : "1px solid transparent",
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
-          <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="34" height="34" style={{ display: "block", borderRadius: 9 }} />
-          <span className="sticker sticker--butter font-ko" style={{ padding: ".25em .6em", fontSize: 11, boxShadow: "0 3px 0 rgba(17,17,17,.12)" }}>Portfolio</span>
+          <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="32" height="32" style={{ display: "block" }} />
+          <span className="hnav__name">
+            <b className="font-serif">Yubin Kim</b>
+            <small>AI Strategy &amp; Planning</small>
+          </span>
         </a>
         <nav aria-label="주요 메뉴" style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
           <div className="nav-desktop" style={{ display: "flex", gap: "clamp(14px,2.4vw,32px)" }}>
             {links.map(([t, h]) => <a key={t} className="navlink" href={h}>{t}</a>)}
           </div>
           <a href="#contact" className="btn" style={{ padding: ".55em 1.1em", fontSize: ".85rem" }}>
-            연락하기 <ArrowUpRight size={16} />
+            Contact <ArrowUpRight size={14} />
           </a>
         </nav>
       </div>
@@ -67,25 +66,28 @@ function Hero() {
 
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 18px" }}><i /></div>
-        <p className="font-sans" style={{ letterSpacing: ".34em", textTransform: "uppercase", fontSize: ".7rem", fontWeight: 600, color: "var(--ink-soft)", opacity: .82, margin: "0 0 14px" }}>SEOUL, Seocho</p>
-        <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 22 }}>Yubin Kim Office — The Manifesto</p>
+        <p className="font-sans hero-kicker">Seoul · Portfolio 2026</p>
+        <p className="eyebrow hero-eyebrow">AI Strategy &amp; Planning</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
-          <span className="sr-only">김유빈 Yubin Kim — 전략기획 × AI</span>
+          <span className="sr-only">김유빈 Yubin Kim — AI 전략기획</span>
           {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
           <br />
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
         <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"전략기획 × AI · 법무법인 경국 — Strategy · Automation · Teaching"}
+          {"AI 전략기획 · 법무법인 경국 — Strategy · Automation · Data"}
         </p>
         <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
           데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.
         </p>
+        <p className="font-ko hero-proof">
+          AI로 풀 문제를 정의하고, 자동화 시스템을 직접 구현해 실제 업무에 적용합니다.
+        </p>
 
         <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="#artifacts" className="btn"><Sparkle size={17} /> 프로젝트 보기</a>
-          <a href="#lectures" className="btn btn--ghost">강의 프로그램 <ArrowUpRight size={16} /></a>
-          <a href="#trajectory" className="btn btn--ghost">걸어온 궤적 <ArrowDown size={16} /></a>
+          <a href="#artifacts" className="btn">대표 프로젝트 <ArrowDown size={15} /></a>
+          <a href="#composite" className="btn btn--ghost">핵심 역량</a>
+          <a href="career.html" className="btn btn--ghost">경력 상세 <ArrowUpRight size={15} /></a>
         </div>
       </div>
 
@@ -132,23 +134,22 @@ function Marquee() {
 function Ledger() {
   const ref = useReveal();
   const ITEMS = [
-    ["8", "수행 프로젝트", "Projects"],
+    ["8", "AI · 자동화 결과물", "Projects"],
+    ["4", "배포 · 사내 운영 시스템", "In Operation"],
+    ["4", "AI · 데이터 전문교육", "Programs"],
     ["8", "강의 프로그램", "Lectures"],
-    ["4", "전문 교육 이수", "Programs"],
     ["3", "수상 · 표창", "Awards"],
-    ["1", "방송 인터뷰", "On Air"],
   ];
   return (
-    <section ref={ref} style={{ position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(54px,7vw,84px) 0" }}>
+    <section ref={ref} className="ledger" aria-label="한눈에 보는 기록">
       <div className="wrap reveal">
-        <div className="menu-rule" style={{ color: "rgba(244,245,248,.45)", marginBottom: 8 }}><i /></div>
-        <p className="eyebrow" style={{ color: "rgba(244,245,248,.55)", margin: "18px 0 30px" }}>06 — The Ledger · 한눈에 보는 기록</p>
+        <p className="eyebrow ledger__eyebrow">At a Glance — 한눈에 보는 기록</p>
         <div className="ledger-grid">
           {ITEMS.map(([n, ko, en], i) => (
             <div key={i} className="ledger-item" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="ledger-num font-serif" data-count={n}>0</div>
-              <div className="font-ko" style={{ fontWeight: 700, fontSize: ".95rem", marginTop: 10 }}>{ko}</div>
-              <div className="font-sans" style={{ fontSize: ".72rem", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(244,245,248,.5)", marginTop: 4 }}>{en}</div>
+              <div className="ledger-num font-serif" data-count={n}>{n}</div>
+              <div className="ledger-ko font-ko">{ko}</div>
+              <div className="ledger-en font-sans">{en}</div>
             </div>
           ))}
         </div>
@@ -159,14 +160,14 @@ function Ledger() {
 
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
-  { n: "01", ko: "전략기획", short: "전략", en: "Strategic Planning",
-    desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하는 일. 정비사업 용역비 수집으로 시장 단가 비교와 사업성 검토의 기준선을 만들었습니다.",
-    tags: ["사업성 검토", "우선순위 설계"] },
-  { n: "02", ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
+  { n: "01", core: true, ko: "AI 전략기획", short: "전략", en: "AI Strategy & Planning",
+    desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 정비사업 용역비 수집으로 시장 단가 비교와 사업성 검토의 기준선을 만들었고, VOC 트리아지에서는 무엇을 리스크로 볼지의 판단 기준을 설계했습니다.",
+    tags: ["문제 정의 · 우선순위 설계", "사업성 검토"] },
+  { n: "02", core: true, ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
     desc: "사람이 반복하던 판단의 앞단을 AI에 맡기고, 사람은 기준을 정하는 자리에 남깁니다. SSAFY·서울대 AIED에서 구조를 익혔습니다.",
     tags: ["SSAFY 13기", "서울대 AIED 4기"] },
-  { n: "03", ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
-    desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다.",
+  { n: "03", core: true, ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
+    desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다. 전략이 감이 아니라 근거 위에 서도록 데이터 구조를 먼저 설계합니다.",
     tags: ["공공데이터 API", "GWS 연동"] },
   { n: "04", ko: "마케팅 · 커뮤니케이션", short: "마케팅", en: "Marketing & Comms",
     desc: "KREMA 4기의 세그먼트 전략과 생성형 AI 제작 역량으로 전략을 시장에 닿는 언어로 옮깁니다.",
@@ -292,10 +293,10 @@ const CASES = [
     manual: "분산된 공고를 수집하여 표로 정리하던 업무.",
     auto: "API가 데이터를 수집하고, 대시보드가 자동으로 갱신.",
     judge: "어떤 지표를 나란히 놓아야 의미가 생기는지는 시장을 알아야 보입니다." },
-  { n: "03", title: "브랜드 캠페인 필름", tag: "Veo 3 · ElevenLabs",
-    manual: "외주에 의뢰하고 수정을 반복하던 업무.",
-    auto: "생성형 AI가 영상과 내레이션을 직접 생성.",
-    judge: "브랜드의 톤을 지키는 판단만큼은 사람이 합니다." },
+  { n: "03", title: "정비사업 용역비 자동 수집", tag: "누리장터 · 웹 크롤링",
+    manual: "흩어진 용역 입찰 공고를 사이트마다 찾아 단가를 옮겨 적던 업무.",
+    auto: "크롤러가 정기적으로 공고와 용역비를 수집·정형화해 비교 가능한 데이터셋으로 축적.",
+    judge: "어떤 항목을 표준 필드로 삼아야 사업성 검토에 쓰이는지는 시장을 알아야 정할 수 있습니다." },
 ];
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
@@ -309,19 +310,19 @@ function ConvergenceMap({ active, onPick }) {
     <svg className="cmap" viewBox="0 0 400 400" role="img" aria-label="여섯 도메인이 하나로 수렴하는 융합 역량 다이어그램">
       <polygon className="cmap__ring" points={NODE.map((p) => p.join(",")).join(" ")} />
       {NODE.map((p, i) => (
-        <line key={"s" + i} className={"cmap__spoke" + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
+        <line key={"s" + i} className={"cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
       ))}
       <circle className="cmap__halo" cx="200" cy="200" r="60" />
       <circle className="cmap__core" cx="200" cy="200" r="46" />
-      <text className="cmap__coreT font-serif" x="200" y="197" textAnchor="middle">YK</text>
-      <text className="cmap__coreS" x="200" y="215" textAnchor="middle">COMPOSITE</text>
+      <text className="cmap__coreT font-serif" x="200" y="199" textAnchor="middle">AI</text>
+      <text className="cmap__coreS" x="200" y="215" textAnchor="middle">STRATEGY</text>
       {NODE.map((p, i) => (
-        <circle key={"n" + i} className={"cmap__node" + (i === active ? " on" : "")}
-          cx={p[0]} cy={p[1]} r={i === active ? 9.5 : 5.5}
+        <circle key={"n" + i} className={"cmap__node" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")}
+          cx={p[0]} cy={p[1]} r={i === active ? 9.5 : DOMAINS[i].core ? 7 : 4.5}
           onMouseEnter={() => onPick(i)} />
       ))}
       {DOMAINS.map((d, i) => (
-        <text key={"t" + i} className={"cmap__label" + (i === active ? " on" : "")}
+        <text key={"t" + i} className={"cmap__label" + (d.core ? " core" : "") + (i === active ? " on" : "")}
           x={LABEL[i].x} y={LABEL[i].y} textAnchor={LABEL[i].a}
           onMouseEnter={() => onPick(i)}>{d.short}</text>
       ))}
@@ -349,15 +350,15 @@ function Composite() {
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="02 — The Composite" titleEn="The Composite" titleKo="전략기획을 중심에 둔 융합 역량" />
+        <SectionHead eyebrow="01 — Core Competencies" titleEn="The Composite" titleKo="AI 전략기획을 중심에 둔 역량 구조" />
 
         <div className="comp-thesis reveal">
           <p className="font-myeongjo">
             전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.
           </p>
           <p className="font-ko comp-thesis__sub">
-            데이터에서 판단의 근거를 꺼내 우선순위를 세우는 전략기획을 중심에 두고,
-            자동화·데이터·커뮤니케이션·강의가 그 판단을 실행과 전달로 잇습니다.
+            중심축은 <strong>AI 전략기획 · AI 자동화 · 데이터</strong> 세 가지입니다.
+            마케팅·강의·도메인 지식은 그 판단을 정확하게 만들고 조직에 전달하는 보조 역량입니다.
           </p>
         </div>
 
@@ -372,33 +373,73 @@ function Composite() {
           </div>
 
           <div className="comp-track">
-            {DOMAINS.map((d, i) => (
-              <article
-                key={d.n}
-                data-i={i}
-                id={"dom-" + d.n}
-                ref={(el) => (rows.current[i] = el)}
-                className={"comp-row" + (i === active ? " on" : "")}
-                onMouseEnter={() => setActive(i)}
-              >
-                <div className="comp-row__head">
-                  <span className="comp-row__n font-cond">{d.n}</span>
-                  <span className="comp-row__rule" />
-                  <span className="comp-row__en font-sans">{d.en}</span>
-                </div>
-                <h3 className="font-ko">{d.ko}</h3>
-                <p className="font-ko">{d.desc}</p>
-                <div className="comp-row__tags font-ko">
-                  {d.tags.map((t) => <span key={t}>{t}</span>)}
-                </div>
-              </article>
-            ))}
+            <p className="comp-group font-sans">Core — 핵심 역량</p>
+            {DOMAINS.filter((d) => d.core).map((d) => {
+              const i = DOMAINS.indexOf(d);
+              return (
+                <article
+                  key={d.n}
+                  data-i={i}
+                  id={"dom-" + d.n}
+                  ref={(el) => (rows.current[i] = el)}
+                  className={"comp-row comp-row--core" + (i === active ? " on" : "")}
+                  onMouseEnter={() => setActive(i)}
+                >
+                  <div className="comp-row__head">
+                    <span className="comp-row__n font-cond">{d.n}</span>
+                    <span className="comp-row__rule" />
+                    <span className="comp-row__en font-sans">{d.en}</span>
+                  </div>
+                  <h3 className="font-ko">{d.ko}</h3>
+                  <p className="font-ko">{d.desc}</p>
+                  <div className="comp-row__tags font-ko">
+                    {d.tags.map((t) => <span key={t}>{t}</span>)}
+                  </div>
+                </article>
+              );
+            })}
+            <p className="comp-group comp-group--sub font-sans">Supporting — 보조 역량 · 눌러서 보기</p>
+            {DOMAINS.filter((d) => !d.core).map((d) => {
+              const i = DOMAINS.indexOf(d);
+              return (
+                <details
+                  key={d.n}
+                  data-i={i}
+                  id={"dom-" + d.n}
+                  ref={(el) => (rows.current[i] = el)}
+                  className={"comp-row comp-row--sub fold" + (i === active ? " on" : "")}
+                  onMouseEnter={() => setActive(i)}
+                >
+                  <summary>
+                    <span className="comp-row__n font-cond">{d.n}</span>
+                    <span className="fold__t">
+                      <strong className="font-ko">{d.ko}</strong>
+                      <em className="font-sans">{d.en}</em>
+                    </span>
+                    <i className="fold__icon" aria-hidden="true" />
+                  </summary>
+                  <div className="fold__body">
+                    <p className="font-ko">{d.desc}</p>
+                    <div className="comp-row__tags font-ko">
+                      {d.tags.map((t) => <span key={t}>{t}</span>)}
+                    </div>
+                  </div>
+                </details>
+              );
+            })}
           </div>
         </div>
 
-        <div className="arsenal reveal" id="arsenal">
-          <div className="menu-rule" style={{ marginBottom: 24 }}><i /></div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 26 }}>The Arsenal — 실무에서 다루는 도구</p>
+        <div className="folds reveal">
+        <details className="arsenal fold" id="arsenal">
+          <summary>
+            <span className="fold__t">
+              <span className="eyebrow">The Arsenal</span>
+              <strong className="font-ko">실무에서 다루는 도구</strong>
+            </span>
+            <i className="fold__icon" aria-hidden="true" />
+          </summary>
+          <div className="fold__body">
           {ARSENAL.map(([label, tools]) => (
             <div key={label} className="arsenal__row">
               <span className="arsenal__label font-ko">{label}</span>
@@ -407,11 +448,18 @@ function Composite() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        </details>
 
-        <div className="creds reveal" id="credentials">
-          <div className="menu-rule" style={{ marginBottom: 24 }}><i /></div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 26 }}>The Credentials — 보유 자격</p>
+        <details className="creds fold" id="credentials">
+          <summary>
+            <span className="fold__t">
+              <span className="eyebrow">The Credentials</span>
+              <strong className="font-ko">보유 자격 <em>{CREDS.length}건</em></strong>
+            </span>
+            <i className="fold__icon" aria-hidden="true" />
+          </summary>
+          <div className="fold__body">
           <div className="creds__grid">
             {CREDS.map((c) => (
               <div key={c.name} id={"cred-" + c.name.toLowerCase().replace(/[^a-z0-9가-힣]+/g, "-")} className="cred">
@@ -421,6 +469,8 @@ function Composite() {
               </div>
             ))}
           </div>
+          </div>
+        </details>
         </div>
 
       </div>
@@ -429,7 +479,7 @@ function Composite() {
     <section className="whyc" ref={bandRef}>
       <div className="wrap">
         <div className="menu-rule reveal" style={{ marginBottom: 26 }}><i /></div>
-        <p className="eyebrow reveal">Why It Matters — 도구가 아니라 우선순위</p>
+        <p className="eyebrow reveal">Strategy Cases — 기획 판단의 기록</p>
 
         <h2 className="whyc__lead font-myeongjo reveal">
           도구는 빨라졌습니다.<br />
@@ -445,21 +495,21 @@ function Composite() {
           {CASES.map((c, i) => (
             <article key={c.n} className="wcase reveal" style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="wcase__head">
-                <span className="wcase__n font-serif">{c.n}</span>
+                <span className="wcase__n font-serif">Case {c.n}</span>
                 <h3 className="wcase__t font-ko">{c.title}</h3>
                 <span className="wcase__tag font-sans">{c.tag}</span>
               </div>
               <div className="wcase__flow">
                 <div className="wcase__cell">
-                  <span className="wcase__lbl font-sans">사람이 하던 일</span>
+                  <span className="wcase__lbl font-sans">As-Is · 기존 방식</span>
                   <p className="font-ko">{c.manual}</p>
                 </div>
                 <div className="wcase__cell wcase__cell--auto">
-                  <span className="wcase__lbl font-sans">도구가 대신하는 일</span>
+                  <span className="wcase__lbl font-sans">To-Be · AI 적용</span>
                   <p className="font-ko">{c.auto}</p>
                 </div>
                 <div className="wcase__cell wcase__cell--judge">
-                  <span className="wcase__lbl font-sans">사람이 정하는 일</span>
+                  <span className="wcase__lbl font-sans">Judgment · 기획 판단</span>
                   <p className="font-ko">{c.judge}</p>
                 </div>
               </div>
@@ -483,58 +533,98 @@ function Composite() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
-  { id: "tl-seocho", year: "2026", tag: "PRESENT", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
+  { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
+    desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 기획·구현해 사내 운영에 적용." },
+  { id: "tl-seocho", group: "public", year: "2026", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
     desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
-  { id: "tl-youth-day", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
+  { id: "tl-youth-day", group: "public", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
     desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류." },
-  { id: "tl-youth-panel", year: "2026", color: "var(--pink)", title: "국무조정실 온라인 청년참여단 활동",
+  { id: "tl-youth-panel", group: "public", year: "2026", color: "var(--pink)", title: "국무조정실 온라인 청년참여단 활동",
     desc: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달." },
-  { id: "tl-konkuk", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
+  { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
-  { id: "tl-seoul-press", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
+  { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
     desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-  { id: "tl-fintech", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
+  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
     desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
-  { id: "tl-krema", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
+  { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
     desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
-  { id: "tl-snu-aied", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
+  { id: "tl-snu-aied", group: "edu", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
-  { id: "tl-ssafy", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
+  { id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
     desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
-  { id: "tl-ssafy-ambassador", year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
+  { id: "tl-ssafy-ambassador", group: "public", year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
     desc: "SSAFY 공식 홍보 앰배서더로 교육 과정과 성과를 콘텐츠로 알리고, 지원자 대상 커뮤니케이션과 대외 홍보 활동을 수행." },
-  { id: "tl-army-startup", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
+  { id: "tl-army-startup", group: "honor", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
     desc: "軍·官·學 주관 2023 강원열린군대 스타트업 프로그램 성취도평가에서 팀 Home_Ally로 2위 입상(2023. 12. 31). HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
-  { id: "tl-army-training", year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
+  { id: "tl-army-training", group: "honor", year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
     desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
-  { id: "tl-army-signal", year: "2022", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
+  { id: "tl-army-signal", group: "honor", year: "2022", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
     desc: "軍 특성화고 현장실습 기간 중 희생정신과 학업성적 우수로 타의 모범이 되어 육군정보통신학교장(준장)으로부터 상장을 수상(2022. 7. 1, 제183호)." },
-  { id: "tl-vattenfall", year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
+  { id: "tl-vattenfall", group: "public", year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
     desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." },
 ];
+
+/* 이력 그룹 — 핵심(실무·AI 교육)은 펼쳐 두고, 대외활동·수상은 눌러서 본다 */
+const TRAJ_GROUPS = [
+  { key: "work", en: "Professional", ko: "실무 경력", open: true },
+  { key: "edu", en: "AI · Data Education", ko: "AI · 데이터 전문교육", open: true,
+    order: ["tl-snu-aied", "tl-ssafy", "tl-krema", "tl-fintech", "tl-konkuk"] },
+  { key: "public", en: "Leadership & Public", ko: "리더십 · 대외활동", open: false },
+  { key: "honor", en: "Honors", ko: "수상 · 표창", open: false },
+];
+
+function TlRows({ rows }) {
+  return (
+    <div className="tl-list">
+      {rows.map((e) => (
+        <div key={e.id} id={e.id} className="tl-row">
+          <span className="tl-year font-serif">{e.year}</span>
+          <div className="tl-body">
+            <h3 className="font-ko">
+              {e.title}
+              {e.tag && <span className="tl-tag font-sans">{e.tag}</span>}
+            </h3>
+            <p className="font-ko">{e.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function Trajectory() {
   const ref = useReveal();
   return (
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
-        <SectionHead eyebrow="03 — Archive" titleEn="The Trajectory" titleKo="걸어온 궤적" />
-        <div className="timeline" style={{ marginTop: 64 }}>
-          <div className="timeline__spine" />
-          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(36px,5vw,58px)" }}>
-            {TRAJECTORY.map((e, i) => (
-              <div key={i} id={e.id} className="tl-row reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 60}ms` }}>
-                <span className="tl-node" />
-                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "8px 18px" }}>
-                  <span className="tl-year" style={{ fontSize: "clamp(2rem,5vw,3.4rem)" }}>{e.year}</span>
-                  {e.tag && <span className="sticker sticker--apple" style={{ fontSize: ".72rem", padding: ".3em .7em", boxShadow: "0 3px 0 rgba(17,17,17,.12)", alignSelf: "center", transform: "translateY(-0.14em)" }}>{e.tag}</span>}
-                  <span className="tl-idx font-cond">{String(i + 1).padStart(2, "0")}</span>
+        <SectionHead eyebrow="03 — Experience" titleEn="The Trajectory" titleKo="이력 — 실무와 전문교육" />
+        <div className="tl-groups">
+          {TRAJ_GROUPS.map((g) => {
+            const rows = g.order
+              ? g.order.map((id) => TRAJECTORY.find((e) => e.id === id))
+              : TRAJECTORY.filter((e) => e.group === g.key);
+            return (
+              <div key={g.key} className="tl-group reveal">
+                <div className="tl-group__label">
+                  <p className="eyebrow">{g.en}</p>
+                  <h3 className="font-ko">{g.ko}</h3>
                 </div>
-                <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.15rem,2.2vw,1.6rem)", margin: "10px 0 8px", letterSpacing: "-.01em" }}>{e.title}</h3>
-                <p className="font-ko" style={{ maxWidth: 720, color: "var(--ink-soft)", lineHeight: 1.75, fontSize: "clamp(.95rem,1.4vw,1.05rem)" }}>{e.desc}</p>
+                {g.open ? <TlRows rows={rows} /> : (
+                  <details className="fold tl-fold">
+                    <summary>
+                      <span className="fold__t">
+                        <strong className="font-ko">{rows.length}건 펼쳐 보기</strong>
+                        <span className="fold__line font-ko">{rows.slice(0, 3).map((e) => e.title.split(" ")[0]).join(" · ")} 외</span>
+                      </span>
+                      <i className="fold__icon" aria-hidden="true" />
+                    </summary>
+                    <TlRows rows={rows} />
+                  </details>
+                )}
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -557,17 +647,54 @@ const EDITIONS = [
     status: "Google Drive 스트리밍 자산 구축 완료", cta: "프로모션 영상 보기", url: "https://drive.google.com/file/d/1F3PssuwdFkcWaiT6fZHgQlz44As0I2nq/view?usp=sharing", video: "video/edition-03.mp4", tags: ["Generative AI", "Video", "Audio Branding"] },
   { n: "05", color: "var(--sky)", Icon: BarChart, title: "공공데이터 API 활용\n청약 인사이트 대시보드",
     desc: "대한민국 부동산 청약 시장의 거시 데이터를 수집·시각화한 데이터 대시보드. 시장의 자금 흐름을 분석하여 지표 중심의 화면으로 구성.",
-    status: "Vercel 배포 완료", cta: "대시보드 바로가기", url: "https://cheongak-dashboard-opal.vercel.app", tags: ["Public Data API", "Dashboard", "Data Viz"] },
+    status: "Vercel 배포 완료", cta: "대시보드 바로가기", url: "https://cheongak-dashboard-opal.vercel.app", tags: ["Public Data API", "Dashboard", "Data Viz"],
+    core: true, point: "시장 판단에 필요한 지표만 골라 나란히 배치 — 무엇을 병렬할지가 곧 분석의 설계." },
   { n: "06", color: "var(--apple)", Icon: Cpu, title: "GWS 연동 VOC 분석\n트리아지(Triage) 시스템",
     desc: "Google Workspace API를 연동하여 고객 피드백을 실시간으로 집계하고, 자체 분류 알고리즘으로 업무 우선순위를 자동화한 백오피스 대시보드.",
-    status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["GWS API", "AI Triage", "Back-office"] },
+    status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["GWS API", "AI Triage", "Back-office"],
+    core: true, point: "무엇을 리스크로 볼지 분류 기준을 먼저 정의하고, 1차 선별만 알고리즘에 위임." },
   { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
     desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
-    status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"] },
+    status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"],
+    core: true, point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
   { n: "08", color: "var(--sky)", Icon: Cpu, title: "누리장터 크롤링 연동\n정비사업 용역비 자동 수집 프로그램",
     desc: "정비사업 정보 플랫폼 '누리장터'에서 조합 대상 용역 입찰과 용역비 데이터를 자동으로 수집하는 크롤링 프로그램. 흩어진 공고를 정기적으로 수집·정형화하여 시장 단가 비교와 사업성 검토를 위한 데이터셋을 구축.",
-    status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["웹 크롤링", "정비사업 데이터", "업무 자동화"] },
+    status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["웹 크롤링", "정비사업 데이터", "업무 자동화"],
+    core: true, point: "시장 단가 비교와 사업성 검토에 바로 쓰이는 필드 구조로 데이터셋을 설계." },
 ];
+
+function EditionCard({ e, i, onPlay }) {
+  return (
+            <article id={"ed-" + e.n} className={"edition reveal" + (e.core ? " edition--core" : "")} style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
+              <div className="edition__chip">{e.status}</div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
+                <span className="edition__num">{e.n}</span>
+                <span style={{ width: 52, height: 52, borderRadius: 16, background: e.color, display: "grid", placeItems: "center", color: "var(--ink)" }}>
+                  <e.Icon size={24} />
+                </span>
+              </div>
+              <span className="edition__index-band" />
+              <p className="font-play" style={{ fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" }}>Edition {e.n}</p>
+              <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" }}>{e.title}</h3>
+              <p className="font-ko" style={{ color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 }}>{e.desc}</p>
+              {e.point && <p className="edition__point font-ko"><b>기획 포인트</b>{e.point}</p>}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
+                {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
+              </div>
+              {e.video ? (
+                <button type="button" className="btn" style={{ alignSelf: "flex-start" }} onClick={() => onPlay(e)}>
+                  {e.cta} <PlayCircle size={16} />
+                </button>
+              ) : e.url ? (
+                <a href={e.url} target="_blank" rel="noreferrer" className="btn" style={{ alignSelf: "flex-start" }}>
+                  {e.cta} <ExternalLink size={16} />
+                </a>
+              ) : (
+                <span className="btn btn--ghost" style={{ alignSelf: "flex-start", cursor: "default", pointerEvents: "none" }}>{e.cta}</span>
+              )}
+            </article>
+  );
+}
 
 function Artifacts() {
   const ref = useReveal();
@@ -583,38 +710,31 @@ function Artifacts() {
     <React.Fragment>
     <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
       <div className="wrap">
-        <SectionHead eyebrow="04 — Selected Works" titleEn="The Artifacts" titleKo="직접 기획·제작한 콘텐츠와 시스템" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))", gap: "clamp(22px,3vw,34px)", marginTop: 64 }}>
-          {EDITIONS.map((e, i) => (
-            <article key={i} id={"ed-" + e.n} className="edition reveal" style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
-              <div className="edition__chip">{e.status}</div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-                <span className="edition__num">{e.n}</span>
-                <span style={{ width: 52, height: 52, borderRadius: 16, background: e.color, display: "grid", placeItems: "center", color: "var(--ink)" }}>
-                  <e.Icon size={24} />
-                </span>
-              </div>
-              <span className="edition__index-band" />
-              <p className="font-play" style={{ fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" }}>Edition {e.n}</p>
-              <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" }}>{e.title}</h3>
-              <p className="font-ko" style={{ color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 }}>{e.desc}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
-                {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
-              </div>
-              {e.video ? (
-                <button type="button" className="btn" style={{ alignSelf: "flex-start" }} onClick={() => setPlaying(e)}>
-                  {e.cta} <PlayCircle size={16} />
-                </button>
-              ) : e.url ? (
-                <a href={e.url} target="_blank" rel="noreferrer" className="btn" style={{ alignSelf: "flex-start" }}>
-                  {e.cta} <ExternalLink size={16} />
-                </a>
-              ) : (
-                <span className="btn btn--ghost" style={{ alignSelf: "flex-start", cursor: "default", pointerEvents: "none" }}>{e.cta}</span>
-              )}
-            </article>
+        <SectionHead eyebrow="02 — Selected Works" titleEn="The Artifacts" titleKo="AI 전략 · 자동화 프로젝트" />
+        <p className="works-lead font-ko reveal">
+          직접 문제를 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 4건</strong>입니다.
+          생성형 AI 콘텐츠 작업은 아래에서 따로 펼쳐 볼 수 있습니다.
+        </p>
+        <div className="works-grid">
+          {EDITIONS.filter((e) => e.core).map((e, i) => (
+            <EditionCard key={e.n} e={e} i={i} onPlay={setPlaying} />
           ))}
         </div>
+        <details className="fold works-more reveal">
+          <summary>
+            <span className="fold__t">
+              <span className="eyebrow">Supplementary</span>
+              <strong className="font-ko">생성형 AI 콘텐츠 작업 <em>{EDITIONS.filter((e) => !e.core).length}건</em></strong>
+              <span className="fold__line font-ko">브랜드 필름 · 카드뉴스 · 멀티미디어 프로모션</span>
+            </span>
+            <i className="fold__icon" aria-hidden="true" />
+          </summary>
+          <div className="works-grid works-grid--sub">
+            {EDITIONS.filter((e) => !e.core).map((e, i) => (
+              <EditionCard key={e.n} e={e} i={i} onPlay={setPlaying} />
+            ))}
+          </div>
+        </details>
       </div>
     </section>
 
@@ -646,7 +766,7 @@ function Lectures() {
     <section id="lectures" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="05 — Lectures & Workshops" titleEn="The Lectures" titleKo="강의로 전하는 전략기획 AI" />
+        <SectionHead eyebrow="04 — Lectures & Workshops" titleEn="The Lectures" titleKo="강의로 전하는 전략기획 AI" />
 
         <div className="lec-intro reveal">
           <p className="font-myeongjo">
@@ -666,6 +786,14 @@ function Lectures() {
               <h3 className="font-ko">{tr.ko}</h3>
               <p className="font-ko">{tr.desc}</p>
             </div>
+            <details className="fold lec-fold">
+              <summary>
+                <span className="fold__t">
+                  <strong className="font-ko">과정 {LECTURES.filter((l) => l.track === tr.key).length}개 보기</strong>
+                  <span className="fold__line font-ko">{LECTURES.filter((l) => l.track === tr.key).map((l) => l.title.split(" — ")[0]).join(" · ")}</span>
+                </span>
+                <i className="fold__icon" aria-hidden="true" />
+              </summary>
             <div className="lec-grid">
               {LECTURES.filter((l) => l.track === tr.key).map((l, i) => (
                 <article key={l.id} id={l.id} className="lec-card reveal" style={{ "--accent-fill": l.color, transitionDelay: `${i * 70}ms` }}>
@@ -694,6 +822,7 @@ function Lectures() {
                 </article>
               ))}
             </div>
+            </details>
           </div>
         ))}
 
@@ -728,7 +857,7 @@ function About() {
       <div className="wrap reveal" style={{ position: "relative", zIndex: 1 }}>
         <div className="about-grid">
           <div>
-            <Quote size={46} style={{ color: "var(--ink)" }} />
+            <p className="eyebrow" style={{ marginBottom: 6 }}>05 — Profile</p>
             <h3 className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" }}>
               판단의 근거를 만들고,<br />실행까지 책임지는 자리에서 일합니다.
             </h3>
@@ -784,27 +913,28 @@ function Contact() {
           <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" strokeWidth="1.3" />
           <circle cx="60" cy="60" r="32" fill="none" stroke="currentColor" strokeWidth="0.9" />
           <text fontSize="9.2" letterSpacing="2.2" fill="currentColor" fontFamily="Inter, Pretendard, sans-serif" fontWeight="600">
-            <textPath href="#sealArc">YUBIN KIM OFFICE · LEGAL DIGNITY · TECHNICAL PRECISION ·</textPath>
+            <textPath href="#sealArc">AI STRATEGY · PLANNING · SEOUL · YUBIN KIM ·</textPath>
           </text>
-          <text x="60" y="68.5" textAnchor="middle" fontFamily="Playfair Display, serif" fontWeight="900" fontSize="25" fill="currentColor">YK</text>
+          <text x="60" y="68.5" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontWeight="600" fontSize="26" fill="currentColor">YK</text>
         </svg>
       </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
-        <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.6rem,9vw,7rem)", lineHeight: .92, letterSpacing: "-.03em", margin: 0 }}>
-          Let’s design<br />the next order.
+        <p className="eyebrow contact-eyebrow">Inquiries — 채용 및 협업 제안</p>
+        <h2 className="font-serif contact-title">
+          Let’s define<br /><em>the next problem.</em>
         </h2>
         <p className="font-ko" style={{ color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" }}>
-          새로운 협업과 프로젝트 또는 Recruiter분들 환영합니다.<br />언제든 편하게 연락주세요!
+          AI 전략기획 · 업무 자동화 · 데이터 기반 서비스 기획 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
-            <Mail size={18} /> 인사 건네기
+            <Mail size={16} /> 이메일 보내기
           </a>
-          <a href="#artifacts" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
-            작업 보기 <ArrowUpRight size={16} />
+          <a href="career.html" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
+            경력 상세 <ArrowUpRight size={14} />
           </a>
           <button type="button" id="copyMail" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
-            이메일 복사
+            이메일 주소 복사
           </button>
         </div>
       </div>
@@ -817,7 +947,7 @@ function Footer() {
   return (
     <footer style={{ borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 }}>
       <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" }}>
-        {[["선언", "#manifesto"], ["궤적", "#trajectory"], ["작업", "#artifacts"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력", "career.html"]].map(([t, h]) => (
+        {[["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
         <a href="https://github.com/yubinxe" rel="me noopener" target="_blank">GitHub</a>
@@ -826,9 +956,9 @@ function Footer() {
       <div className="wrap footer-grid" style={{ padding: "26px 0" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">
           <span style={{ fontWeight: 900, fontSize: 22 }}>YK</span>
-          <span className="font-ko" style={{ fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 }}>YubinKim · 김유빈 — 법무법인 경국</span>
+          <span className="font-ko" style={{ fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 }}>김유빈 · Yubin Kim — AI Strategy &amp; Planning</span>
         </div>
-        <div className="font-sans" style={{ fontSize: ".78rem", color: "rgba(249,246,240,.5)", justifySelf: "center", textAlign: "center" }}>© 2026 Yubin Kim. Crafted with technical precision.</div>
+        <div className="font-sans" style={{ fontSize: ".78rem", color: "rgba(249,246,240,.5)", justifySelf: "center", textAlign: "center" }}>© 2026 Yubin Kim. All rights reserved.</div>
         <a href="#top" className="font-sans" style={{ fontSize: ".8rem", color: "var(--ecru)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, justifySelf: "end" }}>
           맨 위로 <span style={{ display: "inline-block", transform: "rotate(-45deg)" }}><ArrowUpRight size={15} /></span>
         </a>
@@ -853,4 +983,4 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
   );
 }
 
-Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, Lectures, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, EditionCard, Lectures, About, Contact, Footer, SectionHead });
