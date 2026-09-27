@@ -599,6 +599,27 @@ function Trajectory() {
     React.createElement("section", { id: "trajectory", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "04 \u2014 Experience", titleEn: "The Trajectory", titleKo: "\uC774\uB825 \u2014 \uC2E4\uBB34\uC640 \uC804\uBB38\uAD50\uC721" }), /*#__PURE__*/
+
+    React.createElement("figure", { className: "tl-feature reveal" }, /*#__PURE__*/
+    React.createElement("a", { className: "tl-feature__main", href: "gallery.html#youth-day" }, /*#__PURE__*/
+    React.createElement("img", { src: "images/youth-day-yonhap.jpg", srcSet: "images/youth-day-yonhap-600.jpg 600w, images/youth-day-yonhap.jpg 860w",
+      sizes: "(max-width: 900px) 92vw, 52vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 (\uC5F0\uD569\uB274\uC2A4 \uBCF4\uB3C4\uC0AC\uC9C4)", loading: "lazy", width: "860", height: "592" })
+    ), /*#__PURE__*/
+    React.createElement("figcaption", { className: "tl-feature__body" }, /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow" }, "Highlight \u2014 2026"), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, "\uCCAD\uC640\uB300 \xB7 \uB300\uD1B5\uB839 \uC8FC\uAD00 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uCC38\uC11D"), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko" }, "\uCCAD\uB144 \uB300\uD45C\uB85C \uCD08\uCCAD\uB418\uC5B4 \u20182026 \uCCAD\uB144\uC758 \uB0A0 \uC624\uD508\uB9C8\uC774\uD06C\u2019 \uD604\uC7A5\uC5D0 \uCC38\uC11D\uD588\uC2B5\uB2C8\uB2E4. \uCCAD\uB144 \uC815\uCC45\uC758 \uBC29\uD5A5\uACFC \uD604\uC7A5\uC758 \uACFC\uC81C\uB97C \uAD6D\uC815 \uCD5C\uACE0 \uC758\uC0AC\uACB0\uC815 \uB2E8\uC704\uC5D0\uC11C \uC9C1\uC811 \uB4E3\uACE0 \uAD50\uB958\uD55C \uAE30\uB85D\uC785\uB2C8\uB2E4."
+
+
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "tl-feature__thumbs" }, /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html#g-youth-day-selfie" }, /*#__PURE__*/React.createElement("img", { src: "images/youth-day-selfie-600.jpg", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 \uC140\uD504 \uCD2C\uC601", loading: "lazy", width: "600", height: "450" })), /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html#g-youth-day-mbc-02" }, /*#__PURE__*/React.createElement("img", { src: "images/youth-day-mbc-02-600.jpg", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758 \uB0A0 \uC624\uD508\uB9C8\uC774\uD06C \uC0DD\uC911\uACC4 \uD654\uBA74", loading: "lazy", width: "600", height: "338" }))
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uC0AC\uC9C4 \u24D2\uC5F0\uD569\uB274\uC2A4 \xB7 \uBC29\uC1A1 \uD654\uBA74 \u24D2\uC804\uC8FCMBC"), /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html#youth-day", className: "btn btn--ghost" }, "\uD604\uC7A5 \uC0AC\uC9C4 \uC804\uCCB4 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
+    )
+    ), /*#__PURE__*/
     React.createElement("div", { className: "tl-groups" },
     TRAJ_GROUPS.map((g) => {
       const rows = g.order ?

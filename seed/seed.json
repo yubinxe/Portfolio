@@ -700,8 +700,8 @@
         "Tags": "대통령, 참석, 청년의날, 청와대, 초청, 행사",
         "PrimaryLabel": "궤적에서 보기",
         "PrimaryHref": "index.html#tl-youth-day",
-        "SecondaryLabel": "경력 상세",
-        "SecondaryHref": "career.html#cv-youth-day",
+        "SecondaryLabel": "현장 사진 보기",
+        "SecondaryHref": "gallery.html#youth-day",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-day",
         "Source": "kb.js@2026.09.15e",
@@ -957,5 +957,5 @@
       }
     ]
   },
-  "hash": "69cab03e201d9b4c"
+  "hash": "50c7cd9034c72890"
 }

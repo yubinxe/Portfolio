@@ -598,6 +598,27 @@ function Trajectory() {
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
         <SectionHead eyebrow="04 — Experience" titleEn="The Trajectory" titleKo="이력 — 실무와 전문교육" />
+
+        <figure className="tl-feature reveal">
+          <a className="tl-feature__main" href="gallery.html#youth-day">
+            <img src="images/youth-day-yonhap.jpg" srcSet="images/youth-day-yonhap-600.jpg 600w, images/youth-day-yonhap.jpg 860w"
+              sizes="(max-width: 900px) 92vw, 52vw" alt="김유빈 활동 기록 — 2026 청년의날 기념행사 현장 (연합뉴스 보도사진)" loading="lazy" width="860" height="592" />
+          </a>
+          <figcaption className="tl-feature__body">
+            <p className="eyebrow">Highlight — 2026</p>
+            <h3 className="font-ko">청와대 · 대통령 주관 2026 청년의날 기념행사 참석</h3>
+            <p className="font-ko">
+              청년 대표로 초청되어 ‘2026 청년의 날 오픈마이크’ 현장에 참석했습니다. 청년 정책의 방향과 현장의 과제를
+              국정 최고 의사결정 단위에서 직접 듣고 교류한 기록입니다.
+            </p>
+            <div className="tl-feature__thumbs">
+              <a href="gallery.html#g-youth-day-selfie"><img src="images/youth-day-selfie-600.jpg" alt="김유빈 활동 기록 — 2026 청년의날 기념행사 현장 셀프 촬영" loading="lazy" width="600" height="450" /></a>
+              <a href="gallery.html#g-youth-day-mbc-02"><img src="images/youth-day-mbc-02-600.jpg" alt="김유빈 활동 기록 — 2026 청년의 날 오픈마이크 생중계 화면" loading="lazy" width="600" height="338" /></a>
+            </div>
+            <p className="tl-feature__credit font-sans">사진 ⓒ연합뉴스 · 방송 화면 ⓒ전주MBC</p>
+            <a href="gallery.html#youth-day" className="btn btn--ghost">현장 사진 전체 보기 <ArrowUpRight size={14} /></a>
+          </figcaption>
+        </figure>
         <div className="tl-groups">
           {TRAJ_GROUPS.map((g) => {
             const rows = g.order

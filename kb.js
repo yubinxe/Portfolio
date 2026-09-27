@@ -204,7 +204,7 @@
       title: "2026 — 청와대 대통령 주관 청년의날 행사 참석",
       body: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류한 기록입니다.",
       primary: { label: "궤적에서 보기", href: "index.html#tl-youth-day" },
-      secondary: { label: "경력 상세", href: "career.html#cv-youth-day" } },
+      secondary: { label: "현장 사진 보기", href: "gallery.html#youth-day" } },
     { id: "tl-youth-panel", cat: "궤적", tags: ["국무조정실", "청년참여단", "온라인", "정책 제안", "공론장"],
       title: "2026 — 국무조정실 온라인 청년참여단 활동",
       body: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달합니다.",

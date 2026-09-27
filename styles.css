@@ -1830,7 +1830,6 @@ header .btn { padding: .8em 1.3em; font-size: .68rem; }
 .hero-eyebrow { margin-bottom: 26px; font-size: .78rem !important; letter-spacing: .3em !important; }
 #manifesto h1.font-serif { font-weight: 500 !important; letter-spacing: -.01em !important; line-height: .88 !important; color: var(--navy); }
 .hero-proof { max-width: 560px; margin: 16px auto 0; font-size: .95rem; line-height: 1.8; color: var(--ink-soft); }
-.hero-photo img { filter: saturate(.7) contrast(1.02); }
 
 /* ---- LEDGER → 한눈에 보는 기록 (아이보리 띠) ---- */
 .ledger { position: relative; background: var(--paper); border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); padding: clamp(40px, 5vw, 60px) 0; }
@@ -2076,8 +2075,6 @@ h2.font-serif { font-size: clamp(2.8rem, 6.2vw, 5.4rem) !important; line-height:
 .hero-kicker { color: var(--ink-soft); opacity: .85; }
 .hero-eyebrow { color: var(--gold) !important; }
 .hero-proof { color: var(--ink); opacity: .78; }
-.hero-photo { overflow: hidden; }
-.hero-photo img { filter: saturate(.78) contrast(1.03); transform: scale(1.04); will-change: transform; }
 .hero-net { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .scroll-cue { color: var(--gold); }
 .scroll-cue span { opacity: .9; }
@@ -2245,9 +2242,9 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
 .h-ltr:hover, #manifesto h1 .h-ltr:nth-child(odd):hover { color: var(--navy); }
 
 /* ---------- 랜딩: 흰 배경 · 내용을 위로 · 윗부분 산이 또렷하게 ---------- */
-#manifesto { background: #FFFFFF; align-items: flex-start !important; padding-top: clamp(118px, 15vh, 160px) !important; }
-.hero-photo { height: min(62vh, 640px); }
-.hero-photo img { filter: saturate(.9) contrast(1.05); object-position: center 62%; }
+#manifesto { background: #FFFFFF; align-items: flex-start !important; padding-top: clamp(112px, 14vh, 150px) !important; }
+#manifesto .hero-photo__scrim { background: linear-gradient(180deg, #FFF 0%, #FFF 20%, rgba(255,255,255,.55) 36%, rgba(255,255,255,.2) 58%, rgba(255,255,255,.5) 86%, #FFF 100%); }
+#manifesto p.font-ko { text-shadow: 0 0 16px #FFF, 0 0 4px #FFF; }
 #manifesto .scroll-cue { color: var(--navy); }
 .ledger { background: #FFFFFF; }
 
@@ -2297,17 +2294,19 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
   .story__lead { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
   .story__frame { aspect-ratio: 5 / 5; }
 }
-/* 랜딩 — 글자는 흰 바탕 위, 사진은 그 아래 띠로 분리해 산 능선이 또렷하게 */
-#manifesto { flex-direction: column; align-items: stretch !important; min-height: auto !important; padding-bottom: 0 !important; }
-#manifesto > .wrap { order: 1; }
-#manifesto .hero-photo { position: relative; order: 2; inset: auto; height: clamp(280px, 50vh, 560px); margin-top: clamp(28px, 5vh, 56px);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); }
-#manifesto .hero-photo img { object-position: center 38%; filter: saturate(.95) contrast(1.05); }
-#manifesto .hero-photo__scrim, #manifesto .scroll-cue { display: none; }
-#manifesto { padding-top: clamp(92px, 11.5vh, 120px) !important; }
-#manifesto h1.font-serif { font-size: clamp(3rem, 8.2vw, 7rem) !important; }
-#manifesto .wrap > p.font-ko:first-of-type { margin-top: 18px !important; margin-bottom: 14px !important; }
-#manifesto .wrap > div[style] { margin-top: 28px !important; }
-#manifesto .hero-photo { margin-top: -24px; }
-#manifesto .hero-kicker { margin-bottom: 8px; }
-#manifesto .hero-eyebrow { margin-bottom: 18px; }
+
+
+/* 이력 하이라이트 — 2026 청년의날 */
+.tl-feature { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 4vw, 56px); align-items: center; margin: clamp(34px, 4vw, 50px) 0 0; padding: clamp(18px, 2.4vw, 28px); background: var(--paper); border: 1px solid var(--hair); }
+.tl-feature__main { display: block; overflow: hidden; }
+.tl-feature__main img, .tl-feature__thumbs img { display: block; width: 100%; height: auto; object-fit: cover; transition: transform 1.1s var(--ease); }
+.tl-feature__main:hover img, .tl-feature__thumbs a:hover img { transform: scale(1.04); }
+.tl-feature__body h3 { margin: 10px 0 12px; font-size: clamp(1.15rem, 1.9vw, 1.45rem); color: var(--navy); }
+.tl-feature__body > p.font-ko { margin: 0; font-size: 1rem; line-height: 1.85; color: var(--ink-soft); }
+.tl-feature__thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0 10px; }
+.tl-feature__thumbs a { display: block; overflow: hidden; aspect-ratio: 4 / 3; }
+.tl-feature__thumbs img { height: 100%; }
+.tl-feature__credit, .g-credit { margin: 0 0 20px; font-size: .68rem; letter-spacing: .06em; color: var(--ink-soft); opacity: .8; }
+.g-sec__lead { margin: 0 0 24px; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
+.g-credit { margin-top: 16px; }
+@media (max-width: 900px) { .tl-feature { grid-template-columns: 1fr; } }
