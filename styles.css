@@ -2310,3 +2310,4 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
 .g-sec__lead { margin: 0 0 24px; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
 .g-credit { margin-top: 16px; }
 @media (max-width: 900px) { .tl-feature { grid-template-columns: 1fr; } }
+.g-src { margin-left: auto; padding-left: 8px; font-size: .64rem; font-weight: 500; color: var(--ink-soft); opacity: .75; white-space: nowrap; }
