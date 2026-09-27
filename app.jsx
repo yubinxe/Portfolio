@@ -19,10 +19,10 @@ function App() {
       <main>
         <Hero />
         <Ledger />
+        <About />
         <Composite />
         <Artifacts />
         <Trajectory />
-        <About />
         <Lectures />
         <Contact />
       </main>

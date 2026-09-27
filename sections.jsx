@@ -26,8 +26,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-    ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["강의", "#lectures"],
+    ["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
+    ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
@@ -349,7 +349,7 @@ function Composite() {
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="01 — Core Competencies" titleEn="The Composite" titleKo="AI 전략기획을 중심에 둔 역량 구조" />
+        <SectionHead eyebrow="02 — Core Competencies" titleEn="The Composite" titleKo="AI 전략기획을 중심에 둔 역량 구조" />
 
         <div className="comp-thesis reveal">
           <p className="font-myeongjo">
@@ -544,7 +544,7 @@ const TRAJECTORY = [
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
     desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
+  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 수료",
     desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
   { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
     desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
@@ -597,7 +597,7 @@ function Trajectory() {
   return (
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
-        <SectionHead eyebrow="03 — Experience" titleEn="The Trajectory" titleKo="이력 — 실무와 전문교육" />
+        <SectionHead eyebrow="04 — Experience" titleEn="The Trajectory" titleKo="이력 — 실무와 전문교육" />
         <div className="tl-groups">
           {TRAJ_GROUPS.map((g) => {
             const rows = g.order
@@ -709,7 +709,7 @@ function Artifacts() {
     <React.Fragment>
     <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
       <div className="wrap">
-        <SectionHead eyebrow="02 — Selected Works" titleEn="The Artifacts" titleKo="AI 전략 · 자동화 프로젝트" />
+        <SectionHead eyebrow="03 — Selected Works" titleEn="The Artifacts" titleKo="AI 전략 · 자동화 프로젝트" />
         <p className="works-lead font-ko reveal">
           직접 문제를 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 4건</strong>입니다.
           생성형 AI 콘텐츠 작업은 아래에서 따로 펼쳐 볼 수 있습니다.
@@ -765,14 +765,14 @@ function Lectures() {
     <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Side Practice — 준비 중" titleEn="The Lectures" titleKo="준비 중인 AI 강의 프로그램" />
+        <SectionHead eyebrow="Side Practice — Lectures" titleEn="The Lectures" titleKo="AI 강의 프로그램" />
 
         <div className="side-note reveal">
           <span className="side-note__badge font-sans">In Preparation</span>
           <p className="font-ko">
             본업은 <strong>AI 전략기획</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
-            <strong> 별도로 준비하고 있는 프로그램</strong>이며, 아직 출강 이력은 없습니다.
-            커리큘럼과 근거를 미리 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다.
+            <strong> 별도로 설계한 프로그램</strong>으로, 아직 출강 이력은 없습니다.
+            커리큘럼과 근거를 먼저 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다.
           </p>
         </div>
 
@@ -856,49 +856,81 @@ function Lectures() {
   );
 }
 
-/* ============================================================ ABOUT */
+/* ============================================================ ABOUT — 스크롤 스토리
+ * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
+ * 오른쪽 사진이 프로필 → 발표 → 인터뷰 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
+const STORY_LINES = ["판단의 근거를 만들고,", "실행까지 책임지는", "자리에서 일합니다."];
+const STORY_SHOTS = [
+  { src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
+    alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
+  { src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
+    alt: "김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
+  { src: "images/press-yonhap-700.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w",
+    alt: "김유빈 연합뉴스TV 인터뷰 — 강남1인가구센터 취재", chip: "On Air", cap: "연합뉴스TV 인터뷰" },
+];
+
 function About() {
-  const ref = useReveal();
+  const ref = React.useRef(null);
+  const [p, setP] = React.useState(0);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const on = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        const span = r.height - window.innerHeight;
+        setP(span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1);
+      });
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("resize", on);
+    return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); cancelAnimationFrame(raf); };
+  }, []);
+  const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
+  const lineOn = (i) => p >= 0.06 + i * 0.16;
+  const bodyOn = p >= 0.5;
+
   return (
-    <section id="about" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(40px,6vw,72px)", overflow: "hidden" }}>
-      <div className="speckle" style={{ opacity: .35 }} />
-      <div className="wrap reveal" style={{ position: "relative", zIndex: 1 }}>
-        <div className="about-grid">
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 6 }}>04 — Profile</p>
-            <h3 className="font-myeongjo" style={{ fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" }}>
-              판단의 근거를 만들고,<br />실행까지 책임지는 자리에서 일합니다.
+    <section id="about" ref={ref} className="story" style={{ "--p": p.toFixed(3) }}>
+      <div className="story__sticky">
+        <div className="wrap story__grid">
+          <div className="story__copy">
+            <p className="eyebrow">01 — Profile</p>
+            <h3 className="story__lead font-myeongjo">
+              {STORY_LINES.map((l, i) => <span key={l} className={"story__line" + (lineOn(i) ? " on" : "")}>{l}</span>)}
             </h3>
-            <p className="font-ko" style={{ margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
-              흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다. 법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
-            </p>
-            <p className="font-ko" style={{ margin: "12px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" }}>
-              강의실과 사무실, 카메라 앞을 오가며 쌓아온 시간을 기록으로 남깁니다. 말보다 결과물이 먼저 증명하도록.
-            </p>
-
-            <div className="font-ko" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" }}>
-              <MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국
-            </div>
-
-            <div style={{ marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href="gallery.html" className="btn btn--ghost" style={{ fontSize: ".88rem" }}>활동 갤러리 <ArrowUpRight size={15} /></a>
-              <a href="career.html" className="btn btn--ghost" style={{ fontSize: ".88rem" }}>경력 상세 <ArrowUpRight size={15} /></a>
+            <div className={"story__body" + (bodyOn ? " on" : "")}>
+              <p className="font-ko">
+                흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다.
+                법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
+              </p>
+              <p className="story__addr font-ko"><MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국</p>
+              <div className="story__links">
+                <a href="career.html" className="btn">경력 상세 <ArrowUpRight size={15} /></a>
+                <a href="gallery.html" className="btn btn--ghost">활동 갤러리 <ArrowUpRight size={15} /></a>
+              </div>
             </div>
           </div>
 
-          <div className="about-gallery">
-            <figure className="photo-card photo-card--tall reveal">
-              <img src="images/profile-yubin-450.jpg?v=1" srcSet="images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w" sizes="(max-width: 720px) 40vw, 18vw" alt="김유빈 — 법무법인 경국 공식 프로필" width="450" height="600" loading="lazy" />
-              <figcaption className="font-ko"><span className="photo-card__chip">PROFILE</span>김유빈 · Yubin Kim</figcaption>
-            </figure>
-            <figure className="photo-card reveal" style={{ transitionDelay: "90ms" }}>
-              <img src="images/press-yonhap-500.jpg" srcSet="images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w" sizes="(max-width: 720px) 45vw, 20vw" alt="김유빈 연합뉴스TV 인터뷰 — 강남1인가구센터 취재" width="500" height="281" loading="lazy" />
-              <figcaption className="font-ko"><span className="photo-card__chip photo-card__chip--red">ON AIR</span>연합뉴스TV 인터뷰</figcaption>
-            </figure>
-            <figure className="photo-card reveal" style={{ transitionDelay: "180ms" }}>
-              <img src="images/ssafy-presentation-500.jpg" srcSet="images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w" sizes="(max-width: 720px) 45vw, 20vw" alt="김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표" width="500" height="500" loading="lazy" />
-              <figcaption className="font-ko"><span className="photo-card__chip">SSAFY 13기</span>프로젝트 발표</figcaption>
-            </figure>
+          <div className="story__media">
+            <div className="story__frame">
+              {STORY_SHOTS.map((m, i) => (
+                <img key={m.src} className={"story__img" + (i === shot ? " on" : "")} src={m.src} srcSet={m.srcSet}
+                  sizes="(max-width: 900px) 80vw, 34vw" alt={m.alt} loading="lazy" />
+              ))}
+            </div>
+            <div className="story__caps">
+              {STORY_SHOTS.map((m, i) => (
+                <p key={m.chip} className={"story__cap" + (i === shot ? " on" : "")}>
+                  <span className="font-sans">{String(i + 1).padStart(2, "0")} · {m.chip}</span>
+                  <em className="font-ko">{m.cap}</em>
+                </p>
+              ))}
+            </div>
+            <div className="story__prog" aria-hidden="true"><i style={{ transform: `scaleX(${p.toFixed(3)})` }} /></div>
           </div>
         </div>
       </div>
@@ -955,7 +987,7 @@ function Footer() {
   return (
     <footer style={{ borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 }}>
       <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" }}>
-        {[["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => (
+        {[["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
         <a href="https://github.com/yubinxe" rel="me noopener" target="_blank">GitHub</a>

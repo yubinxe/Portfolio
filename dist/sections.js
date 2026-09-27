@@ -27,8 +27,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-  ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-  ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["강의", "#lectures"]];
+  ["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
+  ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]];
 
   return (/*#__PURE__*/
     React.createElement("header", { className: "hnav" + (solid ? " is-solid" : ""), style: {
@@ -350,7 +350,7 @@ function Composite() {
     React.createElement("section", { id: "composite", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .2 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "01 \u2014 Core Competencies", titleEn: "The Composite", titleKo: "AI \uC804\uB7B5\uAE30\uD68D\uC744 \uC911\uC2EC\uC5D0 \uB454 \uC5ED\uB7C9 \uAD6C\uC870" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "02 \u2014 Core Competencies", titleEn: "The Composite", titleKo: "AI \uC804\uB7B5\uAE30\uD68D\uC744 \uC911\uC2EC\uC5D0 \uB454 \uC5ED\uB7C9 \uAD6C\uC870" }), /*#__PURE__*/
 
     React.createElement("div", { className: "comp-thesis reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "font-myeongjo" }, "\uC804\uB7B5\uC740 \uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0 \uC815\uD558\uB294 \uC77C\uC774\uACE0, AI\uB294 \uADF8 \uACB0\uC815\uC744 \uBE68\uB9AC \uC2E4\uD589\uD558\uB294 \uB3C4\uAD6C\uC785\uB2C8\uB2E4."
@@ -545,7 +545,7 @@ const TRAJECTORY = [
   desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
 { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
   desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-{ id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 활동",
+{ id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 수료",
   desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
 { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
   desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
@@ -598,7 +598,7 @@ function Trajectory() {
   return (/*#__PURE__*/
     React.createElement("section", { id: "trajectory", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "03 \u2014 Experience", titleEn: "The Trajectory", titleKo: "\uC774\uB825 \u2014 \uC2E4\uBB34\uC640 \uC804\uBB38\uAD50\uC721" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "04 \u2014 Experience", titleEn: "The Trajectory", titleKo: "\uC774\uB825 \u2014 \uC2E4\uBB34\uC640 \uC804\uBB38\uAD50\uC721" }), /*#__PURE__*/
     React.createElement("div", { className: "tl-groups" },
     TRAJ_GROUPS.map((g) => {
       const rows = g.order ?
@@ -710,7 +710,7 @@ function Artifacts() {
     React.createElement(React.Fragment, null, /*#__PURE__*/
     React.createElement("section", { id: "artifacts", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "02 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "03 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
     React.createElement("p", { className: "works-lead font-ko reveal" }, "\uC9C1\uC811 \uBB38\uC81C\uB97C \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/
     React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C 4\uAC74"), "\uC785\uB2C8\uB2E4. \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20 \uC791\uC5C5\uC740 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
 
@@ -766,13 +766,13 @@ function Lectures() {
     React.createElement("section", { id: "lectures", ref: ref, className: "side-practice", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .22 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 \uC900\uBE44 \uC911", titleEn: "The Lectures", titleKo: "\uC900\uBE44 \uC911\uC778 AI \uAC15\uC758 \uD504\uB85C\uADF8\uB7A8" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 Lectures", titleEn: "The Lectures", titleKo: "AI \uAC15\uC758 \uD504\uB85C\uADF8\uB7A8" }), /*#__PURE__*/
 
     React.createElement("div", { className: "side-note reveal" }, /*#__PURE__*/
     React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, "\uBCF8\uC5C5\uC740 ", /*#__PURE__*/
     React.createElement("strong", null, "AI \uC804\uB7B5\uAE30\uD68D"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
-    React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC900\uBE44\uD558\uACE0 \uC788\uB294 \uD504\uB85C\uADF8\uB7A8"), "\uC774\uBA70, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBBF8\uB9AC \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4."
+    React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC124\uACC4\uD55C \uD504\uB85C\uADF8\uB7A8"), "\uC73C\uB85C, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBA3C\uC800 \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4."
 
     )
     ), /*#__PURE__*/
@@ -857,49 +857,81 @@ function Lectures() {
 
 }
 
-/* ============================================================ ABOUT */
+/* ============================================================ ABOUT — 스크롤 스토리
+ * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
+ * 오른쪽 사진이 프로필 → 발표 → 인터뷰 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
+const STORY_LINES = ["판단의 근거를 만들고,", "실행까지 책임지는", "자리에서 일합니다."];
+const STORY_SHOTS = [
+{ src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
+  alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
+{ src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
+  alt: "김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
+{ src: "images/press-yonhap-700.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w",
+  alt: "김유빈 연합뉴스TV 인터뷰 — 강남1인가구센터 취재", chip: "On Air", cap: "연합뉴스TV 인터뷰" }];
+
+
 function About() {
-  const ref = useReveal();
+  const ref = React.useRef(null);
+  const [p, setP] = React.useState(0);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const on = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        const span = r.height - window.innerHeight;
+        setP(span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1);
+      });
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("resize", on);
+    return () => {window.removeEventListener("scroll", on);window.removeEventListener("resize", on);cancelAnimationFrame(raf);};
+  }, []);
+  const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
+  const lineOn = (i) => p >= 0.06 + i * 0.16;
+  const bodyOn = p >= 0.5;
+
   return (/*#__PURE__*/
-    React.createElement("section", { id: "about", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(40px,6vw,72px)", overflow: "hidden" } }, /*#__PURE__*/
-    React.createElement("div", { className: "speckle", style: { opacity: .35 } }), /*#__PURE__*/
-    React.createElement("div", { className: "wrap reveal", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement("div", { className: "about-grid" }, /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/
-    React.createElement("p", { className: "eyebrow", style: { marginBottom: 6 } }, "04 \u2014 Profile"), /*#__PURE__*/
-    React.createElement("h3", { className: "font-myeongjo", style: { fontWeight: 800, fontSize: "clamp(1.45rem,2.6vw,2.1rem)", lineHeight: 1.42, letterSpacing: "-.01em", margin: "20px 0 0", textWrap: "balance" } }, "\uD310\uB2E8\uC758 \uADFC\uAC70\uB97C \uB9CC\uB4E4\uACE0,", /*#__PURE__*/
-    React.createElement("br", null), "\uC2E4\uD589\uAE4C\uC9C0 \uCC45\uC784\uC9C0\uB294 \uC790\uB9AC\uC5D0\uC11C \uC77C\uD569\uB2C8\uB2E4."
+    React.createElement("section", { id: "about", ref: ref, className: "story", style: { "--p": p.toFixed(3) } }, /*#__PURE__*/
+    React.createElement("div", { className: "story__sticky" }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap story__grid" }, /*#__PURE__*/
+    React.createElement("div", { className: "story__copy" }, /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow" }, "01 \u2014 Profile"), /*#__PURE__*/
+    React.createElement("h3", { className: "story__lead font-myeongjo" },
+    STORY_LINES.map((l, i) => /*#__PURE__*/React.createElement("span", { key: l, className: "story__line" + (lineOn(i) ? " on" : "") }, l))
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko", style: { margin: "18px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" } }, "\uD769\uC5B4\uC9C4 \uC2DC\uC7A5\xB7\uC5C5\uBB34 \uB370\uC774\uD130\uB97C \uBAA8\uC544 \uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0 \uC815\uD558\uACE0, \uADF8 \uACB0\uC815\uC744 \uC790\uB3D9\uD654\uC640 \uCF58\uD150\uCE20\uB85C \uC2E4\uD589\uC5D0 \uC62E\uAE41\uB2C8\uB2E4. \uBC95\uB960\uACFC \uB370\uC774\uD130\uB97C \uB300\uC911\uC774 \uC774\uD574\uD558\uB294 \uC5B8\uC5B4\uB85C \uC62E\uAE30\uB294 \uC77C\uB3C4 \uAC19\uC740 \uC790\uB9AC\uC5D0\uC11C \uD569\uB2C8\uB2E4."
+    React.createElement("div", { className: "story__body" + (bodyOn ? " on" : "") }, /*#__PURE__*/
+    React.createElement("p", { className: "font-ko" }, "\uD769\uC5B4\uC9C4 \uC2DC\uC7A5\xB7\uC5C5\uBB34 \uB370\uC774\uD130\uB97C \uBAA8\uC544 \uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0 \uC815\uD558\uACE0, \uADF8 \uACB0\uC815\uC744 \uC790\uB3D9\uD654\uC640 \uCF58\uD150\uCE20\uB85C \uC2E4\uD589\uC5D0 \uC62E\uAE41\uB2C8\uB2E4. \uBC95\uB960\uACFC \uB370\uC774\uD130\uB97C \uB300\uC911\uC774 \uC774\uD574\uD558\uB294 \uC5B8\uC5B4\uB85C \uC62E\uAE30\uB294 \uC77C\uB3C4 \uAC19\uC740 \uC790\uB9AC\uC5D0\uC11C \uD569\uB2C8\uB2E4."
+
 
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko", style: { margin: "12px 0 0", maxWidth: 520, fontSize: "clamp(.98rem,1.4vw,1.08rem)", lineHeight: 1.8, color: "var(--ink-soft)" } }, "\uAC15\uC758\uC2E4\uACFC \uC0AC\uBB34\uC2E4, \uCE74\uBA54\uB77C \uC55E\uC744 \uC624\uAC00\uBA70 \uC313\uC544\uC628 \uC2DC\uAC04\uC744 \uAE30\uB85D\uC73C\uB85C \uB0A8\uAE41\uB2C8\uB2E4. \uB9D0\uBCF4\uB2E4 \uACB0\uACFC\uBB3C\uC774 \uBA3C\uC800 \uC99D\uBA85\uD558\uB3C4\uB85D."
-
-    ), /*#__PURE__*/
-
-    React.createElement("div", { className: "font-ko", style: { display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20, fontSize: ".9rem", color: "var(--ink-soft)" } }, /*#__PURE__*/
-    React.createElement(MapPin, { size: 15 }), " \uC11C\uC6B8 \uC11C\uCD08\uAD6C \uC11C\uCD08\uB300\uB85C 264 \uBC95\uC870\uD0C0\uC6CC 15F \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D"
-    ), /*#__PURE__*/
-
-    React.createElement("div", { style: { marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" } }, /*#__PURE__*/
-    React.createElement("a", { href: "gallery.html", className: "btn btn--ghost", style: { fontSize: ".88rem" } }, "\uD65C\uB3D9 \uAC24\uB7EC\uB9AC ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
-    React.createElement("a", { href: "career.html", className: "btn btn--ghost", style: { fontSize: ".88rem" } }, "\uACBD\uB825 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
+    React.createElement("p", { className: "story__addr font-ko" }, /*#__PURE__*/React.createElement(MapPin, { size: 15 }), " \uC11C\uC6B8 \uC11C\uCD08\uAD6C \uC11C\uCD08\uB300\uB85C 264 \uBC95\uC870\uD0C0\uC6CC 15F \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D"), /*#__PURE__*/
+    React.createElement("div", { className: "story__links" }, /*#__PURE__*/
+    React.createElement("a", { href: "career.html", className: "btn" }, "\uACBD\uB825 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html", className: "btn btn--ghost" }, "\uD65C\uB3D9 \uAC24\uB7EC\uB9AC ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
+    )
     )
     ), /*#__PURE__*/
 
-    React.createElement("div", { className: "about-gallery" }, /*#__PURE__*/
-    React.createElement("figure", { className: "photo-card photo-card--tall reveal" }, /*#__PURE__*/
-    React.createElement("img", { src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w", sizes: "(max-width: 720px) 40vw, 18vw", alt: "\uAE40\uC720\uBE48 \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uACF5\uC2DD \uD504\uB85C\uD544", width: "450", height: "600", loading: "lazy" }), /*#__PURE__*/
-    React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "photo-card__chip" }, "PROFILE"), "\uAE40\uC720\uBE48 \xB7 Yubin Kim")
-    ), /*#__PURE__*/
-    React.createElement("figure", { className: "photo-card reveal", style: { transitionDelay: "90ms" } }, /*#__PURE__*/
-    React.createElement("img", { src: "images/press-yonhap-500.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w", sizes: "(max-width: 720px) 45vw, 20vw", alt: "\uAE40\uC720\uBE48 \uC5F0\uD569\uB274\uC2A4TV \uC778\uD130\uBDF0 \u2014 \uAC15\uB0A81\uC778\uAC00\uAD6C\uC13C\uD130 \uCDE8\uC7AC", width: "500", height: "281", loading: "lazy" }), /*#__PURE__*/
-    React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "photo-card__chip photo-card__chip--red" }, "ON AIR"), "\uC5F0\uD569\uB274\uC2A4TV \uC778\uD130\uBDF0")
-    ), /*#__PURE__*/
-    React.createElement("figure", { className: "photo-card reveal", style: { transitionDelay: "180ms" } }, /*#__PURE__*/
-    React.createElement("img", { src: "images/ssafy-presentation-500.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w", sizes: "(max-width: 720px) 45vw, 20vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 \uC0BC\uC131\uCCAD\uB144SW\uC544\uCE74\uB370\uBBF8(SSAFY) 13\uAE30 \uD504\uB85C\uC81D\uD2B8 \uBC1C\uD45C", width: "500", height: "500", loading: "lazy" }), /*#__PURE__*/
-    React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "photo-card__chip" }, "SSAFY 13\uAE30"), "\uD504\uB85C\uC81D\uD2B8 \uBC1C\uD45C")
+    React.createElement("div", { className: "story__media" }, /*#__PURE__*/
+    React.createElement("div", { className: "story__frame" },
+    STORY_SHOTS.map((m, i) => /*#__PURE__*/
+    React.createElement("img", { key: m.src, className: "story__img" + (i === shot ? " on" : ""), src: m.src, srcSet: m.srcSet,
+      sizes: "(max-width: 900px) 80vw, 34vw", alt: m.alt, loading: "lazy" })
     )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "story__caps" },
+    STORY_SHOTS.map((m, i) => /*#__PURE__*/
+    React.createElement("p", { key: m.chip, className: "story__cap" + (i === shot ? " on" : "") }, /*#__PURE__*/
+    React.createElement("span", { className: "font-sans" }, String(i + 1).padStart(2, "0"), " \xB7 ", m.chip), /*#__PURE__*/
+    React.createElement("em", { className: "font-ko" }, m.cap)
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "story__prog", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", { style: { transform: `scaleX(${p.toFixed(3)})` } }))
     )
     )
     )
@@ -956,7 +988,7 @@ function Footer() {
   return (/*#__PURE__*/
     React.createElement("footer", { style: { borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap f-links font-sans", style: { display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" } },
-    [["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => /*#__PURE__*/
+    [["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => /*#__PURE__*/
     React.createElement("a", { key: t, href: h }, t)
     ), /*#__PURE__*/
     React.createElement("a", { href: "https://github.com/yubinxe", rel: "me noopener", target: "_blank" }, "GitHub"), /*#__PURE__*/
