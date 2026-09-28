@@ -380,7 +380,7 @@
   ];
 
   return {
-    version: "2026.09.15e",
+    version: "2026.09.28a",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
     rank: rank,
