@@ -36,7 +36,7 @@
       title: "무엇이든 물어보세요",
       subtitle: "김유빈 님의 역량 · 프로젝트 · 경력을 안내합니다",
       greeting:
-        "안녕하세요. **김유빈 님의 포트폴리오**를 안내하는 컨시어지 **유빈 AI**입니다.\n핵심 역량, 대표 프로젝트, 경력, 자격, 협업 방법까지 무엇이든 물어보세요. 답변의 버튼을 누르면 해당 위치로 바로 안내합니다.",
+        "안녕하세요, 반갑습니다 👋\n**김유빈 님의 포트폴리오 컨시어지, 유빈 AI**입니다.\n- 🧩 핵심 역량과 일하는 방식\n- 🗂️ 대표 프로젝트와 기획 판단\n- 🧭 경력 · 교육 · 수상 이력\n궁금한 것을 편하게 물어보세요. 답변 속 버튼을 누르면 해당 위치로 바로 모셔다 드릴게요 ✨",
       teaser: "궁금한 점이 있으신가요?",
       email: "yubin120866@gmail.com",
       model: "gpt-4o-mini",
@@ -149,9 +149,21 @@
       });
       // **bold**
       body = body.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-      return bullet ? '<span class="yk-li">' + body + "</span>" : body;
+      /* 이모지로 시작하는 항목은 이모지가 표지 역할 — 점 표지를 생략 */
+      return bullet ? '<span class="yk-li' + (/^\p{Extended_Pictographic}/u.test(body) ? " yk-li--e" : "") + '">' + body + "</span>" : body;
     });
-    return lines.join("<br>");
+    /* 불릿(블록)과 문장 사이에는 <br>을 넣지 않고, 빈 줄은 문단 간격으로 */
+    var raw = safe.split("\n");
+    var out = "";
+    lines.forEach(function (h, i) {
+      var isBlock = h.indexOf('<span class="yk-li') === 0;
+      if (raw[i].trim() === "") { out += '<span class="yk-gap"></span>'; return; }
+      var prev = i > 0 ? lines[i - 1] : null;
+      var prevBlock = prev == null || prev.indexOf('<span class="yk-li') === 0 || raw[i - 1].trim() === "";
+      if (i > 0 && !isBlock && !prevBlock) out += "<br>";
+      out += h;
+    });
+    return out;
   }
 
   /* ------------------------------------------------------------ 딥링크 엔진 */
@@ -230,29 +242,73 @@
       return { c: c, s: s };
     }).sort(function (a, b) { return b.s - a.s; });
   }
-  /* → { text, ctas:[{label,href}] } */
+  /* 분류별 첫 줄과 '이어서 물어보기' — 질문은 kb-rank 테스트로 검증된 문장만 쓴다 */
+  var TONE = {
+    "프로젝트": { e: "🗂️", lead: "관련 프로젝트를 정리해 드릴게요.", next: ["ed-09", "ed-06", "thesis", "trajectory", "composite"] },
+    "역량": { e: "🧩", lead: "김유빈 님의 역량을 짚어 드릴게요.", next: ["projects", "ed-09", "thesis", "trajectory"] },
+    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["projects", "creds", "tl-youth-day", "composite"] },
+    "자격": { e: "🎖️", lead: "자격과 수상 기록입니다.", next: ["trajectory", "tl-youth-day", "projects"] },
+    "강의": { e: "🎓", lead: "강의 프로그램을 소개해 드릴게요.", next: ["projects", "composite", "contact"] },
+    "연락": { e: "✉️", lead: "연락 방법을 안내해 드릴게요.", next: ["projects", "composite", "trajectory"] },
+    "미디어": { e: "📰", lead: "미디어 기록을 모아 보았습니다.", next: ["tl-youth-day", "projects", "trajectory"] },
+    "인물": { e: "🙂", lead: "김유빈 님을 소개해 드릴게요.", next: ["composite", "projects", "trajectory"] },
+  };
+  var ASK = {
+    "composite": ["🧩 핵심 역량 요약", "핵심 역량을 한눈에 요약해 주세요"],
+    "projects": ["🗂️ 전체 프로젝트", "어떤 프로젝트를 만들었나요?"],
+    "ed-09": ["🏠 집캐치 서비스", "집캐치가 뭔가요"],
+    "ed-06": ["📨 VOC 트리아지", "VOC 트리아지가 뭔가요"],
+    "trajectory": ["🧭 경력 타임라인", "경력 타임라인 정리해 주세요"],
+    "creds": ["🎖️ 자격 · 수상", "자격증 뭐 있으세요?"],
+    "tl-youth-day": ["🇰🇷 청년의날 참석", "청와대 청년의날 갔다면서요"],
+    "thesis": ["💡 일하는 철학", "일하는 철학이 궁금해요"],
+    "contact": ["✉️ 연락 방법", "연락은 어떻게 하나요?"],
+  };
+  function followUps(cat, exclude) {
+    var ids = ((TONE[cat] || TONE["인물"]).next).filter(function (id) { return exclude.indexOf(id) < 0 && ASK[id]; });
+    return ids.slice(0, 3).map(function (id) { return { label: ASK[id][0], ask: ASK[id][1] }; });
+  }
+  /* 긴 문단은 문장 단위 불릿으로 — 한눈에 읽히게 */
+  function tidyBody(body) {
+    var b = String(body || "").trim();
+    if (/\n\s*-\s/.test(b) || b.length < 90) return b;
+    var parts = b.replace(/([다요음])\.\s+/g, "$1.\n").split("\n").filter(Boolean);
+    if (parts.length < 2) return b;
+    return parts.slice(0, 5).map(function (x) { return "- " + x.trim(); }).join("\n");
+  }
+  /* → { text, ctas:[{label,href} | {label,ask}] } */
   function localAnswer(query) {
     var q = (query || "").toLowerCase();
-    if (/(안녕|하이|hello|hi|반가|누구|소개)/.test(q) && q.length < 12) {
-      return { text: "안녕하세요. 김유빈 님의 포트폴리오를 안내하는 **유빈 AI**입니다. 핵심 역량, 프로젝트, 경력, 자격, 협업 방법 중 무엇이 궁금하신가요?", ctas: [] };
+    if (/(안녕|하이|hello|hi|반가)/.test(q) && q.length < 12) {
+      return {
+        text: "반갑습니다 👋 **유빈 AI가 김유빈 님을 안내해 드릴게요.**\n- 🧩 무엇을 잘하는지 — 역량\n- 🗂️ 무엇을 만들었는지 — 프로젝트\n- 🧭 어떤 길을 걸어왔는지 — 이력\n✨ 아래에서 골라 보시거나 편하게 질문해 주세요.",
+        ctas: followUps("인물", []),
+      };
     }
     var scored = scoreCards(q);
     if (!scored.length || scored[0].s === 0) {
       return {
-        text: "그 내용은 포트폴리오에 담겨 있지 않습니다. **[" + PROFILE.email + "](mailto:" + PROFILE.email + ")** 로 문의하시면 김유빈 님이 직접 답변드립니다. 그 밖에 역량·프로젝트·경력·자격은 얼마든지 안내해 드릴게요.",
-        ctas: [{ label: "무료 상담 신청", href: "__consult__" }],
+        text: "🙏 **아쉽게도 그 내용은 포트폴리오에 담겨 있지 않아요.**\n- ✉️ **[" + PROFILE.email + "](mailto:" + PROFILE.email + ")** 로 문의하시면 김유빈 님이 직접 답변드립니다.\n- 💬 아래 '무료 상담 신청'으로 내용을 정리해 바로 전달하실 수도 있어요.\n✨ 역량 · 프로젝트 · 경력은 언제든 자세히 안내해 드릴게요.",
+        ctas: [{ label: "무료 상담 신청", href: "__consult__" }].concat(followUps("인물", [])),
       };
     }
-    var top = scored.filter(function (x) { return x.s > 0; }).slice(0, 2);
-    var ctas = [];
+    var best = scored[0].s;
+    var top = scored.filter(function (x, i) { return x.s > 0 && (i === 0 || x.s >= best * 0.5); }).slice(0, 2);
+    var cat = top[0].c.cat || "인물";
+    var tone = TONE[cat] || TONE["인물"];
+    var links = [];
     top.forEach(function (x) {
       [x.c.primary, x.c.secondary].forEach(function (cta) {
         if (!cta || !cta.href) return;
-        if (ctas.some(function (y) { return y.href === cta.href; })) return;
-        ctas.push(cta);
+        if (links.some(function (y) { return y.href === cta.href; })) return;
+        links.push(cta);
       });
     });
-    return { text: top.map(function (x) { return "**" + x.c.title + "**\n" + x.c.body; }).join("\n\n"), ctas: ctas.slice(0, 3) };
+    var text = tone.e + " **" + tone.lead + "**\n\n" +
+      top.map(function (x) { return "📌 **" + x.c.title + "**\n" + tidyBody(x.c.body); }).join("\n\n") +
+      "\n\n✨ 더 궁금하신 점은 아래에서 이어서 물어보세요.";
+    var exclude = top.map(function (x) { return x.c.id; });
+    return { text: text, ctas: links.slice(0, 3).concat(followUps(cat, exclude)) };
   }
 
   /* ------------------------------------------------------ session storage */
@@ -444,6 +500,46 @@
   .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ right:12px; left:12px; width:auto; bottom:auto; top:12px; transform-origin:top center; }
   .yk-chat.open .yk-fab{ opacity:0; pointer-events:none; }
 }
+
+/* ---- v2 · 상태바 실제 배치 — 섬 좌우 귀 영역 중앙, 섬 중심선에 맞춤 ---- */
+.yk-status{ display:grid !important; grid-template-columns:1fr 126px 1fr; align-items:start; padding:17px 14px 0 !important; height:50px;
+  font-family:-apple-system,"SF Pro Display","SF Pro Text","Pretendard Variable",system-ui,sans-serif; font-size:16.5px; font-weight:600; letter-spacing:-.025em; }
+.yk-status__time{ grid-column:1; justify-self:center; line-height:20px; font-variant-numeric:tabular-nums; padding-left:6px; }
+.yk-status__icons{ grid-column:3; justify-self:center; display:flex; align-items:center; gap:5.5px; height:20px; padding-right:4px; }
+.yk-cell{ width:17px; height:11px; } .yk-wifi{ width:15.5px; height:11.5px; }
+.yk-bat{ position:relative; width:26px; height:12.5px; border-radius:4.2px; box-shadow:inset 0 0 0 1px rgba(14,26,46,.36); margin-right:2px; }
+.yk-bat::after{ content:""; position:absolute; right:-2.6px; top:4px; width:1.6px; height:4.5px; border-radius:0 1.5px 1.5px 0; background:rgba(14,26,46,.4); }
+.yk-bat i{ position:absolute; left:2px; top:2px; bottom:2px; width:calc(100% - 4px); border-radius:2.4px; background:var(--yk-ink); }
+.yk-bat b{ position:absolute; inset:0; display:grid; place-items:center; font-size:8.6px; font-weight:800; color:#fff; letter-spacing:-.04em; }
+.yk-bat.low i{ background:#E0443A; }
+/* 섬 — 렌즈 반사 · 응답 중 라이브 액티비티(좌: 컨시어지 · 우: 파형) */
+.yk-island{ transition:width .55s var(--yk-spring), height .55s var(--yk-spring); box-shadow:0 0 0 .5px rgba(255,255,255,.04); }
+.yk-island::after{ background:radial-gradient(circle at 32% 30%,#5C6F9C 0 12%,#1B2744 30%,#05070C 72%) !important; box-shadow:0 0 0 1.5px #0B0D12; }
+.yk-island__l, .yk-island__r{ position:absolute; top:50%; translate:0 -50%; opacity:0; transition:opacity .25s ease; }
+.yk-island__l{ left:9px; width:20px; height:20px; border-radius:50%; display:grid; place-items:center; font-style:normal;
+  font:600 9px/1 "Cormorant Garamond",Georgia,serif; color:#1B1204; background:var(--yk-gold-grad); }
+.yk-island__r{ right:34px; display:flex; gap:2px; align-items:center; height:14px; }
+.yk-island__r b{ width:2.5px; height:5px; border-radius:2px; background:var(--yk-gold-lt); animation:yk-wave 1s ease-in-out infinite; }
+.yk-island__r b:nth-child(2){ animation-delay:.15s; } .yk-island__r b:nth-child(3){ animation-delay:.3s; } .yk-island__r b:nth-child(4){ animation-delay:.45s; }
+@keyframes yk-wave{ 0%,100%{ height:4px; } 50%{ height:13px; } }
+.yk-busy .yk-island{ width:150px; }
+.yk-busy .yk-island__l, .yk-busy .yk-island__r{ opacity:1; transition-delay:.18s; }
+/* ---- 답변 가독성 ---- */
+.yk-msg.bot .yk-msg__bubble{ line-height:1.62; }
+.yk-msg.bot .yk-msg__bubble strong{ color:var(--yk-navy); font-weight:680; }
+.yk-li{ margin-top:4px; }
+.yk-gap{ display:block; height:9px; }
+.yk-li--e{ padding-left:0; }
+.yk-li--e::before{ display:none; }
+/* 이어서 물어보기 */
+.yk-follow{ display:flex; flex-direction:column; gap:6px; margin-top:2px; animation:yk-in .5s var(--yk-spring) both; }
+.yk-follow__lbl{ font-size:10.5px; font-weight:700; letter-spacing:.14em; color:var(--yk-gold); padding-left:4px; }
+.yk-follow__row{ display:flex; flex-wrap:wrap; gap:6px; }
+.yk-ask{ font:inherit; font-size:12.8px; font-weight:560; color:var(--yk-navy); background:rgba(255,255,255,.75); border:none; border-radius:999px;
+  padding:7px 12px; cursor:pointer; box-shadow:inset 0 0 0 1px rgba(156,126,72,.45); transition:background .25s, box-shadow .25s, transform .35s var(--yk-spring); }
+.yk-ask:hover{ background:#fff; box-shadow:inset 0 0 0 1.3px var(--yk-gold); transform:translateY(-1px); }
+.yk-ask:active{ transform:scale(.97); }
+@media (prefers-reduced-motion:reduce){ .yk-island__r b{ animation:none; } .yk-island{ transition:none; } }
 @media (prefers-reduced-motion:reduce){
   .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser,.yk-cta__btn{ transition:none !important; animation:none !important; }
   .yk-fab__ping::after,.yk-typing span{ animation:none !important; }
@@ -466,9 +562,9 @@
   var ICON_BACK =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
   var ICON_STATUS =
-    '<svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>' +
-    '<svg viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.2-1.3A10.3 10.3 0 0 0 8 .4 10.3 10.3 0 0 0 .8 3.3L2 4.6a8.5 8.5 0 0 1 6-2.4zm0 3.6c1.4 0 2.6.5 3.6 1.4l1.2-1.3A7 7 0 0 0 8 4a7 7 0 0 0-4.8 1.9l1.2 1.3c1-.9 2.2-1.4 3.6-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg>' +
-    '<svg viewBox="0 0 27 12" fill="none"><rect x=".5" y=".5" width="23" height="11" rx="3.2" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4z" fill="currentColor" opacity=".45"/></svg>';
+    '<svg class="yk-cell" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="7.4" width="3.2" height="4.6" rx="1.1"/><rect x="4.9" y="5.2" width="3.2" height="6.8" rx="1.1"/><rect x="9.8" y="2.8" width="3.2" height="9.2" rx="1.1"/><rect x="14.7" y="0" width="3.2" height="12" rx="1.1"/></svg>' +
+    '<svg class="yk-wifi" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M1.6 4.4a9.2 9.2 0 0 1 12.8 0"/><path d="M4.2 7.1a5.5 5.5 0 0 1 7.6 0"/><path d="M8 11.3 6.1 9.4a2.7 2.7 0 0 1 3.8 0z" fill="currentColor" stroke="none"/></svg>' +
+    '<span class="yk-bat"><i></i><b>100</b></span>';
   var ICON_ARROW =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
   var ICON_PIN =
@@ -551,7 +647,7 @@
     var foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · 답변은 포트폴리오 근거로 생성됩니다');
 
     var screen = el("div", "yk-screen");
-    screen.appendChild(el("div", "yk-island"));
+    screen.appendChild(el("div", "yk-island", '<i class="yk-island__l">YK</i><i class="yk-island__r"><b></b><b></b><b></b><b></b></i>'));
     var status = el("div", "yk-status", '<span class="yk-status__time">9:41</span><span class="yk-status__icons" aria-hidden="true">' + ICON_STATUS + "</span>");
     status.setAttribute("aria-hidden", "true");
     screen.appendChild(status);
@@ -564,6 +660,20 @@
     panel.appendChild(screen);
     tickClock();
     setInterval(tickClock, 20000);
+    /* 실제 배터리 잔량(지원 브라우저) — 없으면 100 */
+    try {
+      if (navigator.getBattery) navigator.getBattery().then(function (bt) {
+        function upd() {
+          var pct = Math.round(bt.level * 100);
+          var bat = root.querySelector(".yk-bat");
+          if (!bat) return;
+          bat.querySelector("b").textContent = pct;
+          bat.querySelector("i").style.width = "calc((100% - 4px) * " + bt.level + ")";
+          bat.classList.toggle("low", pct <= 20);
+        }
+        upd(); bt.addEventListener("levelchange", upd);
+      });
+    } catch (e) {}
 
     root.appendChild(teaser);
     root.appendChild(panel);
@@ -591,9 +701,15 @@
   }
 
   /* ------------------------------------------------------------ behaviors */
+  function setBusy(v) {
+    busy = v;
+    if (sendBtn) sendBtn.disabled = v;
+    if (root) root.classList.toggle("yk-busy", v);
+  }
   function hhmm() {
     var d = new Date();
-    return d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+    var h = d.getHours() % 12 || 12; /* iOS 상태바는 오전/오후 없이 12시간제 */
+    return h + ":" + String(d.getMinutes()).padStart(2, "0");
   }
   function tickClock() {
     var t = root && root.querySelector(".yk-status__time");
@@ -615,7 +731,8 @@
     tickClock();
     if (!greeted) {
       greeted = true;
-      body.appendChild(el("div", "yk-stamp", "오늘 " + hhmm()));
+      var d0 = new Date();
+      body.appendChild(el("div", "yk-stamp", "오늘 " + (d0.getHours() < 12 ? "오전 " : "오후 ") + hhmm()));
       renderMessage("bot", CFG.greeting);
     }
     setTimeout(function () { textarea && textarea.focus(); }, 340);
@@ -634,6 +751,21 @@
 
   function renderCtas(col, ctas) {
     if (!ctas || !ctas.length) return;
+    var asks = ctas.filter(function (c) { return c.ask; });
+    ctas = ctas.filter(function (c) { return !c.ask; });
+    if (asks.length) {
+      var fol = el("div", "yk-follow", '<span class="yk-follow__lbl">이어서 물어보기</span>');
+      var frow = el("div", "yk-follow__row");
+      asks.forEach(function (c) {
+        var b = el("button", "yk-ask", escapeHtml(c.label));
+        b.type = "button";
+        b.addEventListener("click", function () { if (!busy) send(c.ask); });
+        frow.appendChild(b);
+      });
+      fol.appendChild(frow);
+      setTimeout(function () { col.appendChild(fol); scrollBottom(); }, 0);
+    }
+    if (!ctas.length) return;
     var row = el("div", "yk-cta");
     ctas.forEach(function (c, i) {
       var b = el("button", "yk-cta__btn" + (i ? " yk-cta__btn--ghost" : ""));
@@ -696,7 +828,7 @@
     if (consult) { consultStep(text); return; }
     if (isConsultIntent(text)) { startConsult(text); return; }
 
-    busy = true; sendBtn.disabled = true;
+    setBusy(true);
     var typing = renderTyping();
     respond(text, typing);
   }
@@ -728,11 +860,13 @@
         pushBot(acc, la.ctas);
       } else {
         // 서버 답변에도 관련 카드의 딥링크 CTA 를 덧붙임 (근거 위치 안내)
-        var ctas = localAnswer(text).ctas.filter(function (c) { return c.href !== "__consult__"; }).slice(0, 2);
+        var all = localAnswer(text).ctas;
+        var ctas = all.filter(function (c) { return c.href && c.href !== "__consult__"; }).slice(0, 2)
+          .concat(all.filter(function (c) { return c.ask; }));
         renderCtas(bubble.__col, ctas);
         pushBot(acc, ctas);
       }
-      busy = false; sendBtn.disabled = false;
+      setBusy(false);
       textarea.focus();
     }
     function fallback() {
@@ -744,7 +878,7 @@
         acc = la.text;
         renderCtas(bubble.__col, la.ctas);
         pushBot(acc, la.ctas);
-        busy = false; sendBtn.disabled = false;
+        setBusy(false);
       });
     }
 
@@ -788,7 +922,7 @@
     open();
     consult = { step: 0, data: {}, page: pageOf(location.pathname) };
     if (firstText) consult.data.opening = firstText;
-    var intro = "**무료 상담 신청**을 도와드리겠습니다. 세 가지만 여쭙겠습니다.\n" + CONSULT.steps[0].ask;
+    var intro = "📝 **무료 상담 신청을 도와드릴게요.**\n세 가지만 여쭙겠습니다.\n" + CONSULT.steps[0].ask;
     renderMessage("bot", intro);
     pushBot(intro);
     setTimeout(function () { textarea && textarea.focus(); }, 200);
@@ -898,7 +1032,7 @@
     var knowledge = EXT && EXT.toKnowledge ? EXT.toKnowledge() : KB.map(function (c) { return "### " + c.title + "\n" + c.body; }).join("\n\n");
     return [
       "당신은 '유빈 AI'입니다 — 김유빈(Yubin Kim)의 포트폴리오를 방문객(주로 채용·협업 담당자)에게 안내하는 격조 있는 컨시어지입니다. 김유빈 님을 3인칭으로 소개합니다.",
-      "[규칙] 1) 아래 <지식> 안의 사실만 근거로 답하고 없는 사실·수치·URL은 지어내지 않습니다. 2) 지식에 없으면 '그 내용은 포트폴리오에 담겨 있지 않습니다. " + PROFILE.email + " 로 문의하시면 김유빈 님이 직접 답변드립니다.' 라고 안내합니다. 3) 링크는 <지식>의 URL만 사용, 법률·세무 판단은 '전문가 상담이 필요합니다'로 안내, 공개 이메일 외 개인정보는 제공하지 않습니다. 4) 무관한 잡담은 정중히 포트폴리오 주제로 유도합니다. 5) 절제되고 품격 있게, 과장 없이. 기본 한국어(영어로 물으면 영어), 3~6문장, 필요시 짧은 불릿, 프로젝트는 [이름](URL) 링크로, 이모지 금지. 6) 사이트 내부 위치를 안내할 때는 [라벨](페이지.html#앵커) 형식의 링크를 사용합니다.",
+      "[규칙] 1) 아래 <지식> 안의 사실만 근거로 답하고 없는 사실·수치·URL은 지어내지 않습니다. 2) 지식에 없으면 '그 내용은 포트폴리오에 담겨 있지 않습니다. " + PROFILE.email + " 로 문의하시면 김유빈 님이 직접 답변드립니다.' 라고 안내합니다. 3) 링크는 <지식>의 URL만 사용, 법률·세무 판단은 '전문가 상담이 필요합니다'로 안내, 공개 이메일 외 개인정보는 제공하지 않습니다. 4) 무관한 잡담은 정중히 포트폴리오 주제로 유도합니다. 5) 품격 있고 따뜻한 컨시어지 어조로, 과장 없이. 기본 한국어(영어로 물으면 영어). 형식: 첫 줄은 이모지 1개로 시작하는 굵은 한 문장 요약, 이어서 핵심을 '- ' 불릿 2~4개로(각 불릿 앞에 항목을 구분하는 이모지 1개 — 예: 📌 🗂️ 🧭 🎓 ✅), 프로젝트는 [이름](URL) 링크로, 마지막 줄은 '✨ '로 시작해 이어서 물어볼 만한 질문 하나를 제안합니다. 이모지는 한 답변에 5개 이내, 장식이 아니라 항목 구분용으로만 씁니다. 6) 사이트 내부 위치를 안내할 때는 [라벨](페이지.html#앵커) 형식의 링크를 사용합니다.",
       "<지식>",
       knowledge,
       "</지식>",
