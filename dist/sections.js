@@ -929,6 +929,7 @@ function About() {
 
 
     ), /*#__PURE__*/
+    React.createElement("p", { className: "signature font-script", "aria-hidden": "true" }, "Yubin Kim"), /*#__PURE__*/
     React.createElement("p", { className: "story__addr font-ko" }, /*#__PURE__*/React.createElement(MapPin, { size: 15 }), " \uC11C\uC6B8 \uC11C\uCD08\uAD6C \uC11C\uCD08\uB300\uB85C 264 \uBC95\uC870\uD0C0\uC6CC 15F \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D"), /*#__PURE__*/
     React.createElement("div", { className: "story__links" }, /*#__PURE__*/
     React.createElement("a", { href: "career.html", className: "btn" }, "\uACBD\uB825 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
@@ -981,6 +982,7 @@ function Contact() {
     )
     ), /*#__PURE__*/
     React.createElement("div", { className: "wrap reveal", style: { position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" } }, /*#__PURE__*/
+    React.createElement("p", { className: "signature signature--light font-script", "aria-hidden": "true" }, "Yubin Kim"), /*#__PURE__*/
     React.createElement("p", { className: "eyebrow contact-eyebrow" }, "Inquiries \u2014 \uCC44\uC6A9 \uBC0F \uD611\uC5C5 \uC81C\uC548"), /*#__PURE__*/
     React.createElement("h2", { className: "font-serif contact-title" }, "Let\u2019s define", /*#__PURE__*/
     React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, "the next problem.")
@@ -1030,6 +1032,11 @@ function Footer() {
 }
 
 /* ---------- shared section header ---------- */
+/* 'The Composite' → 관사만 가는 이탤릭으로 — 클래식 표제의 리듬 */
+function splitTitle(t) {
+  const m = /^(The|At a)\s+(.+)$/.exec(t);
+  return m ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("em", { className: "sh-art" }, m[1]), m[2]) : t;
+}
 function SectionHead({ eyebrow, titleEn, titleKo }) {
   return (/*#__PURE__*/
     React.createElement("div", { className: "reveal" }, /*#__PURE__*/
@@ -1037,7 +1044,7 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
     React.createElement("div", { style: { display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 } }, /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/
     React.createElement("p", { className: "eyebrow", style: { color: "var(--ink-soft)", marginBottom: 14 } }, eyebrow), /*#__PURE__*/
-    React.createElement("h2", { className: "font-serif", style: { fontWeight: 900, fontSize: "clamp(2.4rem,6vw,5rem)", lineHeight: .95, letterSpacing: "-.03em", margin: 0 } }, titleEn)
+    React.createElement("h2", { className: "font-serif", style: { fontWeight: 900, fontSize: "clamp(2.4rem,6vw,5rem)", lineHeight: .95, letterSpacing: "-.03em", margin: 0 } }, splitTitle(titleEn))
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { fontWeight: 600, fontSize: "clamp(1rem,1.6vw,1.2rem)", color: "var(--ink-soft)", whiteSpace: "nowrap", flexShrink: 0, paddingBottom: ".4em" } }, titleKo)
     )

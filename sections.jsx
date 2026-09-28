@@ -928,6 +928,7 @@ function About() {
                 흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다.
                 법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
               </p>
+              <p className="signature font-script" aria-hidden="true">Yubin Kim</p>
               <p className="story__addr font-ko"><MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국</p>
               <div className="story__links">
                 <a href="career.html" className="btn">경력 상세 <ArrowUpRight size={15} /></a>
@@ -980,6 +981,7 @@ function Contact() {
         </svg>
       </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
+        <p className="signature signature--light font-script" aria-hidden="true">Yubin Kim</p>
         <p className="eyebrow contact-eyebrow">Inquiries — 채용 및 협업 제안</p>
         <h2 className="font-serif contact-title">
           Let’s define<br /><em>the next problem.</em>
@@ -1029,6 +1031,11 @@ function Footer() {
 }
 
 /* ---------- shared section header ---------- */
+/* 'The Composite' → 관사만 가는 이탤릭으로 — 클래식 표제의 리듬 */
+function splitTitle(t) {
+  const m = /^(The|At a)\s+(.+)$/.exec(t);
+  return m ? <React.Fragment><em className="sh-art">{m[1]}</em>{m[2]}</React.Fragment> : t;
+}
 function SectionHead({ eyebrow, titleEn, titleKo }) {
   return (
     <div className="reveal">
@@ -1036,7 +1043,7 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
       <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}>
         <div>
           <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 14 }}>{eyebrow}</p>
-          <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.4rem,6vw,5rem)", lineHeight: .95, letterSpacing: "-.03em", margin: 0 }}>{titleEn}</h2>
+          <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.4rem,6vw,5rem)", lineHeight: .95, letterSpacing: "-.03em", margin: 0 }}>{splitTitle(titleEn)}</h2>
         </div>
         <p className="font-ko" style={{ fontWeight: 600, fontSize: "clamp(1rem,1.6vw,1.2rem)", color: "var(--ink-soft)", whiteSpace: "nowrap", flexShrink: 0, paddingBottom: ".4em" }}>{titleKo}</p>
       </div>

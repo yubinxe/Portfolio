@@ -51,33 +51,6 @@ body {
 .font-play    { font-family: "Fredoka", "Pretendard Variable", "Pretendard", sans-serif; }
 .font-myeongjo { font-family: "Nanum Myeongjo", "Playfair Display", serif; }
 
-.about-photo__frame {
-  position: relative;
-  border-radius: 28px;
-  overflow: hidden;
-  border: 1.5px solid var(--ink);
-  box-shadow: 0 28px 60px -22px rgba(17,17,17,.5), 0 3px 0 rgba(17,17,17,.12);
-  transform: rotate(-1.6deg);
-  transition: transform .5s var(--bounce);
-}
-
-.about-photo__frame img { display: block; width: 100%; height: auto; }
-.about-photo__tag {
-  position: absolute;
-  z-index: 3;
-  bottom: -14px; left: -14px;
-  transform: rotate(-6deg);
-}
-.about-photo__dot {
-  position: absolute;
-  z-index: 2;
-  top: -18px; right: -10px;
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: #163A63;
-  border: 1.5px solid var(--ink);
-}
-
 .eyebrow {
   font-family: "Inter", "Pretendard Variable", "Pretendard", sans-serif;
   font-weight: 600;
@@ -294,14 +267,7 @@ body {
   border: 1px solid rgba(17,17,17,.14);
   margin-top: 13px;
 }
-.press-card__quote {
-  margin: 14px 0 0;
-  font-weight: 700;
-  font-size: clamp(.98rem, 1.5vw, 1.08rem);
-  line-height: 1.62;
-  letter-spacing: -.01em;
-  color: var(--ink);
-}
+
 .press-card__caption {
   margin: 9px 0 0;
   font-size: .78rem;
@@ -689,8 +655,6 @@ header.nav-hide { transform: translateY(-100%); }
 
 }
 
-.preloader__mark { text-align: center; animation: preIn .6s ease both; }
-
 body { animation: pageIn .45s ease both; }
 body.page-out { opacity: 0; transition: opacity .24s ease; }
 @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
@@ -809,17 +773,6 @@ body.page-out { opacity: 0; transition: opacity .24s ease; }
   inset: 0;
   z-index: 1;
   pointer-events: none;
-}
-
-.aurora--a {
-  top: -18%; left: -12%;
-  background: radial-gradient(circle at 40% 40%, rgba(31,45,107,.16), transparent 65%);
-  animation: auDrift 19s ease-in-out infinite alternate;
-}
-.aurora--b {
-  bottom: -22%; right: -14%;
-  background: radial-gradient(circle at 60% 60%, rgba(60,80,150,.13), transparent 65%);
-  animation: auDrift 23s ease-in-out infinite alternate-reverse;
 }
 
 #manifesto h1 { transition: transform .25s ease-out; will-change: transform; }
@@ -1267,103 +1220,6 @@ header img[alt^="YK"] { border-radius: 0; }
   transform: none;
 }
 
-/* 인터뷰: 방송 캡처는 16:9 가로 */
-.g-card--wide { max-width: 640px; }
-.g-card--wide img { aspect-ratio: 16 / 9; }
-
-/* ============================================================
-   GALLERY MASONRY — 자연 비율(크롭 없음) + 기고 기사 카드
-   ============================================================ */
-.g-mason {
-  columns: 3;
-  column-gap: clamp(16px, 2.2vw, 26px);
-}
-.g-mason--2 { columns: 2; }
-@media (max-width: 1080px) { .g-mason { columns: 2; } }
-@media (max-width: 640px) { .g-mason, .g-mason--2 { columns: 1; } }
-
-.g-mason .g-card {
-  break-inside: avoid;
-  display: inline-block;
-  width: 100%;
-  margin: 0 0 clamp(16px, 2.2vw, 26px);
-  vertical-align: top;
-}
-/* 자연 비율: aspect-ratio·crop 완전 해제 */
-.g-mason .g-card img,
-.g-mason .g-card--portrait img,
-.g-mason .g-card--doc img {
-  aspect-ratio: auto !important;
-  height: auto !important;
-  width: 100%;
-  object-fit: contain;
-}
-
-/* 기고 기사 카드 */
-.press-cite {
-  break-inside: avoid;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  margin: 0 0 clamp(16px, 2.2vw, 26px);
-  padding: clamp(1.5rem, 2.6vw, 2.1rem);
-  background: var(--ink);
-  color: var(--ecru);
-  border: 1.5px solid var(--ink);
-  border-radius: 20px;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: transform .45s var(--bounce), box-shadow .45s var(--bounce);
-}
-
-.press-cite__tag {
-  font-size: .68rem; font-weight: 700; letter-spacing: .16em;
-  color: #9AA8D6;
-}
-.press-cite__outlet {
-  font-size: .74rem; font-weight: 600; letter-spacing: .04em;
-  color: rgba(244,245,248,.55);
-}
-.press-cite__title {
-  font-weight: 800;
-  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
-  line-height: 1.4;
-  letter-spacing: -.01em;
-  margin: 6px 0 4px;
-  text-wrap: balance;
-}
-.press-cite__meta { font-size: .84rem; color: rgba(244,245,248,.6); line-height: 1.6; }
-.press-cite__cta {
-  margin-top: 10px;
-  font-size: .82rem; font-weight: 700; letter-spacing: .02em;
-  color: var(--ecru);
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.press-cite__cta b { transition: transform .35s var(--bounce); display: inline-block; }
-
-/* press-cite: 상단 이미지 헤더로 연합뉴스 카드와 무게 정렬 */
-.press-cite { padding: 0; overflow: hidden; }
-.press-cite__thumb { display: block; width: 100%; line-height: 0; }
-.press-cite__thumb img {
-  width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-bottom: 1.5px solid rgba(244,245,248,.14);
-  transition: transform .6s var(--bounce);
-}
-
-.press-cite__body {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: clamp(1.3rem, 2.4vw, 1.8rem) clamp(1.4rem, 2.6vw, 2rem) clamp(1.5rem, 2.6vw, 1.9rem);
-}
-.press-cite__body .press-cite__title { margin: 4px 0 2px; }
-
 /* ============================================================
    v30 — 품격 리파인먼트 레이어 (Seoul skyline · 타이포 · 심도 · 인터랙션)
    김앤장 무드: 절제된 네이비, 여백, 하이라인, 정제된 모션
@@ -1803,7 +1659,6 @@ body { background: var(--ecru); color: var(--ink); }
 .btn:hover, .btn:active { transform: none; translate: none; }
 .btn svg, .btn:hover svg { transform: none; }
 .btn--ghost { background: transparent; color: var(--navy); border-color: var(--hair-strong); box-shadow: none; }
-
 
 /* ---- stickers → 얇은 테두리 라벨 ---- */
 .sticker {
@@ -2295,7 +2150,6 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
   .story__frame { aspect-ratio: 5 / 5; }
 }
 
-
 /* 이력 하이라이트 — 2026 청년의날 */
 .tl-feature { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 4vw, 56px); align-items: center; margin: clamp(34px, 4vw, 50px) 0 0; padding: clamp(18px, 2.4vw, 28px); background: var(--paper); border: 1px solid var(--hair); }
 .tl-feature__main { display: block; overflow: hidden; }
@@ -2311,3 +2165,24 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
 .g-credit { margin-top: 16px; }
 @media (max-width: 900px) { .tl-feature { grid-template-columns: 1fr; } }
 .g-src { margin-left: auto; padding-left: 8px; font-size: .64rem; font-weight: 500; color: var(--ink-soft); opacity: .75; white-space: nowrap; }
+
+/* ---- v41 — 서체 정교화 · 청년의날 구분 ---- */
+.font-script { font-family: "Pinyon Script", "Cormorant Garamond", cursive; font-weight: 400; letter-spacing: 0; }
+.signature { margin: 22px 0 0; font-size: clamp(2.2rem, 3.6vw, 3rem); line-height: 1; color: var(--navy); transform: rotate(-3deg); transform-origin: left; }
+.signature--light { margin: 0 0 18px; color: var(--gold-light); transform: rotate(-3deg); transform-origin: center; }
+h2.font-serif .sh-art { font-style: italic; font-weight: 400; font-size: .56em; color: var(--gold-text); margin-right: .16em; vertical-align: .34em; letter-spacing: 0; }
+.font-myeongjo { letter-spacing: -.035em; word-spacing: .02em; }
+p.font-ko { font-weight: 430; }
+.story__lead, .whyc__lead, .whyc__close, .comp-thesis p:first-child { font-feature-settings: "palt" 1; }
+.eyebrow { font-weight: 700; }
+/* 청년의날 — 테두리 패널 + 전용 배치로 다른 기록과 확실히 분리 */
+.g-sec--feature { padding: clamp(22px, 3vw, 40px); background: var(--paper); border: 1px solid var(--hair-strong); border-top: 2px solid var(--gold); }
+.yd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 20px); }
+.yd-grid .g-card { margin: 0; display: flex; flex-direction: column; }
+.yd-grid .g-card a { display: block; overflow: hidden; aspect-ratio: 16 / 10; }
+.yd-grid .g-card img { width: 100%; height: 100%; object-fit: cover; }
+.yd-grid .g-card:first-child { grid-column: span 2; grid-row: span 2; }
+.yd-grid .g-card:first-child a { aspect-ratio: auto; flex: 1; }
+.yd-grid figcaption { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 2px 2px; font-size: .82rem; font-weight: 600; color: var(--ink); }
+@media (max-width: 760px) { .yd-grid { grid-template-columns: 1fr 1fr; } .yd-grid .g-card:first-child { grid-column: span 2; grid-row: auto; } .yd-grid .g-card:first-child a { aspect-ratio: 860 / 592; } }
+@media (max-width: 480px) { .yd-grid { grid-template-columns: 1fr; } .yd-grid .g-card:first-child { grid-column: auto; } }
