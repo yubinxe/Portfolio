@@ -22,6 +22,7 @@ const BarChart = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/Rea
 const Quote = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/React.createElement("path", { d: "M9 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2-1 3-3 4" }), /*#__PURE__*/React.createElement("path", { d: "M19 11h-3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7c0 2-1 3-3 4" }));
 const MapPin = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/React.createElement("path", { d: "M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" }), /*#__PURE__*/React.createElement("circle", { cx: "12", cy: "10", r: "3" }));
 const Award = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/React.createElement("circle", { cx: "12", cy: "8", r: "6" }), /*#__PURE__*/React.createElement("path", { d: "M15.5 13 17 22l-5-3-5 3 1.5-9" }));
+const Home = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/React.createElement("path", { d: "M3 10.5 12 3l9 7.5" }), /*#__PURE__*/React.createElement("path", { d: "M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9" }), /*#__PURE__*/React.createElement("path", { d: "M10 21v-6h4v6" }));
 const Newspaper = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/React.createElement("path", { d: "M4 3h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" }), /*#__PURE__*/React.createElement("path", { d: "M8 7h5M8 11h8M8 15h5" }), /*#__PURE__*/React.createElement("path", { d: "M17 3v4h2" }));
 
 const Code = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__*/React.createElement("path", { d: "m16 18 6-6-6-6" }), /*#__PURE__*/React.createElement("path", { d: "m8 6-6 6 6 6" }), /*#__PURE__*/React.createElement("path", { d: "m14 4-4 16" }));
@@ -29,6 +30,6 @@ const GraduationCap = (p) => /*#__PURE__*/React.createElement(Ic, p, /*#__PURE__
 
 Object.assign(window, {
   ArrowUpRight, ArrowRight, ArrowDown, ExternalLink, Sparkle, Scale,
-  Cpu, LayoutGrid, Mail, PlayCircle, BarChart, Quote, MapPin, Award, Newspaper,
+  Cpu, LayoutGrid, Mail, PlayCircle, BarChart, Quote, MapPin, Award, Newspaper, Home,
   Code, GraduationCap
 });
