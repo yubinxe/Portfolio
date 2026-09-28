@@ -18,13 +18,12 @@ function App() {
       <Nav />
       <main>
         <Hero />
-        <Marquee />
-        <Composite />
-        <Trajectory />
-        <Artifacts />
-        <Lectures />
         <Ledger />
         <About />
+        <Composite />
+        <Artifacts />
+        <Trajectory />
+        <Lectures />
         <Contact />
       </main>
 

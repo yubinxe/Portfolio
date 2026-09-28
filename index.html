@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>김유빈 Yubin Kim — 전략기획 × AI · 강의와 자동화로 증명하는 실행</title>
+<title>김유빈 Yubin Kim — AI 전략기획 · 자동화로 증명하는 실행</title>
 
 <!-- ===== Primary Meta ===== -->
 <meta name="description" content="데이터로 판단의 근거를 만들고 AI로 실행 속도를 만드는 전략기획자 김유빈. 업무 자동화·데이터 대시보드·브랜드 캠페인과 전략기획 AI 강의 프로그램을 배포된 결과물로 증명합니다." />
@@ -39,10 +39,10 @@
 <meta name="twitter:image" content="https://yubinxe.github.io/Portfolio/images/og-image.png?v=3" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
-<link rel="stylesheet" href="styles.css?v=31" />
+<link rel="stylesheet" href="styles.css?v=41" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -384,37 +384,37 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 
 <!-- JSX 는 빌드 시점에 컴파일합니다(npm run build). 원본: *.jsx · 결과물: dist/*.js -->
-<script src="dist/tweaks-panel.js?v=1"></script>
-<script src="dist/icons.js?v=1"></script>
-<script src="dist/sections.js?v=1"></script>
+<script src="dist/tweaks-panel.js?v=6"></script>
+<script src="dist/icons.js?v=6"></script>
+<script src="dist/sections.js?v=6"></script>
 
 <script>
 /* 테마 기본값 · 팔레트 — 편집 패널이 EDITMODE 블록을 그대로 덮어쓰므로 인라인 유지 */
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#1F2D6B",
+  "accent": "#13284B",
   "pastels": [
-    "#E9EBF3",
-    "#E3ECE8",
-    "#DCE6F2",
-    "#E9E6F0",
-    "#F0E7EA"
+    "#EFE9DE",
+    "#EFE9DE",
+    "#EFE9DE",
+    "#EFE9DE",
+    "#EFE9DE"
   ],
-  "motion": "bouncy",
+  "motion": "calm",
   "heroCase": "stacked"
 }/*EDITMODE-END*/;
 
 const PALETTES = {
+  "Heritage ivory": ["#EFE9DE", "#EFE9DE", "#EFE9DE", "#EFE9DE", "#EFE9DE"],
   "Navy office": ["#E9EBF3", "#E3ECE8", "#DCE6F2", "#E9E6F0", "#F0E7EA"],
   "Slate mono":  ["#E8EAEF", "#E3E6EB", "#DDE2EA", "#E7E8ED", "#ECEAEC"],
   "Ink & steel": ["#DFE3EE", "#D8DEEA", "#D2DAEC", "#DDDCE8", "#E2DEE8"],
 };
 </script>
-<script src="dist/app.js?v=1"></script>
+<script src="dist/app.js?v=6"></script>
 
 <script>
-/* ===== micro-interactions (오피스 모션 시스템) ===== */
+/* ===== 절제된 인터랙션 — 진행선 · 스마트 내비 · 스크롤스파이 · 레일 · 카운트업 · 메일 복사 ===== */
 (function () {
-  var fine = window.matchMedia("(pointer: fine)").matches;
   var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* scroll progress ink */
@@ -461,17 +461,30 @@ const PALETTES = {
     lastY = y;
   }, { passive: true });
 
-  /* preloader — 잉크 커튼 (세션 1회) */
-  try {
-    if (!calm && !sessionStorage.getItem("yk_intro")) {
-      sessionStorage.setItem("yk_intro", "1");
-      var pre = document.createElement("div");
-      pre.className = "preloader";
-      pre.innerHTML = '<div class="preloader__mark"><div class="font-serif" style="font-weight:900;font-size:3.2rem;letter-spacing:-.02em">YK</div><div class="menu-rule" style="width:150px;margin:14px auto"><i></i></div><div class="eyebrow" style="letter-spacing:.3em;font-size:10px;opacity:.65">YUBIN KIM OFFICE</div></div>';
-      document.body.appendChild(pre);
-      setTimeout(function () { pre.classList.add("done"); setTimeout(function () { pre.remove(); }, 800); }, 950);
-    }
-  } catch (err) {}
+  /* 커서 링 — 기본 커서 위에 위치를 부드럽게 따라가는 링. 링크·버튼 위에서 커진다 */
+  if (window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var ykRing = document.createElement("div");
+    ykRing.className = "cursor-ring";
+    ykRing.setAttribute("aria-hidden", "true");
+    document.body.appendChild(ykRing);
+    var rcx = -100, rcy = -100, rrx = -100, rry = -100, rOn = false;
+    document.addEventListener("mousemove", function (e) {
+      rcx = e.clientX; rcy = e.clientY;
+      if (!rOn) { rOn = true; rrx = rcx; rry = rcy; ykRing.classList.add("is-on"); }
+    }, { passive: true });
+    document.addEventListener("mouseleave", function () { rOn = false; ykRing.classList.remove("is-on"); });
+    (function ringLoop() {
+      rrx += (rcx - rrx) * 0.2; rry += (rcy - rry) * 0.2;
+      ykRing.style.transform = "translate3d(" + rrx.toFixed(1) + "px," + rry.toFixed(1) + "px,0) translate(-50%,-50%)";
+      requestAnimationFrame(ringLoop);
+    })();
+    document.addEventListener("mouseover", function (e) {
+      var t = e.target.closest && e.target.closest("a, button, summary, .edition, .lec-card, .g-card, .photo-card, .cred, .stat-card, .practice-card, .cmap__node, .cmap__label");
+      ykRing.classList.toggle("is-hover", !!t);
+    }, { passive: true });
+    document.addEventListener("mousedown", function () { ykRing.classList.add("is-down"); });
+    document.addEventListener("mouseup", function () { ykRing.classList.remove("is-down"); });
+  }
 
   /* page fade transition */
   document.addEventListener("click", function (e) {
@@ -480,16 +493,6 @@ const PALETTES = {
     e.preventDefault();
     document.body.classList.add("page-out");
     setTimeout(function () { location.href = a.getAttribute("href"); }, 240);
-  });
-
-  /* ink ripple on click */
-  if (!calm) document.addEventListener("click", function (e) {
-    var rp = document.createElement("span");
-    rp.className = "ripple";
-    rp.style.left = e.clientX + "px";
-    rp.style.top = e.clientY + "px";
-    document.body.appendChild(rp);
-    setTimeout(function () { rp.remove(); }, 720);
   });
 
   /* React 마운트 대기 — scrollspy · rail · fill · count-up · hero exit · toast */
@@ -508,25 +511,10 @@ const PALETTES = {
         }
       });
     }, { rootMargin: "-38% 0px -55% 0px" });
-    ["manifesto", "composite", "trajectory", "artifacts", "lectures", "about", "contact"].forEach(function (id) {
+    ["manifesto", "about", "composite", "artifacts", "trajectory", "lectures", "contact"].forEach(function (id) {
       var s = document.getElementById(id);
       if (s) spy.observe(s);
     });
-
-    var tl = document.querySelector(".timeline");
-    var spine = document.querySelector(".timeline__spine");
-    if (tl && spine) {
-      var fill = document.createElement("div");
-      fill.className = "timeline__fill";
-      spine.appendChild(fill);
-      var onTl = function () {
-        var r = tl.getBoundingClientRect();
-        var p = Math.min(1, Math.max(0, (innerHeight * 0.62 - r.top) / r.height));
-        fill.style.height = (p * 100).toFixed(1) + "%";
-      };
-      window.addEventListener("scroll", onTl, { passive: true });
-      onTl();
-    }
 
     var ioC = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
@@ -544,7 +532,7 @@ const PALETTES = {
     }, { threshold: 0.5 });
     document.querySelectorAll("[data-count]").forEach(function (n) { ioC.observe(n); });
 
-    var RAIL = [["manifesto", "선언"], ["composite", "역량"], ["trajectory", "궤적"], ["artifacts", "작업"], ["lectures", "강의"], ["about", "소개"], ["contact", "연락"]];
+    var RAIL = [["manifesto", "개요"], ["about", "소개"], ["composite", "역량"], ["artifacts", "프로젝트"], ["trajectory", "이력"], ["lectures", "강의"], ["contact", "연락"]];
     var rail = document.createElement("nav");
     rail.className = "rail";
     RAIL.forEach(function (r) {
@@ -565,24 +553,88 @@ const PALETTES = {
     }, { rootMargin: "-38% 0px -55% 0px" });
     RAIL.forEach(function (r) { var s = document.getElementById(r[0]); if (s) railSpy.observe(s); });
 
+    var openHash = function () {
+      var id = decodeURIComponent((location.hash || "").slice(1));
+      var t = id && document.getElementById(id);
+      if (!t) return null;
+      if (t.tagName === "DETAILS") t.open = true;
+      var d = t.parentElement && t.parentElement.closest("details");
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest("details"); }
+      return t;
+    };
+    var first = openHash();
+    if (first) setTimeout(function () {
+      var hd = document.querySelector("header");
+      window.scrollTo({ top: first.getBoundingClientRect().top + window.scrollY - (hd ? hd.offsetHeight : 72) - 18, behavior: "instant" });
+    }, 60);
+    window.addEventListener("hashchange", openHash);
+
+    /* ===== 히어로 성좌 — 이전 랜딩의 인터랙션을 네이비·골드로 절제해 복원 ===== */
     if (!calm) {
-      var heroWrap = document.querySelector("#manifesto .wrap");
-      if (heroWrap) {
-        window.addEventListener("scroll", function () {
-          var y = window.scrollY;
-          if (y > innerHeight * 1.2) return;
-          var p = Math.min(1, y / (innerHeight * 0.9));
-          heroWrap.style.opacity = (1 - p * 0.75).toFixed(3);
-          heroWrap.style.transform = "translateY(" + (y * 0.16).toFixed(1) + "px) scale(" + (1 - p * 0.04).toFixed(4) + ")";
-        }, { passive: true });
-      }
+      var heroSec = document.getElementById("manifesto");
+      var cv = document.createElement("canvas");
+      cv.className = "hero-net";
+      cv.setAttribute("aria-hidden", "true");
+      heroSec.appendChild(cv);
+      var ctx = cv.getContext("2d");
+      var W, H, pts = [], mx = -9999, my = -9999;
+      var sizeNet = function () {
+        var dpr = Math.min(2, window.devicePixelRatio || 1);
+        W = heroSec.offsetWidth; H = heroSec.offsetHeight;
+        cv.width = W * dpr; cv.height = H * dpr;
+        cv.style.width = W + "px"; cv.style.height = H + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var n = Math.min(54, Math.floor(W / 26));
+        pts = [];
+        for (var i = 0; i < n; i++) {
+          pts.push({ x: Math.random() * W, y: Math.random() * H * 0.78, vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22, r: 0.8 + Math.random() * 1.4, g: Math.random() < 0.28 });
+        }
+      };
+      sizeNet();
+      window.addEventListener("resize", sizeNet);
+      heroSec.addEventListener("mousemove", function (e) {
+        var r = heroSec.getBoundingClientRect();
+        mx = e.clientX - r.left; my = e.clientY - r.top;
+      }, { passive: true });
+      heroSec.addEventListener("mouseleave", function () { mx = my = -9999; });
+      (function net() {
+        requestAnimationFrame(net);
+        if (document.hidden || window.scrollY > innerHeight * 1.2) return;
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < pts.length; i++) {
+          var a = pts[i];
+          a.x += a.vx; a.y += a.vy;
+          if (a.x < 0 || a.x > W) a.vx *= -1;
+          if (a.y < 0 || a.y > H) a.vy *= -1;
+          var dxm = a.x - mx, dym = a.y - my, dm = Math.sqrt(dxm * dxm + dym * dym);
+          if (dm < 140 && dm > 0.1) { a.x += (dxm / dm) * 0.6; a.y += (dym / dm) * 0.6; }
+          for (var j = i + 1; j < pts.length; j++) {
+            var b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+            if (d2 < 17000) {
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = "rgba(156,126,72," + (0.2 * (1 - d2 / 17000)).toFixed(3) + ")";
+              ctx.lineWidth = 0.8; ctx.stroke();
+            }
+          }
+          /* 커서 근처 점은 커서와 가는 선으로 잇는다 */
+          if (dm < 180) {
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my);
+            ctx.strokeStyle = "rgba(19,40,75," + (0.18 * (1 - dm / 180)).toFixed(3) + ")";
+            ctx.lineWidth = 0.7; ctx.stroke();
+          }
+          ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.2832);
+          ctx.fillStyle = a.g ? "rgba(156,126,72,.75)" : "rgba(19,40,75,.45)";
+          ctx.fill();
+        }
+      })();
+
     }
 
     var toast = document.createElement("div");
     toast.className = "toast font-ko";
     toast.setAttribute("role", "status");
     toast.setAttribute("aria-live", "polite");
-    toast.textContent = "이메일 주소가 복사되었습니다 ✓";
+    toast.textContent = "이메일 주소가 복사되었습니다";
     document.body.appendChild(toast);
     var cm = document.getElementById("copyMail");
     if (cm) cm.addEventListener("click", function () {
@@ -592,187 +644,12 @@ const PALETTES = {
       });
     });
 
-    /* ===== 서울 라이브 시계 — 오피스 상태 ===== */
-    var lh = document.querySelector(".letterhead");
-    if (lh) {
-      var cell = document.createElement("div");
-      cell.style.textAlign = "left";
-      cell.style.padding = "0 4px";
-      cell.innerHTML = '<div style="font-weight:700;font-size:.98rem;display:flex;align-items:center;gap:7px"><span class="clock-dot"></span>SEOUL, KR</div><div style="font-size:.82rem;color:var(--ink-soft);opacity:.85"><span id="seoulClock">--:--:--</span> KST · <span id="officeState">—</span></div>';
-      lh.appendChild(cell);
-      var tick = function () {
-        var now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
-        var p2 = function (n) { return String(n).padStart(2, "0"); };
-        var el = document.getElementById("seoulClock");
-        if (el) el.textContent = p2(now.getHours()) + ":" + p2(now.getMinutes()) + ":" + p2(now.getSeconds());
-        var st = document.getElementById("officeState");
-        if (st) st.textContent = (now.getHours() >= 9 && now.getHours() < 19) ? "OFFICE OPEN" : "AFTER HOURS";
-      };
-      tick();
-      setInterval(tick, 1000);
-    }
-
-    /* ===== 태그라인 스크램블 디코드 ===== */
-    if (!calm) {
-      var tag = document.querySelector("#manifesto p.font-sans");
-      if (tag) {
-        var FIN = tag.textContent;
-        var POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ§·&/#";
-        var t0 = null;
-        var DUR = 1300;
-        tag.style.minHeight = tag.offsetHeight + "px";
-        function scr(ts) {
-          if (!t0) t0 = ts;
-          var p = Math.min(1, (ts - t0) / DUR);
-          var reveal = Math.floor(FIN.length * p);
-          var out = "";
-          for (var i = 0; i < FIN.length; i++) {
-            var ch = FIN[i];
-            if (i < reveal || ch === " " || ch === ".") out += ch;
-            else out += POOL[(Math.random() * POOL.length) | 0];
-          }
-          tag.textContent = out;
-          if (p < 1) requestAnimationFrame(scr);
-          else tag.textContent = FIN;
-        }
-        setTimeout(function () { requestAnimationFrame(scr); }, 500);
-      }
-    }
-
-    /* ===== 히어로 파티클 성좌 캔버스 ===== */
-    if (!calm) {
-      var heroSec = document.getElementById("manifesto");
-      var cv = document.createElement("canvas");
-      cv.className = "hero-net";
-      heroSec.appendChild(cv);
-      var ctx = cv.getContext("2d");
-      var W, H, pts = [];
-      var mx = -9999, my = -9999;
-      function sizeNet() {
-        W = cv.width = heroSec.offsetWidth;
-        H = cv.height = heroSec.offsetHeight;
-        var n = Math.min(72, Math.floor(W / 22));
-        pts = [];
-        for (var i = 0; i < n; i++) {
-          pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35, r: 1 + Math.random() * 1.6 });
-        }
-      }
-      sizeNet();
-      window.addEventListener("resize", sizeNet);
-      if (fine) heroSec.addEventListener("mousemove", function (e) {
-        var r = heroSec.getBoundingClientRect();
-        mx = e.clientX - r.left; my = e.clientY - r.top;
-      }, { passive: true });
-      heroSec.addEventListener("mouseleave", function () { mx = my = -9999; });
-      (function net() {
-        requestAnimationFrame(net);
-        if (document.hidden || window.scrollY > innerHeight * 1.25) return;
-        ctx.clearRect(0, 0, W, H);
-        for (var i = 0; i < pts.length; i++) {
-          var a = pts[i];
-          a.x += a.vx; a.y += a.vy;
-          if (a.x < 0 || a.x > W) a.vx *= -1;
-          if (a.y < 0 || a.y > H) a.vy *= -1;
-          var dxm = a.x - mx, dym = a.y - my;
-          var dm = Math.sqrt(dxm * dxm + dym * dym);
-          if (dm < 130 && dm > 0.1) { a.x += (dxm / dm) * 0.8; a.y += (dym / dm) * 0.8; }
-          ctx.beginPath();
-          ctx.arc(a.x, a.y, a.r, 0, 6.2832);
-          ctx.fillStyle = "rgba(31,45,107,.5)";
-          ctx.fill();
-          for (var j = i + 1; j < pts.length; j++) {
-            var b = pts[j];
-            var dx = a.x - b.x, dy = a.y - b.y;
-            var d2 = dx * dx + dy * dy;
-            if (d2 < 15600) {
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = "rgba(31,45,107," + (0.16 * (1 - d2 / 15600)).toFixed(3) + ")";
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          }
-        }
-      })();
-    }
-
-    /* ===== 오로라 드리프트 ===== */
-    if (!calm) {
-      var au1 = document.createElement("div"); au1.className = "aurora aurora--a";
-      var au2 = document.createElement("div"); au2.className = "aurora aurora--b";
-      var hs = document.getElementById("manifesto");
-      hs.insertBefore(au1, hs.firstChild);
-      hs.insertBefore(au2, hs.firstChild);
-    }
   }, 150);
 
-  /* ---- 이하 포인터 전용 효과 ---- */
-  if (!fine || calm) return;
-
-  document.addEventListener("mousemove", function (e) {
-    var card = e.target.closest && e.target.closest(".edition");
-    if (!card) return;
-    var r = card.getBoundingClientRect();
-    var rx = ((e.clientY - r.top) / r.height - 0.5) * -4;
-    var ry = ((e.clientX - r.left) / r.width - 0.5) * 4;
-    card.style.transform = "translateY(-12px) scale(1.015) perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg)";
-  }, { passive: true });
-  document.addEventListener("mouseout", function (e) {
-    var card = e.target.closest && e.target.closest(".edition");
-    if (card && !(e.relatedTarget && card.contains(e.relatedTarget))) card.style.transform = "";
-  }, { passive: true });
-
-  document.addEventListener("mousemove", function (e) {
-    var hero = document.getElementById("manifesto");
-    if (!hero) return;
-    var r = hero.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > innerHeight) return;
-    var dx = e.clientX / innerWidth - 0.5;
-    var dy = e.clientY / innerHeight - 0.5;
-    var st = hero.querySelectorAll(".sticker");
-    for (var i = 0; i < st.length; i++) {
-      var d = i % 2 ? 12 : 20;
-      st[i].style.translate = (dx * d).toFixed(1) + "px " + (dy * d).toFixed(1) + "px";
-    }
-    var h1 = hero.querySelector("h1");
-    if (h1) h1.style.transform = "perspective(950px) rotateX(" + (-dy * 4).toFixed(2) + "deg) rotateY(" + (dx * 4).toFixed(2) + "deg)";
-  }, { passive: true });
-
-  var dot = document.createElement("div"); dot.className = "cursor-dot";
-  var ring = document.createElement("div"); ring.className = "cursor-ring";
-  document.body.appendChild(dot); document.body.appendChild(ring);
-  var cx = innerWidth / 2, cy = innerHeight / 2, rx2 = cx, ry2 = cy;
-  document.addEventListener("mousemove", function (e) {
-    cx = e.clientX; cy = e.clientY;
-    dot.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
-  }, { passive: true });
-  (function loop() {
-    rx2 += (cx - rx2) * 0.16; ry2 += (cy - ry2) * 0.16;
-    ring.style.transform = "translate(" + rx2 + "px," + ry2 + "px) translate(-50%,-50%)";
-    requestAnimationFrame(loop);
-  })();
-  document.addEventListener("mouseover", function (e) {
-    var t = e.target.closest && e.target.closest("a, button, .edition, .photo-card, .g-card, .stat-card");
-    ring.classList.toggle("is-hover", !!t);
-  }, { passive: true });
-
-  document.addEventListener("mousemove", function (e) {
-    var b = e.target.closest && e.target.closest(".btn");
-    if (!b) return;
-    var r = b.getBoundingClientRect();
-    var mx = ((e.clientX - r.left) / r.width - 0.5) * 10;
-    var my = ((e.clientY - r.top) / r.height - 0.5) * 8;
-    b.style.translate = mx.toFixed(1) + "px " + my.toFixed(1) + "px";
-  }, { passive: true });
-  document.addEventListener("mouseout", function (e) {
-    var b = e.target.closest && e.target.closest(".btn");
-    if (b && !(e.relatedTarget && b.contains(e.relatedTarget))) b.style.translate = "";
-  }, { passive: true });
 })();
 </script>
   <!-- 유빈 AI 포트폴리오 챗봇 위젯 -->
   <script src="kb.js" defer></script>
-  <script src="chatbot.js" defer></script>
+  <script src="chatbot.js?v=3" defer></script>
 </body>
 </html>

@@ -11,10 +11,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=4" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Anton&display=swap" rel="stylesheet" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
-<link rel="stylesheet" href="styles.css?v=31" />
+<link rel="stylesheet" href="styles.css?v=41" />
 <link rel="canonical" href="https://yubinxe.github.io/Portfolio/career.html" />
 <meta name="author" content="김유빈 Yubin Kim" />
 <meta property="og:type" content="profile" />
@@ -99,10 +99,9 @@
           그 결정을 자동화와 콘텐츠로 실행에 옮깁니다. 실무에서 만든 시스템은 강의 모듈로도 옮기고 있습니다.
         </p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
-          <span class="sticker sticker--sky" style="font-size:.78rem">EST. 2004</span>
           <span class="sticker sticker--butter" style="font-size:.78rem">법무법인 경국 · 사원</span>
-          <span class="sticker sticker--lilac" style="font-size:.78rem">전략기획 × AI</span>
-          <span class="sticker sticker--apple" style="font-size:.78rem">Lecture · 강의 가능</span>
+          <span class="sticker sticker--lilac" style="font-size:.78rem">AI 전략기획</span>
+          <span class="sticker sticker--apple" style="font-size:.78rem">Lecture</span>
         </div>
       </div>
       <figure class="photo-card photo-card--tall" style="--tilt:1.4deg">
@@ -292,26 +291,31 @@
     });
   }, { threshold: 0.6 });
   document.querySelectorAll(".stat-card .num").forEach(function (n) { io2.observe(n); });
-  /* custom cursor (shared) */
+  /* 커서 링 — 기본 커서 위에 위치를 부드럽게 따라가는 링. 링크·버튼 위에서 커진다 */
   if (window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    var dot = document.createElement("div"); dot.className = "cursor-dot";
-    var ring = document.createElement("div"); ring.className = "cursor-ring";
-    document.body.appendChild(dot); document.body.appendChild(ring);
-    var cx = innerWidth / 2, cy = innerHeight / 2, rx = cx, ry = cy;
+    var ykRing = document.createElement("div");
+    ykRing.className = "cursor-ring";
+    ykRing.setAttribute("aria-hidden", "true");
+    document.body.appendChild(ykRing);
+    var rcx = -100, rcy = -100, rrx = -100, rry = -100, rOn = false;
     document.addEventListener("mousemove", function (e) {
-      cx = e.clientX; cy = e.clientY;
-      dot.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
+      rcx = e.clientX; rcy = e.clientY;
+      if (!rOn) { rOn = true; rrx = rcx; rry = rcy; ykRing.classList.add("is-on"); }
     }, { passive: true });
-    (function loop() {
-      rx += (cx - rx) * 0.16; ry += (cy - ry) * 0.16;
-      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
-      requestAnimationFrame(loop);
+    document.addEventListener("mouseleave", function () { rOn = false; ykRing.classList.remove("is-on"); });
+    (function ringLoop() {
+      rrx += (rcx - rrx) * 0.2; rry += (rcy - rry) * 0.2;
+      ykRing.style.transform = "translate3d(" + rrx.toFixed(1) + "px," + rry.toFixed(1) + "px,0) translate(-50%,-50%)";
+      requestAnimationFrame(ringLoop);
     })();
     document.addEventListener("mouseover", function (e) {
-      var t = e.target.closest && e.target.closest("a, button, .g-card, .photo-card, .stat-card, .practice-card");
-      ring.classList.toggle("is-hover", !!t);
+      var t = e.target.closest && e.target.closest("a, button, summary, .edition, .lec-card, .g-card, .photo-card, .cred, .stat-card, .practice-card, .cmap__node, .cmap__label");
+      ykRing.classList.toggle("is-hover", !!t);
     }, { passive: true });
+    document.addEventListener("mousedown", function () { ykRing.classList.add("is-down"); });
+    document.addEventListener("mouseup", function () { ykRing.classList.remove("is-down"); });
   }
+
 /* page fade transition */
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest('a[href$=".html"], a[href="index.html"]');
@@ -324,6 +328,6 @@
 </script>
   <!-- 유빈 AI 포트폴리오 챗봇 위젯 -->
   <script src="kb.js" defer></script>
-  <script src="chatbot.js" defer></script>
+  <script src="chatbot.js?v=3" defer></script>
 </body>
 </html>

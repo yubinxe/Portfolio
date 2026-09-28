@@ -162,6 +162,13 @@
     target.classList.add("yk-spotlight");
     setTimeout(function () { target.classList.remove("yk-spotlight"); }, SPOT_MS);
   }
+  /* 접이식(<details>) 안의 앵커로 가면 감싼 항목을 먼저 펼친다 — 닫힌 칸으로 스크롤되지 않게 */
+  function openFolds(t) {
+    if (t.tagName === "DETAILS") t.open = true;
+    var d = t.parentElement && t.parentElement.closest("details");
+    while (d) { d.open = true; d = d.parentElement && d.parentElement.closest("details"); }
+  }
+  window.ykOpenFolds = openFolds;
   function scrollToHash(hash, tries) {
     var t = hash && document.getElementById(hash);
     if (!t) {
@@ -169,6 +176,7 @@
       if ((tries || 0) < 40) return setTimeout(function () { scrollToHash(hash, (tries || 0) + 1); }, 100);
       return false;
     }
+    openFolds(t);
     var header = document.querySelector("header");
     var offset = (header ? header.offsetHeight : 72) + 18;
     var y = t.getBoundingClientRect().top + window.scrollY - offset;

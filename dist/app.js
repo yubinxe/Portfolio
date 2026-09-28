@@ -19,13 +19,12 @@ function App() {
     React.createElement(Nav, null), /*#__PURE__*/
     React.createElement("main", null, /*#__PURE__*/
     React.createElement(Hero, null), /*#__PURE__*/
-    React.createElement(Marquee, null), /*#__PURE__*/
-    React.createElement(Composite, null), /*#__PURE__*/
-    React.createElement(Trajectory, null), /*#__PURE__*/
-    React.createElement(Artifacts, null), /*#__PURE__*/
-    React.createElement(Lectures, null), /*#__PURE__*/
     React.createElement(Ledger, null), /*#__PURE__*/
     React.createElement(About, null), /*#__PURE__*/
+    React.createElement(Composite, null), /*#__PURE__*/
+    React.createElement(Artifacts, null), /*#__PURE__*/
+    React.createElement(Trajectory, null), /*#__PURE__*/
+    React.createElement(Lectures, null), /*#__PURE__*/
     React.createElement(Contact, null)
     ), /*#__PURE__*/
 
