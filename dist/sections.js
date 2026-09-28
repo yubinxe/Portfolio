@@ -654,6 +654,10 @@ function Trajectory() {
 
 /* ============================================================ ARTIFACTS */
 const EDITIONS = [
+{ n: "09", color: "var(--sky)", Icon: Home, title: "청약·공공임대 맞춤 추천 서비스\n집캐치(ZipCatch)",
+  desc: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 수집해, 지역·주거비·가구 조건을 3단계로 입력하면 지금 지원할 수 있는 후보를 정리해 주는 소비자 서비스. 관심공고 저장·마감 알림과 운영용 CRM(매칭·고객·물건 관리)까지 설계·구현.",
+  status: "Vercel 배포 완료", cta: "서비스 바로가기", url: "https://zipcatch.vercel.app", tags: ["청약홈 · LH API", "맞춤 추천", "Supabase · CRM"],
+  core: true, point: "자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않도록 분리 설계 — 미확인 자격은 불충족으로 단정하지 않고, 당첨 확률은 산출하지 않는다." },
 { n: "01", color: "var(--butter)", Icon: Newspaper, title: "6·3 지방선거\nAI 카드뉴스 & 시네마틱 영상",
   desc: "GPT Image-2, Suno AI, ElevenLabs를 결합하여 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 내레이션 영상. 사회학적 분석을 2030 세대의 소비 포맷으로 옮긴 생성형 AI 미디어 작업.",
   status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing", video: "video/edition-04.mp4", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
@@ -667,9 +671,9 @@ const EDITIONS = [
   desc: "복수의 생성형 AI 도구를 활용하여 부동산 청약 데이터와 플랫폼 사용성을 대중이 이해하기 쉽도록 구성한 영상·오디오 브랜딩 프로젝트.",
   status: "Google Drive 스트리밍 자산 구축 완료", cta: "프로모션 영상 보기", url: "https://drive.google.com/file/d/1F3PssuwdFkcWaiT6fZHgQlz44As0I2nq/view?usp=sharing", video: "video/edition-03.mp4", tags: ["Generative AI", "Video", "Audio Branding"] },
 { n: "05", color: "var(--sky)", Icon: BarChart, title: "공공데이터 API 활용\n청약 인사이트 대시보드",
-  desc: "대한민국 부동산 청약 시장의 거시 데이터를 수집·시각화한 데이터 대시보드. 시장의 자금 흐름을 분석하여 지표 중심의 화면으로 구성.",
-  status: "Vercel 배포 완료", cta: "대시보드 바로가기", url: "https://cheongak-dashboard-opal.vercel.app", tags: ["Public Data API", "Dashboard", "Data Viz"],
-  core: true, point: "시장 판단에 필요한 지표만 골라 나란히 배치 — 무엇을 병렬할지가 곧 분석의 설계." },
+  desc: "청약홈 OpenAPI로 분양정보·지역별 경쟁률·당첨자 가점 통계를 모으고, AI 당첨 확률 계산기와 청약 핫플레이스 지도를 더한 시장 대시보드.",
+  status: "Vercel 배포 완료", cta: "대시보드 바로가기", url: "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app", tags: ["청약홈 OpenAPI", "Dashboard", "Data Viz"],
+  point: "시장 판단에 필요한 지표만 골라 나란히 배치 — 무엇을 병렬할지가 곧 분석의 설계." },
 { n: "06", color: "var(--apple)", Icon: Cpu, title: "GWS 연동 VOC 분석\n트리아지(Triage) 시스템",
   desc: "Google Workspace API를 연동하여 고객 피드백을 실시간으로 집계하고, 자체 분류 알고리즘으로 업무 우선순위를 자동화한 백오피스 대시보드.",
   status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["GWS API", "AI Triage", "Back-office"],
@@ -684,18 +688,22 @@ const EDITIONS = [
   core: true, point: "시장 단가 비교와 사업성 검토에 바로 쓰이는 필드 구조로 데이터셋을 설계." }];
 
 
+/* 화면에 보이는 순서와 번호 — 01 집캐치 · 02 VOC · 03 급여명세 · 04 누리장터, 이어서 아래 작업 */
+const EDITION_ORDER = ["09", "06", "07", "08", "05", "01", "02", "03", "04"];
+const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
+
 function EditionCard({ e, i, onPlay }) {
   return (/*#__PURE__*/
     React.createElement("article", { id: "ed-" + e.n, className: "edition reveal" + (e.core ? " edition--core" : ""), style: { "--accent-fill": e.color, transitionDelay: `${i * 90}ms` } }, /*#__PURE__*/
     React.createElement("div", { className: "edition__chip" }, e.status), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 } }, /*#__PURE__*/
-    React.createElement("span", { className: "edition__num" }, e.n), /*#__PURE__*/
+    React.createElement("span", { className: "edition__num" }, e.no), /*#__PURE__*/
     React.createElement("span", { style: { width: 52, height: 52, borderRadius: 16, background: e.color, display: "grid", placeItems: "center", color: "var(--ink)" } }, /*#__PURE__*/
     React.createElement(e.Icon, { size: 24 })
     )
     ), /*#__PURE__*/
     React.createElement("span", { className: "edition__index-band" }), /*#__PURE__*/
-    React.createElement("p", { className: "font-play", style: { fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" } }, "Edition ", e.n), /*#__PURE__*/
+    React.createElement("p", { className: "font-play", style: { fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" } }, "Edition ", e.no), /*#__PURE__*/
     React.createElement("h3", { className: "font-ko", style: { fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" } }, e.title), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 } }, e.desc),
     e.point && /*#__PURE__*/React.createElement("p", { className: "edition__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uAE30\uD68D \uD3EC\uC778\uD2B8"), e.point), /*#__PURE__*/
@@ -733,11 +741,11 @@ function Artifacts() {
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "03 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
     React.createElement("p", { className: "works-lead font-ko reveal" }, "\uC9C1\uC811 \uBB38\uC81C\uB97C \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/
-    React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C 4\uAC74"), "\uC785\uB2C8\uB2E4. \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20 \uC791\uC5C5\uC740 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C 4\uAC74"), "\uC785\uB2C8\uB2E4. \uB370\uC774\uD130 \uB300\uC2DC\uBCF4\uB4DC\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20 \uC791\uC5C5\uC740 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
     React.createElement("div", { className: "works-grid" },
-    EDITIONS.filter((e) => e.core).map((e, i) => /*#__PURE__*/
+    EDITIONS_SHOWN.filter((e) => e.core).map((e, i) => /*#__PURE__*/
     React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying })
     )
     ), /*#__PURE__*/
@@ -745,13 +753,13 @@ function Artifacts() {
     React.createElement("summary", null, /*#__PURE__*/
     React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
     React.createElement("span", { className: "eyebrow" }, "Supplementary"), /*#__PURE__*/
-    React.createElement("strong", { className: "font-ko" }, "\uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
-    React.createElement("span", { className: "fold__line font-ko" }, "\uBE0C\uB79C\uB4DC \uD544\uB984 \xB7 \uCE74\uB4DC\uB274\uC2A4 \xB7 \uBA40\uD2F0\uBBF8\uB514\uC5B4 \uD504\uB85C\uBAA8\uC158")
+    React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
+    React.createElement("span", { className: "fold__line font-ko" }, "\uCCAD\uC57D \uC778\uC0AC\uC774\uD2B8 \uB300\uC2DC\uBCF4\uB4DC \xB7 \uBE0C\uB79C\uB4DC \uD544\uB984 \xB7 \uCE74\uB4DC\uB274\uC2A4 \xB7 \uBA40\uD2F0\uBBF8\uB514\uC5B4 \uD504\uB85C\uBAA8\uC158")
     ), /*#__PURE__*/
     React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "works-grid works-grid--sub" },
-    EDITIONS.filter((e) => !e.core).map((e, i) => /*#__PURE__*/
+    EDITIONS_SHOWN.filter((e) => !e.core).map((e, i) => /*#__PURE__*/
     React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying })
     )
     )
@@ -764,7 +772,7 @@ function Artifacts() {
     React.createElement("div", { className: "vlightbox__frame", onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
     React.createElement("button", { type: "button", className: "vlightbox__close", onClick: () => setPlaying(null), "aria-label": "\uB2EB\uAE30" }, "\u2715"), /*#__PURE__*/
     React.createElement("div", { className: "vlightbox__meta" }, /*#__PURE__*/
-    React.createElement("span", { className: "font-play" }, "Edition ", playing.n), /*#__PURE__*/
+    React.createElement("span", { className: "font-play" }, "Edition ", playing.no), /*#__PURE__*/
     React.createElement("h4", { className: "font-ko" }, playing.title.replace("\n", " · "))
     ), /*#__PURE__*/
     React.createElement("video", { className: "vlightbox__video", src: playing.video, controls: true, autoPlay: true, playsInline: true, preload: "metadata", controlsList: "nodownload" }, "\uBE0C\uB77C\uC6B0\uC800\uAC00 \uC601\uC0C1 \uC7AC\uC0DD\uC744 \uC9C0\uC6D0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
