@@ -272,165 +272,182 @@
     var css = `
 .yk-chat, .yk-chat *{ box-sizing:border-box; }
 .yk-chat{
-  --yk-accent: var(--accent, #1F2D6B);
-  --yk-ink: var(--ink, #10131C);
-  --yk-ink-soft: var(--ink-soft, #3C4354);
-  --yk-ecru: var(--ecru, #F4F5F8);
-  --yk-ecru-deep: var(--ecru-deep, #E9EBF0);
-  --yk-paper: var(--paper, #FFFFFF);
-  --yk-bounce: cubic-bezier(.34,1.56,.64,1);
+  --yk-accent:#13284B; --yk-navy:#13284B; --yk-navy-deep:#0B1A33;
+  --yk-gold:#9C7E48; --yk-gold-lt:#C9AE7A; --yk-gold-grad:linear-gradient(145deg,#D9BF8A 0%,#B08E52 55%,#8C6D38 100%);
+  --yk-ink:#0E1A2E; --yk-ink-soft:#4A5365; --yk-ivory:#F7F4EE; --yk-paper:#FFFDF9;
+  --yk-ecru:#F7F4EE; --yk-ecru-deep:#EFE9DE;
+  --yk-ease:cubic-bezier(.22,.61,.36,1); --yk-spring:cubic-bezier(.32,1.28,.54,1);
   ${accentRule}
-  font-family:"Pretendard","Inter",system-ui,-apple-system,sans-serif;
+  font-family:-apple-system,"SF Pro Text","Pretendard Variable","Pretendard","Inter",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
 }
 /* ---- 딥링크 스포트라이트 (페이지 요소에 부여) ---- */
-.yk-spotlight{
-  animation:yk-spot 2.6s ease-out both;
-  border-radius:16px;
-}
+.yk-spotlight{ animation:yk-spot 2.6s ease-out both; }
 @keyframes yk-spot{
-  0%{ box-shadow:0 0 0 0 rgba(31,45,107,.0), 0 0 0 9999px rgba(16,19,28,0); }
-  12%{ box-shadow:0 0 0 6px rgba(31,45,107,.55), 0 0 0 9999px rgba(16,19,28,.22); }
-  70%{ box-shadow:0 0 0 6px rgba(31,45,107,.35), 0 0 0 9999px rgba(16,19,28,.10); }
-  100%{ box-shadow:0 0 0 0 rgba(31,45,107,0), 0 0 0 9999px rgba(16,19,28,0); }
+  0%{ box-shadow:0 0 0 0 rgba(156,126,72,0), 0 0 0 9999px rgba(14,26,46,0); }
+  12%{ box-shadow:0 0 0 4px rgba(156,126,72,.75), 0 0 0 9999px rgba(14,26,46,.2); }
+  70%{ box-shadow:0 0 0 4px rgba(156,126,72,.5), 0 0 0 9999px rgba(14,26,46,.08); }
+  100%{ box-shadow:0 0 0 0 rgba(156,126,72,0), 0 0 0 9999px rgba(14,26,46,0); }
 }
-/* ---- FAB ---- */
+/* ---- FAB — 네이비 원 + 골드 링 ---- */
 .yk-fab{
-  position:fixed; right:24px; bottom:24px; z-index:120;
-  width:60px; height:60px; border-radius:50%;
-  background:var(--yk-accent); color:#fff; border:none; cursor:pointer;
-  display:grid; place-items:center;
-  box-shadow:0 10px 30px -8px rgba(31,45,107,.55), 0 2px 8px rgba(16,19,28,.2);
-  transition:transform .4s var(--yk-bounce), box-shadow .4s var(--yk-bounce);
+  position:fixed; right:24px; bottom:24px; z-index:120; width:62px; height:62px; border-radius:50%;
+  background:radial-gradient(120% 120% at 30% 20%,#1D3761 0%,var(--yk-navy) 55%,var(--yk-navy-deep) 100%);
+  color:#F7EBD2; border:none; cursor:pointer; display:grid; place-items:center;
+  box-shadow:0 0 0 1.5px var(--yk-gold-lt), 0 0 0 5px rgba(201,174,122,.18), 0 16px 34px -12px rgba(11,26,51,.65);
+  transition:transform .45s var(--yk-spring), box-shadow .4s var(--yk-ease);
 }
-.yk-fab:hover{ transform:translateY(-3px) scale(1.05); box-shadow:0 16px 36px -10px rgba(31,45,107,.6); }
-.yk-fab:active{ transform:translateY(-1px) scale(.98); }
-.yk-fab svg{ width:26px; height:26px; transition:transform .45s var(--yk-bounce); }
+.yk-fab:hover{ transform:translateY(-3px); box-shadow:0 0 0 1.5px var(--yk-gold-lt), 0 0 0 7px rgba(201,174,122,.22), 0 22px 40px -14px rgba(11,26,51,.7); }
+.yk-fab:active{ transform:scale(.96); }
+.yk-fab svg{ width:25px; height:25px; transition:transform .45s var(--yk-spring), opacity .3s; }
 .yk-fab .yk-x{ position:absolute; opacity:0; transform:rotate(-90deg) scale(.6); }
 .yk-chat.open .yk-fab .yk-bubble-i{ opacity:0; transform:rotate(90deg) scale(.6); }
-.yk-chat.open .yk-fab .yk-x{ opacity:1; transform:rotate(0) scale(1); }
-.yk-fab__ping{
-  position:absolute; top:11px; right:11px; width:11px; height:11px; border-radius:50%;
-  background:#7C8AC4; border:2px solid var(--yk-accent);
-}
-.yk-fab__ping::after{
-  content:""; position:absolute; inset:-2px; border-radius:50%;
-  box-shadow:0 0 0 0 rgba(124,138,196,.6); animation:yk-ping 2.4s ease-out infinite;
-}
-@keyframes yk-ping{ 0%{box-shadow:0 0 0 0 rgba(124,138,196,.55);} 70%,100%{box-shadow:0 0 0 12px rgba(124,138,196,0);} }
-/* ---- teaser ---- */
+.yk-chat.open .yk-fab .yk-x{ opacity:1; transform:none; }
+.yk-fab__ping{ position:absolute; top:9px; right:9px; width:12px; height:12px; border-radius:50%; background:var(--yk-gold-grad); border:2px solid var(--yk-navy); }
+.yk-fab__ping::after{ content:""; position:absolute; inset:-2px; border-radius:50%; animation:yk-ping 2.6s ease-out infinite; }
+@keyframes yk-ping{ 0%{box-shadow:0 0 0 0 rgba(201,174,122,.6);} 70%,100%{box-shadow:0 0 0 12px rgba(201,174,122,0);} }
+.yk-chat.open .yk-fab__ping{ display:none; }
+/* ---- teaser — iOS 알림 배너 ---- */
 .yk-teaser{
-  position:fixed; right:96px; bottom:34px; z-index:119; max-width:230px;
-  background:var(--yk-ink); color:var(--yk-ecru);
-  font-size:13.5px; line-height:1.5; font-weight:500;
-  padding:11px 14px; border-radius:14px 14px 4px 14px;
-  box-shadow:0 14px 34px -14px rgba(16,19,28,.5);
-  opacity:0; transform:translateY(8px) scale(.96); transform-origin:bottom right;
-  transition:opacity .4s ease, transform .4s var(--yk-bounce); pointer-events:none;
+  position:fixed; right:24px; bottom:100px; z-index:119; width:300px;
+  background:rgba(250,248,243,.86); -webkit-backdrop-filter:blur(22px) saturate(180%); backdrop-filter:blur(22px) saturate(180%);
+  color:var(--yk-ink); padding:12px 14px 12px 12px; border-radius:20px; display:flex; gap:11px; align-items:center;
+  box-shadow:0 18px 40px -18px rgba(11,26,51,.45), 0 0 0 .5px rgba(14,26,46,.12);
+  opacity:0; transform:translateY(-10px) scale(.96); transform-origin:top right; pointer-events:none; cursor:pointer;
+  transition:opacity .4s var(--yk-ease), transform .5s var(--yk-spring);
 }
 .yk-teaser.show{ opacity:1; transform:none; pointer-events:auto; }
-.yk-teaser__close{ position:absolute; top:-7px; right:-7px; width:20px; height:20px; border-radius:50%;
-  background:var(--yk-ecru); color:var(--yk-ink); border:none; font-size:12px; cursor:pointer; line-height:1; }
-/* ---- panel ---- */
+.yk-teaser__app{ width:38px; height:38px; border-radius:10px; flex:none; display:grid; place-items:center;
+  background:linear-gradient(160deg,#1D3761,var(--yk-navy-deep)); color:var(--yk-gold-lt);
+  font-family:"Cormorant Garamond",Georgia,serif; font-weight:600; font-size:17px; box-shadow:inset 0 0 0 1px rgba(201,174,122,.4); }
+.yk-teaser__txt{ min-width:0; flex:1; font-size:13.5px; line-height:1.4; }
+.yk-teaser__txt b{ display:flex; justify-content:space-between; font-size:13px; font-weight:650; margin-bottom:1px; }
+.yk-teaser__txt b small{ font-weight:400; font-size:12px; color:var(--yk-ink-soft); }
+.yk-teaser__close{ position:absolute; top:-7px; left:-7px; width:22px; height:22px; border-radius:50%;
+  background:rgba(120,120,128,.9); color:#fff; border:none; font-size:13px; cursor:pointer; line-height:1; opacity:0; transition:opacity .2s; }
+.yk-teaser:hover .yk-teaser__close{ opacity:1; }
+/* ---- 기기 프레임 (iPhone) ---- */
 .yk-panel{
-  position:fixed; right:24px; bottom:96px; z-index:121;
-  width:390px; max-width:calc(100vw - 32px); height:610px; max-height:calc(100vh - 128px);
-  background:var(--yk-paper); border:1.5px solid var(--yk-ink); border-radius:22px;
-  display:flex; flex-direction:column; overflow:hidden;
-  box-shadow:0 30px 70px -24px rgba(16,19,28,.5), 0 4px 14px -6px rgba(16,19,28,.28);
-  opacity:0; transform:translateY(16px) scale(.97); transform-origin:bottom right;
-  pointer-events:none;
-  transition:opacity .34s ease, transform .34s var(--yk-bounce);
+  position:fixed; right:24px; bottom:100px; z-index:121;
+  width:382px; height:760px; max-height:calc(100vh - 124px); max-width:calc(100vw - 32px);
+  border-radius:58px; padding:11px;
+  background:linear-gradient(145deg,#2A2C31 0%,#0D0E11 45%,#23252A 100%);
+  box-shadow:0 0 0 1.5px #3A3C42, 0 0 0 3px rgba(201,174,122,.55), 0 40px 90px -30px rgba(11,26,51,.75), 0 12px 30px -12px rgba(0,0,0,.5);
+  display:flex; opacity:0; transform:translateY(60px) scale(.94); transform-origin:bottom right; pointer-events:none;
+  transition:opacity .38s var(--yk-ease), transform .6s var(--yk-spring);
 }
+.yk-panel::before, .yk-panel::after{ /* 측면 버튼 */
+  content:""; position:absolute; width:3px; border-radius:2px; background:linear-gradient(#3B3D43,#1C1D21);
+}
+.yk-panel::before{ left:-4px; top:150px; height:64px; box-shadow:0 84px 0 0 #2A2C31; }
+.yk-panel::after{ right:-4px; top:190px; height:96px; }
 .yk-chat.open .yk-panel{ opacity:1; transform:none; pointer-events:auto; }
-/* ---- header ---- */
-.yk-head{ background:var(--yk-ink); color:var(--yk-ecru); padding:16px 18px 15px; position:relative; }
-.yk-head__rule{ display:flex; align-items:center; color:rgba(244,245,248,.4); margin-bottom:11px; }
-.yk-head__rule::before,.yk-head__rule::after{ content:""; width:5px; height:5px; background:currentColor; transform:rotate(45deg); }
-.yk-head__rule i{ flex:1; height:1px; background:currentColor; margin:0 8px; }
-.yk-head__row{ display:flex; align-items:center; gap:11px; }
-.yk-mark{ width:38px; height:38px; border-radius:11px; background:var(--yk-accent);
-  display:grid; place-items:center; font-family:"Playfair Display",serif; font-weight:900; font-size:16px; color:#fff; flex:none;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16); }
-.yk-head__meta{ min-width:0; flex:1; }
-.yk-head__name{ font-weight:700; font-size:15px; letter-spacing:-.01em; display:flex; align-items:center; gap:7px; }
-.yk-dot{ width:7px; height:7px; border-radius:50%; background:#8FE3B0; box-shadow:0 0 0 0 rgba(143,227,176,.6); animation:yk-live 2.2s ease-in-out infinite; }
-@keyframes yk-live{ 0%,100%{box-shadow:0 0 0 0 rgba(143,227,176,.5);} 50%{box-shadow:0 0 0 5px rgba(143,227,176,0);} }
-.yk-head__sub{ font-size:11.5px; color:rgba(244,245,248,.62); margin-top:2px; letter-spacing:.01em;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.yk-head__close{ background:transparent; border:none; color:rgba(244,245,248,.7); cursor:pointer;
-  width:30px; height:30px; border-radius:8px; display:grid; place-items:center; transition:background .2s,color .2s; flex:none; }
-.yk-head__close:hover{ background:rgba(244,245,248,.12); color:#fff; }
-/* ---- body ---- */
-.yk-body{ flex:1; overflow-y:auto; padding:18px; background:var(--yk-ecru);
-  display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
-.yk-body::-webkit-scrollbar{ width:8px; }
-.yk-body::-webkit-scrollbar-thumb{ background:rgba(16,19,28,.16); border-radius:8px; border:2px solid var(--yk-ecru); }
-.yk-msg{ display:flex; gap:9px; max-width:90%; animation:yk-in .4s var(--yk-bounce) both; }
-@keyframes yk-in{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
-.yk-msg__ava{ width:27px; height:27px; border-radius:8px; background:var(--yk-accent); color:#fff; flex:none;
-  display:grid; place-items:center; font-family:"Playfair Display",serif; font-weight:900; font-size:11px; margin-top:2px; }
-.yk-msg__col{ min-width:0; display:flex; flex-direction:column; gap:7px; }
-.yk-msg__bubble{ padding:11px 13px; border-radius:14px; font-size:14px; line-height:1.66; letter-spacing:-.006em; word-break:break-word; }
-.yk-msg.bot .yk-msg__bubble{ background:var(--yk-paper); color:var(--yk-ink); border:1px solid rgba(16,19,28,.12); border-top-left-radius:5px;
-  box-shadow:0 2px 10px rgba(16,19,28,.05); }
+.yk-screen{ position:relative; flex:1; min-width:0; display:flex; flex-direction:column; overflow:hidden;
+  border-radius:48px; background:var(--yk-ivory); }
+.yk-island{ position:absolute; top:11px; left:50%; translate:-50% 0; width:112px; height:32px; border-radius:20px; background:#000; z-index:5; }
+.yk-island::after{ content:""; position:absolute; right:14px; top:50%; translate:0 -50%; width:9px; height:9px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#2B3B63,#0A0E18 70%); }
+.yk-status{ height:52px; flex:none; display:flex; align-items:center; justify-content:space-between; padding:6px 30px 0 34px;
+  font-size:15px; font-weight:650; color:var(--yk-ink); letter-spacing:-.01em; background:rgba(247,244,238,.92); }
+.yk-status__icons{ display:flex; gap:6px; align-items:center; }
+.yk-status__icons svg{ height:12px; width:auto; }
+.yk-home{ position:absolute; bottom:8px; left:50%; translate:-50% 0; width:124px; height:5px; border-radius:3px; background:rgba(14,26,46,.85); z-index:5; }
+/* ---- iOS 내비 헤더 ---- */
+.yk-head{ position:relative; flex:none; padding:4px 14px 12px; background:rgba(247,244,238,.92);
+  -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); border-bottom:.5px solid rgba(14,26,46,.14); text-align:center; }
+.yk-head__close{ position:absolute; left:10px; top:6px; background:transparent; border:none; color:var(--yk-gold); cursor:pointer;
+  display:flex; align-items:center; gap:1px; font:inherit; font-size:16px; padding:4px 6px; border-radius:8px; }
+.yk-head__close svg{ width:22px; height:22px; }
+.yk-head__close:hover{ background:rgba(156,126,72,.1); }
+.yk-ava{ width:52px; height:52px; margin:0 auto 5px; border-radius:50%; display:grid; place-items:center; position:relative;
+  background:linear-gradient(160deg,#1D3761,var(--yk-navy-deep)); color:#F2E4C4;
+  font-family:"Cormorant Garamond",Georgia,serif; font-weight:600; font-size:21px; letter-spacing:.02em;
+  box-shadow:0 0 0 2px var(--yk-ivory), 0 0 0 3.5px var(--yk-gold-lt); }
+.yk-ava i{ position:absolute; right:1px; bottom:1px; width:12px; height:12px; border-radius:50%; background:#34C759; border:2px solid var(--yk-ivory); }
+.yk-head__name{ font-size:15.5px; font-weight:650; color:var(--yk-ink); letter-spacing:-.015em; }
+.yk-head__name small{ font-size:11px; font-weight:500; color:var(--yk-gold); letter-spacing:.14em; text-transform:uppercase; margin-left:4px; }
+.yk-head__sub{ font-size:11.5px; color:var(--yk-ink-soft); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+/* ---- 대화 ---- */
+.yk-body{ flex:1; overflow-y:auto; padding:14px 14px 10px; background:var(--yk-ivory); display:flex; flex-direction:column; gap:6px; scroll-behavior:smooth; }
+.yk-body::-webkit-scrollbar{ width:0; }
+.yk-stamp{ align-self:center; font-size:11px; font-weight:600; color:rgba(74,83,101,.75); margin:4px 0 8px; letter-spacing:.02em; }
+.yk-msg{ display:flex; gap:7px; max-width:84%; animation:yk-in .45s var(--yk-spring) both; margin-top:4px; }
+@keyframes yk-in{ from{opacity:0; transform:translateY(10px) scale(.97);} to{opacity:1; transform:none;} }
+.yk-msg__ava{ display:none; }
+.yk-msg__col{ min-width:0; display:flex; flex-direction:column; gap:6px; }
+.yk-msg__bubble{ padding:9px 13px 10px; border-radius:20px; font-size:14.5px; line-height:1.55; letter-spacing:-.012em; word-break:break-word; position:relative; }
+.yk-msg.bot .yk-msg__bubble{ background:#FFFFFF; color:var(--yk-ink); border-bottom-left-radius:6px; box-shadow:0 1px 1px rgba(14,26,46,.06), 0 0 0 .5px rgba(14,26,46,.08); }
 .yk-msg.me{ align-self:flex-end; flex-direction:row-reverse; }
-.yk-msg.me .yk-msg__bubble{ background:var(--yk-accent); color:#fff; border-top-right-radius:5px; }
-.yk-msg.me .yk-msg__ava{ background:var(--yk-ink); }
+.yk-msg.me .yk-msg__bubble{ background:linear-gradient(160deg,#1D3761,var(--yk-navy)); color:#FBF6EA; border-bottom-right-radius:6px; }
 .yk-msg__bubble a{ color:inherit; text-decoration:underline; text-underline-offset:2px; font-weight:600; }
-.yk-msg.bot .yk-msg__bubble a{ color:var(--yk-accent); }
-.yk-li{ display:block; padding-left:14px; position:relative; }
-.yk-li::before{ content:"·"; position:absolute; left:3px; color:var(--yk-accent); font-weight:900; }
-.yk-msg.me .yk-li::before{ color:rgba(255,255,255,.7); }
-/* ---- CTA (딥링크 버튼) ---- */
+.yk-msg.bot .yk-msg__bubble a{ color:var(--yk-gold); text-decoration-color:rgba(156,126,72,.4); }
+.yk-msg__bubble strong{ font-weight:650; }
+.yk-li{ display:block; padding-left:13px; position:relative; }
+.yk-li::before{ content:""; position:absolute; left:2px; top:.72em; width:4px; height:4px; border-radius:50%; background:var(--yk-gold); }
+.yk-msg.me .yk-li::before{ background:var(--yk-gold-lt); }
+/* ---- 딥링크 버튼 ---- */
 .yk-cta{ display:flex; flex-wrap:wrap; gap:6px; }
-.yk-cta__btn{ font:inherit; font-size:12.5px; font-weight:700; color:#fff; background:var(--yk-accent);
-  border:1.3px solid var(--yk-accent); border-radius:999px; padding:6px 12px; cursor:pointer;
-  display:inline-flex; align-items:center; gap:5px; transition:transform .3s var(--yk-bounce), background .2s; }
-.yk-cta__btn:hover{ transform:translateY(-2px); }
-.yk-cta__btn--ghost{ background:var(--yk-paper); color:var(--yk-accent); }
-.yk-cta__btn svg{ width:13px; height:13px; }
+.yk-cta__btn{ font:inherit; font-size:12.5px; font-weight:600; color:#FBF6EA; background:var(--yk-navy); border:none;
+  border-radius:999px; padding:7px 13px; cursor:pointer; display:inline-flex; align-items:center; gap:5px;
+  transition:transform .35s var(--yk-spring), background .25s; }
+.yk-cta__btn:hover{ transform:translateY(-1px); background:var(--yk-navy-deep); }
+.yk-cta__btn--ghost{ background:#FFFFFF; color:var(--yk-navy); box-shadow:inset 0 0 0 1px rgba(156,126,72,.55); }
+.yk-cta__btn--ghost:hover{ background:#FFFBF2; }
+.yk-cta__btn svg{ width:12px; height:12px; }
 /* ---- 리드 폼 ---- */
-.yk-form{ background:var(--yk-paper); border:1px solid rgba(16,19,28,.12); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px; }
-.yk-form label{ font-size:11.5px; font-weight:700; color:var(--yk-ink-soft); letter-spacing:.02em; }
-.yk-form input,.yk-form textarea{ width:100%; font:inherit; font-size:13.5px; border:1.3px solid rgba(16,19,28,.16); border-radius:10px;
-  padding:8px 10px; background:var(--yk-ecru); color:var(--yk-ink); outline:none; cursor:auto !important; }
-.yk-form input:focus,.yk-form textarea:focus{ border-color:var(--yk-accent); }
+.yk-form{ background:#FFFFFF; border-radius:18px; padding:13px; display:flex; flex-direction:column; gap:8px; box-shadow:0 0 0 .5px rgba(14,26,46,.12); }
+.yk-form label{ font-size:11.5px; font-weight:650; color:var(--yk-ink-soft); letter-spacing:.02em; }
+.yk-form input,.yk-form textarea{ width:100%; font:inherit; font-size:14px; border:none; border-radius:12px; padding:9px 11px;
+  background:#F1EEE7; color:var(--yk-ink); outline:none; cursor:auto !important; box-shadow:inset 0 0 0 1px transparent; transition:box-shadow .2s; }
+.yk-form input:focus,.yk-form textarea:focus{ box-shadow:inset 0 0 0 1.5px var(--yk-gold); }
 .yk-form textarea{ resize:vertical; min-height:74px; }
 .yk-form__row{ display:flex; gap:8px; justify-content:flex-end; margin-top:2px; }
 .yk-form__err{ font-size:12px; color:#A02B23; font-weight:600; }
-/* typing */
-.yk-typing{ display:inline-flex; gap:4px; padding:3px 0; }
-.yk-typing span{ width:7px; height:7px; border-radius:50%; background:var(--yk-accent); opacity:.4; animation:yk-bounce2 1.2s infinite; }
-.yk-typing span:nth-child(2){ animation-delay:.15s; } .yk-typing span:nth-child(3){ animation-delay:.3s; }
-@keyframes yk-bounce2{ 0%,60%,100%{transform:translateY(0);opacity:.35;} 30%{transform:translateY(-5px);opacity:.9;} }
-/* ---- quick chips ---- */
-.yk-quick{ display:flex; flex-wrap:wrap; gap:7px; padding:0 18px 4px; }
-.yk-chip{ font-size:12.5px; font-weight:600; color:var(--yk-ink); background:var(--yk-paper);
-  border:1.3px solid var(--yk-ink); border-radius:999px; padding:6px 12px; cursor:pointer;
-  transition:background .22s,color .22s,transform .3s var(--yk-bounce); }
-.yk-chip:hover{ background:var(--yk-accent); border-color:var(--yk-accent); color:#fff; transform:translateY(-2px); }
-.yk-chip--accent{ background:var(--yk-accent); border-color:var(--yk-accent); color:#fff; }
-/* ---- input ---- */
-.yk-input{ border-top:1px solid rgba(16,19,28,.1); background:var(--yk-paper); padding:11px 12px 12px;
-  display:flex; align-items:flex-end; gap:8px; }
-.yk-input textarea{ flex:1; resize:none; border:1.4px solid rgba(16,19,28,.16); border-radius:14px;
-  padding:10px 12px; font:inherit; font-size:14px; line-height:1.5; max-height:104px; color:var(--yk-ink);
-  background:var(--yk-ecru); outline:none; cursor:auto !important; transition:border-color .2s; }
-.yk-input textarea:focus{ border-color:var(--yk-accent); }
-.yk-send{ width:40px; height:40px; border-radius:12px; border:none; background:var(--yk-accent); color:#fff;
-  cursor:pointer; flex:none; display:grid; place-items:center; transition:transform .3s var(--yk-bounce), opacity .2s; }
-.yk-send:hover{ transform:translateY(-2px) scale(1.05); } .yk-send:disabled{ opacity:.4; cursor:default; transform:none; }
-.yk-foot{ text-align:center; font-size:10.5px; color:var(--yk-ink-soft); opacity:.6; padding:0 0 9px; background:var(--yk-paper); letter-spacing:.02em; }
-.yk-foot b{ font-weight:700; }
-/* ---- mobile ---- */
-@media (max-width:480px){
-  .yk-panel{ right:0; bottom:0; width:100vw; max-width:100vw; height:88vh; max-height:88vh; border-radius:20px 20px 0 0; border-width:1.5px 0 0; }
-  .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ display:none; }
+/* typing — iMessage 점 3개 */
+.yk-typing{ display:inline-flex; gap:4px; padding:4px 2px; }
+.yk-typing span{ width:7px; height:7px; border-radius:50%; background:#9AA0AB; animation:yk-dots 1.3s infinite; }
+.yk-typing span:nth-child(2){ animation-delay:.18s; } .yk-typing span:nth-child(3){ animation-delay:.36s; }
+@keyframes yk-dots{ 0%,60%,100%{opacity:.35; transform:none;} 30%{opacity:1; transform:translateY(-3px);} }
+/* ---- 추천 칩 ---- */
+.yk-quick{ display:flex; gap:7px; padding:8px 12px 6px; overflow-x:auto; flex:none; background:var(--yk-ivory); scrollbar-width:none; }
+.yk-quick::-webkit-scrollbar{ display:none; }
+.yk-chip{ flex:none; font:inherit; font-size:13px; font-weight:560; color:var(--yk-navy); background:#FFFFFF; border:none;
+  border-radius:999px; padding:8px 14px; cursor:pointer; box-shadow:inset 0 0 0 1px rgba(14,26,46,.14);
+  transition:background .25s, color .25s, box-shadow .25s, transform .35s var(--yk-spring); }
+.yk-chip:hover{ box-shadow:inset 0 0 0 1px var(--yk-gold); transform:translateY(-1px); }
+.yk-chip--accent{ background:var(--yk-gold-grad); color:#1B1204; box-shadow:none; font-weight:650; }
+.yk-chip--accent:hover{ box-shadow:0 6px 14px -8px rgba(140,109,56,.8); }
+/* ---- 입력 — iMessage 캡슐 + 골드 전송 ---- */
+.yk-input{ flex:none; padding:8px 12px 26px; display:flex; align-items:flex-end; gap:8px; background:rgba(247,244,238,.95); border-top:.5px solid rgba(14,26,46,.1); }
+.yk-input textarea{ flex:1; resize:none; border:none; border-radius:20px; padding:9px 14px; font:inherit; font-size:15px; line-height:1.4;
+  max-height:104px; color:var(--yk-ink); background:#FFFFFF; outline:none; cursor:auto !important;
+  box-shadow:inset 0 0 0 1px rgba(14,26,46,.16); transition:box-shadow .2s; }
+.yk-input textarea:focus{ box-shadow:inset 0 0 0 1.5px var(--yk-gold-lt); }
+.yk-input textarea::placeholder{ color:#9AA0AB; }
+.yk-send{ width:36px; height:36px; border-radius:50%; border:none; background:var(--yk-gold-grad); color:#fff; cursor:pointer; flex:none;
+  display:grid; place-items:center; margin-bottom:2px; box-shadow:0 6px 14px -6px rgba(140,109,56,.85), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .35s var(--yk-spring), opacity .2s, filter .2s; }
+.yk-send svg{ width:18px; height:18px; }
+.yk-send:hover{ transform:scale(1.07); filter:brightness(1.05); }
+.yk-send:active{ transform:scale(.94); }
+.yk-send:disabled{ opacity:.45; cursor:default; transform:none; box-shadow:none; }
+.yk-foot{ display:none; }
+/* ---- 좁은 화면: 프레임 없이 전체 화면 시트 ---- */
+@media (max-width:520px), (max-height:700px){
+  .yk-panel{ right:0; bottom:0; left:0; top:auto; width:100vw; max-width:100vw; height:92vh; height:92dvh; max-height:none;
+    border-radius:26px 26px 0 0; padding:0; background:var(--yk-ivory); box-shadow:0 -20px 50px -20px rgba(11,26,51,.45), 0 0 0 1px rgba(201,174,122,.5); }
+  .yk-panel::before, .yk-panel::after, .yk-island, .yk-status{ display:none; }
+  .yk-screen{ border-radius:26px 26px 0 0; }
+  .yk-head{ padding-top:14px; }
+  .yk-head::before{ content:""; display:block; width:38px; height:5px; border-radius:3px; background:rgba(14,26,46,.2); margin:0 auto 10px; }
+  .yk-head__close{ top:20px; }
+  .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ right:12px; left:12px; width:auto; bottom:auto; top:12px; transform-origin:top center; }
+  .yk-chat.open .yk-fab{ opacity:0; pointer-events:none; }
 }
 @media (prefers-reduced-motion:reduce){
   .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser,.yk-cta__btn{ transition:none !important; animation:none !important; }
-  .yk-fab__ping::after,.yk-dot,.yk-typing span{ animation:none !important; }
-  .yk-spotlight{ animation:none; box-shadow:0 0 0 4px rgba(31,45,107,.5); }
+  .yk-fab__ping::after,.yk-typing span{ animation:none !important; }
+  .yk-spotlight{ animation:none; box-shadow:0 0 0 3px rgba(156,126,72,.7); }
 }
 `;
     var style = el("style");
@@ -445,7 +462,13 @@
   var ICON_X =
     '<svg class="yk-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
   var ICON_SEND =
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>';
+  var ICON_BACK =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+  var ICON_STATUS =
+    '<svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>' +
+    '<svg viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.2-1.3A10.3 10.3 0 0 0 8 .4 10.3 10.3 0 0 0 .8 3.3L2 4.6a8.5 8.5 0 0 1 6-2.4zm0 3.6c1.4 0 2.6.5 3.6 1.4l1.2-1.3A7 7 0 0 0 8 4a7 7 0 0 0-4.8 1.9l1.2 1.3c1-.9 2.2-1.4 3.6-1.4zm0 3.6c.5 0 1 .2 1.3.5L8 11.6 6.7 9.9c.3-.3.8-.5 1.3-.5z"/></svg>' +
+    '<svg viewBox="0 0 27 12" fill="none"><rect x=".5" y=".5" width="23" height="11" rx="3.2" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4z" fill="currentColor" opacity=".45"/></svg>';
   var ICON_ARROW =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>';
   var ICON_PIN =
@@ -477,7 +500,8 @@
     teaser.setAttribute("role", "status");
     teaser.innerHTML =
       '<button class="yk-teaser__close" aria-label="닫기">&times;</button>' +
-      escapeHtml(CFG.teaser);
+      '<span class="yk-teaser__app" aria-hidden="true">YK</span>' +
+      '<span class="yk-teaser__txt"><b>' + escapeHtml(CFG.brandKo) + ' <small>지금</small></b>' + escapeHtml(CFG.teaser) + '</span>';
     teaser.addEventListener("click", function (e) {
       if (e.target.classList.contains("yk-teaser__close")) { hideTeaser(true); e.stopPropagation(); return; }
       open();
@@ -491,16 +515,10 @@
 
     var head = el("div", "yk-head");
     head.innerHTML =
-      '<div class="yk-head__rule"><i></i></div>' +
-      '<div class="yk-head__row">' +
-        '<div class="yk-mark">YK</div>' +
-        '<div class="yk-head__meta">' +
-          '<div class="yk-head__name"><span class="yk-dot"></span>' + escapeHtml(CFG.brandKo) +
-            ' <span style="font-weight:500;font-size:11px;opacity:.6;letter-spacing:.06em">· ' + escapeHtml(CFG.brandEn) + "</span></div>" +
-          '<div class="yk-head__sub">' + escapeHtml(CFG.subtitle) + "</div>" +
-        "</div>" +
-        '<button class="yk-head__close" aria-label="닫기">' + ICON_X.replace("yk-x", "") + "</button>" +
-      "</div>";
+      '<button class="yk-head__close" aria-label="닫기">' + ICON_BACK + '<span>닫기</span></button>' +
+      '<div class="yk-ava" aria-hidden="true">YK<i></i></div>' +
+      '<div class="yk-head__name">' + escapeHtml(CFG.brandKo) + '<small>Concierge</small></div>' +
+      '<div class="yk-head__sub">' + escapeHtml(CFG.subtitle) + "</div>";
     head.querySelector(".yk-head__close").addEventListener("click", close);
 
     body = el("div", "yk-body");
@@ -517,7 +535,7 @@
     var inputBar = el("div", "yk-input");
     textarea = el("textarea");
     textarea.rows = 1;
-    textarea.placeholder = "메시지를 입력하세요…";
+    textarea.placeholder = "iMessage처럼 편하게 물어보세요";
     textarea.setAttribute("aria-label", "메시지 입력");
     textarea.addEventListener("input", autosize);
     textarea.addEventListener("keydown", function (e) {
@@ -532,11 +550,20 @@
 
     var foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · 답변은 포트폴리오 근거로 생성됩니다');
 
-    panel.appendChild(head);
-    panel.appendChild(body);
-    panel.appendChild(quick);
-    panel.appendChild(inputBar);
-    panel.appendChild(foot);
+    var screen = el("div", "yk-screen");
+    screen.appendChild(el("div", "yk-island"));
+    var status = el("div", "yk-status", '<span class="yk-status__time">9:41</span><span class="yk-status__icons" aria-hidden="true">' + ICON_STATUS + "</span>");
+    status.setAttribute("aria-hidden", "true");
+    screen.appendChild(status);
+    screen.appendChild(head);
+    screen.appendChild(body);
+    screen.appendChild(quick);
+    screen.appendChild(inputBar);
+    screen.appendChild(foot);
+    screen.appendChild(el("div", "yk-home"));
+    panel.appendChild(screen);
+    tickClock();
+    setInterval(tickClock, 20000);
 
     root.appendChild(teaser);
     root.appendChild(panel);
@@ -546,6 +573,7 @@
     // 저장된 대화 복원
     if (history.length) {
       greeted = true;
+      body.appendChild(el("div", "yk-stamp", "이전 대화"));
       history.forEach(function (m) { renderMessage(m.role === "user" ? "me" : "bot", m.content, m.ctas); });
       hideQuick();
     }
@@ -563,6 +591,14 @@
   }
 
   /* ------------------------------------------------------------ behaviors */
+  function hhmm() {
+    var d = new Date();
+    return d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+  }
+  function tickClock() {
+    var t = root && root.querySelector(".yk-status__time");
+    if (t) t.textContent = hhmm();
+  }
   function autosize() {
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 104) + "px";
@@ -576,7 +612,12 @@
     root.classList.add("open");
     root.querySelector(".yk-fab").setAttribute("aria-expanded", "true");
     hideTeaser();
-    if (!greeted) { greeted = true; renderMessage("bot", CFG.greeting); }
+    tickClock();
+    if (!greeted) {
+      greeted = true;
+      body.appendChild(el("div", "yk-stamp", "오늘 " + hhmm()));
+      renderMessage("bot", CFG.greeting);
+    }
     setTimeout(function () { textarea && textarea.focus(); }, 340);
     scrollBottom();
   }
