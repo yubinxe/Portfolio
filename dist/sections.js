@@ -305,14 +305,14 @@ const THESIS = [
 
 
 const CASES = [
-{ n: "01", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
+{ n: "01", title: "감정평가사 필드워크", tag: "Three.js · 실지조사 시뮬레이션", feature: true,
+  manual: "실지조사 절차와 감정평가·공간정보 관련 조문, 지목 28종을 교재로 읽고 외우던 학습.",
+  auto: "3D로 옮긴 서울을 걸으며 의뢰 수임부터 등기촉탁까지 5단계를 직접 수행하고, 조문 카드와 지목을 장소에서 수집.",
+  judge: "어떤 절차를 어떤 순서로 밟아야 평가가 성립하는지, 어느 조문을 어느 현장에 붙여야 기억되는지는 감정평가 실무를 알아야 설계할 수 있습니다." },
+{ n: "02", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
   manual: "담당자가 메일함을 직접 확인하며 사안의 우선순위를 판단하던 업무.",
   auto: "Workspace API가 실시간으로 데이터를 수집하고, 분류 알고리즘이 1차 선별을 수행.",
   judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." },
-{ n: "02", title: "청약 인사이트 대시보드", tag: "공공데이터 API",
-  manual: "분산된 공고를 수집하여 표로 정리하던 업무.",
-  auto: "API가 데이터를 수집하고, 대시보드가 자동으로 갱신.",
-  judge: "어떤 지표를 나란히 놓아야 의미가 생기는지는 시장을 알아야 보입니다." },
 { n: "03", title: "정비사업 용역비 자동 수집", tag: "누리장터 · 웹 크롤링",
   manual: "흩어진 용역 입찰 공고를 사이트마다 찾아 단가를 옮겨 적던 업무.",
   auto: "크롤러가 정기적으로 공고와 용역비를 수집·정형화해 비교 가능한 데이터셋으로 축적.",
@@ -506,17 +506,18 @@ function Composite() {
     React.createElement("em", null, "\uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0\uB294 \uC5EC\uC804\uD788 \uC0AC\uB78C\uC774 \uC815\uD569\uB2C8\uB2E4.")
     ), /*#__PURE__*/
 
-    React.createElement("p", { className: "whyc__intro font-ko reveal" }, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD55C \uC138 \uAC1C\uC758 \uC2DC\uC2A4\uD15C\uC5D0\uC11C \uAC19\uC740 \uC77C\uC774 \uBC18\uBCF5\uB410\uC2B5\uB2C8\uB2E4. \uC0AC\uB78C\uC774 \uD558\uB358 \uC77C\uC774 \uB3C4\uAD6C\uB85C \uB118\uC5B4\uAC14\uACE0, \uADF8\uB54C\uB9C8\uB2E4 \uC0AC\uB78C\uC774 \uB0A8\uC544\uC57C \uD560 \uC790\uB9AC\uAC00 \uD558\uB098\uC529 \uB610\uB837\uD574\uC84C\uC2B5\uB2C8\uB2E4. \uADF8 \uC790\uB9AC\uAC00 \uC804\uB7B5\uAE30\uD68D\uC785\uB2C8\uB2E4."
+    React.createElement("p", { className: "whyc__intro font-ko reveal" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uC138 \uAC1C\uC758 \uC2DC\uC2A4\uD15C\uC5D0\uC11C \uAC19\uC740 \uC77C\uC774 \uBC18\uBCF5\uB410\uC2B5\uB2C8\uB2E4. \uC0AC\uB78C\uC774 \uD558\uB358 \uC77C\uC774 \uB3C4\uAD6C\uB85C \uB118\uC5B4\uAC14\uACE0, \uADF8\uB54C\uB9C8\uB2E4 \uC0AC\uB78C\uC774 \uB0A8\uC544\uC57C \uD560 \uC790\uB9AC\uAC00 \uD558\uB098\uC529 \uB610\uB837\uD574\uC84C\uC2B5\uB2C8\uB2E4. \uADF8 \uC790\uB9AC\uAC00 \uC804\uB7B5\uAE30\uD68D\uC785\uB2C8\uB2E4."
 
 
     ), /*#__PURE__*/
 
     React.createElement("div", { className: "wcases" },
     CASES.map((c, i) => /*#__PURE__*/
-    React.createElement("article", { key: c.n, className: "wcase reveal", style: { transitionDelay: `${i * 80}ms` } }, /*#__PURE__*/
+    React.createElement("article", { key: c.n, className: "wcase reveal" + (c.feature ? " wcase--feature" : ""), style: { transitionDelay: `${i * 80}ms` } }, /*#__PURE__*/
     React.createElement("div", { className: "wcase__head" }, /*#__PURE__*/
     React.createElement("span", { className: "wcase__n font-serif" }, "Case ", c.n), /*#__PURE__*/
-    React.createElement("h3", { className: "wcase__t font-ko" }, c.title), /*#__PURE__*/
+    React.createElement("h3", { className: "wcase__t font-ko" }, c.title),
+    c.feature && /*#__PURE__*/React.createElement("span", { className: "wcase__badge font-sans" }, "Featured \xB7 \uAC10\uC815\uD3C9\uAC00"), /*#__PURE__*/
     React.createElement("span", { className: "wcase__tag font-sans" }, c.tag)
     ), /*#__PURE__*/
     React.createElement("div", { className: "wcase__flow" }, /*#__PURE__*/
@@ -532,12 +533,11 @@ function Composite() {
     React.createElement("span", { className: "wcase__lbl font-sans" }, "Judgment \xB7 \uAE30\uD68D \uD310\uB2E8"), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, c.judge)
     )
-    )
+    ),
+    c.feature && /*#__PURE__*/React.createElement(FieldworkStrip, null)
     )
     )
     ), /*#__PURE__*/
-
-    React.createElement(FieldworkStrip, null), /*#__PURE__*/
 
     React.createElement("p", { className: "whyc__close font-myeongjo reveal" }, "\uC138 \uBC88 \uB2E4 \uC0AC\uB78C\uC774 \uD558\uB294 \uC77C\uC740 \uAC19\uC558\uC2B5\uB2C8\uB2E4 \u2014", /*#__PURE__*/
     React.createElement("br", null), /*#__PURE__*/
@@ -569,7 +569,7 @@ function FieldworkStrip() {
     React.createElement("div", null, /*#__PURE__*/
     React.createElement("p", { className: "eyebrow fw__eyebrow" }, "Playable \u2014 \uC9C1\uC811 \uB9CC\uB4E0 \uAC83\uC744 \uC9C1\uC811 \uD574\uBCF4\uAE30"), /*#__PURE__*/
     React.createElement("h3", { className: "fw__title font-ko" }, "\uC77D\uB294 \uB300\uC2E0 \uAC78\uC5B4\uC11C \uC775\uD788\uB294 \uAC10\uC815\uD3C9\uAC00 \uD544\uB4DC\uC6CC\uD06C"), /*#__PURE__*/
-    React.createElement("p", { className: "fw__sub font-ko" }, "\uAC19\uC740 \uBC29\uC2DD\uC73C\uB85C \uBD80\uB3D9\uC0B0 \uB3C4\uBA54\uC778\uC744 \uB2E4\uB918\uC2B5\uB2C8\uB2E4. \uC808\uCC28\uB97C \uC124\uBA85\uD558\uB294 \uB300\uC2E0 \uC808\uCC28\uB97C \uAC77\uAC8C \uB9CC\uB4E4\uC5C8\uC2B5\uB2C8\uB2E4."
+    React.createElement("p", { className: "fw__sub font-ko" }, "\uAC10\uC815\uD3C9\uAC00 \uC2E4\uBB34\uB97C \uADF8\uB300\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uC808\uCC28\uB97C \uC124\uBA85\uD558\uB294 \uB300\uC2E0 \uC808\uCC28\uB97C \uAC77\uAC8C \uB9CC\uB4E4\uC5C8\uC2B5\uB2C8\uB2E4."
 
     )
     ), /*#__PURE__*/
@@ -760,7 +760,7 @@ const EDITIONS = [
 
 
 /* 화면에 보이는 순서와 번호 — 01 집캐치 · 02 VOC · 03 급여명세 · 04 누리장터, 이어서 아래 작업 */
-const EDITION_ORDER = ["09", "10", "06", "07", "08", "05", "01", "02", "03", "04"];
+const EDITION_ORDER = ["10", "09", "06", "07", "08", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {

@@ -34,7 +34,7 @@
       secondary: { label: "경력 상세", href: "career.html#experience" } },
     { id: "thesis", cat: "인물", tags: ["철학", "명제", "왜", "전달", "전문성", "자리", "가치관"],
       title: "일의 명제 — 전략은 우선순위, AI는 속도",
-      body: "\"전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.\" 세 개의 시스템(VOC 트리아지 · 청약 대시보드 · 브랜드 캠페인 필름)에서 사람이 하던 일이 도구로 넘어갈 때마다 사람이 남아야 할 자리가 또렷해졌고, 그 자리는 언제나 '도구에 무엇을 시킬지 정하는 일' — 곧 전략기획이었습니다.",
+      body: "\"전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.\" 세 개의 시스템(감정평가사 필드워크 · VOC 트리아지 · 정비사업 용역비 자동 수집)에서 사람이 하던 일이 도구로 넘어갈 때마다 사람이 남아야 할 자리가 또렷해졌고, 그 자리는 언제나 '도구에 무엇을 시킬지 정하는 일' — 곧 전략기획이었습니다.",
       primary: { label: "Why It Matters", href: "index.html#composite" },
       secondary: { label: "강의 프로그램", href: "index.html#lectures" } },
     { id: "office", cat: "인물", tags: ["법무법인", "경국", "직장", "회사", "소속", "근무", "근무지", "어디", "사무실", "위치", "서초", "주소"],
@@ -144,8 +144,8 @@
 
     /* ---- 프로젝트 ---- */
     { id: "projects", cat: "프로젝트", tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든", "결과물", "산출물"],
-      title: "대표 프로젝트 — 9건",
-      body: "직접 기획·구현한 시스템과 콘텐츠 9건입니다.\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 03 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 04 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 05 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 06 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 07 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 08 Louis Vuitton 시네마틱 캠페인 필름\n- 09 Hyperframe × ElevenLabs 멀티미디어 프로모션",
+      title: "대표 프로젝트 — 10건",
+      body: "직접 기획·구현한 시스템과 콘텐츠 10건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션",
       primary: { label: "작업 전체 보기", href: "index.html#artifacts" },
       secondary: { label: "집캐치 열기", href: "https://zipcatch.vercel.app" } },
     { id: "ed-09", cat: "프로젝트", tags: ["집캐치", "zipcatch", "공공임대", "임대", "lh", "맞춤 추천", "추천 서비스", "공고 알림"],
