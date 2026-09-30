@@ -43,7 +43,7 @@ test("첫 화면 자산이 예산 안에 있다", async () => {
     ["dist/tweaks-panel.js", 40],
     ["dist/icons.js", 12],
     ["dist/app.js", 8],
-    ["styles.css", 90],
+    ["styles.css", 96],   /* 2026-09: 필드워크 체험 스트립(.fw-*) 추가로 +1.4KB — 상한 상향 */
     ["kb.js", 120],
     ["chatbot.js", 80],
   ];

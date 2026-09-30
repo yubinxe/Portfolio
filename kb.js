@@ -153,6 +153,11 @@
       body: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 수집해, 지역·주거비·가구 조건을 3단계로 입력하면 지금 지원할 수 있는 후보를 정리해 주는 소비자 서비스입니다. 관심공고 저장과 마감 알림, 운영용 CRM(매칭·고객·물건 관리)까지 직접 설계·구현했습니다. 자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않고 분리했고, 미확인 자격은 불충족으로 단정하지 않으며 당첨 확률은 산출하지 않습니다.",
       primary: { label: "서비스 바로가기", href: "https://zipcatch.vercel.app" },
       secondary: { label: "작업 카드", href: "index.html#ed-09" } },
+    { id: "ed-10", cat: "프로젝트", tags: ["감정평가", "감정평가사", "필드워크", "게임", "3d", "시뮬레이터", "실지조사", "지목", "조문", "three.js", "webgl", "학습 게임", "체험"],
+      title: "감정평가사 필드워크 — 3D 실지조사 시뮬레이터",
+      body: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임입니다. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집합니다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계했습니다.\n법조문을 글이 아니라 장소로 기억하게 만드는 것이 설계 목표입니다.",
+      primary: { label: "필드워크 체험", href: "https://appraiser-fieldwork.vercel.app/" },
+      secondary: { label: "작업물 카드", href: "index.html#ed-10" } },
     { id: "ed-01", cat: "프로젝트", tags: ["지방선거", "카드뉴스", "선거", "인스타그램", "suno", "gpt image"],
       title: "6·3 지방선거 AI 카드뉴스 & 시네마틱 영상",
       body: "GPT Image-2, Suno AI, ElevenLabs를 결합해 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 내레이션 영상. 사회학적 분석을 2030 세대의 소비 포맷으로 옮긴 생성형 AI 미디어 작업입니다.",
@@ -380,7 +385,7 @@
   ];
 
   return {
-    version: "2026.09.28a",
+    version: "2026.09.30",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
     rank: rank,

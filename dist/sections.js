@@ -517,6 +517,8 @@ function Composite() {
     )
     ), /*#__PURE__*/
 
+    React.createElement(FieldworkStrip, null), /*#__PURE__*/
+
     React.createElement("p", { className: "whyc__close font-myeongjo reveal" }, "\uC138 \uBC88 \uB2E4 \uC0AC\uB78C\uC774 \uD558\uB294 \uC77C\uC740 \uAC19\uC558\uC2B5\uB2C8\uB2E4 \u2014", /*#__PURE__*/
     React.createElement("br", null), /*#__PURE__*/
     React.createElement("em", null, "\uB3C4\uAD6C\uC5D0 \uBB34\uC5C7\uC744 \uC2DC\uD0AC\uC9C0 \uC815\uD558\uB294 \uC77C.")
@@ -524,6 +526,53 @@ function Composite() {
     React.createElement("p", { className: "whyc__closesub font-ko reveal" }, "\uAE30\uC900\uC744 \uC138\uC6B0\uB294 \uC0AC\uB78C\uACFC \uADF8\uAC83\uC744 \uC2E4\uD589\uAE4C\uC9C0 \uC62E\uAE30\uB294 \uC0AC\uB78C\uC774 \uB2E4\uB974\uBA74 \uC18D\uB3C4\uAC00 \uC8FD\uC2B5\uB2C8\uB2E4. \uB458\uC744 \uD55C \uC0AC\uB78C\uC774 \uD558\uB3C4\uB85D \uC900\uBE44\uD574 \uC654\uC2B5\uB2C8\uB2E4."
 
 
+    )
+    )
+    )
+    ));
+
+}
+
+/* ---- 필드워크 체험 스트립 (게임 인게임 화면) ---- */
+const FIELDWORK_SHOTS = [
+{ img: "fw-gwanghwamun", label: "실지조사", cap: "광화문·세종대로를 직접 걷는다" },
+{ img: "fw-street", label: "서울 실측 공간", cap: "종로에서 강남까지, 실제 시간과 햇빛" },
+{ img: "fw-map", label: "사건 지도", cap: "의뢰·업무 장소·수집 대상을 한 화면에" },
+{ img: "fw-phone", label: "업무용 단말", cap: "내 의뢰 · 사건 파일 · 법령 검색" }];
+
+const FIELDWORK_ITEMS = ["실지조사 5단계", "조문 카드 24장", "지목 도감 28종", "실무 퀴즈 · 기출"];
+
+function FieldworkStrip() {
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "fw reveal" }, /*#__PURE__*/
+    React.createElement("div", { className: "fw__head" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow fw__eyebrow" }, "Playable \u2014 \uC9C1\uC811 \uB9CC\uB4E0 \uAC83\uC744 \uC9C1\uC811 \uD574\uBCF4\uAE30"), /*#__PURE__*/
+    React.createElement("h3", { className: "fw__title font-ko" }, "\uC77D\uB294 \uB300\uC2E0 \uAC78\uC5B4\uC11C \uC775\uD788\uB294 \uAC10\uC815\uD3C9\uAC00 \uD544\uB4DC\uC6CC\uD06C"), /*#__PURE__*/
+    React.createElement("p", { className: "fw__sub font-ko" }, "\uAC19\uC740 \uBC29\uC2DD\uC73C\uB85C \uBD80\uB3D9\uC0B0 \uB3C4\uBA54\uC778\uC744 \uB2E4\uB918\uC2B5\uB2C8\uB2E4. \uC808\uCC28\uB97C \uC124\uBA85\uD558\uB294 \uB300\uC2E0 \uC808\uCC28\uB97C \uAC77\uAC8C \uB9CC\uB4E4\uC5C8\uC2B5\uB2C8\uB2E4."
+
+    )
+    ), /*#__PURE__*/
+    React.createElement("a", { className: "fw__cta font-sans", href: "https://appraiser-fieldwork.vercel.app/", target: "_blank", rel: "noopener noreferrer" }, "\uC9C0\uAE08 \uCCB4\uD5D8\uD558\uAE30 ", /*#__PURE__*/
+    React.createElement(ArrowUpRight, { size: 16 })
+    )
+    ), /*#__PURE__*/
+
+    React.createElement("div", { className: "fw__items font-sans" },
+    FIELDWORK_ITEMS.map((t) => /*#__PURE__*/React.createElement("span", { key: t }, t))
+    ), /*#__PURE__*/
+
+    React.createElement("div", { className: "fw__grid" },
+    FIELDWORK_SHOTS.map((s) => /*#__PURE__*/
+    React.createElement("a", { key: s.img, className: "fw__shot", href: "https://appraiser-fieldwork.vercel.app/", target: "_blank", rel: "noopener noreferrer" }, /*#__PURE__*/
+    React.createElement("img", {
+      src: `images/${s.img}-700.jpg`,
+      srcSet: `images/${s.img}-700.jpg 700w, images/${s.img}.jpg 1280w`,
+      sizes: "(max-width: 720px) 88vw, 24vw",
+      alt: `감정평가사 필드워크 인게임 화면 — ${s.label}: ${s.cap}`,
+      width: "700", height: "359", loading: "lazy", decoding: "async" }), /*#__PURE__*/
+    React.createElement("span", { className: "fw__label font-ko" }, s.label), /*#__PURE__*/
+    React.createElement("span", { className: "fw__cap font-ko" }, s.cap)
     )
     )
     )
@@ -658,6 +707,10 @@ const EDITIONS = [
   desc: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 수집해, 지역·주거비·가구 조건을 3단계로 입력하면 지금 지원할 수 있는 후보를 정리해 주는 소비자 서비스. 관심공고 저장·마감 알림과 운영용 CRM(매칭·고객·물건 관리)까지 설계·구현.",
   status: "Vercel 배포 완료", cta: "서비스 바로가기", url: "https://zipcatch.vercel.app", tags: ["청약홈 · LH API", "맞춤 추천", "Supabase · CRM"],
   core: true, point: "자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않도록 분리 설계 — 미확인 자격은 불충족으로 단정하지 않고, 당첨 확률은 산출하지 않는다." },
+{ n: "10", color: "var(--apple)", Icon: MapPin, title: "감정평가사 필드워크\n3D 실지조사 시뮬레이터",
+  desc: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집한다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계.",
+  status: "Vercel 배포 완료", cta: "필드워크 체험", url: "https://appraiser-fieldwork.vercel.app/", tags: ["Three.js · WebGL", "실지조사 5단계", "조문 24 · 지목 28"],
+  core: true, point: "법조문을 글이 아니라 장소로 기억하게 만드는 것이 설계의 목표 — 서울의 실제 시간과 햇빛 아래에서 조사 절차를 몸으로 익힌다." },
 { n: "01", color: "var(--butter)", Icon: Newspaper, title: "6·3 지방선거\nAI 카드뉴스 & 시네마틱 영상",
   desc: "GPT Image-2, Suno AI, ElevenLabs를 결합하여 2026 전국동시지방선거 결과를 분석·시각화한 인스타그램 카드뉴스 6종과 내레이션 영상. 사회학적 분석을 2030 세대의 소비 포맷으로 옮긴 생성형 AI 미디어 작업.",
   status: "Google Drive 스트리밍 자산 구축 완료", cta: "영상 바로 보기", url: "https://drive.google.com/file/d/1k4BcuFz671SajLydfRs5gMRFG2Hu3RWj/view?usp=sharing", video: "video/edition-04.mp4", tags: ["GPT Image-2", "Suno AI", "ElevenLabs"] },
@@ -689,7 +742,7 @@ const EDITIONS = [
 
 
 /* 화면에 보이는 순서와 번호 — 01 집캐치 · 02 VOC · 03 급여명세 · 04 누리장터, 이어서 아래 작업 */
-const EDITION_ORDER = ["09", "06", "07", "08", "05", "01", "02", "03", "04"];
+const EDITION_ORDER = ["09", "10", "06", "07", "08", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {

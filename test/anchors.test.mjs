@@ -16,7 +16,9 @@ const PAGES = { "index.html": idsOf("sections.jsx"), "career.html": idsOf("caree
 // sections.jsx 에서 템플릿으로 생성되는 id
 const sections = readFileSync(new URL("../sections.jsx", import.meta.url), "utf8");
 for (const m of sections.matchAll(/id: "(tl-[\w-]+)"/g)) PAGES["index.html"].add(m[1]);
-for (const n of ["01", "02", "03", "04", "05", "06", "07", "08", "09"]) { PAGES["index.html"].add("ed-" + n); if (Number(n) <= 6) PAGES["index.html"].add("dom-" + n); }
+/* 작업물 번호는 sections.jsx 의 EDITIONS 에서 직접 수집 — 새 작업물이 늘어도 테스트를 손대지 않도록 */
+for (const m of sections.matchAll(/\{ n: "(\d\d)"/g)) PAGES["index.html"].add("ed-" + m[1]);
+for (const n of ["01", "02", "03", "04", "05", "06"]) PAGES["index.html"].add("dom-" + n);
 for (const c of ["tesat", "opic-ih", "전기기능사", "분양대행자"]) PAGES["index.html"].add("cred-" + c);
 for (const m of sections.matchAll(/id: "(lec-\d\d)"/g)) PAGES["index.html"].add(m[1]);
 PAGES["index.html"].add("arsenal"); PAGES["index.html"].add("credentials");
