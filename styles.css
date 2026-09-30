@@ -2104,7 +2104,7 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
 .ledger { background: #FFFFFF; }
 
 /* ---------- 프로필 스크롤 스토리 (애플식 고정 스크롤) ---------- */
-.story { position: relative; height: 280vh; background: var(--ecru); }
+.story { --p: 0; position: relative; height: 280vh; background: var(--ecru); }
 .story__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; overflow: hidden; }
 .story__grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(36px, 6vw, 96px); align-items: center; width: 100%; }
 .story__copy .eyebrow { margin: 0 0 22px; }
@@ -2239,4 +2239,30 @@ p.font-ko { font-weight: 430; }
   .fw__grid { grid-template-columns: 1fr; }
   .fw__head { align-items: flex-start; }
   .fw__cta { width: 100%; justify-content: center; }
+}
+
+/* ============================================================
+   모바일 시연 — 끊김 없이, 손가락 크기로
+   ============================================================ */
+/* <Pic> 의 <picture> 는 레이아웃에 끼지 않는다 — img 가 예전처럼 직접 자식으로 배치 */
+.pic { display: contents; }
+
+@media (pointer: coarse) {
+  /* 터치 대상 44px (WCAG 2.5.5 · Apple HIG) */
+  .btn { min-height: 44px; }
+  header .wrap > a { min-height: 44px; display: inline-flex; align-items: center; }
+  .lec-card__proof { min-height: 44px; display: inline-flex; align-items: center; }
+  .lec-basis__item a { position: relative; }
+  .lec-basis__item a::before { content: ""; position: absolute; inset: -14px -8px; }
+  .fw__cta { min-height: 44px; }
+  footer .f-links { row-gap: 0 !important; }
+  footer .f-links a, footer a[href="#top"] { min-height: 44px; display: inline-flex; align-items: center; }
+
+  /* 고정 헤더의 배경 블러는 스크롤 한 프레임마다 뒤 화면을 다시 흐리게 계산한다.
+     터치 기기에선 거의 불투명한 단색으로 대체 — 보이는 차이는 없고 스크롤 비용은 사라진다 */
+  header, header.hnav.is-solid, #contact .btn {
+    -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  }
+  header[style*="backdrop-filter"] { background: rgba(249, 246, 240, .98) !important; }
+  header.hnav.is-solid { background: rgba(247, 244, 238, .985); }
 }
