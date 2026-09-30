@@ -2188,6 +2188,23 @@ p.font-ko { font-weight: 430; }
 @media (max-width: 480px) { .yd-grid { grid-template-columns: 1fr; } .yd-grid .g-card:first-child { grid-column: auto; } }
 
 /* ===== 필드워크 체험 스트립 — 활자 구간 사이의 쉼표 ===== */
+/* 대표 사례(Case 01 · 감정평가) — 금색 레일과 배지로 나머지 사례보다 한 단 위에 */
+.wcase--feature { position: relative; padding-left: clamp(18px, 2.4vw, 30px); }
+.wcase--feature::before {
+  content: ""; position: absolute; left: 0; top: clamp(30px, 3.8vw, 46px); bottom: clamp(30px, 3.8vw, 46px);
+  width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--gold-light), rgba(201, 174, 122, .15));
+}
+.wcase--feature .wcase__t { font-size: clamp(1.2rem, 2.1vw, 1.6rem); }
+.wcase__badge {
+  font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  padding: .42em .9em; border-radius: 999px; color: #10131C; background: var(--gold-light);
+}
+.wcase--feature .fw { margin-bottom: 0; }
+@media (max-width: 560px) {
+  .wcase--feature { padding-left: 14px; }
+  .wcase--feature .fw { padding: 20px 16px; }
+  .wcase--feature .fw__eyebrow { letter-spacing: .1em; }
+}
 .fw {
   margin: clamp(46px, 6vw, 76px) 0 clamp(40px, 5vw, 64px);
   padding: clamp(24px, 3vw, 34px);

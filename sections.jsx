@@ -304,14 +304,14 @@ const THESIS = [
 ];
 
 const CASES = [
-  { n: "01", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
+  { n: "01", title: "감정평가사 필드워크", tag: "Three.js · 실지조사 시뮬레이션", feature: true,
+    manual: "실지조사 절차와 감정평가·공간정보 관련 조문, 지목 28종을 교재로 읽고 외우던 학습.",
+    auto: "3D로 옮긴 서울을 걸으며 의뢰 수임부터 등기촉탁까지 5단계를 직접 수행하고, 조문 카드와 지목을 장소에서 수집.",
+    judge: "어떤 절차를 어떤 순서로 밟아야 평가가 성립하는지, 어느 조문을 어느 현장에 붙여야 기억되는지는 감정평가 실무를 알아야 설계할 수 있습니다." },
+  { n: "02", title: "VOC 트리아지 시스템", tag: "GWS API · 분류 알고리즘",
     manual: "담당자가 메일함을 직접 확인하며 사안의 우선순위를 판단하던 업무.",
     auto: "Workspace API가 실시간으로 데이터를 수집하고, 분류 알고리즘이 1차 선별을 수행.",
     judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." },
-  { n: "02", title: "청약 인사이트 대시보드", tag: "공공데이터 API",
-    manual: "분산된 공고를 수집하여 표로 정리하던 업무.",
-    auto: "API가 데이터를 수집하고, 대시보드가 자동으로 갱신.",
-    judge: "어떤 지표를 나란히 놓아야 의미가 생기는지는 시장을 알아야 보입니다." },
   { n: "03", title: "정비사업 용역비 자동 수집", tag: "누리장터 · 웹 크롤링",
     manual: "흩어진 용역 입찰 공고를 사이트마다 찾아 단가를 옮겨 적던 업무.",
     auto: "크롤러가 정기적으로 공고와 용역비를 수집·정형화해 비교 가능한 데이터셋으로 축적.",
@@ -506,16 +506,17 @@ function Composite() {
         </h2>
 
         <p className="whyc__intro font-ko reveal">
-          직접 만들어 운영한 세 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
+          직접 만든 세 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
           그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다. 그 자리가 전략기획입니다.
         </p>
 
         <div className="wcases">
           {CASES.map((c, i) => (
-            <article key={c.n} className="wcase reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+            <article key={c.n} className={"wcase reveal" + (c.feature ? " wcase--feature" : "")} style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="wcase__head">
                 <span className="wcase__n font-serif">Case {c.n}</span>
                 <h3 className="wcase__t font-ko">{c.title}</h3>
+                {c.feature && <span className="wcase__badge font-sans">Featured · 감정평가</span>}
                 <span className="wcase__tag font-sans">{c.tag}</span>
               </div>
               <div className="wcase__flow">
@@ -532,11 +533,10 @@ function Composite() {
                   <p className="font-ko">{c.judge}</p>
                 </div>
               </div>
+              {c.feature && <FieldworkStrip />}
             </article>
           ))}
         </div>
-
-        <FieldworkStrip />
 
         <p className="whyc__close font-myeongjo reveal">
           세 번 다 사람이 하는 일은 같았습니다 —<br />
@@ -569,7 +569,7 @@ function FieldworkStrip() {
           <p className="eyebrow fw__eyebrow">Playable — 직접 만든 것을 직접 해보기</p>
           <h3 className="fw__title font-ko">읽는 대신 걸어서 익히는 감정평가 필드워크</h3>
           <p className="fw__sub font-ko">
-            같은 방식으로 부동산 도메인을 다뤘습니다. 절차를 설명하는 대신 절차를 걷게 만들었습니다.
+            감정평가 실무를 그대로 옮겼습니다. 절차를 설명하는 대신 절차를 걷게 만들었습니다.
           </p>
         </div>
         <a className="fw__cta font-sans" href="https://appraiser-fieldwork.vercel.app/" target="_blank" rel="noopener noreferrer">
@@ -759,7 +759,7 @@ const EDITIONS = [
 ];
 
 /* 화면에 보이는 순서와 번호 — 01 집캐치 · 02 VOC · 03 급여명세 · 04 누리장터, 이어서 아래 작업 */
-const EDITION_ORDER = ["09", "10", "06", "07", "08", "05", "01", "02", "03", "04"];
+const EDITION_ORDER = ["10", "09", "06", "07", "08", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {
