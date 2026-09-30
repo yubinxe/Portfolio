@@ -18,7 +18,8 @@ function idsOf(file) {
   if (file === "index.html") {
     for (const m of src.matchAll(/id: "([\w-]+)"/g)) ids.add(m[1]);
     /* 템플릿으로 만들어지는 id */
-    for (const n of ["01", "02", "03", "04", "05", "06", "07", "08"]) ids.add("ed-" + n);
+    /* 작업물 번호는 EDITIONS 정의에서 직접 수집 */
+    for (const m of src.matchAll(/\{ n: "(\d\d)"/g)) ids.add("ed-" + m[1]);
     for (const d of ["strategy", "ai", "data", "marketing", "teaching", "domain"]) ids.add("dom-" + d);
     for (const c of ["tesat", "opic-ih", "전기기능사", "분양대행자"]) ids.add("cred-" + c);
     /* index.html 자체에 있는 정적 id(챗봇 루트 등) */
