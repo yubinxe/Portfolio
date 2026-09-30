@@ -435,18 +435,24 @@ const PALETTES = {
   }, { passive: true });
 
   /* reveal 안전망 — IntersectionObserver 누락 시 강제 노출 (블러 고착 방지) */
+  /* 읽기(getBoundingClientRect)를 전부 끝낸 뒤 한 번에 쓴다. 읽고-쓰고를 번갈아 하면
+     요소마다 브라우저가 레이아웃을 다시 계산한다(저사양 폰 프로파일에서 370ms). */
   var sweepT = null;
   function revealSweep() {
     var els = document.querySelectorAll(".reveal:not(.in)");
+    if (!els.length) { window.removeEventListener("scroll", onSweepScroll); return; }
+    var vh = innerHeight, hit = [];
     for (var i = 0; i < els.length; i++) {
       var r = els[i].getBoundingClientRect();
-      if (r.top < innerHeight * 0.94 && r.bottom > -80) els[i].classList.add("in");
+      if (r.top < vh * 0.94 && r.bottom > -80) hit.push(els[i]);
     }
+    for (var k = 0; k < hit.length; k++) hit[k].classList.add("in");
   }
-  window.addEventListener("scroll", function () {
+  function onSweepScroll() {
     if (sweepT) return;
     sweepT = setTimeout(function () { sweepT = null; revealSweep(); }, 140);
-  }, { passive: true });
+  }
+  window.addEventListener("scroll", onSweepScroll, { passive: true });
   window.addEventListener("resize", revealSweep, { passive: true });
   setTimeout(revealSweep, 1600);
   setTimeout(revealSweep, 3200);
@@ -570,65 +576,136 @@ const PALETTES = {
     }, 60);
     window.addEventListener("hashchange", openHash);
 
-    /* ===== 히어로 성좌 — 이전 랜딩의 인터랙션을 네이비·골드로 절제해 복원 ===== */
+    /* ===== 히어로 성좌 — 메인 스레드를 쓰지 않도록 Web Worker 의 OffscreenCanvas 에서 그린다 =====
+       · 선을 투명도 4단계로 묶어 단계당 stroke 1회(예전엔 선마다 1회 — 프레임당 수백 번)
+       · 터치 기기: 30fps · 점 수 절반 · 해상도 1.5배 상한 · 커서 반응 계산 생략
+       · 화면 밖이면 멈춘다(IntersectionObserver). 미지원 브라우저는 같은 엔진을 메인 스레드에서 실행 */
     if (!calm) {
       var heroSec = document.getElementById("manifesto");
       var cv = document.createElement("canvas");
       cv.className = "hero-net";
       cv.setAttribute("aria-hidden", "true");
       heroSec.appendChild(cv);
-      var ctx = cv.getContext("2d");
-      var W, H, pts = [], mx = -9999, my = -9999;
-      var sizeNet = function () {
-        var dpr = Math.min(2, window.devicePixelRatio || 1);
-        W = heroSec.offsetWidth; H = heroSec.offsetHeight;
-        cv.width = W * dpr; cv.height = H * dpr;
-        cv.style.width = W + "px"; cv.style.height = H + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        var n = Math.min(54, Math.floor(W / 26));
-        pts = [];
-        for (var i = 0; i < n; i++) {
-          pts.push({ x: Math.random() * W, y: Math.random() * H * 0.78, vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22, r: 0.8 + Math.random() * 1.4, g: Math.random() < 0.28 });
+      var coarse = window.matchMedia("(pointer: coarse)").matches;
+
+      var NET_ENGINE = function () {
+        var ctx, W = 0, H = 0, pts = [], mx = -9999, my = -9999, active = true, step = 1000 / 60, last = 0, B = 4, bk = [[], [], [], []];
+        var tick = typeof requestAnimationFrame === "function" ? requestAnimationFrame
+          : function (f) { return setTimeout(function () { f(performance.now()); }, 16); };
+        function seed(n) {
+          pts = [];
+          for (var i = 0; i < n; i++) pts.push({ x: Math.random() * W, y: Math.random() * H * 0.78, vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22, r: 0.8 + Math.random() * 1.4, g: Math.random() < 0.28 });
         }
-      };
-      sizeNet();
-      window.addEventListener("resize", sizeNet);
-      heroSec.addEventListener("mousemove", function (e) {
-        var r = heroSec.getBoundingClientRect();
-        mx = e.clientX - r.left; my = e.clientY - r.top;
-      }, { passive: true });
-      heroSec.addEventListener("mouseleave", function () { mx = my = -9999; });
-      (function net() {
-        requestAnimationFrame(net);
-        if (document.hidden || window.scrollY > innerHeight * 1.2) return;
-        ctx.clearRect(0, 0, W, H);
-        for (var i = 0; i < pts.length; i++) {
-          var a = pts[i];
-          a.x += a.vx; a.y += a.vy;
-          if (a.x < 0 || a.x > W) a.vx *= -1;
-          if (a.y < 0 || a.y > H) a.vy *= -1;
-          var dxm = a.x - mx, dym = a.y - my, dm = Math.sqrt(dxm * dxm + dym * dym);
-          if (dm < 140 && dm > 0.1) { a.x += (dxm / dm) * 0.6; a.y += (dym / dm) * 0.6; }
-          for (var j = i + 1; j < pts.length; j++) {
-            var b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
-            if (d2 < 17000) {
-              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = "rgba(156,126,72," + (0.2 * (1 - d2 / 17000)).toFixed(3) + ")";
-              ctx.lineWidth = 0.8; ctx.stroke();
+        function size(w, h, dpr, n) {
+          W = w; H = h;
+          ctx.canvas.width = Math.round(w * dpr); ctx.canvas.height = Math.round(h * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          seed(n);
+        }
+        function frame(t) {
+          tick(frame);
+          if (!active || t - last < step) return;
+          last = t;
+          ctx.clearRect(0, 0, W, H);
+          for (var q = 0; q < B; q++) bk[q].length = 0;
+          var near = [], i, j, a, b;
+          for (i = 0; i < pts.length; i++) {
+            a = pts[i];
+            a.x += a.vx; a.y += a.vy;
+            if (a.x < 0 || a.x > W) a.vx *= -1;
+            if (a.y < 0 || a.y > H) a.vy *= -1;
+            if (mx > -9000) {
+              var dxm = a.x - mx, dym = a.y - my, dm = Math.sqrt(dxm * dxm + dym * dym);
+              if (dm < 140 && dm > 0.1) { a.x += (dxm / dm) * 0.6; a.y += (dym / dm) * 0.6; }
+              if (dm < 180) near.push(a.x, a.y);
+            }
+            for (j = i + 1; j < pts.length; j++) {
+              b = pts[j];
+              var dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+              if (d2 < 17000) bk[Math.min(B - 1, Math.floor((1 - d2 / 17000) * B))].push(a.x, a.y, b.x, b.y);
             }
           }
-          /* 커서 근처 점은 커서와 가는 선으로 잇는다 */
-          if (dm < 180) {
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my);
-            ctx.strokeStyle = "rgba(19,40,75," + (0.18 * (1 - dm / 180)).toFixed(3) + ")";
-            ctx.lineWidth = 0.7; ctx.stroke();
+          ctx.lineWidth = 0.8;
+          for (q = 0; q < B; q++) {
+            var L = bk[q]; if (!L.length) continue;
+            ctx.strokeStyle = "rgba(156,126,72," + (0.2 * (q + 1) / B).toFixed(3) + ")";
+            ctx.beginPath();
+            for (var m = 0; m < L.length; m += 4) { ctx.moveTo(L[m], L[m + 1]); ctx.lineTo(L[m + 2], L[m + 3]); }
+            ctx.stroke();
           }
-          ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.2832);
-          ctx.fillStyle = a.g ? "rgba(156,126,72,.75)" : "rgba(19,40,75,.45)";
-          ctx.fill();
+          if (near.length) {
+            ctx.strokeStyle = "rgba(19,40,75,.1)"; ctx.lineWidth = 0.7; ctx.beginPath();
+            for (var c = 0; c < near.length; c += 2) { ctx.moveTo(near[c], near[c + 1]); ctx.lineTo(mx, my); }
+            ctx.stroke();
+          }
+          for (var g = 0; g < 2; g++) {
+            ctx.fillStyle = g ? "rgba(156,126,72,.75)" : "rgba(19,40,75,.45)";
+            ctx.beginPath();
+            for (i = 0; i < pts.length; i++) { a = pts[i]; if (a.g === !!g) { ctx.moveTo(a.x + a.r, a.y); ctx.arc(a.x, a.y, a.r, 0, 6.2832); } }
+            ctx.fill();
+          }
         }
-      })();
+        return {
+          init: function (canvas, w, h, dpr, n, isCoarse) { ctx = canvas.getContext("2d"); step = isCoarse ? 1000 / 30 : 1000 / 60; size(w, h, dpr, n); tick(frame); },
+          size: size,
+          pointer: function (x, y) { mx = x; my = y; },
+          active: function (v) { active = v; }
+        };
+      };
 
+      var dims = function () {
+        var w = heroSec.offsetWidth, h = heroSec.offsetHeight;
+        return { w: w, h: h, dpr: Math.min(coarse ? 1.5 : 2, window.devicePixelRatio || 1), n: Math.min(coarse ? 24 : 54, Math.floor(w / 26)) };
+      };
+      var d0 = dims();
+      cv.style.width = d0.w + "px"; cv.style.height = d0.h + "px";
+
+      var send = null;
+      if (cv.transferControlToOffscreen && typeof Worker === "function" && window.Blob && window.URL) {
+        try {
+          var wsrc = "var E=(" + NET_ENGINE.toString() + ")();onmessage=function(e){var d=e.data;" +
+            "if(d.t==='init')E.init(d.canvas,d.w,d.h,d.dpr,d.n,d.coarse);else if(d.t==='size')E.size(d.w,d.h,d.dpr,d.n);" +
+            "else if(d.t==='ptr')E.pointer(d.x,d.y);else if(d.t==='act')E.active(d.v);};";
+          var worker = new Worker(URL.createObjectURL(new Blob([wsrc], { type: "text/javascript" })));
+          var off = cv.transferControlToOffscreen();
+          worker.postMessage({ t: "init", canvas: off, w: d0.w, h: d0.h, dpr: d0.dpr, n: d0.n, coarse: coarse }, [off]);
+          send = function (m) { worker.postMessage(m); };
+          cv.dataset.engine = "worker";
+        } catch (err) { send = null; }
+      }
+      if (!send) {
+        var E = NET_ENGINE();
+        E.init(cv, d0.w, d0.h, d0.dpr, d0.n, coarse);
+        send = function (m) {
+          if (m.t === "size") E.size(m.w, m.h, m.dpr, m.n);
+          else if (m.t === "ptr") E.pointer(m.x, m.y);
+          else if (m.t === "act") E.active(m.v);
+        };
+        cv.dataset.engine = "main";
+      }
+
+      var rsT = null;
+      window.addEventListener("resize", function () {
+        clearTimeout(rsT);
+        rsT = setTimeout(function () {
+          var d = dims();
+          cv.style.width = d.w + "px"; cv.style.height = d.h + "px";
+          send({ t: "size", w: d.w, h: d.h, dpr: d.dpr, n: d.n });
+        }, 180);
+      }, { passive: true });
+      if (!coarse) {
+        heroSec.addEventListener("mousemove", function (e) {
+          var r = heroSec.getBoundingClientRect();
+          send({ t: "ptr", x: e.clientX - r.left, y: e.clientY - r.top });
+        }, { passive: true });
+        heroSec.addEventListener("mouseleave", function () { send({ t: "ptr", x: -9999, y: -9999 }); });
+      }
+      var heroOn = true;
+      var syncAct = function () { send({ t: "act", v: heroOn && !document.hidden }); };
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (es) { heroOn = es[0].isIntersecting; syncAct(); }, { threshold: 0 }).observe(heroSec);
+      }
+      document.addEventListener("visibilitychange", syncAct);
     }
 
     var toast = document.createElement("div");

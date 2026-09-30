@@ -360,8 +360,9 @@
 .yk-chat.open .yk-fab .yk-bubble-i{ opacity:0; transform:rotate(90deg) scale(.6); }
 .yk-chat.open .yk-fab .yk-x{ opacity:1; transform:none; }
 .yk-fab__ping{ position:absolute; top:9px; right:9px; width:12px; height:12px; border-radius:50%; background:var(--yk-gold-grad); border:2px solid var(--yk-navy); }
-.yk-fab__ping::after{ content:""; position:absolute; inset:-2px; border-radius:50%; animation:yk-ping 2.6s ease-out infinite; }
-@keyframes yk-ping{ 0%{box-shadow:0 0 0 0 rgba(201,174,122,.6);} 70%,100%{box-shadow:0 0 0 12px rgba(201,174,122,0);} }
+.yk-fab__ping::after{ content:""; position:absolute; inset:-2px; border-radius:50%; border:2px solid rgba(201,174,122,.6); animation:yk-ping 2.6s ease-out infinite; will-change:transform,opacity; }
+/* box-shadow 를 키우면 매 프레임 리페인트 — transform·opacity 만 쓰면 합성 스레드에서 끝난다 */
+@keyframes yk-ping{ 0%{transform:scale(1);opacity:1;} 70%,100%{transform:scale(2.4);opacity:0;} }
 .yk-chat.open .yk-fab__ping{ display:none; }
 /* ---- teaser — iOS 알림 배너 ---- */
 .yk-teaser{
@@ -544,6 +545,14 @@
   .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser,.yk-cta__btn{ transition:none !important; animation:none !important; }
   .yk-fab__ping::after,.yk-typing span{ animation:none !important; }
   .yk-spotlight{ animation:none; box-shadow:0 0 0 3px rgba(156,126,72,.7); }
+}
+/* 터치 기기 — 기본 규칙 뒤에 둬야 덮어쓴다 (44px 권장 터치 타깃) */
+@media (pointer: coarse){
+  .yk-teaser__close::before{ content:""; position:absolute; inset:-11px; }
+  .yk-head__close{ min-width:44px; min-height:44px; }
+  .yk-chip{ min-height:44px; }
+  .yk-send{ width:44px; height:44px; }
+  .yk-teaser{ -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(250,248,243,.97); }
 }
 `;
     var style = el("style");

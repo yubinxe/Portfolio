@@ -1,7 +1,27 @@
 /* 자동 생성 파일 — 수정하지 마세요. 원본: sections.jsx · 갱신: npm run build */
-/* sections.jsx — all portfolio sections → window */
+function _extends() {return _extends = Object.assign ? Object.assign.bind() : function (n) {for (var e = 1; e < arguments.length; e++) {var t = arguments[e];for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);}return n;}, _extends.apply(null, arguments);} /* sections.jsx — all portfolio sections → window */
 
 /* ---------- scroll reveal hook ---------- */
+/* ============================================================ 반응형 이미지
+ * AVIF → WebP → 원본 JPEG 순으로 브라우저가 고른다. 3배율 폰에서도 원본 대신 AVIF 가 선택된다.
+ * 폭 목록은 scripts/build-images.mjs 산출물과 일치해야 한다(test/images.test.mjs 가 검증). */
+const OPT = {
+  "hero-gangnam": [480, 800, 1200, 1600], "footer-seoul": [480, 800, 1200, 1600],
+  "profile-yubin": [480, 800, 896], "ssafy-presentation": [480, 800, 1016], "press-yonhap": [480, 800, 1200, 1600],
+  "youth-day-yonhap": [480, 800, 860], "youth-day-selfie": [480, 800, 1200], "youth-day-mbc-02": [480, 800, 1200],
+  "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280]
+};
+function Pic({ name, fallback, sizes, alt = "", className, ...img }) {
+  const set = (ext) => OPT[name].map((w) => `images/opt/${name}-${w}.${ext} ${w}w`).join(", ");
+  return (/*#__PURE__*/
+    React.createElement("picture", { className: "pic" }, /*#__PURE__*/
+    React.createElement("source", { type: "image/avif", srcSet: set("avif"), sizes: sizes }), /*#__PURE__*/
+    React.createElement("source", { type: "image/webp", srcSet: set("webp"), sizes: sizes }), /*#__PURE__*/
+    React.createElement("img", _extends({ src: fallback, sizes: sizes, alt: alt, className: className, decoding: "async" }, img))
+    ));
+
+}
+
 function useReveal() {
   const ref = React.useRef(null);
   React.useEffect(() => {
@@ -61,7 +81,7 @@ function Hero() {
   return (/*#__PURE__*/
     React.createElement("section", { id: "manifesto", ref: ref, style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
     React.createElement("div", { className: "hero-photo", "aria-hidden": "true" }, /*#__PURE__*/
-    React.createElement("img", { src: "images/hero-gangnam-1000.jpg?v=1", srcSet: "images/hero-gangnam-1000.jpg?v=1 1000w, images/hero-gangnam.jpg?v=1 1978w", sizes: "100vw", alt: "", fetchpriority: "high", decoding: "async" })
+    React.createElement(Pic, { name: "hero-gangnam", fallback: "images/hero-gangnam-1000.jpg?v=1", sizes: "100vw", fetchpriority: "high" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-photo__scrim", "aria-hidden": "true" }), /*#__PURE__*/
 
@@ -565,12 +585,10 @@ function FieldworkStrip() {
     React.createElement("div", { className: "fw__grid" },
     FIELDWORK_SHOTS.map((s) => /*#__PURE__*/
     React.createElement("a", { key: s.img, className: "fw__shot", href: "https://appraiser-fieldwork.vercel.app/", target: "_blank", rel: "noopener noreferrer" }, /*#__PURE__*/
-    React.createElement("img", {
-      src: `images/${s.img}-700.jpg`,
-      srcSet: `images/${s.img}-700.jpg 700w, images/${s.img}.jpg 1280w`,
-      sizes: "(max-width: 720px) 88vw, 24vw",
+    React.createElement(Pic, { name: s.img, fallback: `images/${s.img}-700.jpg`,
+      sizes: "(max-width: 560px) 88vw, (max-width: 980px) 44vw, 24vw",
       alt: `감정평가사 필드워크 인게임 화면 — ${s.label}: ${s.cap}`,
-      width: "700", height: "359", loading: "lazy", decoding: "async" }), /*#__PURE__*/
+      width: "700", height: "359", loading: "lazy" }), /*#__PURE__*/
     React.createElement("span", { className: "fw__label font-ko" }, s.label), /*#__PURE__*/
     React.createElement("span", { className: "fw__cap font-ko" }, s.cap)
     )
@@ -651,7 +669,7 @@ function Trajectory() {
 
     React.createElement("figure", { className: "tl-feature reveal" }, /*#__PURE__*/
     React.createElement("a", { className: "tl-feature__main", href: "gallery.html#youth-day" }, /*#__PURE__*/
-    React.createElement("img", { src: "images/youth-day-yonhap.jpg", srcSet: "images/youth-day-yonhap-600.jpg 600w, images/youth-day-yonhap.jpg 860w",
+    React.createElement(Pic, { name: "youth-day-yonhap", fallback: "images/youth-day-yonhap.jpg",
       sizes: "(max-width: 900px) 92vw, 52vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 (\uC5F0\uD569\uB274\uC2A4 \uBCF4\uB3C4\uC0AC\uC9C4)", loading: "lazy", width: "860", height: "592" })
     ), /*#__PURE__*/
     React.createElement("figcaption", { className: "tl-feature__body" }, /*#__PURE__*/
@@ -662,8 +680,8 @@ function Trajectory() {
 
     ), /*#__PURE__*/
     React.createElement("div", { className: "tl-feature__thumbs" }, /*#__PURE__*/
-    React.createElement("a", { href: "gallery.html#g-youth-day-selfie" }, /*#__PURE__*/React.createElement("img", { src: "images/youth-day-selfie-600.jpg", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 \uC140\uD504 \uCD2C\uC601", loading: "lazy", width: "600", height: "450" })), /*#__PURE__*/
-    React.createElement("a", { href: "gallery.html#g-youth-day-mbc-02" }, /*#__PURE__*/React.createElement("img", { src: "images/youth-day-mbc-02-600.jpg", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758 \uB0A0 \uC624\uD508\uB9C8\uC774\uD06C \uC0DD\uC911\uACC4 \uD654\uBA74", loading: "lazy", width: "600", height: "338" }))
+    React.createElement("a", { href: "gallery.html#g-youth-day-selfie" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-selfie", fallback: "images/youth-day-selfie-600.jpg", sizes: "(max-width: 900px) 45vw, 25vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 \uC140\uD504 \uCD2C\uC601", loading: "lazy", width: "600", height: "450" })), /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html#g-youth-day-mbc-02" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-mbc-02", fallback: "images/youth-day-mbc-02-600.jpg", sizes: "(max-width: 900px) 45vw, 25vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758 \uB0A0 \uC624\uD508\uB9C8\uC774\uD06C \uC0DD\uC911\uACC4 \uD654\uBA74", loading: "lazy", width: "600", height: "338" }))
     ), /*#__PURE__*/
     React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uC0AC\uC9C4 \u24D2\uC5F0\uD569\uB274\uC2A4 \xB7 \uBC29\uC1A1 \uD654\uBA74 \u24D2\uC804\uC8FCMBC"), /*#__PURE__*/
     React.createElement("a", { href: "gallery.html#youth-day", className: "btn btn--ghost" }, "\uD604\uC7A5 \uC0AC\uC9C4 \uC804\uCCB4 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
@@ -944,40 +962,51 @@ function Lectures() {
  * 오른쪽 사진이 프로필 → 발표 → 인터뷰 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
 const STORY_LINES = ["판단의 근거를 만들고,", "실행까지 책임지는", "자리에서 일합니다."];
 const STORY_SHOTS = [
-{ src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
+{ name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
   alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
-{ src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
+{ name: "ssafy-presentation", src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
   alt: "김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
-{ src: "images/press-yonhap-700.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w",
+{ name: "press-yonhap", src: "images/press-yonhap-700.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w",
   alt: "김유빈 연합뉴스TV 인터뷰 — 강남1인가구센터 취재", chip: "On Air", cap: "연합뉴스TV 인터뷰" }];
 
 
 function About() {
   const ref = React.useRef(null);
-  const [p, setP] = React.useState(0);
+  const barRef = React.useRef(null);
+  /* 연속값(진행도)은 DOM 에 직접 쓰고, React 는 사진·문장이 실제로 바뀌는 순간에만 다시 그린다.
+     예전엔 스크롤 매 프레임 setState → 섹션 전체 재렌더 → 저사양 폰에서 70ms 대 끊김. */
+  const [stage, setStage] = React.useState({ shot: 0, lines: 0, body: false });
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
     let raf = 0;
     const on = () => {
-      cancelAnimationFrame(raf);
+      if (raf) return;
       raf = requestAnimationFrame(() => {
+        raf = 0;
         const r = el.getBoundingClientRect();
         const span = r.height - window.innerHeight;
-        setP(span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1);
+        const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+        el.style.setProperty("--p", p.toFixed(3));
+        if (barRef.current) barRef.current.style.transform = "scaleX(" + p.toFixed(3) + ")";
+        const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
+        let lines = 0;
+        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.06 + i * 0.16) lines = i + 1;
+        const body = p >= 0.5;
+        setStage((s) => s.shot === shot && s.lines === lines && s.body === body ? s : { shot, lines, body });
       });
     };
     on();
     window.addEventListener("scroll", on, { passive: true });
-    window.addEventListener("resize", on);
+    window.addEventListener("resize", on, { passive: true });
     return () => {window.removeEventListener("scroll", on);window.removeEventListener("resize", on);cancelAnimationFrame(raf);};
   }, []);
-  const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
-  const lineOn = (i) => p >= 0.06 + i * 0.16;
-  const bodyOn = p >= 0.5;
+  const { shot } = stage;
+  const lineOn = (i) => i < stage.lines;
+  const bodyOn = stage.body;
 
   return (/*#__PURE__*/
-    React.createElement("section", { id: "about", ref: ref, className: "story", style: { "--p": p.toFixed(3) } }, /*#__PURE__*/
+    React.createElement("section", { id: "about", ref: ref, className: "story" }, /*#__PURE__*/
     React.createElement("div", { className: "story__sticky" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap story__grid" }, /*#__PURE__*/
     React.createElement("div", { className: "story__copy" }, /*#__PURE__*/
@@ -1002,8 +1031,8 @@ function About() {
     React.createElement("div", { className: "story__media" }, /*#__PURE__*/
     React.createElement("div", { className: "story__frame" },
     STORY_SHOTS.map((m, i) => /*#__PURE__*/
-    React.createElement("img", { key: m.src, className: "story__img" + (i === shot ? " on" : ""), src: m.src, srcSet: m.srcSet,
-      sizes: "(max-width: 900px) 80vw, 34vw", alt: m.alt, loading: "lazy" })
+    React.createElement(Pic, { key: m.name, name: m.name, fallback: m.src, className: "story__img" + (i === shot ? " on" : ""),
+      sizes: "(max-width: 900px) 88vw, 34vw", alt: m.alt, loading: "lazy" })
     )
     ), /*#__PURE__*/
     React.createElement("div", { className: "story__caps" },
@@ -1014,7 +1043,7 @@ function About() {
     )
     )
     ), /*#__PURE__*/
-    React.createElement("div", { className: "story__prog", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", { style: { transform: `scaleX(${p.toFixed(3)})` } }))
+    React.createElement("div", { className: "story__prog", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", { ref: barRef }))
     )
     )
     )
@@ -1027,7 +1056,7 @@ function Contact() {
   const ref = useReveal();
   return (/*#__PURE__*/
     React.createElement("section", { id: "contact", ref: ref, style: { position: "relative", background: "var(--ink)", color: "var(--ecru)", padding: "clamp(40px,7vw,84px) 0 0", overflow: "hidden" } }, /*#__PURE__*/
-    React.createElement("div", { className: "contact-photo", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("img", { src: "images/footer-seoul-1000.jpg?v=2", srcSet: "images/footer-seoul-1000.jpg?v=2 1000w, images/footer-seoul.jpg?v=2 1920w", sizes: "100vw", alt: "", loading: "lazy" })), /*#__PURE__*/
+    React.createElement("div", { className: "contact-photo", "aria-hidden": "true" }, /*#__PURE__*/React.createElement(Pic, { name: "footer-seoul", fallback: "images/footer-seoul-1000.jpg?v=2", sizes: "100vw", loading: "lazy" })), /*#__PURE__*/
     React.createElement("div", { className: "contact-photo__scrim", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("div", { className: "seal", "aria-hidden": "true" }, /*#__PURE__*/
     React.createElement("svg", { viewBox: "0 0 120 120" }, /*#__PURE__*/

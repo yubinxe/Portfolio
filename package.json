@@ -9,7 +9,8 @@
     "seed": "node build-seed.mjs && node seed-airtable.js",
     "seed:dry": "node build-seed.mjs && node seed-airtable.js --dry-run",
     "serve": "npx --yes serve -l 8080 .",
-    "build": "node scripts/build-jsx.mjs"
+    "build": "node scripts/build-jsx.mjs",
+    "build:images": "node scripts/build-images.mjs"
   },
   "engines": {
     "node": ">=18"
@@ -18,6 +19,7 @@
     "@babel/core": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sharp": "^0.35.5"
   }
 }

@@ -18,7 +18,8 @@
 | `admin.html` | 리드 인박스(상태 변경 · CSV) + 지식카드 검수. PAT 는 브라우저 localStorage 에만 |
 | `build-seed.mjs` → `seed/seed.json` → `seed-airtable.js` | Airtable 시드(결정론적 빌드 → upsert) |
 | `scripts/build-jsx.mjs` → `dist/` | `npm run build`. `*.jsx` 를 컴파일해 `dist/*.js` 생성. **JSX 를 고쳤으면 반드시 실행**(빌드를 잊으면 `npm test` 가 잡아냄) |
-| `test/` | `npm test` (29건). `lead.test.mjs` 리드 계약·카드 무결성, `anchors.test.mjs` 딥링크 앵커, `seo.test.mjs` 구조화 데이터·canonical·폰트·CSS 캐시 버전·alt·Vercel 계약, `kb-rank.test.mjs` 챗봇 답변 품질(질문 40개), `links.test.mjs` 내부 링크·`@id` 참조, `dist.test.mjs` 빌드 최신 여부, `chat.test.mjs` 서버리스 챗 프록시(CORS·키 미설정 503·스트림 파싱·역할 주입 차단), `seed.test.mjs` 시드 최신 여부 |
+| `scripts/build-images.mjs` → `images/opt/` | `npm run build:images`. 원본 사진을 폭별 AVIF·WebP 로 변환. `sections.jsx` 의 `OPT` 표와 파일이 어긋나면 `images.test.mjs` 가 실패 |
+| `test/` | `npm test` (44건). `lead.test.mjs` 리드 계약·카드 무결성, `anchors.test.mjs` 딥링크 앵커, `seo.test.mjs` 구조화 데이터·canonical·폰트·CSS 캐시 버전·alt·Vercel 계약, `kb-rank.test.mjs` 챗봇 답변 품질(질문 40개), `links.test.mjs` 내부 링크·`@id` 참조, `dist.test.mjs` 빌드 최신 여부, `chat.test.mjs` 서버리스 챗 프록시(CORS·키 미설정 503·스트림 파싱·역할 주입 차단), `seed.test.mjs` 시드 최신 여부 |
 
 ## 지식카드 스키마 (`kb.js`)
 
@@ -91,6 +92,7 @@ AIRTABLE_PAT=pat… AIRTABLE_BASE_ID=app… npm run seed   # KnowledgeCards · P
 ```bash
 npm install       # 최초 1회 (빌드·테스트용 devDependencies)
 npm run build     # *.jsx → dist/*.js — JSX 를 고쳤다면 필수
+npm run build:images  # 사진 추가·교체 시 — AVIF/WebP 폭별 생성 (sharp)
 npm test          # node --test test/ (dist 최신 여부까지 검증)
 node -e "require('./kb.js')" && node --check chatbot.js
 ```
