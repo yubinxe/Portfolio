@@ -32,6 +32,8 @@ const CASES = [
   ["방송 출연한 적 있나요?", ["media"]],
   ["부동산 관련 경험", ["dom-domain", "tl-krema", "ed-05"]],
   ["청와대 청년의날 갔다면서요", ["tl-youth-day"]],
+  ["국민통합위원회 대토론회에서 뭘 발표했어요?", ["tl-national-debate"]],
+  ["미래배당펀드가 뭐예요", ["tl-national-debate"]],
   ["정비사업 용역비 수집한 거", ["ed-08", "dom-strategy"]],
   ["급여명세서 자동화", ["ed-07"]],
   ["집캐치가 뭔가요", ["ed-09"]],

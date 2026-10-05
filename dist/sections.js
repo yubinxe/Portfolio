@@ -7,8 +7,9 @@ function _extends() {return _extends = Object.assign ? Object.assign.bind() : fu
  * 폭 목록은 scripts/build-images.mjs 산출물과 일치해야 한다(test/images.test.mjs 가 검증). */
 const OPT = {
   "hero-gangnam": [480, 800, 1200, 1600], "footer-seoul": [480, 800, 1200, 1600],
-  "profile-yubin": [480, 800, 896], "ssafy-presentation": [480, 800, 1016], "press-yonhap": [480, 800, 1200, 1600],
+  "profile-yubin": [480, 800, 896], "ssafy-presentation": [480, 800, 1016],
   "youth-day-yonhap": [480, 800, 860], "youth-day-selfie": [480, 800, 1200], "youth-day-mbc-02": [480, 800, 1200],
+  "youth-day-venue": [480, 800, 1200], "youth-day-dialogue": [480, 800, 900],
   "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280]
 };
 function Pic({ name, fallback, sizes, alt = "", className, ...img }) {
@@ -606,6 +607,8 @@ const TRAJECTORY = [
   desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
 { id: "tl-youth-day", group: "public", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
   desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류." },
+{ id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 정책 제안 발표",
+  desc: "〈2026 세대·젠더 분야 현장형 국민대화 국민 대토론회〉(2026. 9. 29 · aT센터) 자산 분야 트랙에서 청년 미래배당펀드팀으로 ‘청년 초과세수 미래배당펀드’를 제안·발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계." },
 { id: "tl-youth-panel", group: "public", year: "2026", color: "var(--pink)", title: "국무조정실 온라인 청년참여단 활동",
   desc: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달." },
 { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
@@ -680,10 +683,11 @@ function Trajectory() {
 
     ), /*#__PURE__*/
     React.createElement("div", { className: "tl-feature__thumbs" }, /*#__PURE__*/
-    React.createElement("a", { href: "gallery.html#g-youth-day-selfie" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-selfie", fallback: "images/youth-day-selfie-600.jpg", sizes: "(max-width: 900px) 45vw, 25vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 \uC140\uD504 \uCD2C\uC601", loading: "lazy", width: "600", height: "450" })), /*#__PURE__*/
-    React.createElement("a", { href: "gallery.html#g-youth-day-mbc-02" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-mbc-02", fallback: "images/youth-day-mbc-02-600.jpg", sizes: "(max-width: 900px) 45vw, 25vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758 \uB0A0 \uC624\uD508\uB9C8\uC774\uD06C \uC0DD\uC911\uACC4 \uD654\uBA74", loading: "lazy", width: "600", height: "338" }))
+    React.createElement("a", { href: "gallery.html#g-youth-day-dialogue" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-dialogue", fallback: "images/youth-day-dialogue-600.jpg", sizes: "(max-width: 900px) 30vw, 16vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC, \uCCAD\uB144\uB4E4 \uC0AC\uC774\uC5D0\uC11C \uB9C8\uC774\uD06C\uB97C \uC7A1\uACE0 \uC774\uC57C\uAE30\uD558\uB294 \uB300\uD1B5\uB839", loading: "lazy", width: "600", height: "800", style: { objectPosition: "50% 42%" } })), /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html#g-youth-day-venue" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-venue", fallback: "images/youth-day-venue-600.jpg", sizes: "(max-width: 900px) 30vw, 16vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC, \uCCAD\uC640\uB300 \uD589\uC0AC\uC7A5 \uC804\uACBD", loading: "lazy", width: "600", height: "450" })), /*#__PURE__*/
+    React.createElement("a", { href: "gallery.html#g-youth-day-mbc-02" }, /*#__PURE__*/React.createElement(Pic, { name: "youth-day-mbc-02", fallback: "images/youth-day-mbc-02-600.jpg", sizes: "(max-width: 900px) 30vw, 16vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758 \uB0A0 \uC624\uD508\uB9C8\uC774\uD06C \uC0DD\uC911\uACC4 \uD654\uBA74", loading: "lazy", width: "600", height: "338" }))
     ), /*#__PURE__*/
-    React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uC0AC\uC9C4 \u24D2\uC5F0\uD569\uB274\uC2A4 \xB7 \uBC29\uC1A1 \uD654\uBA74 \u24D2\uC804\uC8FCMBC"), /*#__PURE__*/
+    React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uC0AC\uC9C4 \u24D2\uC5F0\uD569\uB274\uC2A4 \xB7 \uBC29\uC1A1 \uD654\uBA74 \u24D2\uC804\uC8FCMBC \xB7 \uD604\uC7A5 \uC0AC\uC9C4 \uC9C1\uC811 \uCD2C\uC601"), /*#__PURE__*/
     React.createElement("a", { href: "gallery.html#youth-day", className: "btn btn--ghost" }, "\uD604\uC7A5 \uC0AC\uC9C4 \uC804\uCCB4 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
     )
     ), /*#__PURE__*/
@@ -963,15 +967,15 @@ function Lectures() {
 
 /* ============================================================ ABOUT — 스크롤 스토리
  * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
- * 오른쪽 사진이 프로필 → 발표 → 인터뷰 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
+ * 오른쪽 사진이 프로필 → 발표 → 청년의날 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
 const STORY_LINES = ["판단의 근거를 만들고,", "실행까지 책임지는", "자리에서 일합니다."];
 const STORY_SHOTS = [
 { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
   alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
 { name: "ssafy-presentation", src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
   alt: "김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
-{ name: "press-yonhap", src: "images/press-yonhap-700.jpg", srcSet: "images/press-yonhap-500.jpg 500w, images/press-yonhap-700.jpg 700w, images/press-yonhap.jpg 1600w",
-  alt: "김유빈 연합뉴스TV 인터뷰 — 강남1인가구센터 취재", chip: "On Air", cap: "연합뉴스TV 인터뷰" }];
+{ name: "youth-day-selfie", src: "images/youth-day-selfie-600.jpg", pos: "30% 50%",
+  alt: "김유빈 — 2026 청년의날 기념행사에서 대통령과 함께한 셀프 촬영", chip: "Youth Day 2026", cap: "청와대 청년의날 — 대통령과 함께" }];
 
 
 function About() {
@@ -1036,7 +1040,7 @@ function About() {
     React.createElement("div", { className: "story__frame" },
     STORY_SHOTS.map((m, i) => /*#__PURE__*/
     React.createElement(Pic, { key: m.name, name: m.name, fallback: m.src, className: "story__img" + (i === shot ? " on" : ""),
-      sizes: "(max-width: 900px) 88vw, 34vw", alt: m.alt, loading: "lazy" })
+      sizes: "(max-width: 900px) 88vw, 34vw", alt: m.alt, loading: "lazy", style: m.pos ? { objectPosition: m.pos } : undefined })
     )
     ), /*#__PURE__*/
     React.createElement("div", { className: "story__caps" },

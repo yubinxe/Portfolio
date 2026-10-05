@@ -1,5 +1,5 @@
 {
-  "version": "2026.10.01",
+  "version": "2026.10.05",
   "tables": {
     "KnowledgeCards": [
       {
@@ -14,7 +14,7 @@
         "SecondaryHref": "index.html#composite",
         "SecondaryInferred": true,
         "Anchor": "arsenal",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -29,7 +29,7 @@
         "SecondaryHref": "index.html#arsenal",
         "SecondaryInferred": false,
         "Anchor": "composite",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -44,7 +44,7 @@
         "SecondaryHref": "mailto:yubin120866@gmail.com",
         "SecondaryInferred": false,
         "Anchor": "contact",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -59,7 +59,7 @@
         "SecondaryHref": "index.html#credentials",
         "SecondaryInferred": false,
         "Anchor": "credentials",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -74,7 +74,7 @@
         "SecondaryHref": "career.html#practice-ai",
         "SecondaryInferred": false,
         "Anchor": "dom-02",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -89,7 +89,7 @@
         "SecondaryHref": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app",
         "SecondaryInferred": false,
         "Anchor": "dom-03",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -104,7 +104,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": false,
         "Anchor": "dom-06",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -119,7 +119,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "dom-04",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -134,7 +134,7 @@
         "SecondaryHref": "career.html#practice-strategy",
         "SecondaryInferred": false,
         "Anchor": "dom-01",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -149,7 +149,7 @@
         "SecondaryHref": "career.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "lectures",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -164,7 +164,7 @@
         "SecondaryHref": "index.html#ed-01",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -179,7 +179,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -194,7 +194,7 @@
         "SecondaryHref": "index.html#ed-03",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -209,7 +209,7 @@
         "SecondaryHref": "index.html#ed-04",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -224,7 +224,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -239,7 +239,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -254,7 +254,7 @@
         "SecondaryHref": "index.html#artifacts",
         "SecondaryInferred": true,
         "Anchor": "ed-07",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -269,7 +269,7 @@
         "SecondaryHref": "index.html#artifacts",
         "SecondaryInferred": true,
         "Anchor": "ed-08",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -284,7 +284,7 @@
         "SecondaryHref": "index.html#ed-09",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -299,7 +299,7 @@
         "SecondaryHref": "index.html#ed-10",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -314,7 +314,7 @@
         "SecondaryHref": "index.html#ed-11",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -329,7 +329,7 @@
         "SecondaryHref": "gallery.html#credentials",
         "SecondaryInferred": false,
         "Anchor": "archive",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -344,7 +344,7 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "lec-01",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -359,7 +359,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "lec-02",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -374,7 +374,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "lec-03",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -389,7 +389,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "lec-04",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -404,7 +404,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "lec-05",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -419,7 +419,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "lec-06",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -434,7 +434,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "lec-07",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -449,7 +449,7 @@
         "SecondaryHref": "index.html#ed-01",
         "SecondaryInferred": false,
         "Anchor": "lec-08",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -464,7 +464,7 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "basis",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -479,7 +479,7 @@
         "SecondaryHref": "index.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -494,7 +494,7 @@
         "SecondaryHref": "index.html#about",
         "SecondaryInferred": true,
         "Anchor": "artifacts",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -509,7 +509,7 @@
         "SecondaryHref": "career.html#media",
         "SecondaryInferred": false,
         "Anchor": "g-yonhap",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -524,7 +524,7 @@
         "SecondaryHref": "index.html#about",
         "SecondaryInferred": false,
         "Anchor": "practice",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -539,7 +539,7 @@
         "SecondaryHref": "career.html#experience",
         "SecondaryInferred": false,
         "Anchor": "manifesto",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -554,7 +554,7 @@
         "SecondaryHref": "https://zipcatch.vercel.app",
         "SecondaryInferred": false,
         "Anchor": "artifacts",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -569,7 +569,7 @@
         "SecondaryHref": "index.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "composite",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -584,7 +584,7 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "tl-snu-aied",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -599,7 +599,7 @@
         "SecondaryHref": "index.html#tl-army-signal",
         "SecondaryInferred": false,
         "Anchor": "cred-award-2022",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -614,7 +614,7 @@
         "SecondaryHref": "index.html#tl-army-startup",
         "SecondaryInferred": false,
         "Anchor": "cred-award-2023",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -629,7 +629,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "tl-fintech",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -644,7 +644,7 @@
         "SecondaryHref": "career.html#cv-konkuk",
         "SecondaryInferred": false,
         "Anchor": "tl-konkuk",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -659,7 +659,22 @@
         "SecondaryHref": "career.html#cv-krema",
         "SecondaryInferred": false,
         "Anchor": "tl-krema",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
+        "Verified": true
+      },
+      {
+        "Id": "tl-national-debate",
+        "Category": "궤적",
+        "Title": "2026 — 국민통합위원회 국민 대토론회 정책 제안 발표",
+        "Body": "국민통합위원회가 주최·주관한 〈2026 세대·젠더 분야 현장형 국민대화 국민 대토론회〉(2026. 9. 29 · aT센터 그랜드홀)에 참여했습니다. 자산 분야 트랙과제 3 ‘청년 자산형성과 세대 간 자산격차’에서 청년 미래배당펀드팀으로 ‘청년 초과세수 미래배당펀드’를 제안·발표했습니다 — 한 번 쓰고 끝나는 재정여력을 청년 세대가 함께 불리는 자산으로 바꾸자는 제안입니다. 현장에서 인터뷰 촬영에 참여했고, 조영학 재정경제부 청년보좌관과도 교류했습니다.",
+        "Tags": "at센터, 국민대토론회, 국민대화, 국민통합위원회, 대토론회, 미래배당펀드, 발표, 재정경제부, 정책 제안, 조영학, 초과세수, 토론회, 통합위",
+        "PrimaryLabel": "궤적에서 보기",
+        "PrimaryHref": "index.html#tl-national-debate",
+        "SecondaryLabel": "현장 사진 보기",
+        "SecondaryHref": "gallery.html#national-debate",
+        "SecondaryInferred": false,
+        "Anchor": "tl-national-debate",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -674,7 +689,7 @@
         "SecondaryHref": "career.html#cv-seoul-press",
         "SecondaryInferred": false,
         "Anchor": "tl-seoul-press",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -689,7 +704,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "tl-seocho",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -704,7 +719,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "cv-sharing",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -719,7 +734,7 @@
         "SecondaryHref": "index.html#tl-ssafy",
         "SecondaryInferred": false,
         "Anchor": "g-ssafy-presentation",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -734,14 +749,14 @@
         "SecondaryHref": "career.html#cv-vattenfall",
         "SecondaryInferred": false,
         "Anchor": "tl-vattenfall",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
         "Id": "tl-youth-day",
         "Category": "궤적",
         "Title": "2026 — 청와대 대통령 주관 청년의날 행사 참석",
-        "Body": "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류한 기록입니다.",
+        "Body": "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류한 기록입니다. 현장에서 대통령과 셀프 촬영을 남겼고, 객석에서는 한성숙 국무총리와 함께했습니다.",
         "Tags": "대통령, 참석, 청년의날, 청와대, 초청, 행사",
         "PrimaryLabel": "궤적에서 보기",
         "PrimaryHref": "index.html#tl-youth-day",
@@ -749,7 +764,7 @@
         "SecondaryHref": "gallery.html#youth-day",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-day",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
@@ -764,14 +779,14 @@
         "SecondaryHref": "career.html#cv-youth-panel",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-panel",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       },
       {
         "Id": "trajectory",
         "Category": "궤적",
         "Title": "걸어온 궤적 — 최신순",
-        "Body": "- 2026 서초청년네트워크 9기 운영위원회 부위원장 (PRESENT)\n- 2026 청와대 대통령 주관 청년의날 행사 참석\n- 2026 국무조정실 온라인 청년참여단 활동\n- 2026 건국대학교 스마트건설기술교육 프로그램 이수\n- 2026 서울시민기자단 취재기자 · 서울청년파트너스 위원\n- 2026 서울특별시 핀테크 아카데미 14기 수료\n- 2026 서울광역청년센터 나눔서포터즈 · CJ제일제당 나눔냉장고 운영\n- 2026 한국부동산마케팅협회(KREMA) AI 마케팅 기획자 양성 과정 4기 수료\n- 2026 서울대학교 AI 교육 전문가 과정(AIED) 4기 수료\n- 2025 삼성청년SW아카데미(SSAFY) 13기 이수\n- 2024 SSAFY 홍보 앰배서더\n- 2023 강원열린군대 스타트업 프로그램 2군단장상(2위)\n- 2023 육군정보통신학교장 상장 · 육군훈련소 최우수 분대\n- 2022 대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
+        "Body": "- 2026 서초청년네트워크 9기 운영위원회 부위원장 (PRESENT)\n- 2026 청와대 대통령 주관 청년의날 행사 참석\n- 2026 국민통합위원회 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 발표\n- 2026 국무조정실 온라인 청년참여단 활동\n- 2026 건국대학교 스마트건설기술교육 프로그램 이수\n- 2026 서울시민기자단 취재기자 · 서울청년파트너스 위원\n- 2026 서울특별시 핀테크 아카데미 14기 수료\n- 2026 서울광역청년센터 나눔서포터즈 · CJ제일제당 나눔냉장고 운영\n- 2026 한국부동산마케팅협회(KREMA) AI 마케팅 기획자 양성 과정 4기 수료\n- 2026 서울대학교 AI 교육 전문가 과정(AIED) 4기 수료\n- 2025 삼성청년SW아카데미(SSAFY) 13기 이수\n- 2024 SSAFY 홍보 앰배서더\n- 2023 강원열린군대 스타트업 프로그램 2군단장상(2위)\n- 2023 육군정보통신학교장 상장 · 육군훈련소 최우수 분대\n- 2022 대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
         "Tags": "career, history, 경력, 교육, 궤적, 수상, 연혁, 이력, 최신순, 타임라인",
         "PrimaryLabel": "궤적 보기",
         "PrimaryHref": "index.html#trajectory",
@@ -779,7 +794,7 @@
         "SecondaryHref": "career.html#experience",
         "SecondaryInferred": false,
         "Anchor": "trajectory",
-        "Source": "kb.js@2026.10.01",
+        "Source": "kb.js@2026.10.05",
         "Verified": true
       }
     ],
@@ -1032,5 +1047,5 @@
       }
     ]
   },
-  "hash": "0bf78bbad8afd9a8"
+  "hash": "8a623e05f3c5a5a4"
 }
