@@ -144,8 +144,8 @@
 
     /* ---- 프로젝트 ---- */
     { id: "projects", cat: "프로젝트", tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든", "결과물", "산출물"],
-      title: "대표 프로젝트 — 11건",
-      body: "직접 기획·구현한 시스템과 콘텐츠 11건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포",
+      title: "대표 프로젝트 — 12건",
+      body: "직접 기획·구현한 시스템과 콘텐츠 12건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 12 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포",
       primary: { label: "작업 전체 보기", href: "index.html#artifacts" },
       secondary: { label: "집캐치 열기", href: "https://zipcatch.vercel.app" } },
     { id: "ed-09", cat: "프로젝트", tags: ["집캐치", "zipcatch", "공공임대", "임대", "lh", "맞춤 추천", "추천 서비스", "공고 알림"],
@@ -158,6 +158,11 @@
       body: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임입니다. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집합니다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계했습니다.\n법조문을 글이 아니라 장소로 기억하게 만드는 것이 설계 목표입니다.",
       primary: { label: "필드워크 체험", href: "https://appraiser-fieldwork.vercel.app/" },
       secondary: { label: "작업물 카드", href: "index.html#ed-10" } },
+    { id: "ed-12", cat: "프로젝트", tags: ["국정 한눈에", "국정", "상황판", "대시보드", "대통령 동정", "대통령실", "정부 정책", "국회", "국무회의", "증시", "환율", "뉴스", "rss", "서버리스"],
+      title: "국정 한눈에 — 국민용 국정 상황판",
+      body: "대통령 동정·대통령실·정부 정책·국무회의와 국회, 증시·환율·부동산·산업 등 국정과 경제를 한 화면에서 보는 국민용 상황판입니다. 공개 뉴스 RSS와 시세를 Vercel 서버리스 함수가 모아 섹션별로 배정하고, 중복 기사는 먼저 배정된 섹션에만 남깁니다. 피드에 도메인으로 찍혀 오는 출처는 독자가 아는 매체명으로 바꾸고, 포털은 매체가 아니므로 출처·언론사 수에서 뺍니다. 기사 사진은 원문 페이지의 대표 사진(og:image)을 씁니다. 수집 결과는 CDN에 20분 캐시하고 만료 후에도 이전 응답을 즉시 내주며 뒤에서 갱신하며, 수집이 실패하면 저장된 스냅샷으로 대체합니다. 프런트엔드는 외부 라이브러리 없는 ES 모듈이고 라이트·다크 모드를 지원합니다.",
+      primary: { label: "상황판 보기", href: "https://gukjeong-hannune.vercel.app/" },
+      secondary: { label: "작업물 카드", href: "index.html#ed-12" } },
     { id: "ed-11", cat: "프로젝트", tags: ["salvation", "성경", "말씀", "인문학", "철학", "서재", "묵상", "기도", "교회", "신앙", "pwa", "등불이", "챗봇", "위기"],
       title: "Salvation — 성경 말씀 × 인문학 서재",
       body: "성경의 말씀과 인문학·철학의 지혜로 삶의 근본을 비추는 서재형 웹앱(PWA)입니다. \"지금, 어떤 마음이신가요?\"에서 시작해 마음 상태·주제별로 말씀을 이어 주고, 오늘의 말씀·말씀 서재·인문학의 서재를 둘러볼 수 있습니다. '나의 성소'에는 묵상 노트·기도 제목·말씀 암송·통독 진도·연속 묵상이 쌓이며, 로그인하면 Supabase로 기기 간 동기화됩니다. 마스코트 등불이(시편 119:105)가 안내하는 상담 챗봇은 위기 신호를 감지하면 대화를 즉시 멈추고 24시간 상담 기관(109 · 1577-0199 등)을 먼저 안내하며, 입력 문장은 저장하지 않습니다. 개인 창작 프로젝트이며 특정 교회·기관의 공식 서비스가 아닙니다.",
