@@ -318,6 +318,21 @@
         "Verified": true
       },
       {
+        "Id": "ed-12",
+        "Category": "프로젝트",
+        "Title": "국정 한눈에 — 국민용 국정 상황판",
+        "Body": "대통령 동정·대통령실·정부 정책·국무회의와 국회, 증시·환율·부동산·산업 등 국정과 경제를 한 화면에서 보는 국민용 상황판입니다. 공개 뉴스 RSS와 시세를 Vercel 서버리스 함수가 모아 섹션별로 배정하고, 중복 기사는 먼저 배정된 섹션에만 남깁니다. 피드에 도메인으로 찍혀 오는 출처는 독자가 아는 매체명으로 바꾸고, 포털은 매체가 아니므로 출처·언론사 수에서 뺍니다. 기사 사진은 원문 페이지의 대표 사진(og:image)을 씁니다. 수집 결과는 CDN에 20분 캐시하고 만료 후에도 이전 응답을 즉시 내주며 뒤에서 갱신하며, 수집이 실패하면 저장된 스냅샷으로 대체합니다. 프런트엔드는 외부 라이브러리 없는 ES 모듈이고 라이트·다크 모드를 지원합니다.",
+        "Tags": "rss, 국무회의, 국정, 국정 한눈에, 국회, 뉴스, 대시보드, 대통령 동정, 대통령실, 상황판, 서버리스, 정부 정책, 증시, 환율",
+        "PrimaryLabel": "상황판 보기",
+        "PrimaryHref": "https://gukjeong-hannune.vercel.app/",
+        "SecondaryLabel": "작업물 카드",
+        "SecondaryHref": "index.html#ed-12",
+        "SecondaryInferred": false,
+        "Anchor": "",
+        "Source": "kb.js@2026.10.05",
+        "Verified": true
+      },
+      {
         "Id": "gallery",
         "Category": "미디어",
         "Title": "활동 갤러리",
@@ -545,8 +560,8 @@
       {
         "Id": "projects",
         "Category": "프로젝트",
-        "Title": "대표 프로젝트 — 11건",
-        "Body": "직접 기획·구현한 시스템과 콘텐츠 11건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포",
+        "Title": "대표 프로젝트 — 12건",
+        "Body": "직접 기획·구현한 시스템과 콘텐츠 12건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 12 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포",
         "Tags": "artifact, 결과물, 대표, 만든, 산출물, 작업, 포트폴리오, 프로젝트",
         "PrimaryLabel": "작업 전체 보기",
         "PrimaryHref": "index.html#artifacts",
@@ -908,6 +923,16 @@
         "Anchor": "ed-11",
         "Public": true,
         "Tags": "salvation, 성경, 말씀, 인문학, 철학, 서재, 묵상, 기도, 교회, 신앙, pwa, 등불이, 챗봇, 위기"
+      },
+      {
+        "Id": "ed-12",
+        "Edition": "12",
+        "Title": "국정 한눈에 — 국민용 국정 상황판",
+        "Summary": "대통령 동정·대통령실·정부 정책·국무회의와 국회, 증시·환율·부동산·산업 등 국정과 경제를 한 화면에서 보는 국민용 상황판입니다. 공개 뉴스 RSS와 시세를 Vercel 서버리스 함수가 모아 섹션별로 배정하고, 중복 기사는 먼저 배정된 섹션에만 남깁니다. 피드에 도메인으로 찍혀 오는 출처는 독자가 아는 매체명으로 바꾸고, 포털은 매체가 아니므로 출처·언론사 수에서 뺍니다. 기사 사진은 원문 페이지의 대표 사진(og:image)을 씁니다. 수집 결과는 CDN에 20분 캐시하고 만료 후에도 이전 응답을 즉시 내주며 뒤에서 갱신하며, 수집이 실패하면 저장된 스냅샷으로 대체합니다. 프런트엔드는 외부 라이브러리 없는 ES 모듈이고 라이트·다크 모드를 지원합니다.",
+        "Url": "https://gukjeong-hannune.vercel.app/",
+        "Anchor": "ed-12",
+        "Public": true,
+        "Tags": "국정 한눈에, 국정, 상황판, 대시보드, 대통령 동정, 대통령실, 정부 정책, 국회, 국무회의, 증시, 환율, 뉴스, rss, 서버리스"
       }
     ],
     "Services": [
@@ -1047,5 +1072,5 @@
       }
     ]
   },
-  "hash": "8a623e05f3c5a5a4"
+  "hash": "eb299d11b556fc33"
 }
