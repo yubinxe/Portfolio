@@ -2157,7 +2157,7 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
 .tl-feature__main:hover img, .tl-feature__thumbs a:hover img { transform: scale(1.04); }
 .tl-feature__body h3 { margin: 10px 0 12px; font-size: clamp(1.15rem, 1.9vw, 1.45rem); color: var(--navy); }
 .tl-feature__body > p.font-ko { margin: 0; font-size: 1rem; line-height: 1.85; color: var(--ink-soft); }
-.tl-feature__thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0 10px; }
+.tl-feature__thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0 10px; }
 .tl-feature__thumbs a { display: block; overflow: hidden; aspect-ratio: 4 / 3; }
 .tl-feature__thumbs img { height: 100%; }
 .tl-feature__credit, .g-credit { margin: 0 0 20px; font-size: .68rem; letter-spacing: .06em; color: var(--ink-soft); opacity: .8; }
@@ -2177,15 +2177,33 @@ p.font-ko { font-weight: 430; }
 .eyebrow { font-weight: 700; }
 /* 청년의날 — 테두리 패널 + 전용 배치로 다른 기록과 확실히 분리 */
 .g-sec--feature { padding: clamp(22px, 3vw, 40px); background: var(--paper); border: 1px solid var(--hair-strong); border-top: 2px solid var(--gold); }
-.yd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 20px); }
+/* 청년의날 — 4열로 한 단 작게. 대표 사진 2×2, 전경은 가로 2칸, 빈칸은 dense 로 메운다 */
+.yd-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-flow: dense; gap: clamp(10px, 1.3vw, 16px); }
 .yd-grid .g-card { margin: 0; display: flex; flex-direction: column; }
 .yd-grid .g-card a { display: block; overflow: hidden; aspect-ratio: 16 / 10; }
 .yd-grid .g-card img { width: 100%; height: 100%; object-fit: cover; }
 .yd-grid .g-card:first-child { grid-column: span 2; grid-row: span 2; }
 .yd-grid .g-card:first-child a { aspect-ratio: auto; flex: 1; }
-.yd-grid figcaption { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 2px 2px; font-size: .82rem; font-weight: 600; color: var(--ink); }
-@media (max-width: 760px) { .yd-grid { grid-template-columns: 1fr 1fr; } .yd-grid .g-card:first-child { grid-column: span 2; grid-row: auto; } .yd-grid .g-card:first-child a { aspect-ratio: 860 / 592; } }
-@media (max-width: 480px) { .yd-grid { grid-template-columns: 1fr; } .yd-grid .g-card:first-child { grid-column: auto; } }
+.yd-grid .g-card--wide { grid-column: span 2; }
+.yd-grid .g-card--wide a { aspect-ratio: 32 / 10; }
+.yd-grid #g-youth-day-dialogue img { object-position: 50% 42%; }
+.yd-grid figcaption { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 2px 2px; font-size: .8rem; font-weight: 600; color: var(--ink); }
+@media (max-width: 760px) { .yd-grid { grid-template-columns: 1fr 1fr; } .yd-grid .g-card:first-child { grid-column: span 2; grid-row: auto; } .yd-grid .g-card:first-child a { aspect-ratio: 860 / 592; } .yd-grid .g-card--wide a { aspect-ratio: 16 / 7; } }
+@media (max-width: 480px) { .yd-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .yd-grid figcaption { font-size: .74rem; } }
+
+/* 국민 대토론회 — 세로 2장 + 가로 1장을 같은 높이로 */
+.nd-grid { display: grid; grid-template-columns: 1fr 1fr 1.7fr; gap: clamp(10px, 1.3vw, 16px); }
+.nd-grid .g-card { margin: 0; display: flex; flex-direction: column; }
+.nd-grid .g-card a { display: block; overflow: hidden; height: clamp(260px, 28vw, 420px); }
+.nd-grid .g-card img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+.nd-grid #g-debate-interview img { object-position: 50% 62%; }
+.nd-grid figcaption { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 2px 2px; font-size: .8rem; font-weight: 600; color: var(--ink); }
+@media (max-width: 760px) {
+  .nd-grid { grid-template-columns: 1fr 1fr; }
+  .nd-grid .g-card a { height: auto; aspect-ratio: 3 / 4; }
+  .nd-grid #g-debate-cho { grid-column: span 2; }
+  .nd-grid #g-debate-cho a { aspect-ratio: 4 / 3; }
+}
 
 /* ===== 필드워크 체험 스트립 — 활자 구간 사이의 쉼표 ===== */
 /* 대표 사례(Case 01 · 감정평가) — 금색 레일과 배지로 나머지 사례보다 한 단 위에 */

@@ -37,7 +37,7 @@ test("<Pic> 이 쓰는 이름은 전부 OPT 에 등록돼 있다", () => {
   const used = [...src.matchAll(/<Pic name="([\w-]+)"/g)].map((m) => m[1]);
   const missing = used.filter((n) => !OPT[n]);
   assert.deepEqual(missing, []);
-  for (const n of ["fw-gwanghwamun", "fw-street", "fw-map", "fw-phone", "profile-yubin", "ssafy-presentation", "press-yonhap"]) {
+  for (const n of ["fw-gwanghwamun", "fw-street", "fw-map", "fw-phone", "profile-yubin", "ssafy-presentation", "youth-day-selfie"]) {
     assert.ok(OPT[n], n + " 가 OPT 에 없다 (필드워크 스트립·스크롤 스토리는 이름을 변수로 넘긴다)");
   }
 });

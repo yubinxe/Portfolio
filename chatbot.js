@@ -246,7 +246,7 @@
   var TONE = {
     "프로젝트": { e: "🗂️", lead: "관련 프로젝트를 정리해 드릴게요.", next: ["ed-09", "ed-06", "thesis", "trajectory", "composite"] },
     "역량": { e: "🧩", lead: "김유빈 님의 역량을 짚어 드릴게요.", next: ["projects", "ed-09", "thesis", "trajectory"] },
-    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["projects", "creds", "tl-youth-day", "composite"] },
+    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["projects", "creds", "tl-youth-day", "tl-national-debate"] },
     "자격": { e: "🎖️", lead: "자격과 수상 기록입니다.", next: ["trajectory", "tl-youth-day", "projects"] },
     "강의": { e: "🎓", lead: "강의 프로그램을 소개해 드릴게요.", next: ["projects", "composite", "contact"] },
     "연락": { e: "✉️", lead: "연락 방법을 안내해 드릴게요.", next: ["projects", "composite", "trajectory"] },
@@ -261,6 +261,7 @@
     "trajectory": ["🧭 경력 타임라인", "경력 타임라인 정리해 주세요"],
     "creds": ["🎖️ 자격 · 수상", "자격증 뭐 있으세요?"],
     "tl-youth-day": ["🇰🇷 청년의날 참석", "청와대 청년의날 갔다면서요"],
+    "tl-national-debate": ["🗣️ 국민 대토론회 발표", "국민 대토론회에서 뭘 발표했어요?"],
     "thesis": ["💡 일하는 철학", "일하는 철학이 궁금해요"],
     "contact": ["✉️ 연락 방법", "연락은 어떻게 하나요?"],
   };
