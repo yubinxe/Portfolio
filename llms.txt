@@ -1,0 +1,31 @@
+# 김유빈 (Yubin Kim) — 전략기획 × AI 포트폴리오
+
+> 법무법인 경국에서 전략기획과 AI 프로세스 혁신을 담당하는 김유빈(Yubin Kim, 별칭 Ethan Kim)의 공식 포트폴리오입니다. 데이터로 판단의 근거를 만들고, AI로 실행의 속도를 만드는 일을 직접 배포한 결과물로 보여 줍니다.
+
+## 인물
+- 이름: 김유빈 / Yubin Kim / Kim Yubin
+- 소속: 법무법인 경국 (서울 서초구 서초대로 264 법조타워 15F) — 전략기획 · AI 프로세스 혁신
+- 연락: yubin120866@gmail.com
+
+## 언론 · 대외활동
+- [연합뉴스TV 〈함께 빚어낸 특별한 밥상〉 — 강남1인가구센터 인터뷰](https://yubinxe.github.io/Portfolio/gallery.html#g-yonhap)
+- [청와대 대통령 주관 2026 청년의날 기념행사 참석](https://yubinxe.github.io/Portfolio/gallery.html#youth-day)
+- [국민통합위원회 2026 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 정책 제안 발표 (2026. 9. 29 · aT센터)](https://yubinxe.github.io/Portfolio/gallery.html#national-debate)
+- 서초청년네트워크 9기 운영위원회 부위원장 · 국무조정실 온라인 청년참여단 · 서울시민기자단
+
+## 대표 작업
+- [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/)
+- [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app/)
+- [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/)
+- [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/)
+- [전체 작업물](https://yubinxe.github.io/Portfolio/#artifacts)
+
+## 페이지
+- [메인](https://yubinxe.github.io/Portfolio/)
+- [경력 상세](https://yubinxe.github.io/Portfolio/career.html)
+- [전략기획 AI 강의 — 2트랙 8과정](https://yubinxe.github.io/Portfolio/lecture.html)
+- [활동 갤러리](https://yubinxe.github.io/Portfolio/gallery.html)
+
+## 교육 · 수상
+- 삼성청년SW아카데미(SSAFY) 13기 · 서울대학교 AI 교육 전문가 과정(AIED) 4기 · 한국부동산마케팅협회(KREMA) 4기 · 서울특별시 핀테크 아카데미 14기
+- 강원열린군대 스타트업 프로그램 2위(제2군단장 상장, 2023) · 육군훈련소 최우수 분대(2023) · 육군정보통신학교장 상장(2022)
