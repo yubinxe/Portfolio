@@ -562,6 +562,8 @@
 }
 /* 터치 기기 — 기본 규칙 뒤에 둬야 덮어쓴다 (44px 권장 터치 타깃) */
 @media (pointer: coarse){
+  /* iOS Safari 는 16px 미만 입력칸에 초점이 가면 화면을 확대한 채 두어 레이아웃이 깨져 보인다 */
+  .yk-input textarea,.yk-form input,.yk-form textarea,.yk-form select{ font-size:16px; }
   .yk-teaser__close::before{ content:""; position:absolute; inset:-11px; }
   .yk-head__close{ min-width:44px; min-height:44px; }
   .yk-chip{ min-height:44px; }
@@ -742,7 +744,11 @@
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 104) + "px";
   }
-  function showTeaser() { teaser.classList.add("show"); }
+  function showTeaser() {
+    teaser.classList.add("show");
+    // 폰에서는 배너가 본문 버튼을 가리므로 잠깐 보여 주고 접는다 (말풍선 버튼은 그대로 남는다)
+    if (window.matchMedia("(max-width: 640px)").matches) setTimeout(hideTeaser, 6000);
+  }
   function hideTeaser() { teaser && teaser.classList.remove("show"); }
   function hideQuick() { if (quick) quick.style.display = "none"; }
 
