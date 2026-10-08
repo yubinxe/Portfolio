@@ -39,13 +39,15 @@ test("첫 화면 자산이 예산 안에 있다", async () => {
   const { statSync } = await import("node:fs");
   const kb = (p) => statSync(path.join(ROOT, p)).size / 1024;
   const budget = [
-    ["dist/sections.js", 90],
+    ["dist/sections.js", 92], /* 2026-10: 모바일 메뉴 버튼 · 강의 의뢰 CTA · 수상 원본 링크로 +0.5KB */
     ["dist/tweaks-panel.js", 40],
     ["dist/icons.js", 12],
     ["dist/app.js", 8],
     ["styles.css", 96],   /* 2026-09: 필드워크 체험 스트립(.fw-*) 추가로 +1.4KB — 상한 상향 */
     ["kb.js", 120],
     ["chatbot.js", 80],
+    ["features.css", 24],  /* 2026-10 V3: 강의 퍼널·대토론회 사례·수상 비교·모바일 메뉴 — styles.css 와 분리 */
+    ["mnav.js", 6],
   ];
   const over = budget.filter(([f, max]) => kb(f) > max)
     .map(([f, max]) => `${f} ${kb(f).toFixed(0)}KB > ${max}KB`);

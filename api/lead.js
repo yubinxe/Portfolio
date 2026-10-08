@@ -1,7 +1,9 @@
 /* ============================================================================
  * api/lead.js — 무료상담 리드 접수 (Vercel Serverless · Node 18+)
  * ----------------------------------------------------------------------------
- * POST /api/lead  { name, contact, message, need?, context?, page?, history? }
+ * POST /api/lead  { name, contact, message, need?, context?, page?, history?, website? }
+ *   need 가 "[강의 의뢰]" 로 시작하면 강의 의뢰 — 저장 스키마는 같고 알림 제목만 구분한다.
+ *   website 는 사람에게 보이지 않는 함정 칸(honeypot) — 값이 있으면 저장하지 않고 400.
  *   → 200 { ok:true, id, notified:boolean }
  *
  * 핵심 계약: "알림 실패가 리드 저장을 막지 않는다"
@@ -33,6 +35,7 @@ function validate(body) {
       : [],
   };
   var errors = [];
+  if (clean(b.website, 200)) errors.push("spam");
   if (!lead.name) errors.push("name");
   if (!lead.contact) errors.push("contact");
   if (!lead.message && !lead.need) errors.push("message");
@@ -66,7 +69,8 @@ function makeNotifier(env, fetchFn) {
   var f = fetchFn || fetch;
   return function notify(lead, opts) {
     var signal = opts && opts.signal;
-    var text = "[포트폴리오 상담] " + lead.name + " · " + lead.contact + "\n" + (lead.message || lead.need) + "\n" + lead.page;
+    var tag = /^\[강의 의뢰\]/.test(lead.need) ? "[강의 의뢰]" : "[포트폴리오 상담]";
+    var text = tag + " " + lead.name + " · " + lead.contact + (lead.need ? "\n" + lead.need : "") + "\n" + (lead.message || lead.need) + "\n" + lead.page;
     if (env.SLACK_WEBHOOK_URL) {
       return f(env.SLACK_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: text }), signal: signal })
         .then(function (r) { if (!r.ok) throw new Error("slack_" + r.status); return true; });
@@ -75,7 +79,7 @@ function makeNotifier(env, fetchFn) {
       return f("https://api.resend.com/emails", {
         method: "POST", signal: signal,
         headers: { Authorization: "Bearer " + env.RESEND_API_KEY, "Content-Type": "application/json" },
-        body: JSON.stringify({ from: env.LEAD_NOTIFY_FROM || "Yubin AI <onboarding@resend.dev>", to: [env.LEAD_NOTIFY_TO], subject: "[포트폴리오 상담] " + lead.name, text: text }),
+        body: JSON.stringify({ from: env.LEAD_NOTIFY_FROM || "Yubin AI <onboarding@resend.dev>", to: [env.LEAD_NOTIFY_TO], subject: tag + " " + lead.name, text: text }),
       }).then(function (r) { if (!r.ok) throw new Error("resend_" + r.status); return true; });
     }
     return Promise.resolve(false); // 알림 채널 미설정 → 조용히 건너뜀

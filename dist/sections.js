@@ -67,6 +67,9 @@ function Nav() {
     React.createElement("div", { className: "nav-desktop", style: { display: "flex", gap: "clamp(14px,2.4vw,32px)" } },
     links.map(([t, h]) => /*#__PURE__*/React.createElement("a", { key: t, className: "navlink", href: h }, t))
     ), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "mnav-btn", "data-mnav-toggle": "", "aria-expanded": "false", "aria-controls": "mnav" }, /*#__PURE__*/
+    React.createElement("span", { className: "mnav-btn__bars", "aria-hidden": "true" }), "\uBA54\uB274"
+    ), /*#__PURE__*/
     React.createElement("a", { href: "#contact", className: "btn", style: { padding: ".55em 1.1em", fontSize: ".85rem" } }, "Contact ", /*#__PURE__*/
     React.createElement(ArrowUpRight, { size: 14 })
     )
@@ -625,9 +628,9 @@ const TRAJECTORY = [
   desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
 { id: "tl-ssafy-ambassador", group: "public", year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
   desc: "SSAFY 공식 홍보 앰배서더로 교육 과정과 성과를 콘텐츠로 알리고, 지원자 대상 커뮤니케이션과 대외 홍보 활동을 수행." },
-{ id: "tl-army-startup", group: "honor", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상",
+{ id: "tl-army-startup", group: "honor", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상", proof: "gallery.html#cred-award-2023",
   desc: "軍·官·學 주관 2023 강원열린군대 스타트업 프로그램 성취도평가에서 팀 Home_Ally로 2위 입상(2023. 12. 31). HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
-{ id: "tl-army-training", group: "honor", year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상",
+{ id: "tl-army-training", group: "honor", year: "2023", color: "var(--sky)", title: "육군훈련소 최우수 분대 선정 · 훈련소장 상장 수상", proof: "gallery.html#cred-army-training-2023",
   desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
 { id: "tl-army-signal", group: "honor", year: "2022", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
   desc: "軍 특성화고 현장실습 기간 중 희생정신과 학업성적 우수로 타의 모범이 되어 육군정보통신학교장(준장)으로부터 상장을 수상(2022. 7. 1, 제183호)." },
@@ -655,7 +658,8 @@ function TlRows({ rows }) {
     e.title,
     e.tag && /*#__PURE__*/React.createElement("span", { className: "tl-tag font-sans" }, e.tag)
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko" }, e.desc)
+    React.createElement("p", { className: "font-ko" }, e.desc),
+    e.proof && /*#__PURE__*/React.createElement("a", { href: e.proof, className: "tl-proof font-sans" }, "\uC0C1\uC7A5 \uC6D0\uBCF8 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 13 }))
     )
     )
     )
@@ -872,6 +876,8 @@ function Artifacts() {
 }
 
 /* ============================================================ LECTURES */
+/* 강의 의뢰는 챗봇 신청서(chatbot.js · data-lecture-consult)로 연다. 스크립트가 없을 때만 개인 메일로 열린다 */
+const LECTURE_MAILTO = "mailto:yubin120866@gmail.com?subject=";
 function Lectures() {
   const ref = useReveal();
   return (/*#__PURE__*/
@@ -939,7 +945,9 @@ function Lectures() {
     React.createElement("a", { href: "lecture.html#" + l.id, className: "lec-card__proof font-sans" }, "\uACFC\uC815 \uC0C1\uC138 ", /*#__PURE__*/
     React.createElement(ArrowUpRight, { size: 14 })
     )
-    )
+    ), /*#__PURE__*/
+    React.createElement("a", { href: LECTURE_MAILTO + encodeURIComponent("[강의 의뢰] " + l.n + " " + l.title.split(" — ")[0]),
+      className: "lec-card__ask font-sans", "data-lecture-consult": l.id }, "\uC774 \uACFC\uC815 \uC758\uB8B0\uD558\uAE30 ", /*#__PURE__*/React.createElement("span", { "aria-hidden": "true" }, "\u2192"))
     )
     )
     )
@@ -959,7 +967,7 @@ function Lectures() {
     )
     ), /*#__PURE__*/
     React.createElement("div", { style: { marginTop: 30, display: "flex", gap: 12, flexWrap: "wrap" } }, /*#__PURE__*/
-    React.createElement("a", { href: "mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D", className: "btn btn--ghost" }, /*#__PURE__*/React.createElement(Mail, { size: 16 }), " \uAC15\uC758 \uAD00\uB828 \uBB38\uC758"), /*#__PURE__*/
+    React.createElement("a", { href: LECTURE_MAILTO + encodeURIComponent("[강의 의뢰]"), className: "btn", "data-lecture-consult": "" }, /*#__PURE__*/React.createElement(Mail, { size: 16 }), " \uAC15\uC758 \uC758\uB8B0\uD558\uAE30"), /*#__PURE__*/
     React.createElement("a", { href: "lecture.html", className: "btn btn--ghost" }, "\uACFC\uC815\uBCC4 \uC0C1\uC138 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "career.html#lectures", className: "btn btn--ghost" }, "\uAC15\uC758 \uC5ED\uB7C9 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
     )

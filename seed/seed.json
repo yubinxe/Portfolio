@@ -606,14 +606,14 @@
         "Id": "tl-army",
         "Category": "궤적",
         "Title": "2022–2023 — 육군 표창 기록",
-        "Body": "- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n- 육군훈련소 최우수 분대 선정 · 훈련소장(소장) 상장 (2023)\n상장 원본은 갤러리 자격 섹션에 있습니다.",
+        "Body": "- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n- 육군훈련소 최우수 분대 선정 · 육군훈련소장 상장 (2023. 4. 4, 분대원 12명 공동 수상)\n상장 원본은 갤러리 자격 섹션에 있습니다. 훼손된 2023년 상장 두 건은 가독성을 돕는 AI 보정 참고 이미지를 함께 두되, 내용 확인은 원본을 기준으로 합니다.",
         "Tags": "군 복무, 군대, 상장, 수상, 육군, 정보통신학교, 최우수 분대, 표창, 훈련소",
-        "PrimaryLabel": "상장 원본 보기",
-        "PrimaryHref": "gallery.html#cred-award-2022",
+        "PrimaryLabel": "훈련소장 상장 원본",
+        "PrimaryHref": "gallery.html#cred-army-training-2023",
         "SecondaryLabel": "궤적에서 보기",
         "SecondaryHref": "index.html#tl-army-signal",
         "SecondaryInferred": false,
-        "Anchor": "cred-award-2022",
+        "Anchor": "cred-army-training-2023",
         "Source": "kb.js@2026.10.05",
         "Verified": true
       },
@@ -1072,5 +1072,5 @@
       }
     ]
   },
-  "hash": "eb299d11b556fc33"
+  "hash": "0eb0fdc6474aed55"
 }
