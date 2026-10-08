@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
 <link rel="stylesheet" href="styles.css?v=41" />
+<link rel="stylesheet" href="features.css?v=1" />
 <link rel="canonical" href="https://yubinxe.github.io/Portfolio/lecture.html" />
 <meta name="author" content="김유빈 Yubin Kim" />
 <meta property="og:type" content="website" />
@@ -347,7 +348,8 @@
         <a class="navlink" href="gallery.html">갤러리</a>
         <a class="navlink" href="career.html">경력</a>
       </div>
-      <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" class="btn" style="padding:.55em 1.1em;font-size:.85rem">강의 문의</a>
+      <button type="button" class="mnav-btn" data-mnav-toggle aria-expanded="false" aria-controls="mnav"><span class="mnav-btn__bars" aria-hidden="true"></span>메뉴</button>
+      <a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D" class="btn" data-lecture-consult="" style="padding:.55em 1.1em;font-size:.85rem">강의 의뢰</a>
     </nav>
   </div>
 </header>
@@ -377,7 +379,25 @@
       </p>
     </div>
 
-      <div class="lec-track">
+    <section class="lec-pitch reveal" aria-labelledby="lec-pitch-h">
+      <div class="lec-pitch__claim">
+        <p class="eyebrow">How I Teach</p>
+        <h2 id="lec-pitch-h" class="font-myeongjo">AI 활용법을 나열하지 않습니다.<br /><em>문제 정의부터 검증 가능한 산출물까지,</em> 실제 제작 과정을 가르칩니다.</h2>
+        <p class="font-ko">아래 여덟 과정은 기관·조직의 대상과 시간에 맞춰 구성해 제안하는 커리큘럼입니다. 각 과정의 사례는 직접 만들어 공개한 산출물이고, 수업에서 그 화면과 문서를 열어 과정을 보여 드립니다.</p>
+        <div class="lec-pitch__cta">
+          <a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D" class="btn" data-lecture-consult="">강의 의뢰하기 <span aria-hidden="true">→</span></a>
+          <a href="#tracks" class="btn btn--ghost">여덟 과정 보기</a>
+        </div>
+      </div>
+      <ol class="lec-pitch__proof">
+        <li><span class="font-sans">01 · 산출물</span><strong class="font-ko">직접 기획·배포한 서비스와 자동화</strong><a href="index.html#artifacts" class="font-sans">작업물 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+        <li><span class="font-sans">02 · 현장 사례</span><strong class="font-ko">2026 국민 대토론회 — 정책 제안서·발표자료 제작과 발표</strong><a href="gallery.html#national-debate" class="font-sans">사례 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+        <li><span class="font-sans">03 · 이수 근거</span><strong class="font-ko">SSAFY 13기 · 서울대 AIED 4기 · KREMA 4기</strong><a href="#basis" class="font-sans">근거 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      </ol>
+      <p class="lec-pitch__flow font-ko"><span>접수 방법</span> 의뢰하기를 누르면 챗봇이 열리고 짧은 신청서를 작성합니다 → 김유빈이 내용을 검토해 이메일로 회신 → 대상·시간에 맞춘 구성안을 함께 정합니다.</p>
+    </section>
+
+      <div class="lec-track" id="tracks">
         <div class="lec-track__head reveal">
           <span class="lec-track__label font-sans">Track A — AI 파운데이션</span>
           <h2 class="font-ko">도구를 쓰는 사람에서, 도구를 설계하는 사람으로</h2>
@@ -394,6 +414,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>전 직군 입문자 · 도입을 검토하는 관리자</dd></div>
             <div><dt>구성</dt><dd>2시간</dd></div>
+            <div><dt>산출물</dt><dd>업무별 AI 위임 범위와 검수 기준표</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>토큰·맥락창·환각이 생기는 자리</li>
@@ -402,6 +423,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 서울대 AIED 4기 — AI 교육 전문가 과정</p>
           <a href="career.html#cv-snu-aied" class="lec-card__proof font-sans">교육 이수 기록 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2001%20AI%20%EA%B8%B0%EC%B4%88%20%EA%B0%9C%EB%85%90" class="lec-card__ask font-sans" data-lecture-consult="lec-01">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         <article id="lec-02" class="lec-card reveal" style="--accent-fill:var(--lilac)">
           <div class="lec-card__head">
@@ -413,6 +435,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>기획 · 마케팅 · 사무 실무자</dd></div>
             <div><dt>구성</dt><dd>3시간(실습 포함)</dd></div>
+            <div><dt>산출물</dt><dd>팀에서 재사용할 프롬프트 템플릿</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>역할·제약·예시·출력형식의 네 기둥</li>
@@ -421,6 +444,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 서울대 AIED 4기 — 구조화된 프롬프트 아키텍처</p>
           <a href="index.html#ed-02" class="lec-card__proof font-sans">브랜드 필름 적용 사례 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2002%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81" class="lec-card__ask font-sans" data-lecture-consult="lec-02">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         <article id="lec-03" class="lec-card reveal" style="--accent-fill:var(--apple)">
           <div class="lec-card__head">
@@ -432,6 +456,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>비개발 직군 · 사내 도구를 직접 만들고 싶은 실무자</dd></div>
             <div><dt>구성</dt><dd>4시간(제작 실습)</dd></div>
+            <div><dt>산출물</dt><dd>직접 만들어 배포한 업무 도구 1개</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>요구사항을 AI가 이해하는 단위로 쪼개기</li>
@@ -440,6 +465,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> SSAFY 13기 — 소프트웨어 아키텍처 실무 프로젝트</p>
           <a href="index.html#ed-05" class="lec-card__proof font-sans">직접 배포한 대시보드 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2003%20%EB%B0%94%EC%9D%B4%EB%B8%8C%20%EC%BD%94%EB%94%A9" class="lec-card__ask font-sans" data-lecture-consult="lec-03">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         <article id="lec-04" class="lec-card reveal" style="--accent-fill:var(--pink)">
           <div class="lec-card__head">
@@ -451,6 +477,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>사내 자동화를 설계하는 실무자 · 개발 인접 직군</dd></div>
             <div><dt>구성</dt><dd>4시간</dd></div>
+            <div><dt>산출물</dt><dd>도구·권한·승인 지점을 정한 에이전트 설계안</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>도구 연결과 권한 경계 설계</li>
@@ -459,6 +486,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> GWS · NAVER WORKS API 연동과 크롤링 파이프라인 구축 경험</p>
           <a href="index.html#ed-06" class="lec-card__proof font-sans">VOC 트리아지 시스템 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="gallery.html#national-debate" class="lec-card__case font-ko">실전 사례 · 2026 국민 대토론회 정책 제안 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2004%20%ED%95%98%EB%84%A4%EC%8A%A4%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81" class="lec-card__ask font-sans" data-lecture-consult="lec-04">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         </div>
       </div>
@@ -479,6 +507,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>백오피스 · 기획 · 전문직 사무소 실무자</dd></div>
             <div><dt>구성</dt><dd>3시간 / 6시간(실습 포함)</dd></div>
+            <div><dt>산출물</dt><dd>업무 자동화 우선순위 매트릭스</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>업무 흐름 진단과 병목 찾기</li>
@@ -487,6 +516,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 법무법인 경국 — 송무·사무 프로세스 혁신 실무</p>
           <a href="index.html#ed-06" class="lec-card__proof font-sans">VOC 트리아지 사례 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2005%20%EC%8B%A4%EB%AC%B4%EC%9E%90%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EC%A0%84%EB%9E%B5%EA%B8%B0%ED%9A%8D%20AI" class="lec-card__ask font-sans" data-lecture-consult="lec-05">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         <article id="lec-06" class="lec-card reveal" style="--accent-fill:var(--apple)">
           <div class="lec-card__head">
@@ -498,6 +528,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>부동산 · 마케팅 · 정비사업 데이터 담당자</dd></div>
             <div><dt>구성</dt><dd>4시간(대시보드 실습)</dd></div>
+            <div><dt>산출물</dt><dd>지표를 묶은 공공데이터 대시보드 초안</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>공공데이터 API 수집 설계</li>
@@ -506,6 +537,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> KREMA 4기 — AI 기반 부동산 시장 데이터 분석</p>
           <a href="index.html#ed-05" class="lec-card__proof font-sans">청약 인사이트 대시보드 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2006%20%EA%B3%B5%EA%B3%B5%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A1%9C%20%EC%8B%9C%EC%9E%A5%EC%9D%84%20%EC%9D%BD%EB%8A%94%20%EB%B2%95" class="lec-card__ask font-sans" data-lecture-consult="lec-06">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         <article id="lec-07" class="lec-card reveal" style="--accent-fill:var(--lilac)">
           <div class="lec-card__head">
@@ -517,6 +549,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>마케팅 · 홍보 · 브랜드 담당자</dd></div>
             <div><dt>구성</dt><dd>3시간(제작 실습)</dd></div>
+            <div><dt>산출물</dt><dd>브랜드 톤 검수 기준과 짧은 영상 초안</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>영상 프롬프트 아키텍처</li>
@@ -525,6 +558,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> KREMA 4기 — 매체별 디지털 마케팅 전략</p>
           <a href="index.html#ed-02" class="lec-card__proof font-sans">르엘 성수 브랜드 필름 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2007%20%EC%83%9D%EC%84%B1%ED%98%95%20AI%20%EB%B8%8C%EB%9E%9C%EB%93%9C%20%ED%95%84%EB%A6%84%20%EC%A0%9C%EC%9E%91" class="lec-card__ask font-sans" data-lecture-consult="lec-07">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         <article id="lec-08" class="lec-card reveal" style="--accent-fill:var(--pink)">
           <div class="lec-card__head">
@@ -536,6 +570,7 @@
           <dl class="lec-card__meta font-ko">
             <div><dt>대상</dt><dd>공공기관 · 청년 조직 · 협회</dd></div>
             <div><dt>구성</dt><dd>2시간</dd></div>
+            <div><dt>산출물</dt><dd>대상별로 다시 쓴 메시지·포맷 설계안</dd></div>
           </dl>
           <ul class="lec-card__mods font-ko">
             <li>대상에 맞춘 메시지 재구성</li>
@@ -544,6 +579,7 @@
           </ul>
           <p class="lec-card__basis font-ko"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 5 2 9l10 4 10-4z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg> 서울시민기자단 · 연합뉴스TV · 청년 정책 거버넌스</p>
           <a href="index.html#ed-01" class="lec-card__proof font-sans">지방선거 카드뉴스 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <div class="lec-card__foot"><a href="gallery.html#national-debate" class="lec-card__case font-ko">실전 사례 · 2026 국민 대토론회 정책 제안 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D%2008%20%EC%A0%9C%EB%8F%84%EC%9D%98%20%EC%96%B8%EC%96%B4%EB%A5%BC%20%EB%8C%80%EC%A4%91%EC%9D%98%20%EC%96%B8%EC%96%B4%EB%A1%9C" class="lec-card__ask font-sans" data-lecture-consult="lec-08">이 과정 의뢰하기 <span aria-hidden="true">→</span></a></div>
         </article>
         </div>
       </div>
@@ -571,7 +607,7 @@
       </div>
       <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap">
         <a href="lecture-proposal.pdf" class="btn btn--ghost" download>강의 제안서 PDF <span aria-hidden="true">↓</span></a>
-        <a href="mailto:ybkim@gyunggook.com?subject=%5B%EA%B0%95%EC%9D%98%20%EB%AC%B8%EC%9D%98%5D" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> 강의 문의</a>
+        <a href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D" class="btn" data-lecture-consult=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> 강의 의뢰하기</a>
         <a href="career.html#lectures" class="btn btn--ghost">강의 역량 상세 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
         <a href="index.html#lectures" class="btn btn--ghost">메인의 강의 섹션 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </div>
@@ -630,7 +666,8 @@
 })();
 </script>
   <!-- 유빈 AI 포트폴리오 챗봇 위젯 -->
-  <script src="kb.js?v=20260928" defer></script>
-  <script src="chatbot.js?v=5" defer></script>
+  <script src="kb.js?v=20261008" defer></script>
+  <script src="chatbot.js?v=6" defer></script>
+  <script src="mnav.js?v=1" defer></script>
 </body>
 </html>

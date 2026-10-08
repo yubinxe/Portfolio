@@ -67,6 +67,25 @@ test("필수 필드 누락은 400", async () => {
   assert.deepEqual(out.json.fields, ["name", "contact", "message"]);
 });
 
+test("함정 칸(website)에 값이 있으면 저장하지 않고 400", async () => {
+  let saved = false;
+  const out = await lead.handleLead({ ...GOOD, website: "http://spam" }, { saveLead: async () => { saved = true; return "x"; }, notify: async () => true });
+  assert.equal(out.status, 400);
+  assert.ok(out.json.fields.includes("spam"));
+  assert.equal(saved, false);
+});
+
+test("강의 의뢰는 같은 저장 경로를 쓰고 알림 제목만 [강의 의뢰]", async () => {
+  const sent = [];
+  const notify = lead.makeNotifier({ SLACK_WEBHOOK_URL: "https://hooks.example/x" }, async (url, init) => { sent.push(JSON.parse(init.body).text); return { ok: true }; });
+  const out = await lead.handleLead(
+    { name: "담당자 · 기관", contact: "a@example.com", need: "[강의 의뢰] 04 하네스 엔지니어링", message: "희망 과정: 04 하네스 엔지니어링" },
+    { saveLead: async (l) => { assert.equal(l.need, "[강의 의뢰] 04 하네스 엔지니어링"); return "rec9"; }, notify });
+  assert.equal(out.status, 200);
+  assert.equal(out.json.ok, true);
+  assert.match(sent[0], /^\[강의 의뢰\] 담당자/);
+});
+
 test("kb.js 카드 무결성: id 유일 · CTA href 형식 · 보조 CTA 가 주 CTA 와 중복되지 않음", () => {
   const ids = new Set();
   const HREF = /^(https?:\/\/|mailto:|(index|career|gallery|lecture)\.html(#[\w-]+)?$)/;

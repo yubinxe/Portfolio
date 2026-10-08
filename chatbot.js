@@ -461,6 +461,19 @@
 .yk-form textarea{ resize:vertical; min-height:74px; }
 .yk-form__row{ display:flex; gap:8px; justify-content:flex-end; margin-top:2px; }
 .yk-form__err{ font-size:12px; color:#A02B23; font-weight:600; }
+.yk-form select{ width:100%; font:inherit; font-size:14px; border:none; border-radius:12px; padding:9px 11px; background:#F1EEE7; color:var(--yk-ink); outline:none; }
+.yk-form select:focus{ box-shadow:inset 0 0 0 1.5px var(--yk-gold); }
+.yk-form label small{ font-weight:500; color:var(--yk-ink-soft); opacity:.8; margin-left:4px; }
+.yk-form__sec{ margin:6px 0 0; padding-top:8px; border-top:1px solid rgba(14,26,46,.08); font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--yk-ink-soft); }
+.yk-form__hp{ position:absolute !important; left:-9999px !important; width:1px; height:1px; overflow:hidden; }
+.yk-consent{ margin-top:4px; padding:10px 11px; border-radius:12px; background:#F7F4EE; font-size:11.5px; line-height:1.6; color:var(--yk-ink-soft); }
+.yk-consent dl{ margin:0 0 6px; display:grid; grid-template-columns:auto 1fr; gap:2px 8px; }
+.yk-consent dt{ font-weight:700; color:var(--yk-ink); }
+.yk-consent dd{ margin:0; }
+.yk-consent label{ display:flex; gap:8px; align-items:flex-start; font-size:12.5px; font-weight:650; color:var(--yk-ink); letter-spacing:0; cursor:pointer; }
+.yk-consent input{ width:18px; height:18px; flex:none; margin:1px 0 0; padding:0; accent-color:var(--yk-navy); }
+.yk-courses{ display:flex; flex-direction:column; gap:6px; margin-top:6px; }
+.yk-courses .yk-ask{ text-align:left; justify-content:flex-start; }
 /* typing — iMessage 점 3개 */
 .yk-typing{ display:inline-flex; gap:4px; padding:4px 2px; }
 .yk-typing span{ width:7px; height:7px; border-radius:50%; background:#9AA0AB; animation:yk-dots 1.3s infinite; }
@@ -499,7 +512,7 @@
   .yk-head{ padding-top:14px; }
   .yk-head::before{ content:""; display:block; width:38px; height:5px; border-radius:3px; background:rgba(14,26,46,.2); margin:0 auto 10px; }
   .yk-head__close{ top:20px; }
-  .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ right:12px; left:12px; width:auto; bottom:auto; top:12px; transform-origin:top center; }
+  .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ right:12px; left:12px; width:auto; top:auto; bottom:calc(84px + env(safe-area-inset-bottom)); transform-origin:bottom center; } /* 상단에 두면 헤더의 메뉴 버튼을 가린다 */
   .yk-chat.open .yk-fab{ opacity:0; pointer-events:none; }
 }
 
@@ -836,7 +849,7 @@
     textarea.value = ""; autosize();
 
     if (consult) { consultStep(text); return; }
-    if (isConsultIntent(text)) { startConsult(text); return; }
+    if (isConsultIntent(text)) { isLectureIntent(text) ? startLectureConsult() : startConsult(text); return; }
 
     setBusy(true);
     var typing = renderTyping();
@@ -1020,6 +1033,154 @@
       });
     });
   }
+  /* ---------------------------------------------------- 강의 의뢰 퍼널
+   * 일반 상담(3문항 대화)과 분리된 짧은 신청서. 기존 renderLeadForm · submitLead · /api/lead 를 그대로 쓴다.
+   * need 앞에 "[강의 의뢰]" 를 붙여 서버 저장 스키마(Airtable 필드)를 바꾸지 않는다.
+   * 성공은 서버가 저장 확인(ok:true)을 돌려준 경우에만 표시하고, 그 외에는 메일 작성 화면으로 넘긴다. */
+  var COURSES = (EXT && EXT.lectures) || [
+    { id: "lec-01", n: "01", title: "AI 기초 개념" }, { id: "lec-02", n: "02", title: "프롬프트 엔지니어링" },
+    { id: "lec-03", n: "03", title: "바이브 코딩" }, { id: "lec-04", n: "04", title: "하네스 엔지니어링" },
+    { id: "lec-05", n: "05", title: "실무자를 위한 전략기획 AI" }, { id: "lec-06", n: "06", title: "공공데이터로 시장을 읽는 법" },
+    { id: "lec-07", n: "07", title: "생성형 AI 브랜드 필름 제작" }, { id: "lec-08", n: "08", title: "제도의 언어를 대중의 언어로" },
+  ];
+  var CUSTOM_COURSE = { id: "custom", n: "", title: "맞춤 구성 상담" };
+  function courseOf(id) {
+    for (var i = 0; i < COURSES.length; i++) if (COURSES[i].id === id) return COURSES[i];
+    return id === "custom" ? CUSTOM_COURSE : null;
+  }
+  function courseLabel(c) { return c.n ? c.n + " " + c.title : c.title; }
+  function isLectureIntent(text) { return /(강의|특강|워크숍|출강|교육\s?의뢰|lecture|workshop)/i.test(text || ""); }
+
+  function startLectureConsult(courseId) {
+    hideTeaser(); hideQuick();
+    open();
+    consult = null;
+    var c = courseOf(courseId);
+    var intro = "📚 **강의 의뢰 접수**\n과정 선택 → 신청 내용 작성 → 개인정보 수집·이용 동의 순서로 진행됩니다.\n접수된 내용은 김유빈 님이 직접 검토해 이메일로 회신하며, 일정·구성·비용은 회신 후 개별 협의합니다.";
+    renderMessage("bot", intro); pushBot(intro);
+    if (c) { renderLectureForm(c); return; }
+    var bubble = renderMessage("bot", "어떤 과정을 의뢰하시나요? 정해지지 않았다면 **맞춤 구성 상담**을 고르세요.");
+    var box = el("div", "yk-courses");
+    COURSES.concat([CUSTOM_COURSE]).forEach(function (co) {
+      var b = el("button", "yk-ask", escapeHtml(courseLabel(co)));
+      b.type = "button";
+      b.addEventListener("click", function () {
+        box.remove();
+        renderMessage("me", courseLabel(co));
+        renderLectureForm(co);
+      });
+      box.appendChild(b);
+    });
+    bubble.__col.appendChild(box);
+    scrollBottom();
+  }
+
+  function renderLectureForm(course) {
+    var viaMail = isStaticHost() || !CFG.leadEndpoint;
+    var msg = el("div", "yk-msg bot");
+    msg.appendChild(el("div", "yk-msg__ava", "YK"));
+    var col = el("div", "yk-msg__col");
+    col.appendChild(el("div", "yk-msg__bubble", mdLite("아래 신청서를 확인·수정한 뒤 접수해 주세요. **필수** 항목만 채워도 됩니다.")));
+    var opts = COURSES.concat([CUSTOM_COURSE]).map(function (co) {
+      return '<option value="' + co.id + '"' + (co.id === course.id ? " selected" : "") + ">" + escapeHtml(courseLabel(co)) + "</option>";
+    }).join("");
+    var uid = "ykl" + Date.now().toString(36);
+    var form = el("form", "yk-form yk-form--lecture");
+    form.setAttribute("novalidate", "");
+    form.innerHTML =
+      '<label for="' + uid + 'c">희망 과정 <small>필수</small></label><select id="' + uid + 'c" name="course">' + opts + "</select>" +
+      '<label for="' + uid + 'n">담당자 성함 · 기관명 <small>필수</small></label><input id="' + uid + 'n" name="name" autocomplete="organization" placeholder="홍길동 · ○○기관 교육팀" />' +
+      '<label for="' + uid + 'e">회신받을 이메일 <small>필수</small></label><input id="' + uid + 'e" name="contact" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" />' +
+      '<label for="' + uid + 'p">요청 내용 · 교육 목적 <small>필수</small></label><textarea id="' + uid + 'p" name="purpose" placeholder="예) 기획팀 대상으로 업무 자동화 기준을 세우는 실습형 과정을 원합니다."></textarea>' +
+      '<p class="yk-form__sec">선택 입력</p>' +
+      '<label for="' + uid + 'a">대상 · 인원 <small>선택</small></label><input id="' + uid + 'a" name="audience" placeholder="예) 기획·마케팅 실무자 20명" />' +
+      '<label for="' + uid + 's">희망 일정 · 방식 <small>선택</small></label><input id="' + uid + 's" name="schedule" placeholder="예) 11월 중 · 오프라인(서울)" />' +
+      '<label for="' + uid + 'b">예산 · 기타 <small>선택</small></label><input id="' + uid + 'b" name="etc" />' +
+      '<div class="yk-form__hp" aria-hidden="true"><label>웹사이트<input name="website" tabindex="-1" autocomplete="off" /></label></div>' +
+      '<div class="yk-consent">' +
+        '<dl><dt>목적</dt><dd>강의 의뢰 검토와 회신</dd>' +
+        '<dt>항목</dt><dd>담당자 성함·기관명, 이메일, 문의 내용(선택 입력 포함)</dd>' +
+        '<dt>보유</dt><dd>회신과 일정 협의가 끝나면 파기</dd>' +
+        '<dt>문의</dt><dd>' + escapeHtml(PROFILE.email) + '</dd></dl>' +
+        '<label><input type="checkbox" name="agree" /> 개인정보 수집·이용에 동의합니다 <small>필수</small></label>' +
+      "</div>" +
+      '<div class="yk-form__err" role="alert" hidden></div>' +
+      '<div class="yk-form__row"><button type="button" class="yk-cta__btn yk-cta__btn--ghost" data-cancel>취소</button><button type="submit" class="yk-cta__btn">' + (viaMail ? "메일로 작성하기" : "의뢰 접수") + "</button></div>";
+    col.appendChild(form);
+    msg.appendChild(col);
+    body.appendChild(msg);
+    scrollBottom();
+    setTimeout(function () { var f = form.name; f && f.focus({ preventScroll: true }); }, 120);
+
+    form.querySelector("[data-cancel]").addEventListener("click", function () {
+      msg.remove();
+      var t = "강의 의뢰 작성을 취소했습니다. 언제든 다시 시작하실 수 있습니다.";
+      renderMessage("bot", t); pushBot(t);
+    });
+
+    function collect() {
+      var co = courseOf(form.course.value) || CUSTOM_COURSE;
+      var v = function (n) { return (form[n].value || "").trim(); };
+      var extras = [["대상·인원", v("audience")], ["희망 일정·방식", v("schedule")], ["예산·기타", v("etc")]]
+        .filter(function (x) { return x[1]; });
+      var stamp = new Date();
+      var lines = ["희망 과정: " + courseLabel(co), "요청 내용·교육 목적: " + v("purpose")]
+        .concat(extras.map(function (x) { return x[0] + ": " + x[1]; }))
+        .concat(["개인정보 수집·이용 동의: 예 (" + stamp.toISOString().slice(0, 16).replace("T", " ") + " UTC)"]);
+      return {
+        course: co,
+        lead: {
+          name: v("name"), contact: v("contact"),
+          need: "[강의 의뢰] " + courseLabel(co),
+          context: extras.map(function (x) { return x[0] + ": " + x[1]; }).join(" / "),
+          message: lines.join("\n"),
+          page: location.href,
+          website: v("website"),
+          history: [],
+          ua: navigator.userAgent,
+        },
+      };
+    }
+    function mailtoOf(c) {
+      var subject = "[강의 의뢰] " + courseLabel(c.course) + " — " + c.lead.name;
+      var bodyTxt = "담당자·기관: " + c.lead.name + "\n회신 이메일: " + c.lead.contact + "\n\n" + c.lead.message + "\n\n(페이지: " + c.lead.page + ")";
+      return "mailto:" + PROFILE.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(bodyTxt);
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var err = form.querySelector(".yk-form__err");
+      var c = collect();
+      var miss = [];
+      if (!c.lead.name) miss.push("담당자 성함·기관명");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.lead.contact)) miss.push("올바른 이메일");
+      if (!form.purpose.value.trim()) miss.push("요청 내용·교육 목적");
+      if (!form.agree.checked) miss.push("개인정보 수집·이용 동의");
+      if (miss.length) { err.hidden = false; err.textContent = "다음 항목을 확인해 주세요: " + miss.join(", "); return; }
+      err.hidden = true;
+      var btn = form.querySelector('[type="submit"]');
+      var label = btn.textContent;
+      btn.disabled = true; btn.textContent = viaMail ? "메일 작성 화면 여는 중…" : "접수 중…";
+      submitLead(c.lead).then(function (res) {
+        msg.remove();
+        var t = "✅ **강의 의뢰가 접수되었습니다.**\n- 과정: " + courseLabel(c.course) + "\n- 회신 이메일: " + c.lead.contact +
+          "\n김유빈 님이 내용을 검토한 뒤 위 이메일로 회신드립니다. 별도의 자동 확인 메일은 발송되지 않습니다." +
+          (res && res.notified === false ? "\n(접수는 저장되었으며, 내부 알림만 지연될 수 있습니다.)" : "");
+        renderMessage("bot", t); pushBot(t);
+      }).catch(function () {
+        // 입력값은 그대로 둔다 — 메일 앱을 닫고 돌아와도 다시 시도할 수 있게
+        btn.disabled = false; btn.textContent = label;
+        var mailto = mailtoOf(c);
+        var t = (viaMail ? "이 화면에서는 서버 접수를 사용할 수 없어 메일 작성 화면을 열었습니다."
+                         : "서버 접수에 실패해 메일 작성 화면을 열었습니다.") +
+          "\n**메일 앱에서 직접 보내기를 눌러야 접수됩니다.** 아직 접수된 것이 아닙니다.\n받는 사람: " + PROFILE.email;
+        renderMessage("bot", t, [{ label: "메일 작성 화면 다시 열기", href: mailto }]);
+        pushBot(t);
+        try { location.href = mailto; } catch (e2) {}
+      });
+    });
+  }
+
   function submitLead(lead) {
     if (isStaticHost() || !CFG.leadEndpoint) return Promise.reject(new Error("no_lead_endpoint"));
     var controller = new AbortController();
@@ -1131,7 +1292,15 @@
   }
 
   /* ------------------------------------------------------------- init */
-  function init() { build(); }
+  function init() {
+    build();
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest && e.target.closest("[data-lecture-consult]");
+      if (!t || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      startLectureConsult(t.getAttribute("data-lecture-consult") || "");
+    });
+  }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
@@ -1141,7 +1310,12 @@
     close: function () { close(); },
     send: function (t) { open(); send(t); },
     goTo: goTo,                 // 딥링크: YubinChat.goTo("career.html#cv-ssafy")
-    consult: function () { startConsult(); },
+    // 인자 없이 부르면 기존 일반 상담. { intent:"lecture", courseId:"lec-04" } 이면 강의 의뢰 퍼널
+    consult: function (opts) {
+      if (opts && (opts.intent === "lecture" || opts.courseId)) startLectureConsult(opts.courseId);
+      else startConsult();
+    },
+    consultLecture: function (courseId) { startLectureConsult(courseId); },
     answer: localAnswer,        // 로컬 엔진 디버그
     kb: KB,
     // 이 브라우저(localStorage)에만 키 저장 — 레포/깃엔 절대 올라가지 않습니다.
