@@ -1119,14 +1119,14 @@ function Contact() {
 function Footer() {
   return (
     <footer style={{ borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 }}>
-      <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" }}>
+      <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", paddingTop: 22 }}>
         {[["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
         <a href="https://github.com/yubinxe" rel="me noopener" target="_blank">GitHub</a>
         <a href="mailto:ybkim@gyunggook.com" style={{ marginLeft: "auto" }}>ybkim@gyunggook.com</a>
       </div>
-      <div className="wrap footer-grid" style={{ padding: "26px 0" }}>
+      <div className="wrap footer-grid" style={{ paddingTop: 26, paddingBottom: 26 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">
           <span style={{ fontWeight: 900, fontSize: 22 }}>YK</span>
           <span className="font-ko" style={{ fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 }}>김유빈 · Yubin Kim — AI Strategy &amp; Planning</span>

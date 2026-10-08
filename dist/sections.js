@@ -1120,14 +1120,14 @@ function Contact() {
 function Footer() {
   return (/*#__PURE__*/
     React.createElement("footer", { style: { borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 } }, /*#__PURE__*/
-    React.createElement("div", { className: "wrap f-links font-sans", style: { display: "flex", flexWrap: "wrap", gap: "10px 26px", padding: "22px 0 0" } },
+    React.createElement("div", { className: "wrap f-links font-sans", style: { display: "flex", flexWrap: "wrap", gap: "10px 26px", paddingTop: 22 } },
     [["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => /*#__PURE__*/
     React.createElement("a", { key: t, href: h }, t)
     ), /*#__PURE__*/
     React.createElement("a", { href: "https://github.com/yubinxe", rel: "me noopener", target: "_blank" }, "GitHub"), /*#__PURE__*/
     React.createElement("a", { href: "mailto:ybkim@gyunggook.com", style: { marginLeft: "auto" } }, "ybkim@gyunggook.com")
     ), /*#__PURE__*/
-    React.createElement("div", { className: "wrap footer-grid", style: { padding: "26px 0" } }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap footer-grid", style: { paddingTop: 26, paddingBottom: 26 } }, /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }, className: "font-serif" }, /*#__PURE__*/
     React.createElement("span", { style: { fontWeight: 900, fontSize: 22 } }, "YK"), /*#__PURE__*/
     React.createElement("span", { className: "font-ko", style: { fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 } }, "\uAE40\uC720\uBE48 \xB7 Yubin Kim \u2014 AI Strategy & Planning")

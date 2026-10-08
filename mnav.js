@@ -6,8 +6,9 @@
   if (window.__YK_MNAV__) return;
   window.__YK_MNAV__ = true;
 
-  var path = location.pathname.split("/").pop() || "index.html";
-  var onIndex = path === "" || path === "index.html";
+  // Vercel cleanUrls(/gallery)와 GitHub Pages(/Portfolio/gallery.html)를 모두 같은 이름으로 본다
+  var path = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "") + ".html";
+  var onIndex = path === "index.html";
   var base = onIndex ? "" : "index.html";
   var LINKS = [
     ["소개", base + "#about"], ["역량", base + "#composite"], ["프로젝트", base + "#artifacts"], ["이력", base + "#trajectory"],
