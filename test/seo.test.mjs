@@ -194,3 +194,17 @@ test("sameAs 와 화면의 공식 채널 링크가 일치하고 제3자 기사�
   const articles = person.subjectOf.filter((n) => n["@type"] === "Article");
   assert.ok(articles.length >= 2 && articles.every((a) => a.url.startsWith("https://krema.ai/") && a.datePublished));
 });
+
+/* 결과물 ↔ 제작자 — 각 결과물 사이트도 같은 Person @id 를 creator 로 가리킨다(각 저장소에서 반영).
+ * 포트폴리오 쪽에서는 결과물마다 creator 가 이 사람임을 선언해 양방향 근거를 만든다. */
+test("결과물마다 WebApplication 노드가 있고 creator 가 Person @id 를 가리킨다", () => {
+  const graph = ldBlocks(read("index.html"))[0]["@graph"];
+  const apps = graph.filter((n) => n["@type"] === "WebApplication");
+  assert.ok(apps.length >= 5, "결과물 노드 " + apps.length);
+  for (const a of apps) {
+    assert.equal(a.creator["@id"], SITE + "#person", a.name);
+    assert.ok(read("sections.jsx").includes(a.url.replace(/\/$/, "")) || read("index.html").split("<body")[1].includes(a.url.replace(/\/$/, "")), a.url + " 가 화면에 없음");
+  }
+  const works = graph.find((n) => n["@id"] === SITE + "#works");
+  assert.equal(works.itemListElement.length, apps.length);
+});
