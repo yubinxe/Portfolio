@@ -44,4 +44,13 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+/* #root 에는 빌드 시점에 같은 컴포넌트로 미리 렌더한 HTML 이 들어 있다(scripts/prerender.mjs).
+ * 검색 수집기는 JS 없이 본문을 읽고, 브라우저는 그 DOM 을 그대로 이어받는다(hydrate). */
+const rootEl = document.getElementById("root");
+const markMounted = () => document.documentElement.setAttribute("data-app", "ready");
+function Mounted() {
+  React.useEffect(markMounted, []);
+  return <App />;
+}
+if (rootEl.firstElementChild) ReactDOM.hydrateRoot(rootEl, <Mounted />);
+else ReactDOM.createRoot(rootEl).render(<Mounted />);

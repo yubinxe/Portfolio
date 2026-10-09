@@ -1117,14 +1117,24 @@ function Contact() {
 
 }
 
+/* 본인이 운영하는 공개 채널 — index.html Person.sameAs 와 같은 목록을 유지한다(test/seo.test.mjs). */
+const OFFICIAL_CHANNELS = [
+["GitHub", "https://github.com/yubinxe"],
+["Instagram", "https://www.instagram.com/yubinxe/"],
+["티스토리", "https://yubinxe.tistory.com/"],
+["네이버 블로그", "https://blog.naver.com/yubinxe"]];
+
+
 function Footer() {
   return (/*#__PURE__*/
     React.createElement("footer", { style: { borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap f-links font-sans", style: { display: "flex", flexWrap: "wrap", gap: "10px 26px", paddingTop: 22 } },
     [["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => /*#__PURE__*/
     React.createElement("a", { key: t, href: h }, t)
+    ),
+    OFFICIAL_CHANNELS.map(([t, h]) => /*#__PURE__*/
+    React.createElement("a", { key: h, href: h, rel: "me noopener", target: "_blank" }, t)
     ), /*#__PURE__*/
-    React.createElement("a", { href: "https://github.com/yubinxe", rel: "me noopener", target: "_blank" }, "GitHub"), /*#__PURE__*/
     React.createElement("a", { href: "mailto:ybkim@gyunggook.com", style: { marginLeft: "auto" } }, "ybkim@gyunggook.com")
     ), /*#__PURE__*/
     React.createElement("div", { className: "wrap footer-grid", style: { paddingTop: 26, paddingBottom: 26 } }, /*#__PURE__*/

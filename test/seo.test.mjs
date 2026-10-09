@@ -177,3 +177,20 @@ test("404 페이지가 주요 경로와 챗봇으로 연결된다", () => {
   assert.ok(s.includes("chatbot.js"), "404 에 챗봇 위젯 누락");
   assert.match(s, /<meta name="robots" content="noindex, follow"/, "404 는 noindex, follow");
 });
+
+/* 인물 식별 — 본인이 운영하는 채널은 Person.sameAs 와 화면의 링크(rel="me")가 같은 목록이어야
+ * 검색엔진이 '김유빈' · yubinxe · 각 플랫폼을 같은 사람으로 묶을 근거가 생긴다.
+ * 제3자 기사(협회 게시물 등)는 sameAs 가 아니라 subjectOf 로만 연결한다. */
+test("sameAs 와 화면의 공식 채널 링크가 일치하고 제3자 기사는 subjectOf 로만 연결된다", () => {
+  const graph = ldBlocks(read("index.html"))[0]["@graph"];
+  const person = graph.find((n) => n["@type"] === "Person");
+  const channels = [...read("sections.jsx").matchAll(/\["[^"]+", "(https:\/\/[^"]+)"\]/g)].map((m) => m[1])
+    .filter((u) => person.sameAs.includes(u) || /instagram|tistory|blog\.naver|github\.com\/yubinxe$/.test(u));
+  assert.deepEqual([...channels].sort(), [...person.sameAs].sort(), "sections.jsx OFFICIAL_CHANNELS ↔ sameAs 불일치");
+  for (const f of ["career.html", "gallery.html", "lecture.html"]) {
+    for (const u of person.sameAs) assert.ok(read(f).includes(`href="${u}" rel="me`), f + " 푸터에 " + u + " 누락");
+  }
+  assert.ok(person.sameAs.every((u) => !u.includes("krema.ai")), "제3자 기사는 sameAs 에 넣지 않는다");
+  const articles = person.subjectOf.filter((n) => n["@type"] === "Article");
+  assert.ok(articles.length >= 2 && articles.every((a) => a.url.startsWith("https://krema.ai/") && a.datePublished));
+});
