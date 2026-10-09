@@ -203,3 +203,12 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .yd-grid .g-card, .nd-photos .g-card, .award { min-width: 0; }
 @media (max-width: 480px) { .yd-grid .photo-card__chip, .nd-photos .photo-card__chip { white-space: normal; max-width: 100%; letter-spacing: .08em; } }
 @media (max-width: 760px) { .hnav__name b { white-space: nowrap; } }
+
+/* WCAG AA 대비: 밝은 배경 위 작은 골드·회색 글자 */
+:root { --gold-text: #735C30; }
+.yr, .tl-year, .photo-card__chip, .comp-row__n, .nd-label, .lec-pitch__proof li > span, .cmap__cap > span, .cmap__cap > em { color: var(--gold-text) !important; opacity: 1 !important; }
+.comp-row__en { color: var(--ink-soft) !important; opacity: 1 !important; }
+.lec-track__label { color: var(--gold-light) !important; }
+.whyc .yr, .docv .nd-label { color: var(--gold-light) !important; }
+.photo-card__chip--red { color: #FBF8F2 !important; }
+.fold__t strong em { color: var(--gold-text) !important; }

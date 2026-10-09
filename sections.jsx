@@ -827,7 +827,7 @@ function Artifacts() {
       <div className="wrap">
         <SectionHead eyebrow="03 — Selected Works" titleEn="The Artifacts" titleKo="AI 전략 · 자동화 프로젝트" />
         <p className="works-lead font-ko reveal">
-          직접 문제를 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 4건</strong>입니다.
+          직접 문제를 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 {EDITIONS.filter((e) => e.core).length}건</strong>입니다.
           데이터 대시보드와 생성형 AI 콘텐츠 작업은 아래에서 따로 펼쳐 볼 수 있습니다.
         </p>
         <div className="works-grid">
