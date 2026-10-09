@@ -828,7 +828,7 @@ function Artifacts() {
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "03 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
     React.createElement("p", { className: "works-lead font-ko reveal" }, "\uC9C1\uC811 \uBB38\uC81C\uB97C \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/
-    React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C 4\uAC74"), "\uC785\uB2C8\uB2E4. \uB370\uC774\uD130 \uB300\uC2DC\uBCF4\uB4DC\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20 \uC791\uC5C5\uC740 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C ", EDITIONS.filter((e) => e.core).length, "\uAC74"), "\uC785\uB2C8\uB2E4. \uB370\uC774\uD130 \uB300\uC2DC\uBCF4\uB4DC\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20 \uC791\uC5C5\uC740 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
     React.createElement("div", { className: "works-grid" },
