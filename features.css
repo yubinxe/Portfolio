@@ -212,3 +212,4 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .whyc .yr, .docv .nd-label { color: var(--gold-light) !important; }
 .photo-card__chip--red { color: #FBF8F2 !important; }
 .fold__t strong em { color: var(--gold-text) !important; }
+#contact .contact-eyebrow { color: var(--gold-light) !important; }

@@ -1109,6 +1109,12 @@ function Contact() {
     ), /*#__PURE__*/
     React.createElement("button", { type: "button", id: "copyMail", className: "btn btn--ghost", style: { color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" } }, "\uC774\uBA54\uC77C \uC8FC\uC18C \uBCF5\uC0AC"
 
+    ), /*#__PURE__*/
+    React.createElement("a", { href: "yubin-kim.vcf", download: "yubin-kim.vcf", className: "btn btn--ghost", style: { color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" } }, "\uC5F0\uB77D\uCC98 \uC800\uC7A5"
+
+    ), /*#__PURE__*/
+    React.createElement("button", { type: "button", id: "shareSite", className: "btn btn--ghost", style: { color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" } }, "\uD3EC\uD2B8\uD3F4\uB9AC\uC624 \uACF5\uC720"
+
     )
     )
     ), /*#__PURE__*/
