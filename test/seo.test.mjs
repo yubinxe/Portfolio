@@ -177,3 +177,34 @@ test("404 페이지가 주요 경로와 챗봇으로 연결된다", () => {
   assert.ok(s.includes("chatbot.js"), "404 에 챗봇 위젯 누락");
   assert.match(s, /<meta name="robots" content="noindex, follow"/, "404 는 noindex, follow");
 });
+
+/* 인물 식별 — 본인이 운영하는 채널은 Person.sameAs 와 화면의 링크(rel="me")가 같은 목록이어야
+ * 검색엔진이 '김유빈' · yubinxe · 각 플랫폼을 같은 사람으로 묶을 근거가 생긴다.
+ * 제3자 기사(협회 게시물 등)는 sameAs 가 아니라 subjectOf 로만 연결한다. */
+test("sameAs 와 화면의 공식 채널 링크가 일치하고 제3자 기사는 subjectOf 로만 연결된다", () => {
+  const graph = ldBlocks(read("index.html"))[0]["@graph"];
+  const person = graph.find((n) => n["@type"] === "Person");
+  const channels = [...read("sections.jsx").matchAll(/\["[^"]+", "(https:\/\/[^"]+)"\]/g)].map((m) => m[1])
+    .filter((u) => person.sameAs.includes(u) || /instagram|tistory|blog\.naver|github\.com\/yubinxe$/.test(u));
+  assert.deepEqual([...channels].sort(), [...person.sameAs].sort(), "sections.jsx OFFICIAL_CHANNELS ↔ sameAs 불일치");
+  for (const f of ["career.html", "gallery.html", "lecture.html"]) {
+    for (const u of person.sameAs) assert.ok(read(f).includes(`href="${u}" rel="me`), f + " 푸터에 " + u + " 누락");
+  }
+  assert.ok(person.sameAs.every((u) => !u.includes("krema.ai")), "제3자 기사는 sameAs 에 넣지 않는다");
+  const articles = person.subjectOf.filter((n) => n["@type"] === "Article");
+  assert.ok(articles.length >= 2 && articles.every((a) => a.url.startsWith("https://krema.ai/") && a.datePublished));
+});
+
+/* 결과물 ↔ 제작자 — 각 결과물 사이트도 같은 Person @id 를 creator 로 가리킨다(각 저장소에서 반영).
+ * 포트폴리오 쪽에서는 결과물마다 creator 가 이 사람임을 선언해 양방향 근거를 만든다. */
+test("결과물마다 WebApplication 노드가 있고 creator 가 Person @id 를 가리킨다", () => {
+  const graph = ldBlocks(read("index.html"))[0]["@graph"];
+  const apps = graph.filter((n) => n["@type"] === "WebApplication");
+  assert.ok(apps.length >= 5, "결과물 노드 " + apps.length);
+  for (const a of apps) {
+    assert.equal(a.creator["@id"], SITE + "#person", a.name);
+    assert.ok(read("sections.jsx").includes(a.url.replace(/\/$/, "")) || read("index.html").split("<body")[1].includes(a.url.replace(/\/$/, "")), a.url + " 가 화면에 없음");
+  }
+  const works = graph.find((n) => n["@id"] === SITE + "#works");
+  assert.equal(works.itemListElement.length, apps.length);
+});
