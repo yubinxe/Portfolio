@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:김;유빈;;;
+FN;CHARSET=UTF-8:김유빈 (Yubin Kim)
+ORG;CHARSET=UTF-8:법무법인 경국
+TITLE;CHARSET=UTF-8:전략기획 · AI 프로세스 혁신
+EMAIL;TYPE=INTERNET,WORK:ybkim@gyunggook.com
+EMAIL;TYPE=INTERNET,HOME:yubin120866@gmail.com
+URL:https://yubinxe.github.io/Portfolio/
+END:VCARD

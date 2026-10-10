@@ -1109,6 +1109,12 @@ function Contact() {
           <button type="button" id="copyMail" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
             이메일 주소 복사
           </button>
+          <a href="yubin-kim.vcf" download="yubin-kim.vcf" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
+            연락처 저장
+          </a>
+          <button type="button" id="shareSite" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
+            포트폴리오 공유
+          </button>
         </div>
       </div>
       <Footer />
