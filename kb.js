@@ -145,7 +145,7 @@
     /* ---- 프로젝트 ---- */
     { id: "projects", cat: "프로젝트", tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든", "결과물", "산출물"],
       title: "대표 프로젝트 — 15건",
-      body: "직접 기획·구현한 시스템과 콘텐츠 15건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 12 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 13 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 14 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 15 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서",
+      body: "직접 기획·구현한 작업 15건입니다. 생활과 업무 현장에 쓰이는 시스템 6건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 03 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 04 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 05 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 06 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 07 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 08 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 09 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 10 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 11 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 12 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 13 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 14 Louis Vuitton 시네마틱 캠페인 필름\n- 15 Hyperframe × ElevenLabs 멀티미디어 프로모션",
       primary: { label: "작업 전체 보기", href: "index.html#artifacts" },
       secondary: { label: "집캐치 열기", href: "https://zipcatch.vercel.app" } },
     { id: "ed-09", cat: "프로젝트", tags: ["집캐치", "zipcatch", "공공임대", "임대", "lh", "맞춤 추천", "추천 서비스", "공고 알림"],
@@ -227,7 +227,7 @@
     /* ---- 궤적 (최신순) ---- */
     { id: "trajectory", cat: "궤적", tags: ["경력", "이력", "타임라인", "교육", "궤적", "수상", "career", "연혁", "history", "최신순"],
       title: "걸어온 궤적 — 최신순",
-      body: "- 2026 서초청년네트워크 9기 운영위원회 부위원장 (PRESENT)\n- 2026 청와대 대통령 주관 청년의날 행사 참석\n- 2026 국민통합위원회 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 발표\n- 2026 국무조정실 온라인 청년참여단 활동\n- 2026 건국대학교 스마트건설기술교육 프로그램 이수\n- 2026 서울시민기자단 취재기자 · 서울청년파트너스 위원\n- 2026 서울특별시 핀테크 아카데미 14기 수료\n- 2026 서울광역청년센터 나눔서포터즈 · CJ제일제당 나눔냉장고 운영\n- 2026 한국부동산마케팅협회(KREMA) AI 마케팅 기획자 양성 과정 4기 수료\n- 2026 서울대학교 AI 교육 전문가 과정(AIED) 4기 수료\n- 2025 삼성청년SW아카데미(SSAFY) 13기 이수\n- 2024 SSAFY 홍보 앰배서더\n- 2023 강원열린군대 스타트업 프로그램 2군단장상(2위)\n- 2023 육군정보통신학교장 상장 · 육군훈련소 최우수 분대\n- 2022 대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
+      body: "- 2026 국민통합위원회 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 발표\n- 2026 청와대 대통령 주관 청년의날 행사 참석\n- 2026 서초청년네트워크 9기 운영위원회 부위원장 (PRESENT)\n- 2026 국무조정실 온라인 청년참여단 활동\n- 2026 건국대학교 스마트건설기술교육 프로그램 이수\n- 2026 서울시민기자단 취재기자 · 서울청년파트너스 위원\n- 2026 서울특별시 핀테크 아카데미 14기 수료\n- 2026 서울광역청년센터 나눔서포터즈 · CJ제일제당 나눔냉장고 운영\n- 2026 한국부동산마케팅협회(KREMA) AI 마케팅 기획자 양성 과정 4기 수료\n- 2026 서울대학교 AI 교육 전문가 과정(AIED) 4기 수료\n- 2025 삼성청년SW아카데미(SSAFY) 13기 이수\n- 2024 SSAFY 홍보 앰배서더\n- 2023 강원열린군대 스타트업 프로그램 2군단장상(2위)\n- 2023 육군훈련소 최우수 분대 · 훈련소장 상장\n- 2022 육군정보통신학교장 상장\n- 2022 대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
       primary: { label: "궤적 보기", href: "index.html#trajectory" },
       secondary: { label: "경력 상세", href: "career.html#experience" } },
     { id: "tl-seocho", cat: "궤적", tags: ["서초", "청년네트워크", "운영위원회", "부위원장", "거버넌스", "현재"],
@@ -291,8 +291,8 @@
       primary: { label: "상장 원본 보기", href: "gallery.html#cred-award-2023" },
       secondary: { label: "궤적에서 보기", href: "index.html#tl-army-startup" } },
     { id: "tl-army", cat: "궤적", tags: ["육군", "군 복무", "정보통신학교", "훈련소", "최우수 분대", "수상", "상장", "표창", "군대"],
-      title: "2022–2023 — 육군 표창 기록",
-      body: "- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n- 육군훈련소 최우수 분대 선정 · 육군훈련소장 상장 (2023. 4. 4, 분대원 12명 공동 수상)\n상장 원본은 갤러리 자격 섹션에 있습니다. 훼손된 2023년 상장 두 건은 가독성을 돕는 AI 보정 참고 이미지를 함께 두되, 내용 확인은 원본을 기준으로 합니다.",
+      title: "2023–2022 — 육군 표창 기록",
+      body: "- 육군훈련소 최우수 분대 선정 · 육군훈련소장 상장 (2023. 4. 4, 분대원 12명 공동 수상)\n- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n상장 원본은 갤러리 자격 섹션에 있습니다. 훼손된 2023년 상장 두 건은 가독성을 돕는 AI 보정 참고 이미지를 함께 두되, 내용 확인은 원본을 기준으로 합니다.",
       primary: { label: "훈련소장 상장 원본", href: "gallery.html#cred-army-training-2023" },
       secondary: { label: "궤적에서 보기", href: "index.html#tl-army-signal" } },
     { id: "tl-vattenfall", cat: "궤적", tags: ["vattenfall", "독일", "베를린", "해외 연수", "대구광역시교육청", "일마이스터고"],
@@ -415,7 +415,7 @@
   ];
 
   return {
-    version: "2026.10.05",
+    version: "2026.10.13",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
     rank: rank,
