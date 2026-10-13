@@ -145,7 +145,7 @@
     /* ---- 프로젝트 ---- */
     { id: "projects", cat: "프로젝트", tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든", "결과물", "산출물"],
       title: "대표 프로젝트 — 15건",
-      body: "직접 기획·구현한 시스템과 콘텐츠 15건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 12 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 13 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 14 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 15 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://temporary-rushing-ruby-murkdl2.vercel.app) — 웹 문서",
+      body: "직접 기획·구현한 시스템과 콘텐츠 15건입니다.\n- 01 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 02 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 03 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 04 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 05 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n- 06 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 07 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 08 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 09 Louis Vuitton 시네마틱 캠페인 필름\n- 10 Hyperframe × ElevenLabs 멀티미디어 프로모션\n- 11 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 12 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 13 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 14 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 15 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서",
       primary: { label: "작업 전체 보기", href: "index.html#artifacts" },
       secondary: { label: "집캐치 열기", href: "https://zipcatch.vercel.app" } },
     { id: "ed-09", cat: "프로젝트", tags: ["집캐치", "zipcatch", "공공임대", "임대", "lh", "맞춤 추천", "추천 서비스", "공고 알림"],
@@ -176,7 +176,7 @@
     { id: "ed-15", cat: "프로젝트", tags: ["project plaza", "플라자", "유튜브", "youtube", "구글", "google", "제안서", "기능 제안", "prd", "커뮤니티", "dm"],
       title: "Project Plaza — YouTube 커뮤니티 기능 제안서",
       body: "Google Korea(YouTube)를 독자로 쓴 PRD 형식의 외부 기능 제안서입니다. 댓글을 관계의 입구로 바꾸는 Connect·Super Comment·Moments·One Profile 4개 기능과 한국 우선 파일럿, Premium·Lite 패키징, HEART 지표, 크리에이터 클러스터 무작위 배정 실험 설계를 담았습니다. 공개 정보에 기반한 개인 제안이며 Google·YouTube의 공식 자료가 아닙니다.",
-      primary: { label: "제안서 읽기", href: "https://temporary-rushing-ruby-murkdl2.vercel.app" },
+      primary: { label: "제안서 읽기", href: "https://yubin-project-plaza.vercel.app" },
       secondary: { label: "작업물 카드", href: "index.html#ed-15" } },
     { id: "ed-11", cat: "프로젝트", tags: ["salvation", "성경", "말씀", "인문학", "철학", "서재", "묵상", "기도", "교회", "신앙", "pwa", "등불이", "챗봇", "위기"],
       title: "Salvation — 성경 말씀 × 인문학 서재",

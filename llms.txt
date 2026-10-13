@@ -30,7 +30,7 @@
 - [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/)
 - [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app/)
 - [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app/)
-- [Project Plaza — YouTube 커뮤니티 기능 제안서](https://temporary-rushing-ruby-murkdl2.vercel.app)
+- [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app)
 - [전체 작업물](https://yubinxe.github.io/Portfolio/#artifacts)
 
 ## 페이지
