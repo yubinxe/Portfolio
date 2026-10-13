@@ -46,7 +46,7 @@ test("대토론회: 문서 미리보기 파일과 페이지 이미지가 모두 
 
 test("수상자료: 원본이 기본 선택이고 AI 보정본은 라벨로 구분된다", () => {
   const g = read("gallery.html");
-  for (const id of ["cred-army-training-2023", "cred-award-2023"]) {
+  for (const id of ["cred-army-training-2023"]) {
     const i = g.indexOf(`id="${id}"`);
     assert.ok(i > 0, id);
     const block = g.slice(i, g.indexOf("</article>", i));
@@ -55,6 +55,10 @@ test("수상자료: 원본이 기본 선택이고 AI 보정본은 라벨로 구�
     const img = block.match(/<img src="([^"]+)"/)[1];
     assert.ok(!/-ai/.test(img), "기본 이미지는 원본이어야 함: " + img);
   }
+  /* 2군단장 상장은 원본 한 장만 — AI 보정본 없음, 팀원 성명 공개(2026-10-13 사용자 결정) */
+  const c = g.slice(g.indexOf('id="cred-award-2023"'), g.indexOf("</article>", g.indexOf('id="cred-award-2023"')));
+  assert.ok(!/AI 보정|data-state="ai"|-ai/.test(c), "2군단장 상장은 원본만");
+  assert.match(c, /award-corps-2023-600\.jpg/);
   assert.match(g, /내용 확인은 원본을 기준으로 합니다/);
   assert.ok(!existsSync(path.join(ROOT, "images/award-2023.jpg")), "가림 처리 전 원본 공개본은 제거");
 });

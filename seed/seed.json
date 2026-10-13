@@ -1,5 +1,5 @@
 {
-  "version": "2026.10.13",
+  "version": "2026.10.13b",
   "tables": {
     "KnowledgeCards": [
       {
@@ -14,7 +14,7 @@
         "SecondaryHref": "index.html#composite",
         "SecondaryInferred": true,
         "Anchor": "arsenal",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -29,7 +29,7 @@
         "SecondaryHref": "index.html#arsenal",
         "SecondaryInferred": false,
         "Anchor": "composite",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -44,7 +44,7 @@
         "SecondaryHref": "mailto:yubin120866@gmail.com",
         "SecondaryInferred": false,
         "Anchor": "contact",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -59,7 +59,7 @@
         "SecondaryHref": "index.html#credentials",
         "SecondaryInferred": false,
         "Anchor": "credentials",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -74,7 +74,7 @@
         "SecondaryHref": "career.html#practice-ai",
         "SecondaryInferred": false,
         "Anchor": "dom-02",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -89,7 +89,7 @@
         "SecondaryHref": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app",
         "SecondaryInferred": false,
         "Anchor": "dom-03",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -104,7 +104,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": false,
         "Anchor": "dom-06",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -119,7 +119,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "dom-04",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -134,7 +134,7 @@
         "SecondaryHref": "career.html#practice-strategy",
         "SecondaryInferred": false,
         "Anchor": "dom-01",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -149,7 +149,7 @@
         "SecondaryHref": "career.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "lectures",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -164,7 +164,7 @@
         "SecondaryHref": "index.html#ed-01",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -179,7 +179,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -194,7 +194,7 @@
         "SecondaryHref": "index.html#ed-03",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -209,7 +209,7 @@
         "SecondaryHref": "index.html#ed-04",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -224,7 +224,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -239,7 +239,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -254,7 +254,7 @@
         "SecondaryHref": "index.html#artifacts",
         "SecondaryInferred": true,
         "Anchor": "ed-07",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -269,7 +269,7 @@
         "SecondaryHref": "index.html#artifacts",
         "SecondaryInferred": true,
         "Anchor": "ed-08",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -284,7 +284,7 @@
         "SecondaryHref": "index.html#ed-09",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -299,7 +299,7 @@
         "SecondaryHref": "index.html#ed-10",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -314,7 +314,7 @@
         "SecondaryHref": "index.html#ed-11",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -329,7 +329,7 @@
         "SecondaryHref": "index.html#ed-12",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -344,7 +344,7 @@
         "SecondaryHref": "index.html#ed-13",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -359,7 +359,7 @@
         "SecondaryHref": "index.html#ed-14",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -374,7 +374,7 @@
         "SecondaryHref": "index.html#ed-15",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -389,7 +389,7 @@
         "SecondaryHref": "gallery.html#credentials",
         "SecondaryInferred": false,
         "Anchor": "archive",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -404,7 +404,7 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "lec-01",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -419,7 +419,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "lec-02",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -434,7 +434,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "lec-03",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -449,7 +449,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "lec-04",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -464,7 +464,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "lec-05",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -479,7 +479,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "lec-06",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -494,7 +494,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "lec-07",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -509,7 +509,7 @@
         "SecondaryHref": "index.html#ed-01",
         "SecondaryInferred": false,
         "Anchor": "lec-08",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -524,7 +524,7 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "basis",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -539,7 +539,7 @@
         "SecondaryHref": "index.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -554,7 +554,7 @@
         "SecondaryHref": "index.html#about",
         "SecondaryInferred": true,
         "Anchor": "artifacts",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -569,7 +569,7 @@
         "SecondaryHref": "career.html#media",
         "SecondaryInferred": false,
         "Anchor": "g-yonhap",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -584,7 +584,7 @@
         "SecondaryHref": "index.html#about",
         "SecondaryInferred": false,
         "Anchor": "practice",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -599,7 +599,7 @@
         "SecondaryHref": "career.html#experience",
         "SecondaryInferred": false,
         "Anchor": "manifesto",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -614,7 +614,7 @@
         "SecondaryHref": "https://zipcatch.vercel.app",
         "SecondaryInferred": false,
         "Anchor": "artifacts",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -629,7 +629,7 @@
         "SecondaryHref": "index.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "composite",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -644,14 +644,14 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "tl-snu-aied",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
         "Id": "tl-army",
         "Category": "궤적",
         "Title": "2023–2022 — 육군 표창 기록",
-        "Body": "- 육군훈련소 최우수 분대 선정 · 육군훈련소장 상장 (2023. 4. 4, 분대원 12명 공동 수상)\n- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n상장 원본은 갤러리 자격 섹션에 있습니다. 훼손된 2023년 상장 두 건은 가독성을 돕는 AI 보정 참고 이미지를 함께 두되, 내용 확인은 원본을 기준으로 합니다.",
+        "Body": "- 육군훈련소 최우수 분대 선정 · 육군훈련소장 상장 (2023. 4. 4, 분대원 12명 공동 수상)\n- 육군정보통신학교장(준장) 상장 — 軍 특성화고 현장실습 기간 학업성적 우수 · 희생정신 (2022. 7. 1, 제183호)\n상장 원본은 갤러리 자격 섹션에 있습니다. 육군훈련소장 상장은 훼손이 있어 가독성을 돕는 AI 보정 참고 이미지를 함께 두되, 내용 확인은 원본을 기준으로 합니다. 2군단장 상장은 원본 한 장만 둡니다.",
         "Tags": "군 복무, 군대, 상장, 수상, 육군, 정보통신학교, 최우수 분대, 표창, 훈련소",
         "PrimaryLabel": "훈련소장 상장 원본",
         "PrimaryHref": "gallery.html#cred-army-training-2023",
@@ -659,7 +659,7 @@
         "SecondaryHref": "index.html#tl-army-signal",
         "SecondaryInferred": false,
         "Anchor": "cred-army-training-2023",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -674,7 +674,7 @@
         "SecondaryHref": "index.html#tl-army-startup",
         "SecondaryInferred": false,
         "Anchor": "cred-award-2023",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -689,7 +689,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "tl-fintech",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -704,7 +704,7 @@
         "SecondaryHref": "career.html#cv-konkuk",
         "SecondaryInferred": false,
         "Anchor": "tl-konkuk",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -719,7 +719,7 @@
         "SecondaryHref": "career.html#cv-krema",
         "SecondaryInferred": false,
         "Anchor": "tl-krema",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -734,7 +734,7 @@
         "SecondaryHref": "gallery.html#national-debate",
         "SecondaryInferred": false,
         "Anchor": "tl-national-debate",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -749,7 +749,7 @@
         "SecondaryHref": "career.html#cv-seoul-press",
         "SecondaryInferred": false,
         "Anchor": "tl-seoul-press",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -764,7 +764,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "tl-seocho",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -779,7 +779,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "cv-sharing",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -794,7 +794,7 @@
         "SecondaryHref": "index.html#tl-ssafy",
         "SecondaryInferred": false,
         "Anchor": "g-ssafy-presentation",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -809,7 +809,7 @@
         "SecondaryHref": "career.html#cv-vattenfall",
         "SecondaryInferred": false,
         "Anchor": "tl-vattenfall",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -824,7 +824,7 @@
         "SecondaryHref": "gallery.html#youth-day",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-day",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -839,7 +839,7 @@
         "SecondaryHref": "career.html#cv-youth-panel",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-panel",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       },
       {
@@ -854,7 +854,7 @@
         "SecondaryHref": "career.html#experience",
         "SecondaryInferred": false,
         "Anchor": "trajectory",
-        "Source": "kb.js@2026.10.13",
+        "Source": "kb.js@2026.10.13b",
         "Verified": true
       }
     ],
@@ -1147,5 +1147,5 @@
       }
     ]
   },
-  "hash": "4a4002fa47d63976"
+  "hash": "db8ded3877c23c0b"
 }
