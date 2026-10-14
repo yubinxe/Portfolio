@@ -131,8 +131,8 @@
 .awards__head .eyebrow { margin: 0 0 10px; }
 .awards__head h3 { margin: 0 0 10px; font-size: clamp(1.2rem, 2.2vw, 1.55rem); color: var(--navy); line-height: 1.45; }
 .awards__note { margin: 0; padding: 12px 14px; border-left: 2px solid var(--gold); background: var(--paper); font-size: .88rem; line-height: 1.75; color: var(--ink-soft); }
-.awards__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.4vw, 30px); }
-@media (max-width: 760px) { .awards__grid { grid-template-columns: 1fr; } }
+.awards__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 30px); }
+@media (max-width: 900px) { .awards__grid { grid-template-columns: 1fr; } }
 .award { display: flex; flex-direction: column; padding: clamp(14px, 1.8vw, 20px); background: var(--paper); border: 1px solid var(--hair); }
 .award__head h3 { margin: 10px 0 6px; font-size: 1.04rem; font-weight: 750; line-height: 1.45; color: var(--ink); }
 .award__head p { margin: 0 0 14px; font-size: .86rem; line-height: 1.7; color: var(--ink-soft); }
@@ -214,3 +214,6 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .fold__t strong em { color: var(--gold-text) !important; }
 #contact .contact-eyebrow { color: var(--gold-light) !important; }
 .award__solo { display: flex; align-items: center; min-height: 46px; margin: 0 0 10px; font-size: .8rem; font-weight: 650; letter-spacing: .02em; color: var(--navy); }
+@media (min-width: 901px) { .awards__grid { grid-template-rows: auto auto auto auto; row-gap: 0; } .award { display: grid; grid-row: span 4; grid-template-rows: subgrid; align-content: start; } .award__head p { margin-bottom: 0; } .award__solo { align-self: end; } }
+.award__frame a { position: relative; display: block; overflow: hidden; }
+.award__frame a img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
