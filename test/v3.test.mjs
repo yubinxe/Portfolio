@@ -44,22 +44,19 @@ test("대토론회: 문서 미리보기 파일과 페이지 이미지가 모두 
   for (const n of ["박장현", "한도연", "유경현", "나인채", "구고은"]) assert.ok(!pub.includes(n), "공개 사본에 팀원 성명: " + n);
 });
 
-test("수상자료: 원본이 기본 선택이고 AI 보정본은 라벨로 구분된다", () => {
+test("수상자료: 상장 세 장 모두 원본 한 장만, 최신순", () => {
   const g = read("gallery.html");
-  for (const id of ["cred-army-training-2023"]) {
+  /* 상장 세 장 모두 원본 한 장만 — AI 보정본 없음(2026-10-14 사용자 결정), 최신순 */
+  const ids = ["cred-award-2023", "cred-army-training-2023", "cred-award-2022"];
+  let last = -1;
+  for (const id of ids) {
     const i = g.indexOf(`id="${id}"`);
-    assert.ok(i > 0, id);
+    assert.ok(i > last, id + " 순서");
+    last = i;
     const block = g.slice(i, g.indexOf("</article>", i));
-    assert.match(block, /aria-selected="true"[^>]*data-state="orig"/);
-    assert.match(block, /AI 보정 참고/);
-    const img = block.match(/<img src="([^"]+)"/)[1];
-    assert.ok(!/-ai/.test(img), "기본 이미지는 원본이어야 함: " + img);
+    assert.ok(!/AI 보정|data-state="ai"|-ai[-.]/.test(block), id + " 원본만");
+    assert.match(block, /<b>원본<\/b>/);
   }
-  /* 2군단장 상장은 원본 한 장만 — AI 보정본 없음, 팀원 성명 공개(2026-10-13 사용자 결정) */
-  const c = g.slice(g.indexOf('id="cred-award-2023"'), g.indexOf("</article>", g.indexOf('id="cred-award-2023"')));
-  assert.ok(!/AI 보정|data-state="ai"|-ai/.test(c), "2군단장 상장은 원본만");
-  assert.match(c, /award-corps-2023-600\.jpg/);
-  assert.match(g, /내용 확인은 원본을 기준으로 합니다/);
   assert.ok(!existsSync(path.join(ROOT, "images/award-2023.jpg")), "가림 처리 전 원본 공개본은 제거");
 });
 
