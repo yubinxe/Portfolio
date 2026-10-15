@@ -26,6 +26,7 @@
 ## 대표 작업
 - [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/)
 - [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app/)
+- [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app/)
 - [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/)
 - [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/)
 - [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app/)
