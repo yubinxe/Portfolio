@@ -39,7 +39,7 @@ test("첫 화면 자산이 예산 안에 있다", async () => {
   const { statSync } = await import("node:fs");
   const kb = (p) => statSync(path.join(ROOT, p)).size / 1024;
   const budget = [
-    ["dist/sections.js", 94], /* 2026-10: Edition 13–15(곳간 · 성분관 · Project Plaza) 카드 3장으로 +2KB — 상한 상향 */
+    ["dist/sections.js", 96], /* 2026-10: Edition 13–15 카드 +2KB, Edition 16(법조시장 한눈에) +1KB — 상한 상향 */
     ["dist/tweaks-panel.js", 40],
     ["dist/icons.js", 12],
     ["dist/app.js", 8],
