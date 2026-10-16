@@ -61,11 +61,11 @@ test("Person 구조화 데이터가 핵심 필드를 담는다", () => {
   assert.ok(person.sameAs.every((u) => /^https:\/\//.test(u)), "sameAs 는 절대 URL");
 });
 
-test("강의 ItemList 가 8과정이고 앵커 URL 이 실제 id 와 맞는다", () => {
+test("강의 ItemList 가 12과정이고 앵커 URL 이 실제 id 와 맞는다", () => {
   const graph = ldBlocks(read("index.html"))[0]["@graph"];
   const list = graph.find((n) => n["@type"] === "ItemList");
-  assert.equal(list.numberOfItems, 8);
-  assert.equal(list.itemListElement.length, 8);
+  assert.equal(list.numberOfItems, 12);
+  assert.equal(list.itemListElement.length, 12);
   const sections = read("sections.jsx");
   for (const el of list.itemListElement) {
     const id = el.item.url.split("#")[1];

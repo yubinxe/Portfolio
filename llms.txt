@@ -37,7 +37,7 @@
 ## 페이지
 - [메인](https://yubinxe.github.io/Portfolio/)
 - [경력 상세](https://yubinxe.github.io/Portfolio/career.html)
-- [전략기획 AI 강의 — 2트랙 8과정](https://yubinxe.github.io/Portfolio/lecture.html)
+- [AI · 부동산(자산관리) 강의 — 3트랙 12과정](https://yubinxe.github.io/Portfolio/lecture.html)
 - [활동 갤러리](https://yubinxe.github.io/Portfolio/gallery.html)
 
 ## 교육 · 수상

@@ -7,10 +7,10 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (f) => readFileSync(path.join(ROOT, f), "utf8");
 
-test("강의 페이지: 8개 과정마다 해당 courseId 로 챗봇 신청서를 연다", () => {
+test("강의 페이지: 12개 과정마다 해당 courseId 로 챗봇 신청서를 연다", () => {
   const h = read("lecture.html");
-  for (let i = 1; i <= 8; i++) {
-    const id = "lec-0" + i;
+  for (let i = 1; i <= 12; i++) {
+    const id = "lec-" + String(i).padStart(2, "0");
     assert.ok(h.includes(`id="${id}"`), id + " 앵커");
     assert.ok(h.includes(`data-lecture-consult="${id}"`), id + " 의뢰 CTA");
   }

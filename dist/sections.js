@@ -209,7 +209,9 @@ const LECTURE_TRACKS = [
 { key: "foundation", label: "Track A — AI 파운데이션", ko: "도구를 쓰는 사람에서, 도구를 설계하는 사람으로",
   desc: "개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다." },
 { key: "domain", label: "Track B — 도메인 적용", ko: "만들어 본 사람만 가르칠 수 있는 것",
-  desc: "직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." }];
+  desc: "직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
+{ key: "realestate", label: "Track C — 부동산 · 자산관리", ko: "자산은 숫자로, 계약은 근거로",
+  desc: "AI와 나란히 서는 두 번째 전문 영역. 분양대행자 자격과 KREMA 4기, 법무법인 경국의 송무 실무, 정비사업 데이터 자동화와 부동산 직무 체험관 설계에서 나온 네 과정입니다." }];
 
 
 const LECTURES = [
@@ -279,7 +281,41 @@ const LECTURES = [
   hours: "2시간",
   modules: ["대상에 맞춘 메시지 재구성", "카드뉴스·영상 포맷 설계", "정책 제안으로 잇는 커뮤니케이션"],
   basis: "서울시민기자단 · 연합뉴스TV · 청년 정책 거버넌스",
-  proof: { label: "지방선거 카드뉴스", href: "#ed-01" } }];
+  proof: { label: "지방선거 카드뉴스", href: "#ed-01" } },
+
+/* ---- Track C — 부동산 · 자산관리 ---- */
+{ id: "lec-09", n: "09", track: "realestate", color: "var(--apple)", Icon: Home,
+  title: "부동산 자산관리 입문 — 임대수익을 숫자로 읽기",
+  lead: "월세 합계가 아니라 순영업소득(NOI)으로 자산을 봅니다. 공실·경비·환원율 세 숫자로 설명하는 법을 익힙니다.",
+  who: "임대인 · 자산관리 입문자 · 중개·분양 실무자",
+  hours: "3시간(계산 실습)",
+  modules: ["가능총수익 → 공실·대손 → 유효총수익", "운영경비와 NOI — 이자·감가상각을 빼지 않는 이유", "환원율 1%p가 자산가치를 바꾸는 폭"],
+  basis: "감정평가사 필드워크 — 자산관리·리츠 직무 체험 설계",
+  proof: { label: "부동산 직무 체험관", href: "#ed-10" } },
+{ id: "lec-10", n: "10", track: "realestate", color: "var(--butter)", Icon: BarChart,
+  title: "분양 마케팅과 광고 윤리 — 판매보다 신뢰",
+  lead: "근거 없는 '확정'·'보장' 문구가 계약 분쟁이 되는 지점을 미리 막고, 상담을 데이터로 설계합니다.",
+  who: "분양대행 · 시행사 마케팅 · 상담 실무자",
+  hours: "3시간",
+  modules: ["관찰과 주장 구분 — 입지·조망 문구 검수", "청약 가점·자격을 상담에서 다시 계산하는 법", "채널별 예산과 상담 전환 설계"],
+  basis: "분양대행자 자격 · KREMA 4기 부동산 마케팅 기획자 과정",
+  proof: { label: "집캐치 청약 추천 서비스", href: "#ed-09" } },
+{ id: "lec-11", n: "11", track: "realestate", color: "var(--sky)", Icon: Scale,
+  title: "전세·임대차 안전 점검 — 계약 전에 확인할 것",
+  lead: "대항력·확정일자·등기부를 잔금일 기준으로 다시 확인하는 절차를 익힙니다. 법률 자문이 아닌 점검 교육입니다.",
+  who: "사회초년생 · 청년 임차인 · 중개 보조 실무자",
+  hours: "2시간",
+  modules: ["대항력과 우선변제권이 생기는 시점", "등기사항증명서 갑구·을구 읽기", "잔금일 위험과 특약 문구"],
+  basis: "법무법인 경국 송무 실무 · 필드워크 공인중개사 트랙 설계",
+  proof: { label: "전세 안전 점검 체험", href: "https://appraiser-fieldwork.vercel.app/" } },
+{ id: "lec-12", n: "12", track: "realestate", color: "var(--pink)", Icon: MapPin,
+  title: "개발·정비사업을 데이터로 읽기",
+  lead: "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.",
+  who: "시행 · 정비사업 조합 실무 · 부동산 기획 담당자",
+  hours: "4시간(데이터 실습)",
+  modules: ["용적률·건폐율로 사업 규모 잡기", "분양가·공사비 민감도 분석", "누리장터 용역 단가 수집과 비교"],
+  basis: "정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설",
+  proof: { label: "정비사업 용역비 자동 수집", href: "#ed-08" } }];
 
 
 const LECTURE_BASIS = [
@@ -916,14 +952,14 @@ function Lectures() {
     React.createElement("section", { id: "lectures", ref: ref, className: "side-practice", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .22 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 Lectures", titleEn: "The Lectures", titleKo: "AI \uAC15\uC758 \uD504\uB85C\uADF8\uB7A8" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "Side Practice \u2014 Lectures", titleEn: "The Lectures", titleKo: "AI \xB7 \uBD80\uB3D9\uC0B0 \uAC15\uC758 \uD504\uB85C\uADF8\uB7A8" }), /*#__PURE__*/
 
     React.createElement("div", { className: "side-note reveal" }, /*#__PURE__*/
     React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, "\uBCF8\uC5C5\uC740 ", /*#__PURE__*/
     React.createElement("strong", null, "AI \uC804\uB7B5\uAE30\uD68D"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
-    React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC124\uACC4\uD55C \uD504\uB85C\uADF8\uB7A8"), "\uC73C\uB85C, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBA3C\uC800 \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4."
-
+    React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC124\uACC4\uD55C \uD504\uB85C\uADF8\uB7A8"), "\uC73C\uB85C, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBA3C\uC800 \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4. ", /*#__PURE__*/
+    React.createElement("strong", null, "\uAC15\uC758 \uC758\uB8B0\uB294 \uC5B8\uC81C\uB4E0 \uBC1B\uC2B5\uB2C8\uB2E4.")
     )
     ), /*#__PURE__*/
 
@@ -931,7 +967,7 @@ function Lectures() {
     React.createElement("p", { className: "font-myeongjo" }, "\uB9CC\uB4E4\uC5B4 \uBCF8 \uC0AC\uB78C\uB9CC \uAC00\uB974\uCE60 \uC218 \uC788\uB294 \uAC83\uC774 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 4\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uD604\uC7AC \uB450 \uD2B8\uB799, \uC5EC\uB35F \uACFC\uC815\uC758 \uCEE4\uB9AC\uD058\uB7FC\uC744 \uC124\uACC4\uD574 \uB450\uC5C8\uC2B5\uB2C8\uB2E4."
+    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 4\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uD604\uC7AC AI \uB450 \uD2B8\uB799\uACFC \uBD80\uB3D9\uC0B0\xB7\uC790\uC0B0\uAD00\uB9AC \uD55C \uD2B8\uB799, \uC5F4\uB450 \uACFC\uC815\uC758 \uCEE4\uB9AC\uD058\uB7FC\uC744 \uC124\uACC4\uD574 \uB450\uC5C8\uC2B5\uB2C8\uB2E4."
 
 
 
