@@ -1048,6 +1048,8 @@
     { id: "lec-03", n: "03", title: "바이브 코딩" }, { id: "lec-04", n: "04", title: "하네스 엔지니어링" },
     { id: "lec-05", n: "05", title: "실무자를 위한 전략기획 AI" }, { id: "lec-06", n: "06", title: "공공데이터로 시장을 읽는 법" },
     { id: "lec-07", n: "07", title: "생성형 AI 브랜드 필름 제작" }, { id: "lec-08", n: "08", title: "제도의 언어를 대중의 언어로" },
+    { id: "lec-09", n: "09", title: "부동산 자산관리 입문" }, { id: "lec-10", n: "10", title: "분양 마케팅과 광고 윤리" },
+    { id: "lec-11", n: "11", title: "전세·임대차 안전 점검" }, { id: "lec-12", n: "12", title: "개발·정비사업을 데이터로 읽기" },
   ];
   var CUSTOM_COURSE = { id: "custom", n: "", title: "맞춤 구성 상담" };
   function courseOf(id) {

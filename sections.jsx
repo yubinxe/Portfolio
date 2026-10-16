@@ -209,6 +209,8 @@ const LECTURE_TRACKS = [
     desc: "개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다." },
   { key: "domain", label: "Track B — 도메인 적용", ko: "만들어 본 사람만 가르칠 수 있는 것",
     desc: "직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
+  { key: "realestate", label: "Track C — 부동산 · 자산관리", ko: "자산은 숫자로, 계약은 근거로",
+    desc: "AI와 나란히 서는 두 번째 전문 영역. 분양대행자 자격과 KREMA 4기, 법무법인 경국의 송무 실무, 정비사업 데이터 자동화와 부동산 직무 체험관 설계에서 나온 네 과정입니다." },
 ];
 
 const LECTURES = [
@@ -279,6 +281,40 @@ const LECTURES = [
     modules: ["대상에 맞춘 메시지 재구성", "카드뉴스·영상 포맷 설계", "정책 제안으로 잇는 커뮤니케이션"],
     basis: "서울시민기자단 · 연합뉴스TV · 청년 정책 거버넌스",
     proof: { label: "지방선거 카드뉴스", href: "#ed-01" } },
+
+  /* ---- Track C — 부동산 · 자산관리 ---- */
+  { id: "lec-09", n: "09", track: "realestate", color: "var(--apple)", Icon: Home,
+    title: "부동산 자산관리 입문 — 임대수익을 숫자로 읽기",
+    lead: "월세 합계가 아니라 순영업소득(NOI)으로 자산을 봅니다. 공실·경비·환원율 세 숫자로 설명하는 법을 익힙니다.",
+    who: "임대인 · 자산관리 입문자 · 중개·분양 실무자",
+    hours: "3시간(계산 실습)",
+    modules: ["가능총수익 → 공실·대손 → 유효총수익", "운영경비와 NOI — 이자·감가상각을 빼지 않는 이유", "환원율 1%p가 자산가치를 바꾸는 폭"],
+    basis: "감정평가사 필드워크 — 자산관리·리츠 직무 체험 설계",
+    proof: { label: "부동산 직무 체험관", href: "#ed-10" } },
+  { id: "lec-10", n: "10", track: "realestate", color: "var(--butter)", Icon: BarChart,
+    title: "분양 마케팅과 광고 윤리 — 판매보다 신뢰",
+    lead: "근거 없는 '확정'·'보장' 문구가 계약 분쟁이 되는 지점을 미리 막고, 상담을 데이터로 설계합니다.",
+    who: "분양대행 · 시행사 마케팅 · 상담 실무자",
+    hours: "3시간",
+    modules: ["관찰과 주장 구분 — 입지·조망 문구 검수", "청약 가점·자격을 상담에서 다시 계산하는 법", "채널별 예산과 상담 전환 설계"],
+    basis: "분양대행자 자격 · KREMA 4기 부동산 마케팅 기획자 과정",
+    proof: { label: "집캐치 청약 추천 서비스", href: "#ed-09" } },
+  { id: "lec-11", n: "11", track: "realestate", color: "var(--sky)", Icon: Scale,
+    title: "전세·임대차 안전 점검 — 계약 전에 확인할 것",
+    lead: "대항력·확정일자·등기부를 잔금일 기준으로 다시 확인하는 절차를 익힙니다. 법률 자문이 아닌 점검 교육입니다.",
+    who: "사회초년생 · 청년 임차인 · 중개 보조 실무자",
+    hours: "2시간",
+    modules: ["대항력과 우선변제권이 생기는 시점", "등기사항증명서 갑구·을구 읽기", "잔금일 위험과 특약 문구"],
+    basis: "법무법인 경국 송무 실무 · 필드워크 공인중개사 트랙 설계",
+    proof: { label: "전세 안전 점검 체험", href: "https://appraiser-fieldwork.vercel.app/" } },
+  { id: "lec-12", n: "12", track: "realestate", color: "var(--pink)", Icon: MapPin,
+    title: "개발·정비사업을 데이터로 읽기",
+    lead: "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.",
+    who: "시행 · 정비사업 조합 실무 · 부동산 기획 담당자",
+    hours: "4시간(데이터 실습)",
+    modules: ["용적률·건폐율로 사업 규모 잡기", "분양가·공사비 민감도 분석", "누리장터 용역 단가 수집과 비교"],
+    basis: "정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설",
+    proof: { label: "정비사업 용역비 자동 수집", href: "#ed-08" } },
 ];
 
 const LECTURE_BASIS = [
@@ -915,14 +951,14 @@ function Lectures() {
     <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Side Practice — Lectures" titleEn="The Lectures" titleKo="AI 강의 프로그램" />
+        <SectionHead eyebrow="Side Practice — Lectures" titleEn="The Lectures" titleKo="AI · 부동산 강의 프로그램" />
 
         <div className="side-note reveal">
           <span className="side-note__badge font-sans">In Preparation</span>
           <p className="font-ko">
             본업은 <strong>AI 전략기획</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
             <strong> 별도로 설계한 프로그램</strong>으로, 아직 출강 이력은 없습니다.
-            커리큘럼과 근거를 먼저 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다.
+            커리큘럼과 근거를 먼저 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다. <strong>강의 의뢰는 언제든 받습니다.</strong>
           </p>
         </div>
 
@@ -933,7 +969,7 @@ function Lectures() {
           <p className="font-ko lec-intro__sub">
             SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처와 교수법,
             KREMA 4기의 시장 데이터 전략 — 배운 것을 실제로 만들어 운영해 본 뒤에 강의 모듈로 옮겼습니다.
-            현재 두 트랙, 여덟 과정의 커리큘럼을 설계해 두었습니다.
+            현재 AI 두 트랙과 부동산·자산관리 한 트랙, 열두 과정의 커리큘럼을 설계해 두었습니다.
           </p>
         </div>
 
