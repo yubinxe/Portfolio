@@ -164,8 +164,8 @@
 
     /* ---- 프로젝트 ---- */
     { id: "projects", cat: "프로젝트", tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든", "결과물", "산출물"],
-      title: "대표 프로젝트 — 16건",
-      body: "직접 기획·구현한 작업 16건입니다. 생활과 업무 현장에 쓰이는 시스템 6건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 04 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 05 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 06 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 07 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 08 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 09 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 10 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 11 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 12 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 13 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 14 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 15 Louis Vuitton 시네마틱 캠페인 필름\n- 16 Hyperframe × ElevenLabs 멀티미디어 프로모션",
+      title: "대표 프로젝트 — 17건",
+      body: "직접 기획·구현한 작업 17건입니다. 생활과 업무 현장에 쓰이는 시스템 7건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 05 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 06 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 07 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 08 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 09 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 10 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 11 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 12 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 13 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 14 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 15 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 16 Louis Vuitton 시네마틱 캠페인 필름\n- 17 Hyperframe × ElevenLabs 멀티미디어 프로모션",
       primary: { label: "작업 전체 보기", href: "index.html#artifacts" },
       secondary: { label: "집캐치 열기", href: "https://zipcatch.vercel.app" } },
     { id: "ed-09", cat: "프로젝트", tags: ["집캐치", "zipcatch", "공공임대", "임대", "lh", "맞춤 추천", "추천 서비스", "공고 알림"],
@@ -183,6 +183,11 @@
       body: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 기획팀이 바로 전략 판단으로 옮기도록 만든 상황판입니다. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공합니다. 출처 없는 예시 수치는 넣지 않고, 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 줍니다.",
       primary: { label: "상황판 보기", href: "https://legal-pulse-pearl.vercel.app" },
       secondary: { label: "작업물 카드", href: "index.html#ed-16" } },
+    { id: "ed-17", cat: "프로젝트", tags: ["atelier", "atelier ax", "아틀리에", "ai agent", "ai 에이전트", "에이전트", "ai 직원", "ai 인력", "관제", "승인", "agent dashboard"],
+      title: "Atelier AX — AI 에이전트 인력 운영 관제",
+      body: "AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드입니다. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 한눈에 보여 줍니다. 서버·AI와 연결되지 않고 브라우저 안에서만 도는 공개 시연 모드가 있으며, 시연의 가상 활동은 실제 성과 지표에 합산하지 않습니다.",
+      primary: { label: "관제 화면 보기", href: "https://atelier-ax.vercel.app/performance/" },
+      secondary: { label: "작업물 카드", href: "index.html#ed-17" } },
     { id: "ed-12", cat: "프로젝트", tags: ["국정 한눈에", "국정", "상황판", "대시보드", "대통령 동정", "대통령실", "정부 정책", "국회", "국무회의", "증시", "환율", "뉴스", "rss", "서버리스"],
       title: "국정 한눈에 — 국민용 국정 상황판",
       body: "대통령 동정·대통령실·정부 정책·국무회의와 국회, 증시·환율·부동산·산업 등 국정과 경제를 한 화면에서 보는 국민용 상황판입니다. 공개 뉴스 RSS와 시세를 Vercel 서버리스 함수가 모아 섹션별로 배정하고, 중복 기사는 먼저 배정된 섹션에만 남깁니다. 피드에 도메인으로 찍혀 오는 출처는 독자가 아는 매체명으로 바꾸고, 포털은 매체가 아니므로 출처·언론사 수에서 뺍니다. 기사 사진은 원문 페이지의 대표 사진(og:image)을 씁니다. 수집 결과는 CDN에 20분 캐시하고 만료 후에도 이전 응답을 즉시 내주며 뒤에서 갱신하며, 수집이 실패하면 저장된 스냅샷으로 대체합니다. 프런트엔드는 외부 라이브러리 없는 ES 모듈이고 라이트·다크 모드를 지원합니다.",
@@ -450,7 +455,7 @@
   ];
 
   return {
-    version: "2026.10.16c",
+    version: "2026.10.19a",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
     rank: rank,
