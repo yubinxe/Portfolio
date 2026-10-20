@@ -60,7 +60,7 @@ function Nav() {
     React.createElement("img", { src: "images/favicon.svg?v=4", alt: "YK \u2014 \uAE40\uC720\uBE48 CI", width: "32", height: "32", style: { display: "block" } }), /*#__PURE__*/
     React.createElement("span", { className: "hnav__name" }, /*#__PURE__*/
     React.createElement("b", { className: "font-serif" }, "Yubin Kim"), /*#__PURE__*/
-    React.createElement("small", null, "AI Strategy & Planning")
+    React.createElement("small", null, "AI Strategy & Consulting")
     )
     ), /*#__PURE__*/
     React.createElement("nav", { "aria-label": "\uC8FC\uC694 \uBA54\uB274", style: { display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }, className: "font-sans" }, /*#__PURE__*/
@@ -92,15 +92,15 @@ function Hero() {
     React.createElement("div", { className: "wrap reveal", style: { position: "relative", zIndex: 2, textAlign: "center" } }, /*#__PURE__*/
     React.createElement("div", { className: "menu-rule", style: { maxWidth: 210, margin: "0 auto 18px" } }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
     React.createElement("p", { className: "font-sans hero-kicker" }, "Seoul \xB7 Portfolio 2026"), /*#__PURE__*/
-    React.createElement("p", { className: "eyebrow hero-eyebrow" }, "AI Strategy & Planning"), /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow hero-eyebrow" }, "AI Strategy & Consulting"), /*#__PURE__*/
     React.createElement("h1", { className: "font-serif", style: { fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 } }, /*#__PURE__*/
-    React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5\uAE30\uD68D"),
+    React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \uCEE8\uC124\uD305"),
     "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms` } }, c)), /*#__PURE__*/
     React.createElement("br", null),
     "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: `k${i}`, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms` } }, c))
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 } },
-    "AI 전략기획 · 법무법인 경국 — Strategy · Automation · Data"
+    "AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" } }, "\uB370\uC774\uD130\uB85C \uD310\uB2E8\uC758 \uADFC\uAC70\uB97C \uB9CC\uB4E4\uACE0,", /*#__PURE__*/
     React.createElement("br", null), "AI\uB85C \uC2E4\uD589\uC758 \uC18D\uB3C4\uB97C \uB9CC\uB4ED\uB2C8\uB2E4."
@@ -130,7 +130,7 @@ function Sticker({ cls = "", style = {}, children }) {
 
 /* ============================================================ MARQUEE */
 function Marquee() {
-  const items = ["YUBIN KIM OFFICE", "전략기획 × AI", "STRATEGIC PLANNING", "PROCESS AUTOMATION", "DATA-DRIVEN DECISIONS", "AI 강의 · LECTURES", "김유빈 · ETHAN KIM"];
+  const items = ["YUBIN KIM OFFICE", "전략 컨설팅 × AI", "STRATEGY CONSULTING", "PROCESS AUTOMATION", "DATA-DRIVEN DECISIONS", "AI 강의 · LECTURES", "김유빈 · ETHAN KIM"];
   const Row = () => /*#__PURE__*/
   React.createElement("span", null, items.map((t, i) => /*#__PURE__*/
   React.createElement("span", { key: i, style: { display: "inline-flex", alignItems: "center", gap: "2.5rem" } }, /*#__PURE__*/
@@ -184,7 +184,7 @@ function Ledger() {
 
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
-{ n: "01", core: true, ko: "AI 전략기획", short: "전략", en: "AI Strategy & Planning",
+{ n: "01", core: true, ko: "AI 전략 컨설팅", short: "전략", en: "AI Strategy & Consulting",
   desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 정비사업 용역비 수집으로 시장 단가 비교와 사업성 검토의 기준선을 만들었고, VOC 트리아지에서는 무엇을 리스크로 볼지의 판단 기준을 설계했습니다.",
   tags: ["문제 정의 · 우선순위 설계", "사업성 검토"] },
 { n: "02", core: true, ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
@@ -209,7 +209,7 @@ const LECTURE_TRACKS = [
 { key: "foundation", label: "Track A — AI 파운데이션", ko: "도구를 쓰는 사람에서, 도구를 설계하는 사람으로",
   desc: "개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다." },
 { key: "domain", label: "Track B — 도메인 적용", ko: "만들어 본 사람만 가르칠 수 있는 것",
-  desc: "직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
+  desc: "직접 설계·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
 { key: "realestate", label: "Track C — 부동산 · 자산관리", ko: "자산은 숫자로, 계약은 근거로",
   desc: "AI와 나란히 서는 두 번째 전문 영역. 분양대행자 자격과 KREMA 4기, 법무법인 경국의 송무 실무, 정비사업 데이터 자동화와 부동산 직무 체험관 설계에서 나온 네 과정입니다." }];
 
@@ -227,7 +227,7 @@ const LECTURES = [
 { id: "lec-02", n: "02", track: "foundation", color: "var(--lilac)", Icon: Sparkle,
   title: "프롬프트 엔지니어링 — 문장이 아니라 구조로",
   lead: "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.",
-  who: "기획 · 마케팅 · 사무 실무자",
+  who: "전략 · 마케팅 · 사무 실무자",
   hours: "3시간(실습 포함)",
   modules: ["역할·제약·예시·출력형식의 네 기둥", "재사용 가능한 프롬프트 템플릿 설계", "평가와 개선 루프 만들기"],
   basis: "서울대 AIED 4기 — 구조화된 프롬프트 아키텍처",
@@ -251,9 +251,9 @@ const LECTURES = [
 
 /* ---- Track B — 도메인 적용 ---- */
 { id: "lec-05", n: "05", track: "domain", color: "var(--sky)", Icon: BarChart,
-  title: "실무자를 위한 전략기획 AI",
+  title: "실무자를 위한 전략 컨설팅 AI",
   lead: "반복 업무를 진단하고, 무엇을 자동화할지 정하는 기준을 세웁니다.",
-  who: "백오피스 · 기획 · 전문직 사무소 실무자",
+  who: "백오피스 · 전략 · 전문직 사무소 실무자",
   hours: "3시간 / 6시간(실습 포함)",
   modules: ["업무 흐름 진단과 병목 찾기", "자동화 우선순위 매트릭스", "사람이 남아야 할 판단의 자리"],
   basis: "법무법인 경국 — 송무·사무 프로세스 혁신 실무",
@@ -311,7 +311,7 @@ const LECTURES = [
 { id: "lec-12", n: "12", track: "realestate", color: "var(--pink)", Icon: MapPin,
   title: "개발·정비사업을 데이터로 읽기",
   lead: "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.",
-  who: "시행 · 정비사업 조합 실무 · 부동산 기획 담당자",
+  who: "시행 · 정비사업 조합 실무 · 부동산 전략 담당자",
   hours: "4시간(데이터 실습)",
   modules: ["용적률·건폐율로 사업 규모 잡기", "분양가·공사비 민감도 분석", "누리장터 용역 단가 수집과 비교"],
   basis: "정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설",
@@ -410,14 +410,14 @@ function Composite() {
     React.createElement("section", { id: "composite", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .2 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { eyebrow: "02 \u2014 Core Competencies", titleEn: "The Composite", titleKo: "AI \uC804\uB7B5\uAE30\uD68D\uC744 \uC911\uC2EC\uC5D0 \uB454 \uC5ED\uB7C9 \uAD6C\uC870" }), /*#__PURE__*/
+    React.createElement(SectionHead, { eyebrow: "02 \u2014 Core Competencies", titleEn: "The Composite", titleKo: "AI \uC804\uB7B5 \uCEE8\uC124\uD305\uC744 \uC911\uC2EC\uC5D0 \uB454 \uC5ED\uB7C9 \uAD6C\uC870" }), /*#__PURE__*/
 
     React.createElement("div", { className: "comp-thesis reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "font-myeongjo" }, "\uC804\uB7B5\uC740 \uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0 \uC815\uD558\uB294 \uC77C\uC774\uACE0, AI\uB294 \uADF8 \uACB0\uC815\uC744 \uBE68\uB9AC \uC2E4\uD589\uD558\uB294 \uB3C4\uAD6C\uC785\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko comp-thesis__sub" }, "\uC911\uC2EC\uCD95\uC740 ", /*#__PURE__*/
-    React.createElement("strong", null, "AI \uC804\uB7B5\uAE30\uD68D \xB7 AI \uC790\uB3D9\uD654 \xB7 \uB370\uC774\uD130"), " \uC138 \uAC00\uC9C0\uC785\uB2C8\uB2E4. \uB9C8\uCF00\uD305\xB7\uAC15\uC758\xB7\uB3C4\uBA54\uC778 \uC9C0\uC2DD\uC740 \uADF8 \uD310\uB2E8\uC744 \uC815\uD655\uD558\uAC8C \uB9CC\uB4E4\uACE0 \uC870\uC9C1\uC5D0 \uC804\uB2EC\uD558\uB294 \uBCF4\uC870 \uC5ED\uB7C9\uC785\uB2C8\uB2E4."
+    React.createElement("strong", null, "AI \uC804\uB7B5 \uCEE8\uC124\uD305 \xB7 AI \uC790\uB3D9\uD654 \xB7 \uB370\uC774\uD130"), " \uC138 \uAC00\uC9C0\uC785\uB2C8\uB2E4. \uB9C8\uCF00\uD305\xB7\uAC15\uC758\xB7\uB3C4\uBA54\uC778 \uC9C0\uC2DD\uC740 \uADF8 \uD310\uB2E8\uC744 \uC815\uD655\uD558\uAC8C \uB9CC\uB4E4\uACE0 \uC870\uC9C1\uC5D0 \uC804\uB2EC\uD558\uB294 \uBCF4\uC870 \uC5ED\uB7C9\uC785\uB2C8\uB2E4."
 
     )
     ), /*#__PURE__*/
@@ -539,14 +539,14 @@ function Composite() {
     React.createElement("section", { className: "whyc", ref: bandRef }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement("div", { className: "menu-rule reveal", style: { marginBottom: 26 } }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
-    React.createElement("p", { className: "eyebrow reveal" }, "Strategy Cases \u2014 \uAE30\uD68D \uD310\uB2E8\uC758 \uAE30\uB85D"), /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow reveal" }, "Strategy Cases \u2014 \uC804\uB7B5 \uD310\uB2E8\uC758 \uAE30\uB85D"), /*#__PURE__*/
 
     React.createElement("h2", { className: "whyc__lead font-myeongjo reveal" }, "\uB3C4\uAD6C\uB294 \uBE68\uB77C\uC84C\uC2B5\uB2C8\uB2E4.", /*#__PURE__*/
     React.createElement("br", null), /*#__PURE__*/
     React.createElement("em", null, "\uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0\uB294 \uC5EC\uC804\uD788 \uC0AC\uB78C\uC774 \uC815\uD569\uB2C8\uB2E4.")
     ), /*#__PURE__*/
 
-    React.createElement("p", { className: "whyc__intro font-ko reveal" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uC138 \uAC1C\uC758 \uC2DC\uC2A4\uD15C\uC5D0\uC11C \uAC19\uC740 \uC77C\uC774 \uBC18\uBCF5\uB410\uC2B5\uB2C8\uB2E4. \uC0AC\uB78C\uC774 \uD558\uB358 \uC77C\uC774 \uB3C4\uAD6C\uB85C \uB118\uC5B4\uAC14\uACE0, \uADF8\uB54C\uB9C8\uB2E4 \uC0AC\uB78C\uC774 \uB0A8\uC544\uC57C \uD560 \uC790\uB9AC\uAC00 \uD558\uB098\uC529 \uB610\uB837\uD574\uC84C\uC2B5\uB2C8\uB2E4. \uADF8 \uC790\uB9AC\uAC00 \uC804\uB7B5\uAE30\uD68D\uC785\uB2C8\uB2E4."
+    React.createElement("p", { className: "whyc__intro font-ko reveal" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uC138 \uAC1C\uC758 \uC2DC\uC2A4\uD15C\uC5D0\uC11C \uAC19\uC740 \uC77C\uC774 \uBC18\uBCF5\uB410\uC2B5\uB2C8\uB2E4. \uC0AC\uB78C\uC774 \uD558\uB358 \uC77C\uC774 \uB3C4\uAD6C\uB85C \uB118\uC5B4\uAC14\uACE0, \uADF8\uB54C\uB9C8\uB2E4 \uC0AC\uB78C\uC774 \uB0A8\uC544\uC57C \uD560 \uC790\uB9AC\uAC00 \uD558\uB098\uC529 \uB610\uB837\uD574\uC84C\uC2B5\uB2C8\uB2E4. \uADF8 \uC790\uB9AC\uAC00 \uC804\uB7B5 \uCEE8\uC124\uD305\uC785\uB2C8\uB2E4."
 
 
     ), /*#__PURE__*/
@@ -570,7 +570,7 @@ function Composite() {
     React.createElement("p", { className: "font-ko" }, c.auto)
     ), /*#__PURE__*/
     React.createElement("div", { className: "wcase__cell wcase__cell--judge" }, /*#__PURE__*/
-    React.createElement("span", { className: "wcase__lbl font-sans" }, "Judgment \xB7 \uAE30\uD68D \uD310\uB2E8"), /*#__PURE__*/
+    React.createElement("span", { className: "wcase__lbl font-sans" }, "Judgment \xB7 \uC804\uB7B5 \uD310\uB2E8"), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, c.judge)
     )
     ),
@@ -641,7 +641,7 @@ function FieldworkStrip() {
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
 { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
-  desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 기획·구현해 사내 운영에 적용." },
+  desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 설계·구현해 사내 운영에 적용." },
 { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
   desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
 { id: "tl-zipconomy", group: "public", year: "2026", color: "var(--butter)", title: "한경 집코노미 박람회 2026 — KREMA AI 전시관 서비스 시연·발표",
@@ -665,11 +665,11 @@ const TRAJECTORY = [
 { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
   desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
 { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
-  desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
+  desc: "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
 { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 수강 중",
   desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
 { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
-  desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
+  desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 설계 역량을 습득." },
 { id: "tl-snu-aied", group: "edu", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
   desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
 { id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
@@ -802,7 +802,7 @@ const EDITIONS = [
   status: "Vercel 배포 완료", cta: "서재 둘러보기", url: "https://malsseum-guwon.vercel.app/", tags: ["PWA · 오프라인", "Supabase 동기화", "위기 신호 안전장치"],
   point: "챗봇이 위기 신호를 감지하면 해석·성찰 대화를 즉시 멈추고 109·1577-0199 등 24시간 상담 기관을 먼저 안내 — 입력 문장은 저장하지 않고 감지 사실만 남긴다." },
 { n: "16", color: "var(--lilac)", Icon: Scale, title: "법조 시장 상황판\n법조시장 한눈에",
-  desc: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 기획팀이 바로 전략 판단으로 옮기도록 만든 법조 시장 상황판. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공.",
+  desc: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 전략팀이 바로 전략 판단으로 옮기도록 만든 법조 시장 상황판. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공.",
   status: "Vercel 배포 완료", cta: "상황판 보기", url: "https://legal-pulse-pearl.vercel.app", tags: ["국회 · 법제처 · 대한변협", "Next.js · 일 단위 갱신", "기한 계산기"],
   core: true, point: "출처 없는 예시 수치는 넣지 않는다 — 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않는다." },
 { n: "13", color: "var(--butter)", Icon: LayoutGrid, title: "식재료·생활용품 살림 기록 서비스\n곳간(Gotgan)",
@@ -865,7 +865,7 @@ function EditionCard({ e, i, onPlay }) {
     React.createElement("p", { className: "font-play", style: { fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" } }, "Edition ", e.no), /*#__PURE__*/
     React.createElement("h3", { className: "font-ko", style: { fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" } }, e.title), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 } }, e.desc),
-    e.point && /*#__PURE__*/React.createElement("p", { className: "edition__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uAE30\uD68D \uD3EC\uC778\uD2B8"), e.point), /*#__PURE__*/
+    e.point && /*#__PURE__*/React.createElement("p", { className: "edition__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uCEE8\uC124\uD305 \uD3EC\uC778\uD2B8"), e.point), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" } },
     e.tags.map((t) => /*#__PURE__*/React.createElement("span", { key: t, className: "font-sans", style: { fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" } }, t))
     ),
@@ -961,7 +961,7 @@ function Lectures() {
     React.createElement("div", { className: "side-note reveal" }, /*#__PURE__*/
     React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, "\uBCF8\uC5C5\uC740 ", /*#__PURE__*/
-    React.createElement("strong", null, "AI \uC804\uB7B5\uAE30\uD68D"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
+    React.createElement("strong", null, "AI \uC804\uB7B5 \uCEE8\uC124\uD305"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
     React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC124\uACC4\uD55C \uD504\uB85C\uADF8\uB7A8"), "\uC73C\uB85C, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBA3C\uC800 \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4. ", /*#__PURE__*/
     React.createElement("strong", null, "\uAC15\uC758 \uC758\uB8B0\uB294 \uC5B8\uC81C\uB4E0 \uBC1B\uC2B5\uB2C8\uB2E4.")
     )
@@ -1158,7 +1158,7 @@ function Contact() {
     React.createElement("circle", { cx: "60", cy: "60", r: "57", fill: "none", stroke: "currentColor", strokeWidth: "1.3" }), /*#__PURE__*/
     React.createElement("circle", { cx: "60", cy: "60", r: "32", fill: "none", stroke: "currentColor", strokeWidth: "0.9" }), /*#__PURE__*/
     React.createElement("text", { fontSize: "9.2", letterSpacing: "2.2", fill: "currentColor", fontFamily: "Inter, Pretendard, sans-serif", fontWeight: "600" }, /*#__PURE__*/
-    React.createElement("textPath", { href: "#sealArc" }, "AI STRATEGY \xB7 PLANNING \xB7 SEOUL \xB7 YUBIN KIM \xB7")
+    React.createElement("textPath", { href: "#sealArc" }, "AI STRATEGY \xB7 CONSULTING \xB7 SEOUL \xB7 YUBIN KIM \xB7")
     ), /*#__PURE__*/
     React.createElement("text", { x: "60", y: "68.5", textAnchor: "middle", fontFamily: "Cormorant Garamond, serif", fontWeight: "600", fontSize: "26", fill: "currentColor" }, "YK")
     )
@@ -1169,7 +1169,7 @@ function Contact() {
     React.createElement("h2", { className: "font-serif contact-title" }, "Let\u2019s define", /*#__PURE__*/
     React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, "the next problem.")
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko", style: { color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" } }, "AI \uC804\uB7B5\uAE30\uD68D \xB7 \uC5C5\uBB34 \uC790\uB3D9\uD654 \xB7 \uB370\uC774\uD130 \uAE30\uBC18 \uC11C\uBE44\uC2A4 \uAE30\uD68D \uD3EC\uC9C0\uC158\uC758 \uC81C\uC548\uC744 \uAE30\uB2E4\uB9BD\uB2C8\uB2E4.", /*#__PURE__*/
+    React.createElement("p", { className: "font-ko", style: { color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" } }, "AI \uC804\uB7B5 \uCEE8\uC124\uD305 \xB7 \uC5C5\uBB34 \uC790\uB3D9\uD654 \xB7 \uB370\uC774\uD130 \uAE30\uBC18 \uC11C\uBE44\uC2A4 \uCEE8\uC124\uD305 \uD3EC\uC9C0\uC158\uC758 \uC81C\uC548\uC744 \uAE30\uB2E4\uB9BD\uB2C8\uB2E4.", /*#__PURE__*/
     React.createElement("br", null), "\uC774\uBA54\uC77C\uB85C \uC5F0\uB77D \uC8FC\uC2DC\uBA74 \uC131\uC2E4\uD788 \uD68C\uC2E0\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4."
     ), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" } }, /*#__PURE__*/
@@ -1218,7 +1218,7 @@ function Footer() {
     React.createElement("div", { className: "wrap footer-grid", style: { paddingTop: 26, paddingBottom: 26 } }, /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }, className: "font-serif" }, /*#__PURE__*/
     React.createElement("span", { style: { fontWeight: 900, fontSize: 22 } }, "YK"), /*#__PURE__*/
-    React.createElement("span", { className: "font-ko", style: { fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 } }, "\uAE40\uC720\uBE48 \xB7 Yubin Kim \u2014 AI Strategy & Planning")
+    React.createElement("span", { className: "font-ko", style: { fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 } }, "\uAE40\uC720\uBE48 \xB7 Yubin Kim \u2014 AI Strategy & Consulting")
     ), /*#__PURE__*/
     React.createElement("div", { className: "font-sans", style: { fontSize: ".78rem", color: "rgba(249,246,240,.5)", justifySelf: "center", textAlign: "center" } }, "\xA9 2026 Yubin Kim. All rights reserved."), /*#__PURE__*/
     React.createElement("a", { href: "#top", className: "font-sans", style: { fontSize: ".8rem", color: "var(--ecru)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, justifySelf: "end" } }, "\uB9E8 \uC704\uB85C ", /*#__PURE__*/

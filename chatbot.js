@@ -36,7 +36,7 @@
       title: "무엇이든 물어보세요",
       subtitle: "김유빈 님의 역량 · 프로젝트 · 경력을 안내합니다",
       greeting:
-        "안녕하세요, 반갑습니다 👋\n**김유빈 님의 포트폴리오 컨시어지, 유빈 AI**입니다.\n- 🧩 핵심 역량과 일하는 방식\n- 🗂️ 대표 프로젝트와 기획 판단\n- 🧭 경력 · 교육 · 수상 이력\n궁금한 것을 편하게 물어보세요. 답변 속 버튼을 누르면 해당 위치로 바로 모셔다 드릴게요 ✨",
+        "안녕하세요, 반갑습니다 👋\n**김유빈 님의 포트폴리오 컨시어지, 유빈 AI**입니다.\n- 🧩 핵심 역량과 일하는 방식\n- 🗂️ 대표 프로젝트와 전략 판단\n- 🧭 경력 · 교육 · 수상 이력\n궁금한 것을 편하게 물어보세요. 답변 속 버튼을 누르면 해당 위치로 바로 모셔다 드릴게요 ✨",
       teaser: "궁금한 점이 있으신가요?",
       email: "yubin120866@gmail.com",
       model: "gpt-4o-mini",
@@ -71,7 +71,7 @@
   /* kb.js 가 없을 때의 최소 폴백 카드 (kb.js 가 정본) */
   var KB = (EXT && EXT.cards) || [
     { id: "profile", tags: ["소개", "누구", "김유빈", "about"], title: "인물 개요",
-      body: "김유빈(Yubin Kim) · 2004년생. 법무법인 경국에서 전략기획과 AI 프로세스 혁신을 담당합니다.",
+      body: "김유빈(Yubin Kim) · 2004년생. 법무법인 경국에서 전략 컨설팅과 AI 프로세스 혁신을 담당합니다.",
       primary: { label: "선언 보기", href: "index.html#manifesto" }, secondary: null },
     { id: "contact", tags: ["연락", "이메일", "협업", "채용", "문의"], title: "연락·협업",
       body: "협업·채용·프로젝트 문의: [" + PROFILE.email + "](mailto:" + PROFILE.email + ")",
@@ -1046,7 +1046,7 @@
   var COURSES = (EXT && EXT.lectures) || [
     { id: "lec-01", n: "01", title: "AI 기초 개념" }, { id: "lec-02", n: "02", title: "프롬프트 엔지니어링" },
     { id: "lec-03", n: "03", title: "바이브 코딩" }, { id: "lec-04", n: "04", title: "하네스 엔지니어링" },
-    { id: "lec-05", n: "05", title: "실무자를 위한 전략기획 AI" }, { id: "lec-06", n: "06", title: "공공데이터로 시장을 읽는 법" },
+    { id: "lec-05", n: "05", title: "실무자를 위한 전략 컨설팅 AI" }, { id: "lec-06", n: "06", title: "공공데이터로 시장을 읽는 법" },
     { id: "lec-07", n: "07", title: "생성형 AI 브랜드 필름 제작" }, { id: "lec-08", n: "08", title: "제도의 언어를 대중의 언어로" },
     { id: "lec-09", n: "09", title: "부동산 자산관리 입문" }, { id: "lec-10", n: "10", title: "분양 마케팅과 광고 윤리" },
     { id: "lec-11", n: "11", title: "전세·임대차 안전 점검" }, { id: "lec-12", n: "12", title: "개발·정비사업을 데이터로 읽기" },
@@ -1099,9 +1099,9 @@
       '<label for="' + uid + 'c">희망 과정 <small>필수</small></label><select id="' + uid + 'c" name="course">' + opts + "</select>" +
       '<label for="' + uid + 'n">담당자 성함 · 기관명 <small>필수</small></label><input id="' + uid + 'n" name="name" autocomplete="organization" placeholder="홍길동 · ○○기관 교육팀" />' +
       '<label for="' + uid + 'e">회신받을 이메일 <small>필수</small></label><input id="' + uid + 'e" name="contact" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" />' +
-      '<label for="' + uid + 'p">요청 내용 · 교육 목적 <small>필수</small></label><textarea id="' + uid + 'p" name="purpose" placeholder="예) 기획팀 대상으로 업무 자동화 기준을 세우는 실습형 과정을 원합니다."></textarea>' +
+      '<label for="' + uid + 'p">요청 내용 · 교육 목적 <small>필수</small></label><textarea id="' + uid + 'p" name="purpose" placeholder="예) 전략팀 대상으로 업무 자동화 기준을 세우는 실습형 과정을 원합니다."></textarea>' +
       '<p class="yk-form__sec">선택 입력</p>' +
-      '<label for="' + uid + 'a">대상 · 인원 <small>선택</small></label><input id="' + uid + 'a" name="audience" placeholder="예) 기획·마케팅 실무자 20명" />' +
+      '<label for="' + uid + 'a">대상 · 인원 <small>선택</small></label><input id="' + uid + 'a" name="audience" placeholder="예) 전략·마케팅 실무자 20명" />' +
       '<label for="' + uid + 's">희망 일정 · 방식 <small>선택</small></label><input id="' + uid + 's" name="schedule" placeholder="예) 11월 중 · 오프라인(서울)" />' +
       '<label for="' + uid + 'b">예산 · 기타 <small>선택</small></label><input id="' + uid + 'b" name="etc" />' +
       '<div class="yk-form__hp" aria-hidden="true"><label>웹사이트<input name="website" tabindex="-1" autocomplete="off" /></label></div>' +

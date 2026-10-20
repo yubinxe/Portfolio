@@ -12,6 +12,7 @@ const CASES = [
   ["김유빈 님은 어떤 분인가요?", ["profile"]],
   ["핵심 역량을 한눈에 요약해 주세요", ["composite"]],
   ["전략기획 경험이 있나요?", ["dom-strategy"]],
+  ["전략 컨설팅 경험이 있나요?", ["dom-strategy"]],
   ["어떤 프로젝트를 만들었나요?", ["projects"]],
   ["대시보드 만든 거 보여주세요", ["ed-05", "dom-data"]],
   ["강의 하시나요? 커리큘럼 알려주세요", ["lectures", "dom-teaching"]],

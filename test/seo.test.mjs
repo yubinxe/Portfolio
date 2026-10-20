@@ -102,7 +102,7 @@ test("자바스크립트 없이도 index.html 에서 핵심 정보와 내부 링
   const ns = /<noscript>([\s\S]*?)<\/noscript>/.exec(s);
   assert.ok(ns, "noscript 폴백 없음");
   const body = ns[1];
-  for (const kw of ["김유빈", "전략기획", "법무법인 경국", "career.html", "gallery.html"]) {
+  for (const kw of ["김유빈", "전략 컨설팅", "법무법인 경국", "career.html", "gallery.html"]) {
     assert.ok(body.includes(kw), "noscript 에 " + kw + " 누락");
   }
 });

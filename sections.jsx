@@ -59,7 +59,7 @@ function Nav() {
           <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="32" height="32" style={{ display: "block" }} />
           <span className="hnav__name">
             <b className="font-serif">Yubin Kim</b>
-            <small>AI Strategy &amp; Planning</small>
+            <small>AI Strategy &amp; Consulting</small>
           </span>
         </a>
         <nav aria-label="주요 메뉴" style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
@@ -91,15 +91,15 @@ function Hero() {
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 18px" }}><i /></div>
         <p className="font-sans hero-kicker">Seoul · Portfolio 2026</p>
-        <p className="eyebrow hero-eyebrow">AI Strategy &amp; Planning</p>
+        <p className="eyebrow hero-eyebrow">AI Strategy &amp; Consulting</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
-          <span className="sr-only">김유빈 Yubin Kim — AI 전략기획</span>
+          <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅</span>
           {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
           <br />
           {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
         </h1>
         <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"AI 전략기획 · 법무법인 경국 — Strategy · Automation · Data"}
+          {"AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"}
         </p>
         <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
           데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.
@@ -129,7 +129,7 @@ function Sticker({ cls = "", style = {}, children }) {
 
 /* ============================================================ MARQUEE */
 function Marquee() {
-  const items = ["YUBIN KIM OFFICE", "전략기획 × AI", "STRATEGIC PLANNING", "PROCESS AUTOMATION", "DATA-DRIVEN DECISIONS", "AI 강의 · LECTURES", "김유빈 · ETHAN KIM"];
+  const items = ["YUBIN KIM OFFICE", "전략 컨설팅 × AI", "STRATEGY CONSULTING", "PROCESS AUTOMATION", "DATA-DRIVEN DECISIONS", "AI 강의 · LECTURES", "김유빈 · ETHAN KIM"];
   const Row = () => (
     <span>{items.map((t, i) => (
       <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "2.5rem" }}>
@@ -183,7 +183,7 @@ function Ledger() {
 
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
-  { n: "01", core: true, ko: "AI 전략기획", short: "전략", en: "AI Strategy & Planning",
+  { n: "01", core: true, ko: "AI 전략 컨설팅", short: "전략", en: "AI Strategy & Consulting",
     desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 정비사업 용역비 수집으로 시장 단가 비교와 사업성 검토의 기준선을 만들었고, VOC 트리아지에서는 무엇을 리스크로 볼지의 판단 기준을 설계했습니다.",
     tags: ["문제 정의 · 우선순위 설계", "사업성 검토"] },
   { n: "02", core: true, ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
@@ -208,7 +208,7 @@ const LECTURE_TRACKS = [
   { key: "foundation", label: "Track A — AI 파운데이션", ko: "도구를 쓰는 사람에서, 도구를 설계하는 사람으로",
     desc: "개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다." },
   { key: "domain", label: "Track B — 도메인 적용", ko: "만들어 본 사람만 가르칠 수 있는 것",
-    desc: "직접 기획·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
+    desc: "직접 설계·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
   { key: "realestate", label: "Track C — 부동산 · 자산관리", ko: "자산은 숫자로, 계약은 근거로",
     desc: "AI와 나란히 서는 두 번째 전문 영역. 분양대행자 자격과 KREMA 4기, 법무법인 경국의 송무 실무, 정비사업 데이터 자동화와 부동산 직무 체험관 설계에서 나온 네 과정입니다." },
 ];
@@ -226,7 +226,7 @@ const LECTURES = [
   { id: "lec-02", n: "02", track: "foundation", color: "var(--lilac)", Icon: Sparkle,
     title: "프롬프트 엔지니어링 — 문장이 아니라 구조로",
     lead: "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.",
-    who: "기획 · 마케팅 · 사무 실무자",
+    who: "전략 · 마케팅 · 사무 실무자",
     hours: "3시간(실습 포함)",
     modules: ["역할·제약·예시·출력형식의 네 기둥", "재사용 가능한 프롬프트 템플릿 설계", "평가와 개선 루프 만들기"],
     basis: "서울대 AIED 4기 — 구조화된 프롬프트 아키텍처",
@@ -250,9 +250,9 @@ const LECTURES = [
 
   /* ---- Track B — 도메인 적용 ---- */
   { id: "lec-05", n: "05", track: "domain", color: "var(--sky)", Icon: BarChart,
-    title: "실무자를 위한 전략기획 AI",
+    title: "실무자를 위한 전략 컨설팅 AI",
     lead: "반복 업무를 진단하고, 무엇을 자동화할지 정하는 기준을 세웁니다.",
-    who: "백오피스 · 기획 · 전문직 사무소 실무자",
+    who: "백오피스 · 전략 · 전문직 사무소 실무자",
     hours: "3시간 / 6시간(실습 포함)",
     modules: ["업무 흐름 진단과 병목 찾기", "자동화 우선순위 매트릭스", "사람이 남아야 할 판단의 자리"],
     basis: "법무법인 경국 — 송무·사무 프로세스 혁신 실무",
@@ -310,7 +310,7 @@ const LECTURES = [
   { id: "lec-12", n: "12", track: "realestate", color: "var(--pink)", Icon: MapPin,
     title: "개발·정비사업을 데이터로 읽기",
     lead: "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.",
-    who: "시행 · 정비사업 조합 실무 · 부동산 기획 담당자",
+    who: "시행 · 정비사업 조합 실무 · 부동산 전략 담당자",
     hours: "4시간(데이터 실습)",
     modules: ["용적률·건폐율로 사업 규모 잡기", "분양가·공사비 민감도 분석", "누리장터 용역 단가 수집과 비교"],
     basis: "정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설",
@@ -409,14 +409,14 @@ function Composite() {
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="02 — Core Competencies" titleEn="The Composite" titleKo="AI 전략기획을 중심에 둔 역량 구조" />
+        <SectionHead eyebrow="02 — Core Competencies" titleEn="The Composite" titleKo="AI 전략 컨설팅을 중심에 둔 역량 구조" />
 
         <div className="comp-thesis reveal">
           <p className="font-myeongjo">
             전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.
           </p>
           <p className="font-ko comp-thesis__sub">
-            중심축은 <strong>AI 전략기획 · AI 자동화 · 데이터</strong> 세 가지입니다.
+            중심축은 <strong>AI 전략 컨설팅 · AI 자동화 · 데이터</strong> 세 가지입니다.
             마케팅·강의·도메인 지식은 그 판단을 정확하게 만들고 조직에 전달하는 보조 역량입니다.
           </p>
         </div>
@@ -538,7 +538,7 @@ function Composite() {
     <section className="whyc" ref={bandRef}>
       <div className="wrap">
         <div className="menu-rule reveal" style={{ marginBottom: 26 }}><i /></div>
-        <p className="eyebrow reveal">Strategy Cases — 기획 판단의 기록</p>
+        <p className="eyebrow reveal">Strategy Cases — 전략 판단의 기록</p>
 
         <h2 className="whyc__lead font-myeongjo reveal">
           도구는 빨라졌습니다.<br />
@@ -547,7 +547,7 @@ function Composite() {
 
         <p className="whyc__intro font-ko reveal">
           직접 만든 세 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
-          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다. 그 자리가 전략기획입니다.
+          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다. 그 자리가 전략 컨설팅입니다.
         </p>
 
         <div className="wcases">
@@ -569,7 +569,7 @@ function Composite() {
                   <p className="font-ko">{c.auto}</p>
                 </div>
                 <div className="wcase__cell wcase__cell--judge">
-                  <span className="wcase__lbl font-sans">Judgment · 기획 판단</span>
+                  <span className="wcase__lbl font-sans">Judgment · 전략 판단</span>
                   <p className="font-ko">{c.judge}</p>
                 </div>
               </div>
@@ -640,7 +640,7 @@ function FieldworkStrip() {
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
   { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
-    desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 기획·구현해 사내 운영에 적용." },
+    desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 설계·구현해 사내 운영에 적용." },
   { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
     desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
   { id: "tl-zipconomy", group: "public", year: "2026", color: "var(--butter)", title: "한경 집코노미 박람회 2026 — KREMA AI 전시관 서비스 시연·발표",
@@ -664,11 +664,11 @@ const TRAJECTORY = [
   { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
     desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
   { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
-    desc: "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
+    desc: "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
   { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 수강 중",
     desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
   { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
-    desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 기획 역량을 습득." },
+    desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 설계 역량을 습득." },
   { id: "tl-snu-aied", group: "edu", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
   { id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
@@ -801,7 +801,7 @@ const EDITIONS = [
     status: "Vercel 배포 완료", cta: "서재 둘러보기", url: "https://malsseum-guwon.vercel.app/", tags: ["PWA · 오프라인", "Supabase 동기화", "위기 신호 안전장치"],
     point: "챗봇이 위기 신호를 감지하면 해석·성찰 대화를 즉시 멈추고 109·1577-0199 등 24시간 상담 기관을 먼저 안내 — 입력 문장은 저장하지 않고 감지 사실만 남긴다." },
   { n: "16", color: "var(--lilac)", Icon: Scale, title: "법조 시장 상황판\n법조시장 한눈에",
-    desc: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 기획팀이 바로 전략 판단으로 옮기도록 만든 법조 시장 상황판. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공.",
+    desc: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 전략팀이 바로 전략 판단으로 옮기도록 만든 법조 시장 상황판. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공.",
     status: "Vercel 배포 완료", cta: "상황판 보기", url: "https://legal-pulse-pearl.vercel.app", tags: ["국회 · 법제처 · 대한변협", "Next.js · 일 단위 갱신", "기한 계산기"],
     core: true, point: "출처 없는 예시 수치는 넣지 않는다 — 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않는다." },
   { n: "13", color: "var(--butter)", Icon: LayoutGrid, title: "식재료·생활용품 살림 기록 서비스\n곳간(Gotgan)",
@@ -864,7 +864,7 @@ function EditionCard({ e, i, onPlay }) {
               <p className="font-play" style={{ fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" }}>Edition {e.no}</p>
               <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" }}>{e.title}</h3>
               <p className="font-ko" style={{ color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 }}>{e.desc}</p>
-              {e.point && <p className="edition__point font-ko"><b>기획 포인트</b>{e.point}</p>}
+              {e.point && <p className="edition__point font-ko"><b>컨설팅 포인트</b>{e.point}</p>}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
                 {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
               </div>
@@ -960,7 +960,7 @@ function Lectures() {
         <div className="side-note reveal">
           <span className="side-note__badge font-sans">In Preparation</span>
           <p className="font-ko">
-            본업은 <strong>AI 전략기획</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
+            본업은 <strong>AI 전략 컨설팅</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
             <strong> 별도로 설계한 프로그램</strong>으로, 아직 출강 이력은 없습니다.
             커리큘럼과 근거를 먼저 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다. <strong>강의 의뢰는 언제든 받습니다.</strong>
           </p>
@@ -1157,7 +1157,7 @@ function Contact() {
           <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" strokeWidth="1.3" />
           <circle cx="60" cy="60" r="32" fill="none" stroke="currentColor" strokeWidth="0.9" />
           <text fontSize="9.2" letterSpacing="2.2" fill="currentColor" fontFamily="Inter, Pretendard, sans-serif" fontWeight="600">
-            <textPath href="#sealArc">AI STRATEGY · PLANNING · SEOUL · YUBIN KIM ·</textPath>
+            <textPath href="#sealArc">AI STRATEGY · CONSULTING · SEOUL · YUBIN KIM ·</textPath>
           </text>
           <text x="60" y="68.5" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontWeight="600" fontSize="26" fill="currentColor">YK</text>
         </svg>
@@ -1169,7 +1169,7 @@ function Contact() {
           Let’s define<br /><em>the next problem.</em>
         </h2>
         <p className="font-ko" style={{ color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" }}>
-          AI 전략기획 · 업무 자동화 · 데이터 기반 서비스 기획 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
+          AI 전략 컨설팅 · 업무 자동화 · 데이터 기반 서비스 컨설팅 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
@@ -1217,7 +1217,7 @@ function Footer() {
       <div className="wrap footer-grid" style={{ paddingTop: 26, paddingBottom: 26 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">
           <span style={{ fontWeight: 900, fontSize: 22 }}>YK</span>
-          <span className="font-ko" style={{ fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 }}>김유빈 · Yubin Kim — AI Strategy &amp; Planning</span>
+          <span className="font-ko" style={{ fontSize: ".82rem", color: "rgba(249,246,240,.6)", fontFamily: '"Pretendard", sans-serif', fontWeight: 400 }}>김유빈 · Yubin Kim — AI Strategy &amp; Consulting</span>
         </div>
         <div className="font-sans" style={{ fontSize: ".78rem", color: "rgba(249,246,240,.5)", justifySelf: "center", textAlign: "center" }}>© 2026 Yubin Kim. All rights reserved.</div>
         <a href="#top" className="font-sans" style={{ fontSize: ".8rem", color: "var(--ecru)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, justifySelf: "end" }}>
