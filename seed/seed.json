@@ -1,5 +1,5 @@
 {
-  "version": "2026.10.19a",
+  "version": "2026.10.20",
   "tables": {
     "KnowledgeCards": [
       {
@@ -14,14 +14,14 @@
         "SecondaryHref": "index.html#composite",
         "SecondaryInferred": true,
         "Anchor": "arsenal",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "composite",
         "Category": "역량",
-        "Title": "융합 역량 — 전략기획을 중심에 둔 여섯 도메인",
-        "Body": "전략기획을 축에 두고 나머지가 실행과 전달을 맡습니다.\n- 01 전략기획 — 사업성 검토, 우선순위 설계\n- 02 AI 프로세스 자동화 — SSAFY 13기, 서울대 AIED 4기\n- 03 데이터 · 인프라 — 공공데이터 API, GWS 연동\n- 04 마케팅 · 커뮤니케이션 — KREMA 4기, 연합뉴스TV, 서울시민기자단\n- 05 교육 · 강의 — 서울대 AIED 교수법, SSAFY 홍보 앰배서더\n- 06 도메인 — 법무법인 경국, 스마트건설, 청년 정책 거버넌스",
+        "Title": "융합 역량 — 전략 컨설팅을 중심에 둔 여섯 도메인",
+        "Body": "전략 컨설팅을 축에 두고 나머지가 실행과 전달을 맡습니다.\n- 01 전략 컨설팅 — 사업성 검토, 우선순위 설계\n- 02 AI 프로세스 자동화 — SSAFY 13기, 서울대 AIED 4기\n- 03 데이터 · 인프라 — 공공데이터 API, GWS 연동\n- 04 마케팅 · 커뮤니케이션 — KREMA 4기, 연합뉴스TV, 서울시민기자단\n- 05 교육 · 강의 — 서울대 AIED 교수법, SSAFY 홍보 앰배서더\n- 06 도메인 — 법무법인 경국, 스마트건설, 청년 정책 거버넌스",
         "Tags": "composite, 강점, 도메인, 무엇, 여섯, 역량, 융합, 잘, 핵심",
         "PrimaryLabel": "융합 역량 보기",
         "PrimaryHref": "index.html#composite",
@@ -29,7 +29,7 @@
         "SecondaryHref": "index.html#arsenal",
         "SecondaryInferred": false,
         "Anchor": "composite",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -44,7 +44,7 @@
         "SecondaryHref": "mailto:yubin120866@gmail.com",
         "SecondaryInferred": false,
         "Anchor": "contact",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -59,7 +59,7 @@
         "SecondaryHref": "index.html#credentials",
         "SecondaryInferred": false,
         "Anchor": "credentials",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -74,7 +74,7 @@
         "SecondaryHref": "career.html#practice-ai",
         "SecondaryInferred": false,
         "Anchor": "dom-02",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -89,7 +89,7 @@
         "SecondaryHref": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app",
         "SecondaryInferred": false,
         "Anchor": "dom-03",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -104,7 +104,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": false,
         "Anchor": "dom-06",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -119,22 +119,22 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "dom-04",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "dom-strategy",
         "Category": "역량",
-        "Title": "01 전략기획",
+        "Title": "01 전략 컨설팅",
         "Body": "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하는 일입니다. 누리장터에서 정비사업 용역 입찰과 용역비를 자동 수집해 시장 단가 비교와 사업성 검토의 기준선을 만들었고, VOC 트리아지에서는 무엇을 리스크로 볼지의 판단 기준을 설계했습니다. 도구가 아니라 우선순위가 결과를 바꾼다는 것이 그의 전제입니다.",
-        "Tags": "planning, strategy, 기획, 사업성, 우선순위, 의사결정, 전략, 전략기획",
+        "Tags": "consulting, planning, strategy, 기획, 사업성, 우선순위, 의사결정, 전략, 전략 컨설팅, 전략기획, 컨설팅",
         "PrimaryLabel": "역량 01",
         "PrimaryHref": "index.html#dom-01",
-        "SecondaryLabel": "전략기획 업무 영역",
+        "SecondaryLabel": "전략 컨설팅 업무 영역",
         "SecondaryHref": "career.html#practice-strategy",
         "SecondaryInferred": false,
         "Anchor": "dom-01",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -149,7 +149,7 @@
         "SecondaryHref": "career.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "lectures",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -164,7 +164,7 @@
         "SecondaryHref": "index.html#ed-01",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -179,7 +179,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -194,7 +194,7 @@
         "SecondaryHref": "index.html#ed-03",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -209,7 +209,7 @@
         "SecondaryHref": "index.html#ed-04",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -224,7 +224,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -239,7 +239,7 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -254,7 +254,7 @@
         "SecondaryHref": "index.html#artifacts",
         "SecondaryInferred": true,
         "Anchor": "ed-07",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -269,7 +269,7 @@
         "SecondaryHref": "index.html#artifacts",
         "SecondaryInferred": true,
         "Anchor": "ed-08",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -284,7 +284,7 @@
         "SecondaryHref": "index.html#ed-09",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -299,7 +299,7 @@
         "SecondaryHref": "index.html#ed-10",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -314,7 +314,7 @@
         "SecondaryHref": "index.html#ed-11",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -329,7 +329,7 @@
         "SecondaryHref": "index.html#ed-12",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -344,7 +344,7 @@
         "SecondaryHref": "index.html#ed-13",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -359,7 +359,7 @@
         "SecondaryHref": "index.html#ed-14",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -374,14 +374,14 @@
         "SecondaryHref": "index.html#ed-15",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "ed-16",
         "Category": "프로젝트",
         "Title": "법조시장 한눈에 — 법조 시장 상황판",
-        "Body": "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 기획팀이 바로 전략 판단으로 옮기도록 만든 상황판입니다. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공합니다. 출처 없는 예시 수치는 넣지 않고, 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 줍니다.",
+        "Body": "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 전략팀이 바로 전략 판단으로 옮기도록 만든 상황판입니다. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공합니다. 출처 없는 예시 수치는 넣지 않고, 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 줍니다.",
         "Tags": "legal pulse, 기한 계산, 대한변협, 로펌, 법률안, 법조 시장, 법조시장, 법조시장 한눈에, 변호사, 불변기간, 상황판, 입법, 판례",
         "PrimaryLabel": "상황판 보기",
         "PrimaryHref": "https://legal-pulse-pearl.vercel.app",
@@ -389,7 +389,7 @@
         "SecondaryHref": "index.html#ed-16",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -404,7 +404,7 @@
         "SecondaryHref": "index.html#ed-17",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -419,7 +419,7 @@
         "SecondaryHref": "gallery.html#credentials",
         "SecondaryInferred": false,
         "Anchor": "archive",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -434,14 +434,14 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "lec-01",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "lec-02",
         "Category": "강의",
         "Title": "강의 02 — 프롬프트 엔지니어링: 문장이 아니라 구조로",
-        "Body": "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.\n- 역할·제약·예시·출력형식의 네 기둥\n- 재사용 가능한 프롬프트 템플릿 설계\n- 평가와 개선 루프 만들기\n대상은 기획·마케팅·사무 실무자, 3시간 실습 포함입니다. 근거는 서울대 AIED 4기의 구조화된 프롬프트 아키텍처입니다.",
+        "Body": "좋은 프롬프트는 잘 쓴 문장이 아니라 잘 설계된 구조입니다.\n- 역할·제약·예시·출력형식의 네 기둥\n- 재사용 가능한 프롬프트 템플릿 설계\n- 평가와 개선 루프 만들기\n대상은 전략·마케팅·사무 실무자, 3시간 실습 포함입니다. 근거는 서울대 AIED 4기의 구조화된 프롬프트 아키텍처입니다.",
         "Tags": "prompt, prompt engineering, 구조화, 템플릿, 프롬프트, 프롬프트 아키텍처, 프롬프트 엔지니어링",
         "PrimaryLabel": "과정 상세",
         "PrimaryHref": "lecture.html#lec-02",
@@ -449,7 +449,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "lec-02",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -464,7 +464,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "lec-03",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -479,22 +479,22 @@
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "lec-04",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "lec-05",
         "Category": "강의",
-        "Title": "강의 05 — 실무자를 위한 전략기획 AI",
-        "Body": "반복 업무를 진단하고 무엇을 자동화할지 정하는 기준을 세웁니다.\n- 업무 흐름 진단과 병목 찾기\n- 자동화 우선순위 매트릭스\n- 사람이 남아야 할 판단의 자리\n대상은 백오피스·기획·전문직 사무소 실무자이고 3시간 또는 실습 포함 6시간입니다. 근거는 법무법인 경국의 송무·사무 프로세스 혁신 실무입니다.",
-        "Tags": "백오피스, 실무자, 업무 진단, 우선순위, 자동화 강의, 전략기획 강의",
+        "Title": "강의 05 — 실무자를 위한 전략 컨설팅 AI",
+        "Body": "반복 업무를 진단하고 무엇을 자동화할지 정하는 기준을 세웁니다.\n- 업무 흐름 진단과 병목 찾기\n- 자동화 우선순위 매트릭스\n- 사람이 남아야 할 판단의 자리\n대상은 백오피스·전략·전문직 사무소 실무자이고 3시간 또는 실습 포함 6시간입니다. 근거는 법무법인 경국의 송무·사무 프로세스 혁신 실무입니다.",
+        "Tags": "백오피스, 실무자, 업무 진단, 우선순위, 자동화 강의, 전략 컨설팅 강의",
         "PrimaryLabel": "과정 상세",
         "PrimaryHref": "lecture.html#lec-05",
         "SecondaryLabel": "VOC 트리아지 사례",
         "SecondaryHref": "index.html#ed-06",
         "SecondaryInferred": false,
         "Anchor": "lec-05",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -509,7 +509,7 @@
         "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "lec-06",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -524,7 +524,7 @@
         "SecondaryHref": "index.html#ed-02",
         "SecondaryInferred": false,
         "Anchor": "lec-07",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -539,7 +539,7 @@
         "SecondaryHref": "index.html#ed-01",
         "SecondaryInferred": false,
         "Anchor": "lec-08",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -554,7 +554,7 @@
         "SecondaryHref": "index.html#ed-10",
         "SecondaryInferred": false,
         "Anchor": "lec-09",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -569,7 +569,7 @@
         "SecondaryHref": "index.html#ed-09",
         "SecondaryInferred": false,
         "Anchor": "lec-10",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -584,14 +584,14 @@
         "SecondaryHref": "https://appraiser-fieldwork.vercel.app/",
         "SecondaryInferred": false,
         "Anchor": "lec-11",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "lec-12",
         "Category": "강의",
         "Title": "강의 12 — 개발·정비사업을 데이터로 읽기",
-        "Body": "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.\n- 용적률·건폐율로 사업 규모 잡기\n- 분양가·공사비 민감도 분석\n- 누리장터 용역 단가 수집과 비교\n대상은 시행 · 정비사업 조합 실무 · 부동산 기획 담당자이고 4시간(데이터 실습)입니다. 근거는 정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설입니다. 의뢰는 언제든 받습니다.",
+        "Body": "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.\n- 용적률·건폐율로 사업 규모 잡기\n- 분양가·공사비 민감도 분석\n- 누리장터 용역 단가 수집과 비교\n대상은 시행 · 정비사업 조합 실무 · 부동산 전략 담당자이고 4시간(데이터 실습)입니다. 근거는 정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설입니다. 의뢰는 언제든 받습니다.",
         "Tags": "개발 강의, 사업성, 사업수지, 시행, 용역비, 용적률, 재개발, 재건축, 정비사업",
         "PrimaryLabel": "과정 상세",
         "PrimaryHref": "lecture.html#lec-12",
@@ -599,7 +599,7 @@
         "SecondaryHref": "index.html#ed-08",
         "SecondaryInferred": false,
         "Anchor": "lec-12",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -614,14 +614,14 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "basis",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "lectures",
         "Category": "강의",
         "Title": "강의 프로그램 — 3개 트랙 12과정",
-        "Body": "\"만들어 본 사람만 가르칠 수 있는 것이 있습니다.\" SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처·교수법, KREMA 4기의 시장 데이터 전략을 실제로 만들어 운영한 뒤 강의 모듈로 옮겼습니다.\n**Track A — AI 파운데이션**\n- 01 AI 기초 개념 — 무엇이 되고 무엇이 안 되는가 (2시간)\n- 02 프롬프트 엔지니어링 — 문장이 아니라 구조로 (3시간)\n- 03 바이브 코딩 — 코드를 몰라도 만들고 배포하기 (4시간)\n- 04 하네스 엔지니어링 — 에이전트에 손과 발을 달기 (4시간)\n**Track B — 도메인 적용**\n- 05 실무자를 위한 전략기획 AI (3–6시간)\n- 06 공공데이터로 시장을 읽는 법 (4시간)\n- 07 생성형 AI 브랜드 필름 제작 (3시간)\n- 08 제도의 언어를 대중의 언어로 (2시간)\n**Track C — 부동산 · 자산관리**\n- 09 부동산 자산관리 입문 — 임대수익을 숫자로 읽기 (3시간)\n- 10 분양 마케팅과 광고 윤리 — 판매보다 신뢰 (3시간)\n- 11 전세·임대차 안전 점검 — 계약 전에 확인할 것 (2시간)\n- 12 개발·정비사업을 데이터로 읽기 (4시간)\n강의 의뢰는 언제든 받습니다 — [yubin120866@gmail.com](mailto:yubin120866@gmail.com)",
+        "Body": "\"만들어 본 사람만 가르칠 수 있는 것이 있습니다.\" SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처·교수법, KREMA 4기의 시장 데이터 전략을 실제로 만들어 운영한 뒤 강의 모듈로 옮겼습니다.\n**Track A — AI 파운데이션**\n- 01 AI 기초 개념 — 무엇이 되고 무엇이 안 되는가 (2시간)\n- 02 프롬프트 엔지니어링 — 문장이 아니라 구조로 (3시간)\n- 03 바이브 코딩 — 코드를 몰라도 만들고 배포하기 (4시간)\n- 04 하네스 엔지니어링 — 에이전트에 손과 발을 달기 (4시간)\n**Track B — 도메인 적용**\n- 05 실무자를 위한 전략 컨설팅 AI (3–6시간)\n- 06 공공데이터로 시장을 읽는 법 (4시간)\n- 07 생성형 AI 브랜드 필름 제작 (3시간)\n- 08 제도의 언어를 대중의 언어로 (2시간)\n**Track C — 부동산 · 자산관리**\n- 09 부동산 자산관리 입문 — 임대수익을 숫자로 읽기 (3시간)\n- 10 분양 마케팅과 광고 윤리 — 판매보다 신뢰 (3시간)\n- 11 전세·임대차 안전 점검 — 계약 전에 확인할 것 (2시간)\n- 12 개발·정비사업을 데이터로 읽기 (4시간)\n강의 의뢰는 언제든 받습니다 — [yubin120866@gmail.com](mailto:yubin120866@gmail.com)",
         "Tags": "lecture, teaching, training, 강사, 강의, 교육, 세미나, 수업, 워크숍, 출강, 커리큘럼, 특강",
         "PrimaryLabel": "강의 프로그램 상세",
         "PrimaryHref": "lecture.html",
@@ -629,7 +629,7 @@
         "SecondaryHref": "index.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -644,7 +644,7 @@
         "SecondaryHref": "index.html#about",
         "SecondaryInferred": true,
         "Anchor": "artifacts",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -659,14 +659,14 @@
         "SecondaryHref": "career.html#media",
         "SecondaryInferred": false,
         "Anchor": "g-yonhap",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "office",
         "Category": "인물",
         "Title": "소속 — 법무법인 경국",
-        "Body": "법무법인 경국(서울 서초구 서초대로 264 법조타워 15F) 사원. 업무 영역은 네 가지입니다.\n- 전략기획 · 사업성 검토 — 시장 단가 비교와 우선순위 설계\n- AI 프로세스 혁신 — 송무·사무 워크플로우 자동화\n- 마케팅 기획 · 브랜드 필름\n- 데이터 인프라 · 대시보드",
+        "Body": "법무법인 경국(서울 서초구 서초대로 264 법조타워 15F) 사원. 업무 영역은 네 가지입니다.\n- 전략 컨설팅 · 사업성 검토 — 시장 단가 비교와 우선순위 설계\n- AI 프로세스 혁신 — 송무·사무 워크플로우 자동화\n- 마케팅 컨설팅 · 브랜드 필름\n- 데이터 인프라 · 대시보드",
         "Tags": "경국, 근무, 근무지, 법무법인, 사무실, 서초, 소속, 어디, 위치, 주소, 직장, 회사",
         "PrimaryLabel": "업무 영역",
         "PrimaryHref": "career.html#practice",
@@ -674,14 +674,14 @@
         "SecondaryHref": "index.html#about",
         "SecondaryInferred": false,
         "Anchor": "practice",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "profile",
         "Category": "인물",
         "Title": "인물 개요",
-        "Body": "김유빈(Yubin Kim, 별칭 Ethan Kim) · 2004년생. 법무법인 경국에서 전략기획과 AI 프로세스 혁신을 담당합니다. 근무지는 서울 서초구 서초대로 264 법조타워 15F.\n일의 방식은 한 문장입니다 — **데이터로 판단의 근거를 만들고, AI로 실행의 속도를 만듭니다.** 흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮기며, 실무에서 만든 시스템을 강의 모듈로도 옮깁니다.",
+        "Body": "김유빈(Yubin Kim, 별칭 Ethan Kim) · 2004년생. 법무법인 경국에서 전략 컨설팅과 AI 프로세스 혁신을 담당합니다. 근무지는 서울 서초구 서초대로 264 법조타워 15F.\n일의 방식은 한 문장입니다 — **데이터로 판단의 근거를 만들고, AI로 실행의 속도를 만듭니다.** 흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮기며, 실무에서 만든 시스템을 강의 모듈로도 옮깁니다.",
         "Tags": "2004, about, ethan, yubin, 김유빈, 나이, 누구, 소개, 이름, 출생",
         "PrimaryLabel": "선언 보기",
         "PrimaryHref": "index.html#manifesto",
@@ -689,14 +689,14 @@
         "SecondaryHref": "career.html#experience",
         "SecondaryInferred": false,
         "Anchor": "manifesto",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "projects",
         "Category": "프로젝트",
         "Title": "대표 프로젝트 — 17건",
-        "Body": "직접 기획·구현한 작업 17건입니다. 생활과 업무 현장에 쓰이는 시스템 7건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 05 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 06 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 07 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 08 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 09 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 10 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 11 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 12 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 13 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 14 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 15 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 16 Louis Vuitton 시네마틱 캠페인 필름\n- 17 Hyperframe × ElevenLabs 멀티미디어 프로모션",
+        "Body": "직접 설계·구현한 작업 17건입니다. 생활과 업무 현장에 쓰이는 시스템 7건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 05 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 06 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 07 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 08 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 09 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 10 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 11 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 12 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 13 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 14 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 15 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 16 Louis Vuitton 시네마틱 캠페인 필름\n- 17 Hyperframe × ElevenLabs 멀티미디어 프로모션",
         "Tags": "artifact, 결과물, 대표, 만든, 산출물, 작업, 포트폴리오, 프로젝트",
         "PrimaryLabel": "작업 전체 보기",
         "PrimaryHref": "index.html#artifacts",
@@ -704,14 +704,14 @@
         "SecondaryHref": "https://zipcatch.vercel.app",
         "SecondaryInferred": false,
         "Anchor": "artifacts",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "thesis",
         "Category": "인물",
         "Title": "일의 명제 — 전략은 우선순위, AI는 속도",
-        "Body": "\"전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.\" 세 개의 시스템(감정평가사 필드워크 · VOC 트리아지 · 정비사업 용역비 자동 수집)에서 사람이 하던 일이 도구로 넘어갈 때마다 사람이 남아야 할 자리가 또렷해졌고, 그 자리는 언제나 '도구에 무엇을 시킬지 정하는 일' — 곧 전략기획이었습니다.",
+        "Body": "\"전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.\" 세 개의 시스템(감정평가사 필드워크 · VOC 트리아지 · 정비사업 용역비 자동 수집)에서 사람이 하던 일이 도구로 넘어갈 때마다 사람이 남아야 할 자리가 또렷해졌고, 그 자리는 언제나 '도구에 무엇을 시킬지 정하는 일' — 곧 전략 컨설팅이었습니다.",
         "Tags": "가치관, 명제, 왜, 자리, 전달, 전문성, 철학",
         "PrimaryLabel": "Why It Matters",
         "PrimaryHref": "index.html#composite",
@@ -719,7 +719,7 @@
         "SecondaryHref": "index.html#lectures",
         "SecondaryInferred": false,
         "Anchor": "composite",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -734,7 +734,7 @@
         "SecondaryHref": "career.html#cv-acrc-panel",
         "SecondaryInferred": false,
         "Anchor": "tl-acrc-panel",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -749,7 +749,7 @@
         "SecondaryHref": "career.html#cv-snu-aied",
         "SecondaryInferred": false,
         "Anchor": "tl-snu-aied",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -764,7 +764,7 @@
         "SecondaryHref": "index.html#tl-army-signal",
         "SecondaryInferred": false,
         "Anchor": "cred-army-training-2023",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -779,7 +779,7 @@
         "SecondaryHref": "index.html#tl-army-startup",
         "SecondaryInferred": false,
         "Anchor": "cred-award-2023",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -794,7 +794,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "tl-fintech",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -809,14 +809,14 @@
         "SecondaryHref": "career.html#cv-konkuk",
         "SecondaryInferred": false,
         "Anchor": "tl-konkuk",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "tl-krema",
         "Category": "궤적",
         "Title": "2026 — KREMA AI 활용 마케팅 기획자 양성 과정 4기 수료",
-        "Body": "AI 기반 부동산 시장 데이터 분석과 타겟 세그먼트 도출, 매체별 디지털 마케팅 전략 수립 및 자동화 솔루션 기획 역량을 체화했습니다.",
+        "Body": "AI 기반 부동산 시장 데이터 분석과 타겟 세그먼트 도출, 매체별 디지털 마케팅 전략 수립 및 자동화 솔루션 설계 역량을 체화했습니다.",
         "Tags": "4기, krema, 마케팅 기획자, 한국부동산마케팅협회",
         "PrimaryLabel": "궤적에서 보기",
         "PrimaryHref": "index.html#tl-krema",
@@ -824,7 +824,7 @@
         "SecondaryHref": "career.html#cv-krema",
         "SecondaryInferred": false,
         "Anchor": "tl-krema",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -839,14 +839,14 @@
         "SecondaryHref": "gallery.html#national-debate",
         "SecondaryInferred": false,
         "Anchor": "tl-national-debate",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "tl-press",
         "Category": "궤적",
         "Title": "2026 — 서울시민기자단 취재기자 · 서울청년파트너스 위원",
-        "Body": "공공 영역의 미디어 콘텐츠를 기획·편집하고 시정(市政) 현안을 분석해 정책 제안 과정에 참여합니다. 서울청년파트너스 위원으로 정책 제안 프로세스에도 참여했습니다.",
+        "Body": "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석해 정책 제안 과정에 참여합니다. 서울청년파트너스 위원으로 정책 제안 프로세스에도 참여했습니다.",
         "Tags": "기자, 서울시민기자단, 서울청년파트너스, 시정, 취재기자",
         "PrimaryLabel": "궤적에서 보기",
         "PrimaryHref": "index.html#tl-seoul-press",
@@ -854,7 +854,7 @@
         "SecondaryHref": "career.html#cv-seoul-press",
         "SecondaryInferred": false,
         "Anchor": "tl-seoul-press",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -869,7 +869,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "tl-seocho",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -884,7 +884,7 @@
         "SecondaryHref": "index.html#trajectory",
         "SecondaryInferred": true,
         "Anchor": "cv-sharing",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -899,7 +899,7 @@
         "SecondaryHref": "index.html#tl-ssafy",
         "SecondaryInferred": false,
         "Anchor": "g-ssafy-presentation",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -914,7 +914,7 @@
         "SecondaryHref": "career.html#cv-vattenfall",
         "SecondaryInferred": false,
         "Anchor": "tl-vattenfall",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -929,7 +929,7 @@
         "SecondaryHref": "gallery.html#youth-day",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-day",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -944,14 +944,14 @@
         "SecondaryHref": "career.html#cv-youth-panel",
         "SecondaryInferred": false,
         "Anchor": "tl-youth-panel",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
         "Id": "tl-zipconomy",
         "Category": "궤적",
         "Title": "2026 — 한경 집코노미 박람회 2026 KREMA AI 전시관 시연·발표",
-        "Body": "한국경제신문 집코노미 박람회 2026(9. 30 · 코엑스 D홀)에서 한국부동산마케팅협회(KREMA) AI 전시관 C-10 부스에 섰습니다. 직접 기획·구현한 집캐치와 감정평가사 필드워크를 관람객 앞에서 시연하고, 제작 배경과 작동 방식을 설명하며 질문을 받았습니다.",
+        "Body": "한국경제신문 집코노미 박람회 2026(9. 30 · 코엑스 D홀)에서 한국부동산마케팅협회(KREMA) AI 전시관 C-10 부스에 섰습니다. 직접 설계·구현한 집캐치와 감정평가사 필드워크를 관람객 앞에서 시연하고, 제작 배경과 작동 방식을 설명하며 질문을 받았습니다.",
         "Tags": "krema, 박람회, 발표, 부스, 시연, 전시, 집코노미, 코엑스, 한경, 한국경제",
         "PrimaryLabel": "궤적에서 보기",
         "PrimaryHref": "index.html#tl-zipconomy",
@@ -959,7 +959,7 @@
         "SecondaryHref": "gallery.html#zipconomy",
         "SecondaryInferred": false,
         "Anchor": "tl-zipconomy",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       },
       {
@@ -974,7 +974,7 @@
         "SecondaryHref": "career.html#experience",
         "SecondaryInferred": false,
         "Anchor": "trajectory",
-        "Source": "kb.js@2026.10.19a",
+        "Source": "kb.js@2026.10.20",
         "Verified": true
       }
     ],
@@ -1133,7 +1133,7 @@
         "Id": "ed-16",
         "Edition": "16",
         "Title": "법조시장 한눈에 — 법조 시장 상황판",
-        "Summary": "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 기획팀이 바로 전략 판단으로 옮기도록 만든 상황판입니다. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공합니다. 출처 없는 예시 수치는 넣지 않고, 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 줍니다.",
+        "Summary": "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 전략팀이 바로 전략 판단으로 옮기도록 만든 상황판입니다. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공합니다. 출처 없는 예시 수치는 넣지 않고, 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 줍니다.",
         "Url": "https://legal-pulse-pearl.vercel.app",
         "Anchor": "ed-16",
         "Public": true,
@@ -1154,12 +1154,12 @@
       {
         "Id": "svc-strategy",
         "Plan": "A",
-        "Name": "전략기획 · AI 프로세스 진단",
+        "Name": "전략 컨설팅 · AI 프로세스 진단",
         "Tagline": "업무와 시장 데이터를 근거로 무엇을 먼저 할지 정하고 자동화로 설계",
-        "For": "법무법인 · 전문직 사무소 · 백오피스 · 기획 팀",
+        "For": "법무법인 · 전문직 사무소 · 백오피스 · 전략 팀",
         "Deliverables": "업무 흐름 진단 리포트 · 자동화 우선순위 매트릭스 · 파일럿(예: VOC 트리아지 · 메일 자동 발송) 설계",
         "Proof": "ed-06, ed-07, ed-08",
-        "CtaLabel": "전략기획 업무 영역",
+        "CtaLabel": "전략 컨설팅 업무 영역",
         "CtaHref": "career.html#practice-strategy"
       },
       {
@@ -1207,7 +1207,7 @@
         "Id": "consult-need",
         "Type": "consult",
         "Order": 1,
-        "Text": "어떤 과제를 함께 풀고 싶으신가요? (예: 전략기획·업무 자동화 · 데이터 대시보드 · 브랜드 필름 · 강의/특강 · 채용 제안)",
+        "Text": "어떤 과제를 함께 풀고 싶으신가요? (예: 전략 컨설팅·업무 자동화 · 데이터 대시보드 · 브랜드 필름 · 강의/특강 · 채용 제안)",
         "Key": "need"
       },
       {
@@ -1287,5 +1287,5 @@
       }
     ]
   },
-  "hash": "495aad47180323e5"
+  "hash": "cfe56ba5e927bd42"
 }
