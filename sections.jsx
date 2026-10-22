@@ -93,10 +93,12 @@ function Hero() {
         <p className="font-sans hero-kicker">Seoul · Portfolio 2026</p>
         <p className="eyebrow hero-eyebrow">AI Strategy &amp; Consulting</p>
         <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
-          <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅</span>
-          {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
-          <br />
-          {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
+          <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅 </span>
+          <span aria-hidden="true">
+            {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
+            <br />
+            {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
+          </span>
         </h1>
         <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
           {"AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"}

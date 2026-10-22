@@ -94,10 +94,12 @@ function Hero() {
     React.createElement("p", { className: "font-sans hero-kicker" }, "Seoul \xB7 Portfolio 2026"), /*#__PURE__*/
     React.createElement("p", { className: "eyebrow hero-eyebrow" }, "AI Strategy & Consulting"), /*#__PURE__*/
     React.createElement("h1", { className: "font-serif", style: { fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 } }, /*#__PURE__*/
-    React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \uCEE8\uC124\uD305"),
+    React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \uCEE8\uC124\uD305 "), /*#__PURE__*/
+    React.createElement("span", { "aria-hidden": "true" },
     "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms` } }, c)), /*#__PURE__*/
     React.createElement("br", null),
     "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: `k${i}`, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms` } }, c))
+    )
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 } },
     "AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"
