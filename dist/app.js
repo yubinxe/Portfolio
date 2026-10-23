@@ -24,6 +24,7 @@ function App() {
     React.createElement(Composite, null), /*#__PURE__*/
     React.createElement(Artifacts, null), /*#__PURE__*/
     React.createElement(Trajectory, null), /*#__PURE__*/
+    React.createElement(Channels, null), /*#__PURE__*/
     React.createElement(Lectures, null), /*#__PURE__*/
     React.createElement(Contact, null)
     ), /*#__PURE__*/
