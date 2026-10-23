@@ -12,7 +12,7 @@
   var base = onIndex ? "" : "index.html";
   var LINKS = [
     ["소개", base + "#about"], ["역량", base + "#composite"], ["프로젝트", base + "#artifacts"], ["이력", base + "#trajectory"],
-    ["강의", onIndex ? "#lectures" : "lecture.html"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["연락", base + "#contact"],
+    ["강의", onIndex ? "#lectures" : "lecture.html"], ["채널", base + "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["연락", base + "#contact"],
   ];
   var current = { "gallery.html": "갤러리", "lecture.html": "강의", "career.html": "경력 상세" }[path];
 

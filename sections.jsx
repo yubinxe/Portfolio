@@ -48,7 +48,7 @@ function Nav() {
   }, []);
   const links = [
     ["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-    ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
+    ["강의", "#lectures"], ["채널", "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
@@ -1196,6 +1196,63 @@ function Contact() {
   );
 }
 
+/* ============================================================ CHANNELS — 기록·홍보 채널(PR) */
+/* 최근 글은 각 채널 공식 RSS 에서 2026-10-23 에 옮겨 적은 것(제목·날짜·주소 원문 그대로). 팔로워 수 등 확인하지 않은 수치는 쓰지 않는다. */
+const CH_ICON = {
+  ig: <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>,
+  nb: <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M4 4h4.6l6.8 9.6V4H20v16h-4.6L8.6 10.4V20H4z" /></svg>,
+  ts: <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><circle cx="6" cy="6" r="2.6" /><circle cx="12" cy="6" r="2.6" /><circle cx="18" cy="6" r="2.6" /><circle cx="12" cy="12" r="2.6" /><circle cx="12" cy="18" r="2.6" /></svg>,
+};
+const CHANNELS = [
+  { k: "nb", name: "네이버 블로그", handle: "blog.naver.com/yubinxe", url: "https://blog.naver.com/yubinxe", tone: "#03A94D", label: "현장과 사유",
+    pitch: "AI 전략기획 · 청년정책. 법무법인에서 AI로 업무를 자동화하며, 부동산·정책 현장의 질문과 독서·예술의 사유를 기록합니다.",
+    tags: ["현장과 사유", "정책·도시 분석", "전시와 예술", "영화와 시선"],
+    posts: [["청와대에서 보낸 청년의날 행사, 한 달 뒤 다시 생각하는 청년정책과 기억들", "2026.10.21", "https://blog.naver.com/yubinxe/224449296593"],
+      ["한경 집코노미 2026 부스 참여 후기 — 직접 개발한 부동산 관련 서비스를 코엑스 현장에서 선보이다", "2026.10.19", "https://blog.naver.com/yubinxe/224446565096"],
+      ["트렌드 코리아 2027 발표회 후기 — AI를 활용하여 무엇을 위해 어떻게 만들어낼 것인가", "2026.10.12", "https://blog.naver.com/yubinxe/224439232761"]] },
+  { k: "ts", name: "티스토리", handle: "yubinxe.tistory.com", url: "https://yubinxe.tistory.com/", tone: "#E8501E", label: "대외 활동",
+    pitch: "현장에서 보고 들은 것을 적고, 판단의 근거로 다시 접목합니다. AI 전략 기획 · 청년 정책 · 재테크 및 부동산.",
+    tags: ["대외 활동", "청년 활동", "SSAFY"],
+    posts: [["트렌드 코리아 2027 김난도 교수 키워드 발표회 후기 — ALPHA SHEEP과 10대 키워드", "2026.10.11", "https://yubinxe.tistory.com/4"],
+      ["국민통합위원회 국민 대토론회 후기 — 단 2시간 만에 AI로 청년 자산 정책 설계 및 제안서 작성, PPT 제작 후 발표까지", "2026.10.02", "https://yubinxe.tistory.com/3"]] },
+  { k: "ig", name: "Instagram", handle: "@yubinxe", url: "https://www.instagram.com/yubinxe/", tone: "#C13584", label: "AI 비주얼",
+    pitch: "생성형 AI로 만든 카드뉴스와 시네마틱 영상을 올립니다. 분석을 2030 세대가 실제로 보는 형식으로 옮기는 채널입니다.",
+    tags: ["AI 카드뉴스", "시네마틱 영상", "브랜드 필름"],
+    posts: [["6·3 지방선거 AI 카드뉴스 6종 & 내레이션 영상 — GPT Image-2 · Suno AI · ElevenLabs", "작업물", "#ed-01"]] },
+];
+function Channels() {
+  const ref = useReveal();
+  return (
+    <section id="channels" ref={ref} className="ch-sec" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
+      <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow="Media & PR — Channels" titleEn="The Channels" titleKo="기록 · 홍보 채널" />
+        <p className="ch-lede font-myeongjo reveal">현장에서 보고, 만들고, 기록합니다. <span>일한 과정과 생각은 세 채널에 먼저 올라옵니다.</span></p>
+        <div className="ch-grid">
+          {CHANNELS.map((c, i) => (
+            <article key={c.k} className={"ch-card reveal" + (i === 0 ? " ch-card--lead" : "")} style={{ "--ch": c.tone, transitionDelay: `${i * 90}ms` }}>
+              <header className="ch-head">
+                <span className="ch-ico">{CH_ICON[c.k]}</span>
+                <div><b className="font-ko">{c.name}</b><small className="font-sans">{c.handle}</small></div>
+                <span className="ch-label font-sans">{c.label}</span>
+              </header>
+              <p className="ch-pitch font-ko">{c.pitch}</p>
+              <ul className="ch-tags font-sans" aria-label={c.name + " 분류"}>{c.tags.map((t) => <li key={t}>{t}</li>)}</ul>
+              {c.k === "ig" && <a className="ch-mosaic" href="#ed-01" aria-label="6·3 지방선거 AI 카드뉴스 6종 — 작업 카드로 이동">{[1, 2, 3, 4, 5, 6].map((j) => <span key={j} className="font-sans"><b>CARD</b>0{j}</span>)}</a>}
+              <ol className="ch-posts" aria-label={c.name + " 최근 글"}>
+                {c.posts.map(([t, d, u]) => (
+                  <li key={t}><a href={u} {...(u.startsWith("#") ? {} : { target: "_blank", rel: "noopener" })} className="font-ko"><time className="font-sans">{d}</time><span>{t}</span></a></li>
+                ))}
+              </ol>
+              <a className="ch-cta font-sans" href={c.url} target="_blank" rel="me noopener">{c.name} 방문 <ArrowUpRight size={15} /></a>
+            </article>
+          ))}
+        </div>
+        <p className="ch-note font-sans reveal">최근 글은 각 채널 RSS 기준(2026.10.23) · 채널 이름을 누르면 새 창에서 열립니다.</p>
+      </div>
+    </section>
+  );
+}
+
 /* 본인이 운영하는 공개 채널 — index.html Person.sameAs 와 같은 목록을 유지한다(test/seo.test.mjs). */
 const OFFICIAL_CHANNELS = [
   ["GitHub", "https://github.com/yubinxe"],
@@ -1208,7 +1265,7 @@ function Footer() {
   return (
     <footer style={{ borderTop: "1px solid rgba(249,246,240,.18)", position: "relative", zIndex: 2 }}>
       <div className="wrap f-links font-sans" style={{ display: "flex", flexWrap: "wrap", gap: "10px 26px", paddingTop: 22 }}>
-        {[["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => (
+        {[["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"], ["강의", "#lectures"], ["채널", "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]].map(([t, h]) => (
           <a key={t} href={h}>{t}</a>
         ))}
         {OFFICIAL_CHANNELS.map(([t, h]) => (
@@ -1251,4 +1308,4 @@ function SectionHead({ eyebrow, titleEn, titleKo }) {
   );
 }
 
-Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, EditionCard, Lectures, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, EditionCard, Lectures, Channels, About, Contact, Footer, SectionHead });

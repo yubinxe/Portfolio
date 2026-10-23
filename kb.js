@@ -359,6 +359,11 @@
       body: "협업 · 채용 · 프로젝트 문의는 이메일로 받습니다.\n- 개인: [" + EMAIL + "](mailto:" + EMAIL + ")\n- 사무실: [" + EMAIL_OFFICE + "](mailto:" + EMAIL_OFFICE + ")\n새로운 협업과 프로젝트, Recruiter 분들을 환영합니다. 챗봇에서 '무료 상담 신청'을 누르면 상담 내용을 정리해 바로 전달할 수 있습니다.",
       primary: { label: "연락 섹션", href: "index.html#contact" },
       secondary: { label: "이메일 보내기", href: "mailto:" + EMAIL } },
+    { id: "channels", cat: "연락", tags: ["채널", "sns 채널", "블로그", "네이버 블로그", "티스토리", "tistory", "sns", "pr", "홍보", "기록", "글"],
+      title: "기록 · 홍보 채널",
+      body: "일한 과정과 생각은 세 채널에 먼저 올라옵니다.\n- [네이버 블로그](https://blog.naver.com/yubinxe) — AI 전략기획 · 청년정책. 부동산·정책 현장의 질문과 독서·예술의 사유를 기록(현장과 사유 · 정책·도시 분석 · 전시와 예술 · 영화와 시선)\n- [티스토리](https://yubinxe.tistory.com/) — 현장에서 보고 들은 것을 적고 판단의 근거로 다시 접목(대외 활동 · 청년 활동 · SSAFY)\n- [Instagram @yubinxe](https://www.instagram.com/yubinxe/) — 생성형 AI로 만든 카드뉴스와 시네마틱 영상",
+      primary: { label: "채널 섹션", href: "index.html#channels" },
+      secondary: { label: "네이버 블로그", href: "https://blog.naver.com/yubinxe" } },
     { id: "ledger", cat: "인물", tags: ["숫자", "한눈에", "몇", "개수", "통계", "ledger"],
       title: "한눈에 보는 기록 (The Ledger)",
       body: "- 수행 프로젝트 8\n- 전문 교육 이수 4\n- 수상 · 표창 3\n- 방송 인터뷰 1",
@@ -455,7 +460,7 @@
   ];
 
   return {
-    version: "2026.10.20b",
+    version: "2026.10.23a",
     site: SITE, email: EMAIL, emailOffice: EMAIL_OFFICE,
     cards: CARDS, services: SERVICES, consult: CONSULT, suggestions: SUGGESTIONS,
     rank: rank,

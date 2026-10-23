@@ -14,7 +14,7 @@
 - `npm test` — 52건 모두 통과해야 커밋
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=41` · `features.css?v=6` · `dist/sections.js?v=19` · `chatbot.js?v=9` · `mnav.js?v=2` · `kb.js?v=20261020b`
+`styles.css?v=41` · `features.css?v=7` · `dist/sections.js?v=20` · `chatbot.js?v=9` · `mnav.js?v=3` · `kb.js?v=20261023a`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.

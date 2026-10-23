@@ -23,6 +23,7 @@ function App() {
         <Composite />
         <Artifacts />
         <Trajectory />
+        <Channels />
         <Lectures />
         <Contact />
       </main>
