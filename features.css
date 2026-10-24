@@ -240,3 +240,18 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .ch-note{margin-top:22px;font-size:.78rem;color:var(--ink-soft)}
 @media(max-width:1000px){.ch-grid{grid-template-columns:1fr 1fr}.ch-card--lead{grid-column:1/-1}}
 @media(max-width:640px){.ch-grid{grid-template-columns:1fr}.ch-card{padding:22px}}
+
+/* 폰 최적화 — 위치 표시·주요 버튼·터치 크기·카드 접기 */
+.yk-prog,.yk-now{display:none}.edition__more{display:none}
+@media(max-width:760px){
+.yk-prog{display:block;position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:linear-gradient(90deg,var(--gold-text),#C9A24E);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.yk-now{display:inline-flex;align-items:center;gap:6px;position:fixed;top:21px;left:62px;z-index:51;height:30px;padding:0 12px;border-radius:999px;background:rgba(250,248,243,.94);border:1px solid rgba(115,92,48,.35);font-size:.8rem;font-weight:700;color:var(--navy);text-decoration:none;opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s;pointer-events:none}
+.yk-now.on{opacity:1;transform:none;pointer-events:auto}.yk-now.solo{top:10px;left:50%;transform:translateX(-50%);box-shadow:0 8px 22px -10px rgba(26,26,26,.45);transition:opacity .3s,top .3s,left .3s}.yk-now.solo:not(.on){transform:translate(-50%,-6px)}.yk-now b{font-size:.7rem;color:var(--gold-text)}
+.btn{font-size:.84rem;min-height:44px}
+#manifesto .btn.hero-main{flex:1 1 100%;justify-content:center;min-height:54px;font-size:1rem;box-shadow:0 14px 30px -14px rgba(31,45,107,.6)}
+#manifesto .btn--ghost{flex:1 1 0;justify-content:center}
+.tl-proof,.ch-cta{min-height:44px;display:inline-flex;align-items:center}
+.edition__desc:not(.is-open){display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;flex-grow:0!important}
+.edition__more{display:inline-flex;align-self:flex-start;align-items:center;min-height:40px;margin:-4px 0 4px;padding:0 14px;border:1px solid rgba(26,26,26,.18);border-radius:999px;background:transparent;font-size:.8rem;font-weight:700;color:var(--navy);cursor:pointer}
+}
+@media(prefers-reduced-motion:reduce){.yk-now{transition:none}}

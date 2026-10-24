@@ -111,7 +111,7 @@ function Hero() {
         </p>
 
         <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="#artifacts" className="btn">대표 프로젝트 <ArrowDown size={15} /></a>
+          <a href="#artifacts" className="btn hero-main">대표 프로젝트 <ArrowDown size={15} /></a>
           <a href="#composite" className="btn btn--ghost">핵심 역량</a>
           <a href="career.html" className="btn btn--ghost">경력 상세 <ArrowUpRight size={15} /></a>
         </div>
@@ -853,6 +853,7 @@ const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "08", "10", "14", "11
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {
+  const [more, setMore] = React.useState(false); /* 폰에서 설명 4줄만 보이고 펼친다 */
   return (
             <article id={"ed-" + e.n} className={"edition reveal" + (e.core ? " edition--core" : "")} style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
               <div className="edition__chip">{e.status}</div>
@@ -865,7 +866,8 @@ function EditionCard({ e, i, onPlay }) {
               <span className="edition__index-band" />
               <p className="font-play" style={{ fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" }}>Edition {e.no}</p>
               <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" }}>{e.title}</h3>
-              <p className="font-ko" style={{ color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 }}>{e.desc}</p>
+              <p className={"font-ko edition__desc" + (more ? " is-open" : "")} style={{ color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 }}>{e.desc}</p>
+              <button type="button" className="edition__more font-sans" aria-expanded={more} onClick={() => setMore(!more)}>{more ? "접기" : "더 보기"}</button>
               {e.point && <p className="edition__point font-ko"><b>컨설팅 포인트</b>{e.point}</p>}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
                 {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
