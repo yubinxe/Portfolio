@@ -381,9 +381,12 @@
 .yk-teaser__txt{ min-width:0; flex:1; font-size:13.5px; line-height:1.4; }
 .yk-teaser__txt b{ display:flex; justify-content:space-between; font-size:13px; font-weight:650; margin-bottom:1px; }
 .yk-teaser__txt b small{ font-weight:400; font-size:12px; color:var(--yk-ink-soft); }
-.yk-teaser__close{ position:absolute; top:-7px; left:-7px; width:22px; height:22px; border-radius:50%;
-  background:rgba(120,120,128,.9); color:#fff; border:none; font-size:13px; cursor:pointer; line-height:1; opacity:0; transition:opacity .2s; }
-.yk-teaser:hover .yk-teaser__close{ opacity:1; }
+.yk-teaser__close{ position:absolute; top:-9px; right:-9px; width:28px; height:28px; border-radius:50%; display:grid; place-items:center;
+  background:#1B2A4A; color:#fff; border:2px solid #FAF8F3; font-size:17px; font-weight:700; cursor:pointer; line-height:1;
+  box-shadow:0 4px 12px -4px rgba(11,26,51,.6); transition:transform .2s; }
+.yk-teaser__close:hover,.yk-teaser__close:focus-visible{ transform:scale(1.1); }
+.yk-teaser__close:focus-visible{ outline:2px solid var(--yk-gold-lt); outline-offset:2px; }
+.yk-teaser__txt b small{ margin-right:14px; }
 /* ---- 기기 프레임 (iPhone) ---- */
 .yk-panel{
   position:fixed; right:24px; bottom:100px; z-index:121;
@@ -620,11 +623,11 @@
     teaser = el("div", "yk-teaser");
     teaser.setAttribute("role", "status");
     teaser.innerHTML =
-      '<button class="yk-teaser__close" aria-label="닫기">&times;</button>' +
+      '<button type="button" class="yk-teaser__close" aria-label="안내 닫기 — 다시 보이지 않음">&times;</button>' +
       '<span class="yk-teaser__app" aria-hidden="true">YK</span>' +
       '<span class="yk-teaser__txt"><b>' + escapeHtml(CFG.brandKo) + ' <small>지금</small></b>' + escapeHtml(CFG.teaser) + '</span>';
     teaser.addEventListener("click", function (e) {
-      if (e.target.classList.contains("yk-teaser__close")) { hideTeaser(true); e.stopPropagation(); return; }
+      if (e.target.classList.contains("yk-teaser__close")) { hideTeaser(); try { localStorage.setItem("yk.teaser.off", "1"); } catch (x) {} e.stopPropagation(); return; }
       open();
     });
 
@@ -718,7 +721,8 @@
     });
 
     // 첫 방문 티저
-    if (!REDUCED && !history.length) {
+    var teaserOff = false; try { teaserOff = localStorage.getItem("yk.teaser.off") === "1"; } catch (x) {}
+    if (!REDUCED && !history.length && !teaserOff) {
       setTimeout(function () { if (!root.classList.contains("open")) showTeaser(); }, 2600);
     }
 
