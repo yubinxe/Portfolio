@@ -100,8 +100,8 @@
         "Tags": "api, gws, 공공데이터, 대시보드, 데이터, 시각화, 인프라",
         "PrimaryLabel": "역량 03",
         "PrimaryHref": "index.html#dom-03",
-        "SecondaryLabel": "대시보드 열기",
-        "SecondaryHref": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app",
+        "SecondaryLabel": "청약 대시보드 카드",
+        "SecondaryHref": "index.html#ed-05",
         "SecondaryInferred": false,
         "Anchor": "dom-03",
         "Source": "kb.js@2026.10.23a",
@@ -231,14 +231,14 @@
         "Id": "ed-05",
         "Category": "프로젝트",
         "Title": "공공데이터 API 청약 인사이트 대시보드",
-        "Body": "청약홈 OpenAPI로 분양정보·지역별 경쟁률·당첨자 가점 통계를 모으고, AI 당첨 확률 계산기와 청약 핫플레이스 지도를 더한 시장 대시보드입니다. Vercel에 배포되어 있습니다. 분산된 공고를 표로 정리하던 일을 API 수집과 자동 갱신으로 바꾸었고, '어떤 지표를 나란히 놓아야 의미가 생기는지'는 사람이 정합니다.",
+        "Body": "청약홈 OpenAPI로 분양정보·지역별 경쟁률·당첨자 가점 통계를 모으고, AI 당첨 확률 계산기와 청약 핫플레이스 지도를 더한 시장 대시보드입니다. Vercel에 배포했고, 공개 데모 링크는 현재 종료됐습니다. 분산된 공고를 표로 정리하던 일을 API 수집과 자동 갱신으로 바꾸었고, '어떤 지표를 나란히 놓아야 의미가 생기는지'는 사람이 정합니다.",
         "Tags": "vercel, 공공데이터, 대시보드, 부동산, 시각화, 청약",
-        "PrimaryLabel": "대시보드 바로가기",
-        "PrimaryHref": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app",
-        "SecondaryLabel": "작업 카드",
-        "SecondaryHref": "index.html#ed-05",
+        "PrimaryLabel": "작업 카드",
+        "PrimaryHref": "index.html#ed-05",
+        "SecondaryLabel": "역량 03",
+        "SecondaryHref": "index.html#dom-03",
         "SecondaryInferred": false,
-        "Anchor": "",
+        "Anchor": "ed-05",
         "Source": "kb.js@2026.10.23a",
         "Verified": true
       },
@@ -711,7 +711,7 @@
         "Id": "projects",
         "Category": "프로젝트",
         "Title": "대표 프로젝트 — 17건",
-        "Body": "직접 설계·구현한 작업 17건입니다. 생활과 업무 현장에 쓰이는 시스템 7건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 05 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 06 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 07 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 08 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 09 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 10 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 11 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 12 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 13 [청약 인사이트 대시보드](https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app) — Vercel 배포\n- 14 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 15 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 16 Louis Vuitton 시네마틱 캠페인 필름\n- 17 Hyperframe × ElevenLabs 멀티미디어 프로모션",
+        "Body": "직접 설계·구현한 작업 17건입니다. 생활과 업무 현장에 쓰이는 시스템 7건을 먼저 소개하고, 나머지는 '그 밖의 작업'에 모았습니다.\n[대표 시스템]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n- 05 [VOC 트리아지 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 06 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n- 07 누리장터 크롤링 정비사업 용역비 자동 수집 (사내 운영 · 비공개)\n[그 밖의 작업]\n- 08 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 09 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 10 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 11 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 12 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 13 청약 인사이트 대시보드 — Vercel 배포(공개 데모 종료)\n- 14 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 15 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 16 Louis Vuitton 시네마틱 캠페인 필름\n- 17 Hyperframe × ElevenLabs 멀티미디어 프로모션",
         "Tags": "artifact, 결과물, 대표, 만든, 산출물, 작업, 포트폴리오, 프로젝트",
         "PrimaryLabel": "작업 전체 보기",
         "PrimaryHref": "index.html#artifacts",
@@ -1038,10 +1038,10 @@
         "Id": "ed-05",
         "Edition": "05",
         "Title": "공공데이터 API 청약 인사이트 대시보드",
-        "Summary": "청약홈 OpenAPI로 분양정보·지역별 경쟁률·당첨자 가점 통계를 모으고, AI 당첨 확률 계산기와 청약 핫플레이스 지도를 더한 시장 대시보드입니다. Vercel에 배포되어 있습니다. 분산된 공고를 표로 정리하던 일을 API 수집과 자동 갱신으로 바꾸었고, '어떤 지표를 나란히 놓아야 의미가 생기는지'는 사람이 정합니다.",
-        "Url": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app",
+        "Summary": "청약홈 OpenAPI로 분양정보·지역별 경쟁률·당첨자 가점 통계를 모으고, AI 당첨 확률 계산기와 청약 핫플레이스 지도를 더한 시장 대시보드입니다. Vercel에 배포했고, 공개 데모 링크는 현재 종료됐습니다. 분산된 공고를 표로 정리하던 일을 API 수집과 자동 갱신으로 바꾸었고, '어떤 지표를 나란히 놓아야 의미가 생기는지'는 사람이 정합니다.",
+        "Url": "",
         "Anchor": "ed-05",
-        "Public": true,
+        "Public": false,
         "Tags": "청약, 대시보드, 공공데이터, 부동산, 시각화, vercel"
       },
       {
@@ -1197,7 +1197,7 @@
         "Deliverables": "데이터 수집 파이프라인(API · 크롤링) · 지표 설계 · Vercel 배포 대시보드",
         "Proof": "ed-05, ed-08",
         "CtaLabel": "대시보드 사례",
-        "CtaHref": "https://cheongak-dashboard-di9e6muep-yubin-ki-m-s-projects.vercel.app"
+        "CtaHref": "index.html#ed-05"
       },
       {
         "Id": "svc-lecture",
@@ -1302,5 +1302,5 @@
       }
     ]
   },
-  "hash": "ecbce0a94ee393f4"
+  "hash": "80b8826252eea839"
 }
