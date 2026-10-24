@@ -558,6 +558,15 @@
 .yk-ask:hover{ background:#fff; box-shadow:inset 0 0 0 1.3px var(--yk-gold); transform:translateY(-1px); }
 .yk-ask:active{ transform:scale(.97); }
 @media (prefers-reduced-motion:reduce){ .yk-island__r b{ animation:none; } .yk-island{ transition:none; } }
+/* ---- 모바일 시트에도 다이내믹 아일랜드 — 손잡이 자리, 응답 중엔 라이브 액티비티로 확장 ---- */
+@media (max-width:520px), (max-height:700px){
+  .yk-status{ display:none !important; }
+  .yk-island{ display:block; top:9px; width:104px; height:30px; }
+  .yk-busy .yk-island{ width:156px; }
+  .yk-head{ padding-top:48px; }
+  .yk-head::before{ display:none; }
+  .yk-head__close{ top:46px; }
+}
 @media (prefers-reduced-motion:reduce){
   .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser,.yk-cta__btn{ transition:none !important; animation:none !important; }
   .yk-fab__ping::after,.yk-typing span{ animation:none !important; }
