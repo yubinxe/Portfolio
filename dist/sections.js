@@ -713,8 +713,8 @@ const DIARY = [
   facts: [["주최", "성평등가족부 · 한국양성평등교육진흥원"], ["장소", "연세대 백양누리 그랜드볼룸"], ["시간", "10:00 – 17:00"]],
   main: { name: "gf-stage", alt: "김유빈 활동 기록 — 〈모두의 성평등〉 공개형 공론장 무대 앞", pos: "40% 50%" },
   thumbs: [
-  { name: "gf-duo", href: "gallery.html#g-gf-duo", alt: "김유빈 활동 기록 — 공론장 무대 앞에서 성평등 교육 활동가 이한 님과 함께", pos: "35% 45%" },
-  { name: "gf-selfie", href: "gallery.html#g-gf-selfie", alt: "김유빈 활동 기록 — 공론장에서 김승훈 2030 고용노동부 자문단·광주광역시 청년위원장과 함께한 셀프 촬영", pos: "50% 45%" }],
+  { name: "gf-duo", href: "gallery.html#g-gf-duo", alt: "김유빈 활동 기록 — 공론장 무대 앞에서 김승훈 2030 고용노동부 자문단·광주광역시 청년위원장과 함께", pos: "35% 45%" },
+  { name: "gf-selfie", href: "gallery.html#g-gf-selfie", alt: "김유빈 활동 기록 — 공론장에서 성평등 교육 활동가 이한 님과 함께한 셀프 촬영", pos: "50% 45%" }],
 
   href: "gallery.html#gender-forum", cta: "공론장 사진 전체 보기" }];
 
