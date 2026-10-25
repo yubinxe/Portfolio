@@ -278,3 +278,4 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 @media (max-width:900px){.diary__item--rev{grid-template-columns:1fr}.diary__item--rev .diary__main{order:0}.diary__stamp b{font-size:1.5rem}}
 @media (prefers-reduced-motion:reduce){.diary__pulse{animation:none}}
 .yd-grid .g-card--full{grid-column:1/-1}.yd-grid .g-card--full a{aspect-ratio:32/9}
+.diary__facts dd{word-break:keep-all}

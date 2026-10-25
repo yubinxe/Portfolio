@@ -650,7 +650,7 @@ const TRAJECTORY = [
   { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
     desc: "‘청년이 생각하는 성평등정책, 어디까지?’를 주제로 연세대 백양누리 그랜드볼룸에서 열린 공개형 공론장(2026. 10. 25)에 참석해 청년 세대의 시각으로 정책 토론에 함께했습니다.", proof: "gallery.html#gender-forum", proofLabel: "공론장 현장 보기" },
   { id: "tl-dyl", group: "public", year: "2026", color: "var(--sky)", title: "2026 민주청년지도자 양성과정 입학 · 수강 중",
-    desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 현장 보기" },
+    desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강을 들었습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 현장 보기" },
   { id: "tl-zipconomy", group: "public", year: "2026", color: "var(--butter)", title: "한경 집코노미 박람회 2026 — KREMA AI 전시관 서비스 시연·발표",
     desc: "코엑스 D홀 KREMA AI 전시관 C-10 부스에서 청약·공공임대 맞춤 추천 서비스 집캐치와 3D 감정평가 필드워크를 소개하고, 제작 배경과 작동 방식을 설명하며 관람객 질문에 답했습니다.", proof: "gallery.html#zipconomy", proofLabel: "박람회 현장 보기" },
   { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 정책 제안 발표",
@@ -697,13 +697,13 @@ const TRAJECTORY = [
 const DIARY = [
   { id: "dyl", date: "10.24", day: "SAT", tone: "navy", chip: "입학 · 진행 중",
     eyebrow: "Field Diary — 2026. 10. 24", title: "2026 민주청년지도자 양성과정 입학",
-    body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식과 특강, 저녁의 국회 앞까지 — 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
-    facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["상태", "수강 중"]],
-    main: { name: "dyl-assembly", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 첫날 저녁, 불 켜진 국회의사당 앞", pos: "58% 50%" },
+    body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강을 들었습니다. 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
+    facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["함께", "김민석 당대표 · 강득구 민주연구원장 · 이광재 예산결산특별위원장"], ["상태", "수강 중"]],
+    main: { name: "dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞에서 김민석 당대표와 함께", pos: "50% 33%", w: 675, h: 1200 },
     thumbs: [
-      { name: "dyl-entrance", href: "gallery.html#g-dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞", pos: "50% 28%" },
-      { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 함께한 기념 촬영", pos: "50% 40%" },
-      { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 특강을 마친 뒤 ‘감사합니다’ 화면 앞 기념 촬영", pos: "45% 40%" },
+      { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 강득구 민주연구원장과 함께", pos: "50% 40%" },
+      { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강을 마친 뒤 함께", pos: "45% 40%" },
+      { name: "dyl-assembly", href: "gallery.html#g-dyl-assembly", alt: "김유빈 활동 기록 — 양성과정 첫날 저녁, 불 켜진 국회의사당 앞", pos: "58% 50%" },
     ],
     href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" },
   { id: "gender-forum", date: "10.25", day: "SUN", tone: "sage", chip: "공론장 참석",
@@ -725,7 +725,7 @@ function FieldDiary() {
       {DIARY.map((d, i) => (
         <figure key={d.id} className={"tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "")}>
           <a className="tl-feature__main diary__main" href={d.href}>
-            <Pic name={d.main.name} fallback={"images/" + d.main.name + ".jpg"} sizes="(max-width: 900px) 92vw, 52vw" alt={d.main.alt} loading="lazy" width="1200" height="675" style={{ objectPosition: d.main.pos }} />
+            <Pic name={d.main.name} fallback={"images/" + d.main.name + ".jpg"} sizes="(max-width: 900px) 92vw, 52vw" alt={d.main.alt} loading="lazy" width={d.main.w || 1200} height={d.main.h || 675} style={{ objectPosition: d.main.pos }} />
             <span className="diary__stamp" aria-hidden="true"><b className="font-serif">{d.date}</b><i className="font-sans">{d.day} · 2026</i></span>
           </a>
           <figcaption className="tl-feature__body">
