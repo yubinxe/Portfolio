@@ -10,6 +10,8 @@ const OPT = {
   "profile-yubin": [480, 800, 896], "ssafy-presentation": [480, 800, 1016],
   "youth-day-yonhap": [480, 800, 860], "youth-day-selfie": [480, 800, 1200], "youth-day-mbc-02": [480, 800, 1200],
   "youth-day-venue": [480, 800, 1200], "youth-day-dialogue": [480, 800, 900],
+  "dyl-assembly": [480, 800, 1200], "dyl-entrance": [480, 675], "dyl-library": [480, 800, 1200], "dyl-lecture": [480, 800, 1200],
+  "gf-stage": [480, 800, 1200], "gf-duo": [480, 800, 1200], "gf-selfie": [480, 800, 1200],
   "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280]
 };
 function Pic({ name, fallback, sizes, alt = "", className, ...img }) {
@@ -646,6 +648,10 @@ const TRAJECTORY = [
   desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 설계·구현해 사내 운영에 적용." },
 { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
   desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
+{ id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
+  desc: "‘청년이 생각하는 성평등정책, 어디까지?’를 주제로 연세대 백양누리 그랜드볼룸에서 열린 공개형 공론장(2026. 10. 25)에 참석해 청년 세대의 시각으로 정책 토론에 함께했습니다.", proof: "gallery.html#gender-forum", proofLabel: "공론장 현장 보기" },
+{ id: "tl-dyl", group: "public", year: "2026", color: "var(--sky)", title: "2026 민주청년지도자 양성과정 입학 · 수강 중",
+  desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 현장 보기" },
 { id: "tl-zipconomy", group: "public", year: "2026", color: "var(--butter)", title: "한경 집코노미 박람회 2026 — KREMA AI 전시관 서비스 시연·발표",
   desc: "코엑스 D홀 KREMA AI 전시관 C-10 부스에서 청약·공공임대 맞춤 추천 서비스 집캐치와 3D 감정평가 필드워크를 소개하고, 제작 배경과 작동 방식을 설명하며 관람객 질문에 답했습니다.", proof: "gallery.html#zipconomy", proofLabel: "박람회 현장 보기" },
 { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 정책 제안 발표",
@@ -687,6 +693,62 @@ const TRAJECTORY = [
 { id: "tl-vattenfall", group: "public", year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
   desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." }];
 
+
+/* 현장 일지 — 청와대 청년의날 다음 장. 이틀 연속 일정을 날짜 도장으로 잇는다 */
+const DIARY = [
+{ id: "dyl", date: "10.24", day: "SAT", tone: "navy", chip: "입학 · 진행 중",
+  eyebrow: "Field Diary — 2026. 10. 24", title: "2026 민주청년지도자 양성과정 입학",
+  body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식과 특강, 저녁의 국회 앞까지 — 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
+  facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["상태", "수강 중"]],
+  main: { name: "dyl-assembly", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 첫날 저녁, 불 켜진 국회의사당 앞", pos: "58% 50%" },
+  thumbs: [
+  { name: "dyl-entrance", href: "gallery.html#g-dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞", pos: "50% 28%" },
+  { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 함께한 기념 촬영", pos: "50% 40%" },
+  { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 특강을 마친 뒤 ‘감사합니다’ 화면 앞 기념 촬영", pos: "45% 40%" }],
+
+  href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" },
+{ id: "gender-forum", date: "10.25", day: "SUN", tone: "sage", chip: "공론장 참석",
+  eyebrow: "Field Diary — 2026. 10. 25", title: "〈모두의 성평등〉 — 성평등가족부 청년세대 성별균형 공개형 공론장",
+  body: "‘청년이 생각하는 성평등정책, 어디까지?’를 주제로 연세대 백양누리 그랜드볼룸에서 열린 제2차 공개형 공론장에 참석했습니다. 하루 전 정책을 배우는 자리에 섰다면, 다음 날은 정부 부처의 공론장에서 청년의 의견을 보태는 자리였습니다.",
+  facts: [["주최", "성평등가족부 · 한국양성평등교육진흥원"], ["장소", "연세대 백양누리 그랜드볼룸"], ["시간", "10:00 – 17:00"]],
+  main: { name: "gf-stage", alt: "김유빈 활동 기록 — 〈모두의 성평등〉 공개형 공론장 무대 앞", pos: "40% 50%" },
+  thumbs: [
+  { name: "gf-duo", href: "gallery.html#g-gf-duo", alt: "김유빈 활동 기록 — 공론장 무대 앞에서 참가자와 함께", pos: "35% 45%" },
+  { name: "gf-selfie", href: "gallery.html#g-gf-selfie", alt: "김유빈 활동 기록 — 공론장 쉬는 시간, 참가자와 함께한 셀프 촬영", pos: "50% 45%" }],
+
+  href: "gallery.html#gender-forum", cta: "공론장 사진 전체 보기" }];
+
+
+function FieldDiary() {
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "diary" }, /*#__PURE__*/
+    React.createElement("p", { className: "diary__lead font-ko" }, /*#__PURE__*/React.createElement("span", { className: "diary__pulse", "aria-hidden": "true" }), "\uCCAD\uC640\uB300 \uCCAD\uB144\uC758\uB0A0, \uADF8\uB2E4\uC74C \uC7A5 \u2014 \uC774\uD2C0 \uC5F0\uC18D \uD604\uC7A5 \uC77C\uC9C0"),
+    DIARY.map((d, i) => /*#__PURE__*/
+    React.createElement("figure", { key: d.id, className: "tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "") }, /*#__PURE__*/
+    React.createElement("a", { className: "tl-feature__main diary__main", href: d.href }, /*#__PURE__*/
+    React.createElement(Pic, { name: d.main.name, fallback: "images/" + d.main.name + ".jpg", sizes: "(max-width: 900px) 92vw, 52vw", alt: d.main.alt, loading: "lazy", width: "1200", height: "675", style: { objectPosition: d.main.pos } }), /*#__PURE__*/
+    React.createElement("span", { className: "diary__stamp", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, d.date), /*#__PURE__*/React.createElement("i", { className: "font-sans" }, d.day, " \xB7 2026"))
+    ), /*#__PURE__*/
+    React.createElement("figcaption", { className: "tl-feature__body" }, /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow" }, d.eyebrow, " ", /*#__PURE__*/React.createElement("span", { className: "diary__chip font-sans" }, d.chip)), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, d.title), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko" }, d.body), /*#__PURE__*/
+    React.createElement("dl", { className: "diary__facts font-ko" },
+    d.facts.map(([k, v]) => /*#__PURE__*/React.createElement("div", { key: k }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "tl-feature__thumbs" + (d.thumbs.length === 2 ? " diary__thumbs--2" : "") },
+    d.thumbs.map((t) => /*#__PURE__*/
+    React.createElement("a", { key: t.name, href: t.href }, /*#__PURE__*/React.createElement(Pic, { name: t.name, fallback: "images/" + t.name + "-600.jpg", sizes: "(max-width: 900px) 30vw, 16vw", alt: t.alt, loading: "lazy", width: "600", height: "338", style: { objectPosition: t.pos } }))
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uD604\uC7A5 \uC0AC\uC9C4 \uC9C1\uC811 \uCD2C\uC601"), /*#__PURE__*/
+    React.createElement("a", { href: d.href, className: "btn btn--ghost" }, d.cta, " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
+    )
+    )
+    )
+    ));
+
+}
 
 /* 이력 그룹 — 핵심(실무·AI 교육)은 펼쳐 두고, 대외활동·수상은 눌러서 본다 */
 const TRAJ_GROUPS = [
@@ -748,6 +810,7 @@ function Trajectory() {
     React.createElement("a", { href: "gallery.html#youth-day", className: "btn btn--ghost" }, "\uD604\uC7A5 \uC0AC\uC9C4 \uC804\uCCB4 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
     )
     ), /*#__PURE__*/
+    React.createElement(FieldDiary, null), /*#__PURE__*/
     React.createElement("div", { className: "tl-groups" },
     TRAJ_GROUPS.map((g) => {
       const rows = (g.order ?

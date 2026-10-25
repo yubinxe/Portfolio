@@ -255,3 +255,26 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .edition__more{display:inline-flex;align-self:flex-start;align-items:center;min-height:40px;margin:-4px 0 4px;padding:0 14px;border:1px solid rgba(26,26,26,.18);border-radius:999px;background:transparent;font-size:.8rem;font-weight:700;color:var(--navy);cursor:pointer}
 }
 @media(prefers-reduced-motion:reduce){.yk-now{transition:none}}
+/* 현장 일지 — 청와대 청년의날 다음 장(10.24 양성과정 · 10.25 공론장) */
+.diary{position:relative;margin-top:clamp(28px,4vw,48px)}
+.diary__lead{display:flex;align-items:center;gap:10px;margin:0;font-size:.86rem;font-weight:700;letter-spacing:.02em;color:var(--gold-text)}
+.diary__pulse{width:9px;height:9px;border-radius:50%;background:#1F8A5B;box-shadow:0 0 0 0 rgba(31,138,91,.45);animation:dyPulse 2.2s ease-out infinite}
+@keyframes dyPulse{70%{box-shadow:0 0 0 9px rgba(31,138,91,0)}100%{box-shadow:0 0 0 0 rgba(31,138,91,0)}}
+.diary__item{margin-top:18px;position:relative;border-left:3px solid var(--dy,#1B2A4A)}
+.diary--navy{--dy:#1B2A4A}.diary--sage{--dy:#4F8A7A}
+.diary__item--rev{grid-template-columns:.9fr 1.1fr}.diary__item--rev .diary__main{order:2}
+.diary__main{position:relative;aspect-ratio:16/10}
+.diary__main img{height:100%;object-fit:cover}
+.diary__stamp{position:absolute;left:14px;bottom:14px;display:flex;flex-direction:column;align-items:center;padding:9px 13px 8px;background:rgba(255,255,255,.93);border:1px solid var(--dy);box-shadow:4px 4px 0 var(--dy);transform:rotate(-3deg);transition:transform .6s var(--bounce)}
+.diary__main:hover .diary__stamp{transform:rotate(0) translateY(-3px)}
+.diary__stamp b{font-size:1.9rem;line-height:1;color:var(--dy);font-weight:900;letter-spacing:-.02em}
+.diary__stamp i{font-style:normal;font-size:.6rem;font-weight:700;letter-spacing:.16em;color:var(--ink-soft);margin-top:4px}
+.diary__chip{display:inline-block;margin-left:6px;padding:2px 9px;border-radius:999px;font-size:.66rem;letter-spacing:.06em;color:#fff;background:var(--dy);vertical-align:2px}
+.diary__facts{display:grid;gap:6px;margin:16px 0 0;padding:12px 14px;background:var(--ecru);border-left:2px solid var(--dy)}
+.diary__facts div{display:flex;gap:12px;font-size:.86rem;line-height:1.5}
+.diary__facts dt{flex:none;width:68px;font-weight:700;color:var(--gold-text)}
+.diary__facts dd{margin:0;color:var(--ink)}
+.diary__thumbs--2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:900px){.diary__item--rev{grid-template-columns:1fr}.diary__item--rev .diary__main{order:0}.diary__stamp b{font-size:1.5rem}}
+@media (prefers-reduced-motion:reduce){.diary__pulse{animation:none}}
+.yd-grid .g-card--full{grid-column:1/-1}.yd-grid .g-card--full a{aspect-ratio:32/9}
