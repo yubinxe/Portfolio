@@ -519,6 +519,11 @@
   .yk-chat.open .yk-fab{ opacity:0; pointer-events:none; }
 }
 
+/* 넓지만 낮은 화면(가로 폴더블·태블릿) — 시트·티저를 오른쪽 카드로, 본문을 가리지 않게 */
+@media (min-width:521px) and (max-height:700px){
+  .yk-panel{ left:auto; right:12px; width:min(420px, calc(100vw - 24px)); max-width:420px; }
+  .yk-teaser{ left:auto; right:16px; width:300px; }
+}
 /* ---- v2 · 상태바 실제 배치 — 섬 좌우 귀 영역 중앙, 섬 중심선에 맞춤 ---- */
 .yk-status{ display:grid !important; grid-template-columns:1fr 126px 1fr; align-items:start; padding:17px 14px 0 !important; height:50px;
   font-family:-apple-system,"SF Pro Display","SF Pro Text","Pretendard Variable",system-ui,sans-serif; font-size:16.5px; font-weight:600; letter-spacing:-.025em; }

@@ -1,4 +1,4 @@
-/* mnav.js — 모바일 전체 메뉴 (760px 이하에서 헤더의 '메뉴' 버튼이 연다)
+/* mnav.js — 모바일 전체 메뉴 (860px 이하에서 헤더의 '메뉴' 버튼이 연다)
  * 버튼은 각 페이지 헤더에 [data-mnav-toggle] 로 들어 있고(메인은 React Nav), 패널은 이 스크립트가 body 끝에 만든다.
  * 접근성: aria-expanded/aria-controls · Esc·바깥·링크 클릭 시 닫기 · 초점 가두기와 복귀 · 열린 동안 스크롤 잠금 */
 (function () {
@@ -98,6 +98,6 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
   // 화면이 넓어지면(회전 등) 패널을 닫는다 — 데스크톱 메뉴와 겹치지 않게
-  var mq = window.matchMedia("(min-width: 761px)");
+  var mq = window.matchMedia("(min-width: 861px)");
   (mq.addEventListener ? mq.addEventListener.bind(mq, "change") : mq.addListener.bind(mq))(function (m) { if (m.matches) close(false); });
 })();
