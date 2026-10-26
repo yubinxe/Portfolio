@@ -159,7 +159,7 @@
 /* ---------- 모바일 메뉴 ---------- */
 html { scroll-padding-top: 84px; }
 .mnav-btn { display: none; }
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .mnav-btn {
     display: inline-flex; align-items: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 0 12px;
     font: inherit; font-family: "Pretendard Variable", "Pretendard", sans-serif; font-size: .84rem; font-weight: 650; letter-spacing: .02em;
@@ -197,7 +197,7 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .mnav__list a:focus-visible, .mnav__cta:focus-visible, .mnav__close:focus-visible { outline: 3px solid #8FB8F2; outline-offset: 2px; }
 .mnav__n { font-size: .66rem; letter-spacing: .16em; color: var(--gold); width: 1.8em; flex: none; }
 .mnav__cta { margin-top: 22px; display: flex; align-items: center; justify-content: center; min-height: 48px; font-size: .9rem; font-weight: 700; letter-spacing: .04em; color: var(--ecru); background: var(--navy); text-decoration: none; }
-@media (max-width: 760px) { .mnav-btn, header nav[aria-label="주요 메뉴"] > .btn { white-space: nowrap; flex: none; } }
+@media (max-width: 860px) { .mnav-btn, header nav[aria-label="주요 메뉴"] > .btn { white-space: nowrap; flex: none; } }
 @media (max-width: 400px) { .hnav__name { display: none !important; } }
 /* 좁은 화면에서 사진 칩이 칸보다 길어 가로 스크롤을 만들지 않게 */
 .yd-grid .g-card, .nd-photos .g-card, .award { min-width: 0; }
@@ -279,3 +279,8 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 @media (prefers-reduced-motion:reduce){.diary__pulse{animation:none}}
 .yd-grid .g-card--full{grid-column:1/-1}.yd-grid .g-card--full a{aspect-ratio:32/9}
 .diary__facts dd{word-break:keep-all}
+/* 폴더블·태블릿 — 861–1100px 은 내비 글자를 유지(좁혀서), 860px 이하는 '메뉴' 버튼 */
+@media (min-width:861px) and (max-width:1100px){header .hnav__name small{display:none}header nav[aria-label="주요 메뉴"]{gap:14px!important}html header .nav-desktop{display:flex!important;gap:clamp(10px,1.5vw,18px)!important;font-size:.84rem}header nav[aria-label="주요 메뉴"]>.btn{padding:.55em .9em!important;font-size:.78rem!important;white-space:nowrap}}
+/* 가로로 펼친 폴더블·낮은 화면 — 첫 화면 안에 이름·소개·버튼이 다 들어오게 */
+@media (max-height:760px) and (min-width:600px) and (orientation:landscape){#manifesto{padding-top:82px!important;padding-bottom:40px!important}#manifesto h1{font-size:clamp(2.8rem,16vh,7.5rem)!important}#manifesto .menu-rule{margin-bottom:8px!important}#manifesto .hero-kicker{display:none}#manifesto .hero-eyebrow{margin-bottom:12px}#manifesto h1+p{margin-top:14px!important;margin-bottom:8px!important}#manifesto .hero-proof{margin-top:8px}#manifesto .wrap>div:last-child{margin-top:18px!important}#manifesto .scroll-cue{display:none}#manifesto .btn.hero-main,#manifesto .btn--ghost{flex:0 0 auto;min-height:44px;font-size:.84rem;box-shadow:none}.yk-teaser{display:none!important}}
+@media (max-height:560px) and (min-width:600px) and (orientation:landscape){#manifesto .hero-proof,#manifesto .hero-eyebrow{display:none}}
