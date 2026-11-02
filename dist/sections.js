@@ -644,7 +644,7 @@ function FieldworkStrip() {
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
 { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
-  desc: "송무·사무 실무를 담당하며 반복 업무를 진단하고, 급여명세서 자동 발송과 정비사업 용역비 자동 수집 프로그램을 설계·구현해 사내 운영에 적용." },
+  desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)와 누리장터 정비사업 용역비 데이터 수집을 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
 { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
   desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
 { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
@@ -890,11 +890,11 @@ const EDITIONS = [
 { n: "06", color: "var(--apple)", Icon: Cpu, title: "고객 메일 자동 분류 시스템\n— 급한 메일부터 알려 줍니다",
   desc: "회사로 들어오는 고객 메일을 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 광고처럼 넘겨도 되는 것'으로 나눠 보여 주는 업무 화면. 담당자는 위에서부터 차례로 처리하면 됩니다.",
   status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["구글 업무도구 연동", "자동 분류", "업무 화면"],
-  core: true, point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
+  point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
 { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
   desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
   status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"],
-  core: true, point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
+  point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
 { n: "08", color: "var(--sky)", Icon: Cpu, title: "누리장터 크롤링 연동\n정비사업 용역비 자동 수집 프로그램",
   desc: "정비사업 정보 플랫폼 '누리장터'에서 조합 대상 용역 입찰과 용역비 데이터를 자동으로 수집하는 크롤링 프로그램. 흩어진 공고를 정기적으로 수집·정형화하여 시장 단가 비교와 사업성 검토를 위한 데이터셋을 구축.",
   status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["웹 크롤링", "정비사업 데이터", "업무 자동화"],
@@ -940,6 +940,88 @@ function EditionCard({ e, i, onPlay }) {
 
 }
 
+/* ============================================================ AX DESK — 법무법인 경국 */
+/* 정비사업의 법률·경제 위험을 다루는 사내 AX. 의뢰인·사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다 */
+const AX_CASES = [
+{ id: "ax-reintel", no: "01", en: "RE:INTELLIGENCE", ko: "정비사업 법률 리스크 관제",
+  problem: "정비사업의 분쟁과 지연은 대개 늦게 발견된 법령·고시·절차 변경에서 시작됩니다.",
+  approach: "사업지 주소를 기준으로 법령·고시·행정절차·조합 관련 공개정보를 수집하고, 변경사항이 사업의 어느 단계에 영향을 주는지 구조화해 변호사가 검토할 수 있게 올립니다.",
+  flow: ["사업지 주소", "법령·고시·공개정보 수집", "사업 단계 매핑", "변호사 검토"],
+  value: ["변호사 — 사업지별로 먼저 검토할 변경사항을 정합니다", "조합·시행 자문 — 사업 단계별 리스크를 지연 전에 확인합니다"],
+  tags: ["도시정비법", "Legal Intelligence", "Risk Management"] },
+{ id: "ax-assembly", no: "02", en: "ASSEMBLY RISK ENGINE", ko: "조합 총회결의 하자 사전검증",
+  problem: "총회결의 분쟁은 소집 통지·정족수·의결권 검토의 작은 오류에서 시작되고, 결의의 효력 자체를 흔듭니다.",
+  approach: "소집 통지, 조합원 명부, 의결권, 정족수, 안건별 의결 결과를 대조 규칙으로 맞춰 보고, 결의 효력에 영향을 줄 수 있는 지점을 사전에 식별합니다.",
+  flow: ["소집 통지 · 명부", "의결권 · 정족수 대조", "안건별 결과 검증", "하자 위험 표시"],
+  value: ["총회 전 — 다시 확인할 안건과 명부를 특정합니다", "변호사 — 결의 효력 다툼에 대비할 근거를 미리 정리합니다"],
+  tags: ["총회결의", "규칙 기반 검증", "법률 → 데이터 구조"] },
+{ id: "ax-contract", no: "03", en: "CONTRACT RISK INTELLIGENCE", ko: "정비사업 계약변경 분석 — AI Redline",
+  problem: "공사비 증액과 계약 조항 변경은 법률 문제이면서 동시에 조합원이 부담할 비용의 문제입니다.",
+  approach: "공사도급계약 등의 변경 전후 조항을 나란히 대조해 공사비, 지급조건, 책임 배분, 분쟁 가능성을 항목별로 구조화합니다.",
+  flow: ["변경 전 · 후 계약서", "조항 대조(Redline)", "공사비 · 지급 · 책임 분류", "분쟁 가능성 검토"],
+  value: ["변호사 — 협상 전에 불리하게 바뀐 조항을 특정합니다", "조합 — 계약 변경이 공사비와 지급 일정에 주는 영향을 함께 봅니다"],
+  tags: ["공사도급계약", "AI Redline", "법률 × 재무 위험"] }];
+
+const AX_SUPPORT = [
+{ id: "ax-compensation", tag: "실무 연계", en: "COMPENSATION BRIEF", ko: "광명시흥 보상자료 분석 · 정보 구조화",
+  desc: "광명시흥 3기 신도시 보상 관련 발표자료 77장을 제작하며 감정평가·보상협의·재결로 이어지는 토지보상 절차와 쟁점을 정보 구조로 정리했습니다.",
+  state: "실무 수행 · 비공개" },
+{ id: "ax-procurement", tag: "운영 실적", en: "PROCUREMENT DATA", ko: "누리장터 정비사업 용역비 데이터 수집",
+  desc: "조합 대상 용역 입찰과 용역비 공고를 정기 수집·정형화해 시장 단가 비교와 사업성 검토의 기준선을 만듭니다.",
+  state: "사내 운영", href: "#ed-08" }];
+
+
+function AxDesk() {
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "axd reveal", id: "ax-desk", "aria-labelledby": "ax-desk-title" }, /*#__PURE__*/
+    React.createElement("div", { className: "axd__bar font-sans" }, /*#__PURE__*/
+    React.createElement("span", null, /*#__PURE__*/React.createElement("i", { className: "axd__dot", "aria-hidden": "true" }), "LEGAL \xD7 REAL ESTATE AX DESK"), /*#__PURE__*/
+    React.createElement("span", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \xB7 \uC804\uB7B5\uAE30\uD68D")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axd__head" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/
+    React.createElement("p", { className: "axd__eyebrow font-sans" }, "Flagship \u2014 \uC815\uBE44\uC0AC\uC5C5\uC758 \uBC95\uB960 \xB7 \uACBD\uC81C \uC704\uD5D8"), /*#__PURE__*/
+    React.createElement("h3", { id: "ax-desk-title", className: "font-ko" }, "\uBC18\uBCF5 \uC5C5\uBB34\uAC00 \uC544\uB2C8\uB77C, \uC0AC\uC5C5\uC744 \uBA48\uCD94\uAC8C \uD558\uB294 \uC704\uD5D8\uC744 \uB2E4\uB8F9\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("p", { className: "axd__lead font-ko" }, "\uBC95\uB839 \uBCC0\uACBD, \uCD1D\uD68C\uACB0\uC758 \uD558\uC790, \uACC4\uC57D\uBCC0\uACBD \u2014 \uC815\uBE44\uC0AC\uC5C5\uC5D0\uC11C \uBD84\uC7C1\uACFC \uC9C0\uC5F0\uC744 \uBD80\uB974\uB294 \uC9C0\uC810\uC744 \uB370\uC774\uD130\uC640 \uADDC\uCE59\uC73C\uB85C \uBA3C\uC800 \uCC3E\uACE0, \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uD655\uC815\uD558\uB294 \uAD6C\uC870\uB85C \uC124\uACC4\xB7\uAD6C\uCD95\uD588\uC2B5\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("dl", { className: "axd__stats font-sans" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBA54\uC778 AX \xB7 \uAD6C\uCD95"), /*#__PURE__*/React.createElement("dd", null, "3", /*#__PURE__*/React.createElement("small", null, "\uAC74"))), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC2E4\uBB34 \uC5F0\uACC4"), /*#__PURE__*/React.createElement("dd", null, "1", /*#__PURE__*/React.createElement("small", null, "\uAC74"))), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC6B4\uC601 \uC911"), /*#__PURE__*/React.createElement("dd", null, "1", /*#__PURE__*/React.createElement("small", null, "\uAC74")))
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axd__grid" },
+    AX_CASES.map((c) => /*#__PURE__*/
+    React.createElement("article", { key: c.id, id: c.id, className: "axd__case" }, /*#__PURE__*/
+    React.createElement("div", { className: "axd__top font-sans" }, /*#__PURE__*/React.createElement("span", null, "AX ", c.no), /*#__PURE__*/React.createElement("span", { className: "axd__state" }, /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" }), "\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uBE44\uACF5\uAC1C")), /*#__PURE__*/
+    React.createElement("h4", { className: "axd__en font-sans" }, c.en), /*#__PURE__*/
+    React.createElement("p", { className: "axd__ko font-ko" }, c.ko), /*#__PURE__*/
+    React.createElement("p", { className: "axd__p font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uBB38\uC81C"), c.problem), /*#__PURE__*/
+    React.createElement("p", { className: "axd__p font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uAD6C\uC870"), c.approach), /*#__PURE__*/
+    React.createElement("ol", { className: "axd__flow font-ko" }, c.flow.map((f) => /*#__PURE__*/React.createElement("li", { key: f }, f))), /*#__PURE__*/
+    React.createElement("ul", { className: "axd__value font-ko" }, c.value.map((v) => /*#__PURE__*/React.createElement("li", { key: v }, v))), /*#__PURE__*/
+    React.createElement("p", { className: "axd__tags font-sans" }, c.tags.join(" · "))
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axd__sub" },
+    AX_SUPPORT.map((c) => {
+      const Tag = c.href ? "a" : "div";
+      return (/*#__PURE__*/
+        React.createElement(Tag, _extends({ key: c.id, id: c.id, className: "axd__mini" }, c.href ? { href: c.href } : {}), /*#__PURE__*/
+        React.createElement("span", { className: "axd__mtag font-sans" }, c.tag, " \xB7 ", c.state), /*#__PURE__*/
+        React.createElement("strong", { className: "font-sans" }, c.en), /*#__PURE__*/
+        React.createElement("span", { className: "axd__mko font-ko" }, c.ko), /*#__PURE__*/
+        React.createElement("span", { className: "axd__mdesc font-ko" }, c.desc)
+        ));
+
+    })
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "axd__note font-ko" }, "\uC758\uB8B0\uC778\xB7\uC0AC\uAC74 \uC815\uBCF4, \uACC4\uC57D \uAE08\uC561, \uC0AC\uB0B4 \uC2DC\uC2A4\uD15C \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uC774\uACF3\uC5D0\uB294 \uBB38\uC81C \uC815\uC758\uC640 \uAD6C\uC870\uB9CC \uB2F4\uC558\uC2B5\uB2C8\uB2E4.")
+    ));
+
+}
+
 function Artifacts() {
   const ref = useReveal();
   const [playing, setPlaying] = React.useState(null);
@@ -955,10 +1037,11 @@ function Artifacts() {
     React.createElement("section", { id: "artifacts", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "03 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
-    React.createElement("p", { className: "works-lead font-ko reveal" }, "\uC0DD\uD65C\uACFC \uC5C5\uBB34 \uD604\uC7A5\uC758 \uBB38\uC81C\uB97C \uC9C1\uC811 \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/
-    React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C ", EDITIONS.filter((e) => e.core).length, "\uAC74"), "\uC785\uB2C8\uB2E4. \uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130, \uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8, \uC81C\uC548\uC11C\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uB294 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    React.createElement("p", { className: "works-lead font-ko reveal" }, "\uB9E8 \uC704\uB294 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC815\uBE44\uC0AC\uC5C5\uC758 \uBC95\uB960\xB7\uACBD\uC81C \uC704\uD5D8\uC744 \uB2E4\uB8E8\uB294 ", /*#__PURE__*/
+    React.createElement("strong", null, "AX \uD604\uD669\uD310"), ", \uADF8 \uC544\uB798\uB294 \uC9C1\uC811 \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C ", EDITIONS.filter((e) => e.core).length, "\uAC74"), "\uC785\uB2C8\uB2E4. \uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130, \uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8, \uC81C\uC548\uC11C\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uB294 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
+    React.createElement(AxDesk, null), /*#__PURE__*/
     React.createElement("div", { className: "works-grid" },
     EDITIONS_SHOWN.filter((e) => e.core).map((e, i) => /*#__PURE__*/
     React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying })
@@ -969,7 +1052,7 @@ function Artifacts() {
     React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
     React.createElement("span", { className: "eyebrow" }, "Supplementary"), /*#__PURE__*/
     React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
-    React.createElement("span", { className: "fold__line font-ko" }, "\uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 Project Plaza \xB7 \uCCAD\uC57D \uB300\uC2DC\uBCF4\uB4DC \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
+    React.createElement("span", { className: "fold__line font-ko" }, "\uACE0\uAC1D \uBA54\uC77C \uBD84\uB958 \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1 \xB7 \uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
     ), /*#__PURE__*/
     React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })
     ), /*#__PURE__*/

@@ -18,6 +18,81 @@
         "Verified": true
       },
       {
+        "Id": "ax-assembly",
+        "Category": "프로젝트",
+        "Title": "Assembly Risk Engine — 조합 총회결의 하자 사전검증",
+        "Body": "총회 소집 통지, 조합원 명부, 의결권, 정족수, 안건별 의결 결과를 대조 규칙으로 맞춰 보고, 결의 효력에 영향을 줄 수 있는 지점을 사전에 식별하는 시스템입니다. 법무법인 경국 사내 구축 · 비공개.",
+        "Tags": "소집, 의결, 의결권, 정족수, 조합원 명부, 총회, 총회결의, 하자",
+        "PrimaryLabel": "AX 현황판",
+        "PrimaryHref": "index.html#ax-desk",
+        "SecondaryLabel": "작업 보기",
+        "SecondaryHref": "index.html#artifacts",
+        "SecondaryInferred": true,
+        "Anchor": "ax-desk",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
+        "Id": "ax-compensation",
+        "Category": "프로젝트",
+        "Title": "광명시흥 3기 신도시 보상자료 분석 · 정보 구조화",
+        "Body": "광명시흥 3기 신도시 보상 관련 발표자료 77장을 제작하며 감정평가·보상협의·재결로 이어지는 토지보상 절차와 쟁점을 정보 구조로 정리했습니다. 실무 수행 · 비공개.",
+        "Tags": "3기 신도시, 77장, 광명시흥, 보상, 보상협의, 재결, 토지보상",
+        "PrimaryLabel": "AX 현황판",
+        "PrimaryHref": "index.html#ax-desk",
+        "SecondaryLabel": "작업 보기",
+        "SecondaryHref": "index.html#artifacts",
+        "SecondaryInferred": true,
+        "Anchor": "ax-desk",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
+        "Id": "ax-contract",
+        "Category": "프로젝트",
+        "Title": "Contract Risk Intelligence — 정비사업 계약변경 AI Redline",
+        "Body": "공사도급계약 등의 변경 전후 조항을 나란히 대조해 공사비, 지급조건, 책임 배분, 분쟁 가능성을 항목별로 구조화하는 시스템입니다. 법률 검토와 재무적 위험 분석을 한 화면에서 함께 봅니다. 법무법인 경국 사내 구축 · 비공개.",
+        "Tags": "redline, 계약변경, 계약서, 공사도급, 공사비, 공사비 증액, 레드라인, 조항",
+        "PrimaryLabel": "AX 현황판",
+        "PrimaryHref": "index.html#ax-desk",
+        "SecondaryLabel": "작업 보기",
+        "SecondaryHref": "index.html#artifacts",
+        "SecondaryInferred": true,
+        "Anchor": "ax-desk",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
+        "Id": "ax-desk",
+        "Category": "프로젝트",
+        "Title": "법무법인 경국 AX 현황판 — 정비사업의 법률·경제 위험",
+        "Body": "법무법인 경국에서 정비사업의 분쟁과 지연을 부르는 지점을 데이터와 규칙으로 먼저 찾고, 판단은 변호사가 확정하는 구조로 설계·구축한 AX입니다.\n- RE:INTELLIGENCE — 정비사업 법률 리스크 관제(사내 구축)\n- Assembly Risk Engine — 조합 총회결의 하자 사전검증(사내 구축)\n- Contract Risk Intelligence — 정비사업 계약변경 AI Redline(사내 구축)\n- 실무 연계 — 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)\n- 운영 — 누리장터 정비사업 용역비 데이터 수집\n의뢰인·사건 정보와 사내 화면은 공개하지 않습니다.",
+        "Tags": "ax, ax 현황판, redline, 경국 ax, 계약변경, 리스크 관제, 법무법인 ax, 전략기획, 정비사업 리스크, 총회결의",
+        "PrimaryLabel": "AX 현황판",
+        "PrimaryHref": "index.html#ax-desk",
+        "SecondaryLabel": "업무 영역",
+        "SecondaryHref": "career.html#practice",
+        "SecondaryInferred": false,
+        "Anchor": "ax-desk",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
+        "Id": "ax-reintel",
+        "Category": "프로젝트",
+        "Title": "RE:INTELLIGENCE — 정비사업 법률 리스크 관제",
+        "Body": "사업지 주소를 기준으로 법령·고시·행정절차·조합 관련 공개정보를 수집하고, 변경사항이 사업의 어느 단계에 영향을 주는지 구조화해 변호사가 검토할 수 있게 올리는 AX 시스템입니다. 법무법인 경국 사내 구축 · 비공개.",
+        "Tags": "re:intelligence, reintelligence, 고시, 리스크 관제, 법령, 법률 리스크, 사업지, 행정절차",
+        "PrimaryLabel": "AX 현황판",
+        "PrimaryHref": "index.html#ax-desk",
+        "SecondaryLabel": "작업 보기",
+        "SecondaryHref": "index.html#artifacts",
+        "SecondaryInferred": true,
+        "Anchor": "ax-desk",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
         "Id": "channels",
         "Category": "연락",
         "Title": "기록 · 홍보 채널",
@@ -681,7 +756,7 @@
         "Id": "office",
         "Category": "인물",
         "Title": "소속 — 법무법인 경국",
-        "Body": "법무법인 경국(서울 서초구 서초대로 264 법조타워 15F) 사원. 업무 영역은 네 가지입니다.\n- 전략 컨설팅 · 사업성 검토 — 시장 단가 비교와 우선순위 설계\n- AI 프로세스 혁신 — 송무·사무 워크플로우 자동화\n- 마케팅 컨설팅 · 브랜드 필름\n- 데이터 인프라 · 대시보드",
+        "Body": "법무법인 경국(서울 서초구 서초대로 264 법조타워 15F) 사원. 업무 영역은 네 가지입니다.\n- 정비사업 AX — 법률 리스크 관제 · 총회결의 하자 사전검증 · 계약변경 AI Redline(사내 구축)\n- 전략 컨설팅 · 사업성 검토 — 광명시흥 보상자료 구조화, 정비사업 용역비 데이터로 시장 단가 비교\n- AI 프로세스 혁신 — 송무·사무 워크플로우 자동화\n- 마케팅 컨설팅 · 브랜드 필름\n- 데이터 인프라 · 대시보드",
         "Tags": "경국, 근무, 근무지, 법무법인, 사무실, 서초, 소속, 어디, 위치, 주소, 직장, 회사",
         "PrimaryLabel": "업무 영역",
         "PrimaryHref": "career.html#practice",
@@ -1332,5 +1407,5 @@
       }
     ]
   },
-  "hash": "70389519f77602b8"
+  "hash": "b82522afd223d324"
 }
