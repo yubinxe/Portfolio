@@ -943,64 +943,51 @@ function EditionCard({ e, i, onPlay }) {
 /* ============================================================ AX DESK — 법무법인 경국 */
 /* 정비사업의 법률·경제 위험을 다루는 사내 AX. 의뢰인·사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다 */
 const AX_CASES = [
-{ id: "ax-reintel", no: "01", en: "RE:INTELLIGENCE", ko: "정비사업 법률 리스크 관제",
-  problem: "정비사업의 분쟁과 지연은 대개 늦게 발견된 법령·고시·절차 변경에서 시작됩니다.",
-  approach: "사업지 주소를 기준으로 법령·고시·행정절차·조합 관련 공개정보를 수집하고, 변경사항이 사업의 어느 단계에 영향을 주는지 구조화해 변호사가 검토할 수 있게 올립니다.",
-  flow: ["사업지 주소", "법령·고시·공개정보 수집", "사업 단계 매핑", "변호사 검토"],
-  value: ["변호사 — 사업지별로 먼저 검토할 변경사항을 정합니다", "조합·시행 자문 — 사업 단계별 리스크를 지연 전에 확인합니다"],
-  tags: ["도시정비법", "Legal Intelligence", "Risk Management"] },
-{ id: "ax-assembly", no: "02", en: "ASSEMBLY RISK ENGINE", ko: "조합 총회결의 하자 사전검증",
-  problem: "총회결의 분쟁은 소집 통지·정족수·의결권 검토의 작은 오류에서 시작되고, 결의의 효력 자체를 흔듭니다.",
-  approach: "소집 통지, 조합원 명부, 의결권, 정족수, 안건별 의결 결과를 대조 규칙으로 맞춰 보고, 결의 효력에 영향을 줄 수 있는 지점을 사전에 식별합니다.",
-  flow: ["소집 통지 · 명부", "의결권 · 정족수 대조", "안건별 결과 검증", "하자 위험 표시"],
-  value: ["총회 전 — 다시 확인할 안건과 명부를 특정합니다", "변호사 — 결의 효력 다툼에 대비할 근거를 미리 정리합니다"],
-  tags: ["총회결의", "규칙 기반 검증", "법률 → 데이터 구조"] },
-{ id: "ax-contract", no: "03", en: "CONTRACT RISK INTELLIGENCE", ko: "정비사업 계약변경 분석 — AI Redline",
-  problem: "공사비 증액과 계약 조항 변경은 법률 문제이면서 동시에 조합원이 부담할 비용의 문제입니다.",
-  approach: "공사도급계약 등의 변경 전후 조항을 나란히 대조해 공사비, 지급조건, 책임 배분, 분쟁 가능성을 항목별로 구조화합니다.",
-  flow: ["변경 전 · 후 계약서", "조항 대조(Redline)", "공사비 · 지급 · 책임 분류", "분쟁 가능성 검토"],
-  value: ["변호사 — 협상 전에 불리하게 바뀐 조항을 특정합니다", "조합 — 계약 변경이 공사비와 지급 일정에 주는 영향을 함께 봅니다"],
-  tags: ["공사도급계약", "AI Redline", "법률 × 재무 위험"] }];
+{ id: "ax-reintel", no: "01", icon: "§", title: "법이 바뀌면 바로 알려 주는 시스템", en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
+  problem: "법령·고시가 바뀐 걸 늦게 알면 분쟁과 사업 지연으로 이어집니다.",
+  solve: "사업지 주소를 기준으로 법령·고시·행정 공고의 변화를 모아, 그 사업의 어느 단계에 영향이 있는지 정리해 변호사에게 올립니다.",
+  effect: "변호사가 먼저 검토할 변경사항을 바로 고릅니다.",
+  before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토" },
+{ id: "ax-assembly", no: "02", icon: "✓", title: "총회 전에 ‘무효 위험’을 찾는 시스템", en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
+  problem: "소집 통지·정족수·의결권 중 하나만 틀려도 총회 결의가 효력 다툼에 휘말립니다.",
+  solve: "통지, 조합원 명부, 의결권, 정족수, 안건별 결과를 서로 맞대어 보고 틀린 곳을 표시합니다.",
+  effect: "총회 전에 다시 확인할 안건과 명부를 특정합니다.",
+  before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시" },
+{ id: "ax-contract", no: "03", icon: "⇄", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
+  problem: "공사비 증액과 계약 조항 변경은 곧바로 조합원이 낼 돈의 문제가 됩니다.",
+  solve: "바뀌기 전·후 공사도급계약서를 나란히 비교해 공사비, 지급조건, 책임 조항의 변화와 분쟁 소지를 표시합니다.",
+  effect: "협상 전에 불리하게 바뀐 조항을 특정합니다.",
+  before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시" }];
 
 const AX_SUPPORT = [
-{ id: "ax-compensation", tag: "실무 연계", en: "COMPENSATION BRIEF", ko: "광명시흥 보상자료 분석 · 정보 구조화",
-  desc: "광명시흥 3기 신도시 보상 관련 발표자료 77장을 제작하며 감정평가·보상협의·재결로 이어지는 토지보상 절차와 쟁점을 정보 구조로 정리했습니다.",
-  state: "실무 수행 · 비공개" },
-{ id: "ax-procurement", tag: "운영 실적", en: "PROCUREMENT DATA", ko: "누리장터 정비사업 용역비 데이터 수집",
-  desc: "조합 대상 용역 입찰과 용역비 공고를 정기 수집·정형화해 시장 단가 비교와 사업성 검토의 기준선을 만듭니다.",
-  state: "사내 운영", href: "#ed-08" }];
+{ id: "ax-compensation", tag: "실무", title: "광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
+{ id: "ax-procurement", tag: "운영 중", title: "정비사업 용역비 데이터 자동 수집", desc: "누리장터의 조합 용역 입찰·용역비 공고를 모아 시장 단가 비교의 기준을 만듭니다.", href: "#ed-08" }];
 
 
 function AxDesk() {
   return (/*#__PURE__*/
     React.createElement("div", { className: "axd reveal", id: "ax-desk", "aria-labelledby": "ax-desk-title" }, /*#__PURE__*/
-    React.createElement("div", { className: "axd__bar font-sans" }, /*#__PURE__*/
-    React.createElement("span", null, /*#__PURE__*/React.createElement("i", { className: "axd__dot", "aria-hidden": "true" }), "LEGAL \xD7 REAL ESTATE AX DESK"), /*#__PURE__*/
-    React.createElement("span", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \xB7 \uC804\uB7B5\uAE30\uD68D")
-    ), /*#__PURE__*/
     React.createElement("div", { className: "axd__head" }, /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/
-    React.createElement("p", { className: "axd__eyebrow font-sans" }, "Flagship \u2014 \uC815\uBE44\uC0AC\uC5C5\uC758 \uBC95\uB960 \xB7 \uACBD\uC81C \uC704\uD5D8"), /*#__PURE__*/
-    React.createElement("h3", { id: "ax-desk-title", className: "font-ko" }, "\uBC18\uBCF5 \uC5C5\uBB34\uAC00 \uC544\uB2C8\uB77C, \uC0AC\uC5C5\uC744 \uBA48\uCD94\uAC8C \uD558\uB294 \uC704\uD5D8\uC744 \uB2E4\uB8F9\uB2C8\uB2E4"), /*#__PURE__*/
-    React.createElement("p", { className: "axd__lead font-ko" }, "\uBC95\uB839 \uBCC0\uACBD, \uCD1D\uD68C\uACB0\uC758 \uD558\uC790, \uACC4\uC57D\uBCC0\uACBD \u2014 \uC815\uBE44\uC0AC\uC5C5\uC5D0\uC11C \uBD84\uC7C1\uACFC \uC9C0\uC5F0\uC744 \uBD80\uB974\uB294 \uC9C0\uC810\uC744 \uB370\uC774\uD130\uC640 \uADDC\uCE59\uC73C\uB85C \uBA3C\uC800 \uCC3E\uACE0, \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uD655\uC815\uD558\uB294 \uAD6C\uC870\uB85C \uC124\uACC4\xB7\uAD6C\uCD95\uD588\uC2B5\uB2C8\uB2E4.")
-    ), /*#__PURE__*/
-    React.createElement("dl", { className: "axd__stats font-sans" }, /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBA54\uC778 AX \xB7 \uAD6C\uCD95"), /*#__PURE__*/React.createElement("dd", null, "3", /*#__PURE__*/React.createElement("small", null, "\uAC74"))), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC2E4\uBB34 \uC5F0\uACC4"), /*#__PURE__*/React.createElement("dd", null, "1", /*#__PURE__*/React.createElement("small", null, "\uAC74"))), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC6B4\uC601 \uC911"), /*#__PURE__*/React.createElement("dd", null, "1", /*#__PURE__*/React.createElement("small", null, "\uAC74")))
-    )
+    React.createElement("p", { className: "axd__eyebrow font-sans" }, /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" }), "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \xB7 AX \uD504\uB85C\uC81D\uD2B8"), /*#__PURE__*/
+    React.createElement("h3", { id: "ax-desk-title", className: "font-ko" }, "\uC7AC\uAC1C\uBC1C\xB7\uC7AC\uAC74\uCD95 \uC0AC\uC5C5\uC774 ", /*#__PURE__*/React.createElement("em", null, "\uBC95 \xB7 \uCD1D\uD68C \xB7 \uACC4\uC57D"), " \uBB38\uC81C\uB85C \uBA48\uCD94\uC9C0 \uC54A\uAC8C"), /*#__PURE__*/
+    React.createElement("p", { className: "axd__lead font-ko" }, "\uC704\uD5D8\uC740 \uC2DC\uC2A4\uD15C\uC774 \uBA3C\uC800 \uCC3E\uACE0, \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4. \uC0AC\uB0B4\uC5D0 \uC9C1\uC811 \uAD6C\uCD95\uD55C \uC138 \uAC00\uC9C0\uC785\uB2C8\uB2E4.")
     ), /*#__PURE__*/
     React.createElement("div", { className: "axd__grid" },
     AX_CASES.map((c) => /*#__PURE__*/
     React.createElement("article", { key: c.id, id: c.id, className: "axd__case" }, /*#__PURE__*/
-    React.createElement("div", { className: "axd__top font-sans" }, /*#__PURE__*/React.createElement("span", null, "AX ", c.no), /*#__PURE__*/React.createElement("span", { className: "axd__state" }, /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" }), "\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uBE44\uACF5\uAC1C")), /*#__PURE__*/
-    React.createElement("h4", { className: "axd__en font-sans" }, c.en), /*#__PURE__*/
-    React.createElement("p", { className: "axd__ko font-ko" }, c.ko), /*#__PURE__*/
-    React.createElement("p", { className: "axd__p font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uBB38\uC81C"), c.problem), /*#__PURE__*/
-    React.createElement("p", { className: "axd__p font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uAD6C\uC870"), c.approach), /*#__PURE__*/
-    React.createElement("ol", { className: "axd__flow font-ko" }, c.flow.map((f) => /*#__PURE__*/React.createElement("li", { key: f }, f))), /*#__PURE__*/
-    React.createElement("ul", { className: "axd__value font-ko" }, c.value.map((v) => /*#__PURE__*/React.createElement("li", { key: v }, v))), /*#__PURE__*/
-    React.createElement("p", { className: "axd__tags font-sans" }, c.tags.join(" · "))
+    React.createElement("div", { className: "axd__top" }, /*#__PURE__*/React.createElement("span", { className: "axd__icon font-serif", "aria-hidden": "true" }, c.icon), /*#__PURE__*/React.createElement("span", { className: "axd__no font-serif" }, c.no)), /*#__PURE__*/
+    React.createElement("h4", { className: "axd__title font-ko" }, c.title), /*#__PURE__*/
+    React.createElement("p", { className: "axd__en font-sans" }, c.en), /*#__PURE__*/
+    React.createElement("dl", { className: "axd__rows font-ko" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBB38\uC81C"), /*#__PURE__*/React.createElement("dd", null, c.problem)), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD574\uACB0"), /*#__PURE__*/React.createElement("dd", null, c.solve)), /*#__PURE__*/
+    React.createElement("div", { className: "axd__eff" }, /*#__PURE__*/React.createElement("dt", null, "\uD6A8\uACFC"), /*#__PURE__*/React.createElement("dd", null, c.effect))
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axd__ba font-ko" }, /*#__PURE__*/
+    React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, "\uC804"), c.before), /*#__PURE__*/
+    React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, "\uD6C4"), c.after)
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "axd__state font-sans" }, "\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C")
     )
     )
     ), /*#__PURE__*/
@@ -1009,15 +996,14 @@ function AxDesk() {
       const Tag = c.href ? "a" : "div";
       return (/*#__PURE__*/
         React.createElement(Tag, _extends({ key: c.id, id: c.id, className: "axd__mini" }, c.href ? { href: c.href } : {}), /*#__PURE__*/
-        React.createElement("span", { className: "axd__mtag font-sans" }, c.tag, " \xB7 ", c.state), /*#__PURE__*/
-        React.createElement("strong", { className: "font-sans" }, c.en), /*#__PURE__*/
-        React.createElement("span", { className: "axd__mko font-ko" }, c.ko), /*#__PURE__*/
+        React.createElement("span", { className: "axd__mtag font-sans" }, c.tag), /*#__PURE__*/
+        React.createElement("strong", { className: "font-ko" }, c.title), /*#__PURE__*/
         React.createElement("span", { className: "axd__mdesc font-ko" }, c.desc)
         ));
 
     })
     ), /*#__PURE__*/
-    React.createElement("p", { className: "axd__note font-ko" }, "\uC758\uB8B0\uC778\xB7\uC0AC\uAC74 \uC815\uBCF4, \uACC4\uC57D \uAE08\uC561, \uC0AC\uB0B4 \uC2DC\uC2A4\uD15C \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uC774\uACF3\uC5D0\uB294 \uBB38\uC81C \uC815\uC758\uC640 \uAD6C\uC870\uB9CC \uB2F4\uC558\uC2B5\uB2C8\uB2E4.")
+    React.createElement("p", { className: "axd__note font-ko" }, "\uC758\uB8B0\uC778\xB7\uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
     ));
 
 }

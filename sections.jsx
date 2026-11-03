@@ -942,64 +942,51 @@ function EditionCard({ e, i, onPlay }) {
 /* ============================================================ AX DESK — 법무법인 경국 */
 /* 정비사업의 법률·경제 위험을 다루는 사내 AX. 의뢰인·사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다 */
 const AX_CASES = [
-  { id: "ax-reintel", no: "01", en: "RE:INTELLIGENCE", ko: "정비사업 법률 리스크 관제",
-    problem: "정비사업의 분쟁과 지연은 대개 늦게 발견된 법령·고시·절차 변경에서 시작됩니다.",
-    approach: "사업지 주소를 기준으로 법령·고시·행정절차·조합 관련 공개정보를 수집하고, 변경사항이 사업의 어느 단계에 영향을 주는지 구조화해 변호사가 검토할 수 있게 올립니다.",
-    flow: ["사업지 주소", "법령·고시·공개정보 수집", "사업 단계 매핑", "변호사 검토"],
-    value: ["변호사 — 사업지별로 먼저 검토할 변경사항을 정합니다", "조합·시행 자문 — 사업 단계별 리스크를 지연 전에 확인합니다"],
-    tags: ["도시정비법", "Legal Intelligence", "Risk Management"] },
-  { id: "ax-assembly", no: "02", en: "ASSEMBLY RISK ENGINE", ko: "조합 총회결의 하자 사전검증",
-    problem: "총회결의 분쟁은 소집 통지·정족수·의결권 검토의 작은 오류에서 시작되고, 결의의 효력 자체를 흔듭니다.",
-    approach: "소집 통지, 조합원 명부, 의결권, 정족수, 안건별 의결 결과를 대조 규칙으로 맞춰 보고, 결의 효력에 영향을 줄 수 있는 지점을 사전에 식별합니다.",
-    flow: ["소집 통지 · 명부", "의결권 · 정족수 대조", "안건별 결과 검증", "하자 위험 표시"],
-    value: ["총회 전 — 다시 확인할 안건과 명부를 특정합니다", "변호사 — 결의 효력 다툼에 대비할 근거를 미리 정리합니다"],
-    tags: ["총회결의", "규칙 기반 검증", "법률 → 데이터 구조"] },
-  { id: "ax-contract", no: "03", en: "CONTRACT RISK INTELLIGENCE", ko: "정비사업 계약변경 분석 — AI Redline",
-    problem: "공사비 증액과 계약 조항 변경은 법률 문제이면서 동시에 조합원이 부담할 비용의 문제입니다.",
-    approach: "공사도급계약 등의 변경 전후 조항을 나란히 대조해 공사비, 지급조건, 책임 배분, 분쟁 가능성을 항목별로 구조화합니다.",
-    flow: ["변경 전 · 후 계약서", "조항 대조(Redline)", "공사비 · 지급 · 책임 분류", "분쟁 가능성 검토"],
-    value: ["변호사 — 협상 전에 불리하게 바뀐 조항을 특정합니다", "조합 — 계약 변경이 공사비와 지급 일정에 주는 영향을 함께 봅니다"],
-    tags: ["공사도급계약", "AI Redline", "법률 × 재무 위험"] },
+  { id: "ax-reintel", no: "01", icon: "§", title: "법이 바뀌면 바로 알려 주는 시스템", en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
+    problem: "법령·고시가 바뀐 걸 늦게 알면 분쟁과 사업 지연으로 이어집니다.",
+    solve: "사업지 주소를 기준으로 법령·고시·행정 공고의 변화를 모아, 그 사업의 어느 단계에 영향이 있는지 정리해 변호사에게 올립니다.",
+    effect: "변호사가 먼저 검토할 변경사항을 바로 고릅니다.",
+    before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토" },
+  { id: "ax-assembly", no: "02", icon: "✓", title: "총회 전에 ‘무효 위험’을 찾는 시스템", en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
+    problem: "소집 통지·정족수·의결권 중 하나만 틀려도 총회 결의가 효력 다툼에 휘말립니다.",
+    solve: "통지, 조합원 명부, 의결권, 정족수, 안건별 결과를 서로 맞대어 보고 틀린 곳을 표시합니다.",
+    effect: "총회 전에 다시 확인할 안건과 명부를 특정합니다.",
+    before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시" },
+  { id: "ax-contract", no: "03", icon: "⇄", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
+    problem: "공사비 증액과 계약 조항 변경은 곧바로 조합원이 낼 돈의 문제가 됩니다.",
+    solve: "바뀌기 전·후 공사도급계약서를 나란히 비교해 공사비, 지급조건, 책임 조항의 변화와 분쟁 소지를 표시합니다.",
+    effect: "협상 전에 불리하게 바뀐 조항을 특정합니다.",
+    before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시" },
 ];
 const AX_SUPPORT = [
-  { id: "ax-compensation", tag: "실무 연계", en: "COMPENSATION BRIEF", ko: "광명시흥 보상자료 분석 · 정보 구조화",
-    desc: "광명시흥 3기 신도시 보상 관련 발표자료 77장을 제작하며 감정평가·보상협의·재결로 이어지는 토지보상 절차와 쟁점을 정보 구조로 정리했습니다.",
-    state: "실무 수행 · 비공개" },
-  { id: "ax-procurement", tag: "운영 실적", en: "PROCUREMENT DATA", ko: "누리장터 정비사업 용역비 데이터 수집",
-    desc: "조합 대상 용역 입찰과 용역비 공고를 정기 수집·정형화해 시장 단가 비교와 사업성 검토의 기준선을 만듭니다.",
-    state: "사내 운영", href: "#ed-08" },
+  { id: "ax-compensation", tag: "실무", title: "광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
+  { id: "ax-procurement", tag: "운영 중", title: "정비사업 용역비 데이터 자동 수집", desc: "누리장터의 조합 용역 입찰·용역비 공고를 모아 시장 단가 비교의 기준을 만듭니다.", href: "#ed-08" },
 ];
 
 function AxDesk() {
   return (
     <div className="axd reveal" id="ax-desk" aria-labelledby="ax-desk-title">
-      <div className="axd__bar font-sans">
-        <span><i className="axd__dot" aria-hidden="true" />LEGAL × REAL ESTATE AX DESK</span>
-        <span>법무법인 경국 · 전략기획</span>
-      </div>
       <div className="axd__head">
-        <div>
-          <p className="axd__eyebrow font-sans">Flagship — 정비사업의 법률 · 경제 위험</p>
-          <h3 id="ax-desk-title" className="font-ko">반복 업무가 아니라, 사업을 멈추게 하는 위험을 다룹니다</h3>
-          <p className="axd__lead font-ko">법령 변경, 총회결의 하자, 계약변경 — 정비사업에서 분쟁과 지연을 부르는 지점을 데이터와 규칙으로 먼저 찾고, 판단은 변호사가 확정하는 구조로 설계·구축했습니다.</p>
-        </div>
-        <dl className="axd__stats font-sans">
-          <div><dt>메인 AX · 구축</dt><dd>3<small>건</small></dd></div>
-          <div><dt>실무 연계</dt><dd>1<small>건</small></dd></div>
-          <div><dt>운영 중</dt><dd>1<small>건</small></dd></div>
-        </dl>
+        <p className="axd__eyebrow font-sans"><i aria-hidden="true" />법무법인 경국 · AX 프로젝트</p>
+        <h3 id="ax-desk-title" className="font-ko">재개발·재건축 사업이 <em>법 · 총회 · 계약</em> 문제로 멈추지 않게</h3>
+        <p className="axd__lead font-ko">위험은 시스템이 먼저 찾고, 판단은 변호사가 내립니다. 사내에 직접 구축한 세 가지입니다.</p>
       </div>
       <div className="axd__grid">
         {AX_CASES.map((c) => (
           <article key={c.id} id={c.id} className="axd__case">
-            <div className="axd__top font-sans"><span>AX {c.no}</span><span className="axd__state"><i aria-hidden="true" />사내 구축 · 비공개</span></div>
-            <h4 className="axd__en font-sans">{c.en}</h4>
-            <p className="axd__ko font-ko">{c.ko}</p>
-            <p className="axd__p font-ko"><b>문제</b>{c.problem}</p>
-            <p className="axd__p font-ko"><b>구조</b>{c.approach}</p>
-            <ol className="axd__flow font-ko">{c.flow.map((f) => <li key={f}>{f}</li>)}</ol>
-            <ul className="axd__value font-ko">{c.value.map((v) => <li key={v}>{v}</li>)}</ul>
-            <p className="axd__tags font-sans">{c.tags.join(" · ")}</p>
+            <div className="axd__top"><span className="axd__icon font-serif" aria-hidden="true">{c.icon}</span><span className="axd__no font-serif">{c.no}</span></div>
+            <h4 className="axd__title font-ko">{c.title}</h4>
+            <p className="axd__en font-sans">{c.en}</p>
+            <dl className="axd__rows font-ko">
+              <div><dt>문제</dt><dd>{c.problem}</dd></div>
+              <div><dt>해결</dt><dd>{c.solve}</dd></div>
+              <div className="axd__eff"><dt>효과</dt><dd>{c.effect}</dd></div>
+            </dl>
+            <div className="axd__ba font-ko">
+              <span><b>전</b>{c.before}</span>
+              <span><b>후</b>{c.after}</span>
+            </div>
+            <p className="axd__state font-sans">사내 구축 · 화면 비공개</p>
           </article>
         ))}
       </div>
@@ -1008,15 +995,14 @@ function AxDesk() {
           const Tag = c.href ? "a" : "div";
           return (
             <Tag key={c.id} id={c.id} className="axd__mini" {...(c.href ? { href: c.href } : {})}>
-              <span className="axd__mtag font-sans">{c.tag} · {c.state}</span>
-              <strong className="font-sans">{c.en}</strong>
-              <span className="axd__mko font-ko">{c.ko}</span>
+              <span className="axd__mtag font-sans">{c.tag}</span>
+              <strong className="font-ko">{c.title}</strong>
               <span className="axd__mdesc font-ko">{c.desc}</span>
             </Tag>
           );
         })}
       </div>
-      <p className="axd__note font-ko">의뢰인·사건 정보, 계약 금액, 사내 시스템 화면은 공개하지 않습니다. 이곳에는 문제 정의와 구조만 담았습니다.</p>
+      <p className="axd__note font-ko">의뢰인·사건 정보와 사내 화면은 공개하지 않습니다.</p>
     </div>
   );
 }
