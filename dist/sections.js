@@ -84,7 +84,7 @@ function Nav() {
 function Hero() {
   const ref = useReveal();
   return (/*#__PURE__*/
-    React.createElement("section", { id: "manifesto", ref: ref, style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
+    React.createElement("section", { id: "manifesto", ref: ref, "data-cine": "exit", style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
     React.createElement("div", { className: "hero-photo", "aria-hidden": "true" }, /*#__PURE__*/
     React.createElement(Pic, { name: "hero-gangnam", fallback: "images/hero-gangnam-1000.jpg?v=1", sizes: "100vw", fetchpriority: "high" })
     ), /*#__PURE__*/
@@ -373,7 +373,7 @@ function ConvergenceMap({ active, onPick }) {
     React.createElement("svg", { className: "cmap", viewBox: "0 0 400 400", role: "img", "aria-label": "\uC5EC\uC12F \uB3C4\uBA54\uC778\uC774 \uD558\uB098\uB85C \uC218\uB834\uD558\uB294 \uC735\uD569 \uC5ED\uB7C9 \uB2E4\uC774\uC5B4\uADF8\uB7A8" }, /*#__PURE__*/
     React.createElement("polygon", { className: "cmap__ring", points: NODE.map((p) => p.join(",")).join(" ") }),
     NODE.map((p, i) => /*#__PURE__*/
-    React.createElement("line", { key: "s" + i, className: "cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : ""), x1: "200", y1: "200", x2: p[0], y2: p[1] })
+    React.createElement("line", { key: "s" + i, pathLength: "1", className: "cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : ""), x1: "200", y1: "200", x2: p[0], y2: p[1] })
     ), /*#__PURE__*/
     React.createElement("circle", { className: "cmap__halo", cx: "200", cy: "200", r: "60" }), /*#__PURE__*/
     React.createElement("circle", { className: "cmap__core", cx: "200", cy: "200", r: "46" }), /*#__PURE__*/
@@ -410,7 +410,7 @@ function Composite() {
 
   return (/*#__PURE__*/
     React.createElement(React.Fragment, null, /*#__PURE__*/
-    React.createElement("section", { id: "composite", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
+    React.createElement("section", { id: "composite", ref: ref, "data-cine": "pass", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .2 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "02 \u2014 Core Competencies", titleEn: "The Composite", titleKo: "AI \uC804\uB7B5 \uCEE8\uC124\uD305\uC744 \uC911\uC2EC\uC5D0 \uB454 \uC5ED\uB7C9 \uAD6C\uC870" }), /*#__PURE__*/
@@ -426,7 +426,7 @@ function Composite() {
     ), /*#__PURE__*/
 
     React.createElement("div", { className: "comp-stage" }, /*#__PURE__*/
-    React.createElement("div", { className: "comp-stage__sticky" }, /*#__PURE__*/
+    React.createElement("div", { className: "comp-stage__sticky", "data-tilt": "" }, /*#__PURE__*/
     React.createElement(ConvergenceMap, { active: active, onPick: setActive }), /*#__PURE__*/
     React.createElement("div", { className: "cmap__cap" }, /*#__PURE__*/
     React.createElement("span", { className: "font-cond" }, DOMAINS[active].n), /*#__PURE__*/
@@ -713,7 +713,7 @@ function FieldDiary() {
     React.createElement("div", { className: "diary" }, /*#__PURE__*/
     React.createElement("p", { className: "diary__lead font-ko" }, /*#__PURE__*/React.createElement("span", { className: "diary__pulse", "aria-hidden": "true" }), "\uCCAD\uC640\uB300 \uCCAD\uB144\uC758\uB0A0, \uADF8\uB2E4\uC74C \uC7A5 \u2014 \uD604\uC7A5 \uC77C\uC9C0"),
     DIARY.map((d, i) => /*#__PURE__*/
-    React.createElement("figure", { key: d.id, className: "tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "") }, /*#__PURE__*/
+    React.createElement("figure", { key: d.id, "data-cine": "pass", className: "tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "") }, /*#__PURE__*/
     React.createElement("a", { className: "tl-feature__main diary__main", href: d.href }, /*#__PURE__*/
     React.createElement(Pic, { name: d.main.name, fallback: "images/" + d.main.name + ".jpg", sizes: "(max-width: 900px) 92vw, 52vw", alt: d.main.alt, loading: "lazy", width: d.main.w || 1200, height: d.main.h || 675, style: { objectPosition: d.main.pos } }), /*#__PURE__*/
     React.createElement("span", { className: "diary__stamp", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, d.date), /*#__PURE__*/React.createElement("i", { className: "font-sans" }, d.day, " \xB7 2026"))
@@ -778,7 +778,7 @@ function Trajectory() {
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "04 \u2014 Experience", titleEn: "The Trajectory", titleKo: "\uC774\uB825 \u2014 \uC2E4\uBB34\uC640 \uC804\uBB38\uAD50\uC721" }), /*#__PURE__*/
 
-    React.createElement("figure", { className: "tl-feature reveal" }, /*#__PURE__*/
+    React.createElement("figure", { className: "tl-feature reveal", "data-cine": "pass" }, /*#__PURE__*/
     React.createElement("a", { className: "tl-feature__main", href: "gallery.html#youth-day" }, /*#__PURE__*/
     React.createElement(Pic, { name: "youth-day-yonhap", fallback: "images/youth-day-yonhap.jpg",
       sizes: "(max-width: 900px) 92vw, 52vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 (\uC5F0\uD569\uB274\uC2A4 \uBCF4\uB3C4\uC0AC\uC9C4)", loading: "lazy", width: "860", height: "592" })
@@ -890,11 +890,11 @@ const EDITIONS = [
 { n: "06", color: "var(--apple)", Icon: Cpu, title: "고객 메일 자동 분류 시스템\n— 급한 메일부터 알려 줍니다",
   desc: "회사로 들어오는 고객 메일을 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 광고처럼 넘겨도 되는 것'으로 나눠 보여 주는 업무 화면. 담당자는 위에서부터 차례로 처리하면 됩니다.",
   status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["구글 업무도구 연동", "자동 분류", "업무 화면"],
-  point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
+  core: true, point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
 { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
   desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
   status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"],
-  point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
+  core: true, point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
 { n: "08", color: "var(--sky)", Icon: Cpu, title: "누리장터 크롤링 연동\n정비사업 용역비 자동 수집 프로그램",
   desc: "정비사업 정보 플랫폼 '누리장터'에서 조합 대상 용역 입찰과 용역비 데이터를 자동으로 수집하는 크롤링 프로그램. 흩어진 공고를 정기적으로 수집·정형화하여 시장 단가 비교와 사업성 검토를 위한 데이터셋을 구축.",
   status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["웹 크롤링", "정비사업 데이터", "업무 자동화"],
@@ -908,7 +908,7 @@ const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.
 function EditionCard({ e, i, onPlay }) {
   const [more, setMore] = React.useState(false); /* 폰에서 설명 4줄만 보이고 펼친다 */
   return (/*#__PURE__*/
-    React.createElement("article", { id: "ed-" + e.n, className: "edition reveal" + (e.core ? " edition--core" : ""), style: { "--accent-fill": e.color, transitionDelay: `${i * 90}ms` } }, /*#__PURE__*/
+    React.createElement("article", { id: "ed-" + e.n, "data-tilt": e.core ? "" : undefined, className: "edition reveal" + (e.core ? " edition--core" : ""), style: { "--accent-fill": e.color, transitionDelay: `${i * 90}ms` } }, /*#__PURE__*/
     React.createElement("div", { className: "edition__chip" }, e.status), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 } }, /*#__PURE__*/
     React.createElement("span", { className: "edition__num" }, e.no), /*#__PURE__*/
@@ -964,7 +964,132 @@ const AX_SUPPORT = [
 { id: "ax-procurement", tag: "운영 중", title: "정비사업 용역비 데이터 자동 수집", desc: "누리장터의 조합 용역 입찰·용역비 공고를 모아 시장 단가 비교의 기준을 만듭니다.", href: "#ed-08" }];
 
 
+/* AX 조립 장면 — 흩어진 법령·서류·계약서가 스크롤에 따라 세 갈래 체계로 모인다. 진행도(--cp)는 cine.js 가 쓴다 */
+const AXA_COLS = [
+{ x: 18, k: "§", t: "법령 · 고시 감시", items: ["법령 개정", "고시 변경", "행정 공고", "조례 개정"], node: "사업 단계 매핑", out: "변호사 검토" },
+{ x: 50, k: "✓", t: "총회 하자 검증", items: ["소집 통지", "조합원 명부", "의결권", "정족수"], node: "규칙 대조", out: "하자 위험 표시" },
+{ x: 82, k: "⇄", t: "계약변경 비교", items: ["계약서 v1", "계약서 v2", "공사비 조항", "지급 조건"], node: "조항 대조", out: "비용 · 책임 영향" }];
+
+/* 시작 위치는 고정된 의사난수 — 프리렌더와 브라우저가 같은 값을 그려야 한다 */
+const axaSeed = (n) => {const x = Math.sin(n * 91.7) * 43758.5453;return x - Math.floor(x);};
+
+function AxAssembly() {
+  let n = 0;
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "axa", "data-cine": "pin", "aria-hidden": "true" }, /*#__PURE__*/
+    React.createElement("div", { className: "axa__sticky" }, /*#__PURE__*/
+    React.createElement("div", { className: "axa__stage" }, /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--1 font-ko" }, "\uD769\uC5B4\uC9C4 \uBC95\uB839 \xB7 \uCD1D\uD68C \uC11C\uB958 \xB7 \uACC4\uC57D\uC11C"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--2 font-ko" }, "\uADDC\uCE59\uC73C\uB85C \uBAA8\uC73C\uACE0, \uB2E8\uACC4\uBCC4\uB85C \uC815\uB9AC\uD558\uACE0"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--3 font-ko" }, "\uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4"),
+    AXA_COLS.map((c, ci) => /*#__PURE__*/
+    React.createElement(React.Fragment, { key: c.t }, /*#__PURE__*/
+    React.createElement("span", { className: "axa__head font-ko", style: { "--x": c.x } }, /*#__PURE__*/React.createElement("b", null, c.k), c.t),
+    c.items.map((it, ii) => {
+      n += 1;
+      const st = { "--sx": (axaSeed(n) * 90 + 5).toFixed(1), "--sy": (axaSeed(n + 40) * 70 + 8).toFixed(1),
+        "--sr": ((axaSeed(n + 80) - 0.5) * 70).toFixed(0), "--sz": ((axaSeed(n + 120) - 0.6) * 520).toFixed(0),
+        "--ex": c.x, "--ey": 22 + ii * 9.4 };
+      return /*#__PURE__*/React.createElement("span", { key: it, className: "axa__doc font-ko axa__doc--" + ci, style: st }, it);
+    }), /*#__PURE__*/
+    React.createElement("i", { className: "axa__w axa__w--1", style: { "--x": c.x } }), /*#__PURE__*/
+    React.createElement("i", { className: "axa__w axa__w--2", style: { "--x": c.x } }), /*#__PURE__*/
+    React.createElement("span", { className: "axa__node font-ko", style: { "--x": c.x } }, c.node), /*#__PURE__*/
+    React.createElement("span", { className: "axa__out font-ko", style: { "--x": c.x } }, c.out)
+    )
+    )
+    )
+    )
+    ));
+
+}
+
+/* 사례 무대 안의 가상 시연 — 실제 사업지·의뢰인·계약 자료가 아니다 */
+function AxDemo({ id }) {
+  const [split, setSplit] = React.useState(50);
+  const [run, setRun] = React.useState(0);
+  if (id === "ax-reintel") {
+    const src = ["국가법령정보", "지자체 고시", "행정 공고", "조합 공개자료"];
+    const alerts = [["조례 개정", "사업시행계획 단계", "검토 필요"], ["고시 변경", "관리처분 단계", "영향 확인"], ["행정 공고", "조합설립 단계", "참고"]];
+    return (/*#__PURE__*/
+      React.createElement("div", { className: "axdemo axdemo--a" }, /*#__PURE__*/
+      React.createElement("div", { className: "axdemo__src" }, src.map((s, i) => /*#__PURE__*/React.createElement("span", { key: s, style: { "--i": i } }, s))), /*#__PURE__*/
+      React.createElement("div", { className: "axdemo__core font-sans" }, "\uC0AC\uC5C5\uC9C0 \uC8FC\uC18C \uAE30\uC900 \xB7 \uB2E8\uACC4 \uB9E4\uD551"), /*#__PURE__*/
+      React.createElement("ul", { className: "axdemo__alerts font-ko" },
+      alerts.map((a, i) => /*#__PURE__*/React.createElement("li", { key: a[0], style: { "--i": i } }, /*#__PURE__*/React.createElement("b", null, a[0]), /*#__PURE__*/React.createElement("span", null, a[1]), /*#__PURE__*/React.createElement("em", null, a[2])))
+      )
+      ));
+
+  }
+  if (id === "ax-assembly") {
+    const cols = ["소집 통지", "의사정족수", "의결정족수", "의결권 확인"];
+    const rows = [["안건 1 · 정관 변경", [1, 1, 1, 1]], ["안건 2 · 예산안", [1, 1, 0, 1]], ["안건 3 · 임원 선임", [1, 1, 1, 0]], ["안건 4 · 용역 계약", [1, 1, 1, 1]]];
+    return (/*#__PURE__*/
+      React.createElement("div", { className: "axdemo axdemo--b", key: run }, /*#__PURE__*/
+      React.createElement("table", { className: "axdemo__mx font-ko" }, /*#__PURE__*/
+      React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\uC548\uAC74"), cols.map((c) => /*#__PURE__*/React.createElement("th", { key: c }, c)))), /*#__PURE__*/
+      React.createElement("tbody", null, rows.map(([r, v], ri) => /*#__PURE__*/
+      React.createElement("tr", { key: r }, /*#__PURE__*/React.createElement("th", null, r), v.map((ok, ci) => /*#__PURE__*/React.createElement("td", { key: ci, className: ok ? "ok" : "ng", style: { "--i": ri * 4 + ci } }, ok ? "✓" : "확인 필요")))
+      ))
+      ), /*#__PURE__*/
+      React.createElement("button", { type: "button", className: "btn btn--ghost axdemo__run", onClick: () => setRun(run + 1) }, "\uAC80\uC99D \uB2E4\uC2DC \uC2E4\uD589")
+      ));
+
+  }
+  const v1 = [["제○조 공사비", "도급금액은 계약 시 확정한다."], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 수급인이 부담한다."]];
+  const v2 = [["제○조 공사비", "물가 변동 시 도급금액을 조정할 수 있다.", 1], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 도급인이 부담한다.", 1]];
+  const drag = (ev) => {
+    const r = ev.currentTarget.getBoundingClientRect();
+    setSplit(Math.round(Math.max(0, Math.min(100, (ev.clientX - r.left) / r.width * 100))));
+  };
+  const col = (rows, tag) => /*#__PURE__*/
+  React.createElement("div", { className: "axdemo__doc font-ko" }, /*#__PURE__*/React.createElement("span", { className: "axdemo__ver font-sans" }, tag),
+  rows.map((r) => /*#__PURE__*/React.createElement("p", { key: r[0], className: r[2] ? "chg" : "" }, /*#__PURE__*/React.createElement("b", null, r[0]), r[1])));
+
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "axdemo axdemo--c" }, /*#__PURE__*/
+    React.createElement("div", { className: "axdemo__cmp", style: { "--split": split + "%" },
+      onPointerDown: (ev) => {ev.currentTarget.setPointerCapture(ev.pointerId);drag(ev);},
+      onPointerMove: (ev) => {if (ev.buttons || ev.pointerType === "touch") drag(ev);} },
+    col(v1, "변경 전"), /*#__PURE__*/
+    React.createElement("div", { className: "axdemo__over" }, col(v2, "변경 후")), /*#__PURE__*/
+    React.createElement("i", { className: "axdemo__handle", "aria-hidden": "true" })
+    ), /*#__PURE__*/
+    React.createElement("label", { className: "axdemo__range font-sans" }, "\u2190 \uBCC0\uACBD \uC804 \xB7 \uBCC0\uACBD \uD6C4 \u2192", /*#__PURE__*/
+    React.createElement("input", { type: "range", min: "0", max: "100", value: split, onChange: (ev) => setSplit(+ev.target.value), "aria-label": "\uBCC0\uACBD \uC804\uD6C4 \uBE44\uAD50 \uC704\uCE58" })
+    )
+    ));
+
+}
+
 function AxDesk() {
+  const [open, setOpen] = React.useState(null);
+  const cards = React.useRef({});
+  const panel = React.useRef(null);
+  const closeBtn = React.useRef(null);
+  const reduce = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* FLIP — 누른 카드의 자리에서 무대가 펼쳐진다 */
+  const flip = (id, reverse) => {
+    const card = cards.current[id],el = panel.current;
+    if (!card || !el || !el.animate || reduce()) {if (el) el.style.opacity = "1";return Promise.resolve();}
+    const a = card.getBoundingClientRect(),b = el.getBoundingClientRect();
+    const from = `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`;
+    const kf = [{ transform: from, opacity: .6, borderRadius: "2px" }, { transform: "none", opacity: 1 }];
+    return el.animate(reverse ? kf.slice().reverse() : kf, { duration: reverse ? 380 : 620, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }).finished.catch(() => {});
+  };
+  React.useEffect(() => {
+    if (!open) return;
+    document.documentElement.classList.add("axs-lock");
+    flip(open, false).then(() => closeBtn.current && closeBtn.current.focus());
+    const onKey = (ev) => {if (ev.key === "Escape") close();};
+    window.addEventListener("keydown", onKey);
+    return () => {window.removeEventListener("keydown", onKey);document.documentElement.classList.remove("axs-lock");};
+  }, [open]);
+  const close = () => {
+    const id = open;
+    flip(id, true).then(() => {setOpen(null);const c = cards.current[id];c && c.focus && c.focus();});
+  };
+  const cur = AX_CASES.find((c) => c.id === open);
   return (/*#__PURE__*/
     React.createElement("div", { className: "axd reveal", id: "ax-desk", "aria-labelledby": "ax-desk-title" }, /*#__PURE__*/
     React.createElement("div", { className: "axd__head" }, /*#__PURE__*/
@@ -972,9 +1097,10 @@ function AxDesk() {
     React.createElement("h3", { id: "ax-desk-title", className: "font-ko" }, "\uC7AC\uAC1C\uBC1C\xB7\uC7AC\uAC74\uCD95 \uC0AC\uC5C5\uC774 ", /*#__PURE__*/React.createElement("em", null, "\uBC95 \xB7 \uCD1D\uD68C \xB7 \uACC4\uC57D"), " \uBB38\uC81C\uB85C \uBA48\uCD94\uC9C0 \uC54A\uAC8C"), /*#__PURE__*/
     React.createElement("p", { className: "axd__lead font-ko" }, "\uC704\uD5D8\uC740 \uC2DC\uC2A4\uD15C\uC774 \uBA3C\uC800 \uCC3E\uACE0, \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4. \uC0AC\uB0B4\uC5D0 \uC9C1\uC811 \uAD6C\uCD95\uD55C \uC138 \uAC00\uC9C0\uC785\uB2C8\uB2E4.")
     ), /*#__PURE__*/
+    React.createElement(AxAssembly, null), /*#__PURE__*/
     React.createElement("div", { className: "axd__grid" },
     AX_CASES.map((c) => /*#__PURE__*/
-    React.createElement("article", { key: c.id, id: c.id, className: "axd__case" }, /*#__PURE__*/
+    React.createElement("article", { key: c.id, id: c.id, className: "axd__case", "data-tilt": "", ref: (n) => {cards.current[c.id] = n;}, tabIndex: -1 }, /*#__PURE__*/
     React.createElement("div", { className: "axd__top" }, /*#__PURE__*/React.createElement("span", { className: "axd__icon font-serif", "aria-hidden": "true" }, c.icon), /*#__PURE__*/React.createElement("span", { className: "axd__no font-serif" }, c.no)), /*#__PURE__*/
     React.createElement("h4", { className: "axd__title font-ko" }, c.title), /*#__PURE__*/
     React.createElement("p", { className: "axd__en font-sans" }, c.en), /*#__PURE__*/
@@ -987,7 +1113,10 @@ function AxDesk() {
     React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, "\uC804"), c.before), /*#__PURE__*/
     React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, "\uD6C4"), c.after)
     ), /*#__PURE__*/
-    React.createElement("p", { className: "axd__state font-sans" }, "\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C")
+    React.createElement("div", { className: "axd__foot" }, /*#__PURE__*/
+    React.createElement("p", { className: "axd__state font-sans" }, "\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C"), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "axd__open font-sans", onClick: () => setOpen(c.id), "aria-haspopup": "dialog" }, "\uC791\uB3D9 \uBC29\uC2DD \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 13 }))
+    )
     )
     )
     ), /*#__PURE__*/
@@ -1003,7 +1132,29 @@ function AxDesk() {
 
     })
     ), /*#__PURE__*/
-    React.createElement("p", { className: "axd__note font-ko" }, "\uC758\uB8B0\uC778\xB7\uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
+    React.createElement("p", { className: "axd__note font-ko" }, "\uC758\uB8B0\uC778\xB7\uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."),
+    cur && /*#__PURE__*/
+    React.createElement("div", { className: "axs", role: "dialog", "aria-modal": "true", "aria-labelledby": "axs-title", onClick: close }, /*#__PURE__*/
+    React.createElement("div", { className: "axs__panel", ref: panel, onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "axs__close font-sans", ref: closeBtn, onClick: close, "aria-label": "\uB2EB\uAE30" }, "\uB2EB\uAE30 \u2715"), /*#__PURE__*/
+    React.createElement("p", { className: "axs__eyebrow font-sans" }, "AX ", cur.no, " \xB7 ", cur.en), /*#__PURE__*/
+    React.createElement("h3", { id: "axs-title", className: "font-ko" }, cur.title), /*#__PURE__*/
+    React.createElement("div", { className: "axs__body" }, /*#__PURE__*/
+    React.createElement("div", { className: "axs__demo" }, /*#__PURE__*/
+    React.createElement(AxDemo, { id: cur.id }), /*#__PURE__*/
+    React.createElement("p", { className: "axs__fic font-ko" }, "\uC704 \uD654\uBA74\uC740 \uAD6C\uC870\uB97C \uBCF4\uC5EC \uC8FC\uB294 ", /*#__PURE__*/React.createElement("b", null, "\uAC00\uC0C1 \uC2DC\uC5F0"), "\uC785\uB2C8\uB2E4. \uC2E4\uC81C \uC0AC\uC5C5\uC9C0\xB7\uC758\uB8B0\uC778\xB7\uACC4\uC57D \uC790\uB8CC\uAC00 \uC544\uB2D9\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("dl", { className: "axs__facts font-ko" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBB38\uC81C"), /*#__PURE__*/React.createElement("dd", null, cur.problem)), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uB0B4 \uC5ED\uD560"), /*#__PURE__*/React.createElement("dd", null, "\uBB38\uC81C \uC815\uC758 \xB7 \uAC80\uD1A0 \uADDC\uCE59 \uC124\uACC4 \xB7 \uC2DC\uC2A4\uD15C \uAD6C\uCD95")), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBC29\uC2DD"), /*#__PURE__*/React.createElement("dd", null, cur.solve)), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD6A8\uACFC"), /*#__PURE__*/React.createElement("dd", null, cur.effect)), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC0C1\uD0DC"), /*#__PURE__*/React.createElement("dd", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uC2E4\uC81C \uD654\uBA74\uACFC \uC790\uB8CC\uB294 \uBE44\uACF5\uAC1C"))
+    )
+    )
+    )
+    )
+
     ));
 
 }
@@ -1038,7 +1189,7 @@ function Artifacts() {
     React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
     React.createElement("span", { className: "eyebrow" }, "Supplementary"), /*#__PURE__*/
     React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
-    React.createElement("span", { className: "fold__line font-ko" }, "\uACE0\uAC1D \uBA54\uC77C \uBD84\uB958 \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1 \xB7 \uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
+    React.createElement("span", { className: "fold__line font-ko" }, "\uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 Project Plaza \xB7 \uCCAD\uC57D \uB300\uC2DC\uBCF4\uB4DC \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
     ), /*#__PURE__*/
     React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })
     ), /*#__PURE__*/
