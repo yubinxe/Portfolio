@@ -711,7 +711,7 @@
         "Id": "ledger",
         "Category": "인물",
         "Title": "한눈에 보는 기록 (The Ledger)",
-        "Body": "- 수행 프로젝트 8\n- 전문 교육 이수 4\n- 수상 · 표창 3\n- 방송 인터뷰 1",
+        "Body": "- AI · 자동화 결과물 16\n- 배포 · 사내 운영 시스템 11\n- 전문 교육 이수 4\n- 수상 · 표창 3\n- 방송 인터뷰 1",
         "Tags": "ledger, 개수, 몇, 숫자, 통계, 한눈에",
         "PrimaryLabel": "작업 보기",
         "PrimaryHref": "index.html#artifacts",
@@ -1382,5 +1382,5 @@
       }
     ]
   },
-  "hash": "52e44d49164c2ba9"
+  "hash": "211cd6021879b8c6"
 }
