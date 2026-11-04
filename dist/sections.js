@@ -188,7 +188,7 @@ function Ledger() {
 /* ============================================================ COMPOSITE — 융합 역량 */
 const DOMAINS = [
 { n: "01", core: true, ko: "AI 전략 컨설팅", short: "전략", en: "AI Strategy & Consulting",
-  desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 정비사업 용역비 수집으로 시장 단가 비교와 사업성 검토의 기준선을 만들었고, 고객 메일 자동 분류에서는 무엇을 위험 신호로 볼지 판단 기준을 세웠습니다.",
+  desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 위험 신호로 볼지 판단 기준을 세웠습니다.",
   tags: ["문제 정의 · 우선순위 설계", "사업성 검토"] },
 { n: "02", core: true, ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
   desc: "사람이 반복하던 판단의 앞단을 AI에 맡기고, 사람은 기준을 정하는 자리에 남깁니다. SSAFY·서울대 AIED에서 구조를 익혔습니다.",
@@ -249,7 +249,7 @@ const LECTURES = [
   who: "사내 자동화를 설계하는 실무자 · 개발 인접 직군",
   hours: "4시간",
   modules: ["도구 연결과 권한 경계 설계", "맥락 주입과 실패 시 폴백 설계", "사람이 승인해야 할 지점 정하기"],
-  basis: "GWS · NAVER WORKS API 연동과 크롤링 파이프라인 구축 경험",
+  basis: "GWS · NAVER WORKS API 연동 경험",
   proof: { label: "고객 메일 자동 분류 시스템", href: "#ed-06" } },
 
 /* ---- Track B — 도메인 적용 ---- */
@@ -313,12 +313,12 @@ const LECTURES = [
   proof: { label: "전세 안전 점검 체험", href: "https://appraiser-fieldwork.vercel.app/" } },
 { id: "lec-12", n: "12", track: "realestate", color: "var(--pink)", Icon: MapPin,
   title: "개발·정비사업을 데이터로 읽기",
-  lead: "용적률·사업수지·용역 단가를 공공데이터로 확인해, 사업성을 감이 아니라 숫자로 판단합니다.",
+  lead: "용적률·사업수지를 공공데이터로 확인하고 보상 절차의 쟁점을 짚어, 사업성을 감이 아니라 숫자로 판단합니다.",
   who: "시행 · 정비사업 조합 실무 · 부동산 전략 담당자",
   hours: "4시간(데이터 실습)",
-  modules: ["용적률·건폐율로 사업 규모 잡기", "분양가·공사비 민감도 분석", "누리장터 용역 단가 수집과 비교"],
-  basis: "정비사업 용역비 자동 수집 프로그램 운영 · 건국대 스마트건설",
-  proof: { label: "정비사업 용역비 자동 수집", href: "#ed-08" } }];
+  modules: ["용적률·건폐율로 사업 규모 잡기", "분양가·공사비 민감도 분석", "보상 절차 읽기 — 감정평가 → 보상협의 → 재결"],
+  basis: "광명시흥 3기 신도시 보상자료 분석(발표자료 77장) · 건국대 스마트건설",
+  proof: { label: "광명시흥 보상자료 분석", href: "#ax-desk" } }];
 
 
 const LECTURE_BASIS = [
@@ -355,11 +355,7 @@ const CASES = [
 { n: "02", title: "고객 메일 자동 분류 시스템", tag: "구글 업무도구 연동 · 자동 분류",
   manual: "담당자가 메일함을 직접 확인하며 사안의 우선순위를 판단하던 업무.",
   auto: "메일이 들어오면 자동으로 모아 급한 순서대로 1차 분류.",
-  judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." },
-{ n: "03", title: "정비사업 용역비 자동 수집", tag: "누리장터 · 웹 크롤링",
-  manual: "흩어진 용역 입찰 공고를 사이트마다 찾아 단가를 옮겨 적던 업무.",
-  auto: "크롤러가 정기적으로 공고와 용역비를 수집·정형화해 비교 가능한 데이터셋으로 축적.",
-  judge: "어떤 항목을 표준 필드로 삼아야 사업성 검토에 쓰이는지는 시장을 알아야 정할 수 있습니다." }];
+  judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." }];
 
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
@@ -549,7 +545,7 @@ function Composite() {
     React.createElement("em", null, "\uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0\uB294 \uC5EC\uC804\uD788 \uC0AC\uB78C\uC774 \uC815\uD569\uB2C8\uB2E4.")
     ), /*#__PURE__*/
 
-    React.createElement("p", { className: "whyc__intro font-ko reveal" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uC138 \uAC1C\uC758 \uC2DC\uC2A4\uD15C\uC5D0\uC11C \uAC19\uC740 \uC77C\uC774 \uBC18\uBCF5\uB410\uC2B5\uB2C8\uB2E4. \uC0AC\uB78C\uC774 \uD558\uB358 \uC77C\uC774 \uB3C4\uAD6C\uB85C \uB118\uC5B4\uAC14\uACE0, \uADF8\uB54C\uB9C8\uB2E4 \uC0AC\uB78C\uC774 \uB0A8\uC544\uC57C \uD560 \uC790\uB9AC\uAC00 \uD558\uB098\uC529 \uB610\uB837\uD574\uC84C\uC2B5\uB2C8\uB2E4. \uADF8 \uC790\uB9AC\uAC00 \uC804\uB7B5 \uCEE8\uC124\uD305\uC785\uB2C8\uB2E4."
+    React.createElement("p", { className: "whyc__intro font-ko reveal" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uB450 \uAC1C\uC758 \uC2DC\uC2A4\uD15C\uC5D0\uC11C \uAC19\uC740 \uC77C\uC774 \uBC18\uBCF5\uB410\uC2B5\uB2C8\uB2E4. \uC0AC\uB78C\uC774 \uD558\uB358 \uC77C\uC774 \uB3C4\uAD6C\uB85C \uB118\uC5B4\uAC14\uACE0, \uADF8\uB54C\uB9C8\uB2E4 \uC0AC\uB78C\uC774 \uB0A8\uC544\uC57C \uD560 \uC790\uB9AC\uAC00 \uD558\uB098\uC529 \uB610\uB837\uD574\uC84C\uC2B5\uB2C8\uB2E4. \uADF8 \uC790\uB9AC\uAC00 \uC804\uB7B5 \uCEE8\uC124\uD305\uC785\uB2C8\uB2E4."
 
 
     ), /*#__PURE__*/
@@ -644,7 +640,7 @@ function FieldworkStrip() {
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
 { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
-  desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)와 누리장터 정비사업 용역비 데이터 수집을 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
+  desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)를 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
 { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
   desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
 { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
@@ -890,19 +886,15 @@ const EDITIONS = [
 { n: "06", color: "var(--apple)", Icon: Cpu, title: "고객 메일 자동 분류 시스템\n— 급한 메일부터 알려 줍니다",
   desc: "회사로 들어오는 고객 메일을 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 광고처럼 넘겨도 되는 것'으로 나눠 보여 주는 업무 화면. 담당자는 위에서부터 차례로 처리하면 됩니다.",
   status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["구글 업무도구 연동", "자동 분류", "업무 화면"],
-  point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
+  core: true, point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
 { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
   desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
   status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"],
-  point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
-{ n: "08", color: "var(--sky)", Icon: Cpu, title: "누리장터 크롤링 연동\n정비사업 용역비 자동 수집 프로그램",
-  desc: "정비사업 정보 플랫폼 '누리장터'에서 조합 대상 용역 입찰과 용역비 데이터를 자동으로 수집하는 크롤링 프로그램. 흩어진 공고를 정기적으로 수집·정형화하여 시장 단가 비교와 사업성 검토를 위한 데이터셋을 구축.",
-  status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["웹 크롤링", "정비사업 데이터", "업무 자동화"],
-  core: true, point: "시장 단가 비교와 사업성 검토에 바로 쓰이는 필드 구조로 데이터셋을 설계." }];
+  core: true, point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." }];
 
 
 /* 화면에 보이는 순서와 번호 — 실생활·실무 시스템 7건을 먼저, 학습·콘텐츠·제안 작업은 "그 밖의 작업"에 */
-const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "08", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
+const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {
@@ -960,8 +952,7 @@ const AX_CASES = [
   before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시" }];
 
 const AX_SUPPORT = [
-{ id: "ax-compensation", tag: "실무", title: "광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
-{ id: "ax-procurement", tag: "운영 중", title: "정비사업 용역비 데이터 자동 수집", desc: "누리장터의 조합 용역 입찰·용역비 공고를 모아 시장 단가 비교의 기준을 만듭니다.", href: "#ed-08" }];
+{ id: "ax-compensation", tag: "실무", title: "광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." }];
 
 
 function AxDesk() {
