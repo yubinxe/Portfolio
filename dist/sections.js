@@ -81,27 +81,34 @@ function Nav() {
 }
 
 /* ============================================================ HERO */
+/* 히어로 — 고정된 한 화면 안에서 카메라가 도시로 들어간다(진행도 --cp 는 cine.js).
+ *  0–15%  정지 화면 · 이름이 원근을 두고 차례로 선다
+ * 15–50%  사진이 앞으로 오고, YUBIN / KIM 은 서로 다른 깊이로 갈라진다
+ * 50–85%  카메라가 더 밀고 들어가며 이름이 카메라를 지나쳐 사라진다
+ * 85–100% 아이보리 막이 올라와 소개 장면으로 이어진다 */
 function Hero() {
   const ref = useReveal();
   return (/*#__PURE__*/
-    React.createElement("section", { id: "manifesto", ref: ref, "data-cine": "exit", style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
+    React.createElement("section", { id: "manifesto", ref: ref, className: "hero-scene", "data-cine": "pin", "data-cine-rest": "0" }, /*#__PURE__*/
+    React.createElement("div", { className: "hero-scene__sticky", style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
     React.createElement("div", { className: "hero-photo", "aria-hidden": "true" }, /*#__PURE__*/
-    React.createElement(Pic, { name: "hero-gangnam", fallback: "images/hero-gangnam-1000.jpg?v=1", sizes: "100vw", fetchpriority: "high" })
+
+    React.createElement(Pic, { name: "hero-gangnam", fallback: "images/hero-gangnam-1000.jpg?v=1", sizes: "(max-width: 700px) 130vh, (max-width: 1100px) 165vh, 100vw", fetchpriority: "high" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-photo__scrim", "aria-hidden": "true" }), /*#__PURE__*/
 
-    React.createElement("div", { className: "wrap reveal", style: { position: "relative", zIndex: 2, textAlign: "center" } }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap reveal hero-copy", style: { position: "relative", zIndex: 2, textAlign: "center" } }, /*#__PURE__*/
     React.createElement("div", { className: "menu-rule", style: { maxWidth: 210, margin: "0 auto 18px" } }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
     React.createElement("p", { className: "font-sans hero-kicker" }, "Seoul \xB7 Portfolio 2026"), /*#__PURE__*/
     React.createElement("p", { className: "eyebrow hero-eyebrow" }, "AI Strategy & Consulting"), /*#__PURE__*/
-    React.createElement("h1", { className: "font-serif", style: { fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 } }, /*#__PURE__*/
+    React.createElement("h1", { className: "font-serif hero-name", style: { fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 } }, /*#__PURE__*/
     React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \uCEE8\uC124\uD305 "), /*#__PURE__*/
-    React.createElement("span", { "aria-hidden": "true" },
-    "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms` } }, c)), /*#__PURE__*/
-    React.createElement("br", null),
-    "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: `k${i}`, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms` } }, c))
+    React.createElement("span", { "aria-hidden": "true", className: "hero-name__rows" }, /*#__PURE__*/
+    React.createElement("span", { className: "hero-row hero-row--1" }, "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms` } }, c))), /*#__PURE__*/
+    React.createElement("span", { className: "hero-row hero-row--2" }, "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: `k${i}`, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms` } }, c)))
     )
     ), /*#__PURE__*/
+    React.createElement("div", { className: "hero-sub" }, /*#__PURE__*/
     React.createElement("p", { className: "font-ko", style: { fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 } },
     "AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"
     ), /*#__PURE__*/
@@ -110,9 +117,10 @@ function Hero() {
     ), /*#__PURE__*/
     React.createElement("p", { className: "font-ko hero-proof" }, "AI\uB85C \uD480 \uBB38\uC81C\uB97C \uC815\uC758\uD558\uACE0, \uC790\uB3D9\uD654 \uC2DC\uC2A4\uD15C\uC744 \uC9C1\uC811 \uAD6C\uD604\uD574 \uC2E4\uC81C \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD569\uB2C8\uB2E4."
 
+    )
     ), /*#__PURE__*/
 
-    React.createElement("div", { style: { marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" } }, /*#__PURE__*/
+    React.createElement("div", { className: "hero-cta", style: { marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" } }, /*#__PURE__*/
     React.createElement("a", { href: "#artifacts", className: "btn hero-main" }, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "#composite", className: "btn btn--ghost" }, "\uD575\uC2EC \uC5ED\uB7C9"), /*#__PURE__*/
     React.createElement("a", { href: "career.html", className: "btn btn--ghost" }, "\uACBD\uB825 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
@@ -122,6 +130,8 @@ function Hero() {
     React.createElement("a", { href: "#trajectory", className: "scroll-cue", style: { position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", textDecoration: "none" } }, /*#__PURE__*/
     React.createElement("span", { className: "font-sans", style: { fontSize: ".64rem", letterSpacing: ".3em", fontWeight: 600 } }, "SCROLL"), /*#__PURE__*/
     React.createElement("i", null)
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "hero-veil", "aria-hidden": "true" })
     )
     ));
 
@@ -360,31 +370,31 @@ const CASES = [
 
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
-const LABEL = [
-{ x: 200, y: 46, a: "middle" }, { x: 334, y: 128, a: "start" }, { x: 334, y: 278, a: "start" },
-{ x: 200, y: 360, a: "middle" }, { x: 66, y: 278, a: "end" }, { x: 66, y: 128, a: "end" }];
 
-
+/* 역량 지도 — 판(뒤) · 선(가운데) · 핵심(앞)이 서로 다른 깊이에 놓인 입체 지도.
+ * 스크롤하면 눕혀진 판이 관람자 쪽으로 서고(--k), 선이 이어지고, 핵심 역량이 앞으로 나온다.
+ * 포인터·손가락 위치는 카메라(--rx --ry), 고른 역량은 가장 앞으로 나오고 나머지는 물러난다. */
 function ConvergenceMap({ active, onPick }) {
   return (/*#__PURE__*/
-    React.createElement("svg", { className: "cmap", viewBox: "0 0 400 400", role: "img", "aria-label": "\uC5EC\uC12F \uB3C4\uBA54\uC778\uC774 \uD558\uB098\uB85C \uC218\uB834\uD558\uB294 \uC735\uD569 \uC5ED\uB7C9 \uB2E4\uC774\uC5B4\uADF8\uB7A8" }, /*#__PURE__*/
+    React.createElement("div", { className: "cmap3d", "data-cine": "pass", "data-cine-src": "#composite", role: "group", "aria-label": "\uC5EC\uC12F \uB3C4\uBA54\uC778\uC774 \uD558\uB098\uB85C \uC218\uB834\uD558\uB294 \uC735\uD569 \uC5ED\uB7C9 \uC9C0\uB3C4 \u2014 \uC5ED\uB7C9\uC744 \uB204\uB974\uBA74 \uC124\uBA85\uC774 \uBC14\uB01D\uB2C8\uB2E4" }, /*#__PURE__*/
+    React.createElement("div", { className: "cmap3d__rig" }, /*#__PURE__*/
+    React.createElement("div", { className: "cmap3d__plate", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("svg", { className: "cmap", viewBox: "0 0 400 400", "aria-hidden": "true" }, /*#__PURE__*/
     React.createElement("polygon", { className: "cmap__ring", points: NODE.map((p) => p.join(",")).join(" ") }),
     NODE.map((p, i) => /*#__PURE__*/
-    React.createElement("line", { key: "s" + i, pathLength: "1", className: "cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : ""), x1: "200", y1: "200", x2: p[0], y2: p[1] })
+    React.createElement("line", { key: "s" + i, pathLength: "1", style: { "--d": i }, className: "cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : ""), x1: "200", y1: "200", x2: p[0], y2: p[1] })
     ), /*#__PURE__*/
-    React.createElement("circle", { className: "cmap__halo", cx: "200", cy: "200", r: "60" }), /*#__PURE__*/
-    React.createElement("circle", { className: "cmap__core", cx: "200", cy: "200", r: "46" }), /*#__PURE__*/
-    React.createElement("text", { className: "cmap__coreT font-serif", x: "200", y: "199", textAnchor: "middle" }, "AI"), /*#__PURE__*/
-    React.createElement("text", { className: "cmap__coreS", x: "200", y: "215", textAnchor: "middle" }, "STRATEGY"),
-    NODE.map((p, i) => /*#__PURE__*/
-    React.createElement("circle", { key: "n" + i, className: "cmap__node" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : ""),
-      cx: p[0], cy: p[1], r: i === active ? 9.5 : DOMAINS[i].core ? 7 : 4.5,
-      onMouseEnter: () => onPick(i) })
-    ),
+    React.createElement("circle", { className: "cmap__halo", cx: "200", cy: "200", r: "60" })
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "cmap3d__core", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, "AI"), /*#__PURE__*/React.createElement("span", null, "STRATEGY")),
     DOMAINS.map((d, i) => /*#__PURE__*/
-    React.createElement("text", { key: "t" + i, className: "cmap__label" + (d.core ? " core" : "") + (i === active ? " on" : ""),
-      x: LABEL[i].x, y: LABEL[i].y, textAnchor: LABEL[i].a,
-      onMouseEnter: () => onPick(i) }, d.short)
+    React.createElement("button", { key: d.n, type: "button", "aria-pressed": i === active,
+      className: "cmap3d__n" + (d.core ? " core" : "") + (i === active ? " on" : "") + " p-" + "trrbll"[i],
+      style: { left: NODE[i][0] / 4 + "%", top: NODE[i][1] / 4 + "%", "--d": i },
+      onMouseEnter: () => onPick(i), onFocus: () => onPick(i), onClick: () => onPick(i) }, /*#__PURE__*/
+    React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, d.short)
+    )
+    )
     )
     ));
 
@@ -407,7 +417,7 @@ function Composite() {
 
   return (/*#__PURE__*/
     React.createElement(React.Fragment, null, /*#__PURE__*/
-    React.createElement("section", { id: "composite", ref: ref, "data-cine": "pass", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
+    React.createElement("section", { id: "composite", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .2 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "02 \u2014 Core Competencies", titleEn: "The Composite", titleKo: "AI \uC804\uB7B5 \uCEE8\uC124\uD305\uC744 \uC911\uC2EC\uC5D0 \uB454 \uC5ED\uB7C9 \uAD6C\uC870" }), /*#__PURE__*/
@@ -898,7 +908,7 @@ const EDITIONS = [
 const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
-function EditionCard({ e, i, onPlay }) {
+function EditionCard({ e, i, onPlay, onStage }) {
   const [more, setMore] = React.useState(false); /* 폰에서 설명 4줄만 보이고 펼친다 */
   return (/*#__PURE__*/
     React.createElement("article", { id: "ed-" + e.n, "data-tilt": e.core ? "" : undefined, className: "edition reveal" + (e.core ? " edition--core" : ""), style: { "--accent-fill": e.color, transitionDelay: `${i * 90}ms` } }, /*#__PURE__*/
@@ -917,7 +927,14 @@ function EditionCard({ e, i, onPlay }) {
     e.point && /*#__PURE__*/React.createElement("p", { className: "edition__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uCEE8\uC124\uD305 \uD3EC\uC778\uD2B8"), e.point), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" } },
     e.tags.map((t) => /*#__PURE__*/React.createElement("span", { key: t, className: "font-sans", style: { fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" } }, t))
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "edition__acts" },
+    THEATERS[e.n] && onStage && /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "btn edition__stage", "aria-haspopup": "dialog",
+      onClick: (ev) => onStage(e, ev.currentTarget.closest("article")) }, "\uC791\uB3D9 \uC6D0\uB9AC \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/
+    React.createElement(Layers, { size: 16 })
     ),
+
     e.video ? /*#__PURE__*/
     React.createElement("button", { type: "button", className: "btn", style: { alignSelf: "flex-start" }, onClick: () => onPlay(e) },
     e.cta, " ", /*#__PURE__*/React.createElement(PlayCircle, { size: 16 })
@@ -929,6 +946,7 @@ function EditionCard({ e, i, onPlay }) {
 
     React.createElement("span", { className: "btn btn--ghost", style: { alignSelf: "flex-start", cursor: "default", pointerEvents: "none" } }, e.cta)
 
+    )
     ));
 
 }
@@ -965,29 +983,52 @@ const AXA_COLS = [
 /* 시작 위치는 고정된 의사난수 — 프리렌더와 브라우저가 같은 값을 그려야 한다 */
 const axaSeed = (n) => {const x = Math.sin(n * 91.7) * 43758.5453;return x - Math.floor(x);};
 
+/* 4막 — I 흩어짐: 서로 다른 깊이에 떠 있는 자료 · II 모임: 곡선을 그리며 세 갈래로 정렬
+ *       III 처리: 선이 이어지고 단계마다 확인 표시 · IV 사람의 판단: 자동 처리와 변호사 판단의 경계 */
+const AXA_ACTS = ["흩어짐", "모임", "처리", "사람의 판단"];
+/* 깊은 곳에 떠 있는 빈 서류 — 1막의 공간감을 만들고, 모일 때 더 깊이 물러나 사라진다 */
+const AXA_GHOSTS = Array.from({ length: 7 }, (_, i) => ({
+  "--gx": (axaSeed(i + 300) * 96 + 2).toFixed(1), "--gy": (axaSeed(i + 340) * 74 + 8).toFixed(1),
+  "--gz": (-(axaSeed(i + 380) * 700 + 200)).toFixed(0), "--gr": ((axaSeed(i + 420) - 0.5) * 80).toFixed(0)
+}));
 function AxAssembly() {
   let n = 0;
   return (/*#__PURE__*/
-    React.createElement("div", { className: "axa", "data-cine": "pin", "aria-hidden": "true" }, /*#__PURE__*/
-    React.createElement("div", { className: "axa__sticky" }, /*#__PURE__*/
+    React.createElement("div", { className: "axa", "data-cine": "pin" }, /*#__PURE__*/
+    React.createElement("p", { className: "sr-only" }, "\uD769\uC5B4\uC9C4 \uBC95\uB839\xB7\uCD1D\uD68C \uC11C\uB958\xB7\uACC4\uC57D\uC11C\uB97C \uADDC\uCE59\uC73C\uB85C \uBAA8\uC544 \uC138 \uAC08\uB798(\uBC95\uB839 \uAC10\uC2DC \xB7 \uCD1D\uD68C \uD558\uC790 \uAC80\uC99D \xB7 \uACC4\uC57D\uBCC0\uACBD \uBE44\uAD50)\uB85C \uCC98\uB9AC\uD558\uACE0, \uB9C8\uC9C0\uB9C9 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9AC\uB294 \uAD6C\uC870\uB97C \uBCF4\uC5EC \uC8FC\uB294 \uC7A5\uBA74\uC785\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("div", { className: "axa__sticky", "aria-hidden": "true" }, /*#__PURE__*/
     React.createElement("div", { className: "axa__stage" }, /*#__PURE__*/
-    React.createElement("p", { className: "axa__cap axa__cap--1 font-ko" }, "\uD769\uC5B4\uC9C4 \uBC95\uB839 \xB7 \uCD1D\uD68C \uC11C\uB958 \xB7 \uACC4\uC57D\uC11C"), /*#__PURE__*/
-    React.createElement("p", { className: "axa__cap axa__cap--2 font-ko" }, "\uADDC\uCE59\uC73C\uB85C \uBAA8\uC73C\uACE0, \uB2E8\uACC4\uBCC4\uB85C \uC815\uB9AC\uD558\uACE0"), /*#__PURE__*/
-    React.createElement("p", { className: "axa__cap axa__cap--3 font-ko" }, "\uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4"),
+    React.createElement("i", { className: "axa__light" }), /*#__PURE__*/
+    React.createElement("div", { className: "axa__frame" }, /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--1 font-ko" }, "\uBC95\uB839 \xB7 \uCD1D\uD68C \uC11C\uB958 \xB7 \uACC4\uC57D\uC11C\uAC00 \uD769\uC5B4\uC838 \uC788\uC2B5\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--2 font-ko" }, "\uADDC\uCE59\uC5D0 \uB530\uB77C \uC138 \uAC08\uB798\uB85C \uBAA8\uC774\uACE0"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--3 font-ko" }, "\uB2E8\uACC4\uB9C8\uB2E4 \uAE30\uC900\uACFC \uB300\uC870\uD569\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--4 font-ko" }, "\uB9C8\uC9C0\uB9C9 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("div", { className: "axa__world" },
+    AXA_GHOSTS.map((g, gi) => /*#__PURE__*/React.createElement("i", { key: "g" + gi, className: "axa__ghost", style: g })),
     AXA_COLS.map((c, ci) => /*#__PURE__*/
     React.createElement(React.Fragment, { key: c.t }, /*#__PURE__*/
-    React.createElement("span", { className: "axa__head font-ko", style: { "--x": c.x } }, /*#__PURE__*/React.createElement("b", null, c.k), c.t),
+    React.createElement("span", { className: "axa__head font-ko", style: { "--x": c.x, "--ci": ci } }, /*#__PURE__*/React.createElement("b", null, c.k), c.t),
     c.items.map((it, ii) => {
       n += 1;
-      const st = { "--sx": (axaSeed(n) * 90 + 5).toFixed(1), "--sy": (axaSeed(n + 40) * 70 + 8).toFixed(1),
-        "--sr": ((axaSeed(n + 80) - 0.5) * 70).toFixed(0), "--sz": ((axaSeed(n + 120) - 0.6) * 520).toFixed(0),
-        "--ex": c.x, "--ey": 22 + ii * 9.4 };
-      return /*#__PURE__*/React.createElement("span", { key: it, className: "axa__doc font-ko axa__doc--" + ci, style: st }, it);
+      const sz = (axaSeed(n + 120) - 0.6) * 520;
+      const st = { "--sx": (axaSeed(n) * 90 + 5).toFixed(1), "--sy": (axaSeed(n + 40) * 66 + 10).toFixed(1),
+        "--sr": ((axaSeed(n + 80) - 0.5) * 70).toFixed(0), "--sz": sz.toFixed(0), "--far": Math.max(0, -sz / 320).toFixed(2),
+        "--ar": ((axaSeed(n + 160) - 0.5) * 24).toFixed(1), "--ex": c.x, "--ey": 20 + ii * 7.6, "--ii": ii, "--ci": ci };
+      return /*#__PURE__*/React.createElement("span", { key: it, className: "axa__doc font-ko axa__doc--" + ci, style: st }, /*#__PURE__*/React.createElement("small", { className: "font-serif" }, c.k), it);
     }), /*#__PURE__*/
-    React.createElement("i", { className: "axa__w axa__w--1", style: { "--x": c.x } }), /*#__PURE__*/
-    React.createElement("i", { className: "axa__w axa__w--2", style: { "--x": c.x } }), /*#__PURE__*/
-    React.createElement("span", { className: "axa__node font-ko", style: { "--x": c.x } }, c.node), /*#__PURE__*/
-    React.createElement("span", { className: "axa__out font-ko", style: { "--x": c.x } }, c.out)
+    React.createElement("i", { className: "axa__w axa__w--1", style: { "--x": c.x, "--ci": ci } }, /*#__PURE__*/React.createElement("b", null)), /*#__PURE__*/
+    React.createElement("span", { className: "axa__node font-ko", style: { "--x": c.x, "--ci": ci } }, c.node), /*#__PURE__*/
+    React.createElement("i", { className: "axa__w axa__w--2", style: { "--x": c.x, "--ci": ci } }), /*#__PURE__*/
+    React.createElement("span", { className: "axa__out font-ko", style: { "--x": c.x, "--ci": ci } }, c.out), /*#__PURE__*/
+    React.createElement("i", { className: "axa__w axa__w--3", style: { "--x": c.x, "--ci": ci } })
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axa__line font-sans" }, /*#__PURE__*/React.createElement("span", null, "\uC790\uB3D9 \uCC98\uB9AC \u25B2"), /*#__PURE__*/React.createElement("span", null, "\u25BC \uC0AC\uB78C\uC758 \uD310\uB2E8")), /*#__PURE__*/
+    React.createElement("div", { className: "axa__judge font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uCD5C\uC885 \uD310\uB2E8"), " \uBCC0\uD638\uC0AC\uAC00 \uAC80\uD1A0\uD558\uACE0 \uD655\uC815\uD569\uB2C8\uB2E4")
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "axa__acts font-sans" },
+    AXA_ACTS.map((a, i) => /*#__PURE__*/React.createElement("li", { key: a }, /*#__PURE__*/React.createElement("b", null, ["I", "II", "III", "IV"][i]), a))
     )
     )
     )
@@ -1029,14 +1070,14 @@ function AxDemo({ id }) {
 
   }
   const v1 = [["제○조 공사비", "도급금액은 계약 시 확정한다."], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 수급인이 부담한다."]];
-  const v2 = [["제○조 공사비", "물가 변동 시 도급금액을 조정할 수 있다.", 1], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 도급인이 부담한다.", 1]];
+  const v2 = [["제○조 공사비", "물가 변동 시 도급금액을 조정할 수 있다.", "비용 증가 가능"], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 도급인이 부담한다.", "부담 주체 이전"]];
   const drag = (ev) => {
     const r = ev.currentTarget.getBoundingClientRect();
     setSplit(Math.round(Math.max(0, Math.min(100, (ev.clientX - r.left) / r.width * 100))));
   };
   const col = (rows, tag) => /*#__PURE__*/
   React.createElement("div", { className: "axdemo__doc font-ko" }, /*#__PURE__*/React.createElement("span", { className: "axdemo__ver font-sans" }, tag),
-  rows.map((r) => /*#__PURE__*/React.createElement("p", { key: r[0], className: r[2] ? "chg" : "" }, /*#__PURE__*/React.createElement("b", null, r[0]), r[1])));
+  rows.map((r) => /*#__PURE__*/React.createElement("p", { key: r[0], className: r[2] ? "chg" : "" }, /*#__PURE__*/React.createElement("b", null, r[0], r[2] && /*#__PURE__*/React.createElement("i", { className: "font-sans" }, r[2])), r[1])));
 
   return (/*#__PURE__*/
     React.createElement("div", { className: "axdemo axdemo--c" }, /*#__PURE__*/
@@ -1047,6 +1088,7 @@ function AxDemo({ id }) {
     React.createElement("div", { className: "axdemo__over" }, col(v2, "변경 후")), /*#__PURE__*/
     React.createElement("i", { className: "axdemo__handle", "aria-hidden": "true" })
     ), /*#__PURE__*/
+    React.createElement("p", { className: "axdemo__sum font-ko", "aria-live": "polite" }, split < 50 ? /*#__PURE__*/React.createElement("span", null, "\uBC14\uB010 \uC870\uD56D ", /*#__PURE__*/React.createElement("b", null, "2\uACF3"), " \u2014 \uACF5\uC0AC\uBE44 \uC870\uC815 \xB7 \uC124\uACC4 \uBCC0\uACBD \uBE44\uC6A9 \uBD80\uB2F4") : /*#__PURE__*/React.createElement("span", null, "\uC190\uC7A1\uC774\uB97C \uC67C\uCABD\uC73C\uB85C \uB04C\uBA74 \uBC14\uB010 \uACC4\uC57D\uC11C\uAC00 \uB36E\uC785\uB2C8\uB2E4")), /*#__PURE__*/
     React.createElement("label", { className: "axdemo__range font-sans" }, "\u2190 \uBCC0\uACBD \uC804 \xB7 \uBCC0\uACBD \uD6C4 \u2192", /*#__PURE__*/
     React.createElement("input", { type: "range", min: "0", max: "100", value: split, onChange: (ev) => setSplit(+ev.target.value), "aria-label": "\uBCC0\uACBD \uC804\uD6C4 \uBE44\uAD50 \uC704\uCE58" })
     )
@@ -1059,28 +1101,19 @@ function AxDesk() {
   const cards = React.useRef({});
   const panel = React.useRef(null);
   const closeBtn = React.useRef(null);
-  const reduce = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const closing = React.useRef(false);
   /* FLIP — 누른 카드의 자리에서 무대가 펼쳐진다 */
-  const flip = (id, reverse) => {
-    const card = cards.current[id],el = panel.current;
-    if (!card || !el || !el.animate || reduce()) {if (el) el.style.opacity = "1";return Promise.resolve();}
-    const a = card.getBoundingClientRect(),b = el.getBoundingClientRect();
-    const from = `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`;
-    const kf = [{ transform: from, opacity: .6, borderRadius: "2px" }, { transform: "none", opacity: 1 }];
-    return el.animate(reverse ? kf.slice().reverse() : kf, { duration: reverse ? 380 : 620, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }).finished.catch(() => {});
-  };
   React.useEffect(() => {
     if (!open) return;
-    document.documentElement.classList.add("axs-lock");
-    flip(open, false).then(() => closeBtn.current && closeBtn.current.focus());
-    const onKey = (ev) => {if (ev.key === "Escape") close();};
-    window.addEventListener("keydown", onKey);
-    return () => {window.removeEventListener("keydown", onKey);document.documentElement.classList.remove("axs-lock");};
+    closing.current = false;
+    flipFrom(cards.current[open], panel.current, false).then(() => closeBtn.current && closeBtn.current.focus({ preventScroll: true }));
   }, [open]);
   const close = () => {
-    const id = open;
-    flip(id, true).then(() => {setOpen(null);const c = cards.current[id];c && c.focus && c.focus();});
+    if (closing.current) return;
+    closing.current = true;
+    flipFrom(cards.current[open], panel.current, true).then(() => setOpen(null));
   };
+  useStageDialog(!!open, panel, close);
   const cur = AX_CASES.find((c) => c.id === open);
   return (/*#__PURE__*/
     React.createElement("div", { className: "axd reveal", id: "ax-desk", "aria-labelledby": "ax-desk-title" }, /*#__PURE__*/
@@ -1125,42 +1158,249 @@ function AxDesk() {
     })
     ), /*#__PURE__*/
     React.createElement("p", { className: "axd__note font-ko" }, "\uC758\uB8B0\uC778\xB7\uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."),
-    cur && /*#__PURE__*/
-    React.createElement("div", { className: "axs", role: "dialog", "aria-modal": "true", "aria-labelledby": "axs-title", onClick: close }, /*#__PURE__*/
-    React.createElement("div", { className: "axs__panel", ref: panel, onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "axs__close font-sans", ref: closeBtn, onClick: close, "aria-label": "\uB2EB\uAE30" }, "\uB2EB\uAE30 \u2715"), /*#__PURE__*/
-    React.createElement("p", { className: "axs__eyebrow font-sans" }, "AX ", cur.no, " \xB7 ", cur.en), /*#__PURE__*/
-    React.createElement("h3", { id: "axs-title", className: "font-ko" }, cur.title), /*#__PURE__*/
-    React.createElement("div", { className: "axs__body" }, /*#__PURE__*/
-    React.createElement("div", { className: "axs__demo" }, /*#__PURE__*/
-    React.createElement(AxDemo, { id: cur.id }), /*#__PURE__*/
-    React.createElement("p", { className: "axs__fic font-ko" }, "\uC704 \uD654\uBA74\uC740 \uAD6C\uC870\uB97C \uBCF4\uC5EC \uC8FC\uB294 ", /*#__PURE__*/React.createElement("b", null, "\uAC00\uC0C1 \uC2DC\uC5F0"), "\uC785\uB2C8\uB2E4. \uC2E4\uC81C \uC0AC\uC5C5\uC9C0\xB7\uC758\uB8B0\uC778\xB7\uACC4\uC57D \uC790\uB8CC\uAC00 \uC544\uB2D9\uB2C8\uB2E4.")
-    ), /*#__PURE__*/
-    React.createElement("dl", { className: "axs__facts font-ko" }, /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBB38\uC81C"), /*#__PURE__*/React.createElement("dd", null, cur.problem)), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uB0B4 \uC5ED\uD560"), /*#__PURE__*/React.createElement("dd", null, "\uBB38\uC81C \uC815\uC758 \xB7 \uAC80\uD1A0 \uADDC\uCE59 \uC124\uACC4 \xB7 \uC2DC\uC2A4\uD15C \uAD6C\uCD95")), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBC29\uC2DD"), /*#__PURE__*/React.createElement("dd", null, cur.solve)), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD6A8\uACFC"), /*#__PURE__*/React.createElement("dd", null, cur.effect)), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC0C1\uD0DC"), /*#__PURE__*/React.createElement("dd", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uC2E4\uC81C \uD654\uBA74\uACFC \uC790\uB8CC\uB294 \uBE44\uACF5\uAC1C"))
+    cur && ReactDOM.createPortal(/*#__PURE__*/
+      React.createElement("div", { className: "axs", role: "dialog", "aria-modal": "true", "aria-labelledby": "axs-title", onClick: close }, /*#__PURE__*/
+      React.createElement("div", { className: "axs__panel", ref: panel, onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
+      React.createElement("button", { type: "button", className: "axs__close font-sans", ref: closeBtn, onClick: close, "aria-label": "\uB2EB\uAE30" }, "\uB2EB\uAE30 \u2715"), /*#__PURE__*/
+      React.createElement("p", { className: "axs__eyebrow font-sans" }, "AX ", cur.no, " \xB7 ", cur.en), /*#__PURE__*/
+      React.createElement("h3", { id: "axs-title", className: "font-ko" }, cur.title), /*#__PURE__*/
+      React.createElement("div", { className: "axs__body" }, /*#__PURE__*/
+      React.createElement("div", { className: "axs__demo" }, /*#__PURE__*/
+      React.createElement(AxDemo, { id: cur.id }), /*#__PURE__*/
+      React.createElement("p", { className: "axs__fic font-ko" }, "\uC704 \uD654\uBA74\uC740 \uAD6C\uC870\uB97C \uBCF4\uC5EC \uC8FC\uB294 ", /*#__PURE__*/React.createElement("b", null, "\uAC00\uC0C1 \uC2DC\uC5F0"), "\uC785\uB2C8\uB2E4. \uC2E4\uC81C \uC0AC\uC5C5\uC9C0\xB7\uC758\uB8B0\uC778\xB7\uACC4\uC57D \uC790\uB8CC\uAC00 \uC544\uB2D9\uB2C8\uB2E4.")
+      ), /*#__PURE__*/
+      React.createElement("dl", { className: "axs__facts font-ko" }, /*#__PURE__*/
+      React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBB38\uC81C"), /*#__PURE__*/React.createElement("dd", null, cur.problem)), /*#__PURE__*/
+      React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uB0B4 \uC5ED\uD560"), /*#__PURE__*/React.createElement("dd", null, "\uBB38\uC81C \uC815\uC758 \xB7 \uAC80\uD1A0 \uADDC\uCE59 \uC124\uACC4 \xB7 \uC2DC\uC2A4\uD15C \uAD6C\uCD95")), /*#__PURE__*/
+      React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBC29\uC2DD"), /*#__PURE__*/React.createElement("dd", null, cur.solve)), /*#__PURE__*/
+      React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD6A8\uACFC"), /*#__PURE__*/React.createElement("dd", null, cur.effect)), /*#__PURE__*/
+      React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC0C1\uD0DC"), /*#__PURE__*/React.createElement("dd", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uC2E4\uC81C \uD654\uBA74\uACFC \uC790\uB8CC\uB294 \uBE44\uACF5\uAC1C"))
+      )
+      )
+      )
+      ),
+      document.body
     )
-    )
-    )
-    )
-
     ));
 
+}
+
+/* 무대(대화상자) 공통 — 스크롤 잠금 · 뒤 화면 inert · 초점 가두기 · Esc 닫기 · 닫으면 연 자리로 초점 복귀.
+ * 무대는 document.body 에 붙으므로(portal) #root 전체를 inert 로 만들어도 무대는 살아 있다. */
+function useStageDialog(open, panelRef, onClose) {
+  const closeRef = React.useRef(onClose);
+  closeRef.current = onClose;
+  React.useEffect(() => {
+    if (!open) return;
+    const opener = document.activeElement;
+    const root = document.getElementById("root");
+    const html = document.documentElement;
+    html.classList.add("axs-lock");
+    if (root) root.inert = true;
+    const onKey = (ev) => {
+      if (ev.key === "Escape") {ev.preventDefault();closeRef.current();return;}
+      const box = panelRef.current;
+      if (ev.key !== "Tab" || !box) return;
+      const f = Array.prototype.filter.call(
+        box.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])'),
+        (n) => n.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0],last = f[f.length - 1],cur = document.activeElement;
+      if (!box.contains(cur)) {ev.preventDefault();first.focus();} else
+      if (ev.shiftKey && cur === first) {ev.preventDefault();last.focus();} else
+      if (!ev.shiftKey && cur === last) {ev.preventDefault();first.focus();}
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      html.classList.remove("axs-lock");
+      if (root) root.inert = false;
+      if (opener && opener.focus && document.contains(opener)) opener.focus({ preventScroll: true });
+    };
+  }, [open]);
+}
+const prefersCalm = () => !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+/* FLIP — a(원래 자리)에서 b(무대)로. reverse 면 무대가 원래 자리로 돌아간다 */
+function flipFrom(card, el, reverse) {
+  if (!card || !el || !el.animate || prefersCalm()) {if (el) el.style.opacity = "1";return Promise.resolve();}
+  const a = card.getBoundingClientRect(),b = el.getBoundingClientRect();
+  const from = `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`;
+  const kf = [{ transform: from, opacity: .7 }, { transform: "none", opacity: 1 }];
+  return el.animate(reverse ? kf.slice().reverse() : kf, { duration: reverse ? 420 : 680, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }).finished.catch(() => {});
+}
+
+/* ============================================================ 제품 극장 — 카드가 무대로 펼쳐지고, 실제 화면이 층층이 열린다
+ * 화면은 2026. 11. 4. 각 서비스의 공개 화면을 그대로 캡처한 것(images/product). 기능 설명은 작업 카드에 적힌 사실만. */
+const THEATERS = {
+  "09": {
+    name: "ZipCatch", url: "https://zipcatch.vercel.app", open: "집캐치 열기",
+    cap: "2026. 11. 4. 실제 서비스 화면 캡처 — 화면 속 공고와 숫자는 캡처 시점의 공개 데이터입니다.",
+    ruleT: "추천 원칙",
+    rule: "자격 · 예산 · 선호 적합도 · 마감 긴급도를 한 점수로 섞지 않고 따로 보여 줍니다. 확인되지 않은 자격은 불충족으로 단정하지 않고, 당첨 확률은 계산하지 않습니다.",
+    layers: [
+    { img: "zc-home", k: "첫 화면", t: "지금 열려 있는 공고를 지도와 숫자로", d: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 모아, 지역별로 열려 있는 공고 수와 가장 가까운 마감을 먼저 보여 줍니다." },
+    { img: "zc-analyze", k: "조건 입력", t: "지역 · 주거비 · 가구 조건을 차례로", d: "가입 없이 조건을 단계별로 고르면, 그 조건으로 지금 지원할 수 있는 후보를 추립니다." },
+    { img: "zc-map", k: "지도 탐색", t: "보이는 범위의 공고를 바로 옆 목록으로", d: "범위(서울 · 수도권 · 전국)를 고르면 지도에 공고가 표시되고, 보이는 범위의 공고가 목록으로 정리됩니다." },
+    { img: "zc-notices", k: "후보 정리", t: "마감이 가까운 순으로, 조건별로 걸러서", d: "지역 · 유형 필터로 후보를 좁히고, 관심공고 저장과 마감 알림으로 이어집니다." }]
+
+  },
+  "17": {
+    name: "Atelier AX", url: "https://atelier-ax.vercel.app/", open: "관제 화면 열기",
+    cap: "2026. 11. 4. 공개 시연 모드 화면 캡처 — 화면 속 직원과 업무는 시연용 가상 데이터입니다.",
+    ruleT: "운영 원칙",
+    rule: "에이전트가 한 일은 사람이 검증 · 승인해야 끝납니다. 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않습니다.",
+    layers: [
+    { img: "ax-live", k: "라이브", t: "AI 직원이 일하는 모습을 사무실처럼", d: "출근 · 작업 · 대기 상태와 진행 단계를 한 화면에서 봅니다. 공개 시연 모드는 서버 없이 이 브라우저 안에서만 돕니다." },
+    { img: "ax-missions", k: "업무", t: "지시한 업무가 단계별로 넘어가는 과정", d: "업무를 지시하면 담당 직원 사이로 단계가 넘어가고, 도구 호출(웹 검색 · 파일 수정 · 코드 실행)과 인계가 실행 기록으로 남습니다." },
+    { img: "ax-approvals", k: "승인", t: "사람이 승인해야 끝나는 지점", d: "정책에 걸린 작업과 결재가 필요한 산출물은 승인 센터에서 사람이 검증 · 승인합니다." },
+    { img: "ax-performance", k: "성과", t: "처리 · 승인 · 반려를 직원별로", d: "종료된 업무와 최종 승인 · 반려를 직원별로 집계합니다." }]
+
+  }
+};
+
+function TheaterShot({ name, alt }) {
+  const set = (ext) => `images/product/${name}-720.${ext} 720w, images/product/${name}-1280.${ext} 1280w`;
+  return (/*#__PURE__*/
+    React.createElement("picture", null, /*#__PURE__*/
+    React.createElement("source", { type: "image/avif", srcSet: set("avif"), sizes: "(max-width: 860px) 92vw, 62vw" }), /*#__PURE__*/
+    React.createElement("source", { type: "image/webp", srcSet: set("webp"), sizes: "(max-width: 860px) 92vw, 62vw" }), /*#__PURE__*/
+    React.createElement("img", { src: `images/product/${name}-1280.webp`, alt: alt, width: "1280", height: "800", decoding: "async", draggable: "false" })
+    ));
+
+}
+
+/* 펼침 --f(0 접힘 → 1 층층이 펼침)와 집중 --q(0 전체 → 1 한 층 정면)를 rAF 로 직접 쓴다 — 드래그는 곧바로 반영 */
+function ProductTheater({ ed, card, onClose }) {
+  const T = THEATERS[ed.n];
+  const surf = React.useRef(null),stage = React.useRef(null),range = React.useRef(null),closeBtn = React.useRef(null);
+  const v = React.useRef({ f: 0, q: 0 }),anim = React.useRef({});
+  const [sel, setSel] = React.useState(-1);
+  const busy = React.useRef(false);
+  const put = (k, x) => {
+    v.current[k] = x;
+    if (stage.current) stage.current.style.setProperty("--" + k, x.toFixed(3));
+    if (k === "f" && range.current) range.current.value = String(Math.round(x * 100));
+  };
+  const tween = (k, to, ms) => new Promise((done) => {
+    cancelAnimationFrame(anim.current[k]);
+    if (prefersCalm()) {put(k, to);done();return;}
+    const a = v.current[k],t0 = performance.now();
+    const step = (t) => {
+      const u = Math.min(1, (t - t0) / ms),e = 1 - Math.pow(1 - u, 3);
+      put(k, a + (to - a) * e);
+      if (u < 1) anim.current[k] = requestAnimationFrame(step);else done();
+    };
+    anim.current[k] = requestAnimationFrame(step);
+  });
+  React.useEffect(() => {
+    if (card) card.classList.add("is-staged");
+    put("f", 0);put("q", 0);
+    flipFrom(card, surf.current, false).then(() => {
+      if (closeBtn.current) closeBtn.current.focus({ preventScroll: true });
+      return tween("f", 1, 1200);
+    });
+    return () => {Object.values(anim.current).forEach(cancelAnimationFrame);if (card) card.classList.remove("is-staged");};
+  }, []);
+  const pick = async (i) => {
+    if (busy.current) return;
+    busy.current = true;
+    if (v.current.q > 0) await tween("q", 0, 380);
+    setSel(i);
+    if (i >= 0) {if (v.current.f < 1) await tween("f", 1, 420);await tween("q", 1, 620);}
+    busy.current = false;
+  };
+  const close = async () => {
+    if (busy.current === "closing") return;
+    busy.current = "closing";
+    if (v.current.q > 0) await tween("q", 0, 260);
+    await tween("f", 0, 420);
+    await flipFrom(card, surf.current, true);
+    onClose();
+  };
+  useStageDialog(true, surf, close);
+  /* 직접 조작 — 무대를 옆으로 끌면 접고 편다. 끌지 않고 놓으면 그 층을 정면으로 */
+  const drag = React.useRef(null);
+  const down = (ev) => {
+    if (ev.button > 0) return;
+    drag.current = { x: ev.clientX, f: v.current.f, moved: false, w: ev.currentTarget.clientWidth };
+    ev.currentTarget.setPointerCapture(ev.pointerId);
+  };
+  const move = (ev) => {
+    const d = drag.current;
+    if (!d) return;
+    if (Math.abs(ev.clientX - d.x) > 6) {
+      if (!d.moved) {d.moved = true;cancelAnimationFrame(anim.current.f);if (v.current.q > 0) pick(-1);}
+      put("f", Math.max(0, Math.min(1, d.f + (ev.clientX - d.x) / (d.w * 0.55))));
+    }
+  };
+  const up = (ev) => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d || d.moved) return;
+    const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+    const layer = hit && hit.closest && hit.closest("[data-layer]");
+    if (layer) {const i = +layer.getAttribute("data-layer");pick(sel === i ? -1 : i);}
+  };
+  const cur = sel >= 0 ? T.layers[sel] : null;
+  const order = T.layers.map((l, i) => i).reverse(); /* 접혔을 때 첫 화면이 맨 위에 오도록 뒤에서부터 그린다 */
+  return ReactDOM.createPortal(/*#__PURE__*/
+    React.createElement("div", { className: "pth", role: "dialog", "aria-modal": "true", "aria-labelledby": "pth-title", onClick: close }, /*#__PURE__*/
+    React.createElement("div", { className: "pth__surface", ref: surf, onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
+    React.createElement("div", { className: "pth__in" }, /*#__PURE__*/
+    React.createElement("div", { className: "pth__stage", ref: stage, onPointerDown: down, onPointerMove: move, onPointerUp: up, onPointerCancel: () => {drag.current = null;} }, /*#__PURE__*/
+    React.createElement("div", { className: "pth__stack" + (sel >= 0 ? " has-sel" : "") },
+    order.map((i) => {
+      const L = T.layers[i];
+      return (/*#__PURE__*/
+        React.createElement("div", { key: L.img, "data-layer": i, className: "pth__layer" + (i === sel ? " is-sel" : ""), style: { "--i": i } }, /*#__PURE__*/
+        React.createElement(TheaterShot, { name: L.img, alt: `${T.name} ${L.k} 화면 — ${L.t}` }), /*#__PURE__*/
+        React.createElement("span", { className: "pth__tag font-sans" }, /*#__PURE__*/React.createElement("b", null, String(i + 1).padStart(2, "0")), L.k)
+        ));
+
+    })
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "pth__hint font-sans", "aria-hidden": "true" }, "\u2190 \uB04C\uC5B4\uC11C \uC811\uACE0 \uD3B4\uAE30 \xB7 \uD654\uBA74\uC744 \uB204\uB974\uBA74 \uC815\uBA74\uC73C\uB85C \u2192")
+    ), /*#__PURE__*/
+
+    React.createElement("aside", { className: "pth__side" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "pth__close font-sans", ref: closeBtn, onClick: close }, "\uB2EB\uAE30 \u2715"), /*#__PURE__*/
+    React.createElement("p", { className: "pth__eyebrow font-sans" }, "Edition ", ed.no, " \xB7 ", T.name), /*#__PURE__*/
+    React.createElement("h3", { id: "pth-title", className: "font-ko" }, ed.title.split("\n")[0]), /*#__PURE__*/
+    React.createElement("ol", { className: "pth__list" },
+    T.layers.map((L, i) => /*#__PURE__*/
+    React.createElement("li", { key: L.img }, /*#__PURE__*/
+    React.createElement("button", { type: "button", "aria-pressed": i === sel, onClick: () => pick(sel === i ? -1 : i) }, /*#__PURE__*/
+    React.createElement("b", { className: "font-serif" }, String(i + 1).padStart(2, "0")), /*#__PURE__*/
+    React.createElement("span", { className: "font-ko" }, /*#__PURE__*/React.createElement("em", null, L.k), L.t)
+    )
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "pth__detail font-ko", "aria-live": "polite" },
+    cur ? /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, cur.k), cur.d) : /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, T.ruleT), T.rule)
+    ), /*#__PURE__*/
+    React.createElement("label", { className: "pth__fold font-sans" }, "\uC811\uAE30 \u2194 \uD3BC\uCE58\uAE30", /*#__PURE__*/
+    React.createElement("input", { ref: range, type: "range", min: "0", max: "100", defaultValue: "0", "aria-label": "\uD654\uBA74 \uCE35 \uD3BC\uCE58\uAE30",
+      onChange: (ev) => {cancelAnimationFrame(anim.current.f);put("f", +ev.target.value / 100);} })
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "pth__foot" }, /*#__PURE__*/
+    React.createElement("a", { className: "btn", href: T.url, target: "_blank", rel: "noreferrer" }, T.open, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 15 })), /*#__PURE__*/
+    React.createElement("p", { className: "pth__cap font-ko" }, T.cap)
+    )
+    )
+    )
+    )
+    ),
+    document.body
+  );
 }
 
 function Artifacts() {
   const ref = useReveal();
   const [playing, setPlaying] = React.useState(null);
-  React.useEffect(() => {
-    if (!playing) return;
-    const onKey = (ev) => {if (ev.key === "Escape") setPlaying(null);};
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {window.removeEventListener("keydown", onKey);document.body.style.overflow = "";};
-  }, [playing]);
+  const [staged, setStaged] = React.useState(null); /* { e, card } — 제품 극장 */
+  const vframe = React.useRef(null);
+  useStageDialog(!!playing, vframe, () => setPlaying(null));
   return (/*#__PURE__*/
     React.createElement(React.Fragment, null, /*#__PURE__*/
     React.createElement("section", { id: "artifacts", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" } }, /*#__PURE__*/
@@ -1173,9 +1413,10 @@ function Artifacts() {
     React.createElement(AxDesk, null), /*#__PURE__*/
     React.createElement("div", { className: "works-grid" },
     EDITIONS_SHOWN.filter((e) => e.core).map((e, i) => /*#__PURE__*/
-    React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying })
+    React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying, onStage: (ed, card) => setStaged({ e: ed, card }) })
     )
-    ), /*#__PURE__*/
+    ),
+    staged && /*#__PURE__*/React.createElement(ProductTheater, { ed: staged.e, card: staged.card, onClose: () => setStaged(null) }), /*#__PURE__*/
     React.createElement("details", { className: "fold works-more reveal" }, /*#__PURE__*/
     React.createElement("summary", null, /*#__PURE__*/
     React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
@@ -1194,23 +1435,23 @@ function Artifacts() {
     )
     ),
 
-    playing && /*#__PURE__*/
-    React.createElement("div", { className: "vlightbox", onClick: () => setPlaying(null), role: "dialog", "aria-modal": "true" }, /*#__PURE__*/
-    React.createElement("div", { className: "vlightbox__frame", onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "vlightbox__close", onClick: () => setPlaying(null), "aria-label": "\uB2EB\uAE30" }, "\u2715"), /*#__PURE__*/
-    React.createElement("div", { className: "vlightbox__meta" }, /*#__PURE__*/
-    React.createElement("span", { className: "font-play" }, "Edition ", playing.no), /*#__PURE__*/
-    React.createElement("h4", { className: "font-ko" }, playing.title.replace("\n", " · "))
-    ), /*#__PURE__*/
-    React.createElement("video", { className: "vlightbox__video", src: playing.video, controls: true, autoPlay: true, playsInline: true, preload: "metadata", controlsList: "nodownload" }, "\uBE0C\uB77C\uC6B0\uC800\uAC00 \uC601\uC0C1 \uC7AC\uC0DD\uC744 \uC9C0\uC6D0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
+    playing && ReactDOM.createPortal(/*#__PURE__*/
+      React.createElement("div", { className: "vlightbox", onClick: () => setPlaying(null), role: "dialog", "aria-modal": "true", "aria-label": playing.title.replace("\n", " · ") }, /*#__PURE__*/
+      React.createElement("div", { className: "vlightbox__frame", ref: vframe, onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
+      React.createElement("button", { type: "button", className: "vlightbox__close", onClick: () => setPlaying(null), "aria-label": "\uB2EB\uAE30" }, "\u2715"), /*#__PURE__*/
+      React.createElement("div", { className: "vlightbox__meta" }, /*#__PURE__*/
+      React.createElement("span", { className: "font-play" }, "Edition ", playing.no), /*#__PURE__*/
+      React.createElement("h4", { className: "font-ko" }, playing.title.replace("\n", " · "))
+      ), /*#__PURE__*/
+      React.createElement("video", { className: "vlightbox__video", src: playing.video, controls: true, autoPlay: true, playsInline: true, preload: "metadata", controlsList: "nodownload" }, "\uBE0C\uB77C\uC6B0\uC800\uAC00 \uC601\uC0C1 \uC7AC\uC0DD\uC744 \uC9C0\uC6D0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
 
-    ),
-    playing.url ? /*#__PURE__*/
-    React.createElement("a", { className: "vlightbox__fallback font-sans", href: playing.url, target: "_blank", rel: "noreferrer" }, "\uC601\uC0C1\uC774 \uBCF4\uC774\uC9C0 \uC54A\uC73C\uBA74 \uC6D0\uBCF8 \uB9C1\uD06C\uB85C \uBCF4\uAE30 \u2192") :
-    null
-    )
-    )
-
+      ),
+      playing.url ? /*#__PURE__*/
+      React.createElement("a", { className: "vlightbox__fallback font-sans", href: playing.url, target: "_blank", rel: "noreferrer" }, "\uC601\uC0C1\uC774 \uBCF4\uC774\uC9C0 \uC54A\uC73C\uBA74 \uC6D0\uBCF8 \uB9C1\uD06C\uB85C \uBCF4\uAE30 \u2192") :
+      null
+      )
+      ),
+      document.body)
     ));
 
 }
@@ -1330,30 +1571,41 @@ const STORY_SHOTS = [
   alt: "김유빈 — 2026 청년의날 기념행사에서 대통령과 함께한 셀프 촬영", chip: "Youth Day 2026", cap: "청와대 청년의날 — 대통령과 함께" }];
 
 
+/* 소개 — 한 편의 다큐멘터리처럼. 진행도 --p(0~1) 하나로 세 장면이 이어진다.
+ * 다음 사진은 액자 안에서 옆으로 열리며(가면을 transform 으로 — clip-path 없음) 들어오고,
+ * 앞 사진은 카메라가 지나가듯 커지며 반대쪽으로 밀려난다. 글은 같은 진행도로 함께 움직인다.
+ * 넓은 화면: 섹션이 고정된 동안 진행 · 좁은 화면: 액자가 화면을 지나가는 동안 진행 */
 function About() {
   const ref = React.useRef(null);
-  const barRef = React.useRef(null);
-  /* 연속값(진행도)은 DOM 에 직접 쓰고, React 는 사진·문장이 실제로 바뀌는 순간에만 다시 그린다.
-     예전엔 스크롤 매 프레임 setState → 섹션 전체 재렌더 → 저사양 폰에서 70ms 대 끊김. */
-  const [stage, setStage] = React.useState({ shot: 0, lines: 0, body: false });
+  const frameRef = React.useRef(null);
+  const mediaRef = React.useRef(null);
+  const [stage, setStage] = React.useState({ lines: 0, body: false });
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const wide = window.matchMedia("(min-width: 901px)");
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
     const on = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        const r = el.getBoundingClientRect();
-        const span = r.height - window.innerHeight;
-        const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
-        el.style.setProperty("--p", p.toFixed(3));
-        if (barRef.current) barRef.current.style.transform = "scaleX(" + p.toFixed(3) + ")";
-        const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
+        let p = 1;
+        if (!calm.matches) {
+          const vh = window.innerHeight;
+          if (wide.matches) {
+            const r = el.getBoundingClientRect(),span = r.height - vh;
+            p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+          } else if (frameRef.current) {
+            const f = frameRef.current.getBoundingClientRect();
+            p = Math.min(1, Math.max(0, (vh * 0.9 - f.top) / (vh * 0.9)));
+          }
+        }
+        if (mediaRef.current) mediaRef.current.style.setProperty("--p", p.toFixed(4)); /* 사진 쪽에만 — 섹션 전체 재계산을 피한다 */
         let lines = 0;
-        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.06 + i * 0.16) lines = i + 1;
-        const body = p >= 0.5;
-        setStage((s) => s.shot === shot && s.lines === lines && s.body === body ? s : { shot, lines, body });
+        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.04 + i * 0.12) lines = i + 1;
+        const body = p >= 0.42;
+        setStage((st) => st.lines === lines && st.body === body ? st : { lines, body });
       });
     };
     on();
@@ -1361,9 +1613,9 @@ function About() {
     window.addEventListener("resize", on, { passive: true });
     return () => {window.removeEventListener("scroll", on);window.removeEventListener("resize", on);cancelAnimationFrame(raf);};
   }, []);
-  const { shot } = stage;
   const lineOn = (i) => i < stage.lines;
-  const bodyOn = stage.body;
+  /* 장면 i 의 들어옴(--in)·나감(--out) — 앞 장면의 나감이 곧 다음 장면의 들어옴 */
+  const io = (i) => ({ "--in": i === 0 ? "1" : `var(--u${i})`, "--out": i === STORY_SHOTS.length - 1 ? "0" : `var(--u${i + 1})` });
 
   return (/*#__PURE__*/
     React.createElement("section", { id: "about", ref: ref, className: "story" }, /*#__PURE__*/
@@ -1374,7 +1626,7 @@ function About() {
     React.createElement("h3", { className: "story__lead font-myeongjo" },
     STORY_LINES.map((l, i) => /*#__PURE__*/React.createElement("span", { key: l, className: "story__line" + (lineOn(i) ? " on" : "") }, l))
     ), /*#__PURE__*/
-    React.createElement("div", { className: "story__body" + (bodyOn ? " on" : "") }, /*#__PURE__*/
+    React.createElement("div", { className: "story__body" + (stage.body ? " on" : "") }, /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, "\uD769\uC5B4\uC9C4 \uC2DC\uC7A5\xB7\uC5C5\uBB34 \uB370\uC774\uD130\uB97C \uBAA8\uC544 \uBB34\uC5C7\uC744 \uBA3C\uC800 \uD560\uC9C0 \uC815\uD558\uACE0, \uADF8 \uACB0\uC815\uC744 \uC790\uB3D9\uD654\uC640 \uCF58\uD150\uCE20\uB85C \uC2E4\uD589\uC5D0 \uC62E\uAE41\uB2C8\uB2E4. \uBC95\uB960\uACFC \uB370\uC774\uD130\uB97C \uB300\uC911\uC774 \uC774\uD574\uD558\uB294 \uC5B8\uC5B4\uB85C \uC62E\uAE30\uB294 \uC77C\uB3C4 \uAC19\uC740 \uC790\uB9AC\uC5D0\uC11C \uD569\uB2C8\uB2E4."
 
 
@@ -1388,22 +1640,27 @@ function About() {
     )
     ), /*#__PURE__*/
 
-    React.createElement("div", { className: "story__media" }, /*#__PURE__*/
-    React.createElement("div", { className: "story__frame" },
+    React.createElement("div", { className: "story__media", ref: mediaRef }, /*#__PURE__*/
+    React.createElement("div", { className: "story__frame", ref: frameRef },
     STORY_SHOTS.map((m, i) => /*#__PURE__*/
-    React.createElement(Pic, { key: m.name, name: m.name, fallback: m.src, className: "story__img" + (i === shot ? " on" : ""),
+    React.createElement("div", { key: m.name, className: "story__shot", style: io(i) }, /*#__PURE__*/
+    React.createElement("div", { className: "story__shot-in" }, /*#__PURE__*/
+    React.createElement(Pic, { name: m.name, fallback: m.src, className: "story__img",
       sizes: "(max-width: 900px) 88vw, 34vw", alt: m.alt, loading: "lazy", style: m.pos ? { objectPosition: m.pos } : undefined })
     )
+    )
+    ), /*#__PURE__*/
+    React.createElement("span", { className: "story__count font-sans", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("b", null, "01"), /*#__PURE__*/React.createElement("b", null, "02"), /*#__PURE__*/React.createElement("b", null, "03"), /*#__PURE__*/React.createElement("i", null, "/ 03"))
     ), /*#__PURE__*/
     React.createElement("div", { className: "story__caps" },
     STORY_SHOTS.map((m, i) => /*#__PURE__*/
-    React.createElement("p", { key: m.chip, className: "story__cap" + (i === shot ? " on" : "") }, /*#__PURE__*/
+    React.createElement("p", { key: m.chip, className: "story__cap", style: io(i) }, /*#__PURE__*/
     React.createElement("span", { className: "font-sans" }, String(i + 1).padStart(2, "0"), " \xB7 ", m.chip), /*#__PURE__*/
     React.createElement("em", { className: "font-ko" }, m.cap)
     )
     )
     ), /*#__PURE__*/
-    React.createElement("div", { className: "story__prog", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", { ref: barRef }))
+    React.createElement("div", { className: "story__prog", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", null))
     )
     )
     )

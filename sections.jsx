@@ -80,38 +80,46 @@ function Nav() {
 }
 
 /* ============================================================ HERO */
+/* 히어로 — 고정된 한 화면 안에서 카메라가 도시로 들어간다(진행도 --cp 는 cine.js).
+ *  0–15%  정지 화면 · 이름이 원근을 두고 차례로 선다
+ * 15–50%  사진이 앞으로 오고, YUBIN / KIM 은 서로 다른 깊이로 갈라진다
+ * 50–85%  카메라가 더 밀고 들어가며 이름이 카메라를 지나쳐 사라진다
+ * 85–100% 아이보리 막이 올라와 소개 장면으로 이어진다 */
 function Hero() {
   const ref = useReveal();
   return (
-    <section id="manifesto" ref={ref} data-cine="exit" style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
+    <section id="manifesto" ref={ref} className="hero-scene" data-cine="pin" data-cine-rest="0">
+      <div className="hero-scene__sticky" style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
       <div className="hero-photo" aria-hidden="true">
-        <Pic name="hero-gangnam" fallback="images/hero-gangnam-1000.jpg?v=1" sizes="100vw" fetchpriority="high" />
+        {/* 사진은 높이 기준으로 덮인다(원본 비율 2.47:1) — 폭 100vw 로 고르면 폰·태블릿에서 절반 해상도가 와 흐려진다 */}
+        <Pic name="hero-gangnam" fallback="images/hero-gangnam-1000.jpg?v=1" sizes="(max-width: 700px) 130vh, (max-width: 1100px) 165vh, 100vw" fetchpriority="high" />
       </div>
       <div className="hero-photo__scrim" aria-hidden="true" />
 
-      <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+      <div className="wrap reveal hero-copy" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
         <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 18px" }}><i /></div>
         <p className="font-sans hero-kicker">Seoul · Portfolio 2026</p>
         <p className="eyebrow hero-eyebrow">AI Strategy &amp; Consulting</p>
-        <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
+        <h1 className="font-serif hero-name" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
           <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅 </span>
-          <span aria-hidden="true">
-            {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
-            <br />
-            {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
+          <span aria-hidden="true" className="hero-name__rows">
+            <span className="hero-row hero-row--1">{"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}</span>
+            <span className="hero-row hero-row--2">{"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}</span>
           </span>
         </h1>
-        <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"}
-        </p>
-        <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
-          데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.
-        </p>
-        <p className="font-ko hero-proof">
-          AI로 풀 문제를 정의하고, 자동화 시스템을 직접 구현해 실제 업무에 적용합니다.
-        </p>
+        <div className="hero-sub">
+          <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
+            {"AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"}
+          </p>
+          <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
+            데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.
+          </p>
+          <p className="font-ko hero-proof">
+            AI로 풀 문제를 정의하고, 자동화 시스템을 직접 구현해 실제 업무에 적용합니다.
+          </p>
+        </div>
 
-        <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+        <div className="hero-cta" style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#artifacts" className="btn hero-main">대표 프로젝트 <ArrowDown size={15} /></a>
           <a href="#composite" className="btn btn--ghost">핵심 역량</a>
           <a href="career.html" className="btn btn--ghost">경력 상세 <ArrowUpRight size={15} /></a>
@@ -122,6 +130,8 @@ function Hero() {
         <span className="font-sans" style={{ fontSize: ".64rem", letterSpacing: ".3em", fontWeight: 600 }}>SCROLL</span>
         <i />
       </a>
+      <div className="hero-veil" aria-hidden="true" />
+      </div>
     </section>
   );
 }
@@ -359,33 +369,33 @@ const CASES = [
 ];
 
 const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
-const LABEL = [
-  { x: 200, y: 46, a: "middle" }, { x: 334, y: 128, a: "start" }, { x: 334, y: 278, a: "start" },
-  { x: 200, y: 360, a: "middle" }, { x: 66, y: 278, a: "end" }, { x: 66, y: 128, a: "end" },
-];
 
+/* 역량 지도 — 판(뒤) · 선(가운데) · 핵심(앞)이 서로 다른 깊이에 놓인 입체 지도.
+ * 스크롤하면 눕혀진 판이 관람자 쪽으로 서고(--k), 선이 이어지고, 핵심 역량이 앞으로 나온다.
+ * 포인터·손가락 위치는 카메라(--rx --ry), 고른 역량은 가장 앞으로 나오고 나머지는 물러난다. */
 function ConvergenceMap({ active, onPick }) {
   return (
-    <svg className="cmap" viewBox="0 0 400 400" role="img" aria-label="여섯 도메인이 하나로 수렴하는 융합 역량 다이어그램">
-      <polygon className="cmap__ring" points={NODE.map((p) => p.join(",")).join(" ")} />
-      {NODE.map((p, i) => (
-        <line key={"s" + i} pathLength="1" className={"cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
-      ))}
-      <circle className="cmap__halo" cx="200" cy="200" r="60" />
-      <circle className="cmap__core" cx="200" cy="200" r="46" />
-      <text className="cmap__coreT font-serif" x="200" y="199" textAnchor="middle">AI</text>
-      <text className="cmap__coreS" x="200" y="215" textAnchor="middle">STRATEGY</text>
-      {NODE.map((p, i) => (
-        <circle key={"n" + i} className={"cmap__node" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")}
-          cx={p[0]} cy={p[1]} r={i === active ? 9.5 : DOMAINS[i].core ? 7 : 4.5}
-          onMouseEnter={() => onPick(i)} />
-      ))}
-      {DOMAINS.map((d, i) => (
-        <text key={"t" + i} className={"cmap__label" + (d.core ? " core" : "") + (i === active ? " on" : "")}
-          x={LABEL[i].x} y={LABEL[i].y} textAnchor={LABEL[i].a}
-          onMouseEnter={() => onPick(i)}>{d.short}</text>
-      ))}
-    </svg>
+    <div className="cmap3d" data-cine="pass" data-cine-src="#composite" role="group" aria-label="여섯 도메인이 하나로 수렴하는 융합 역량 지도 — 역량을 누르면 설명이 바뀝니다">
+      <div className="cmap3d__rig">
+        <div className="cmap3d__plate" aria-hidden="true" />
+        <svg className="cmap" viewBox="0 0 400 400" aria-hidden="true">
+          <polygon className="cmap__ring" points={NODE.map((p) => p.join(",")).join(" ")} />
+          {NODE.map((p, i) => (
+            <line key={"s" + i} pathLength="1" style={{ "--d": i }} className={"cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
+          ))}
+          <circle className="cmap__halo" cx="200" cy="200" r="60" />
+        </svg>
+        <div className="cmap3d__core" aria-hidden="true"><b className="font-serif">AI</b><span>STRATEGY</span></div>
+        {DOMAINS.map((d, i) => (
+          <button key={d.n} type="button" aria-pressed={i === active}
+            className={"cmap3d__n" + (d.core ? " core" : "") + (i === active ? " on" : "") + " p-" + "trrbll"[i]}
+            style={{ left: NODE[i][0] / 4 + "%", top: NODE[i][1] / 4 + "%", "--d": i }}
+            onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
+            <i aria-hidden="true" /><span className="font-ko">{d.short}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -406,7 +416,7 @@ function Composite() {
 
   return (
     <React.Fragment>
-    <section id="composite" ref={ref} data-cine="pass" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
+    <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
         <SectionHead eyebrow="02 — Core Competencies" titleEn="The Composite" titleKo="AI 전략 컨설팅을 중심에 둔 역량 구조" />
@@ -897,7 +907,7 @@ const EDITIONS = [
 const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
-function EditionCard({ e, i, onPlay }) {
+function EditionCard({ e, i, onPlay, onStage }) {
   const [more, setMore] = React.useState(false); /* 폰에서 설명 4줄만 보이고 펼친다 */
   return (
             <article id={"ed-" + e.n} data-tilt={e.core ? "" : undefined} className={"edition reveal" + (e.core ? " edition--core" : "")} style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
@@ -917,6 +927,13 @@ function EditionCard({ e, i, onPlay }) {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
                 {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
               </div>
+              <div className="edition__acts">
+              {THEATERS[e.n] && onStage && (
+                <button type="button" className="btn edition__stage" aria-haspopup="dialog"
+                  onClick={(ev) => onStage(e, ev.currentTarget.closest("article"))}>
+                  작동 원리 펼쳐 보기 <Layers size={16} />
+                </button>
+              )}
               {e.video ? (
                 <button type="button" className="btn" style={{ alignSelf: "flex-start" }} onClick={() => onPlay(e)}>
                   {e.cta} <PlayCircle size={16} />
@@ -928,6 +945,7 @@ function EditionCard({ e, i, onPlay }) {
               ) : (
                 <span className="btn btn--ghost" style={{ alignSelf: "flex-start", cursor: "default", pointerEvents: "none" }}>{e.cta}</span>
               )}
+              </div>
             </article>
   );
 }
@@ -964,31 +982,54 @@ const AXA_COLS = [
 /* 시작 위치는 고정된 의사난수 — 프리렌더와 브라우저가 같은 값을 그려야 한다 */
 const axaSeed = (n) => { const x = Math.sin(n * 91.7) * 43758.5453; return x - Math.floor(x); };
 
+/* 4막 — I 흩어짐: 서로 다른 깊이에 떠 있는 자료 · II 모임: 곡선을 그리며 세 갈래로 정렬
+ *       III 처리: 선이 이어지고 단계마다 확인 표시 · IV 사람의 판단: 자동 처리와 변호사 판단의 경계 */
+const AXA_ACTS = ["흩어짐", "모임", "처리", "사람의 판단"];
+/* 깊은 곳에 떠 있는 빈 서류 — 1막의 공간감을 만들고, 모일 때 더 깊이 물러나 사라진다 */
+const AXA_GHOSTS = Array.from({ length: 7 }, (_, i) => ({
+  "--gx": (axaSeed(i + 300) * 96 + 2).toFixed(1), "--gy": (axaSeed(i + 340) * 74 + 8).toFixed(1),
+  "--gz": (-(axaSeed(i + 380) * 700 + 200)).toFixed(0), "--gr": ((axaSeed(i + 420) - 0.5) * 80).toFixed(0),
+}));
 function AxAssembly() {
   let n = 0;
   return (
-    <div className="axa" data-cine="pin" aria-hidden="true">
-      <div className="axa__sticky">
+    <div className="axa" data-cine="pin">
+      <p className="sr-only">흩어진 법령·총회 서류·계약서를 규칙으로 모아 세 갈래(법령 감시 · 총회 하자 검증 · 계약변경 비교)로 처리하고, 마지막 판단은 변호사가 내리는 구조를 보여 주는 장면입니다.</p>
+      <div className="axa__sticky" aria-hidden="true">
         <div className="axa__stage">
-          <p className="axa__cap axa__cap--1 font-ko">흩어진 법령 · 총회 서류 · 계약서</p>
-          <p className="axa__cap axa__cap--2 font-ko">규칙으로 모으고, 단계별로 정리하고</p>
-          <p className="axa__cap axa__cap--3 font-ko">판단은 변호사가 내립니다</p>
-          {AXA_COLS.map((c, ci) => (
-            <React.Fragment key={c.t}>
-              <span className="axa__head font-ko" style={{ "--x": c.x }}><b>{c.k}</b>{c.t}</span>
-              {c.items.map((it, ii) => {
-                n += 1;
-                const st = { "--sx": (axaSeed(n) * 90 + 5).toFixed(1), "--sy": (axaSeed(n + 40) * 70 + 8).toFixed(1),
-                  "--sr": ((axaSeed(n + 80) - 0.5) * 70).toFixed(0), "--sz": ((axaSeed(n + 120) - 0.6) * 520).toFixed(0),
-                  "--ex": c.x, "--ey": 22 + ii * 9.4 };
-                return <span key={it} className={"axa__doc font-ko axa__doc--" + ci} style={st}>{it}</span>;
-              })}
-              <i className="axa__w axa__w--1" style={{ "--x": c.x }} />
-              <i className="axa__w axa__w--2" style={{ "--x": c.x }} />
-              <span className="axa__node font-ko" style={{ "--x": c.x }}>{c.node}</span>
-              <span className="axa__out font-ko" style={{ "--x": c.x }}>{c.out}</span>
-            </React.Fragment>
-          ))}
+          <i className="axa__light" />
+          <div className="axa__frame">
+          <p className="axa__cap axa__cap--1 font-ko">법령 · 총회 서류 · 계약서가 흩어져 있습니다</p>
+          <p className="axa__cap axa__cap--2 font-ko">규칙에 따라 세 갈래로 모이고</p>
+          <p className="axa__cap axa__cap--3 font-ko">단계마다 기준과 대조합니다</p>
+          <p className="axa__cap axa__cap--4 font-ko">마지막 판단은 변호사가 내립니다</p>
+          <div className="axa__world">
+            {AXA_GHOSTS.map((g, gi) => <i key={"g" + gi} className="axa__ghost" style={g} />)}
+            {AXA_COLS.map((c, ci) => (
+              <React.Fragment key={c.t}>
+                <span className="axa__head font-ko" style={{ "--x": c.x, "--ci": ci }}><b>{c.k}</b>{c.t}</span>
+                {c.items.map((it, ii) => {
+                  n += 1;
+                  const sz = (axaSeed(n + 120) - 0.6) * 520;
+                  const st = { "--sx": (axaSeed(n) * 90 + 5).toFixed(1), "--sy": (axaSeed(n + 40) * 66 + 10).toFixed(1),
+                    "--sr": ((axaSeed(n + 80) - 0.5) * 70).toFixed(0), "--sz": sz.toFixed(0), "--far": Math.max(0, -sz / 320).toFixed(2),
+                    "--ar": ((axaSeed(n + 160) - 0.5) * 24).toFixed(1), "--ex": c.x, "--ey": 20 + ii * 7.6, "--ii": ii, "--ci": ci };
+                  return <span key={it} className={"axa__doc font-ko axa__doc--" + ci} style={st}><small className="font-serif">{c.k}</small>{it}</span>;
+                })}
+                <i className="axa__w axa__w--1" style={{ "--x": c.x, "--ci": ci }}><b /></i>
+                <span className="axa__node font-ko" style={{ "--x": c.x, "--ci": ci }}>{c.node}</span>
+                <i className="axa__w axa__w--2" style={{ "--x": c.x, "--ci": ci }} />
+                <span className="axa__out font-ko" style={{ "--x": c.x, "--ci": ci }}>{c.out}</span>
+                <i className="axa__w axa__w--3" style={{ "--x": c.x, "--ci": ci }} />
+              </React.Fragment>
+            ))}
+            <div className="axa__line font-sans"><span>자동 처리 ▲</span><span>▼ 사람의 판단</span></div>
+            <div className="axa__judge font-ko"><b>최종 판단</b> 변호사가 검토하고 확정합니다</div>
+          </div>
+          <ol className="axa__acts font-sans">
+            {AXA_ACTS.map((a, i) => <li key={a}><b>{["I", "II", "III", "IV"][i]}</b>{a}</li>)}
+          </ol>
+          </div>
         </div>
       </div>
     </div>
@@ -1028,14 +1069,14 @@ function AxDemo({ id }) {
     );
   }
   const v1 = [["제○조 공사비", "도급금액은 계약 시 확정한다."], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 수급인이 부담한다."]];
-  const v2 = [["제○조 공사비", "물가 변동 시 도급금액을 조정할 수 있다.", 1], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 도급인이 부담한다.", 1]];
+  const v2 = [["제○조 공사비", "물가 변동 시 도급금액을 조정할 수 있다.", "비용 증가 가능"], ["제○조 지급 조건", "기성은 매월 정산해 지급한다."], ["제○조 책임", "설계 변경 비용은 도급인이 부담한다.", "부담 주체 이전"]];
   const drag = (ev) => {
     const r = ev.currentTarget.getBoundingClientRect();
     setSplit(Math.round(Math.max(0, Math.min(100, ((ev.clientX - r.left) / r.width) * 100))));
   };
   const col = (rows, tag) => (
     <div className="axdemo__doc font-ko"><span className="axdemo__ver font-sans">{tag}</span>
-      {rows.map((r) => <p key={r[0]} className={r[2] ? "chg" : ""}><b>{r[0]}</b>{r[1]}</p>)}</div>
+      {rows.map((r) => <p key={r[0]} className={r[2] ? "chg" : ""}><b>{r[0]}{r[2] && <i className="font-sans">{r[2]}</i>}</b>{r[1]}</p>)}</div>
   );
   return (
     <div className="axdemo axdemo--c">
@@ -1046,6 +1087,7 @@ function AxDemo({ id }) {
         <div className="axdemo__over">{col(v2, "변경 후")}</div>
         <i className="axdemo__handle" aria-hidden="true" />
       </div>
+      <p className="axdemo__sum font-ko" aria-live="polite">{split < 50 ? <span>바뀐 조항 <b>2곳</b> — 공사비 조정 · 설계 변경 비용 부담</span> : <span>손잡이를 왼쪽으로 끌면 바뀐 계약서가 덮입니다</span>}</p>
       <label className="axdemo__range font-sans">← 변경 전 · 변경 후 →
         <input type="range" min="0" max="100" value={split} onChange={(ev) => setSplit(+ev.target.value)} aria-label="변경 전후 비교 위치" />
       </label>
@@ -1058,28 +1100,19 @@ function AxDesk() {
   const cards = React.useRef({});
   const panel = React.useRef(null);
   const closeBtn = React.useRef(null);
-  const reduce = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const closing = React.useRef(false);
   /* FLIP — 누른 카드의 자리에서 무대가 펼쳐진다 */
-  const flip = (id, reverse) => {
-    const card = cards.current[id], el = panel.current;
-    if (!card || !el || !el.animate || reduce()) { if (el) el.style.opacity = "1"; return Promise.resolve(); }
-    const a = card.getBoundingClientRect(), b = el.getBoundingClientRect();
-    const from = `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`;
-    const kf = [{ transform: from, opacity: .6, borderRadius: "2px" }, { transform: "none", opacity: 1 }];
-    return el.animate(reverse ? kf.slice().reverse() : kf, { duration: reverse ? 380 : 620, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }).finished.catch(() => {});
-  };
   React.useEffect(() => {
     if (!open) return;
-    document.documentElement.classList.add("axs-lock");
-    flip(open, false).then(() => closeBtn.current && closeBtn.current.focus());
-    const onKey = (ev) => { if (ev.key === "Escape") close(); };
-    window.addEventListener("keydown", onKey);
-    return () => { window.removeEventListener("keydown", onKey); document.documentElement.classList.remove("axs-lock"); };
+    closing.current = false;
+    flipFrom(cards.current[open], panel.current, false).then(() => closeBtn.current && closeBtn.current.focus({ preventScroll: true }));
   }, [open]);
   const close = () => {
-    const id = open;
-    flip(id, true).then(() => { setOpen(null); const c = cards.current[id]; c && c.focus && c.focus(); });
+    if (closing.current) return;
+    closing.current = true;
+    flipFrom(cards.current[open], panel.current, true).then(() => setOpen(null));
   };
+  useStageDialog(!!open, panel, close);
   const cur = AX_CASES.find((c) => c.id === open);
   return (
     <div className="axd reveal" id="ax-desk" aria-labelledby="ax-desk-title">
@@ -1124,7 +1157,7 @@ function AxDesk() {
         })}
       </div>
       <p className="axd__note font-ko">의뢰인·사건 정보와 사내 화면은 공개하지 않습니다.</p>
-      {cur && (
+      {cur && ReactDOM.createPortal(
         <div className="axs" role="dialog" aria-modal="true" aria-labelledby="axs-title" onClick={close}>
           <div className="axs__panel" ref={panel} onClick={(ev) => ev.stopPropagation()}>
             <button type="button" className="axs__close font-sans" ref={closeBtn} onClick={close} aria-label="닫기">닫기 ✕</button>
@@ -1144,22 +1177,229 @@ function AxDesk() {
               </dl>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
+  );
+}
+
+/* 무대(대화상자) 공통 — 스크롤 잠금 · 뒤 화면 inert · 초점 가두기 · Esc 닫기 · 닫으면 연 자리로 초점 복귀.
+ * 무대는 document.body 에 붙으므로(portal) #root 전체를 inert 로 만들어도 무대는 살아 있다. */
+function useStageDialog(open, panelRef, onClose) {
+  const closeRef = React.useRef(onClose);
+  closeRef.current = onClose;
+  React.useEffect(() => {
+    if (!open) return;
+    const opener = document.activeElement;
+    const root = document.getElementById("root");
+    const html = document.documentElement;
+    html.classList.add("axs-lock");
+    if (root) root.inert = true;
+    const onKey = (ev) => {
+      if (ev.key === "Escape") { ev.preventDefault(); closeRef.current(); return; }
+      const box = panelRef.current;
+      if (ev.key !== "Tab" || !box) return;
+      const f = Array.prototype.filter.call(
+        box.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])'),
+        (n) => n.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1], cur = document.activeElement;
+      if (!box.contains(cur)) { ev.preventDefault(); first.focus(); }
+      else if (ev.shiftKey && cur === first) { ev.preventDefault(); last.focus(); }
+      else if (!ev.shiftKey && cur === last) { ev.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      html.classList.remove("axs-lock");
+      if (root) root.inert = false;
+      if (opener && opener.focus && document.contains(opener)) opener.focus({ preventScroll: true });
+    };
+  }, [open]);
+}
+const prefersCalm = () => !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+/* FLIP — a(원래 자리)에서 b(무대)로. reverse 면 무대가 원래 자리로 돌아간다 */
+function flipFrom(card, el, reverse) {
+  if (!card || !el || !el.animate || prefersCalm()) { if (el) el.style.opacity = "1"; return Promise.resolve(); }
+  const a = card.getBoundingClientRect(), b = el.getBoundingClientRect();
+  const from = `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`;
+  const kf = [{ transform: from, opacity: .7 }, { transform: "none", opacity: 1 }];
+  return el.animate(reverse ? kf.slice().reverse() : kf, { duration: reverse ? 420 : 680, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }).finished.catch(() => {});
+}
+
+/* ============================================================ 제품 극장 — 카드가 무대로 펼쳐지고, 실제 화면이 층층이 열린다
+ * 화면은 2026. 11. 4. 각 서비스의 공개 화면을 그대로 캡처한 것(images/product). 기능 설명은 작업 카드에 적힌 사실만. */
+const THEATERS = {
+  "09": {
+    name: "ZipCatch", url: "https://zipcatch.vercel.app", open: "집캐치 열기",
+    cap: "2026. 11. 4. 실제 서비스 화면 캡처 — 화면 속 공고와 숫자는 캡처 시점의 공개 데이터입니다.",
+    ruleT: "추천 원칙",
+    rule: "자격 · 예산 · 선호 적합도 · 마감 긴급도를 한 점수로 섞지 않고 따로 보여 줍니다. 확인되지 않은 자격은 불충족으로 단정하지 않고, 당첨 확률은 계산하지 않습니다.",
+    layers: [
+      { img: "zc-home", k: "첫 화면", t: "지금 열려 있는 공고를 지도와 숫자로", d: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 모아, 지역별로 열려 있는 공고 수와 가장 가까운 마감을 먼저 보여 줍니다." },
+      { img: "zc-analyze", k: "조건 입력", t: "지역 · 주거비 · 가구 조건을 차례로", d: "가입 없이 조건을 단계별로 고르면, 그 조건으로 지금 지원할 수 있는 후보를 추립니다." },
+      { img: "zc-map", k: "지도 탐색", t: "보이는 범위의 공고를 바로 옆 목록으로", d: "범위(서울 · 수도권 · 전국)를 고르면 지도에 공고가 표시되고, 보이는 범위의 공고가 목록으로 정리됩니다." },
+      { img: "zc-notices", k: "후보 정리", t: "마감이 가까운 순으로, 조건별로 걸러서", d: "지역 · 유형 필터로 후보를 좁히고, 관심공고 저장과 마감 알림으로 이어집니다." },
+    ],
+  },
+  "17": {
+    name: "Atelier AX", url: "https://atelier-ax.vercel.app/", open: "관제 화면 열기",
+    cap: "2026. 11. 4. 공개 시연 모드 화면 캡처 — 화면 속 직원과 업무는 시연용 가상 데이터입니다.",
+    ruleT: "운영 원칙",
+    rule: "에이전트가 한 일은 사람이 검증 · 승인해야 끝납니다. 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않습니다.",
+    layers: [
+      { img: "ax-live", k: "라이브", t: "AI 직원이 일하는 모습을 사무실처럼", d: "출근 · 작업 · 대기 상태와 진행 단계를 한 화면에서 봅니다. 공개 시연 모드는 서버 없이 이 브라우저 안에서만 돕니다." },
+      { img: "ax-missions", k: "업무", t: "지시한 업무가 단계별로 넘어가는 과정", d: "업무를 지시하면 담당 직원 사이로 단계가 넘어가고, 도구 호출(웹 검색 · 파일 수정 · 코드 실행)과 인계가 실행 기록으로 남습니다." },
+      { img: "ax-approvals", k: "승인", t: "사람이 승인해야 끝나는 지점", d: "정책에 걸린 작업과 결재가 필요한 산출물은 승인 센터에서 사람이 검증 · 승인합니다." },
+      { img: "ax-performance", k: "성과", t: "처리 · 승인 · 반려를 직원별로", d: "종료된 업무와 최종 승인 · 반려를 직원별로 집계합니다." },
+    ],
+  },
+};
+
+function TheaterShot({ name, alt }) {
+  const set = (ext) => `images/product/${name}-720.${ext} 720w, images/product/${name}-1280.${ext} 1280w`;
+  return (
+    <picture>
+      <source type="image/avif" srcSet={set("avif")} sizes="(max-width: 860px) 92vw, 62vw" />
+      <source type="image/webp" srcSet={set("webp")} sizes="(max-width: 860px) 92vw, 62vw" />
+      <img src={`images/product/${name}-1280.webp`} alt={alt} width="1280" height="800" decoding="async" draggable="false" />
+    </picture>
+  );
+}
+
+/* 펼침 --f(0 접힘 → 1 층층이 펼침)와 집중 --q(0 전체 → 1 한 층 정면)를 rAF 로 직접 쓴다 — 드래그는 곧바로 반영 */
+function ProductTheater({ ed, card, onClose }) {
+  const T = THEATERS[ed.n];
+  const surf = React.useRef(null), stage = React.useRef(null), range = React.useRef(null), closeBtn = React.useRef(null);
+  const v = React.useRef({ f: 0, q: 0 }), anim = React.useRef({});
+  const [sel, setSel] = React.useState(-1);
+  const busy = React.useRef(false);
+  const put = (k, x) => {
+    v.current[k] = x;
+    if (stage.current) stage.current.style.setProperty("--" + k, x.toFixed(3));
+    if (k === "f" && range.current) range.current.value = String(Math.round(x * 100));
+  };
+  const tween = (k, to, ms) => new Promise((done) => {
+    cancelAnimationFrame(anim.current[k]);
+    if (prefersCalm()) { put(k, to); done(); return; }
+    const a = v.current[k], t0 = performance.now();
+    const step = (t) => {
+      const u = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - u, 3);
+      put(k, a + (to - a) * e);
+      if (u < 1) anim.current[k] = requestAnimationFrame(step); else done();
+    };
+    anim.current[k] = requestAnimationFrame(step);
+  });
+  React.useEffect(() => {
+    if (card) card.classList.add("is-staged");
+    put("f", 0); put("q", 0);
+    flipFrom(card, surf.current, false).then(() => {
+      if (closeBtn.current) closeBtn.current.focus({ preventScroll: true });
+      return tween("f", 1, 1200);
+    });
+    return () => { Object.values(anim.current).forEach(cancelAnimationFrame); if (card) card.classList.remove("is-staged"); };
+  }, []);
+  const pick = async (i) => {
+    if (busy.current) return;
+    busy.current = true;
+    if (v.current.q > 0) await tween("q", 0, 380);
+    setSel(i);
+    if (i >= 0) { if (v.current.f < 1) await tween("f", 1, 420); await tween("q", 1, 620); }
+    busy.current = false;
+  };
+  const close = async () => {
+    if (busy.current === "closing") return;
+    busy.current = "closing";
+    if (v.current.q > 0) await tween("q", 0, 260);
+    await tween("f", 0, 420);
+    await flipFrom(card, surf.current, true);
+    onClose();
+  };
+  useStageDialog(true, surf, close);
+  /* 직접 조작 — 무대를 옆으로 끌면 접고 편다. 끌지 않고 놓으면 그 층을 정면으로 */
+  const drag = React.useRef(null);
+  const down = (ev) => {
+    if (ev.button > 0) return;
+    drag.current = { x: ev.clientX, f: v.current.f, moved: false, w: ev.currentTarget.clientWidth };
+    ev.currentTarget.setPointerCapture(ev.pointerId);
+  };
+  const move = (ev) => {
+    const d = drag.current;
+    if (!d) return;
+    if (Math.abs(ev.clientX - d.x) > 6) {
+      if (!d.moved) { d.moved = true; cancelAnimationFrame(anim.current.f); if (v.current.q > 0) pick(-1); }
+      put("f", Math.max(0, Math.min(1, d.f + (ev.clientX - d.x) / (d.w * 0.55))));
+    }
+  };
+  const up = (ev) => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d || d.moved) return;
+    const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+    const layer = hit && hit.closest && hit.closest("[data-layer]");
+    if (layer) { const i = +layer.getAttribute("data-layer"); pick(sel === i ? -1 : i); }
+  };
+  const cur = sel >= 0 ? T.layers[sel] : null;
+  const order = T.layers.map((l, i) => i).reverse(); /* 접혔을 때 첫 화면이 맨 위에 오도록 뒤에서부터 그린다 */
+  return ReactDOM.createPortal(
+    <div className="pth" role="dialog" aria-modal="true" aria-labelledby="pth-title" onClick={close}>
+      <div className="pth__surface" ref={surf} onClick={(ev) => ev.stopPropagation()}>
+        <div className="pth__in">
+          <div className="pth__stage" ref={stage} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={() => { drag.current = null; }}>
+            <div className={"pth__stack" + (sel >= 0 ? " has-sel" : "")}>
+              {order.map((i) => {
+                const L = T.layers[i];
+                return (
+                  <div key={L.img} data-layer={i} className={"pth__layer" + (i === sel ? " is-sel" : "")} style={{ "--i": i }}>
+                    <TheaterShot name={L.img} alt={`${T.name} ${L.k} 화면 — ${L.t}`} />
+                    <span className="pth__tag font-sans"><b>{String(i + 1).padStart(2, "0")}</b>{L.k}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="pth__hint font-sans" aria-hidden="true">← 끌어서 접고 펴기 · 화면을 누르면 정면으로 →</p>
+          </div>
+
+          <aside className="pth__side">
+            <button type="button" className="pth__close font-sans" ref={closeBtn} onClick={close}>닫기 ✕</button>
+            <p className="pth__eyebrow font-sans">Edition {ed.no} · {T.name}</p>
+            <h3 id="pth-title" className="font-ko">{ed.title.split("\n")[0]}</h3>
+            <ol className="pth__list">
+              {T.layers.map((L, i) => (
+                <li key={L.img}>
+                  <button type="button" aria-pressed={i === sel} onClick={() => pick(sel === i ? -1 : i)}>
+                    <b className="font-serif">{String(i + 1).padStart(2, "0")}</b>
+                    <span className="font-ko"><em>{L.k}</em>{L.t}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+            <div className="pth__detail font-ko" aria-live="polite">
+              {cur ? <p><b>{cur.k}</b>{cur.d}</p> : <p><b>{T.ruleT}</b>{T.rule}</p>}
+            </div>
+            <label className="pth__fold font-sans">접기 ↔ 펼치기
+              <input ref={range} type="range" min="0" max="100" defaultValue="0" aria-label="화면 층 펼치기"
+                onChange={(ev) => { cancelAnimationFrame(anim.current.f); put("f", +ev.target.value / 100); }} />
+            </label>
+            <div className="pth__foot">
+              <a className="btn" href={T.url} target="_blank" rel="noreferrer">{T.open} <ExternalLink size={15} /></a>
+              <p className="pth__cap font-ko">{T.cap}</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>,
+    document.body
   );
 }
 
 function Artifacts() {
   const ref = useReveal();
   const [playing, setPlaying] = React.useState(null);
-  React.useEffect(() => {
-    if (!playing) return;
-    const onKey = (ev) => { if (ev.key === "Escape") setPlaying(null); };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [playing]);
+  const [staged, setStaged] = React.useState(null); /* { e, card } — 제품 극장 */
+  const vframe = React.useRef(null);
+  useStageDialog(!!playing, vframe, () => setPlaying(null));
   return (
     <React.Fragment>
     <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
@@ -1172,9 +1412,10 @@ function Artifacts() {
         <AxDesk />
         <div className="works-grid">
           {EDITIONS_SHOWN.filter((e) => e.core).map((e, i) => (
-            <EditionCard key={e.n} e={e} i={i} onPlay={setPlaying} />
+            <EditionCard key={e.n} e={e} i={i} onPlay={setPlaying} onStage={(ed, card) => setStaged({ e: ed, card })} />
           ))}
         </div>
+        {staged && <ProductTheater ed={staged.e} card={staged.card} onClose={() => setStaged(null)} />}
         <details className="fold works-more reveal">
           <summary>
             <span className="fold__t">
@@ -1193,9 +1434,9 @@ function Artifacts() {
       </div>
     </section>
 
-    {playing && (
-      <div className="vlightbox" onClick={() => setPlaying(null)} role="dialog" aria-modal="true">
-        <div className="vlightbox__frame" onClick={(ev) => ev.stopPropagation()}>
+    {playing && ReactDOM.createPortal(
+      <div className="vlightbox" onClick={() => setPlaying(null)} role="dialog" aria-modal="true" aria-label={playing.title.replace("\n", " · ")}>
+        <div className="vlightbox__frame" ref={vframe} onClick={(ev) => ev.stopPropagation()}>
           <button type="button" className="vlightbox__close" onClick={() => setPlaying(null)} aria-label="닫기">✕</button>
           <div className="vlightbox__meta">
             <span className="font-play">Edition {playing.no}</span>
@@ -1209,7 +1450,7 @@ function Artifacts() {
           ) : null}
         </div>
       </div>
-    )}
+    , document.body)}
     </React.Fragment>
   );
 }
@@ -1329,30 +1570,41 @@ const STORY_SHOTS = [
     alt: "김유빈 — 2026 청년의날 기념행사에서 대통령과 함께한 셀프 촬영", chip: "Youth Day 2026", cap: "청와대 청년의날 — 대통령과 함께" },
 ];
 
+/* 소개 — 한 편의 다큐멘터리처럼. 진행도 --p(0~1) 하나로 세 장면이 이어진다.
+ * 다음 사진은 액자 안에서 옆으로 열리며(가면을 transform 으로 — clip-path 없음) 들어오고,
+ * 앞 사진은 카메라가 지나가듯 커지며 반대쪽으로 밀려난다. 글은 같은 진행도로 함께 움직인다.
+ * 넓은 화면: 섹션이 고정된 동안 진행 · 좁은 화면: 액자가 화면을 지나가는 동안 진행 */
 function About() {
   const ref = React.useRef(null);
-  const barRef = React.useRef(null);
-  /* 연속값(진행도)은 DOM 에 직접 쓰고, React 는 사진·문장이 실제로 바뀌는 순간에만 다시 그린다.
-     예전엔 스크롤 매 프레임 setState → 섹션 전체 재렌더 → 저사양 폰에서 70ms 대 끊김. */
-  const [stage, setStage] = React.useState({ shot: 0, lines: 0, body: false });
+  const frameRef = React.useRef(null);
+  const mediaRef = React.useRef(null);
+  const [stage, setStage] = React.useState({ lines: 0, body: false });
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const wide = window.matchMedia("(min-width: 901px)");
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
     const on = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        const r = el.getBoundingClientRect();
-        const span = r.height - window.innerHeight;
-        const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
-        el.style.setProperty("--p", p.toFixed(3));
-        if (barRef.current) barRef.current.style.transform = "scaleX(" + p.toFixed(3) + ")";
-        const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
+        let p = 1;
+        if (!calm.matches) {
+          const vh = window.innerHeight;
+          if (wide.matches) {
+            const r = el.getBoundingClientRect(), span = r.height - vh;
+            p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+          } else if (frameRef.current) {
+            const f = frameRef.current.getBoundingClientRect();
+            p = Math.min(1, Math.max(0, (vh * 0.9 - f.top) / (vh * 0.9)));
+          }
+        }
+        if (mediaRef.current) mediaRef.current.style.setProperty("--p", p.toFixed(4)); /* 사진 쪽에만 — 섹션 전체 재계산을 피한다 */
         let lines = 0;
-        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.06 + i * 0.16) lines = i + 1;
-        const body = p >= 0.5;
-        setStage((s) => (s.shot === shot && s.lines === lines && s.body === body ? s : { shot, lines, body }));
+        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.04 + i * 0.12) lines = i + 1;
+        const body = p >= 0.42;
+        setStage((st) => (st.lines === lines && st.body === body ? st : { lines, body }));
       });
     };
     on();
@@ -1360,9 +1612,9 @@ function About() {
     window.addEventListener("resize", on, { passive: true });
     return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); cancelAnimationFrame(raf); };
   }, []);
-  const { shot } = stage;
   const lineOn = (i) => i < stage.lines;
-  const bodyOn = stage.body;
+  /* 장면 i 의 들어옴(--in)·나감(--out) — 앞 장면의 나감이 곧 다음 장면의 들어옴 */
+  const io = (i) => ({ "--in": i === 0 ? "1" : `var(--u${i})`, "--out": i === STORY_SHOTS.length - 1 ? "0" : `var(--u${i + 1})` });
 
   return (
     <section id="about" ref={ref} className="story">
@@ -1373,7 +1625,7 @@ function About() {
             <h3 className="story__lead font-myeongjo">
               {STORY_LINES.map((l, i) => <span key={l} className={"story__line" + (lineOn(i) ? " on" : "")}>{l}</span>)}
             </h3>
-            <div className={"story__body" + (bodyOn ? " on" : "")}>
+            <div className={"story__body" + (stage.body ? " on" : "")}>
               <p className="font-ko">
                 흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다.
                 법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
@@ -1387,22 +1639,27 @@ function About() {
             </div>
           </div>
 
-          <div className="story__media">
-            <div className="story__frame">
+          <div className="story__media" ref={mediaRef}>
+            <div className="story__frame" ref={frameRef}>
               {STORY_SHOTS.map((m, i) => (
-                <Pic key={m.name} name={m.name} fallback={m.src} className={"story__img" + (i === shot ? " on" : "")}
-                  sizes="(max-width: 900px) 88vw, 34vw" alt={m.alt} loading="lazy" style={m.pos ? { objectPosition: m.pos } : undefined} />
+                <div key={m.name} className="story__shot" style={io(i)}>
+                  <div className="story__shot-in">
+                    <Pic name={m.name} fallback={m.src} className="story__img"
+                      sizes="(max-width: 900px) 88vw, 34vw" alt={m.alt} loading="lazy" style={m.pos ? { objectPosition: m.pos } : undefined} />
+                  </div>
+                </div>
               ))}
+              <span className="story__count font-sans" aria-hidden="true"><b>01</b><b>02</b><b>03</b><i>/ 03</i></span>
             </div>
             <div className="story__caps">
               {STORY_SHOTS.map((m, i) => (
-                <p key={m.chip} className={"story__cap" + (i === shot ? " on" : "")}>
+                <p key={m.chip} className="story__cap" style={io(i)}>
                   <span className="font-sans">{String(i + 1).padStart(2, "0")} · {m.chip}</span>
                   <em className="font-ko">{m.cap}</em>
                 </p>
               ))}
             </div>
-            <div className="story__prog" aria-hidden="true"><i ref={barRef} /></div>
+            <div className="story__prog" aria-hidden="true"><i /></div>
           </div>
         </div>
       </div>
