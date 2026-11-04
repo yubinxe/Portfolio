@@ -396,7 +396,7 @@
       secondary: { label: "네이버 블로그", href: "https://blog.naver.com/yubinxe" } },
     { id: "ledger", cat: "인물", tags: ["숫자", "한눈에", "몇", "개수", "통계", "ledger"],
       title: "한눈에 보는 기록 (The Ledger)",
-      body: "- 수행 프로젝트 8\n- 전문 교육 이수 4\n- 수상 · 표창 3\n- 방송 인터뷰 1",
+      body: "- AI · 자동화 결과물 16\n- 배포 · 사내 운영 시스템 11\n- 전문 교육 이수 4\n- 수상 · 표창 3\n- 방송 인터뷰 1",
       primary: { label: "작업 보기", href: "index.html#artifacts" },
       secondary: null },
   ];
