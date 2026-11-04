@@ -162,8 +162,9 @@ function Marquee() {
 function Ledger() {
   const ref = useReveal();
   const ITEMS = [
-  ["8", "AI · 자동화 결과물", "Projects"],
-  ["4", "배포 · 사내 운영 시스템", "In Operation"],
+  /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
+  [String(EDITIONS.length), "AI · 자동화 결과물", "Projects"],
+  [String(EDITIONS.filter((e) => /배포 완료|사내 운영/.test(e.status)).length), "배포 · 사내 운영 시스템", "In Operation"],
   ["4", "AI · 데이터 전문교육", "Programs"],
   ["3", "수상 · 표창", "Awards"]];
 
