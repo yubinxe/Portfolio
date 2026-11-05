@@ -121,9 +121,10 @@ function Hero() {
     ), /*#__PURE__*/
 
     React.createElement("div", { className: "hero-cta", style: { marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" } }, /*#__PURE__*/
-    React.createElement("a", { href: "#artifacts", className: "btn hero-main" }, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
-    React.createElement("a", { href: "#composite", className: "btn btn--ghost" }, "\uD575\uC2EC \uC5ED\uB7C9"), /*#__PURE__*/
-    React.createElement("a", { href: "career.html", className: "btn btn--ghost" }, "\uACBD\uB825 \uC0C1\uC138 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 }))
+    React.createElement("a", { href: "#tools", className: "btn hero-main" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C 4\uAC00\uC9C0 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
+    React.createElement("a", { href: "#work-systems", className: "btn btn--ghost" }, "\uC5C5\uBB34 \uC790\uB3D9\uD654 \xB7 AX"), /*#__PURE__*/
+    React.createElement("a", { href: "#contact", className: "btn btn--ghost hero-ask", onClick: (ev) => {if (window.YubinChat) {ev.preventDefault();window.YubinChat.open();}} }, "\uC9C8\uBB38\uD558\uAE30"), /*#__PURE__*/
+    React.createElement("a", { href: "#contact", className: "btn btn--ghost" }, "\uC5F0\uB77D\uD558\uAE30")
     )
     ), /*#__PURE__*/
 
@@ -845,7 +846,7 @@ const EDITIONS = [
 { n: "09", color: "var(--sky)", Icon: Home, title: "청약·공공임대 맞춤 추천 서비스\n집캐치(ZipCatch)",
   desc: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 수집해, 지역·주거비·가구 조건을 3단계로 입력하면 지금 지원할 수 있는 후보를 정리해 주는 소비자 서비스. 관심공고 저장·마감 알림과 운영용 CRM(매칭·고객·물건 관리)까지 설계·구현.",
   status: "Vercel 배포 완료", cta: "서비스 바로가기", url: "https://zipcatch.vercel.app", tags: ["청약홈 · LH API", "맞춤 추천", "Supabase · CRM"],
-  core: true, point: "자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않도록 분리 설계 — 미확인 자격은 불충족으로 단정하지 않고, 당첨 확률은 산출하지 않는다." },
+  group: "everyday-tools", origin: "independent", usage: "personal", point: "자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않도록 분리 설계 — 미확인 자격은 불충족으로 단정하지 않고, 당첨 확률은 산출하지 않는다." },
 { n: "10", color: "var(--apple)", Icon: MapPin, title: "감정평가사 필드워크\n3D 실지조사 시뮬레이터",
   desc: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집한다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계.",
   status: "Vercel 배포 완료", cta: "필드워크 체험", url: "https://appraiser-fieldwork.vercel.app/", tags: ["Three.js · WebGL", "실지조사 5단계", "조문 24 · 지목 28"],
@@ -853,11 +854,11 @@ const EDITIONS = [
 { n: "17", color: "var(--apple)", Icon: Cpu, title: "AI 에이전트 인력 운영 관제\nAtelier AX",
   desc: "AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 사람이 일하는 사무실처럼 보여 준다. 서버 없이 브라우저 안에서만 도는 공개 시연 모드를 함께 제공. 2.0에서는 아이디어를 설명하면 AI 팀(기획·디자인·개발·검수)이 6단계로 일하는 과정을 쉬운 말로 보여 주고 범위·설계·검토·공개 4곳에서 사용자 승인을 받는 ‘프로젝트 스튜디오’를 더했다.",
   status: "Vercel 배포 완료", cta: "관제 화면 보기", url: "https://atelier-ax.vercel.app/performance/", tags: ["AI Agent 관제", "프로젝트 스튜디오", "승인 워크플로"],
-  core: true, point: "에이전트가 한 일을 사람이 검증·승인해야 끝나는 구조 — 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않는다." },
+  group: "everyday-tools", origin: "independent", usage: "personal", point: "에이전트가 한 일을 사람이 검증·승인해야 끝나는 구조 — 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않는다." },
 { n: "12", color: "var(--sky)", Icon: LayoutGrid, title: "국민용 국정 상황판\n국정 한눈에",
   desc: "대통령 동정·대통령실·정부 정책·국무회의와 국회, 증시·환율·부동산·산업까지 국정과 경제를 한 화면에 모은 상황판. 공개 뉴스 RSS와 시세를 서버리스 함수가 모아 섹션별로 배정하고, 중복 기사를 걸러 언론사 원문 사진과 함께 보여준다. 섹션 필터·검색, 지수 추이 스파크라인, 라이트·다크 모드 지원.",
   status: "Vercel 배포 완료", cta: "상황판 보기", url: "https://gukjeong-hannune.vercel.app/", tags: ["공개 RSS · 시세 수집", "Vercel Serverless", "외부 라이브러리 0"],
-  core: true, point: "수집이 실패해도 화면이 비지 않게 — CDN 20분 캐시와 stale-while-revalidate로 즉시 응답하고, 실패하면 저장된 스냅샷으로 대체. 포털은 기사를 옮겨 실을 뿐 매체가 아니므로 출처·언론사 수에서 뺐다." },
+  group: "everyday-tools", origin: "independent", usage: "personal", point: "수집이 실패해도 화면이 비지 않게 — CDN 20분 캐시와 stale-while-revalidate로 즉시 응답하고, 실패하면 저장된 스냅샷으로 대체. 포털은 기사를 옮겨 실을 뿐 매체가 아니므로 출처·언론사 수에서 뺐다." },
 { n: "11", color: "var(--pink)", Icon: Quote, title: "성경 말씀 × 인문학 서재\nSalvation",
   desc: "\"지금, 어떤 마음이신가요?\"에서 시작해 마음 상태·주제별로 성경 말씀과 인문학·철학의 문장을 이어 주는 서재형 PWA. 오늘의 말씀, 말씀·인문학 서재, 묵상 노트·기도 제목·말씀 암송·통독 진도를 쌓는 '나의 성소', 마스코트 등불이(시편 119:105)가 안내하는 상담 챗봇까지 설계·구현.",
   status: "Vercel 배포 완료", cta: "서재 둘러보기", url: "https://malsseum-guwon.vercel.app/", tags: ["PWA · 오프라인", "Supabase 동기화", "위기 신호 안전장치"],
@@ -865,7 +866,7 @@ const EDITIONS = [
 { n: "16", color: "var(--lilac)", Icon: Scale, title: "법조 시장 상황판\n법조시장 한눈에",
   desc: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 전략팀이 바로 전략 판단으로 옮기도록 만든 법조 시장 상황판. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공.",
   status: "Vercel 배포 완료", cta: "상황판 보기", url: "https://legal-pulse-pearl.vercel.app", tags: ["국회 · 법제처 · 대한변협", "Next.js · 일 단위 갱신", "기한 계산기"],
-  core: true, point: "출처 없는 예시 수치는 넣지 않는다 — 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않는다." },
+  group: "everyday-tools", origin: "independent", usage: "personal", point: "출처 없는 예시 수치는 넣지 않는다 — 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않는다." },
 { n: "13", color: "var(--butter)", Icon: LayoutGrid, title: "식재료·생활용품 살림 기록 서비스\n곳간(Gotgan)",
   desc: "주문 화면이나 영수증을 찍으면 식재료 보관 기한과 생활용품 재구매 시점을 셈해 알려 주는 자취생·주부용 살림 기록 서비스. 구역별 곳간, 자동 장보기, 월별 가계, 달력 알림까지 설계·구현.",
   status: "Vercel 배포 완료", cta: "서비스 바로가기", url: "https://gotgan-three.vercel.app", tags: ["사진 판독 · Claude API", "PWA · 오프라인", "서버리스 보안 설계"],
@@ -897,21 +898,40 @@ const EDITIONS = [
 { n: "06", color: "var(--apple)", Icon: Cpu, title: "고객 메일 자동 분류 시스템\n— 급한 메일부터 알려 줍니다",
   desc: "회사로 들어오는 고객 메일을 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 광고처럼 넘겨도 되는 것'으로 나눠 보여 주는 업무 화면. 담당자는 위에서부터 차례로 처리하면 됩니다.",
   status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["구글 업무도구 연동", "자동 분류", "업무 화면"],
-  core: true, point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
+  work: [["문제", "담당자가 메일함을 직접 열어 보며 무엇부터 답할지 판단하던 업무"], ["바꾼 흐름", "메일이 들어오면 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 넘겨도 되는 것'으로 1차 분류"],
+  ["내 역할", "분류 기준 설계 · 시스템 구현"], ["상태", "Vercel 배포 — 업무 화면 공개"]],
+  group: "enterprise-systems", origin: "organizational", usage: "professional", point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
 { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
   desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
   status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"],
-  core: true, point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." }];
+  work: [["문제", "급여명세서를 사람이 만들고 한 명씩 보내던 반복 절차"], ["바꾼 흐름", "네이버웍스 메일 API로 명세서 생성과 발송을 자동화하고 절차를 표준화"],
+  ["내 역할", "API 연동 · 발송 자동화 구현"], ["상태", "사내 운영 적용"], ["공개 범위", "급여 정보를 다루어 화면과 코드는 비공개"]],
+  group: "enterprise-systems", origin: "organizational", usage: "professional", point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." }];
 
 
 /* 화면에 보이는 순서와 번호 — 실생활·실무 시스템 7건을 먼저, 학습·콘텐츠·제안 작업은 "그 밖의 작업"에 */
 const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
-const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
+const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => {
+  const e = EDITIONS.find((x) => x.n === n);
+  return { ...e, group: e.group || "supplementary", no: String(i + 1).padStart(2, "0") };
+});
+/* 작업의 성격(누가 만들어 어디서 쓰는가)과 배포 상태는 따로 본다 — Vercel 배포는 회사 도입의 증거가 아니다.
+ *   everyday-tools     직접 기획·개발·배포하고 일상에서 자주 쓰는 개인 제품(origin independent · usage personal)
+ *   enterprise-systems 실제 업무 흐름을 바꾸려고 만든 업무 시스템(origin organizational · usage professional)
+ *   supplementary      학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠 */
+const byGroup = (g) => EDITIONS_SHOWN.filter((e) => e.group === g);
+/* 네 가지 도구 — 왜 만들었는지 · 어떻게 쓰는지(작업 카드의 사실에서만) · 실제 화면(모바일 · 데스크톱 캡처) */
+const TOOL_META = {
+  "09": { name: "ZipCatch · 집캐치", shot: "zc-home", why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾으려고 만들었습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다." },
+  "16": { name: "법조시장 한눈에", shot: "lp-home", why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 화면에서 보려고 만들었습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다." },
+  "17": { name: "Atelier AX", shot: "ax-live", why: "AI 에이전트가 무엇을 하는지 보이지 않으면 결과를 믿고 맡기기 어려워, 배정부터 승인까지 보이게 만들었습니다.", use: "AI 팀에 일을 맡기고 진행 단계와 승인 대기를 확인할 때 씁니다." },
+  "12": { name: "국정 한눈에", shot: "gk-home", why: "국정 소식과 경제 지표를 여러 포털과 앱을 오가며 보던 것을 한 화면으로 모으려고 만들었습니다.", use: "국정 · 정책 · 증시 · 환율의 흐름을 한 번에 훑을 때 씁니다." }
+};
 
 function EditionCard({ e, i, onPlay, onStage }) {
   const [more, setMore] = React.useState(false); /* 폰에서 설명 4줄만 보이고 펼친다 */
   return (/*#__PURE__*/
-    React.createElement("article", { id: "ed-" + e.n, "data-tilt": e.core ? "" : undefined, className: "edition reveal" + (e.core ? " edition--core" : ""), style: { "--accent-fill": e.color, transitionDelay: `${i * 90}ms` } }, /*#__PURE__*/
+    React.createElement("article", { id: "ed-" + e.n, "data-tilt": e.group !== "supplementary" ? "" : undefined, className: "edition reveal" + (e.group !== "supplementary" ? " edition--core" : "") + (e.work ? " edition--work" : ""), style: { "--accent-fill": e.color, transitionDelay: `${i * 90}ms` } }, /*#__PURE__*/
     React.createElement("div", { className: "edition__chip" }, e.status), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 } }, /*#__PURE__*/
     React.createElement("span", { className: "edition__num" }, e.no), /*#__PURE__*/
@@ -924,6 +944,11 @@ function EditionCard({ e, i, onPlay, onStage }) {
     React.createElement("h3", { className: "font-ko", style: { fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" } }, e.title), /*#__PURE__*/
     React.createElement("p", { className: "font-ko edition__desc" + (more ? " is-open" : ""), style: { color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 } }, e.desc), /*#__PURE__*/
     React.createElement("button", { type: "button", className: "edition__more font-sans", "aria-expanded": more, onClick: () => setMore(!more) }, more ? "접기" : "더 보기"),
+    e.work && /*#__PURE__*/
+    React.createElement("dl", { className: "edition__work font-ko" },
+    e.work.map(([k, v]) => /*#__PURE__*/React.createElement("div", { key: k }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))
+    ),
+
     e.point && /*#__PURE__*/React.createElement("p", { className: "edition__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uCEE8\uC124\uD305 \uD3EC\uC778\uD2B8"), e.point), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" } },
     e.tags.map((t) => /*#__PURE__*/React.createElement("span", { key: t, className: "font-sans", style: { fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" } }, t))
@@ -1255,13 +1280,40 @@ const THEATERS = {
     { img: "ax-approvals", k: "승인", t: "사람이 승인해야 끝나는 지점", d: "정책에 걸린 작업과 결재가 필요한 산출물은 승인 센터에서 사람이 검증 · 승인합니다." },
     { img: "ax-performance", k: "성과", t: "처리 · 승인 · 반려를 직원별로", d: "종료된 업무와 최종 승인 · 반려를 직원별로 집계합니다." }]
 
+  },
+  "16": {
+    name: "법조시장 한눈에", url: "https://legal-pulse-pearl.vercel.app", open: "상황판 열기",
+    cap: "2026. 11. 5. 실제 서비스 화면 캡처 — 화면 속 법률안 · 법령 · 회원 수는 캡처 시점의 공개 데이터입니다.",
+    ruleT: "데이터 원칙",
+    rule: "출처 없는 예시 수치는 넣지 않습니다. 인증키가 없거나 수집에 실패한 값은 '인증키 필요' · '불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않습니다.",
+    layers: [
+    { img: "lp-home", k: "요약", t: "법조 시장의 지금을 첫 화면에", d: "22대 국회 발의 법률안의 처리 현황, 개업 변호사 수, 다음 공휴일, 불변기간 만료일 계산기를 첫 화면에 모았습니다." },
+    { img: "lp-redev", k: "정비사업", t: "재개발 · 재건축 법률안과 판례", d: "정비사업 법률의 국회 발의 현황과 최근 본회의 통과, 시행 예정 개정과 분쟁 판례를 함께 봅니다." },
+    { img: "lp-family", k: "분야별", t: "분야마다 같은 틀로", d: "부동산 · 임대차, 가사, 상속, 형사, 노동, 기업까지 분야별로 발의 법률안 · 시행 예정 법령 · 공개 판례를 같은 틀로 보여 줍니다." },
+    { img: "lp-sources", k: "출처", t: "모든 수치의 출처와 연결 상태", d: "화면의 수치를 어느 공식 출처에서 받았는지, 연결 상태와 마지막으로 받은 시각을 함께 공개합니다." }]
+
+  },
+  "12": {
+    name: "국정 한눈에", url: "https://gukjeong-hannune.vercel.app/", open: "상황판 열기",
+    cap: "2026. 11. 5. 실제 서비스 화면 캡처 — 화면 속 기사와 지표는 캡처 시점의 공개 뉴스 · 시세입니다.",
+    ruleT: "수집 원칙",
+    rule: "수집이 실패해도 화면이 비지 않게 — CDN 20분 캐시와 stale-while-revalidate로 즉시 응답하고, 실패하면 저장된 스냅샷으로 대체합니다. 포털은 기사를 옮겨 실을 뿐 매체가 아니므로 출처 · 언론사 수에서 뺍니다.",
+    layers: [
+    { img: "gk-home", k: "오늘", t: "오늘의 국정을 첫 화면 한 장에", d: "날짜와 주요 지표, 분야별 소식을 첫 화면에 모읍니다. 섹션 필터 · 검색과 라이트 · 다크 모드를 지원합니다." },
+    { img: "gk-markets", k: "시장", t: "증시 · 환율 · 원자재를 추이와 함께", d: "코스피 · 코스닥 · 환율 · 해외 지수를 등락과 함께 작은 추이 그래프(스파크라인)로 보여 줍니다." },
+    { img: "gk-brief", k: "브리핑", t: "많이 다룬 소식을 세 줄로", d: "가장 많은 언론이 다룬 사안을 3줄 브리핑으로 정리하고, 24시간 보도 흐름과 분야별 보도량을 함께 보여 줍니다." },
+    { img: "gk-top", k: "기사", t: "중복을 걸러 분야별로", d: "공개 뉴스 RSS를 분야별로 배정하고 중복 기사를 걸러, 언론사 원문 사진과 함께 보여 줍니다." }]
+
   }
 };
 
 function TheaterShot({ name, alt }) {
   const set = (ext) => `images/product/${name}-720.${ext} 720w, images/product/${name}-1280.${ext} 1280w`;
+  /* 폰에서는 실제 모바일 화면 캡처를 쓴다 — 데스크톱 화면을 작게 줄여 보이지 않게 */
   return (/*#__PURE__*/
     React.createElement("picture", null, /*#__PURE__*/
+    React.createElement("source", { media: "(max-width: 760px)", type: "image/avif", srcSet: `images/product/${name}-m600.avif` }), /*#__PURE__*/
+    React.createElement("source", { media: "(max-width: 760px)", type: "image/webp", srcSet: `images/product/${name}-m600.webp` }), /*#__PURE__*/
     React.createElement("source", { type: "image/avif", srcSet: set("avif"), sizes: "(max-width: 860px) 92vw, 62vw" }), /*#__PURE__*/
     React.createElement("source", { type: "image/webp", srcSet: set("webp"), sizes: "(max-width: 860px) 92vw, 62vw" }), /*#__PURE__*/
     React.createElement("img", { src: `images/product/${name}-1280.webp`, alt: alt, width: "1280", height: "800", decoding: "async", draggable: "false" })
@@ -1365,7 +1417,9 @@ function ProductTheater({ ed, card, onClose }) {
     React.createElement("aside", { className: "pth__side" }, /*#__PURE__*/
     React.createElement("button", { type: "button", className: "pth__close font-sans", ref: closeBtn, onClick: close }, "\uB2EB\uAE30 \u2715"), /*#__PURE__*/
     React.createElement("p", { className: "pth__eyebrow font-sans" }, "Edition ", ed.no, " \xB7 ", T.name), /*#__PURE__*/
-    React.createElement("h3", { id: "pth-title", className: "font-ko" }, ed.title.split("\n")[0]), /*#__PURE__*/
+    React.createElement("h3", { id: "pth-title", className: "font-ko" }, ed.title.split("\n")[0]),
+    ed.origin === "independent" && /*#__PURE__*/React.createElement("p", { className: "pth__origin font-sans" }, "\uC9C1\uC811 \uAE30\uD68D \xB7 \uAC1C\uBC1C \xB7 \uBC30\uD3EC\uD55C \uAC1C\uC778 \uC81C\uD488 \u2014 \uD68C\uC0AC \uB3C4\uC785 \uC2DC\uC2A4\uD15C \uC544\uB2D8"), /*#__PURE__*/
+    React.createElement("p", { className: "pth__desc font-ko" }, ed.desc), /*#__PURE__*/
     React.createElement("ol", { className: "pth__list" },
     T.layers.map((L, i) => /*#__PURE__*/
     React.createElement("li", { key: L.img }, /*#__PURE__*/
@@ -1395,6 +1449,106 @@ function ProductTheater({ ed, card, onClose }) {
   );
 }
 
+/* 묶음 머리 — A · B · C 를 한눈에 구분 */
+function WorksHead({ k, en, ko, sub }) {
+  return (/*#__PURE__*/
+    React.createElement("header", { className: "whead reveal" }, /*#__PURE__*/
+    React.createElement("span", { className: "whead__k font-serif", "aria-hidden": "true" }, k), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/
+    React.createElement("p", { className: "whead__en font-sans" }, en), /*#__PURE__*/
+    React.createElement("h3", { className: "whead__ko font-ko" }, ko),
+    sub && /*#__PURE__*/React.createElement("p", { className: "whead__sub font-ko" }, sub)
+    )
+    ));
+
+}
+
+/* 네 가지 도구 — 폰: 옆으로 넘기는 큰 화면 네 장(지금 장은 앞으로, 옆 장은 깊이 물러남)
+ * 넓은 화면: 2 × 2. 넘김은 브라우저 기본 가로 스크롤(scroll-snap)이라 세로 스크롤을 빼앗지 않는다.
+ * 각 장의 거리(--d)는 스크롤 위치에서 rAF 로 계산 — 카드 위치는 크기가 바뀔 때만 잰다 */
+function ToolDeck({ items, onStage }) {
+  const track = React.useRef(null);
+  const [cur, setCur] = React.useState(0);
+  React.useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    let raf = 0,mids = [],w = 1;
+    const measure = () => {const cs = Array.from(el.children);mids = cs.map((c) => c.offsetLeft + c.offsetWidth / 2);w = cs[0] && cs[0].offsetWidth || 1;frame();};
+    const frame = () => {
+      raf = 0;
+      const c = el.scrollLeft + el.clientWidth / 2;
+      let best = 0,bd = 1e9;
+      const cs = el.children;
+      for (let i = 0; i < cs.length; i++) {
+        const d = Math.max(-1.6, Math.min(1.6, (mids[i] - c) / w));
+        cs[i].style.setProperty("--d", d.toFixed(3));
+        cs[i].style.setProperty("--ad", Math.abs(d).toFixed(3));
+        if (Math.abs(d) < bd) {bd = Math.abs(d);best = i;}
+      }
+      setCur((p) => p === best ? p : best);
+    };
+    const on = () => {if (!raf) raf = requestAnimationFrame(frame);};
+    measure();
+    el.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("resize", measure, { passive: true });
+    return () => {el.removeEventListener("scroll", on);window.removeEventListener("resize", measure);cancelAnimationFrame(raf);};
+  }, []);
+  const go = (i) => {
+    const el = track.current,c = el && el.children[i];
+    if (!c) return;
+    el.scrollTo({ left: c.offsetLeft - (el.clientWidth - c.offsetWidth) / 2, behavior: prefersCalm() ? "auto" : "smooth" });
+  };
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "tools" }, /*#__PURE__*/
+    React.createElement("div", { className: "tools__track", ref: track, role: "list", "aria-label": "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC790\uC8FC \uC4F0\uB294 \uB3C4\uAD6C \uB124 \uAC00\uC9C0 \u2014 \uC606\uC73C\uB85C \uB118\uACA8 \uBCF4\uC138\uC694" },
+    items.map((e, i) => {
+      const M = TOOL_META[e.n] || {};
+      const [t1, t2] = e.title.split("\n");
+      return (/*#__PURE__*/
+        React.createElement("article", { key: e.n, id: "ed-" + e.n, className: "tool", role: "listitem", style: { "--accent-fill": e.color }, "aria-label": `${i + 1} / ${items.length} — ${M.name || t2}` }, /*#__PURE__*/
+        React.createElement("div", { className: "tool__shot", "aria-hidden": "true" }, /*#__PURE__*/
+        React.createElement("picture", null, /*#__PURE__*/
+        React.createElement("source", { media: "(max-width: 760px)", type: "image/avif", srcSet: `images/product/${M.shot}-m600.avif` }), /*#__PURE__*/
+        React.createElement("source", { media: "(max-width: 760px)", type: "image/webp", srcSet: `images/product/${M.shot}-m600.webp` }), /*#__PURE__*/
+        React.createElement("source", { type: "image/avif", srcSet: `images/product/${M.shot}-720.avif 720w, images/product/${M.shot}-1280.avif 1280w`, sizes: "(max-width: 1100px) 46vw, 560px" }), /*#__PURE__*/
+        React.createElement("img", { src: `images/product/${M.shot}-720.webp`, alt: "", loading: "lazy", decoding: "async", width: "720", height: "450", draggable: "false" })
+        ), /*#__PURE__*/
+        React.createElement("span", { className: "tool__no font-serif" }, e.no)
+        ), /*#__PURE__*/
+        React.createElement("div", { className: "tool__body" }, /*#__PURE__*/
+        React.createElement("p", { className: "tool__badge font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC0AC\uC6A9"), /*#__PURE__*/React.createElement("span", null, e.status)), /*#__PURE__*/
+        React.createElement("h4", { className: "tool__name font-ko" }, /*#__PURE__*/React.createElement("small", null, t1), M.name || t2), /*#__PURE__*/
+        React.createElement("p", { className: "tool__why font-ko" }, M.why), /*#__PURE__*/
+        React.createElement("p", { className: "tool__use font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uC774\uB807\uAC8C \uC501\uB2C8\uB2E4"), M.use), /*#__PURE__*/
+        React.createElement("p", { className: "tool__desc font-ko" }, e.desc), /*#__PURE__*/
+        React.createElement("div", { className: "tool__acts" },
+        THEATERS[e.n] && onStage && /*#__PURE__*/
+        React.createElement("button", { type: "button", className: "btn tool__stage", "aria-haspopup": "dialog",
+          onClick: (ev) => onStage(e, ev.currentTarget.closest("article")) }, "\uD654\uBA74 \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(Layers, { size: 16 })), /*#__PURE__*/
+
+        React.createElement("a", { href: e.url, target: "_blank", rel: "noreferrer", className: "btn btn--ghost" }, e.cta, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 15 }))
+        )
+        )
+        ));
+
+    })
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "tools__nav", "aria-label": "\uB3C4\uAD6C \uB118\uAE30\uAE30" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "tools__arrow", onClick: () => go(Math.max(0, cur - 1)), disabled: cur === 0, "aria-label": "\uC774\uC804 \uB3C4\uAD6C" }, "\u2190"), /*#__PURE__*/
+    React.createElement("ol", { className: "tools__dots" },
+    items.map((e, i) => /*#__PURE__*/
+    React.createElement("li", { key: e.n }, /*#__PURE__*/React.createElement("button", { type: "button", "aria-current": i === cur ? "true" : undefined, onClick: () => go(i) }, /*#__PURE__*/
+    React.createElement("span", { className: "sr-only" }, (TOOL_META[e.n] || {}).name, " \uBCF4\uAE30")
+    ))
+    )
+    ), /*#__PURE__*/
+    React.createElement("span", { className: "tools__count font-sans", "aria-live": "polite" }, String(cur + 1).padStart(2, "0"), " / ", String(items.length).padStart(2, "0"), " \xB7 ", (TOOL_META[items[cur].n] || {}).name), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "tools__arrow", onClick: () => go(Math.min(items.length - 1, cur + 1)), disabled: cur === items.length - 1, "aria-label": "\uB2E4\uC74C \uB3C4\uAD6C" }, "\u2192")
+    )
+    ));
+
+}
+
 function Artifacts() {
   const ref = useReveal();
   const [playing, setPlaying] = React.useState(null);
@@ -1406,28 +1560,45 @@ function Artifacts() {
     React.createElement("section", { id: "artifacts", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "03 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
-    React.createElement("p", { className: "works-lead font-ko reveal" }, "\uB9E8 \uC704\uB294 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC815\uBE44\uC0AC\uC5C5\uC758 \uBC95\uB960\xB7\uACBD\uC81C \uC704\uD5D8\uC744 \uB2E4\uB8E8\uB294 ", /*#__PURE__*/
-    React.createElement("strong", null, "AX \uD604\uD669\uD310"), ", \uADF8 \uC544\uB798\uB294 \uC9C1\uC811 \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C ", EDITIONS.filter((e) => e.core).length, "\uAC74"), "\uC785\uB2C8\uB2E4. \uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130, \uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8, \uC81C\uC548\uC11C\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uB294 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-
+    React.createElement("p", { className: "works-lead font-ko reveal" }, "\uC131\uACA9\uC774 \uB2E4\uB978 \uC791\uC5C5\uC744 \uC11E\uC9C0 \uC54A\uACE0 \uC138 \uAC08\uB798\uB85C \uB098\uB234\uC2B5\uB2C8\uB2E4. ", /*#__PURE__*/
+    React.createElement("strong", null, "A"), " \uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC77C\uC0C1\uC5D0\uC11C \uC790\uC8FC \uC4F0\uB294 \uB3C4\uAD6C ", byGroup("everyday-tools").length, "\uAC00\uC9C0,", /*#__PURE__*/
+    React.createElement("strong", null, " B"), " \uC2E4\uC81C \uC5C5\uBB34\uB97C \uC2DC\uC2A4\uD15C\uC73C\uB85C \uBC14\uAFBC ", byGroup("enterprise-systems").length, "\uAC74, ", /*#__PURE__*/React.createElement("strong", null, "C"), " \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC758 \uC815\uBE44\uC0AC\uC5C5 AX ", AX_CASES.length, "\uAC74\uC785\uB2C8\uB2E4. \uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130 \xB7 \uC81C\uC548\uC11C \xB7 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uB294 \uB9E8 \uC544\uB798 ", /*#__PURE__*/
+    React.createElement("strong", null, "D"), "\uC5D0 \uBAA8\uC558\uC2B5\uB2C8\uB2E4."
     ), /*#__PURE__*/
-    React.createElement(AxDesk, null), /*#__PURE__*/
+
+    React.createElement("div", { className: "wgroup", id: "tools" }, /*#__PURE__*/
+    React.createElement(WorksHead, { k: "A", en: "My Everyday Tools", ko: "\uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC77C\uC0C1\uC5D0\uC11C \uC790\uC8FC \uC0AC\uC6A9\uD558\uB294 \uB124 \uAC00\uC9C0 \uB3C4\uAD6C",
+      sub: "\uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2C8\uB77C \uC81C\uAC00 \uC9C1\uC811 \uAE30\uD68D \xB7 \uAC1C\uBC1C \xB7 \uBC30\uD3EC\uD55C \uAC1C\uC778 \uC81C\uD488\uC785\uB2C8\uB2E4. \uBC18\uBCF5\uB418\uB294 \uC815\uBCF4 \uBB38\uC81C\uB97C \uCC3E\uC544 \uC18C\uD504\uD2B8\uC6E8\uC5B4\uB85C \uD480\uACE0, \uADF8 \uB3C4\uAD6C\uB97C \uC81C \uC77C\uACFC \uC0DD\uD65C\uC5D0 \uC9C1\uC811 \uC501\uB2C8\uB2E4." }), /*#__PURE__*/
+    React.createElement(ToolDeck, { items: byGroup("everyday-tools"), onStage: (ed, card) => setStaged({ e: ed, card }) })
+    ), /*#__PURE__*/
+
+    React.createElement("div", { className: "wgroup", id: "work-systems" }, /*#__PURE__*/
+    React.createElement(WorksHead, { k: "B", en: "Enterprise Work Systems", ko: "\uC5C5\uBB34\uB97C \uC2DC\uC2A4\uD15C\uC73C\uB85C \uC804\uD658\uD558\uB2E4",
+      sub: "\uC2E4\uC81C \uC5C5\uBB34 \uD750\uB984\uC5D0\uC11C \uCD9C\uBC1C\uD55C \uC2DC\uC2A4\uD15C\uC785\uB2C8\uB2E4. \uBB34\uC5C7\uC774 \uBB38\uC81C\uC600\uACE0, \uBB34\uC5C7\uC744 \uBC14\uAFE8\uACE0, \uC81C\uAC00 \uB9E1\uC740 \uBD80\uBD84\uACFC \uC9C0\uAE08 \uC0C1\uD0DC\uB97C \uD568\uAED8 \uC801\uC5C8\uC2B5\uB2C8\uB2E4." }), /*#__PURE__*/
     React.createElement("div", { className: "works-grid" },
-    EDITIONS_SHOWN.filter((e) => e.core).map((e, i) => /*#__PURE__*/
-    React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying, onStage: (ed, card) => setStaged({ e: ed, card }) })
+    byGroup("enterprise-systems").map((e, i) => /*#__PURE__*/
+    React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying })
     )
+    )
+    ), /*#__PURE__*/
+
+    React.createElement("div", { className: "wgroup" }, /*#__PURE__*/
+    React.createElement(WorksHead, { k: "C", en: "Specialized AX Desk", ko: "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \u2014 \uC815\uBE44\uC0AC\uC5C5 \uBC95\uB960 AX",
+      sub: "\uBC95\uB960 \xB7 \uCD1D\uD68C \xB7 \uACC4\uC57D \uC704\uD5D8\uC744 \uB2E4\uB8E8\uB294 \uC804\uBB38 \uC601\uC5ED\uC758 AX \uC0AC\uB840\uC785\uB2C8\uB2E4. \uC704\uC758 \uAC1C\uC778 \uB3C4\uAD6C\uC640\uB294 \uBCC4\uAC1C\uB85C, \uC0AC\uB0B4\uC5D0 \uAD6C\uCD95\uD55C \uC2DC\uC2A4\uD15C\uC785\uB2C8\uB2E4." }), /*#__PURE__*/
+    React.createElement(AxDesk, null)
     ),
     staged && /*#__PURE__*/React.createElement(ProductTheater, { ed: staged.e, card: staged.card, onClose: () => setStaged(null) }), /*#__PURE__*/
     React.createElement("details", { className: "fold works-more reveal" }, /*#__PURE__*/
     React.createElement("summary", null, /*#__PURE__*/
     React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
-    React.createElement("span", { className: "eyebrow" }, "Supplementary"), /*#__PURE__*/
-    React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
+    React.createElement("span", { className: "eyebrow" }, "D \xB7 Supplementary Work"), /*#__PURE__*/
+    React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, byGroup("supplementary").length, "\uAC74")), /*#__PURE__*/
     React.createElement("span", { className: "fold__line font-ko" }, "\uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 Project Plaza \xB7 \uCCAD\uC57D \uB300\uC2DC\uBCF4\uB4DC \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
     ), /*#__PURE__*/
     React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "works-grid works-grid--sub" },
-    EDITIONS_SHOWN.filter((e) => !e.core).map((e, i) => /*#__PURE__*/
+    byGroup("supplementary").map((e, i) => /*#__PURE__*/
     React.createElement(EditionCard, { key: e.n, e: e, i: i, onPlay: setPlaying })
     )
     )

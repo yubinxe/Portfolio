@@ -36,7 +36,7 @@
       title: "무엇이든 물어보세요",
       subtitle: "김유빈 님의 역량 · 프로젝트 · 경력을 안내합니다",
       greeting:
-        "안녕하세요, 반갑습니다 👋\n**김유빈 님의 포트폴리오 컨시어지, 유빈 AI**입니다.\n- 🧩 핵심 역량과 일하는 방식\n- 🗂️ 대표 프로젝트와 전략 판단\n- 🧭 경력 · 교육 · 수상 이력\n궁금한 것을 편하게 물어보세요. 답변 속 버튼을 누르면 해당 위치로 바로 모셔다 드릴게요 ✨",
+        "안녕하세요, **김유빈 님의 포트폴리오 안내**입니다.\n아래 네 가지 중 하나를 누르거나 편하게 물어보세요.",
       teaser: "궁금한 점이 있으신가요?",
       email: "yubin120866@gmail.com",
       model: "gpt-4o-mini",
@@ -52,6 +52,12 @@
   );
 
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* 서버가 없는 정적 호스팅(GitHub Pages)에서는 생성형 AI 가 아니라 사이트 내용(kb.js)으로 답한다.
+     그런 곳에서 'AI' 라고 내세우지 않도록 이름과 안내 문구를 바꾼다 */
+  var LOCAL_ONLY = (function () { try { return isStaticHost() && !getKey(); } catch (e) { return false; } })();
+  if (LOCAL_ONLY && !(window.YUBIN_CHAT_CONFIG && window.YUBIN_CHAT_CONFIG.brandKo)) CFG.brandKo = "유빈 안내 데스크";
+  var FOOT_AI = "답변은 포트폴리오 근거로 AI가 생성합니다";
+  var FOOT_LOCAL = "사이트에 적힌 내용으로 바로 답합니다 · 생성형 AI 아님";
   var STORE_KEY = "yk_chat_history_v2";
   var DEEPLINK_KEY = "yk_deeplink";
 
@@ -282,7 +288,7 @@
     var q = (query || "").toLowerCase();
     if (/(안녕|하이|hello|hi|반가)/.test(q) && q.length < 12) {
       return {
-        text: "반갑습니다 👋 **유빈 AI가 김유빈 님을 안내해 드릴게요.**\n- 🧩 무엇을 잘하는지 — 역량\n- 🗂️ 무엇을 만들었는지 — 프로젝트\n- 🧭 어떤 길을 걸어왔는지 — 이력\n✨ 아래에서 골라 보시거나 편하게 질문해 주세요.",
+        text: "반갑습니다 👋 **" + CFG.brandKo + "가 김유빈 님을 안내해 드릴게요.**\n- 🧩 무엇을 잘하는지 — 역량\n- 🗂️ 무엇을 만들었는지 — 프로젝트\n- 🧭 어떤 길을 걸어왔는지 — 이력\n✨ 아래에서 골라 보시거나 편하게 질문해 주세요.",
         ctas: followUps("인물", []),
       };
     }
@@ -614,7 +620,7 @@
 
   /* ----------------------------------------------------------- build DOM */
   var history = loadHistory();
-  var root, panel, body, quick, textarea, sendBtn, teaser, busy = false, localMode = false, greeted = false;
+  var root, panel, body, quick, textarea, sendBtn, teaser, foot, busy = false, localMode = false, greeted = false;
   var consult = null; // { step, data:{} } — 진행 중 상담 흐름
 
   function build() {
@@ -686,7 +692,7 @@
     inputBar.appendChild(textarea);
     inputBar.appendChild(sendBtn);
 
-    var foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · 답변은 포트폴리오 근거로 생성됩니다');
+    foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + (LOCAL_ONLY ? FOOT_LOCAL : FOOT_AI));
 
     var screen = el("div", "yk-screen");
     screen.appendChild(el("div", "yk-island", '<i class="yk-island__l">YK</i><i class="yk-island__r"><b></b><b></b><b></b><b></b></i>'));
@@ -917,8 +923,9 @@
       textarea.focus();
     }
     function fallback() {
-      // 서버 실패 → 로컬 지식으로 타이핑 효과
+      // 서버 실패 → 로컬 지식으로 타이핑 효과 (안내 문구도 사실대로)
       localMode = true;
+      if (foot) foot.innerHTML = '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + FOOT_LOCAL;
       var la = localAnswer(text);
       ensureBubble();
       typeOut(bubble, la.text, function () {

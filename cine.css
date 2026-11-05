@@ -319,3 +319,80 @@ html.axs-lock #artifacts .works-grid>.edition:not(.is-staged){transform:scale(.9
 .axdemo__doc p b i{display:inline-block;margin-left:6px;padding:1px 6px;font-style:normal;font-size:.62rem;font-weight:700;color:#A23B2A;background:rgba(162,59,42,.08);border:1px solid rgba(162,59,42,.3)}
 .axdemo__sum{margin:10px 0 0;font-size:.8rem;color:var(--ink-soft)}
 .axdemo__sum b{color:#A23B2A}
+
+/* =====================================================================
+   작업 분류 — A 직접 만든 도구 · B 업무 시스템 · C 경국 AX · D 그 밖의 작업
+   ===================================================================== */
+.wgroup{margin-top:clamp(46px,6vw,80px);scroll-margin-top:80px}
+.whead{display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2vw,24px);align-items:start;margin-bottom:clamp(18px,2.4vw,28px);padding-top:18px;border-top:1px solid var(--hair-strong)}
+.whead__k{font-size:clamp(2.6rem,5vw,3.8rem);line-height:.9;color:var(--navy);font-weight:600}
+.whead__en{margin:2px 0 4px;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text)}
+.whead__ko{margin:0;font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:800;letter-spacing:-.02em;color:var(--navy);word-break:keep-all}
+.whead__sub{margin:8px 0 0;max-width:720px;font-size:.92rem;line-height:1.75;color:var(--ink-soft);word-break:keep-all}
+
+/* B 업무 시스템 — 문제 · 바꾼 흐름 · 역할 · 상태 */
+.edition__work{display:grid;gap:0;margin:4px 0 12px;border-top:1px solid var(--hair)}
+.edition__work div{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--hair)}
+.edition__work dt{font-size:.7rem;font-weight:800;letter-spacing:.06em;color:var(--gold-text);padding-top:2px}
+.edition__work dd{margin:0;font-size:.88rem;line-height:1.6;color:var(--ink);word-break:keep-all}
+
+/* A 네 가지 도구 — 폰: 옆으로 넘기는 큰 화면(지금 장은 앞, 옆 장은 깊이 물러남) · 넓은 화면: 2 × 2 */
+.tools{position:relative}
+.tools__track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,28px)}
+.tool{position:relative;display:flex;flex-direction:column;min-width:0;background:var(--paper);border:1px solid var(--hair);border-top:3px solid var(--navy);box-shadow:0 1px 0 rgba(16,19,28,.05),0 22px 44px -30px rgba(11,26,51,.45);scroll-margin-top:90px}
+.tool__shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0E1424}
+.tool__shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.tool:hover .tool__shot img{transform:scale(1.035)}
+.tool__no{position:absolute;left:14px;bottom:10px;font-size:2.2rem;line-height:1;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+.tool__body{display:flex;flex-direction:column;gap:10px;flex:1;padding:clamp(18px,2.2vw,26px)}
+.tool__badge{display:flex;flex-wrap:wrap;gap:6px;margin:0;font-size:.66rem;font-weight:700;letter-spacing:.06em}
+.tool__badge b{padding:3px 9px;color:#fff;background:var(--navy)}
+.tool__badge span{padding:3px 9px;color:var(--ink-soft);background:var(--ecru-deep)}
+.tool__name{margin:2px 0 0;font-size:clamp(1.25rem,2vw,1.55rem);font-weight:800;line-height:1.25;letter-spacing:-.02em;color:var(--navy)}
+.tool__name small{display:block;margin-bottom:3px;font-size:.78rem;font-weight:700;letter-spacing:0;color:var(--ink-soft)}
+.tool__why{margin:0;font-size:.95rem;line-height:1.7;color:var(--ink);word-break:keep-all}
+.tool__use{margin:0;padding:10px 12px;font-size:.88rem;line-height:1.6;background:#F3E7C9;border-left:3px solid var(--gold-text);word-break:keep-all}
+.tool__use b{display:block;font-size:.68rem;letter-spacing:.1em;color:var(--gold-text)}
+.tool__desc{margin:0;font-size:.84rem;line-height:1.7;color:var(--ink-soft);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tool__acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
+.tool__stage{background:var(--navy)!important;color:#fff!important}
+.tool.is-staged{visibility:hidden}
+html.axs-lock #tools .tool:not(.is-staged){transform:scale(.95);opacity:.4;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s}
+.tools__nav{display:none}
+@media (max-width:760px){
+  /* 화면 폭보다 좁은 장 — 다음 장이 옆에 살짝 보여 넘길 수 있음을 알린다 */
+  .tools{margin:0 -16px}
+  .tools__track{display:flex;gap:0;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 10vw 18px;perspective:1100px}
+  .tools__track::-webkit-scrollbar{display:none}
+  .tool{flex:0 0 80vw;margin:0 1.2vw;scroll-snap-align:center;scroll-snap-stop:always;
+    transform:rotateY(calc(var(--d,0)*-24deg)) translate3d(calc(var(--d,0)*-6vw),0,calc(var(--ad,0)*-150px)) scale(calc(1 - var(--ad,0)*.05));opacity:calc(1 - var(--ad,0)*.42);transform-origin:50% 50%}
+  .tool__shot{aspect-ratio:auto;height:min(46svh,400px)}
+  .tool__shot img{transform:translate3d(calc(var(--d,0)*-6%),0,0) scale(1.04);transition:none}
+  .tool__body{gap:8px;padding:16px 16px 18px}
+  .tool__name,.tool__why{transform:translate3d(calc(var(--d,0)*40px),0,0)}
+  .tool__why{font-size:.9rem}
+  .tool__desc{display:none}
+  .tool__acts .btn{flex:1 1 auto;justify-content:center;min-height:46px}
+  .tools__nav{display:flex;align-items:center;justify-content:center;gap:12px;padding:0 16px}
+  .tools__arrow{width:44px;height:44px;border:1px solid var(--hair-strong);background:var(--paper);color:var(--navy);font-size:1.1rem;cursor:pointer}
+  .tools__arrow:disabled{opacity:.35;cursor:default}
+  .tools__dots{display:flex;gap:2px;margin:0;padding:0;list-style:none}
+  .tools__dots button{width:28px;height:44px;padding:0;border:0;background:none;cursor:pointer;position:relative}
+  .tools__dots button::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--hair-strong);transition:transform .3s,background .3s}
+  .tools__dots button[aria-current]::after{background:var(--navy);transform:scale(1.4)}
+  .tools__count{flex:1;min-width:0;font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  /* 첫 화면 — 바로 가기 네 개 */
+  #manifesto .hero-cta{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important}
+  #manifesto .hero-cta .btn{min-width:0;padding-left:6px;padding-right:6px;font-size:.8rem;text-align:center;white-space:normal;line-height:1.25}
+  #manifesto .hero-cta .hero-main{grid-column:1/-1}
+  .cine-on .hero-scene{height:140vh;height:140svh}
+  /* 극장 — 폰은 세로 실제 화면(390 × 844 캡처) */
+  .pth__stage{height:min(58svh,520px)}
+  .pth__stack{width:auto;height:84%;aspect-ratio:390/844}
+  .pth__layer img{object-fit:cover;object-position:top}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.tool,.tool__shot img,.tool__name,.tool__why{transform:none!important;opacity:1!important}}
+.tool:focus-within{outline:none}
+.tools__arrow:focus-visible,.tools__dots button:focus-visible,.tool .btn:focus-visible{outline:3px solid #8FB8F2;outline-offset:2px}
+.pth__origin{margin:-4px 0 0;font-size:.68rem;font-weight:700;letter-spacing:.04em;color:var(--navy)}
+.pth__desc{margin:0;font-size:.84rem;line-height:1.7;color:var(--ink-soft);word-break:keep-all}
