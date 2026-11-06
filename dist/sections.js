@@ -119,7 +119,7 @@ function HeroCity() {
     React.createElement("div", { className: "lc-cta" }, /*#__PURE__*/
     React.createElement("a", { href: "#tools", className: "btn lc-cta__main" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C 4\uAC00\uC9C0 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uACBD\uAD6D AX \uC9C0\uD718\uC2E4"), /*#__PURE__*/
-    React.createElement("a", { href: "#contact", className: "btn btn--ghost", onClick: (ev) => {if (window.YubinChat) {ev.preventDefault();window.YubinChat.open();}} }, "\uC9C8\uBB38\uD558\uAE30"), /*#__PURE__*/
+    React.createElement("a", { href: "#contact", className: "btn btn--ghost lc-cta__ask", onClick: (ev) => {if (window.YubinChat) {ev.preventDefault();window.YubinChat.open();}} }, "\uC9C8\uBB38\uD558\uAE30"), /*#__PURE__*/
     React.createElement("a", { href: "#contact", className: "btn btn--ghost" }, "\uC5F0\uB77D\uD558\uAE30")
     )
     ), /*#__PURE__*/
@@ -1543,7 +1543,7 @@ function FlagshipTool({ e, onOpen, flip }) {
   const [t1] = e.title.split("\n");
   React.useEffect(() => {
     ctl.current = window.City && window.City.mount(cv.current, "tool-" + e.n, {
-      scroll: ".fl", mode: "pass", img: { d: `images/product/${M.shot}-720.webp`, m: `images/product/${M.shot}-m600.webp` }
+      scroll: ".fl", mode: "reveal", img: { d: `images/product/${M.shot}-720.webp`, m: `images/product/${M.shot}-m600.webp` }
     });
     return () => ctl.current && ctl.current.destroy();
   }, []);

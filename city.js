@@ -479,7 +479,8 @@
         var la = seg(s.p, 0.3 + i * 0.1, 0.62 + i * 0.1), z = lerp(30, 3 + i * 5.2, la) + o * (2 + i * 3), P = inset(M.site.P, 1.2);
         if (i === 3) continue;
         r.flat(P, z, rgba(T.plane, (0.05 + 0.04 * i) * la * (1 - o)), "rgba(19,40,75," + (0.5 * la * (1 - o)).toFixed(2) + ")", 0.9);
-        r.label(P[i % 2 ? 3 : 1][0], P[i % 2 ? 3 : 1][1], z, M.layers[i], { dx: i % 2 ? -16 : 16, dy: -4, align: i % 2 ? "right" : "left", a: la * (1 - o), size: 11 });
+        var ex = P.map(function (q) { return r.p(q[0], q[1], z)[0]; }), vi = ex.indexOf(i % 2 ? Math.min.apply(null, ex) : Math.max.apply(null, ex));
+        r.label(P[vi][0], P[vi][1], z, M.layers[i], { dx: i % 2 ? -14 : 14, dy: -4, align: i % 2 ? "right" : "left", a: la * (1 - o), size: 11 });
       }
       /* 기관에서 흘러드는 문서 — 보일 때만 움직인다 */
       var t = (now || 0) / 2600;
@@ -489,7 +490,7 @@
         r.flat(rect(px, py, 2.2, 2.9, 0.3 + i), pz, rgba([255, 255, 255], a), "rgba(19,40,75," + (0.5 * a).toFixed(2) + ")", 0.7);
       }
       var top = inset(M.site.P, 1.2), zt = 3 + 3 * 5.2 + o * 8, la3 = seg(s.p, 0.6, 0.92);
-      if (o < 0.01) { r.flat(top, zt, rgba(T.gold, 0.12 * la3), T.gLine, 1.3, la3); r.label(top[1][0], top[1][1], zt, M.layers[3], { dx: 16, dy: -4, a: la3, size: 11, col: "rgba(115,92,48,1)" }); }
+      if (o < 0.01) { r.flat(top, zt, rgba(T.gold, 0.12 * la3), T.gLine, 1.3, la3); var ex3 = top.map(function (q) { return r.p(q[0], q[1], zt)[0]; }), v3 = ex3.indexOf(Math.min.apply(null, ex3)); r.label(top[v3][0], top[v3][1], zt, M.layers[3], { dx: -14, dy: -4, align: "right", a: la3, size: 11, col: "rgba(115,92,48,1)" }); }
       morphFocus(r, M, s, top, zt);
     },
   };
@@ -742,7 +743,7 @@
         st[k] = t.a + (t.b - t.a) * (t.lin ? u : 1 - Math.pow(1 - u, 3));
         if (u >= 1) { delete tw[k]; t.done(); } else busy = true;
       }
-      if (sec) st.p = quiet ? (S.rest != null ? S.rest : 1) : prog();
+      if (sec && opt.mode !== "reveal") st.p = quiet ? (S.rest != null ? S.rest : 1) : prog();
       if (st.intro < 1) { st.intro = clamp((now - st.t0) / 1800, 0, 1); busy = true; }
       /* 상시 움직임(문서 흐름 · 업무 흐름)은 스크롤하는 동안 쉬었다가 멈추면 이어 간다 */
       var live = S.live && act && !quiet && st.o < 0.01;
@@ -760,12 +761,17 @@
     }
     function req(force) { if (!raf && !dead && (vis || force)) raf = requestAnimationFrame(frame); }
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { vis = e.isIntersecting; act = e.intersectionRatio >= 0.35; if (vis) { loadImg(); req(); } });
+      es.forEach(function (e) {
+        vis = e.isIntersecting; act = e.intersectionRatio >= 0.35;
+        if (vis) { loadImg(); req(); }
+        /* reveal — 처음 충분히 보일 때 한 번 솟는다(그 뒤 스크롤은 그리기 0회) */
+        if (opt.mode === "reveal" && act && !st.revealed) { st.revealed = 1; if (calm()) { st.p = 1; dirty = true; } else api.tween("p", 1, 1500); }
+      });
     }, { threshold: [0, 0.35], rootMargin: "120px 0px" });
     io.observe(canvas);
     var scrolled = 0;
     var onScroll = function () { scrolled = performance.now(); if (vis) req(); };
-    if (sec || S.live) window.addEventListener("scroll", onScroll, { passive: true });
+    if ((sec && opt.mode !== "reveal") || S.live) window.addEventListener("scroll", onScroll, { passive: true });
     var ro = window.ResizeObserver ? new ResizeObserver(function () { measure(); }) : null;
     if (ro) { ro.observe(canvas); if (sec) ro.observe(sec); } else window.addEventListener("resize", measure);
     window.addEventListener("load", measure);

@@ -19,7 +19,7 @@
 
   // 메인: 폰 헤더에 현재 섹션·읽은 정도 표시
   if (onIndex) (function () {
-    var S = "glance:한눈에,about:소개,composite:역량,whyc:전략 사례,ax-desk:경국 AX,artifacts:네 가지 도구,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
+    var S = "glance:한눈에,about:소개,composite:역량,ax-desk:경국 AX,artifacts:네 가지 도구,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
     var bar = document.createElement("div"), tag = document.createElement("a"), cur = "", tk = 0;
     bar.className = "yk-prog"; tag.className = "yk-now font-sans"; tag.href = "#top"; tag.setAttribute("aria-label", "현재 섹션, 맨 위로");
     document.body.append(bar, tag);

@@ -118,7 +118,7 @@ function HeroCity() {
           <div className="lc-cta">
             <a href="#tools" className="btn lc-cta__main">직접 만든 도구 4가지 <ArrowDown size={15} /></a>
             <a href="#ax-desk" className="btn btn--ghost">경국 AX 지휘실</a>
-            <a href="#contact" className="btn btn--ghost" onClick={(ev) => { if (window.YubinChat) { ev.preventDefault(); window.YubinChat.open(); } }}>질문하기</a>
+            <a href="#contact" className="btn btn--ghost lc-cta__ask" onClick={(ev) => { if (window.YubinChat) { ev.preventDefault(); window.YubinChat.open(); } }}>질문하기</a>
             <a href="#contact" className="btn btn--ghost">연락하기</a>
           </div>
         </div>
@@ -1542,7 +1542,7 @@ function FlagshipTool({ e, onOpen, flip }) {
   const [t1] = e.title.split("\n");
   React.useEffect(() => {
     ctl.current = window.City && window.City.mount(cv.current, "tool-" + e.n, {
-      scroll: ".fl", mode: "pass", img: { d: `images/product/${M.shot}-720.webp`, m: `images/product/${M.shot}-m600.webp` },
+      scroll: ".fl", mode: "reveal", img: { d: `images/product/${M.shot}-720.webp`, m: `images/product/${M.shot}-m600.webp` },
     });
     return () => ctl.current && ctl.current.destroy();
   }, []);

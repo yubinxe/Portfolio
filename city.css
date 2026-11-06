@@ -55,16 +55,21 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
   .lc-role span{display:none}
   .lc-lead{margin-top:10px;font-size:1.06rem;transition:opacity .5s}
   .lc-proof{display:none}
-  .lc-cta{margin-top:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .lc-cta{margin-top:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-right:0}
+  .lc-cta .lc-cta__ask{display:none} /* 폰 — 오른쪽 아래 상담 버튼이 같은 일을 한다 */
+  .lc-cta .btn:not(.lc-cta__main){margin-right:0}
+  .lc-cta .btn:last-child{margin-right:70px}
   .lc-cta .btn{min-width:0;padding:0 6px;justify-content:center;text-align:center;white-space:normal;line-height:1.25;font-size:.74rem;letter-spacing:.06em}
   .lc-cta .lc-cta__main{grid-column:1/-1;min-height:52px;font-size:.86rem}
   .city-hero[data-phase="2"] .lc-lead,.city-hero[data-phase="3"] .lc-lead,.city-hero[data-phase="4"] .lc-lead{opacity:0}
-  .lc-steps{top:auto;left:20px;right:20px;bottom:calc(132px + env(safe-area-inset-bottom));text-align:left}
+  .lc-steps{top:auto;left:20px;right:20px;bottom:calc(152px + env(safe-area-inset-bottom));text-align:left}
+  .lc-cta{position:relative;z-index:3}
+  .city-hero__copy{padding-bottom:calc(12px + env(safe-area-inset-bottom))}
   .lc-steps li{display:none;justify-content:flex-start}
   .city-hero[data-phase="0"] .lc-steps li[data-i="0"],.city-hero[data-phase="1"] .lc-steps li[data-i="1"],.city-hero[data-phase="2"] .lc-steps li[data-i="2"],
   .city-hero[data-phase="3"] .lc-steps li[data-i="3"],.city-hero[data-phase="4"] .lc-steps li[data-i="4"]{display:flex}
   .lc-steps__ko{max-width:none!important}
-  .lc-note{left:auto;right:20px;bottom:calc(136px + env(safe-area-inset-bottom));font-size:.66rem}
+  .lc-note{left:20px;right:20px;bottom:calc(132px + env(safe-area-inset-bottom));font-size:.64rem;color:rgba(74,83,101,.9)}
   .lc-skip{display:none}
 }
 @media (max-width:760px) and (max-height:700px){.lc-lead{display:none}}
