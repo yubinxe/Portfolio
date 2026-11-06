@@ -909,7 +909,8 @@ const EDITIONS = [
 
 
 /* 화면에 보이는 순서와 번호 — 실생활·실무 시스템 7건을 먼저, 학습·콘텐츠·제안 작업은 "그 밖의 작업"에 */
-const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
+/* 07(네이버웍스 급여명세서)은 작업 목록이 아니라 경국 AX 데스크의 "실무" 칸(광명시흥 보상자료 옆)에 둔다 — 앵커 #ed-07 은 그 칸에 있다 */
+const EDITION_ORDER = ["09", "16", "17", "12", "06", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {
@@ -967,7 +968,8 @@ const AX_CASES = [
   before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시" }];
 
 const AX_SUPPORT = [
-{ id: "ax-compensation", tag: "실무 · Practice", title: "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." }];
+{ id: "ax-compensation", tag: "실무 · Practice", title: "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
+{ id: "ed-07", tag: "실무 · Practice", title: "NAVER WORKS Payroll · 네이버웍스 급여명세서 자동 발송", desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다. 사내 운영 · 비공개." }];
 
 
 function AxDesk() {
@@ -1031,7 +1033,7 @@ function Artifacts() {
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { eyebrow: "03 \u2014 Selected Works", titleEn: "The Artifacts", titleKo: "AI \uC804\uB7B5 \xB7 \uC790\uB3D9\uD654 \uD504\uB85C\uC81D\uD2B8" }), /*#__PURE__*/
     React.createElement("p", { className: "works-lead font-ko reveal" }, "\uB9E8 \uC704\uB294 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC815\uBE44\uC0AC\uC5C5\uC758 \uBC95\uB960\xB7\uACBD\uC81C \uC704\uD5D8\uC744 \uB2E4\uB8E8\uB294 ", /*#__PURE__*/
-    React.createElement("strong", null, "AX \uD604\uD669\uD310"), ", \uADF8 \uC544\uB798\uB294 \uC9C1\uC811 \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C ", EDITIONS.filter((e) => e.core).length, "\uAC74"), "\uC785\uB2C8\uB2E4. \uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130, \uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8, \uC81C\uC548\uC11C\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uB294 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    React.createElement("strong", null, "AX \uD604\uD669\uD310"), ", \uADF8 \uC544\uB798\uB294 \uC9C1\uC811 \uC815\uC758\uD558\uACE0 \uAD6C\uD604\uD574 ", /*#__PURE__*/React.createElement("strong", null, "\uBC30\uD3EC\uD558\uAC70\uB098 \uC0AC\uB0B4 \uC5C5\uBB34\uC5D0 \uC801\uC6A9\uD55C \uC2DC\uC2A4\uD15C ", EDITIONS_SHOWN.filter((e) => e.core).length, "\uAC74"), "\uC785\uB2C8\uB2E4. \uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130, \uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8, \uC81C\uC548\uC11C\uC640 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uB294 \uC544\uB798\uC5D0\uC11C \uB530\uB85C \uD3BC\uCCD0 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
     React.createElement(AxDesk, null), /*#__PURE__*/
@@ -1044,8 +1046,8 @@ function Artifacts() {
     React.createElement("summary", null, /*#__PURE__*/
     React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
     React.createElement("span", { className: "eyebrow" }, "Supplementary"), /*#__PURE__*/
-    React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
-    React.createElement("span", { className: "fold__line font-ko" }, "\uACE0\uAC1D \uBA54\uC77C \uBD84\uB958 \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1 \xB7 \uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
+    React.createElement("strong", { className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", null, EDITIONS_SHOWN.filter((e) => !e.core).length, "\uAC74")), /*#__PURE__*/
+    React.createElement("span", { className: "fold__line font-ko" }, "\uAC10\uC815\uD3C9\uAC00\uC0AC \uD544\uB4DC\uC6CC\uD06C \xB7 \uC131\uBD84\uAD00 \xB7 Salvation \xB7 \uC0DD\uC131\uD615 AI \uC601\uC0C1")
     ), /*#__PURE__*/
     React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })
     ), /*#__PURE__*/
@@ -1305,7 +1307,7 @@ function Contact() {
     React.createElement("br", null), "\uC774\uBA54\uC77C\uB85C \uC5F0\uB77D \uC8FC\uC2DC\uBA74 \uC131\uC2E4\uD788 \uD68C\uC2E0\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4."
     ), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" } }, /*#__PURE__*/
-    React.createElement("a", { href: "mailto:ybkim@gyunggook.com", className: "btn", style: { background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" } }, /*#__PURE__*/
+    React.createElement("a", { href: "mailto:yubin120866@gmail.com", className: "btn", style: { background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" } }, /*#__PURE__*/
     React.createElement(Mail, { size: 16 }), " \uC774\uBA54\uC77C \uBCF4\uB0B4\uAE30"
     ), /*#__PURE__*/
     React.createElement("a", { href: "career.html", className: "btn btn--ghost", style: { color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" } }, "\uACBD\uB825 \uC0C1\uC138 ", /*#__PURE__*/
@@ -1402,7 +1404,7 @@ function Footer() {
     OFFICIAL_CHANNELS.map(([t, h]) => /*#__PURE__*/
     React.createElement("a", { key: h, href: h, rel: "me noopener", target: "_blank" }, t)
     ), /*#__PURE__*/
-    React.createElement("a", { href: "mailto:ybkim@gyunggook.com", style: { marginLeft: "auto" } }, "ybkim@gyunggook.com")
+    React.createElement("a", { href: "mailto:yubin120866@gmail.com", style: { marginLeft: "auto" } }, "yubin120866@gmail.com")
     ), /*#__PURE__*/
     React.createElement("div", { className: "wrap footer-grid", style: { paddingTop: 26, paddingBottom: 26 } }, /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }, className: "font-serif" }, /*#__PURE__*/
