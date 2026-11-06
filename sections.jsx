@@ -923,7 +923,8 @@ const EDITIONS = [
 ];
 
 /* 화면에 보이는 순서와 번호 — 실생활·실무 시스템 7건을 먼저, 학습·콘텐츠·제안 작업은 "그 밖의 작업"에 */
-const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
+/* 07(네이버웍스 급여명세서)은 작업 목록이 아니라 경국 AX 데스크의 "실무" 칸(광명시흥 보상자료 옆)에 둔다 — 앵커 #ed-07 은 그 칸에 있다 */
+const EDITION_ORDER = ["09", "16", "17", "12", "06", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => {
   const e = EDITIONS.find((x) => x.n === n);
   return { ...e, group: e.group || "supplementary", no: String(i + 1).padStart(2, "0") };
@@ -1010,6 +1011,7 @@ const AX_CASES = [
 ];
 const AX_SUPPORT = [
   { id: "ax-compensation", tag: "실무 · Practice", title: "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
+  { id: "ed-07", tag: "실무 · Practice", title: "NAVER WORKS Payroll · 네이버웍스 급여명세서 자동 발송", desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다. 사내 운영 · 비공개." },
 ];
 
 /* AX 조립 장면 — 흩어진 법령·서류·계약서가 스크롤에 따라 세 갈래 체계로 모인다. 진행도(--cp)는 cine.js 가 쓴다 */
@@ -1883,7 +1885,7 @@ function Contact() {
           AI 전략 컨설팅 · 업무 자동화 · 데이터 기반 서비스 컨설팅 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
+          <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
             <Mail size={16} /> 이메일 보내기
           </a>
           <a href="career.html" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
@@ -1980,7 +1982,7 @@ function Footer() {
         {OFFICIAL_CHANNELS.map(([t, h]) => (
           <a key={h} href={h} rel="me noopener" target="_blank">{t}</a>
         ))}
-        <a href="mailto:ybkim@gyunggook.com" style={{ marginLeft: "auto" }}>ybkim@gyunggook.com</a>
+        <a href="mailto:yubin120866@gmail.com" style={{ marginLeft: "auto" }}>yubin120866@gmail.com</a>
       </div>
       <div className="wrap footer-grid" style={{ paddingTop: 26, paddingBottom: 26 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">

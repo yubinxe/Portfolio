@@ -22,7 +22,8 @@
 
   var SITE = "https://yubinxe.github.io/Portfolio/";
   var EMAIL = "yubin120866@gmail.com";
-  var EMAIL_OFFICE = "ybkim@gyunggook.com";
+  /* 공개 연락처는 개인 메일 하나 — 회사 공식 메일함이 아니다 */
+  var EMAIL_OFFICE = EMAIL;
 
   /* ------------------------------------------------------------ 지식카드 */
   var CARDS = [
@@ -165,7 +166,7 @@
     /* ---- 프로젝트 ---- */
     { id: "projects", cat: "프로젝트", tags: ["프로젝트", "작업", "artifact", "포트폴리오", "대표", "만든", "결과물", "산출물"],
       title: "작업 전체 — 16건 (네 갈래)",
-      body: "직접 설계·구현한 작업 16건을 성격별로 나눠 소개합니다. 배포 여부와 '누가 어디서 쓰는가'는 따로 봅니다.\n[A 직접 만들어 자주 쓰는 도구 4 — 개인 제품, 회사 시스템 아님]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n[B 업무 시스템 2]\n- 05 [고객 메일 자동 분류 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n- 06 네이버웍스 메일 연동 급여명세서 자동 발송 (사내 운영 · 비공개)\n[C 법무법인 경국 정비사업 AX 3] RE:INTELLIGENCE · Assembly Risk Engine · Contract Risk Intelligence(사내 구축)\n[D 그 밖의 작업]\n- 07 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 08 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 09 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 10 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 11 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 12 청약 인사이트 대시보드 — Vercel 배포(공개 데모 종료)\n- 13 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 14 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 15 Louis Vuitton 시네마틱 캠페인 필름\n- 16 Hyperframe × ElevenLabs 멀티미디어 프로모션",
+      body: "직접 설계·구현한 작업 16건을 성격별로 나눠 소개합니다. 배포 여부와 '누가 어디서 쓰는가'는 따로 봅니다.\n[A 직접 만들어 자주 쓰는 도구 4 — 개인 제품, 회사 시스템 아님]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n[B 업무 시스템 1]\n- 05 [고객 메일 자동 분류 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n[C 법무법인 경국 정비사업 AX 3] RE:INTELLIGENCE · Assembly Risk Engine · Contract Risk Intelligence(사내 구축) · 실무 — 광명시흥 보상자료 분석 · 네이버웍스 급여명세서 자동 발송(사내 운영)\n[D 그 밖의 작업]\n- 06 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 07 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 08 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 09 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 10 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 11 청약 인사이트 대시보드 — Vercel 배포(공개 데모 종료)\n- 12 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 13 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 14 Louis Vuitton 시네마틱 캠페인 필름\n- 15 Hyperframe × ElevenLabs 멀티미디어 프로모션",
       primary: { label: "작업 전체 보기", href: "index.html#artifacts" },
       secondary: { label: "직접 만든 도구 4", href: "index.html#tools" } },
     { id: "everyday-tools", cat: "프로젝트", tags: ["자주 쓰는", "자주 쓰는 서비스", "직접 만들어", "직접 만든", "일상", "개인 제품", "개인 도구", "내가 쓰는", "도구 4", "서비스 4", "my everyday tools"],
@@ -174,8 +175,8 @@
       primary: { label: "네 가지 도구 보기", href: "index.html#tools" },
       secondary: { label: "집캐치 열기", href: "https://zipcatch.vercel.app" } },
     { id: "work-systems", cat: "프로젝트", tags: ["업무 자동화", "자동화했", "법무법인에서", "회사에서", "실제 업무", "업무 시스템", "사내 자동화", "enterprise"],
-      title: "실제 업무를 시스템으로 — 업무 시스템 2건과 경국 AX",
-      body: "실제 업무 흐름에서 출발한 시스템입니다.\n- 고객 메일 자동 분류 시스템 — 담당자가 메일함을 직접 열어 판단하던 일을 '지금 답할 것 · 오늘 안에 볼 것 · 넘겨도 되는 것' 1차 분류로 바꿈. 분류 기준 설계 · 구현, Vercel 배포\n- 네이버웍스 급여명세서 자동 발송 — 명세서 생성과 발송을 메일 API로 자동화. 사내 운영 적용 · 화면과 코드 비공개\n법무법인 경국의 정비사업 AX로는 RE:INTELLIGENCE(법률 리스크 관제) · Assembly Risk Engine(총회결의 하자 사전검증) · Contract Risk Intelligence(계약변경 AI Redline)를 사내에 구축했습니다. 집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에는 회사 시스템이 아니라 개인 제품입니다.",
+      title: "실제 업무를 시스템으로 — 업무 시스템 · 실무 · 경국 AX",
+      body: "실제 업무 흐름에서 출발한 시스템입니다.\n- 고객 메일 자동 분류 시스템 — 담당자가 메일함을 직접 열어 판단하던 일을 '지금 답할 것 · 오늘 안에 볼 것 · 넘겨도 되는 것' 1차 분류로 바꿈. 분류 기준 설계 · 구현, Vercel 배포\n실무로는 네이버웍스 급여명세서 자동 발송(메일 API로 생성·발송 자동화, 사내 운영)과 광명시흥 3기 신도시 보상자료 분석을 맡았고, 법무법인 경국의 정비사업 AX로는 RE:INTELLIGENCE(법률 리스크 관제) · Assembly Risk Engine(총회결의 하자 사전검증) · Contract Risk Intelligence(계약변경 AI Redline)를 사내에 구축했습니다. 집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에는 회사 시스템이 아니라 개인 제품입니다.",
       primary: { label: "업무 시스템 보기", href: "index.html#work-systems" },
       secondary: { label: "경국 AX 보기", href: "index.html#ax-desk" } },
     { id: "ed-09", cat: "프로젝트", tags: ["집캐치", "zipcatch", "공공임대", "임대", "lh", "맞춤 추천", "추천 서비스", "공고 알림"],
@@ -255,8 +256,8 @@
       secondary: { label: "작업 카드", href: "index.html#ed-06" } },
     { id: "ed-07", cat: "프로젝트", tags: ["네이버웍스", "naver works", "급여", "명세서", "자동 발송", "사내"],
       title: "네이버웍스 메일 연동 급여명세서 자동 발송",
-      body: "실제 업무 흐름을 바꾼 업무 시스템입니다. 네이버웍스(NAVER WORKS) 메일 API와 연동해 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 발송 절차를 표준화해 처리 시간을 단축하고 오류 가능성을 줄였습니다. 사내 운영 · 비공개.",
-      primary: { label: "작업 카드", href: "index.html#ed-07" },
+      body: "법무법인 경국 AX 데스크의 실무 칸(광명시흥 보상자료 옆)에 있는 실무 작업입니다. 네이버웍스(NAVER WORKS) 메일 API와 연동해 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 발송 절차를 표준화해 처리 시간을 단축하고 오류 가능성을 줄였습니다. 사내 운영 · 비공개.",
+      primary: { label: "AX 데스크 실무 칸", href: "index.html#ed-07" },
       secondary: null },
     { id: "ax-desk", cat: "프로젝트", tags: ["ax", "경국 ax", "ax 현황판", "법무법인 ax", "전략기획", "리스크 관제", "총회결의", "계약변경", "redline", "정비사업 리스크"],
       title: "법무법인 경국 AX 현황판 — 정비사업의 법률·경제 위험",
@@ -401,7 +402,7 @@
     /* ---- 연락 · 협업 ---- */
     { id: "contact", cat: "연락", tags: ["연락", "이메일", "협업", "채용", "contact", "제안", "문의", "메일", "recruiter", "연락처"],
       title: "연락 · 협업",
-      body: "협업 · 채용 · 프로젝트 문의는 이메일로 받습니다.\n- 개인: [" + EMAIL + "](mailto:" + EMAIL + ")\n- 사무실: [" + EMAIL_OFFICE + "](mailto:" + EMAIL_OFFICE + ")\n새로운 협업과 프로젝트, Recruiter 분들을 환영합니다. 챗봇에서 '무료 상담 신청'을 누르면 상담 내용을 정리해 바로 전달할 수 있습니다.",
+      body: "협업 · 채용 · 프로젝트 문의는 이메일로 받습니다.\n- 이메일: [" + EMAIL + "](mailto:" + EMAIL + ") (개인 메일 · 회사 공식 메일함 아님)\n새로운 협업과 프로젝트, Recruiter 분들을 환영합니다. 챗봇에서 '무료 상담 신청'을 누르면 상담 내용을 정리해 바로 전달할 수 있습니다.",
       primary: { label: "연락 섹션", href: "index.html#contact" },
       secondary: { label: "이메일 보내기", href: "mailto:" + EMAIL } },
     { id: "channels", cat: "연락", tags: ["채널", "sns 채널", "블로그", "네이버 블로그", "티스토리", "tistory", "sns", "pr", "홍보", "기록", "글"],
