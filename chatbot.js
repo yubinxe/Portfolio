@@ -58,6 +58,8 @@
   if (LOCAL_ONLY && !(window.YUBIN_CHAT_CONFIG && window.YUBIN_CHAT_CONFIG.brandKo)) CFG.brandKo = "유빈 안내 데스크";
   var FOOT_AI = "답변은 포트폴리오 근거로 AI가 생성합니다";
   var FOOT_LOCAL = "사이트에 적힌 내용으로 바로 답합니다 · 생성형 AI 아님";
+  var FOOT_NEUTRAL = "포트폴리오 근거로 답합니다"; /* 서버 응답을 확인하기 전에는 AI 라고 내세우지 않는다 */
+  var liveShown = false;
   var STORE_KEY = "yk_chat_history_v2";
   var DEEPLINK_KEY = "yk_deeplink";
 
@@ -489,6 +491,14 @@
 .yk-typing span:nth-child(2){ animation-delay:.18s; } .yk-typing span:nth-child(3){ animation-delay:.36s; }
 @keyframes yk-dots{ 0%,60%,100%{opacity:.35; transform:none;} 30%{opacity:1; transform:translateY(-3px);} }
 /* ---- 추천 칩 ---- */
+.yk-start{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:4px 2px 10px; }
+.yk-start__btn{ display:grid; gap:4px; min-height:84px; padding:14px 14px; text-align:left; font:inherit; border-radius:16px; border:1px solid rgba(201,174,122,.55); background:#fff; color:#0B1A33; cursor:pointer; box-shadow:0 10px 24px -18px rgba(11,26,51,.5); transition:transform .2s, box-shadow .2s; }
+.yk-start__btn b{ font-size:.96rem; font-weight:800; letter-spacing:-.01em; }
+.yk-start__btn small{ font-size:.74rem; color:#5A6273; line-height:1.4; }
+.yk-start__btn:active{ transform:scale(.98); }
+.yk-start__btn--accent{ background:#0B1A33; color:#F3EEE4; border-color:#0B1A33; }
+.yk-start__btn--accent small{ color:rgba(243,238,228,.75); }
+.yk-start__btn:focus-visible{ outline:3px solid #8FB8F2; outline-offset:2px; }
 .yk-quick{ display:flex; gap:7px; padding:8px 12px 6px; overflow-x:auto; flex:none; background:var(--yk-ivory); scrollbar-width:none; }
 .yk-quick::-webkit-scrollbar{ display:none; }
 .yk-chip{ flex:none; font:inherit; font-size:13px; font-weight:560; color:var(--yk-navy); background:#FFFFFF; border:none;
@@ -692,7 +702,7 @@
     inputBar.appendChild(textarea);
     inputBar.appendChild(sendBtn);
 
-    foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + (LOCAL_ONLY ? FOOT_LOCAL : FOOT_AI));
+    foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + (LOCAL_ONLY ? FOOT_LOCAL : FOOT_NEUTRAL));
 
     var screen = el("div", "yk-screen");
     screen.appendChild(el("div", "yk-island", '<i class="yk-island__l">YK</i><i class="yk-island__r"><b></b><b></b><b></b><b></b></i>'));
@@ -777,6 +787,36 @@
   function hideQuick() { if (quick) quick.style.display = "none"; }
 
   function toggle() { root.classList.contains("open") ? close() : open(); }
+  /* 폰에서는 열자마자 입력창에 초점을 주지 않는다 — 키보드가 올라와 첫 화면(시작 버튼 4개)을 가리지 않게 */
+  var TOUCH = window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(max-width: 640px)").matches;
+  function focusInput() { if (!TOUCH && textarea) textarea.focus(); }
+  /* 첫 화면 — 큰 버튼 4개(자주 쓰는 서비스 · 업무 자동화 · 경력 · 연락). 한 번 누르면 아래 칩 줄로 바뀐다 */
+  function renderStart() {
+    var grid = el("div", "yk-start");
+    grid.setAttribute("role", "group");
+    grid.setAttribute("aria-label", "바로 시작하기");
+    SUGGESTIONS.slice(0, 4).forEach(function (s) {
+      var isConsult = s.query === "__consult__";
+      var b = el("button", "yk-start__btn" + (isConsult ? " yk-start__btn--accent" : ""), "<b>" + escapeHtml(s.label) + "</b>" + (s.sub ? "<small>" + escapeHtml(s.sub) + "</small>" : ""));
+      b.type = "button";
+      b.addEventListener("click", function () { grid.remove(); isConsult ? startConsult() : send(s.query); });
+      grid.appendChild(b);
+    });
+    body.appendChild(grid);
+    hideQuick();
+    return grid;
+  }
+  /* 화면 키보드가 올라오면 보이는 영역(visualViewport)에 맞춰 시트 높이를 줄인다 — 입력창과 마지막 답이 키보드 위에 */
+  function fitViewport() {
+    var vv = window.visualViewport;
+    if (!vv || !panel || window.innerWidth > 520) return;
+    if (!root.classList.contains("open")) { panel.style.height = ""; panel.style.bottom = ""; return; }
+    var kb = window.innerHeight - vv.height - vv.offsetTop;
+    if (kb > 80) { panel.style.height = Math.round(vv.height) + "px"; panel.style.bottom = Math.round(kb) + "px"; }
+    else { panel.style.height = ""; panel.style.bottom = ""; }
+    scrollBottom();
+  }
+  if (window.visualViewport) { window.visualViewport.addEventListener("resize", fitViewport); window.visualViewport.addEventListener("scroll", fitViewport); }
   function open() {
     root.classList.add("open");
     root.querySelector(".yk-fab").setAttribute("aria-expanded", "true");
@@ -787,8 +827,10 @@
       var d0 = new Date();
       body.appendChild(el("div", "yk-stamp", "오늘 " + (d0.getHours() < 12 ? "오전 " : "오후 ") + hhmm()));
       renderMessage("bot", CFG.greeting);
+      var start = renderStart();
+      if (TOUCH) setTimeout(function () { var f = start.querySelector("button"); f && f.focus({ preventScroll: true }); }, 340);
     }
-    setTimeout(function () { textarea && textarea.focus(); }, 340);
+    setTimeout(focusInput, 340);
     scrollBottom();
   }
   function close() {
@@ -797,6 +839,7 @@
     var inside = root.contains(document.activeElement) && document.activeElement !== fab;
     root.classList.remove("open");
     fab.setAttribute("aria-expanded", "false");
+    fitViewport();
     if (inside) fab.focus();
   }
 
@@ -899,6 +942,7 @@
       }
     }
     function onToken(tok) {
+      if (!liveShown && foot) { liveShown = true; foot.innerHTML = '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + FOOT_AI; } /* 실제로 생성 응답이 왔을 때만 AI 라고 표시 */
       acc += tok;
       ensureBubble();
       bubble.innerHTML = mdLite(acc);
@@ -920,7 +964,7 @@
         pushBot(acc, ctas);
       }
       setBusy(false);
-      textarea.focus();
+      focusInput();
     }
     function fallback() {
       // 서버 실패 → 로컬 지식으로 타이핑 효과 (안내 문구도 사실대로)
@@ -979,7 +1023,7 @@
     var intro = "📝 **무료 상담 신청을 도와드릴게요.**\n세 가지만 여쭙겠습니다.\n" + CONSULT.steps[0].ask;
     renderMessage("bot", intro);
     pushBot(intro);
-    setTimeout(function () { textarea && textarea.focus(); }, 200);
+    setTimeout(focusInput, 200);
   }
   function consultStep(answer) {
     var step = CONSULT.steps[consult.step];

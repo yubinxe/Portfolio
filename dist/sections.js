@@ -82,15 +82,22 @@ function Nav() {
 }
 
 /* ============================================================ HERO */
-/* 히어로 — 고정된 한 화면 안에서 카메라가 도시로 들어간다(진행도 --cp 는 cine.js).
- *  0–15%  정지 화면 · 이름이 원근을 두고 차례로 선다
- * 15–50%  사진이 앞으로 오고, YUBIN / KIM 은 서로 다른 깊이로 갈라진다
- * 50–85%  카메라가 더 밀고 들어가며 이름이 카메라를 지나쳐 사라진다
- * 85–100% 아이보리 막이 올라와 소개 장면으로 이어진다 */
+/* 첫 장면 — 하나의 고정 장면(world) 안에서 소개 → 포털 → 네 가지 도구가 이어진다. 진행도 --cp 는 cine.js.
+ * 앞 30%(히어로 구간, --h 0→1)
+ *    0–15%  세 깊이(도시 사진 · 이름 · 소개)가 정지 화면으로 선다. 바로 가기 버튼은 처음부터 누를 수 있다
+ *   15–40%  --a  이름이 카메라 쪽으로 크게 다가오고(1 → 1.6배), 도시는 더 느리게, 소개 문구는 바깥으로 흩어진다
+ *   40–70%  --b  글자 하나하나가 좌우로 갈라지며 6배까지 커져 관람자 곁을 지나간다(사진은 1.13배까지만)
+ *   62–100% --c  글자 사이에 남색 창(포털)이 열려 커지고, 그 안 '뒤에 있던' 도구 세계가 화면을 채운다
+ * 뒤 70%(도구 구간) — ToolCube 가 같은 스크롤로 네 면 큐브를 돌린다 */
 function Hero() {
   const ref = useReveal();
+  const [staged, setStaged] = React.useState(null);
+  const tools = byGroup("everyday-tools");
   return (/*#__PURE__*/
-    React.createElement("section", { id: "manifesto", ref: ref, className: "hero-scene", "data-cine": "pin", "data-cine-rest": "0" }, /*#__PURE__*/
+    React.createElement("section", { id: "manifesto", ref: ref, className: "hero-scene world", "data-cine": "pin", "data-cine-rest": "0" }, /*#__PURE__*/
+
+    React.createElement("span", { id: "tools", className: "world__mark world__mark--tools", "aria-hidden": "true" }),
+    tools.map((e, i) => /*#__PURE__*/React.createElement("span", { key: e.n, id: "ed-" + e.n, className: "world__mark", style: { "--i": i }, "aria-hidden": "true" })), /*#__PURE__*/
     React.createElement("div", { className: "hero-scene__sticky", style: { position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 } }, /*#__PURE__*/
     React.createElement("div", { className: "hero-photo", "aria-hidden": "true" }, /*#__PURE__*/
 
@@ -105,8 +112,8 @@ function Hero() {
     React.createElement("h1", { className: "font-serif hero-name", style: { fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 } }, /*#__PURE__*/
     React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \uCEE8\uC124\uD305 "), /*#__PURE__*/
     React.createElement("span", { "aria-hidden": "true", className: "hero-name__rows" }, /*#__PURE__*/
-    React.createElement("span", { className: "hero-row hero-row--1" }, "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms` } }, c))), /*#__PURE__*/
-    React.createElement("span", { className: "hero-row hero-row--2" }, "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: `k${i}`, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms` } }, c)))
+    React.createElement("span", { className: "hero-row hero-row--1" }, "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms`, "--li": i - 2 } }, c))), /*#__PURE__*/
+    React.createElement("span", { className: "hero-row hero-row--2" }, "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: `k${i}`, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms`, "--li": i - 1 } }, c)))
     )
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-sub" }, /*#__PURE__*/
@@ -129,12 +136,18 @@ function Hero() {
     )
     ), /*#__PURE__*/
 
-    React.createElement("a", { href: "#trajectory", className: "scroll-cue", style: { position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", textDecoration: "none" } }, /*#__PURE__*/
+    React.createElement("a", { href: "#tools", className: "scroll-cue", style: { position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", textDecoration: "none" } }, /*#__PURE__*/
     React.createElement("span", { className: "font-sans", style: { fontSize: ".64rem", letterSpacing: ".3em", fontWeight: 600 } }, "SCROLL"), /*#__PURE__*/
     React.createElement("i", null)
     ), /*#__PURE__*/
-    React.createElement("div", { className: "hero-veil", "aria-hidden": "true" })
+
+    React.createElement("div", { className: "hero-portal" }, /*#__PURE__*/
+    React.createElement("div", { className: "hero-portal__in" }, /*#__PURE__*/
+    React.createElement(ToolCube, { items: tools, onStage: (ed, card) => setStaged({ e: ed, card }) })
     )
+    )
+    ),
+    staged && /*#__PURE__*/React.createElement(ProductTheater, { ed: staged.e, card: staged.card, onClose: () => setStaged(null) })
     ));
 
 }
@@ -994,17 +1007,17 @@ function EditionCard({ e, i, onPlay, onStage }) {
 /* ============================================================ AX DESK — 법무법인 경국 */
 /* 정비사업의 법률·경제 위험을 다루는 사내 AX. 의뢰인·사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다 */
 const AX_CASES = [
-{ id: "ax-reintel", no: "01", icon: "§", name: "RE:INTELLIGENCE", ko: "법령 변경 알림", enLine: "Regulatory Change Alert", title: "법이 바뀌면 바로 알려 주는 시스템", en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
+{ id: "ax-reintel", no: "01", icon: "§", name: "RE:INTELLIGENCE", ko: "법령 변경 알림", enLine: "Regulatory Change Alert", title: "법이 바뀌면 바로 알려 주는 시스템", watch: ["법령 개정", "고시 변경", "행정 공고", "조례 개정"], en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
   problem: "법령·고시가 바뀐 걸 늦게 알면 분쟁과 사업 지연으로 이어집니다.",
   solve: "사업지 주소를 기준으로 법령·고시·행정 공고의 변화를 모아, 그 사업의 어느 단계에 영향이 있는지 정리해 변호사에게 올립니다.",
   effect: "변호사가 먼저 검토할 변경사항을 바로 고릅니다.",
   before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토" },
-{ id: "ax-assembly", no: "02", icon: "✓", name: "Assembly Risk Engine", ko: "총회 무효 위험 검사", enLine: "General Assembly Validity Check", title: "총회 전에 ‘무효 위험’을 찾는 시스템", en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
+{ id: "ax-assembly", no: "02", icon: "✓", name: "Assembly Risk Engine", ko: "총회 무효 위험 검사", enLine: "General Assembly Validity Check", title: "총회 전에 ‘무효 위험’을 찾는 시스템", watch: ["소집 통지", "조합원 명부", "의결권", "정족수"], en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
   problem: "소집 통지·정족수·의결권 중 하나만 틀려도 총회 결의가 효력 다툼에 휘말립니다.",
   solve: "통지, 조합원 명부, 의결권, 정족수, 안건별 결과를 서로 맞대어 보고 틀린 곳을 표시합니다.",
   effect: "총회 전에 다시 확인할 안건과 명부를 특정합니다.",
   before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시" },
-{ id: "ax-contract", no: "03", icon: "⇄", name: "Contract Risk Intelligence", ko: "계약 변경 조항 비교", enLine: "Contract Change Redline", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
+{ id: "ax-contract", no: "03", icon: "⇄", name: "Contract Risk Intelligence", ko: "계약 변경 조항 비교", enLine: "Contract Change Redline", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", watch: ["계약서 변경 전 · 후", "공사비 조항", "지급 조건", "책임 조항"], en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
   problem: "공사비 증액과 계약 조항 변경은 곧바로 조합원이 낼 돈의 문제가 됩니다.",
   solve: "바뀌기 전·후 공사도급계약서를 나란히 비교해 공사비, 지급조건, 책임 조항의 변화와 분쟁 소지를 표시합니다.",
   effect: "협상 전에 불리하게 바뀐 조항을 특정합니다.",
@@ -1039,7 +1052,15 @@ function AxAssembly() {
     React.createElement("p", { className: "sr-only" }, "\uD769\uC5B4\uC9C4 \uBC95\uB839\xB7\uCD1D\uD68C \uC11C\uB958\xB7\uACC4\uC57D\uC11C\uB97C \uADDC\uCE59\uC73C\uB85C \uBAA8\uC544 \uC138 \uAC08\uB798(\uBC95\uB839 \uAC10\uC2DC \xB7 \uCD1D\uD68C \uD558\uC790 \uAC80\uC99D \xB7 \uACC4\uC57D\uBCC0\uACBD \uBE44\uAD50)\uB85C \uCC98\uB9AC\uD558\uACE0, \uB9C8\uC9C0\uB9C9 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9AC\uB294 \uAD6C\uC870\uB97C \uBCF4\uC5EC \uC8FC\uB294 \uC7A5\uBA74\uC785\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("div", { className: "axa__sticky", "aria-hidden": "true" }, /*#__PURE__*/
     React.createElement("div", { className: "axa__stage" }, /*#__PURE__*/
+    React.createElement("i", { className: "axa__aperture" }), /*#__PURE__*/
     React.createElement("i", { className: "axa__light" }), /*#__PURE__*/
+
+    React.createElement("div", { className: "axa__mcaps" }, /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--1 font-ko" }, "\uBC95\uB839 \xB7 \uCD1D\uD68C \uC11C\uB958 \xB7 \uACC4\uC57D\uC11C\uAC00 \uD769\uC5B4\uC838 \uC788\uC2B5\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--2 font-ko" }, "\uADDC\uCE59\uC5D0 \uB530\uB77C \uC138 \uAC08\uB798\uB85C \uBAA8\uC774\uACE0"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--3 font-ko" }, "\uC2DC\uC2A4\uD15C\uB9C8\uB2E4 \uAE30\uC900\uACFC \uB300\uC870\uD569\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("p", { className: "axa__cap axa__cap--4 font-ko" }, "\uB9C8\uC9C0\uB9C9 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4")
+    ), /*#__PURE__*/
     React.createElement("div", { className: "axa__frame" }, /*#__PURE__*/
     React.createElement("p", { className: "axa__cap axa__cap--1 font-ko" }, "\uBC95\uB839 \xB7 \uCD1D\uD68C \uC11C\uB958 \xB7 \uACC4\uC57D\uC11C\uAC00 \uD769\uC5B4\uC838 \uC788\uC2B5\uB2C8\uB2E4"), /*#__PURE__*/
     React.createElement("p", { className: "axa__cap axa__cap--2 font-ko" }, "\uADDC\uCE59\uC5D0 \uB530\uB77C \uC138 \uAC08\uB798\uB85C \uBAA8\uC774\uACE0"), /*#__PURE__*/
@@ -1171,6 +1192,7 @@ function AxDesk() {
 
     React.createElement("h4", { className: "axd__title font-ko" }, /*#__PURE__*/React.createElement("span", { className: "axd__name font-sans", lang: "en" }, c.name), c.ko), /*#__PURE__*/
     React.createElement("p", { className: "axd__en font-sans" }, /*#__PURE__*/React.createElement("span", { lang: "en" }, c.enLine), " \u2014 ", c.title), /*#__PURE__*/
+    React.createElement("ul", { className: "axb__watch font-ko", "aria-label": "\uC0B4\uD3B4\uBCF4\uB294 \uC790\uB8CC" }, c.watch.map((w) => /*#__PURE__*/React.createElement("li", { key: w }, w))), /*#__PURE__*/
     React.createElement("dl", { className: "axd__rows font-ko" }, /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBB38\uC81C ", /*#__PURE__*/React.createElement("i", { lang: "en" }, "Problem")), /*#__PURE__*/React.createElement("dd", null, c.problem)), /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD574\uACB0 ", /*#__PURE__*/React.createElement("i", { lang: "en" }, "Solution")), /*#__PURE__*/React.createElement("dd", null, c.solve)), /*#__PURE__*/
@@ -1187,6 +1209,7 @@ function AxDesk() {
     )
     )
     ), /*#__PURE__*/
+    React.createElement("p", { className: "axb__subhead font-sans" }, "\uC2E4\uBB34 \xB7 Practice \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uB9E1\uC740 \uC2E4\uBB34"), /*#__PURE__*/
     React.createElement("div", { className: "axd__sub" },
     AX_SUPPORT.map((c) => {
       const Tag = c.href ? "a" : "div";
@@ -1339,7 +1362,85 @@ function TheaterShot({ name, alt }) {
 }
 
 /* 펼침 --f(0 접힘 → 1 층층이 펼침)와 집중 --q(0 전체 → 1 한 층 정면)를 rAF 로 직접 쓴다 — 드래그는 곧바로 반영 */
-function ProductTheater({ ed, card, onClose }) {
+/* 폰 극장 — 고른 화면이 카드(큐브 면)에서 떨어져 나와 화면 전체로 커진다(FLIP).
+ * 화면은 원래 폭(1:1)으로 보여 글자가 그대로 읽히고, 아래로 스크롤해 화면 전체를 본다.
+ * 옆으로 넘기면 다음 실제 화면, 두 번 누르면 2배 확대. 아래 썸네일 띠는 큰 화면에서 펼쳐져 나온다.
+ * 닫으면 같은 길로 그 카드 자리에 돌아간다 */
+function MobileTheater({ ed, card, onClose }) {
+  const T = THEATERS[ed.n];
+  const surf = React.useRef(null),track = React.useRef(null),closeBtn = React.useRef(null);
+  const [i, setI] = React.useState(0);
+  const [zoom, setZoom] = React.useState(-1);
+  const closing = React.useRef(false);
+  React.useEffect(() => {
+    if (card) card.classList.add("is-staged");
+    flipFrom(card, surf.current, false).then(() => closeBtn.current && closeBtn.current.focus({ preventScroll: true }));
+    return () => {if (card) card.classList.remove("is-staged");};
+  }, []);
+  const close = () => {
+    if (closing.current) return;
+    closing.current = true;
+    if (track.current) track.current.scrollTo({ left: 0 });
+    flipFrom(card, surf.current, true).then(onClose);
+  };
+  useStageDialog(true, surf, close);
+  const onScroll = () => {
+    const el = track.current;
+    if (!el) return;
+    const k = Math.round(el.scrollLeft / el.clientWidth);
+    if (k !== i) {setI(k);setZoom(-1);}
+  };
+  const go = (k) => {const el = track.current;if (el) el.scrollTo({ left: k * el.clientWidth, behavior: prefersCalm() ? "auto" : "smooth" });};
+  const L = T.layers[i];
+  return ReactDOM.createPortal(/*#__PURE__*/
+    React.createElement("div", { className: "pthm", role: "dialog", "aria-modal": "true", "aria-labelledby": "pthm-title" }, /*#__PURE__*/
+    React.createElement("div", { className: "pthm__surface", ref: surf }, /*#__PURE__*/
+    React.createElement("header", { className: "pthm__head" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/
+    React.createElement("p", { className: "pthm__eyebrow font-sans" }, T.name, " \xB7 ", String(i + 1).padStart(2, "0"), " / ", String(T.layers.length).padStart(2, "0")), /*#__PURE__*/
+    React.createElement("h3", { id: "pthm-title", className: "font-ko" }, /*#__PURE__*/React.createElement("b", null, L.k), " ", L.t)
+    ), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "pthm__close font-sans", ref: closeBtn, onClick: close }, "\uB2EB\uAE30 \u2715")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "pthm__track", ref: track, onScroll: onScroll },
+    T.layers.map((l, k) => /*#__PURE__*/
+    React.createElement("section", { key: l.img, className: "pthm__page" + (zoom === k ? " is-zoom" : ""), "aria-label": `${l.k} — ${l.t}` }, /*#__PURE__*/
+    React.createElement("div", { className: "pthm__shot", onDoubleClick: () => setZoom(zoom === k ? -1 : k) }, /*#__PURE__*/
+    React.createElement(TheaterShot, { name: l.img, alt: `${T.name} ${l.k} 화면 — ${l.t}` })
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "pthm__desc font-ko" }, l.d)
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("footer", { className: "pthm__foot" }, /*#__PURE__*/
+    React.createElement("ol", { className: "pthm__thumbs" },
+    T.layers.map((l, k) => /*#__PURE__*/
+    React.createElement("li", { key: l.img, style: { "--k": k } }, /*#__PURE__*/
+    React.createElement("button", { type: "button", "aria-current": k === i ? "true" : undefined, onClick: () => go(k), "aria-label": `${l.k} 화면으로` }, /*#__PURE__*/
+    React.createElement("img", { src: `images/product/${l.img}-m600.webp`, alt: "", loading: "lazy", decoding: "async" }), /*#__PURE__*/
+    React.createElement("span", { className: "font-sans" }, l.k)
+    )
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "pthm__bar" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "pthm__zoom font-sans", onClick: () => setZoom(zoom === i ? -1 : i), "aria-pressed": zoom === i }, zoom === i ? "원래 크기" : "2배 확대"), /*#__PURE__*/
+    React.createElement("a", { className: "btn pthm__go", href: T.url, target: "_blank", rel: "noreferrer" }, T.open, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 14 }))
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "pthm__cap font-ko" }, T.cap)
+    )
+    )
+    ),
+    document.body
+  );
+}
+
+function ProductTheater(props) {
+  const [mob] = React.useState(() => !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches));
+  return mob ? /*#__PURE__*/React.createElement(MobileTheater, props) : /*#__PURE__*/React.createElement(DesktopTheater, props);
+}
+
+function DesktopTheater({ ed, card, onClose }) {
   const T = THEATERS[ed.n];
   const surf = React.useRef(null),stage = React.useRef(null),range = React.useRef(null),closeBtn = React.useRef(null);
   const v = React.useRef({ f: 0, q: 0 }),anim = React.useRef({});
@@ -1480,88 +1581,164 @@ function WorksHead({ k, en, ko, sub }) {
 
 }
 
-/* 네 가지 도구 — 폰: 옆으로 넘기는 큰 화면 네 장(지금 장은 앞으로, 옆 장은 깊이 물러남)
- * 넓은 화면: 2 × 2. 넘김은 브라우저 기본 가로 스크롤(scroll-snap)이라 세로 스크롤을 빼앗지 않는다.
- * 각 장의 거리(--d)는 스크롤 위치에서 rAF 로 계산 — 카드 위치는 크기가 바뀔 때만 잰다 */
-function ToolDeck({ items, onStage }) {
-  const track = React.useRef(null);
+/* 네 가지 도구 — 네 면 큐브(참고: 스크롤 큐브 갤러리). 같은 진행값 x(0 → 3)를 두 입력이 움직인다.
+ *   세로 스크롤(기본, 가로채지 않음) — 도구 구간 300svh 동안 x 가 0 → 3
+ *   가로로 끌기 — 손가락 이동만큼 스크롤 위치를 옮겨 x 를 바꾼다(놓으면 가장 가까운 면으로)
+ * 면마다 앞뒤 22%씩 머무는 구간이 있어 늘 읽을 수 있는 정면에서 멈춘다. 돌 때는 살짝 물러났다 다가온다.
+ * 제목·설명(--d)과 배경색은 같은 x 로 함께 바뀐다. 면을 누르면 그 화면이 제품 극장으로 펼쳐진다 */
+const ease3 = (t) => t * t * (3 - 2 * t);
+function ToolCube({ items, onStage }) {
+  const root = React.useRef(null),box = React.useRef(null);
+  const faces = React.useRef([]),infos = React.useRef([]),bgs = React.useRef([]);
+  const geo = React.useRef({ start: 0, span: 1, w: 1, x: 0 });
   const [cur, setCur] = React.useState(0);
   React.useEffect(() => {
-    const el = track.current;
-    if (!el) return;
-    let raf = 0,mids = [],w = 1;
-    const measure = () => {const cs = Array.from(el.children);mids = cs.map((c) => c.offsetLeft + c.offsetWidth / 2);w = cs[0] && cs[0].offsetWidth || 1;frame();};
+    const el = root.current,sec = el && el.closest(".world");
+    if (!el || !sec) return;
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const marks = sec.querySelectorAll(".world__mark");
+    let raf = 0;
+    const measure = () => {
+      const y = window.scrollY,r0 = marks[0].getBoundingClientRect(),r1 = marks[marks.length - 1].getBoundingClientRect();
+      geo.current.start = r0.top + y;geo.current.span = Math.max(1, r1.top - r0.top);
+      geo.current.w = box.current && box.current.offsetWidth || 1;
+      frame();
+    };
     const frame = () => {
       raf = 0;
-      const c = el.scrollLeft + el.clientWidth / 2;
-      let best = 0,bd = 1e9;
-      const cs = el.children;
-      for (let i = 0; i < cs.length; i++) {
-        const d = Math.max(-1.6, Math.min(1.6, (mids[i] - c) / w));
-        cs[i].style.setProperty("--d", d.toFixed(3));
-        cs[i].style.setProperty("--ad", Math.abs(d).toFixed(3));
-        if (Math.abs(d) < bd) {bd = Math.abs(d);best = i;}
+      const g = geo.current,n = items.length - 1;
+      const y = window.scrollY;
+      sec.classList.toggle("is-open", y >= g.start - window.innerHeight * 0.04);
+      if (calm.matches || !document.documentElement.classList.contains("cine-on")) return;
+      const x = Math.max(0, Math.min(n, (y - g.start) / g.span * n));
+      g.x = x;
+      const i0 = Math.min(n - 1, Math.floor(x)),f = x - i0;
+      const e = x >= n ? 1 : ease3(Math.max(0, Math.min(1, (f - 0.22) / 0.56)));
+      const a = i0 + e,turn = Math.sin(Math.PI * e);
+      if (box.current) box.current.style.transform = `translate3d(0,0,${(-g.w / 2 - turn * g.w * 0.35).toFixed(1)}px) rotateX(${(-3 - turn * 4).toFixed(2)}deg) rotateY(${(-a * 90).toFixed(2)}deg)`;
+      for (let i = 0; i <= n; i++) {
+        const d = a - i,ad = Math.min(1.5, Math.abs(d));
+        if (faces.current[i]) faces.current[i].style.setProperty("--sh", Math.min(1, ad).toFixed(3));
+        if (infos.current[i]) {infos.current[i].style.setProperty("--d", Math.max(-1.5, Math.min(1.5, d)).toFixed(3));infos.current[i].style.setProperty("--ad", ad.toFixed(3));}
+        if (bgs.current[i]) bgs.current[i].style.opacity = Math.max(0, 1 - ad).toFixed(3);
       }
-      setCur((p) => p === best ? p : best);
+      const k = Math.round(a);
+      setCur((p) => p === k ? p : k);
     };
     const on = () => {if (!raf) raf = requestAnimationFrame(frame);};
     measure();
-    el.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("scroll", on, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
-    return () => {el.removeEventListener("scroll", on);window.removeEventListener("resize", measure);cancelAnimationFrame(raf);};
+    window.addEventListener("load", measure);
+    return () => {window.removeEventListener("scroll", on);window.removeEventListener("resize", measure);window.removeEventListener("load", measure);cancelAnimationFrame(raf);};
   }, []);
   const go = (i) => {
-    const el = track.current,c = el && el.children[i];
-    if (!c) return;
-    el.scrollTo({ left: c.offsetLeft - (el.clientWidth - c.offsetWidth) / 2, behavior: prefersCalm() ? "auto" : "smooth" });
+    const g = geo.current,n = items.length - 1;
+    window.scrollTo({ top: g.start + g.span * i / n, behavior: prefersCalm() ? "auto" : "smooth" });
+  };
+  /* 가로로 끌기 → 스크롤 위치. 세로 이동은 브라우저 기본(touch-action: pan-y) 그대로 */
+  const drag = React.useRef(null);
+  const down = (ev) => {
+    if (ev.button > 0) return;
+    drag.current = { x: ev.clientX, y: ev.clientY, s: window.scrollY, h: false, id: ev.pointerId, t: ev.target };
+  };
+  const move = (ev) => {
+    const d = drag.current;
+    if (!d) return;
+    const dx = ev.clientX - d.x,dy = ev.clientY - d.y;
+    if (!d.h && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy) * 1.2) {d.h = true;try {ev.currentTarget.setPointerCapture(d.id);} catch (e) {}}
+    if (d.h) {
+      const g = geo.current,n = items.length - 1;
+      window.scrollTo(0, d.s - dx / (g.w * 0.9) * (g.span / n));
+    }
+  };
+  const up = (ev) => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d) return;
+    if (d.h) {
+      const g = geo.current,dx = ev.clientX - d.x;
+      const base = Math.round(g.x),next = Math.abs(dx) > g.w * 0.18 ? dx < 0 ? Math.ceil(g.x - 0.001) : Math.floor(g.x + 0.001) : base;
+      go(Math.max(0, Math.min(items.length - 1, next)));
+      return;
+    }
+    const face = d.t && d.t.closest && d.t.closest(".cube__face");
+    if (face && Math.abs(ev.clientX - d.x) < 10 && Math.abs(ev.clientY - d.y) < 10) {
+      const i = +face.getAttribute("data-i");
+      if (i === cur && THEATERS[items[i].n] && onStage) onStage(items[i], face);else
+      go(i);
+    }
   };
   return (/*#__PURE__*/
-    React.createElement("div", { className: "tools" }, /*#__PURE__*/
-    React.createElement("div", { className: "tools__track", ref: track, role: "list", "aria-label": "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC790\uC8FC \uC4F0\uB294 \uB3C4\uAD6C \uB124 \uAC00\uC9C0 \u2014 \uC606\uC73C\uB85C \uB118\uACA8 \uBCF4\uC138\uC694" },
+    React.createElement("div", { className: "cube", ref: root }, /*#__PURE__*/
+    React.createElement("div", { className: "cube__bg", "aria-hidden": "true" },
+    items.map((e, i) => /*#__PURE__*/React.createElement("i", { key: e.n, ref: (n) => bgs.current[i] = n, style: { "--c": e.color, opacity: i === 0 ? 1 : 0 } }))
+    ), /*#__PURE__*/
+    React.createElement("header", { className: "cube__head" }, /*#__PURE__*/
+    React.createElement("p", { className: "cube__k font-sans" }, "A \xB7 My Everyday Tools"), /*#__PURE__*/
+    React.createElement("h2", { className: "cube__title font-ko" }, "\uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC77C\uC0C1\uC5D0\uC11C \uC790\uC8FC \uC4F0\uB294 \uB124 \uAC00\uC9C0 \uB3C4\uAD6C"), /*#__PURE__*/
+    React.createElement("p", { className: "cube__sub font-ko" }, "\uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2C8\uB77C \uC9C1\uC811 \uAE30\uD68D \xB7 \uAC1C\uBC1C \xB7 \uBC30\uD3EC\uD55C \uAC1C\uC778 \uC81C\uD488\uC785\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "cube__stage", onPointerDown: down, onPointerMove: move, onPointerUp: up, onPointerCancel: () => {drag.current = null;} }, /*#__PURE__*/
+    React.createElement("div", { className: "cube__box", ref: box },
     items.map((e, i) => {
       const M = TOOL_META[e.n] || {};
-      const [t1, t2] = e.title.split("\n");
       return (/*#__PURE__*/
-        React.createElement("article", { key: e.n, id: "ed-" + e.n, className: "tool", role: "listitem", style: { "--accent-fill": e.color }, "aria-label": `${i + 1} / ${items.length} — ${M.name || t2}` }, /*#__PURE__*/
-        React.createElement("div", { className: "tool__shot", "aria-hidden": "true" }, /*#__PURE__*/
+        React.createElement("div", { key: e.n, "data-i": i, className: "cube__face", ref: (n) => faces.current[i] = n, style: { "--i": i }, "aria-hidden": "true" }, /*#__PURE__*/
         React.createElement("picture", null, /*#__PURE__*/
         React.createElement("source", { media: "(max-width: 760px)", type: "image/avif", srcSet: `images/product/${M.shot}-m600.avif` }), /*#__PURE__*/
         React.createElement("source", { media: "(max-width: 760px)", type: "image/webp", srcSet: `images/product/${M.shot}-m600.webp` }), /*#__PURE__*/
-        React.createElement("source", { type: "image/avif", srcSet: `images/product/${M.shot}-720.avif 720w, images/product/${M.shot}-1280.avif 1280w`, sizes: "(max-width: 1100px) 46vw, 560px" }), /*#__PURE__*/
-        React.createElement("img", { src: `images/product/${M.shot}-720.webp`, alt: "", loading: "lazy", decoding: "async", width: "720", height: "450", draggable: "false" })
+        React.createElement("source", { type: "image/avif", srcSet: `images/product/${M.shot}-720.avif 720w, images/product/${M.shot}-1280.avif 1280w`, sizes: "(max-width: 1100px) 50vw, 620px" }), /*#__PURE__*/
+        React.createElement("img", { src: `images/product/${M.shot}-720.webp`, alt: "", decoding: "async", draggable: "false", loading: i ? "lazy" : "eager" })
         ), /*#__PURE__*/
-        React.createElement("span", { className: "tool__no font-serif" }, e.no)
-        ), /*#__PURE__*/
-        React.createElement("div", { className: "tool__body" }, /*#__PURE__*/
-        React.createElement("p", { className: "tool__badge font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC0AC\uC6A9"), /*#__PURE__*/React.createElement("span", null, e.status)), /*#__PURE__*/
-        React.createElement("h4", { className: "tool__name font-ko" }, /*#__PURE__*/React.createElement("small", null, t1), M.name || t2), /*#__PURE__*/
-        React.createElement("p", { className: "tool__why font-ko" }, M.why), /*#__PURE__*/
-        React.createElement("p", { className: "tool__use font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uC774\uB807\uAC8C \uC501\uB2C8\uB2E4"), M.use), /*#__PURE__*/
-        React.createElement("p", { className: "tool__desc font-ko" }, e.desc), /*#__PURE__*/
-        React.createElement("div", { className: "tool__acts" },
-        THEATERS[e.n] && onStage && /*#__PURE__*/
-        React.createElement("button", { type: "button", className: "btn tool__stage", "aria-haspopup": "dialog",
-          onClick: (ev) => onStage(e, ev.currentTarget.closest("article")) }, "\uD654\uBA74 \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(Layers, { size: 16 })), /*#__PURE__*/
+        React.createElement("span", { className: "cube__shade" }), /*#__PURE__*/
+        React.createElement("span", { className: "cube__no font-serif" }, e.no)
+        ));
 
-        React.createElement("a", { href: e.url, target: "_blank", rel: "noreferrer", className: "btn btn--ghost" }, e.cta, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 15 }))
+    })
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "cube__info" },
+    items.map((e, i) => {
+      const M = TOOL_META[e.n] || {};
+      const [t1] = e.title.split("\n");
+      const on = i === cur;
+      return (/*#__PURE__*/
+        React.createElement("article", { key: e.n, className: "cube__txt" + (on ? " is-on" : ""), ref: (n) => infos.current[i] = n, "aria-hidden": on ? undefined : "true", style: { "--accent-fill": e.color } }, /*#__PURE__*/
+        React.createElement("div", { className: "cube__flat", "aria-hidden": "true" }, /*#__PURE__*/
+        React.createElement("picture", null, /*#__PURE__*/
+        React.createElement("source", { media: "(max-width: 760px)", type: "image/webp", srcSet: `images/product/${M.shot}-m600.webp` }), /*#__PURE__*/
+        React.createElement("img", { src: `images/product/${M.shot}-720.webp`, alt: "", loading: "lazy", decoding: "async" })
         )
+        ), /*#__PURE__*/
+        React.createElement("p", { className: "tool__badge font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC0AC\uC6A9"), /*#__PURE__*/React.createElement("span", null, e.status), /*#__PURE__*/React.createElement("span", null, e.no, " / ", String(items.length).padStart(2, "0"))), /*#__PURE__*/
+        React.createElement("h3", { className: "cube__name font-ko" }, /*#__PURE__*/React.createElement("small", null, t1), M.name), /*#__PURE__*/
+        React.createElement("p", { className: "cube__why font-ko" }, M.why), /*#__PURE__*/
+        React.createElement("p", { className: "cube__use font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uC774\uB807\uAC8C \uC501\uB2C8\uB2E4"), M.use), /*#__PURE__*/
+        React.createElement("div", { className: "cube__acts" },
+        THEATERS[e.n] && onStage && /*#__PURE__*/
+        React.createElement("button", { type: "button", className: "btn cube__open", "aria-haspopup": "dialog", tabIndex: on ? 0 : -1,
+          onClick: () => onStage(e, faces.current[i]) }, "\uD654\uBA74 \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(Layers, { size: 16 })), /*#__PURE__*/
+
+        React.createElement("a", { href: e.url, target: "_blank", rel: "noreferrer", className: "btn btn--ghost cube__link", tabIndex: on ? 0 : -1 }, e.cta, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 15 }))
         )
         ));
 
     })
     ), /*#__PURE__*/
-    React.createElement("div", { className: "tools__nav", "aria-label": "\uB3C4\uAD6C \uB118\uAE30\uAE30" }, /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "tools__arrow", onClick: () => go(Math.max(0, cur - 1)), disabled: cur === 0, "aria-label": "\uC774\uC804 \uB3C4\uAD6C" }, "\u2190"), /*#__PURE__*/
-    React.createElement("ol", { className: "tools__dots" },
+    React.createElement("div", { className: "cube__nav" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "cube__arrow", onClick: () => go(Math.max(0, cur - 1)), disabled: cur === 0, "aria-label": "\uC774\uC804 \uB3C4\uAD6C" }, "\u2190"), /*#__PURE__*/
+    React.createElement("ol", { className: "cube__dots" },
     items.map((e, i) => /*#__PURE__*/
     React.createElement("li", { key: e.n }, /*#__PURE__*/React.createElement("button", { type: "button", "aria-current": i === cur ? "true" : undefined, onClick: () => go(i) }, /*#__PURE__*/
     React.createElement("span", { className: "sr-only" }, (TOOL_META[e.n] || {}).name, " \uBCF4\uAE30")
     ))
     )
     ), /*#__PURE__*/
-    React.createElement("span", { className: "tools__count font-sans", "aria-live": "polite" }, String(cur + 1).padStart(2, "0"), " / ", String(items.length).padStart(2, "0"), " \xB7 ", (TOOL_META[items[cur].n] || {}).name), /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "tools__arrow", onClick: () => go(Math.min(items.length - 1, cur + 1)), disabled: cur === items.length - 1, "aria-label": "\uB2E4\uC74C \uB3C4\uAD6C" }, "\u2192")
-    )
+    React.createElement("span", { className: "cube__count font-sans", "aria-live": "polite" }, String(cur + 1).padStart(2, "0"), " / ", String(items.length).padStart(2, "0"), " \xB7 ", (TOOL_META[items[cur].n] || {}).name), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "cube__arrow", onClick: () => go(Math.min(items.length - 1, cur + 1)), disabled: cur === items.length - 1, "aria-label": "\uB2E4\uC74C \uB3C4\uAD6C" }, "\u2192")
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "cube__hint font-sans", "aria-hidden": "true" }, "\uC704\uB85C \uBC00\uAC70\uB098 \uC606\uC73C\uB85C \uB04C\uC5B4 \uB3CC\uB824 \uBCF4\uC138\uC694 \xB7 \uD654\uBA74\uC744 \uB204\uB974\uBA74 \uD06C\uAC8C \uD3BC\uCCD0\uC9D1\uB2C8\uB2E4")
     ));
 
 }
@@ -1583,10 +1760,14 @@ function Artifacts() {
     React.createElement("strong", null, "D"), "\uC5D0 \uBAA8\uC558\uC2B5\uB2C8\uB2E4."
     ), /*#__PURE__*/
 
-    React.createElement("div", { className: "wgroup", id: "tools" }, /*#__PURE__*/
+    React.createElement("div", { className: "wgroup" }, /*#__PURE__*/
     React.createElement(WorksHead, { k: "A", en: "My Everyday Tools", ko: "\uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC77C\uC0C1\uC5D0\uC11C \uC790\uC8FC \uC0AC\uC6A9\uD558\uB294 \uB124 \uAC00\uC9C0 \uB3C4\uAD6C",
-      sub: "\uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2C8\uB77C \uC81C\uAC00 \uC9C1\uC811 \uAE30\uD68D \xB7 \uAC1C\uBC1C \xB7 \uBC30\uD3EC\uD55C \uAC1C\uC778 \uC81C\uD488\uC785\uB2C8\uB2E4. \uBC18\uBCF5\uB418\uB294 \uC815\uBCF4 \uBB38\uC81C\uB97C \uCC3E\uC544 \uC18C\uD504\uD2B8\uC6E8\uC5B4\uB85C \uD480\uACE0, \uADF8 \uB3C4\uAD6C\uB97C \uC81C \uC77C\uACFC \uC0DD\uD65C\uC5D0 \uC9C1\uC811 \uC501\uB2C8\uB2E4." }), /*#__PURE__*/
-    React.createElement(ToolDeck, { items: byGroup("everyday-tools"), onStage: (ed, card) => setStaged({ e: ed, card }) })
+      sub: "\uCCAB \uC7A5\uBA74 \uBC14\uB85C \uB2E4\uC74C, \uD3EC\uD138 \uB108\uBA38\uC758 \uD050\uBE0C\uC5D0\uC11C \uC2E4\uC81C \uD654\uBA74\uC73C\uB85C \uB118\uACA8 \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2C8\uB77C \uC9C1\uC811 \uAE30\uD68D \xB7 \uAC1C\uBC1C \xB7 \uBC30\uD3EC\uD55C \uAC1C\uC778 \uC81C\uD488\uC785\uB2C8\uB2E4." }), /*#__PURE__*/
+    React.createElement("ol", { className: "tools-index" },
+    byGroup("everyday-tools").map((e) => /*#__PURE__*/
+    React.createElement("li", { key: e.n }, /*#__PURE__*/React.createElement("a", { href: "#ed-" + e.n, className: "font-ko" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, e.no), (TOOL_META[e.n] || {}).name, /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })))
+    )
+    )
     ), /*#__PURE__*/
 
     React.createElement("div", { className: "wgroup", id: "work-systems" }, /*#__PURE__*/
@@ -1932,6 +2113,87 @@ const CHANNELS = [
   tags: ["AI 카드뉴스", "시네마틱 영상", "브랜드 필름"],
   posts: [["6·3 지방선거 AI 카드뉴스 6종 & 내레이션 영상 — GPT Image-2 · Suno AI · ElevenLabs", "작업물", "#ed-01"]] }];
 
+/* 현장 기록(Visual Journal) — 포트폴리오에 실린 본인 사진. Instagram 게시물이라고 하지 않는다.
+ * 들어올 때: 큰 사진이 시야로 커지고, 나머지는 서로 다른 거리(--dz)에서 다른 속도로 떠오른다(--cp, cine.js)
+ * 누르면: 그 사진이 제자리에서 떨어져 화면 가득 커지고(FLIP), 맥락과 원래 출처 링크가 아래에서 올라온다. 닫으면 제자리로 */
+const JOURNAL = [
+{ name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
+  d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
+{ name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
+  d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
+{ name: "dyl-qa", src: "images/dyl-qa.jpg", t: "민주청년지도자 양성과정 — 특강 질의", when: "2026. 10. 24 · 민주연구원", dz: 0.6,
+  d: "이광재 예산결산특별위원장의 특강에서 마이크를 잡고 직접 질문했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl" }] },
+{ img: "images/zipconomy-demo-600.jpg", src: "images/zipconomy-demo.jpg", t: "한경 집코노미 박람회 — 집캐치 시연", when: "2026. 9. 30 · 코엑스 D홀", dz: 1.3,
+  d: "KREMA AI 전시관 부스에서 직접 만든 집캐치와 감정평가사 필드워크를 시연하고 질문을 받았습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#zipconomy" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224446565096" }] },
+{ name: "ssafy-presentation", src: "images/ssafy-presentation.jpg", t: "SSAFY 13기 — 프로젝트 아키텍처 발표", when: "삼성청년SW아카데미", dz: 0.8,
+  d: "삼성청년SW아카데미 13기에서 프로젝트 아키텍처를 발표했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#g-ssafy-presentation" }] },
+{ name: "fw-gwanghwamun", src: "images/fw-gwanghwamun.jpg", t: "감정평가사 필드워크 — 광화문에서 시작", when: "직접 만든 3D 실지조사 시뮬레이터", dz: 1.6,
+  d: "서울을 직접 걸으며 의뢰 수임부터 등기촉탁까지 5단계를 수행하는 3D 학습 게임의 첫 장면입니다.",
+  links: [{ l: "작업 카드", h: "#ed-10" }, { l: "필드워크 체험", h: "https://appraiser-fieldwork.vercel.app/" }] }];
+
+function PhotoJournal() {
+  const [open, setOpen] = React.useState(-1);
+  const thumbs = React.useRef([]),big = React.useRef(null),box = React.useRef(null),closing = React.useRef(false);
+  React.useEffect(() => {
+    if (open < 0) return;
+    closing.current = false;
+    flipFrom(thumbs.current[open], big.current, false);
+  }, [open]);
+  const close = () => {
+    if (closing.current) return;
+    closing.current = true;
+    const k = open;
+    flipFrom(thumbs.current[k], big.current, true).then(() => setOpen(-1));
+  };
+  useStageDialog(open >= 0, box, close);
+  const J = open >= 0 ? JOURNAL[open] : null;
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "jr", "data-cine": "pass" }, /*#__PURE__*/
+    React.createElement("header", { className: "jr__head reveal" }, /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow" }, "Visual Journal \u2014 \uD604\uC7A5 \uAE30\uB85D"), /*#__PURE__*/
+    React.createElement("h3", { className: "font-myeongjo" }, "\uD604\uC7A5\uC5D0\uC11C \uB0A8\uAE34 \uC7A5\uBA74\uB4E4"), /*#__PURE__*/
+    React.createElement("p", { className: "jr__note font-ko" }, "\uD3EC\uD2B8\uD3F4\uB9AC\uC624\uC5D0 \uC2E4\uB9B0 \uBCF8\uC778 \uC0AC\uC9C4\uC785\uB2C8\uB2E4. Instagram \uAC8C\uC2DC\uBB3C\uC744 \uC62E\uACA8 \uC628 \uAC83\uC774 \uC544\uB2C8\uB77C, \uAC01 \uC0AC\uC9C4\uC758 \uC6D0\uB798 \uAE30\uB85D(\uAC24\uB7EC\uB9AC \xB7 \uBE14\uB85C\uADF8 \xB7 \uBCF4\uB3C4)\uC73C\uB85C \uC774\uC5B4\uC9D1\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("ul", { className: "jr__grid" },
+    JOURNAL.map((j, i) => /*#__PURE__*/
+    React.createElement("li", { key: j.t, className: "jr__item" + (j.lead ? " jr__item--lead" : ""), style: { "--dz": j.dz, "--i": i } }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "jr__btn", onClick: () => setOpen(i), "aria-haspopup": "dialog", "aria-label": j.t + " 크게 보기" }, /*#__PURE__*/
+    React.createElement("span", { className: "jr__frame", ref: (n) => thumbs.current[i] = n },
+    j.name ? /*#__PURE__*/React.createElement(Pic, { name: j.name, fallback: j.src, sizes: j.lead ? "(max-width: 760px) 92vw, 52vw" : "(max-width: 760px) 46vw, 24vw", alt: "", loading: "lazy" }) : /*#__PURE__*/
+    React.createElement("img", { src: j.img, alt: "", loading: "lazy", decoding: "async" })
+    ), /*#__PURE__*/
+    React.createElement("span", { className: "jr__cap" }, /*#__PURE__*/React.createElement("b", { className: "font-ko" }, j.t), /*#__PURE__*/React.createElement("small", { className: "font-sans" }, j.when))
+    )
+    )
+    )
+    ),
+    J && ReactDOM.createPortal(/*#__PURE__*/
+      React.createElement("div", { className: "jrv", role: "dialog", "aria-modal": "true", "aria-label": J.t, ref: box, onClick: close }, /*#__PURE__*/
+      React.createElement("figure", { className: "jrv__fig", ref: big, onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
+      React.createElement("img", { src: J.src, alt: "김유빈 활동 기록 — " + J.t, decoding: "async" })
+      ), /*#__PURE__*/
+      React.createElement("div", { className: "jrv__info", onClick: (ev) => ev.stopPropagation() }, /*#__PURE__*/
+      React.createElement("p", { className: "jrv__when font-sans" }, J.when), /*#__PURE__*/
+      React.createElement("h4", { className: "font-ko" }, J.t), /*#__PURE__*/
+      React.createElement("p", { className: "font-ko" }, J.d), /*#__PURE__*/
+      React.createElement("div", { className: "jrv__links" },
+      J.links.map(({ l, h }) => /*#__PURE__*/React.createElement("a", _extends({ key: h, href: h, className: "font-sans" }, /^https?:/.test(h) ? { target: "_blank", rel: "noreferrer" } : {}, { onClick: () => {if (!/^https?:/.test(h)) setOpen(-1);} }), l, " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 13 }))), /*#__PURE__*/
+      React.createElement("button", { type: "button", className: "jrv__close font-sans", onClick: close }, "\uB2EB\uAE30 \u2715")
+      )
+      )
+      ),
+      document.body
+    )
+    ));
+
+}
+
+/* Instagram 피드 미리보기 대신 — 채널 카드는 소개만, 사진은 아래 현장 기록으로 */
 function Channels() {
   const ref = useReveal();
   return (/*#__PURE__*/
@@ -1948,8 +2210,7 @@ function Channels() {
     React.createElement("span", { className: "ch-label font-sans" }, c.label)
     ), /*#__PURE__*/
     React.createElement("p", { className: "ch-pitch font-ko" }, c.pitch), /*#__PURE__*/
-    React.createElement("ul", { className: "ch-tags font-sans", "aria-label": c.name + " 분류" }, c.tags.map((t) => /*#__PURE__*/React.createElement("li", { key: t }, t))),
-    c.k === "ig" && /*#__PURE__*/React.createElement("a", { className: "ch-mosaic", href: "#ed-01", "aria-label": "6\xB73 \uC9C0\uBC29\uC120\uAC70 AI \uCE74\uB4DC\uB274\uC2A4 6\uC885 \u2014 \uC791\uC5C5 \uCE74\uB4DC\uB85C \uC774\uB3D9" }, [1, 2, 3, 4, 5, 6].map((j) => /*#__PURE__*/React.createElement("span", { key: j, className: "font-sans" }, /*#__PURE__*/React.createElement("b", null, "CARD"), "0", j))), /*#__PURE__*/
+    React.createElement("ul", { className: "ch-tags font-sans", "aria-label": c.name + " 분류" }, c.tags.map((t) => /*#__PURE__*/React.createElement("li", { key: t }, t))), /*#__PURE__*/
     React.createElement("ol", { className: "ch-posts", "aria-label": c.name + " 최근 글" },
     c.posts.map(([t, d, u]) => /*#__PURE__*/
     React.createElement("li", { key: t }, /*#__PURE__*/React.createElement("a", _extends({ href: u }, u.startsWith("#") ? {} : { target: "_blank", rel: "noopener" }, { className: "font-ko" }), /*#__PURE__*/React.createElement("time", { className: "font-sans" }, d), /*#__PURE__*/React.createElement("span", null, t)))
@@ -1959,6 +2220,7 @@ function Channels() {
     )
     )
     ), /*#__PURE__*/
+    React.createElement(PhotoJournal, null), /*#__PURE__*/
     React.createElement("p", { className: "ch-note font-sans reveal" }, "\uCD5C\uADFC \uAE00\uC740 \uAC01 \uCC44\uB110 RSS \uAE30\uC900(2026.10.23) \xB7 \uCC44\uB110 \uC774\uB984\uC744 \uB204\uB974\uBA74 \uC0C8 \uCC3D\uC5D0\uC11C \uC5F4\uB9BD\uB2C8\uB2E4.")
     )
     ));
