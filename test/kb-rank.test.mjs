@@ -9,6 +9,7 @@ const KB = require("../kb.js");
 
 /* [질문, 1순위로 와야 할 카드 id 후보] — 후보 중 하나면 통과 */
 const CASES = [
+  ["재정경제부 차관 간담회 다녀왔나요?", ["tl-moef-youth"]],
   ["김유빈 님은 어떤 분인가요?", ["profile"]],
   ["핵심 역량을 한눈에 요약해 주세요", ["composite"]],
   ["전략기획 경험이 있나요?", ["dom-strategy"]],
