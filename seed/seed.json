@@ -20,9 +20,9 @@
       {
         "Id": "ax-assembly",
         "Category": "프로젝트",
-        "Title": "Assembly Risk Engine — 조합 총회결의 하자 사전검증",
+        "Title": "Assembly Risk Engine · 총회 무효 위험 검사 (General Assembly Validity Check) — 조합 총회결의 하자 사전검증",
         "Body": "총회 소집 통지, 조합원 명부, 의결권, 정족수, 안건별 의결 결과를 대조 규칙으로 맞춰 보고, 결의 효력에 영향을 줄 수 있는 지점을 사전에 식별하는 시스템입니다. 법무법인 경국 사내 구축 · 비공개.",
-        "Tags": "소집, 의결, 의결권, 정족수, 조합원 명부, 총회, 총회결의, 하자",
+        "Tags": "assembly, 소집, 의결, 의결권, 정족수, 조합원 명부, 총회, 총회 무효, 총회결의, 하자",
         "PrimaryLabel": "AX 현황판",
         "PrimaryHref": "index.html#ax-desk",
         "SecondaryLabel": "작업 보기",
@@ -35,7 +35,7 @@
       {
         "Id": "ax-compensation",
         "Category": "프로젝트",
-        "Title": "광명시흥 3기 신도시 보상자료 분석 · 정보 구조화",
+        "Title": "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석 · 정보 구조화",
         "Body": "광명시흥 3기 신도시 보상 관련 발표자료 77장을 제작하며 감정평가·보상협의·재결로 이어지는 토지보상 절차와 쟁점을 정보 구조로 정리했습니다. 실무 수행 · 비공개.",
         "Tags": "3기 신도시, 77장, 광명시흥, 보상, 보상협의, 재결, 토지보상",
         "PrimaryLabel": "AX 현황판",
@@ -50,9 +50,9 @@
       {
         "Id": "ax-contract",
         "Category": "프로젝트",
-        "Title": "Contract Risk Intelligence — 정비사업 계약변경 AI Redline",
+        "Title": "Contract Risk Intelligence · 계약 변경 조항 비교 (Contract Change Redline) — 정비사업 계약변경 AI Redline",
         "Body": "공사도급계약 등의 변경 전후 조항을 나란히 대조해 공사비, 지급조건, 책임 배분, 분쟁 가능성을 항목별로 구조화하는 시스템입니다. 법률 검토와 재무적 위험 분석을 한 화면에서 함께 봅니다. 법무법인 경국 사내 구축 · 비공개.",
-        "Tags": "redline, 계약변경, 계약서, 공사도급, 공사비, 공사비 증액, 레드라인, 조항",
+        "Tags": "contract, redline, 계약 변경 조항, 계약변경, 계약서, 공사도급, 공사비, 공사비 증액, 레드라인, 조항",
         "PrimaryLabel": "AX 현황판",
         "PrimaryHref": "index.html#ax-desk",
         "SecondaryLabel": "작업 보기",
@@ -80,9 +80,9 @@
       {
         "Id": "ax-reintel",
         "Category": "프로젝트",
-        "Title": "RE:INTELLIGENCE — 정비사업 법률 리스크 관제",
+        "Title": "RE:INTELLIGENCE · 법령 변경 알림 (Regulatory Change Alert) — 정비사업 법률 리스크 관제",
         "Body": "사업지 주소를 기준으로 법령·고시·행정절차·조합 관련 공개정보를 수집하고, 변경사항이 사업의 어느 단계에 영향을 주는지 구조화해 변호사가 검토할 수 있게 올리는 AX 시스템입니다. 법무법인 경국 사내 구축 · 비공개.",
-        "Tags": "re:intelligence, reintelligence, 고시, 리스크 관제, 법령, 법률 리스크, 사업지, 행정절차",
+        "Tags": "re:intelligence, regulatory, reintelligence, 고시, 리스크 관제, 법령, 법령 변경 알림, 법률 리스크, 사업지, 행정절차",
         "PrimaryLabel": "AX 현황판",
         "PrimaryHref": "index.html#ax-desk",
         "SecondaryLabel": "작업 보기",
@@ -933,6 +933,21 @@
         "Verified": true
       },
       {
+        "Id": "tl-moef-youth",
+        "Category": "궤적",
+        "Title": "2026 — 재정경제부 제1차관 청년 현장방문 및 간담회 참석",
+        "Body": "권대영 재정경제부 제1차관이 서울 마포구 창업기업 지원시설 SVC Seoul에서 연 청년 현장방문 및 간담회(2026. 10. 27)에 법무법인 경국 소속으로 참석했습니다. 차관 취임 후 첫 현장 행보로 마련된 자리로, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융 등 3대 사회정책에 대한 현장 의견을 전했습니다. 간담회에서는 첫 취업과 일경험 연계, AI 시대 창업 지원, 전·월세 주거 불안 완화, 사회 진출 초기 자산형성 지원이 건의됐다고 보도됐습니다.",
+        "Tags": "svc, svc seoul, 간담회, 권대영, 마포, 재경부, 재정경제부, 제1차관, 차관, 청년 간담회, 현장방문",
+        "PrimaryLabel": "궤적에서 보기",
+        "PrimaryHref": "index.html#tl-moef-youth",
+        "SecondaryLabel": "간담회 현장 보기",
+        "SecondaryHref": "gallery.html#moef-youth",
+        "SecondaryInferred": false,
+        "Anchor": "tl-moef-youth",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
         "Id": "tl-national-debate",
         "Category": "궤적",
         "Title": "2026 — 국민통합위원회 국민 대토론회 정책 제안 발표",
@@ -1382,5 +1397,5 @@
       }
     ]
   },
-  "hash": "211cd6021879b8c6"
+  "hash": "49ac1b029a65fc8e"
 }
