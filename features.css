@@ -299,7 +299,8 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .axd__icon{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#F3E7C9;font-size:1.25rem}
 .axd__no{font-size:2rem;font-weight:900;color:rgba(31,45,107,.14);line-height:1}
 .axd__title{margin:14px 0 4px;font-size:1.12rem;line-height:1.45;color:var(--navy);word-break:keep-all}
-.axd__en{margin:0 0 14px;font-size:.64rem;font-weight:700;letter-spacing:.08em;color:var(--gold-text)}
+.axd__en{margin:0 0 14px;font-size:.76rem;font-weight:600;line-height:1.5;letter-spacing:.01em;color:var(--ink-soft);word-break:keep-all}
+.axd__en span{font-weight:800;color:var(--gold-text)}
 .axd__rows{margin:0;display:grid;gap:10px;flex:1}
 .axd__rows div{display:grid;grid-template-columns:38px 1fr;gap:8px;align-items:start}
 .axd__rows dt{padding:2px 0;font-size:.72rem;font-weight:800;text-align:center;color:var(--navy);border:1px solid var(--hair-strong)}
@@ -319,3 +320,11 @@ a.axd__mini:hover{border-color:var(--gold-text)}
 .axd__note{margin:14px 0 0;font-size:.74rem;color:var(--ink-soft)}
 @media (max-width:1000px){.axd__grid{grid-template-columns:1fr}}
 @media (max-width:620px){.axd__sub{grid-template-columns:1fr}}
+/* 갤러리 — 언론 보도 출처 */
+.g-press{display:block;margin-top:8px;font-size:.74rem;font-weight:600;letter-spacing:.04em;color:var(--gold-text)}
+.g-press a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+/* 경국 AX — 영문 제품명 + 한글 이름 병기 */
+.axd__name{display:block;margin-bottom:4px;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-text)}
+.axd__rows dt i{display:block;margin-top:1px;font-style:normal;font-weight:600;font-size:.56rem;letter-spacing:0;white-space:nowrap;opacity:.8}
+.axd__ba b i{font-style:normal;font-weight:600;font-size:.86em;letter-spacing:.04em;opacity:.75}
+.axd__lead-en{display:block;margin-top:4px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}

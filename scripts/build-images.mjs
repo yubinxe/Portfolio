@@ -29,6 +29,10 @@ export const IMAGES = [
   ["fw-street.jpg", "fw-street"],
   ["fw-map.jpg", "fw-map"],
   ["fw-phone.jpg", "fw-phone"],
+  ["moef-group.jpg", "moef-group"],
+  ["moef-nameplate.jpg", "moef-nameplate"],
+  ["moef-tour.jpg", "moef-tour"],
+  ["moef-talk.jpg", "moef-talk"],
 ];
 export const WIDTHS = [480, 800, 1200];
 

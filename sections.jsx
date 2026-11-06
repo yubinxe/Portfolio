@@ -9,6 +9,7 @@ const OPT = {
   "profile-yubin": [480, 800, 896], "ssafy-presentation": [480, 800, 1016],
   "youth-day-yonhap": [480, 800, 860], "youth-day-selfie": [480, 800, 1200], "youth-day-mbc-02": [480, 800, 1200],
   "youth-day-venue": [480, 800, 1200], "youth-day-dialogue": [480, 800, 900],
+  "moef-group": [480, 800, 1200, 1600], "moef-nameplate": [480, 675], "moef-tour": [480, 800, 1200, 1600], "moef-talk": [480, 800, 1200, 1600],
   "dyl-assembly": [480, 800, 1200], "dyl-entrance": [480, 675], "dyl-library": [480, 800, 1200], "dyl-lecture": [480, 800, 1200], "dyl-qa": [480, 800, 1200],
   "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280],
 };
@@ -654,6 +655,8 @@ const TRAJECTORY = [
     desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)를 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
   { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
     desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
+  { id: "tl-moef-youth", group: "public", year: "2026", color: "var(--sky)", title: "재정경제부 제1차관 청년 현장방문 및 간담회 참석",
+    desc: "권대영 재정경제부 제1차관이 서울 마포구 창업기업 지원시설 SVC Seoul에서 연 청년 현장방문 및 간담회(2026. 10. 27)에 법무법인 경국 소속으로 참석했습니다. 차관 취임 후 첫 현장 행보로 마련된 자리로, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융 등 3대 사회정책에 대한 현장 의견을 전했습니다.", proof: "gallery.html#moef-youth", proofLabel: "간담회 현장 보기" },
   { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
     desc: "‘청년이 생각하는 성평등정책, 어디까지?’를 주제로 연세대 백양누리 그랜드볼룸에서 열린 공개형 공론장(2026. 10. 25)에 참석해 청년 세대의 시각으로 정책 토론에 함께했고, 현장에서 성평등가족부 장관과 함께했습니다.", proof: "gallery.html#gender-forum", proofLabel: "공론장 현장 보기" },
   { id: "tl-dyl", group: "public", year: "2026", color: "var(--sky)", title: "2026 민주청년지도자 양성과정 입학 · 수강 중",
@@ -713,6 +716,17 @@ const DIARY = [
       { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강을 마친 뒤 함께", pos: "45% 40%" },
     ],
     href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" },
+  { id: "moef-youth", date: "10.27", day: "TUE", tone: "sage", chip: "간담회 참석",
+    eyebrow: "Field Diary — 2026. 10. 27", title: "재정경제부 제1차관 청년 현장방문 및 간담회",
+    body: "권대영 재정경제부 제1차관의 취임 후 첫 현장 행보로 마련된 청년 간담회에 법무법인 경국 소속으로 참석했습니다. 간담회에 앞서 SVC Seoul 입주 청년 창업기업의 AI 기반 주거지 탐색 · 공공사업 검색·매칭 서비스 시연 참관이 있었고, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융에 대한 현장 의견을 전했습니다.",
+    facts: [["주최", "재정경제부"], ["장소", "SVC Seoul · 서울 마포구"], ["함께", "권대영 재정경제부 제1차관 · 조영학 재정경제부 청년보좌역"], ["주제", "주거 · 일자리 · 서민금융"]],
+    main: { name: "moef-group", alt: "김유빈 활동 기록 — 권대영 재정경제부 제1차관 청년 현장방문 및 간담회 단체 사진(2026. 10. 27 · SVC Seoul)", pos: "50% 45%", w: 1600, h: 777 },
+    thumbs: [
+      { name: "moef-nameplate", href: "gallery.html#g-moef-nameplate", alt: "김유빈 활동 기록 — 간담회 좌석의 '법무법인 경국 김유빈' 명패", pos: "50% 80%" },
+      { name: "moef-tour", href: "gallery.html#g-moef-tour", alt: "김유빈 활동 기록 — SVC Seoul 입주 기업의 서비스 시연을 살펴보는 권대영 재정경제부 제1차관", pos: "40% 35%" },
+      { name: "moef-talk", href: "gallery.html#g-moef-talk", alt: "김유빈 활동 기록 — 시연 현장에서 권대영 재정경제부 제1차관과 청년들", pos: "55% 35%" },
+    ],
+    href: "gallery.html#moef-youth", cta: "간담회 사진 전체 보기" },
 ];
 
 function FieldDiary() {
@@ -978,24 +992,24 @@ function EditionCard({ e, i, onPlay, onStage }) {
 /* ============================================================ AX DESK — 법무법인 경국 */
 /* 정비사업의 법률·경제 위험을 다루는 사내 AX. 의뢰인·사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다 */
 const AX_CASES = [
-  { id: "ax-reintel", no: "01", icon: "§", title: "법이 바뀌면 바로 알려 주는 시스템", en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
+  { id: "ax-reintel", no: "01", icon: "§", name: "RE:INTELLIGENCE", ko: "법령 변경 알림", enLine: "Regulatory Change Alert", title: "법이 바뀌면 바로 알려 주는 시스템", en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
     problem: "법령·고시가 바뀐 걸 늦게 알면 분쟁과 사업 지연으로 이어집니다.",
     solve: "사업지 주소를 기준으로 법령·고시·행정 공고의 변화를 모아, 그 사업의 어느 단계에 영향이 있는지 정리해 변호사에게 올립니다.",
     effect: "변호사가 먼저 검토할 변경사항을 바로 고릅니다.",
     before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토" },
-  { id: "ax-assembly", no: "02", icon: "✓", title: "총회 전에 ‘무효 위험’을 찾는 시스템", en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
+  { id: "ax-assembly", no: "02", icon: "✓", name: "Assembly Risk Engine", ko: "총회 무효 위험 검사", enLine: "General Assembly Validity Check", title: "총회 전에 ‘무효 위험’을 찾는 시스템", en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
     problem: "소집 통지·정족수·의결권 중 하나만 틀려도 총회 결의가 효력 다툼에 휘말립니다.",
     solve: "통지, 조합원 명부, 의결권, 정족수, 안건별 결과를 서로 맞대어 보고 틀린 곳을 표시합니다.",
     effect: "총회 전에 다시 확인할 안건과 명부를 특정합니다.",
     before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시" },
-  { id: "ax-contract", no: "03", icon: "⇄", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
+  { id: "ax-contract", no: "03", icon: "⇄", name: "Contract Risk Intelligence", ko: "계약 변경 조항 비교", enLine: "Contract Change Redline", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
     problem: "공사비 증액과 계약 조항 변경은 곧바로 조합원이 낼 돈의 문제가 됩니다.",
     solve: "바뀌기 전·후 공사도급계약서를 나란히 비교해 공사비, 지급조건, 책임 조항의 변화와 분쟁 소지를 표시합니다.",
     effect: "협상 전에 불리하게 바뀐 조항을 특정합니다.",
     before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시" },
 ];
 const AX_SUPPORT = [
-  { id: "ax-compensation", tag: "실무", title: "광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
+  { id: "ax-compensation", tag: "실무 · Practice", title: "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
 ];
 
 /* AX 조립 장면 — 흩어진 법령·서류·계약서가 스크롤에 따라 세 갈래 체계로 모인다. 진행도(--cp)는 cine.js 가 쓴다 */
@@ -1142,28 +1156,29 @@ function AxDesk() {
   return (
     <div className="axd reveal" id="ax-desk" aria-labelledby="ax-desk-title">
       <div className="axd__head">
-        <p className="axd__eyebrow font-sans"><i aria-hidden="true" />법무법인 경국 · AX 프로젝트</p>
+        <p className="axd__eyebrow font-sans"><i aria-hidden="true" />Kyunggook Law Firm · AX Projects — 법무법인 경국 AX 프로젝트</p>
         <h3 id="ax-desk-title" className="font-ko">재개발·재건축 사업이 <em>법 · 총회 · 계약</em> 문제로 멈추지 않게</h3>
-        <p className="axd__lead font-ko">위험은 시스템이 먼저 찾고, 판단은 변호사가 내립니다. 사내에 직접 구축한 세 가지입니다.</p>
+        <p className="axd__lead font-ko">위험은 시스템이 먼저 찾고, 판단은 변호사가 내립니다. 사내에 직접 구축한 세 가지입니다.<span className="axd__lead-en font-sans">Systems flag the risk first; lawyers make the call.</span></p>
       </div>
       <AxAssembly />
       <div className="axd__grid">
         {AX_CASES.map((c) => (
           <article key={c.id} id={c.id} className="axd__case" data-tilt="" ref={(n) => { cards.current[c.id] = n; }} tabIndex={-1}>
             <div className="axd__top"><span className="axd__icon font-serif" aria-hidden="true">{c.icon}</span><span className="axd__no font-serif">{c.no}</span></div>
-            <h4 className="axd__title font-ko">{c.title}</h4>
-            <p className="axd__en font-sans">{c.en}</p>
+            {/* 한눈에 알아보게 — 영문 제품명 + 한글 한 줄 이름, 그 아래 영문 · 한글 설명 */}
+            <h4 className="axd__title font-ko"><span className="axd__name font-sans" lang="en">{c.name}</span>{c.ko}</h4>
+            <p className="axd__en font-sans"><span lang="en">{c.enLine}</span> — {c.title}</p>
             <dl className="axd__rows font-ko">
-              <div><dt>문제</dt><dd>{c.problem}</dd></div>
-              <div><dt>해결</dt><dd>{c.solve}</dd></div>
-              <div className="axd__eff"><dt>효과</dt><dd>{c.effect}</dd></div>
+              <div><dt>문제 <i lang="en">Problem</i></dt><dd>{c.problem}</dd></div>
+              <div><dt>해결 <i lang="en">Solution</i></dt><dd>{c.solve}</dd></div>
+              <div className="axd__eff"><dt>효과 <i lang="en">Impact</i></dt><dd>{c.effect}</dd></div>
             </dl>
             <div className="axd__ba font-ko">
-              <span><b>전</b>{c.before}</span>
-              <span><b>후</b>{c.after}</span>
+              <span><b>전 <i lang="en">Before</i></b>{c.before}</span>
+              <span><b>후 <i lang="en">After</i></b>{c.after}</span>
             </div>
             <div className="axd__foot">
-              <p className="axd__state font-sans">사내 구축 · 화면 비공개</p>
+              <p className="axd__state font-sans">사내 구축 · 화면 비공개 — In-house · Private</p>
               <button type="button" className="axd__open font-sans" onClick={() => setOpen(c.id)} aria-haspopup="dialog">작동 방식 펼쳐 보기 <ArrowUpRight size={13} /></button>
             </div>
           </article>
@@ -1187,7 +1202,7 @@ function AxDesk() {
           <div className="axs__panel" ref={panel} onClick={(ev) => ev.stopPropagation()}>
             <button type="button" className="axs__close font-sans" ref={closeBtn} onClick={close} aria-label="닫기">닫기 ✕</button>
             <p className="axs__eyebrow font-sans">AX {cur.no} · {cur.en}</p>
-            <h3 id="axs-title" className="font-ko">{cur.title}</h3>
+            <h3 id="axs-title" className="font-ko"><span className="axd__name font-sans" lang="en">{cur.name} · {cur.enLine}</span>{cur.ko} — {cur.title}</h3>
             <div className="axs__body">
               <div className="axs__demo">
                 <AxDemo id={cur.id} />
