@@ -17,11 +17,13 @@ function App() {
     <div id="top">
       <Nav />
       <main>
-        <Hero />
+        <HeroCity />
         <Ledger />
         <About />
         <Composite />
-        <Artifacts />
+        <AXCommand />
+        <ArtifactsSection />
+        <ResearchArchive />
         <Trajectory />
         <Channels />
         <Lectures />

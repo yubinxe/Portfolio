@@ -225,6 +225,8 @@
     var flagged = null;
     try { flagged = sessionStorage.getItem(DEEPLINK_KEY); sessionStorage.removeItem(DEEPLINK_KEY); } catch (e) {}
     var hash = (location.hash || "").replace(/^#/, "");
+    /* 메인 페이지의 주소 #앵커는 페이지 스크립트가 맡는다 — 두 곳이 동시에 스크롤하면 자리가 어긋난다 */
+    if (flagged === null && hash && document.getElementById("manifesto")) return;
     if (flagged !== null || hash) {
       var h = hash || flagged;
       if (h) setTimeout(function () { scrollToHash(h); }, 260);
@@ -753,7 +755,13 @@
     // 첫 방문 티저
     var teaserOff = false; try { teaserOff = localStorage.getItem("yk.teaser.off") === "1"; } catch (x) {}
     if (!REDUCED && !history.length && !teaserOff) {
-      setTimeout(function () { if (!root.classList.contains("open")) showTeaser(); }, 2600);
+      /* 폰 첫 화면(건축 모형)에서는 바로 가기 버튼을 가리지 않게 — 첫 장면을 지나간 뒤에 띄운다 */
+      var hero = document.getElementById("manifesto");
+      var later = function () { setTimeout(function () { if (!root.classList.contains("open")) showTeaser(); }, 2600); };
+      if (hero && window.innerWidth <= 760 && window.IntersectionObserver) {
+        var io = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) { io.disconnect(); later(); } });
+        io.observe(hero);
+      } else later();
     }
 
     resumeDeepLink();
