@@ -93,7 +93,7 @@ function Hero() {
   const [staged, setStaged] = React.useState(null);
   const tools = byGroup("everyday-tools");
   return (
-    <section id="manifesto" ref={ref} className="hero-scene world" data-cine="pin" data-cine-rest="0">
+    <section id="manifesto" ref={ref} className="hero-scene world" data-cine="pin" data-cine-rest="0" data-cine-max=".31">
       {/* 고정 장면 안의 요소는 앵커가 될 수 없어 스크롤 위치에 표지를 둔다 — #tools · #ed-NN 이 곧 그 면 */}
       <span id="tools" className="world__mark world__mark--tools" aria-hidden="true" />
       {tools.map((e, i) => <span key={e.n} id={"ed-" + e.n} className="world__mark" style={{ "--i": i }} aria-hidden="true" />)}

@@ -94,7 +94,7 @@ function Hero() {
   const [staged, setStaged] = React.useState(null);
   const tools = byGroup("everyday-tools");
   return (/*#__PURE__*/
-    React.createElement("section", { id: "manifesto", ref: ref, className: "hero-scene world", "data-cine": "pin", "data-cine-rest": "0" }, /*#__PURE__*/
+    React.createElement("section", { id: "manifesto", ref: ref, className: "hero-scene world", "data-cine": "pin", "data-cine-rest": "0", "data-cine-max": ".31" }, /*#__PURE__*/
 
     React.createElement("span", { id: "tools", className: "world__mark world__mark--tools", "aria-hidden": "true" }),
     tools.map((e, i) => /*#__PURE__*/React.createElement("span", { key: e.n, id: "ed-" + e.n, className: "world__mark", style: { "--i": i }, "aria-hidden": "true" })), /*#__PURE__*/

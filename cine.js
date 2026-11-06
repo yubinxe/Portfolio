@@ -15,6 +15,7 @@
  *   data-cine-src     진행도는 이 조상(선택자) 기준으로 재고, 변수는 자기에게만 쓴다.
  *                     큰 섹션에 변수를 쓰면 그 안 모든 요소가 매 프레임 스타일을 다시 계산한다
  *                     (실측: 역량 섹션 4배 감속 폰에서 긴 프레임 40% → 1%)
+ *   data-cine-max     진행도 상한 — 그 뒤로는 값이 변하지 않아 스타일 재계산이 멈춘다(첫 장면: 히어로 몫까지만)
  *   data-tilt         포인터·손가락 위치로 기울어짐 --rx --ry (-1 ~ 1)
  */
 (function () {
@@ -39,7 +40,7 @@
     scenes = [];
     for (var i = 0; i < els.length; i++) {
       var src = els[i].getAttribute("data-cine-src");
-      scenes.push({ el: els[i], src: (src && els[i].closest(src)) || els[i], mode: els[i].getAttribute("data-cine"), rest: els[i].getAttribute("data-cine-rest"), top: 0, h: 0, last: "", live: false });
+      scenes.push({ el: els[i], src: (src && els[i].closest(src)) || els[i], mode: els[i].getAttribute("data-cine"), rest: els[i].getAttribute("data-cine-rest"), max: +(els[i].getAttribute("data-cine-max") || 1), top: 0, h: 0, last: "", live: false });
     }
     document.querySelectorAll("[data-tilt]").forEach(bindTilt);
     measure();
@@ -61,6 +62,7 @@
         else if (s.mode === "pin") { var span = s.h - vh; p = span > 0 ? clamp(-top / span) : 1; }
         else p = clamp((vh - top) / (vh + s.h));
       }
+      if (p > s.max) p = s.max;
       var v = p.toFixed(4);
       if (v !== s.last) { s.last = v; s.el.style.setProperty("--cp", v); }
     }
