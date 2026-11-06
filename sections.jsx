@@ -908,7 +908,8 @@ const EDITIONS = [
 ];
 
 /* 화면에 보이는 순서와 번호 — 실생활·실무 시스템 7건을 먼저, 학습·콘텐츠·제안 작업은 "그 밖의 작업"에 */
-const EDITION_ORDER = ["09", "16", "17", "12", "06", "07", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
+/* 07(네이버웍스 급여명세서)은 작업 목록이 아니라 경국 AX 데스크의 "실무" 칸(광명시흥 보상자료 옆)에 둔다 — 앵커 #ed-07 은 그 칸에 있다 */
+const EDITION_ORDER = ["09", "16", "17", "12", "06", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
 const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
 
 function EditionCard({ e, i, onPlay }) {
@@ -967,6 +968,7 @@ const AX_CASES = [
 ];
 const AX_SUPPORT = [
   { id: "ax-compensation", tag: "실무 · Practice", title: "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
+  { id: "ed-07", tag: "실무 · Practice", title: "NAVER WORKS Payroll · 네이버웍스 급여명세서 자동 발송", desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다. 사내 운영 · 비공개." },
 ];
 
 function AxDesk() {
@@ -1030,7 +1032,7 @@ function Artifacts() {
       <div className="wrap">
         <SectionHead eyebrow="03 — Selected Works" titleEn="The Artifacts" titleKo="AI 전략 · 자동화 프로젝트" />
         <p className="works-lead font-ko reveal">
-          맨 위는 법무법인 경국에서 정비사업의 법률·경제 위험을 다루는 <strong>AX 현황판</strong>, 그 아래는 직접 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 {EDITIONS.filter((e) => e.core).length}건</strong>입니다.
+          맨 위는 법무법인 경국에서 정비사업의 법률·경제 위험을 다루는 <strong>AX 현황판</strong>, 그 아래는 직접 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 {EDITIONS_SHOWN.filter((e) => e.core).length}건</strong>입니다.
           학습용 시뮬레이터, 개인 프로젝트, 제안서와 생성형 AI 콘텐츠는 아래에서 따로 펼쳐 볼 수 있습니다.
         </p>
         <AxDesk />
@@ -1043,8 +1045,8 @@ function Artifacts() {
           <summary>
             <span className="fold__t">
               <span className="eyebrow">Supplementary</span>
-              <strong className="font-ko">그 밖의 작업 <em>{EDITIONS.filter((e) => !e.core).length}건</em></strong>
-              <span className="fold__line font-ko">고객 메일 분류 · 급여명세서 자동 발송 · 감정평가사 필드워크 · 성분관 · Salvation · 생성형 AI 영상</span>
+              <strong className="font-ko">그 밖의 작업 <em>{EDITIONS_SHOWN.filter((e) => !e.core).length}건</em></strong>
+              <span className="fold__line font-ko">감정평가사 필드워크 · 성분관 · Salvation · 생성형 AI 영상</span>
             </span>
             <i className="fold__icon" aria-hidden="true" />
           </summary>
@@ -1304,7 +1306,7 @@ function Contact() {
           AI 전략 컨설팅 · 업무 자동화 · 데이터 기반 서비스 컨설팅 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="mailto:ybkim@gyunggook.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
+          <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
             <Mail size={16} /> 이메일 보내기
           </a>
           <a href="career.html" className="btn btn--ghost" style={{ color: "var(--ecru)", borderColor: "var(--ecru)", boxShadow: "none" }}>
@@ -1401,7 +1403,7 @@ function Footer() {
         {OFFICIAL_CHANNELS.map(([t, h]) => (
           <a key={h} href={h} rel="me noopener" target="_blank">{t}</a>
         ))}
-        <a href="mailto:ybkim@gyunggook.com" style={{ marginLeft: "auto" }}>ybkim@gyunggook.com</a>
+        <a href="mailto:yubin120866@gmail.com" style={{ marginLeft: "auto" }}>yubin120866@gmail.com</a>
       </div>
       <div className="wrap footer-grid" style={{ paddingTop: 26, paddingBottom: 26 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }} className="font-serif">
