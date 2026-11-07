@@ -23,6 +23,7 @@ function App() {
         <Composite />
         <AXCommand />
         <ArtifactsSection />
+        <PolicySection />
         <ResearchArchive />
         <Trajectory />
         <Channels />

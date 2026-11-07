@@ -256,12 +256,12 @@
   var TONE = {
     "프로젝트": { e: "🗂️", lead: "관련 프로젝트를 정리해 드릴게요.", next: ["ed-09", "ed-06", "thesis", "trajectory", "composite"] },
     "역량": { e: "🧩", lead: "김유빈 님의 역량을 짚어 드릴게요.", next: ["projects", "ed-09", "thesis", "trajectory"] },
-    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["projects", "creds", "tl-youth-day", "tl-national-debate"] },
+    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["policy", "projects", "creds", "tl-national-debate"] },
     "자격": { e: "🎖️", lead: "자격과 수상 기록입니다.", next: ["trajectory", "tl-youth-day", "projects"] },
     "강의": { e: "🎓", lead: "강의 프로그램을 소개해 드릴게요.", next: ["projects", "composite", "contact"] },
     "연락": { e: "✉️", lead: "연락 방법을 안내해 드릴게요.", next: ["projects", "composite", "trajectory"] },
     "미디어": { e: "📰", lead: "미디어 기록을 모아 보았습니다.", next: ["tl-youth-day", "projects", "trajectory"] },
-    "인물": { e: "🙂", lead: "김유빈 님을 소개해 드릴게요.", next: ["composite", "projects", "trajectory"] },
+    "인물": { e: "🙂", lead: "김유빈 님을 소개해 드릴게요.", next: ["composite", "projects", "policy", "trajectory"] },
   };
   var ASK = {
     "composite": ["🧩 핵심 역량 요약", "핵심 역량을 한눈에 요약해 주세요"],

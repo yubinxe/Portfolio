@@ -110,8 +110,8 @@
       {
         "Id": "composite",
         "Category": "역량",
-        "Title": "융합 역량 — 전략 컨설팅을 중심에 둔 여섯 도메인",
-        "Body": "전략 컨설팅을 축에 두고 나머지가 실행과 전달을 맡습니다.\n- 01 전략 컨설팅 — 사업성 검토, 우선순위 설계\n- 02 AI 프로세스 자동화 — SSAFY 13기, 서울대 AIED 4기\n- 03 데이터 · 인프라 — 공공데이터 API, GWS 연동\n- 04 마케팅 · 커뮤니케이션 — KREMA 4기, 연합뉴스TV, 서울시민기자단\n- 05 교육 · 강의 — 서울대 AIED 교수법, SSAFY 홍보 앰배서더\n- 06 도메인 — 법무법인 경국, 스마트건설, 청년 정책 거버넌스",
+        "Title": "역량 구조 — AI 전략·AX 실행을 줄기로 한 T자(π자로 넓혀 가는 중)",
+        "Body": "모든 역량의 깊이가 같지 않습니다.\n[줄기 — 실증된 깊이] 01 AI 전략 · 02 AX 실행·업무 자동화 · 03 데이터 기반 판단\n[적용 영역] 06 법률·부동산의 산업 이해 — 법무법인 경국, 광명시흥 보상자료, 건국대 스마트건설, KREMA 4기\n[넓어지는 영역] 05 정책·공공 의사결정 참여 · 04 설명·교육·소통\n두 번째 깊이로 법률·부동산·제도적 의사결정이 형성되는 중입니다(자격이나 완성된 전문성이 아님). 숙련도 점수는 쓰지 않습니다.",
         "Tags": "composite, 강점, 도메인, 무엇, 여섯, 역량, 융합, 잘, 핵심",
         "PrimaryLabel": "융합 역량 보기",
         "PrimaryHref": "index.html#composite",
@@ -155,10 +155,10 @@
       {
         "Id": "dom-ai",
         "Category": "역량",
-        "Title": "02 AI 프로세스 자동화",
-        "Body": "사람이 반복하던 판단의 앞단을 AI에 맡기고, 사람은 기준을 정하는 자리에 남깁니다. 삼성청년SW아카데미(SSAFY) 13기와 서울대 AI 교육 전문가 과정(AIED) 4기에서 구조를 익혔고, React · Vercel 배포까지 직접 수행합니다.",
+        "Title": "AX 실행 · 업무 자동화",
+        "Body": "반복되는 판단의 앞단을 시스템으로 옮기고, 사람은 기준을 정하는 자리에 남깁니다. 경국 AX 3종 · 네이버웍스 급여명세서 자동 발송 · 고객 메일 자동 분류를 만들었고, 삼성청년SW아카데미(SSAFY) 13기와 서울대 AI 교육 전문가 과정(AIED) 4기에서 구조를 익혔습니다.",
         "Tags": "ai, 개발, 생성형, 엔지니어링, 인공지능, 자동화, 프롬프트",
-        "PrimaryLabel": "역량 02",
+        "PrimaryLabel": "AX 실행",
         "PrimaryHref": "index.html#dom-02",
         "SecondaryLabel": "AI 프로세스 혁신",
         "SecondaryHref": "career.html#practice-ai",
@@ -170,10 +170,10 @@
       {
         "Id": "dom-data",
         "Category": "역량",
-        "Title": "03 데이터 · 인프라",
+        "Title": "데이터 기반 판단",
         "Body": "공공데이터 API와 Google Workspace API를 의사결정 가능한 화면으로 번역합니다. 청약 인사이트 대시보드와 고객 메일 자동 분류 시스템을 직접 구축·배포했습니다.",
         "Tags": "api, gws, 공공데이터, 대시보드, 데이터, 시각화, 인프라",
-        "PrimaryLabel": "역량 03",
+        "PrimaryLabel": "데이터 기반 판단",
         "PrimaryHref": "index.html#dom-03",
         "SecondaryLabel": "청약 대시보드 카드",
         "SecondaryHref": "index.html#ed-05",
@@ -185,10 +185,10 @@
       {
         "Id": "dom-domain",
         "Category": "역량",
-        "Title": "06 도메인 — 법무 · 부동산 · 공공",
-        "Body": "판단의 바탕이 되는 세 영역입니다.\n- 법무 — 법무법인 경국 송무·사무 실무의 정확성\n- 부동산 · 건설 — 건국대 스마트건설(BIM · 드론 측량), 분양대행자 자격\n- 공공 — 서초청년네트워크 운영위 부위원장, 국무조정실 온라인 청년참여단\n법률·세무 판단 자체는 전문가 상담이 필요합니다.",
+        "Title": "법률·부동산의 산업 이해 (적용 영역)",
+        "Body": "AI 전략·AX 가 실제로 쓰이는 영역입니다.\n- 법률 — 법무법인 경국 송무·사무, 정비사업 법률 위험을 다루는 경국 AX\n- 부동산 — 광명시흥 3기 신도시 보상자료 구조화(발표자료 77장), 집캐치, 건국대 스마트건설(BIM · 드론 측량), 분양대행자 자격\n두 번째 깊이(법률·부동산·제도적 의사결정)로 형성되는 중이며, 자격 취득을 뜻하지 않습니다.",
         "Tags": "bim, 건설, 공공, 도메인, 법률, 법무, 부동산, 송무, 정책",
-        "PrimaryLabel": "역량 06",
+        "PrimaryLabel": "법률·부동산",
         "PrimaryHref": "index.html#dom-06",
         "SecondaryLabel": "궤적 보기",
         "SecondaryHref": "index.html#trajectory",
@@ -200,10 +200,10 @@
       {
         "Id": "dom-marketing",
         "Category": "역량",
-        "Title": "04 마케팅 · 커뮤니케이션",
-        "Body": "KREMA(한국부동산마케팅협회) 4기의 데이터 기반 세그먼트 전략과 생성형 AI 제작 역량으로 전략을 시장에 닿는 언어로 옮깁니다. 서울시민기자단 취재기자 활동과 연합뉴스TV 인터뷰로 공공 영역의 전달 경험도 쌓았습니다.",
+        "Title": "설명·교육·소통 (Knowledge Translation)",
+        "Body": "기술과 정책을 이해하기 쉬운 말로 옮기는 역량입니다. 서울대 AIED 4기에서 교수법을 익혔고, 한경 집코노미 박람회에서 직접 만든 서비스를 시연·발표했으며, SSAFY 홍보 앰배서더 · 서울시민기자단 취재기자로 활동했습니다. KREMA 4기의 세그먼트 전략도 같은 갈래입니다. 강의는 제안 커리큘럼입니다(출강 이력 없음).",
         "Tags": "기자, 마케팅, 매체, 미디어, 세그먼트, 캠페인, 커뮤니케이션, 홍보",
-        "PrimaryLabel": "역량 04",
+        "PrimaryLabel": "설명·교육·소통",
         "PrimaryHref": "index.html#dom-04",
         "SecondaryLabel": "브랜드 필름 보기",
         "SecondaryHref": "index.html#ed-02",
@@ -215,10 +215,10 @@
       {
         "Id": "dom-strategy",
         "Category": "역량",
-        "Title": "01 전략 컨설팅",
-        "Body": "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하는 일입니다. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 리스크로 볼지의 판단 기준을 설계했습니다. 도구가 아니라 우선순위가 결과를 바꾼다는 것이 그의 전제입니다.",
+        "Title": "AI 전략",
+        "Body": "무엇을 먼저 하고 무엇을 AI에 맡길지 정하는 일입니다. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 '급함'으로 볼지 기준을 세웠습니다.",
         "Tags": "consulting, planning, strategy, 기획, 사업성, 우선순위, 의사결정, 전략, 전략 컨설팅, 전략기획, 컨설팅",
-        "PrimaryLabel": "역량 01",
+        "PrimaryLabel": "AI 전략",
         "PrimaryHref": "index.html#dom-01",
         "SecondaryLabel": "전략 컨설팅 업무 영역",
         "SecondaryHref": "career.html#practice-strategy",
@@ -310,7 +310,7 @@
         "Tags": "vercel, 공공데이터, 대시보드, 부동산, 시각화, 청약",
         "PrimaryLabel": "작업 카드",
         "PrimaryHref": "index.html#ed-05",
-        "SecondaryLabel": "역량 03",
+        "SecondaryLabel": "데이터 기반 판단",
         "SecondaryHref": "index.html#dom-03",
         "SecondaryInferred": false,
         "Anchor": "ed-05",
@@ -768,10 +768,25 @@
         "Verified": true
       },
       {
+        "Id": "policy",
+        "Category": "궤적",
+        "Title": "정책 참여 — 현장에서 발견한 문제를 제도의 언어로",
+        "Body": "소프트웨어를 만드는 데서 멈추지 않고 정책 논의의 자리에 나갑니다. 참석 · 제안 · 역할 · 수강을 구분해 적고, 정책 채택 여부는 적지 않습니다.\n- 제안 — 국민통합위원회 2026 국민 대토론회 ‘청년 초과세수 미래배당펀드’ 팀 제안 · 발표(2026. 9. 29 · aT센터)\n- 참석 · 의견 — 재정경제부 제1차관 청년 현장방문 및 간담회(2026. 10. 27 · SVC Seoul), 성평등가족부 공개형 공론장(2026. 10. 25 · 연세대), 청와대 청년의날 기념행사(초청 참석)\n- 역할 — 서초청년네트워크 9기 운영위원회 부위원장, 서초구 가치디자인단, 국민권익위원회 청년정책 패널, 국무조정실 온라인 청년참여단\n- 배움 — 2026 민주청년지도자 양성과정 수강 중(민주연구원)\n정부 · 정당의 직책이 아니며, 정책을 결정하는 자리가 아닙니다.",
+        "Tags": "civic, policy, 간담회, 거버넌스, 공공, 공론, 공론장, 국민 대토론회, 정책, 정책 참여, 제도, 청년 정책",
+        "PrimaryLabel": "정책 참여 보기",
+        "PrimaryHref": "index.html#policy",
+        "SecondaryLabel": "대토론회 현장",
+        "SecondaryHref": "gallery.html#national-debate",
+        "SecondaryInferred": false,
+        "Anchor": "policy",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
         "Id": "profile",
         "Category": "인물",
-        "Title": "인물 개요",
-        "Body": "김유빈(Yubin Kim, 별칭 Ethan Kim) · 2004년생. 법무법인 경국에서 전략 컨설팅과 AI 프로세스 혁신을 담당합니다. 근무지는 서울 서초구 서초대로 264 법조타워 15F.\n일의 방식은 한 문장입니다 — **데이터로 판단의 근거를 만들고, AI로 실행의 속도를 만듭니다.** 흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮기며, 실무에서 만든 시스템을 강의 모듈로도 옮깁니다.",
+        "Title": "인물 개요 — 복잡한 문제를 구조화하고, 기술로 실행하는 사람",
+        "Body": "김유빈(Yubin Kim, 별칭 Ethan Kim) · 2004년생. 법무법인 경국에서 정비사업 AX 와 전략기획을 맡고 있습니다(사원). 근무지는 서울 서초구 서초대로 264 법조타워 15F.\n한 문장으로는 **복잡한 문제를 구조화하고, 기술로 실행합니다.** 법률·부동산·정책의 현장에서 AI가 도울 수 있는 일과 사람이 판단해야 할 일을 구분합니다.\n- 핵심(실증된 깊이): AI 전략 · AX 실행 — 경국 AX 3종, 급여명세서 자동 발송, 고객 메일 자동 분류, 직접 만든 도구 4가지\n- 적용 영역: 법률·부동산 — 정비사업 법률 위험, 광명시흥 보상자료 구조화(77장)\n- 넓어지는 영역: 정책·공공 의사결정 참여(국민 대토론회 정책 제안 발표 등) · 설명·교육·소통\n변호사 · 감정평가사 · 공무원이 아니며, 정책 참여는 결정이 아니라 논의에 참여한 기록입니다.",
         "Tags": "2004, about, ethan, yubin, 김유빈, 나이, 누구, 소개, 이름, 출생",
         "PrimaryLabel": "선언 보기",
         "PrimaryHref": "index.html#manifesto",
@@ -786,7 +801,7 @@
         "Id": "projects",
         "Category": "프로젝트",
         "Title": "작업 전체 — 16건 (세 자리)",
-        "Body": "직접 설계·구현한 작업 16건을 성격별로 나눠 세 자리에 둡니다. 배포 여부와 '누가 어디서 쓰는가'는 따로 봅니다.\n[The Artifacts — 직접 만들어 자주 쓰는 도구 4 · 개인 제품, 회사 시스템 아님]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n[경국 AX 지휘실 — The Artifacts 바로 위] AX 3: RE:INTELLIGENCE · Assembly Risk Engine · Contract Risk Intelligence(사내 구축) · 실무 2: 광명시흥 보상자료 분석(발표자료 77장) · 네이버웍스 급여명세서 자동 발송(사내 운영) · 운영 흐름 1:\n- 05 [고객 메일 자동 분류 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n[연구 기록(Research Archive) — 그 밖의 작업 10]\n- 06 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 07 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 08 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 09 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 10 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 11 청약 인사이트 대시보드 — Vercel 배포(공개 데모 종료)\n- 12 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 13 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 14 Louis Vuitton 시네마틱 캠페인 필름\n- 15 Hyperframe × ElevenLabs 멀티미디어 프로모션",
+        "Body": "직접 설계·구현한 작업 16건을 성격별로 나눠 세 자리에 둡니다. 배포 여부와 '누가 어디서 쓰는가'는 따로 봅니다.\n[The Artifacts — 직접 만들어 자주 쓰는 도구 4 · 개인 제품, 회사 시스템 아님]\n- 01 [집캐치 — 청약·공공임대 맞춤 추천 서비스](https://zipcatch.vercel.app) — Vercel 배포\n- 02 [법조시장 한눈에 — 법조 시장 상황판](https://legal-pulse-pearl.vercel.app) — Vercel 배포\n- 03 [Atelier AX — AI 에이전트 인력 운영 관제](https://atelier-ax.vercel.app/performance/) — Vercel 배포\n- 04 [국정 한눈에 — 국민용 국정 상황판](https://gukjeong-hannune.vercel.app/) — Vercel 배포\n[경국 AX 지휘실 — The Artifacts 바로 위] AX 3: RE:INTELLIGENCE · Assembly Risk Engine · Contract Risk Intelligence(사내 구축) · 실무 2: 광명시흥 보상자료 분석(발표자료 77장) · 네이버웍스 급여명세서 자동 발송(사내 운영) · 운영 흐름 1:\n- 05 [고객 메일 자동 분류 시스템](https://mail-dashboard-blue-six.vercel.app) — Vercel 배포\n[연구 기록(Research Archive) — 그 밖의 작업 10 · 정책 참여 섹션 아래]\n- 06 [감정평가사 필드워크 — 3D 실지조사 시뮬레이터](https://appraiser-fieldwork.vercel.app/) — Vercel 배포\n- 07 [성분관 — K-뷰티 성분 처방 서비스](https://seongbun.vercel.app) — Vercel 배포\n- 08 [Salvation — 성경 말씀 × 인문학 서재](https://malsseum-guwon.vercel.app/) — Vercel 배포\n- 09 [Project Plaza — YouTube 커뮤니티 기능 제안서](https://yubin-project-plaza.vercel.app) — 웹 문서\n- 10 [곳간 — 식재료·생활용품 살림 기록 서비스](https://gotgan-three.vercel.app) — Vercel 배포\n- 11 청약 인사이트 대시보드 — Vercel 배포(공개 데모 종료)\n- 12 6·3 지방선거 AI 카드뉴스 & 시네마틱 영상\n- 13 Veo 3 × Google Vids 르엘 성수 브랜드 필름\n- 14 Louis Vuitton 시네마틱 캠페인 필름\n- 15 Hyperframe × ElevenLabs 멀티미디어 프로모션",
         "Tags": "artifact, 결과물, 대표, 만든, 산출물, 작업, 포트폴리오, 프로젝트",
         "PrimaryLabel": "작업 전체 보기",
         "PrimaryHref": "index.html#artifacts",
@@ -815,8 +830,8 @@
       {
         "Id": "thesis",
         "Category": "인물",
-        "Title": "일의 명제 — 전략은 우선순위, AI는 속도",
-        "Body": "\"전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.\" 두 개의 시스템(감정평가사 필드워크 · 고객 메일 자동 분류)에서 사람이 하던 일이 도구로 넘어갈 때마다 사람이 남아야 할 자리가 또렷해졌고, 그 자리는 언제나 '도구에 무엇을 시킬지 정하는 일' — 곧 전략 컨설팅이었습니다.",
+        "Title": "일의 명제 — 기술은 실행에, 판단은 방향에",
+        "Body": "\"AI가 답을 만드는 시대, 무엇을 물을지 결정하는 사람이 되겠습니다.\" (Technology for Execution. Judgment for Direction.) 시스템은 분석과 실행을 돕지만, 결과가 큰 결정 — 무엇을 문제로 삼을지, 이해관계가 부딪칠 때 무엇을 앞세울지, 어떤 위험을 받아들일지 — 은 그 결정에 책임지는 사람이 내린다는 입장입니다. 감정평가사 필드워크와 고객 메일 자동 분류에서 도구가 맡는 일과 사람이 정하는 기준의 경계를 확인했습니다.",
         "Tags": "가치관, 명제, 왜, 자리, 전달, 전문성, 철학",
         "PrimaryLabel": "Why It Matters",
         "PrimaryHref": "index.html#composite",
@@ -1402,8 +1417,8 @@
         "Id": "chip-1",
         "Type": "chip",
         "Order": 1,
-        "Text": "자주 쓰는 서비스 4개",
-        "Key": "직접 만들어서 자주 쓰는 서비스가 뭐예요?"
+        "Text": "어떤 사람인가요",
+        "Key": "김유빈은 어떤 사람인가요?"
       },
       {
         "Id": "chip-2",
@@ -1416,8 +1431,8 @@
         "Id": "chip-3",
         "Type": "chip",
         "Order": 3,
-        "Text": "경력과 전문성",
-        "Key": "경력 타임라인 정리해 주세요"
+        "Text": "직접 만든 서비스 4개",
+        "Key": "직접 만들어서 자주 쓰는 서비스가 뭐예요?"
       },
       {
         "Id": "chip-4",
@@ -1428,5 +1443,5 @@
       }
     ]
   },
-  "hash": "27730b9c33065e16"
+  "hash": "f0a15c8ad1e5b6f0"
 }

@@ -49,8 +49,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["소개", "#about"], ["역량", "#composite"], ["경국 AX", "#ax-desk"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-    ["강의", "#lectures"], ["채널", "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
+    ["소개", "#about"], ["역량", "#composite"], ["경국 AX", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
+    ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
@@ -107,14 +107,15 @@ function HeroCity() {
         <canvas ref={cv} className="city-hero__cv" aria-hidden="true" />
         <div className="city-hero__veil" aria-hidden="true" />
         <div className="wrap city-hero__copy">
-          <p className="lc-kicker font-sans"><span>Seoul · Portfolio 2026</span><span>AI Strategy &amp; Consulting</span></p>
+          <p className="lc-kicker font-ko">김유빈 <span className="font-sans" lang="en">Yubin Kim</span> · AI 전략·AX 실행</p>
           <h1 id="hero-title" className="lc-name">
             <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅 </span>
             <span aria-hidden="true"><span className="lc-name__l">Yubin</span><span className="lc-name__l lc-name__l--2">Kim</span></span>
           </h1>
-          <p className="lc-role font-ko">AI 전략 컨설팅 · 법무법인 경국 <span className="font-sans">— Strategy · Automation · Data</span></p>
-          <p className="lc-lead font-myeongjo">데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.</p>
-          <p className="lc-proof font-ko">AI로 풀 문제를 정의하고, 자동화 시스템을 직접 구현해 실제 업무에 적용합니다.</p>
+          {/* 첫 화면이 답할 것 — 무엇을 잘하는가(구조화 · 실행) · 어디서(법률 · 부동산 · 정책) · 왜 더 볼까(아래 근거) */}
+          <p className="lc-lead font-myeongjo">복잡한 문제를 구조화하고,<br />기술로 실행합니다.</p>
+          <p className="lc-proof font-ko">법률·부동산·정책의 현장에서 AI가 도울 수 있는 일과 사람이 판단해야 할 일을 구분합니다.</p>
+          <p className="lc-role font-ko">법무법인 경국 — 정비사업 AX · 전략기획 <span className="font-sans" lang="en">AI Strategy · Practical AX · Human Judgment</span></p>
           <div className="lc-cta">
             <a href="#tools" className="btn lc-cta__main">직접 만든 도구 4가지 <ArrowDown size={15} /></a>
             <a href="#ax-desk" className="btn btn--ghost">경국 AX 지휘실</a>
@@ -166,53 +167,73 @@ function Marquee() {
 }
 
 /* ============================================================ LEDGER — at a glance */
+/* 한눈에 — 숫자 대신 '무엇을 하는 사람인가' 세 문장. 문장마다 아래쪽의 실제 근거로 이어진다 */
+const GLANCE = [
+  { n: "01", ko: "문제를 정의합니다", en: "Problem Framing", href: "#ax-compensation",
+    d: "업무 흐름 · 제약 · 제도 · 이해관계를 먼저 읽습니다.", ev: "광명시흥 3기 신도시 보상자료를 절차와 쟁점으로 구조화(발표자료 77장)" },
+  { n: "02", ko: "실행 가능한 시스템을 만듭니다", en: "AX Implementation", href: "#ax-desk",
+    d: "정의한 문제를 자동화와 제품으로 옮깁니다.", ev: "경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 직접 만든 도구 4가지" },
+  { n: "03", ko: "판단과 제도로 연결합니다", en: "Human & Institutional Decisions", href: "#policy",
+    d: "결과를 판단하는 사람이 이해하도록 만들고, 정책 논의의 자리에 나갑니다.", ev: "변호사 검토로 끝나는 AX 구조 · 국민 대토론회 정책 제안 발표 · 청년 정책 거버넌스" },
+];
 function Ledger() {
   const ref = useReveal();
-  const ITEMS = [
-    /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
-    [String(EDITIONS.length), "AI · 자동화 결과물", "Projects"],
-    [String(EDITIONS.filter((e) => /배포 완료|사내 운영/.test(e.status)).length), "배포 · 사내 운영 시스템", "In Operation"],
-    ["4", "AI · 데이터 전문교육", "Programs"],
-    ["3", "수상 · 표창", "Awards"],
+  /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
+  const facts = [
+    [String(EDITIONS.length), "결과물"], [String(EDITIONS.filter((e) => /배포 완료|사내 운영/.test(e.status)).length), "배포 · 사내 운영"],
+    ["4", "AI · 데이터 전문교육"], ["3", "수상 · 표창"],
   ];
   return (
-    <section id="glance" ref={ref} className="ledger" aria-label="한눈에 보는 기록">
+    <section id="glance" ref={ref} className="ledger glance" aria-labelledby="glance-title">
       <div className="wrap reveal">
-        <p className="eyebrow ledger__eyebrow">At a Glance — 한눈에 보는 기록</p>
-        <div className="ledger-grid">
-          {ITEMS.map(([n, ko, en], i) => (
-            <div key={i} className="ledger-item" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="ledger-num font-serif" data-count={n}>{n}</div>
-              <div className="ledger-ko font-ko">{ko}</div>
-              <div className="ledger-en font-sans">{en}</div>
-            </div>
+        <h2 id="glance-title" className="glance__h"><span className="font-ko">이렇게 일합니다</span><span className="font-serif" lang="en">How I Work</span></h2>
+        <ol className="glance__list">
+          {GLANCE.map((g) => (
+            <li key={g.n}>
+              <a href={g.href} className="glance__item">
+                <b className="font-serif">{g.n}</b>
+                <h3><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
+                <p className="glance__d font-ko">{g.d}</p>
+                <p className="glance__ev font-ko"><span>근거</span>{g.ev}</p>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
+        <p className="glance__facts font-ko">
+          {facts.map(([n, k]) => <span key={k}><b className="font-serif" data-count={n}>{n}</b>{k}</span>)}
+        </p>
       </div>
     </section>
   );
 }
 
 /* ============================================================ COMPOSITE — 융합 역량 */
+/* 역량은 깊이가 다르다 — 줄기(실증된 깊이) · 적용 영역 · 넓어지는 영역. 숙련도 점수 · 퍼센트는 쓰지 않는다.
+ * id(dom-NN)는 고정이고 화면 순서는 tier 순서다. 두 번째 깊이(법률·부동산·제도적 의사결정)는 '형성 중'으로만 적는다 */
 const DOMAINS = [
-  { n: "01", core: true, ko: "AI 전략 컨설팅", short: "전략", en: "AI Strategy & Consulting",
-    desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 위험 신호로 볼지 판단 기준을 세웠습니다.",
-    tags: ["문제 정의 · 우선순위 설계", "사업성 검토"] },
-  { n: "02", core: true, ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
-    desc: "사람이 반복하던 판단의 앞단을 AI에 맡기고, 사람은 기준을 정하는 자리에 남깁니다. SSAFY·서울대 AIED에서 구조를 익혔습니다.",
-    tags: ["SSAFY 13기", "서울대 AIED 4기"] },
-  { n: "03", core: true, ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
+  { n: "01", tier: "core", ko: "AI 전략", short: "AI 전략", en: "AI Strategy",
+    desc: "무엇을 먼저 하고 무엇을 AI에 맡길지 정합니다. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 ‘급함’으로 볼지 기준을 세웠습니다.",
+    tags: ["문제 정의 · 우선순위", "보상자료 77장 구조화"] },
+  { n: "02", tier: "core", ko: "AX 실행 · 업무 자동화", short: "AX 실행", en: "AX Implementation",
+    desc: "반복되는 판단의 앞단을 시스템으로 옮기고, 사람은 기준을 정하는 자리에 남깁니다. 경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류를 만들었고, SSAFY 13기 · 서울대 AIED 4기에서 구조를 익혔습니다.",
+    tags: ["경국 AX 3종", "SSAFY 13기 · 서울대 AIED 4기"] },
+  { n: "03", tier: "core", ko: "데이터 기반 판단", short: "데이터", en: "Data-Based Reasoning",
     desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다. 전략이 감이 아니라 근거 위에 서도록 데이터 구조를 먼저 설계합니다.",
     tags: ["공공데이터 API", "GWS 연동"] },
-  { n: "04", ko: "마케팅 · 커뮤니케이션", short: "마케팅", en: "Marketing & Comms",
-    desc: "KREMA 4기의 세그먼트 전략과 생성형 AI 제작 역량으로 전략을 시장에 닿는 언어로 옮깁니다.",
-    tags: ["KREMA 4기", "연합뉴스TV · 서울시민기자단"] },
-  { n: "05", ko: "교육 · 강의", short: "강의", en: "Teaching",
-    desc: "서울대 AIED 4기에서 교수법을 체화하고, 실무에서 만든 시스템을 강의 모듈로 옮깁니다.",
+  { n: "06", tier: "applied", ko: "법률·부동산의 산업 이해", short: "법률·부동산", en: "Legal & Real Estate Intelligence",
+    desc: "정비사업의 법률 위험, 토지보상 절차, 청약·공공임대 공고를 실무와 제품으로 다뤘습니다. 법무법인 경국의 송무·사무, 건국대 스마트건설 교육, KREMA 4기, 분양대행자 자격이 바탕입니다.",
+    tags: ["법무법인 경국", "스마트건설 · KREMA 4기"] },
+  { n: "05", tier: "wide", ko: "정책·공공 의사결정 참여", short: "정책·공공", en: "Policy & Public Decision-Making",
+    desc: "국민 대토론회에서 정책을 제안·발표했고, 서초청년네트워크 9기 운영위원회 부위원장 · 청년정책 패널로 활동합니다. 참석과 제안은 정책 결정이 아니라 논의에 참여한 기록입니다.",
+    tags: ["국민 대토론회 제안 발표", "서초청년네트워크 부위원장"] },
+  { n: "04", tier: "wide", ko: "설명·교육·소통", short: "설명·소통", en: "Knowledge Translation & Communication",
+    desc: "서울대 AIED 4기에서 교수법을 익혔고, 박람회 시연 · SSAFY 홍보 앰배서더 · 서울시민기자단으로 기술과 정책을 이해하기 쉬운 말로 옮겨 왔습니다. 강의는 제안 커리큘럼입니다.",
     tags: ["서울대 AIED 4기", "SSAFY 홍보 앰배서더"] },
-  { n: "06", ko: "도메인 — 법무 · 부동산 · 공공", short: "도메인", en: "Domain Expertise",
-    desc: "법무법인 경국의 송무·사무, 건국대 스마트건설의 부동산 이해, 청년 정책 거버넌스의 공공 감각이 판단의 바탕입니다.",
-    tags: ["법무법인 경국", "스마트건설 · 청년정책"] },
+];
+const TIERS = [
+  { key: "core", ko: "줄기 — 실증된 깊이", en: "Core Depth" },
+  { key: "applied", ko: "적용 영역", en: "Applied Domain" },
+  { key: "wide", ko: "넓어지는 영역", en: "Expanding Domains" },
 ];
 
 /* ============================================================ LECTURES — 강의 프로그램 */
@@ -349,11 +370,6 @@ const CREDS = [
   { name: "분양대행자", ko: "부동산 분양 실무 자격", by: "주택·상가 분양 대행" },
 ];
 
-const THESIS = [
-  ["교차점의 희소성", "법률의 엄밀함과 인공지능의 구현 역량을 함께 갖춘 인력은 많지 않다. 대체 불가능성은 한 분야의 깊이가 아니라 서로 다른 분야가 만나는 경계에서 형성."],
-  ["실행을 통한 증명", "학습한 내용을 배포 가능한 결과물로 구현. 여섯 건의 프로젝트는 서술이 아니라 접근 가능한 산출물로 존재."],
-  ["언어의 매개", "제도의 언어와 기술의 언어, 대중의 언어를 오가며 조직 내부에서 발생하는 소통의 간극을 조정."],
-];
 
 const CASES = [
   { n: "01", title: "감정평가사 필드워크", tag: "Three.js · 실지조사 시뮬레이션", feature: true,
@@ -366,32 +382,45 @@ const CASES = [
     judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." },
 ];
 
-const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
-
-/* 역량 지도 — 판(뒤) · 선(가운데) · 핵심(앞)이 서로 다른 깊이에 놓인 입체 지도.
- * 스크롤하면 눕혀진 판이 관람자 쪽으로 서고(--k), 선이 이어지고, 핵심 역량이 앞으로 나온다.
- * 포인터·손가락 위치는 카메라(--rx --ry), 고른 역량은 가장 앞으로 나오고 나머지는 물러난다. */
-function ConvergenceMap({ active, onPick }) {
+/* T/π 역량 구조 — 위 가로줄은 넓이(연결된 영역), 아래 굵은 줄기는 실증된 깊이(AI 전략·AX 실행).
+ * 왼쪽의 점선 줄기는 형성 중인 두 번째 깊이(법률·부동산·제도적 의사결정) — 자격이나 완성된 전문성이 아니다 */
+const TMAP = { "06": [5, 28], "01": [29, 58], "05": [58, 79], "04": [79, 100] }; /* 가로줄 칸 — 왼쪽 · 오른쪽 % */
+function TShapeMap({ active, onPick }) {
+  const cur = DOMAINS[active] || DOMAINS[0];
+  const coreOn = cur.tier === "core";
+  const seg = (n) => TMAP[n];
+  const btn = (n, label, i) => {
+    const [l, r] = seg(n);
+    const on = n === "01" ? coreOn : cur.n === n;
+    return (
+      <button key={n} type="button" className={"tmap__seg" + (on ? " on" : "") + (n === "01" ? " tmap__seg--core" : "")} style={{ left: l + "%", width: (r - l) + "%" }}
+        aria-pressed={on} onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
+        <span className="font-ko">{label}</span>
+      </button>
+    );
+  };
   return (
-    <div className="cmap3d" data-cine="pass" data-cine-src="#composite" role="group" aria-label="여섯 도메인이 하나로 수렴하는 융합 역량 지도 — 역량을 누르면 설명이 바뀝니다">
-      <div className="cmap3d__rig">
-        <div className="cmap3d__plate" aria-hidden="true" />
-        <svg className="cmap" viewBox="0 0 400 400" aria-hidden="true">
-          <polygon className="cmap__ring" points={NODE.map((p) => p.join(",")).join(" ")} />
-          {NODE.map((p, i) => (
-            <line key={"s" + i} pathLength="1" style={{ "--d": i }} className={"cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
-          ))}
-          <circle className="cmap__halo" cx="200" cy="200" r="60" />
-        </svg>
-        <div className="cmap3d__core" aria-hidden="true"><b className="font-serif">AI</b><span>STRATEGY</span></div>
-        {DOMAINS.map((d, i) => (
-          <button key={d.n} type="button" aria-pressed={i === active}
-            className={"cmap3d__n" + (d.core ? " core" : "") + (i === active ? " on" : "") + " p-" + "trrbll"[i]}
-            style={{ left: NODE[i][0] / 4 + "%", top: NODE[i][1] / 4 + "%", "--d": i }}
-            onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
-            <i aria-hidden="true" /><span className="font-ko">{d.short}</span>
-          </button>
-        ))}
+    <div className="tmap" role="group" aria-label="T자 · π자 역량 구조 — 칸을 누르면 설명이 바뀝니다">
+      <div className="tmap__bar">
+        {btn("06", "법률·부동산", DOMAINS.findIndex((d) => d.n === "06"))}
+        {btn("01", "AI 전략·AX 실행", coreOn ? active : 0)}
+        {btn("05", "정책·공공", DOMAINS.findIndex((d) => d.n === "05"))}
+        {btn("04", "설명·소통", DOMAINS.findIndex((d) => d.n === "04"))}
+      </div>
+      <div className="tmap__stem" style={{ left: TMAP["01"][0] + "%", width: (TMAP["01"][1] - TMAP["01"][0]) + "%" }}>
+        {DOMAINS.filter((d) => d.tier === "core").map((d) => {
+          const i = DOMAINS.indexOf(d);
+          return (
+            <button key={d.n} type="button" className={"tmap__lv" + (i === active ? " on" : "")} aria-pressed={i === active}
+              onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
+              <b className="font-serif">{d.n}</b><span className="font-ko">{d.short}</span>
+            </button>
+          );
+        })}
+        <p className="tmap__cap font-ko">실증된 깊이<em className="font-sans" lang="en">Demonstrated</em></p>
+      </div>
+      <div className={"tmap__stem2" + (cur.n === "06" ? " on" : "")} style={{ left: (TMAP["06"][0] + 4) + "%", width: (TMAP["06"][1] - TMAP["06"][0] - 8) + "%" }}>
+        <p className="font-ko">두 번째 깊이<br /><span>법률·부동산 ·<br />제도적 의사결정</span><em>형성 중</em></p>
       </div>
     </div>
   );
@@ -417,83 +446,36 @@ function Composite() {
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="02 — Core Competencies" titleEn="The Composite" titleKo="AI 전략 컨설팅을 중심에 둔 역량 구조" />
+        <SectionHead no="02 역량 구조" ko="AI 전략·AX 실행을 줄기로" en="AI Strategy & AX Implementation"
+          lead="모든 역량의 깊이가 같지 않습니다. 실제 결과물로 증명한 줄기는 하나이고, 법률·부동산은 그 줄기가 쓰이는 영역, 정책·소통은 넓혀 가는 영역입니다." />
 
-        <div className="comp-thesis reveal">
-          <p className="font-myeongjo">
-            전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.
-          </p>
-          <p className="font-ko comp-thesis__sub">
-            중심축은 <strong>AI 전략 컨설팅 · AI 자동화 · 데이터</strong> 세 가지입니다.
-            마케팅·강의·도메인 지식은 그 판단을 정확하게 만들고 조직에 전달하는 보조 역량입니다.
-          </p>
-        </div>
-
-        <div className="comp-stage">
-          <div className="comp-stage__sticky" data-tilt="">
-            <ConvergenceMap active={active} onPick={setActive} />
+        <div className="comp-stage comp-stage--t">
+          <div className="comp-stage__sticky">
+            <TShapeMap active={active} onPick={setActive} />
             <div className="cmap__cap">
-              <span className="font-cond">{DOMAINS[active].n}</span>
+              <span className="font-sans">{TIERS.find((t) => t.key === DOMAINS[active].tier).ko}</span>
               <strong className="font-ko">{DOMAINS[active].ko}</strong>
-              <em className="font-sans">{DOMAINS[active].en}</em>
+              <em className="font-sans" lang="en">{DOMAINS[active].en}</em>
             </div>
           </div>
 
           <div className="comp-track">
-            <p className="comp-group font-sans">Core — 핵심 역량</p>
-            {DOMAINS.filter((d) => d.core).map((d) => {
-              const i = DOMAINS.indexOf(d);
-              return (
-                <article
-                  key={d.n}
-                  data-i={i}
-                  id={"dom-" + d.n}
-                  ref={(el) => (rows.current[i] = el)}
-                  className={"comp-row comp-row--core" + (i === active ? " on" : "")}
-                  onMouseEnter={() => setActive(i)}
-                >
-                  <div className="comp-row__head">
-                    <span className="comp-row__n font-cond">{d.n}</span>
-                    <span className="comp-row__rule" />
-                    <span className="comp-row__en font-sans">{d.en}</span>
-                  </div>
-                  <h3 className="font-ko">{d.ko}</h3>
-                  <p className="font-ko">{d.desc}</p>
-                  <div className="comp-row__tags font-ko">
-                    {d.tags.map((t) => <span key={t}>{t}</span>)}
-                  </div>
-                </article>
-              );
-            })}
-            <p className="comp-group comp-group--sub font-sans">Supporting — 보조 역량 · 눌러서 보기</p>
-            {DOMAINS.filter((d) => !d.core).map((d) => {
-              const i = DOMAINS.indexOf(d);
-              return (
-                <details
-                  key={d.n}
-                  data-i={i}
-                  id={"dom-" + d.n}
-                  ref={(el) => (rows.current[i] = el)}
-                  className={"comp-row comp-row--sub fold" + (i === active ? " on" : "")}
-                  onMouseEnter={() => setActive(i)}
-                >
-                  <summary>
-                    <span className="comp-row__n font-cond">{d.n}</span>
-                    <span className="fold__t">
-                      <strong className="font-ko">{d.ko}</strong>
-                      <em className="font-sans">{d.en}</em>
-                    </span>
-                    <i className="fold__icon" aria-hidden="true" />
-                  </summary>
-                  <div className="fold__body">
-                    <p className="font-ko">{d.desc}</p>
-                    <div className="comp-row__tags font-ko">
-                      {d.tags.map((t) => <span key={t}>{t}</span>)}
-                    </div>
-                  </div>
-                </details>
-              );
-            })}
+            {TIERS.map((t) => (
+              <React.Fragment key={t.key}>
+                <p className={"comp-group font-ko" + (t.key !== "core" ? " comp-group--sub" : "")}>{t.ko} <em className="font-sans" lang="en">{t.en}</em></p>
+                {DOMAINS.filter((d) => d.tier === t.key).map((d) => {
+                  const i = DOMAINS.indexOf(d);
+                  return (
+                    <article key={d.n} data-i={i} id={"dom-" + d.n} ref={(el) => (rows.current[i] = el)}
+                      className={"comp-row comp-row--" + t.key + (i === active ? " on" : "")} onMouseEnter={() => setActive(i)}>
+                      <h3 className="comp-row__t"><span className="font-ko">{d.ko}</span><em className="font-sans" lang="en">{d.en}</em></h3>
+                      <p className="font-ko">{d.desc}</p>
+                      <div className="comp-row__tags font-ko">{d.tags.map((x) => <span key={x}>{x}</span>)}</div>
+                    </article>
+                  );
+                })}
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
@@ -546,16 +528,17 @@ function Composite() {
     <section className="whyc" ref={bandRef}>
       <div className="wrap">
         <div className="menu-rule reveal" style={{ marginBottom: 26 }}><i /></div>
-        <p className="eyebrow reveal">Strategy Cases — 전략 판단의 기록</p>
+        <p className="whyc__k font-ko reveal">전략 판단의 기록 <span className="font-sans" lang="en">Strategy Cases</span></p>
 
         <h2 className="whyc__lead font-myeongjo reveal">
-          도구는 빨라졌습니다.<br />
-          <em>무엇을 먼저 할지는 여전히 사람이 정합니다.</em>
+          AI가 답을 만드는 시대,<br />
+          <em>무엇을 물을지 결정하는 사람이 되겠습니다.</em>
         </h2>
+        <p className="whyc__en font-serif reveal" lang="en">Technology for Execution. Judgment for Direction.</p>
 
         <p className="whyc__intro font-ko reveal">
-          직접 만든 두 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
-          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다. 그 자리가 전략 컨설팅입니다.
+          시스템은 분석과 실행을 돕습니다. 그러나 결과가 큰 결정 — 무엇을 문제로 삼을지, 이해관계가 부딪칠 때 무엇을 앞세울지,
+          어떤 위험을 받아들일지 — 은 그 결정에 책임지는 사람이 내립니다. 직접 만든 두 시스템에서 그 경계가 어디인지 확인했습니다.
         </p>
 
         <div className="wcases">
@@ -586,13 +569,8 @@ function Composite() {
           ))}
         </div>
 
-        <p className="whyc__close font-myeongjo reveal">
-          세 번 다 사람이 하는 일은 같았습니다 —<br />
-          <em>도구에 무엇을 시킬지 정하는 일.</em>
-        </p>
         <p className="whyc__closesub font-ko reveal">
-          기준을 세우는 사람과 그것을 실행까지 옮기는 사람이 다르면 속도가 죽습니다.
-          둘을 한 사람이 하도록 준비해 왔습니다.
+          두 경우 모두 도구가 맡은 일은 빨라졌고, 기준을 정하는 일은 사람에게 남았습니다. 그 기준을 세우고 실행까지 옮기는 것이 제 일입니다.
         </p>
       </div>
     </section>
@@ -793,7 +771,9 @@ function Trajectory() {
   return (
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
-        <SectionHead eyebrow="05 — Experience" titleEn="The Trajectory" titleKo="이력 — 실무와 전문교육" />
+        <SectionHead no="06 성장 경로" ko="어디로 성장하고 있는가" en="Development Trajectory"
+          lead="연대순 목록보다 먼저, 다루는 문제가 어떻게 커져 왔는지 봅니다. 시기는 서로 겹칩니다 — 아래 단계는 순서가 아니라 문제의 복잡도입니다." />
+        <GrowthPath />
 
         <figure className="tl-feature reveal" data-cine="pass">
           <a className="tl-feature__main" href="gallery.html#youth-day">
@@ -932,13 +912,21 @@ const ARCHIVE = ARCHIVE_ORDER.map((n, i) => ({ ...edOf(n), no: pad2(i + 1) }));
 /* 네 가지 도구 — 왜 만들었는지 · 어떻게 쓰는지(작업 카드의 사실에서만) · 실제 화면 · 그 제품만의 공간 */
 const TOOL_META = {
   "09": { name: "ZipCatch · 집캐치", shot: "zc-home", env: "The Housing Landscape", envKo: "지도 위 필지에서 아파트 단지가 솟고, 위치 표시가 꽂힙니다",
-    why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾으려고 만들었습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다." },
+    why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾기 어려웠습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다.",
+    made: "두 공고를 공공데이터 API로 모아, 지역 · 주거비 · 가구 조건 3단계 입력으로 지금 지원할 수 있는 후보를 정리하는 서비스.",
+    link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원" },
   "16": { name: "법조시장 한눈에", shot: "lp-home", env: "The Regulatory Landscape", envKo: "개발 대상지 위로 법률안 · 법령 · 판례가 층으로 내려앉습니다",
-    why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 화면에서 보려고 만들었습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다." },
+    why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 번에 보기 어려웠습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다.",
+    made: "국회 · 법제처 · 대한변협 공개 자료를 하루 단위로 갱신하는 상황판과, 민법 기간 계산 조문에 맞춘 기한 계산기.",
+    link: "흩어진 법률 정보를 리서치 흐름으로 — 출처와 연결 상태를 함께 공개" },
   "17": { name: "Atelier AX", shot: "ax-live", env: "The Agent Workspace", envKo: "사무실 평면 위 네 역할 사이로 업무가 흐르고, 승인 책상에서 끝납니다",
-    why: "AI 에이전트가 무엇을 하는지 보이지 않으면 결과를 믿고 맡기기 어려워, 배정부터 승인까지 보이게 만들었습니다.", use: "AI 팀에 일을 맡기고 진행 단계와 승인 대기를 확인할 때 씁니다." },
+    why: "AI 에이전트가 무엇을 하는지 보이지 않으면 결과를 믿고 맡기기 어려웠습니다.", use: "AI 팀에 일을 맡기고 진행 단계와 승인 대기를 확인할 때 씁니다.",
+    made: "AI 직원에게 업무를 배정하고, 실행 과정을 관찰하고, 산출물을 사람이 검증 · 승인하는 관제 대시보드.",
+    link: "배정 · 실행 가시성 · 사람의 승인 — AX 를 운영하는 원칙 그 자체" },
   "12": { name: "국정 한눈에", shot: "gk-home", env: "The National Information Landscape", envKo: "정책 · 국회 · 경제 · 시장 네 갈래가 한 판으로 모입니다",
-    why: "국정 소식과 경제 지표를 여러 포털과 앱을 오가며 보던 것을 한 화면으로 모으려고 만들었습니다.", use: "국정 · 정책 · 증시 · 환율의 흐름을 한 번에 훑을 때 씁니다." },
+    why: "국정 소식과 경제 지표를 여러 포털과 앱을 오가며 봐야 했습니다.", use: "국정 · 정책 · 증시 · 환율의 흐름을 한 번에 훑을 때 씁니다.",
+    made: "공개 뉴스 RSS와 시세를 서버리스 함수로 모아 섹션별로 배정하고 중복 기사를 거른 국정 · 경제 상황판.",
+    link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기" },
 };
 
 /* ============================================================ AX INTELLIGENCE COMMAND — 법무법인 경국
@@ -1040,10 +1028,9 @@ function AXCommand() {
     <section id="ax-desk" className="axc" aria-labelledby="axc-title">
       <div className="wrap axc__wrap">
         <header className="axc__mast">
-          <p className="axc__k font-sans">Gyunggook Law Firm — AX Intelligence Command</p>
-          <h2 id="axc-title" className="axc__title"><span className="font-serif" lang="en">AX Intelligence Command</span><span className="font-ko">법무법인 경국 AX 지휘실</span></h2>
-          <p className="axc__pos font-sans" lang="en">Spatial Intelligence <i>×</i> Legal Judgment <i>×</i> Operational Execution</p>
-          <p className="axc__lead font-ko">재개발 · 재건축 사업이 <b>법 · 총회 · 계약</b> 문제로 멈추지 않게 — 위험은 시스템이 먼저 찾고, 판단은 변호사가 내립니다. 사내에 직접 구축한 세 가지입니다.</p>
+          <p className="axc__k font-ko">03 법무법인 경국 AX 지휘실 <span className="font-sans" lang="en">Gyunggook AX Intelligence Command</span></p>
+          <h2 id="axc-title" className="axc__title"><span className="font-ko">판단이 필요한 곳에,<br />실행 가능한 시스템을 설계합니다</span><span className="font-serif" lang="en">Legal AX · Risk Intelligence · Operational Execution</span></h2>
+          <p className="axc__lead font-ko">재개발 · 재건축 사업이 <b>법 · 총회 · 계약</b> 문제로 멈추지 않게 — 세 시스템은 같은 원칙으로 움직입니다. <b>관련 정보는 시스템이 먼저 찾아 정리하고, 판단은 변호사가 내립니다.</b> AI 가 법률 판단을 대신하지 않습니다.</p>
         </header>
 
         <div className="axc__console">
@@ -1121,8 +1108,7 @@ function AXCommand() {
         </div>
 
         <header className="axc__subhead">
-          <p className="axc__k font-sans">Practical Execution — 실무</p>
-          <h3 className="font-ko">법무법인 경국에서 맡은 실무</h3>
+          <h3 className="font-ko">법무법인 경국에서 맡은 실무 <span className="font-sans" lang="en">Practical Execution</span></h3>
         </header>
         <div className="axc__practice">
           <PracticeComp item={AX_SUPPORT[0]} />
@@ -1197,7 +1183,7 @@ function OpsMail({ e }) {
     <div id="work-systems" className={"axo" + (on ? " is-on" : "")} ref={box}>
       <article id={"ed-" + e.n} className="axo__card">
         <div className="axo__txt">
-          <p className="axc__k font-sans">Operational Workflow — 운영 흐름</p>
+          <p className="axc__k font-ko">운영 흐름 <span className="font-sans" lang="en">Operational Workflow</span></p>
           <h4 className="font-ko">{t1}<small>{t2.replace(/^—\s*/, "")}</small></h4>
           <p className="axo__desc font-ko">{e.desc}</p>
           <dl className="axp__work font-ko">{e.work.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
@@ -1563,8 +1549,12 @@ function FlagshipTool({ e, onOpen, flip }) {
       <div className="fl__txt">
         <p className="fl__badge font-sans"><b>직접 만들어 사용</b><span>{e.status}</span><span>{e.no} / 04</span></p>
         <h3 id={"fl-" + e.n} className="fl__name"><small className="font-ko">{t1}</small><span className="font-serif">{M.name}</span></h3>
-        <p className="fl__why font-ko">{M.why}</p>
-        <p className="fl__use font-ko"><b>이렇게 씁니다</b>{M.use}</p>
+        <ol className="fl__story font-ko">
+          <li><b>어떤 문제가 있었나</b>{M.why}</li>
+          <li><b>무엇을 만들었나</b>{M.made}</li>
+          <li><b>어떻게 쓰나</b>{M.use}</li>
+        </ol>
+        <p className="fl__link font-ko"><span>이어지는 역량</span>{M.link}</p>
         <ol className="fl__layers font-ko">
           {T.layers.map((L, i) => <li key={L.img}><b className="font-sans">{pad2(i + 1)}</b><span><em>{L.k}</em>{L.t}</span></li>)}
         </ol>
@@ -1606,11 +1596,10 @@ function ArtifactsSection() {
   return (
     <section id="artifacts" ref={ref} className="arts" aria-labelledby="arts-title">
       <div className="wrap">
-        <SectionHead eyebrow="04 — Selected Works" titleEn="The Artifacts" titleKo="직접 만든 네 가지 도구" />
+        <SectionHead no="04 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Four Independently Developed Products" />
         <div id="tools" className="arts__intro reveal">
-          <p className="arts__k font-sans" id="arts-title">A — My Everyday Tools</p>
-          <p className="arts__lead font-ko">직접 기획 · 개발 · 배포하고 <b>일상에서 자주 쓰는 개인 제품</b> 네 가지입니다. 회사 시스템이 아닙니다.
-            <span> 법무법인 경국의 AX 는 바로 위 지휘실에, 학습 · 실험 · 콘텐츠 작업은 아래 연구 기록에 있습니다.</span></p>
+          <p className="arts__lead font-ko" id="arts-title">문제를 발견하는 데서 끝내지 않고, 혼자 끝까지 만들어 배포한 <b>개인 제품</b> 네 가지입니다. 회사 시스템이 아닙니다.
+            <span>제품마다 어떤 문제가 있었는지 → 무엇을 만들었는지 → 어떻게 쓰는지 순서로 적었습니다. 법무법인 경국의 AX 는 바로 위에 있습니다.</span></p>
           <ol className="arts__index">
             {TOOLS.map((e) => (
               <li key={e.n}><a href={"#ed-" + e.n}>
@@ -1626,6 +1615,89 @@ function ArtifactsSection() {
       <div ref={anchor} className="fl-anchor" aria-hidden="true" />
       {staged && <ProductTheater ed={staged.e} card={staged.card} onClose={onClose} />}
     </section>
+  );
+}
+
+/* ============================================================ POLICY — 현장의 문제를 제도의 언어로
+ * 같은 문제 해결 방식의 연장. 참석 · 제안 · 역할 · 수강을 섞지 않고 따로 적는다 — 제안은 채택이 아니고, 참석은 결정이 아니다.
+ * 특정 정당 · 진영의 홍보가 아니라, 정책 논의에 참여한 기록이다. 날짜 · 기관 · 역할은 이력(TRAJECTORY)과 같은 원문 */
+const POLICY = [
+  { k: "propose", ko: "제안하다", en: "Propose", items: [
+    { t: "국민통합위원회 2026 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 정책 제안 발표", d: "2026. 9. 29 · aT센터 · 자산 분야 트랙",
+      what: "청년 미래배당펀드팀으로 제안 · 발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계했습니다.", kind: "팀 제안 · 발표", href: "gallery.html#national-debate" },
+  ] },
+  { k: "deliberate", ko: "듣고, 의견을 전하다", en: "Deliberate", items: [
+    { t: "재정경제부 제1차관 청년 현장방문 및 간담회", d: "2026. 10. 27 · SVC Seoul", what: "법무법인 경국 소속으로 참석. 주거 · 일자리 · 서민금융에 대한 청년들의 현장 의견이 오간 자리입니다.", kind: "참석", href: "gallery.html#moef-youth" },
+    { t: "성평등가족부 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉", d: "2026. 10. 25 · 연세대", what: "청년 세대의 시각으로 정책 토론에 함께했습니다.", kind: "공론장 참여", href: "gallery.html#gender-forum" },
+    { t: "청와대 대통령 주관 2026 청년의날 기념행사", d: "2026", what: "청년 대표로 초청되어 참석했습니다.", kind: "초청 참석", href: "gallery.html#youth-day" },
+  ] },
+  { k: "participate", ko: "운영에 참여하다", en: "Participate", items: [
+    { t: "서초청년네트워크 9기 운영위원회 부위원장", d: "2026", what: "서초구 청년 정책 거버넌스에서 분과 의제 설정과 위원회 운영을 맡고 있습니다.", kind: "위원 · 부위원장", href: "#tl-seocho" },
+    { t: "서초구 가치디자인단 · 국민권익위원회 청년정책 패널 · 국무조정실 온라인 청년참여단", d: "2026", what: "구정 현장 활동과 청년 정책 과제에 대한 의견 수렴 · 제안에 참여합니다.", kind: "위촉 · 패널 · 참여단", href: "#tl-acrc-panel" },
+  ] },
+  { k: "learn", ko: "배우다", en: "Learn", items: [
+    { t: "2026 민주청년지도자 양성과정", d: "2026. 10. 24 – 12. 13 · 민주연구원", what: "정책 · 리더십 과정을 수강하고 있습니다.", kind: "수강 중", href: "gallery.html#dyl" },
+  ] },
+];
+function PolicySection() {
+  const ref = useReveal();
+  return (
+    <section id="policy" ref={ref} className="pol" aria-labelledby="pol-title">
+      <div className="wrap">
+        <header className="pol__head reveal">
+          <p className="sh__no font-ko">05 정책 참여 <span className="font-sans" lang="en">Policy Participation & Public Deliberation</span></p>
+          <h2 id="pol-title" className="pol__t font-ko">현장에서 발견한 문제를<br />제도의 언어로 옮깁니다</h2>
+          <p className="pol__lead font-ko">법률 · 부동산 현장의 문제는 결국 제도와 이해관계의 문제로 이어집니다. 그래서 소프트웨어를 만드는 데서 멈추지 않고,
+            정책 논의의 자리에 나가 듣고, 제안하고, 운영에 참여합니다.</p>
+          <p className="pol__note font-ko">참석과 제안은 정책 결정이 아닙니다. 채택 여부는 적지 않습니다.</p>
+        </header>
+        <div className="pol__grid">
+          {POLICY.map((g) => (
+            <div key={g.k} className={"pol__col pol__col--" + g.k + " reveal"}>
+              <h3 className="pol__h"><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
+              <ul>
+                {g.items.map((it) => (
+                  <li key={it.t}>
+                    <a href={it.href} className="pol__item">
+                      <span className="pol__kind font-ko">{it.kind}</span>
+                      <strong className="font-ko">{it.t}</strong>
+                      <span className="pol__d font-sans">{it.d}</span>
+                      <span className="pol__what font-ko">{it.what}</span>
+                      <span className="pol__go font-sans">근거 보기 <ArrowUpRight size={13} /></span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 성장 경로 — 연대순 목록 위에, 다루는 문제의 복잡도로 본 다섯 단계. 마지막 단계는 '지향'으로 따로 표시 */
+const GROWTH = [
+  { ko: "기술을 학습하다", en: "Learn", ev: "SSAFY 13기 이수(2025) · 서울대 AIED 4기 수료 · 명지대 AI 데이터 매니지먼트(트랙3 수료 · 나머지 수강)", href: "#tl-ssafy" },
+  { ko: "조직의 문제를 해결하다", en: "Solve", ev: "법무법인 경국 — 정비사업 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 보상자료 77장", href: "#ax-desk" },
+  { ko: "독립 제품으로 넓히다", en: "Build", ev: "집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에 — 직접 기획 · 개발 · 배포", href: "#tools" },
+  { ko: "제도와 정책의 현장에 서다", en: "Engage", ev: "국민 대토론회 정책 제안 발표 · 서초청년네트워크 부위원장 · 정책 간담회 · 공론장", href: "#policy" },
+  { ko: "더 무거운 결정의 영역으로", en: "Direction", ev: "기술 구현 · 법률 · 부동산의 산업 이해 · 제도에 대한 이해를 함께 갖추고, 결과에 책임지는 결정을 다루는 자리 — 앞으로의 방향입니다.", href: "#composite", aim: true },
+];
+function GrowthPath() {
+  return (
+    <ol className="grow reveal">
+      {GROWTH.map((g, i) => (
+        <li key={g.en} className={g.aim ? "grow__aim" : ""}>
+          <a href={g.href}>
+            <b className="font-serif">{pad2(i + 1)}</b>
+            <h3><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
+            <p className="font-ko">{g.ev}</p>
+            {g.aim && <span className="grow__tag font-ko">지향 · 진행 중</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
   );
 }
 
@@ -1665,7 +1737,7 @@ function ResearchArchive() {
     <section id="research" className="ra" aria-labelledby="ra-title">
       <div className="wrap">
         <header className="ra__head">
-          <p className="ra__k font-sans">Research Archive — 연구 · 실험 기록</p>
+          <p className="ra__k font-ko">연구 · 실험 기록 <span className="font-sans" lang="en">Research Archive</span></p>
           <h2 id="ra-title" className="font-ko">그 밖의 작업 <em className="font-serif">{ARCHIVE.length}</em></h2>
           <p className="ra__sub font-ko">학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠입니다. 네 가지 도구, 경국 AX 와는 성격이 다른 기록이라 따로 모았습니다.</p>
         </header>
@@ -1699,7 +1771,8 @@ function Lectures() {
     <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Side Practice — Lectures" titleEn="The Lectures" titleKo="AI · 부동산 강의 프로그램" />
+        <SectionHead no="강의 · 소통" ko="기술을 이해하는 것에서, 이해시키는 것으로" en="AI Education & Knowledge Translation"
+          lead="쓸모 있는 시스템은 쓰는 사람이 이해해야 자리 잡습니다. 실무에서 만든 것을 가르칠 수 있는 단위로 옮긴 제안 커리큘럼입니다." />
 
         <div className="side-note reveal">
           <span className="side-note__badge font-sans">In Preparation</span>
@@ -1795,7 +1868,7 @@ function Lectures() {
 /* ============================================================ ABOUT — 스크롤 스토리
  * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
  * 오른쪽 사진이 프로필 → 발표 → 청년의날 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
-const STORY_LINES = ["판단의 근거를 만들고,", "실행까지 책임지는", "자리에서 일합니다."];
+const STORY_LINES = ["조직에서 반복되는 문제를 찾고,", "기술로 풀 수 있는 부분을", "시스템으로 옮깁니다."];
 const STORY_SHOTS = [
   { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
     alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
@@ -1856,14 +1929,15 @@ function About() {
       <div className="story__sticky">
         <div className="wrap story__grid">
           <div className="story__copy">
-            <p className="eyebrow">01 — Profile</p>
+            <p className="sh__no font-ko">01 소개 <span className="font-sans" lang="en">Profile</span></p>
             <h3 className="story__lead font-myeongjo">
               {STORY_LINES.map((l, i) => <span key={l} className={"story__line" + (lineOn(i) ? " on" : "")}>{l}</span>)}
             </h3>
             <div className={"story__body" + (stage.body ? " on" : "")}>
               <p className="font-ko">
-                흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다.
-                법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
+                법무법인 경국에서 정비사업 AX 와 전략기획을 맡아, 반복되는 업무를 시스템으로 옮겨 왔습니다.
+                필요한 도구는 직접 만들어 씁니다. 동시에 법률 · 부동산 · 정책의 제약과 이해관계를 공부하며,
+                기술의 결과가 실제 판단과 실행으로 이어지도록 하는 역량을 키우고 있습니다.
               </p>
               <p className="signature font-script" aria-hidden="true">Yubin Kim</p>
               <p className="story__addr font-ko"><MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국</p>
@@ -1924,12 +1998,12 @@ function Contact() {
       </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
         <p className="signature signature--light font-script" aria-hidden="true">Yubin Kim</p>
-        <p className="eyebrow contact-eyebrow">Inquiries — 채용 및 협업 제안</p>
-        <h2 className="font-serif contact-title">
-          Let’s define<br /><em>the next problem.</em>
+        <p className="contact-eyebrow font-ko">채용 · 협업 제안 <span className="font-sans" lang="en">Inquiries</span></p>
+        <h2 className="contact-title contact-title--ko font-myeongjo">
+          다음에 풀 문제를<br /><em>함께 정의하고 싶습니다.</em>
         </h2>
-        <p className="font-ko" style={{ color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" }}>
-          AI 전략 컨설팅 · 업무 자동화 · 데이터 기반 서비스 컨설팅 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
+        <p className="font-ko" style={{ color: "rgba(249,246,240,.78)", maxWidth: 600, margin: "26px auto 40px", lineHeight: 1.75, fontSize: "1.05rem" }}>
+          AI 전략 · 업무 자동화, 법률 · 부동산의 디지털 전환, 정책과 기술이 만나는 과제에 관해 함께 이야기하고 싶습니다.<br />개인 메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
@@ -2064,7 +2138,7 @@ function Channels() {
   return (
     <section id="channels" ref={ref} className="ch-sec" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Media & PR — Channels" titleEn="The Channels" titleKo="기록 · 홍보 채널" />
+        <SectionHead no="기록" ko="일한 과정을 기록하는 채널" en="Channels & Journal" />
         <p className="ch-lede font-myeongjo reveal">현장에서 보고, 만들고, 기록합니다. <span>일한 과정과 생각은 세 채널에 먼저 올라옵니다.</span></p>
         <div className="ch-grid">
           {CHANNELS.map((c, i) => (
@@ -2128,23 +2202,16 @@ function Footer() {
 
 /* ---------- shared section header ---------- */
 /* 'The Composite' → 관사만 가는 이탤릭으로 — 클래식 표제의 리듬 */
-function splitTitle(t) {
-  const m = /^(The|At a)\s+(.+)$/.exec(t);
-  return m ? <React.Fragment><em className="sh-art">{m[1]}</em>{m[2]}</React.Fragment> : t;
-}
-function SectionHead({ eyebrow, titleEn, titleKo }) {
+/* 섹션 머리 — 한국어가 뜻을 맡고, 영어는 같은 묶음 안에서 전문 용어로 거든다(장식용 대문자 영어 제목 없음) */
+function SectionHead({ no, ko, en, lead }) {
   return (
-    <div className="reveal">
-      <div className="menu-rule" style={{ marginBottom: 26 }}><i /></div>
-      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}>
-        <div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 14 }}>{eyebrow}</p>
-          <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.4rem,6vw,5rem)", lineHeight: .95, letterSpacing: "-.03em", margin: 0 }}>{splitTitle(titleEn)}</h2>
-        </div>
-        <p className="font-ko" style={{ fontWeight: 600, fontSize: "clamp(1rem,1.6vw,1.2rem)", color: "var(--ink-soft)", whiteSpace: "nowrap", flexShrink: 0, paddingBottom: ".4em" }}>{titleKo}</p>
-      </div>
-    </div>
+    <header className="sh reveal">
+      <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
+      {no && <p className="sh__no font-ko">{no}</p>}
+      <h2 className="sh__t"><span className="sh__ko font-ko">{ko}</span>{en && <span className="sh__en font-serif" lang="en">{en}</span>}</h2>
+      {lead && <p className="sh__lead font-ko">{lead}</p>}
+    </header>
   );
 }
 
-Object.assign(window, { Nav, HeroCity, AXCommand, ArtifactsSection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, HeroCity, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
