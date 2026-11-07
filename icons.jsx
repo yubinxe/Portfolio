@@ -24,11 +24,12 @@ const Award        = (p) => <Ic {...p}><circle cx="12" cy="8" r="6" /><path d="M
 const Home         = (p) => <Ic {...p}><path d="M3 10.5 12 3l9 7.5" /><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9" /><path d="M10 21v-6h4v6" /></Ic>;
 const Newspaper    = (p) => <Ic {...p}><path d="M4 3h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" /><path d="M8 7h5M8 11h8M8 15h5" /><path d="M17 3v4h2" /></Ic>;
 
+const Layers       = (p) => <Ic {...p}><path d="m12 2 10 5-10 5L2 7z" /><path d="m2 17 10 5 10-5" /><path d="m2 12 10 5 10-5" /></Ic>;
 const Code         = (p) => <Ic {...p}><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /><path d="m14 4-4 16" /></Ic>;
 const GraduationCap = (p) => <Ic {...p}><path d="M22 9 12 5 2 9l10 4 10-4z" /><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5" /><path d="M22 9v6" /></Ic>;
 
 Object.assign(window, {
   ArrowUpRight, ArrowRight, ArrowDown, ExternalLink, Sparkle, Scale,
   Cpu, LayoutGrid, Mail, PlayCircle, BarChart, Quote, MapPin, Award, Newspaper, Home,
-  Code, GraduationCap,
+  Code, GraduationCap, Layers,
 });

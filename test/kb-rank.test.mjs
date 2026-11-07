@@ -9,8 +9,15 @@ const KB = require("../kb.js");
 
 /* [질문, 1순위로 와야 할 카드 id 후보] — 후보 중 하나면 통과 */
 const CASES = [
+  ["직접 만들어서 자주 쓰는 서비스가 뭐예요?", ["everyday-tools"]],
+  ["법무법인에서는 어떤 업무를 자동화했나요?", ["work-systems"]],
+  ["AI 에이전트는 회사에서 운영하나요?", ["ed-17"]],
   ["재정경제부 차관 간담회 다녀왔나요?", ["tl-moef-youth"]],
   ["김유빈 님은 어떤 분인가요?", ["profile"]],
+  ["김유빈은 어떤 사람인가요?", ["profile"]],
+  ["정책 참여는 어떤 걸 했나요?", ["policy"]],
+  ["공론장이나 정책 거버넌스 활동", ["policy", "tl-gender-forum", "tl-seocho"]],
+  ["역량 구조가 궁금해요", ["composite"]],
   ["핵심 역량을 한눈에 요약해 주세요", ["composite"]],
   ["전략기획 경험이 있나요?", ["dom-strategy"]],
   ["전략 컨설팅 경험이 있나요?", ["dom-strategy"]],

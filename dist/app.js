@@ -18,11 +18,14 @@ function App() {
     React.createElement("div", { id: "top" }, /*#__PURE__*/
     React.createElement(Nav, null), /*#__PURE__*/
     React.createElement("main", null, /*#__PURE__*/
-    React.createElement(Hero, null), /*#__PURE__*/
+    React.createElement(HeroCity, null), /*#__PURE__*/
     React.createElement(Ledger, null), /*#__PURE__*/
     React.createElement(About, null), /*#__PURE__*/
     React.createElement(Composite, null), /*#__PURE__*/
-    React.createElement(Artifacts, null), /*#__PURE__*/
+    React.createElement(AXCommand, null), /*#__PURE__*/
+    React.createElement(ArtifactsSection, null), /*#__PURE__*/
+    React.createElement(PolicySection, null), /*#__PURE__*/
+    React.createElement(ResearchArchive, null), /*#__PURE__*/
     React.createElement(Trajectory, null), /*#__PURE__*/
     React.createElement(Channels, null), /*#__PURE__*/
     React.createElement(Lectures, null), /*#__PURE__*/
@@ -49,7 +52,10 @@ function App() {
 /* #root 에는 빌드 시점에 같은 컴포넌트로 미리 렌더한 HTML 이 들어 있다(scripts/prerender.mjs).
  * 검색 수집기는 JS 없이 본문을 읽고, 브라우저는 그 DOM 을 그대로 이어받는다(hydrate). */
 const rootEl = document.getElementById("root");
-const markMounted = () => document.documentElement.setAttribute("data-app", "ready");
+const markMounted = () => {
+  document.documentElement.setAttribute("data-app", "ready");
+  window.dispatchEvent(new Event("cine:scan")); /* 장면 엔진(cine.js)이 이어받은 DOM 을 다시 찾는다 */
+};
 function Mounted() {
   React.useEffect(markMounted, []);
   return /*#__PURE__*/React.createElement(App, null);

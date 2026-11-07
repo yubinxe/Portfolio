@@ -49,8 +49,8 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["소개", "#about"], ["역량", "#composite"], ["프로젝트", "#artifacts"], ["이력", "#trajectory"],
-    ["강의", "#lectures"], ["채널", "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
+    ["소개", "#about"], ["역량", "#composite"], ["경국 AX", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
+    ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
@@ -80,49 +80,57 @@ function Nav() {
   );
 }
 
-/* ============================================================ HERO */
-function Hero() {
-  const ref = useReveal();
+/* ============================================================ HERO — THE LIVING CITY
+ * 첫 장면 — 땅에서 판단까지. 그림은 city.js 의 캔버스 한 장(건축 모형), 글은 그 위의 HTML.
+ *   0–18%  필지 경계가 그려지고 채워진다(첫 방문 1.8초 동안 선이 먼저 그어진다)
+ *  18–38%  건물이 바닥 윤곽에서 솟는다 — 안쪽부터 시차를 두고, 카메라는 평면도에서 비스듬한 모형 시점으로
+ *  38–60%  카메라가 대상 필지로 다가가고, 한 건물이 층판 9장으로 갈라진다(분해도)
+ *  60–82%  토지 · 법령 · 계약 · 가치가 필지 모양 그대로 위로 쌓이고, 이웃 필지와 관계선이 이어진다
+ *  82–100% 카메라가 위로 올라 다시 도면 — 금색 경계만 남고 다음 장으로 넘어간다
+ * 장면 단계는 data-phase(0–4)로만 HTML 에 알려 자막을 바꾼다(스크롤 프레임마다 CSS 변수를 쓰지 않음) */
+const CITY_STEPS = [
+  ["01", "Land", "필지가 그려집니다"],
+  ["02", "Massing", "도시가 올라섭니다"],
+  ["03", "Section", "한 건물을 층으로 엽니다"],
+  ["04", "Intelligence", "토지 · 법령 · 계약 · 가치가 겹칩니다"],
+  ["05", "Plan", "판단은 다시 도면 위로"],
+];
+function HeroCity() {
+  const cv = React.useRef(null);
+  React.useEffect(() => {
+    const c = window.City && window.City.mount(cv.current, "hero", { scroll: ".city-hero", mode: "pin", phaseEl: ".city-hero" });
+    return () => c && c.destroy();
+  }, []);
   return (
-    <section id="manifesto" ref={ref} style={{ position: "relative", minHeight: "100svh", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 90, paddingBottom: 150 }}>
-      <div className="hero-photo" aria-hidden="true">
-        <Pic name="hero-gangnam" fallback="images/hero-gangnam-1000.jpg?v=1" sizes="100vw" fetchpriority="high" />
-      </div>
-      <div className="hero-photo__scrim" aria-hidden="true" />
-
-      <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-        <div className="menu-rule" style={{ maxWidth: 210, margin: "0 auto 18px" }}><i /></div>
-        <p className="font-sans hero-kicker">Seoul · Portfolio 2026</p>
-        <p className="eyebrow hero-eyebrow">AI Strategy &amp; Consulting</p>
-        <h1 className="font-serif" style={{ fontWeight: 900, lineHeight: .84, letterSpacing: "-.03em", fontSize: "clamp(3.4rem, 12.5vw, 10.5rem)", margin: 0 }}>
-          <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅 </span>
-          <span aria-hidden="true">
-            {"YUBIN".split("").map((c, i) => <span key={i} className="h-ltr" style={{ animationDelay: `${120 + i * 55}ms` }}>{c}</span>)}
-            <br />
-            {"KIM".split("").map((c, i) => <span key={`k${i}`} className="h-ltr" style={{ animationDelay: `${120 + (i + 6) * 55}ms` }}>{c}</span>)}
-          </span>
-        </h1>
-        <p className="font-ko" style={{ fontWeight: 600, letterSpacing: ".01em", fontSize: "clamp(.92rem, 1.6vw, 1.12rem)", color: "var(--ink)", marginTop: 26, marginBottom: 20 }}>
-          {"AI 전략 컨설팅 · 법무법인 경국 — Strategy · Automation · Data"}
-        </p>
-        <p className="font-ko" style={{ maxWidth: 620, margin: "0 auto", fontSize: "clamp(1rem, 1.7vw, 1.22rem)", lineHeight: 1.7, color: "var(--ink-soft)" }}>
-          데이터로 판단의 근거를 만들고,<br />AI로 실행의 속도를 만듭니다.
-        </p>
-        <p className="font-ko hero-proof">
-          AI로 풀 문제를 정의하고, 자동화 시스템을 직접 구현해 실제 업무에 적용합니다.
-        </p>
-
-        <div style={{ marginTop: 44, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="#artifacts" className="btn hero-main">대표 프로젝트 <ArrowDown size={15} /></a>
-          <a href="#composite" className="btn btn--ghost">핵심 역량</a>
-          <a href="career.html" className="btn btn--ghost">경력 상세 <ArrowUpRight size={15} /></a>
+    <section id="manifesto" className="city-hero" data-phase="0" aria-labelledby="hero-title">
+      <div className="city-hero__sticky">
+        <canvas ref={cv} className="city-hero__cv" aria-hidden="true" />
+        <div className="city-hero__veil" aria-hidden="true" />
+        <div className="wrap city-hero__copy">
+          <p className="lc-kicker font-ko">김유빈 <span className="font-sans" lang="en">Yubin Kim</span> · AI 전략·AX 실행</p>
+          <h1 id="hero-title" className="lc-name">
+            <span className="sr-only">김유빈 Yubin Kim — AI 전략 컨설팅 </span>
+            <span aria-hidden="true"><span className="lc-name__l">Yubin</span><span className="lc-name__l lc-name__l--2">Kim</span></span>
+          </h1>
+          {/* 첫 화면이 답할 것 — 무엇을 잘하는가(구조화 · 실행) · 어디서(법률 · 부동산 · 정책) · 왜 더 볼까(아래 근거) */}
+          <p className="lc-lead font-myeongjo">복잡한 문제를 구조화하고,<br />기술로 실행합니다.</p>
+          <p className="lc-proof font-ko">법률·부동산·정책의 현장에서 AI가 도울 수 있는 일과 사람이 판단해야 할 일을 구분합니다.</p>
+          <p className="lc-role font-ko">법무법인 경국 — 정비사업 AX · 전략기획 <span className="font-sans" lang="en">AI Strategy · Practical AX · Human Judgment</span></p>
+          <div className="lc-cta">
+            <a href="#tools" className="btn lc-cta__main">직접 만든 도구 4가지 <ArrowDown size={15} /></a>
+            <a href="#ax-desk" className="btn btn--ghost">경국 AX 지휘실</a>
+            <a href="#contact" className="btn btn--ghost lc-cta__ask" onClick={(ev) => { if (window.YubinChat) { ev.preventDefault(); window.YubinChat.open(); } }}>질문하기</a>
+            <a href="#contact" className="btn btn--ghost">연락하기</a>
+          </div>
         </div>
+        <ol className="lc-steps font-sans" aria-hidden="true">
+          {CITY_STEPS.map(([n, en, ko], i) => (
+            <li key={n} data-i={i}><b>{n}</b><span className="lc-steps__en">{en}</span><span className="lc-steps__ko font-ko">{ko}</span></li>
+          ))}
+        </ol>
+        <p className="lc-note font-ko" aria-hidden="true">개념 모형 — 실제 지번 · 용도지역이 아닙니다</p>
+        <a href="#glance" className="lc-skip font-sans">장면 건너뛰기 <ArrowDown size={13} /></a>
       </div>
-
-      <a href="#trajectory" className="scroll-cue" style={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", textDecoration: "none" }}>
-        <span className="font-sans" style={{ fontSize: ".64rem", letterSpacing: ".3em", fontWeight: 600 }}>SCROLL</span>
-        <i />
-      </a>
     </section>
   );
 }
@@ -159,53 +167,73 @@ function Marquee() {
 }
 
 /* ============================================================ LEDGER — at a glance */
+/* 한눈에 — 숫자 대신 '무엇을 하는 사람인가' 세 문장. 문장마다 아래쪽의 실제 근거로 이어진다 */
+const GLANCE = [
+  { n: "01", ko: "문제를 정의합니다", en: "Problem Framing", href: "#ax-compensation",
+    d: "업무 흐름 · 제약 · 제도 · 이해관계를 먼저 읽습니다.", ev: "광명시흥 3기 신도시 보상자료를 절차와 쟁점으로 구조화(발표자료 77장)" },
+  { n: "02", ko: "실행 가능한 시스템을 만듭니다", en: "AX Implementation", href: "#ax-desk",
+    d: "정의한 문제를 자동화와 제품으로 옮깁니다.", ev: "경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 직접 만든 도구 4가지" },
+  { n: "03", ko: "판단과 제도로 연결합니다", en: "Human & Institutional Decisions", href: "#policy",
+    d: "결과를 판단하는 사람이 이해하도록 만들고, 정책 논의의 자리에 나갑니다.", ev: "변호사 검토로 끝나는 AX 구조 · 국민 대토론회 정책 제안 발표 · 청년 정책 거버넌스" },
+];
 function Ledger() {
   const ref = useReveal();
-  const ITEMS = [
-    /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
-    [String(EDITIONS.length), "AI · 자동화 결과물", "Projects"],
-    [String(EDITIONS.filter((e) => /배포 완료|사내 운영/.test(e.status)).length), "배포 · 사내 운영 시스템", "In Operation"],
-    ["4", "AI · 데이터 전문교육", "Programs"],
-    ["3", "수상 · 표창", "Awards"],
+  /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
+  const facts = [
+    [String(EDITIONS.length), "결과물"], [String(EDITIONS.filter((e) => /배포 완료|사내 운영/.test(e.status)).length), "배포 · 사내 운영"],
+    ["4", "AI · 데이터 전문교육"], ["3", "수상 · 표창"],
   ];
   return (
-    <section ref={ref} className="ledger" aria-label="한눈에 보는 기록">
+    <section id="glance" ref={ref} className="ledger glance" aria-labelledby="glance-title">
       <div className="wrap reveal">
-        <p className="eyebrow ledger__eyebrow">At a Glance — 한눈에 보는 기록</p>
-        <div className="ledger-grid">
-          {ITEMS.map(([n, ko, en], i) => (
-            <div key={i} className="ledger-item" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="ledger-num font-serif" data-count={n}>{n}</div>
-              <div className="ledger-ko font-ko">{ko}</div>
-              <div className="ledger-en font-sans">{en}</div>
-            </div>
+        <h2 id="glance-title" className="glance__h"><span className="font-ko">이렇게 일합니다</span><span className="font-serif" lang="en">How I Work</span></h2>
+        <ol className="glance__list">
+          {GLANCE.map((g) => (
+            <li key={g.n}>
+              <a href={g.href} className="glance__item">
+                <b className="font-serif">{g.n}</b>
+                <h3><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
+                <p className="glance__d font-ko">{g.d}</p>
+                <p className="glance__ev font-ko"><span>근거</span>{g.ev}</p>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
+        <p className="glance__facts font-ko">
+          {facts.map(([n, k]) => <span key={k}><b className="font-serif" data-count={n}>{n}</b>{k}</span>)}
+        </p>
       </div>
     </section>
   );
 }
 
 /* ============================================================ COMPOSITE — 융합 역량 */
+/* 역량은 깊이가 다르다 — 줄기(실증된 깊이) · 적용 영역 · 넓어지는 영역. 숙련도 점수 · 퍼센트는 쓰지 않는다.
+ * id(dom-NN)는 고정이고 화면 순서는 tier 순서다. 두 번째 깊이(법률·부동산·제도적 의사결정)는 '형성 중'으로만 적는다 */
 const DOMAINS = [
-  { n: "01", core: true, ko: "AI 전략 컨설팅", short: "전략", en: "AI Strategy & Consulting",
-    desc: "흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지, 무엇을 AI에 맡길지 정하는 일. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 위험 신호로 볼지 판단 기준을 세웠습니다.",
-    tags: ["문제 정의 · 우선순위 설계", "사업성 검토"] },
-  { n: "02", core: true, ko: "AI 프로세스 자동화", short: "AI", en: "AI Automation",
-    desc: "사람이 반복하던 판단의 앞단을 AI에 맡기고, 사람은 기준을 정하는 자리에 남깁니다. SSAFY·서울대 AIED에서 구조를 익혔습니다.",
-    tags: ["SSAFY 13기", "서울대 AIED 4기"] },
-  { n: "03", core: true, ko: "데이터 · 인프라", short: "데이터", en: "Data Infrastructure",
+  { n: "01", tier: "core", ko: "AI 전략", short: "AI 전략", en: "AI Strategy",
+    desc: "무엇을 먼저 하고 무엇을 AI에 맡길지 정합니다. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 ‘급함’으로 볼지 기준을 세웠습니다.",
+    tags: ["문제 정의 · 우선순위", "보상자료 77장 구조화"] },
+  { n: "02", tier: "core", ko: "AX 실행 · 업무 자동화", short: "AX 실행", en: "AX Implementation",
+    desc: "반복되는 판단의 앞단을 시스템으로 옮기고, 사람은 기준을 정하는 자리에 남깁니다. 경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류를 만들었고, SSAFY 13기 · 서울대 AIED 4기에서 구조를 익혔습니다.",
+    tags: ["경국 AX 3종", "SSAFY 13기 · 서울대 AIED 4기"] },
+  { n: "03", tier: "core", ko: "데이터 기반 판단", short: "데이터", en: "Data-Based Reasoning",
     desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다. 전략이 감이 아니라 근거 위에 서도록 데이터 구조를 먼저 설계합니다.",
     tags: ["공공데이터 API", "GWS 연동"] },
-  { n: "04", ko: "마케팅 · 커뮤니케이션", short: "마케팅", en: "Marketing & Comms",
-    desc: "KREMA 4기의 세그먼트 전략과 생성형 AI 제작 역량으로 전략을 시장에 닿는 언어로 옮깁니다.",
-    tags: ["KREMA 4기", "연합뉴스TV · 서울시민기자단"] },
-  { n: "05", ko: "교육 · 강의", short: "강의", en: "Teaching",
-    desc: "서울대 AIED 4기에서 교수법을 체화하고, 실무에서 만든 시스템을 강의 모듈로 옮깁니다.",
+  { n: "06", tier: "applied", ko: "법률·부동산의 산업 이해", short: "법률·부동산", en: "Legal & Real Estate Intelligence",
+    desc: "정비사업의 법률 위험, 토지보상 절차, 청약·공공임대 공고를 실무와 제품으로 다뤘습니다. 법무법인 경국의 송무·사무, 건국대 스마트건설 교육, KREMA 4기, 분양대행자 자격이 바탕입니다.",
+    tags: ["법무법인 경국", "스마트건설 · KREMA 4기"] },
+  { n: "05", tier: "wide", ko: "정책·공공 의사결정 참여", short: "정책·공공", en: "Policy & Public Decision-Making",
+    desc: "국민 대토론회에서 정책을 제안·발표했고, 서초청년네트워크 9기 운영위원회 부위원장 · 청년정책 패널로 활동합니다. 참석과 제안은 정책 결정이 아니라 논의에 참여한 기록입니다.",
+    tags: ["국민 대토론회 제안 발표", "서초청년네트워크 부위원장"] },
+  { n: "04", tier: "wide", ko: "설명·교육·소통", short: "설명·소통", en: "Knowledge Translation & Communication",
+    desc: "서울대 AIED 4기에서 교수법을 익혔고, 박람회 시연 · SSAFY 홍보 앰배서더 · 서울시민기자단으로 기술과 정책을 이해하기 쉬운 말로 옮겨 왔습니다. 강의는 제안 커리큘럼입니다.",
     tags: ["서울대 AIED 4기", "SSAFY 홍보 앰배서더"] },
-  { n: "06", ko: "도메인 — 법무 · 부동산 · 공공", short: "도메인", en: "Domain Expertise",
-    desc: "법무법인 경국의 송무·사무, 건국대 스마트건설의 부동산 이해, 청년 정책 거버넌스의 공공 감각이 판단의 바탕입니다.",
-    tags: ["법무법인 경국", "스마트건설 · 청년정책"] },
+];
+const TIERS = [
+  { key: "core", ko: "줄기 — 실증된 깊이", en: "Core Depth" },
+  { key: "applied", ko: "적용 영역", en: "Applied Domain" },
+  { key: "wide", ko: "넓어지는 영역", en: "Expanding Domains" },
 ];
 
 /* ============================================================ LECTURES — 강의 프로그램 */
@@ -342,11 +370,6 @@ const CREDS = [
   { name: "분양대행자", ko: "부동산 분양 실무 자격", by: "주택·상가 분양 대행" },
 ];
 
-const THESIS = [
-  ["교차점의 희소성", "법률의 엄밀함과 인공지능의 구현 역량을 함께 갖춘 인력은 많지 않다. 대체 불가능성은 한 분야의 깊이가 아니라 서로 다른 분야가 만나는 경계에서 형성."],
-  ["실행을 통한 증명", "학습한 내용을 배포 가능한 결과물로 구현. 여섯 건의 프로젝트는 서술이 아니라 접근 가능한 산출물로 존재."],
-  ["언어의 매개", "제도의 언어와 기술의 언어, 대중의 언어를 오가며 조직 내부에서 발생하는 소통의 간극을 조정."],
-];
 
 const CASES = [
   { n: "01", title: "감정평가사 필드워크", tag: "Three.js · 실지조사 시뮬레이션", feature: true,
@@ -359,34 +382,47 @@ const CASES = [
     judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." },
 ];
 
-const NODE = [[200, 68], [314, 134], [314, 266], [200, 332], [86, 266], [86, 134]];
-const LABEL = [
-  { x: 200, y: 46, a: "middle" }, { x: 334, y: 128, a: "start" }, { x: 334, y: 278, a: "start" },
-  { x: 200, y: 360, a: "middle" }, { x: 66, y: 278, a: "end" }, { x: 66, y: 128, a: "end" },
-];
-
-function ConvergenceMap({ active, onPick }) {
+/* T/π 역량 구조 — 위 가로줄은 넓이(연결된 영역), 아래 굵은 줄기는 실증된 깊이(AI 전략·AX 실행).
+ * 왼쪽의 점선 줄기는 형성 중인 두 번째 깊이(법률·부동산·제도적 의사결정) — 자격이나 완성된 전문성이 아니다 */
+const TMAP = { "06": [5, 28], "01": [29, 58], "05": [58, 79], "04": [79, 100] }; /* 가로줄 칸 — 왼쪽 · 오른쪽 % */
+function TShapeMap({ active, onPick }) {
+  const cur = DOMAINS[active] || DOMAINS[0];
+  const coreOn = cur.tier === "core";
+  const seg = (n) => TMAP[n];
+  const btn = (n, label, i) => {
+    const [l, r] = seg(n);
+    const on = n === "01" ? coreOn : cur.n === n;
+    return (
+      <button key={n} type="button" className={"tmap__seg" + (on ? " on" : "") + (n === "01" ? " tmap__seg--core" : "")} style={{ left: l + "%", width: (r - l) + "%" }}
+        aria-pressed={on} onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
+        <span className="font-ko">{label}</span>
+      </button>
+    );
+  };
   return (
-    <svg className="cmap" viewBox="0 0 400 400" role="img" aria-label="여섯 도메인이 하나로 수렴하는 융합 역량 다이어그램">
-      <polygon className="cmap__ring" points={NODE.map((p) => p.join(",")).join(" ")} />
-      {NODE.map((p, i) => (
-        <line key={"s" + i} className={"cmap__spoke" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")} x1="200" y1="200" x2={p[0]} y2={p[1]} />
-      ))}
-      <circle className="cmap__halo" cx="200" cy="200" r="60" />
-      <circle className="cmap__core" cx="200" cy="200" r="46" />
-      <text className="cmap__coreT font-serif" x="200" y="199" textAnchor="middle">AI</text>
-      <text className="cmap__coreS" x="200" y="215" textAnchor="middle">STRATEGY</text>
-      {NODE.map((p, i) => (
-        <circle key={"n" + i} className={"cmap__node" + (DOMAINS[i].core ? " core" : "") + (i === active ? " on" : "")}
-          cx={p[0]} cy={p[1]} r={i === active ? 9.5 : DOMAINS[i].core ? 7 : 4.5}
-          onMouseEnter={() => onPick(i)} />
-      ))}
-      {DOMAINS.map((d, i) => (
-        <text key={"t" + i} className={"cmap__label" + (d.core ? " core" : "") + (i === active ? " on" : "")}
-          x={LABEL[i].x} y={LABEL[i].y} textAnchor={LABEL[i].a}
-          onMouseEnter={() => onPick(i)}>{d.short}</text>
-      ))}
-    </svg>
+    <div className="tmap" role="group" aria-label="T자 · π자 역량 구조 — 칸을 누르면 설명이 바뀝니다">
+      <div className="tmap__bar">
+        {btn("06", "법률·부동산", DOMAINS.findIndex((d) => d.n === "06"))}
+        {btn("01", "AI 전략·AX 실행", coreOn ? active : 0)}
+        {btn("05", "정책·공공", DOMAINS.findIndex((d) => d.n === "05"))}
+        {btn("04", "설명·소통", DOMAINS.findIndex((d) => d.n === "04"))}
+      </div>
+      <div className="tmap__stem" style={{ left: TMAP["01"][0] + "%", width: (TMAP["01"][1] - TMAP["01"][0]) + "%" }}>
+        {DOMAINS.filter((d) => d.tier === "core").map((d) => {
+          const i = DOMAINS.indexOf(d);
+          return (
+            <button key={d.n} type="button" className={"tmap__lv" + (i === active ? " on" : "")} aria-pressed={i === active}
+              onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
+              <b className="font-serif">{d.n}</b><span className="font-ko">{d.short}</span>
+            </button>
+          );
+        })}
+        <p className="tmap__cap font-ko">실증된 깊이<em className="font-sans" lang="en">Demonstrated</em></p>
+      </div>
+      <div className={"tmap__stem2" + (cur.n === "06" ? " on" : "")} style={{ left: (TMAP["06"][0] + 4) + "%", width: (TMAP["06"][1] - TMAP["06"][0] - 8) + "%" }}>
+        <p className="font-ko">두 번째 깊이<br /><span>법률·부동산 ·<br />제도적 의사결정</span><em>형성 중</em></p>
+      </div>
+    </div>
   );
 }
 
@@ -410,83 +446,36 @@ function Composite() {
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="02 — Core Competencies" titleEn="The Composite" titleKo="AI 전략 컨설팅을 중심에 둔 역량 구조" />
+        <SectionHead no="02 역량 구조" ko="AI 전략·AX 실행을 줄기로" en="AI Strategy & AX Implementation"
+          lead="모든 역량의 깊이가 같지 않습니다. 실제 결과물로 증명한 줄기는 하나이고, 법률·부동산은 그 줄기가 쓰이는 영역, 정책·소통은 넓혀 가는 영역입니다." />
 
-        <div className="comp-thesis reveal">
-          <p className="font-myeongjo">
-            전략은 무엇을 먼저 할지 정하는 일이고, AI는 그 결정을 빨리 실행하는 도구입니다.
-          </p>
-          <p className="font-ko comp-thesis__sub">
-            중심축은 <strong>AI 전략 컨설팅 · AI 자동화 · 데이터</strong> 세 가지입니다.
-            마케팅·강의·도메인 지식은 그 판단을 정확하게 만들고 조직에 전달하는 보조 역량입니다.
-          </p>
-        </div>
-
-        <div className="comp-stage">
+        <div className="comp-stage comp-stage--t">
           <div className="comp-stage__sticky">
-            <ConvergenceMap active={active} onPick={setActive} />
+            <TShapeMap active={active} onPick={setActive} />
             <div className="cmap__cap">
-              <span className="font-cond">{DOMAINS[active].n}</span>
+              <span className="font-sans">{TIERS.find((t) => t.key === DOMAINS[active].tier).ko}</span>
               <strong className="font-ko">{DOMAINS[active].ko}</strong>
-              <em className="font-sans">{DOMAINS[active].en}</em>
+              <em className="font-sans" lang="en">{DOMAINS[active].en}</em>
             </div>
           </div>
 
           <div className="comp-track">
-            <p className="comp-group font-sans">Core — 핵심 역량</p>
-            {DOMAINS.filter((d) => d.core).map((d) => {
-              const i = DOMAINS.indexOf(d);
-              return (
-                <article
-                  key={d.n}
-                  data-i={i}
-                  id={"dom-" + d.n}
-                  ref={(el) => (rows.current[i] = el)}
-                  className={"comp-row comp-row--core" + (i === active ? " on" : "")}
-                  onMouseEnter={() => setActive(i)}
-                >
-                  <div className="comp-row__head">
-                    <span className="comp-row__n font-cond">{d.n}</span>
-                    <span className="comp-row__rule" />
-                    <span className="comp-row__en font-sans">{d.en}</span>
-                  </div>
-                  <h3 className="font-ko">{d.ko}</h3>
-                  <p className="font-ko">{d.desc}</p>
-                  <div className="comp-row__tags font-ko">
-                    {d.tags.map((t) => <span key={t}>{t}</span>)}
-                  </div>
-                </article>
-              );
-            })}
-            <p className="comp-group comp-group--sub font-sans">Supporting — 보조 역량 · 눌러서 보기</p>
-            {DOMAINS.filter((d) => !d.core).map((d) => {
-              const i = DOMAINS.indexOf(d);
-              return (
-                <details
-                  key={d.n}
-                  data-i={i}
-                  id={"dom-" + d.n}
-                  ref={(el) => (rows.current[i] = el)}
-                  className={"comp-row comp-row--sub fold" + (i === active ? " on" : "")}
-                  onMouseEnter={() => setActive(i)}
-                >
-                  <summary>
-                    <span className="comp-row__n font-cond">{d.n}</span>
-                    <span className="fold__t">
-                      <strong className="font-ko">{d.ko}</strong>
-                      <em className="font-sans">{d.en}</em>
-                    </span>
-                    <i className="fold__icon" aria-hidden="true" />
-                  </summary>
-                  <div className="fold__body">
-                    <p className="font-ko">{d.desc}</p>
-                    <div className="comp-row__tags font-ko">
-                      {d.tags.map((t) => <span key={t}>{t}</span>)}
-                    </div>
-                  </div>
-                </details>
-              );
-            })}
+            {TIERS.map((t) => (
+              <React.Fragment key={t.key}>
+                <p className={"comp-group font-ko" + (t.key !== "core" ? " comp-group--sub" : "")}>{t.ko} <em className="font-sans" lang="en">{t.en}</em></p>
+                {DOMAINS.filter((d) => d.tier === t.key).map((d) => {
+                  const i = DOMAINS.indexOf(d);
+                  return (
+                    <article key={d.n} data-i={i} id={"dom-" + d.n} ref={(el) => (rows.current[i] = el)}
+                      className={"comp-row comp-row--" + t.key + (i === active ? " on" : "")} onMouseEnter={() => setActive(i)}>
+                      <h3 className="comp-row__t"><span className="font-ko">{d.ko}</span><em className="font-sans" lang="en">{d.en}</em></h3>
+                      <p className="font-ko">{d.desc}</p>
+                      <div className="comp-row__tags font-ko">{d.tags.map((x) => <span key={x}>{x}</span>)}</div>
+                    </article>
+                  );
+                })}
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
@@ -539,16 +528,17 @@ function Composite() {
     <section className="whyc" ref={bandRef}>
       <div className="wrap">
         <div className="menu-rule reveal" style={{ marginBottom: 26 }}><i /></div>
-        <p className="eyebrow reveal">Strategy Cases — 전략 판단의 기록</p>
+        <p className="whyc__k font-ko reveal">전략 판단의 기록 <span className="font-sans" lang="en">Strategy Cases</span></p>
 
         <h2 className="whyc__lead font-myeongjo reveal">
-          도구는 빨라졌습니다.<br />
-          <em>무엇을 먼저 할지는 여전히 사람이 정합니다.</em>
+          AI가 답을 만드는 시대,<br />
+          <em>무엇을 물을지 결정하는 사람이 되겠습니다.</em>
         </h2>
+        <p className="whyc__en font-serif reveal" lang="en">Technology for Execution. Judgment for Direction.</p>
 
         <p className="whyc__intro font-ko reveal">
-          직접 만든 두 개의 시스템에서 같은 일이 반복됐습니다. 사람이 하던 일이 도구로 넘어갔고,
-          그때마다 사람이 남아야 할 자리가 하나씩 또렷해졌습니다. 그 자리가 전략 컨설팅입니다.
+          시스템은 분석과 실행을 돕습니다. 그러나 결과가 큰 결정 — 무엇을 문제로 삼을지, 이해관계가 부딪칠 때 무엇을 앞세울지,
+          어떤 위험을 받아들일지 — 은 그 결정에 책임지는 사람이 내립니다. 직접 만든 두 시스템에서 그 경계가 어디인지 확인했습니다.
         </p>
 
         <div className="wcases">
@@ -579,13 +569,8 @@ function Composite() {
           ))}
         </div>
 
-        <p className="whyc__close font-myeongjo reveal">
-          세 번 다 사람이 하는 일은 같았습니다 —<br />
-          <em>도구에 무엇을 시킬지 정하는 일.</em>
-        </p>
         <p className="whyc__closesub font-ko reveal">
-          기준을 세우는 사람과 그것을 실행까지 옮기는 사람이 다르면 속도가 죽습니다.
-          둘을 한 사람이 하도록 준비해 왔습니다.
+          두 경우 모두 도구가 맡은 일은 빨라졌고, 기준을 정하는 일은 사람에게 남았습니다. 그 기준을 세우고 실행까지 옮기는 것이 제 일입니다.
         </p>
       </div>
     </section>
@@ -723,7 +708,7 @@ function FieldDiary() {
     <div className="diary">
       <p className="diary__lead font-ko"><span className="diary__pulse" aria-hidden="true" />청와대 청년의날, 그다음 장 — 현장 일지</p>
       {DIARY.map((d, i) => (
-        <figure key={d.id} className={"tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "")}>
+        <figure key={d.id} data-cine="pass" className={"tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "")}>
           <a className="tl-feature__main diary__main" href={d.href}>
             <Pic name={d.main.name} fallback={"images/" + d.main.name + ".jpg"} sizes="(max-width: 900px) 92vw, 52vw" alt={d.main.alt} loading="lazy" width={d.main.w || 1200} height={d.main.h || 675} style={{ objectPosition: d.main.pos }} />
             <span className="diary__stamp" aria-hidden="true"><b className="font-serif">{d.date}</b><i className="font-sans">{d.day} · 2026</i></span>
@@ -786,9 +771,11 @@ function Trajectory() {
   return (
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
-        <SectionHead eyebrow="04 — Experience" titleEn="The Trajectory" titleKo="이력 — 실무와 전문교육" />
+        <SectionHead no="06 성장 경로" ko="어디로 성장하고 있는가" en="Development Trajectory"
+          lead="연대순 목록보다 먼저, 다루는 문제가 어떻게 커져 왔는지 봅니다. 시기는 서로 겹칩니다 — 아래 단계는 순서가 아니라 문제의 복잡도입니다." />
+        <GrowthPath />
 
-        <figure className="tl-feature reveal">
+        <figure className="tl-feature reveal" data-cine="pass">
           <a className="tl-feature__main" href="gallery.html#youth-day">
             <Pic name="youth-day-yonhap" fallback="images/youth-day-yonhap.jpg"
               sizes="(max-width: 900px) 92vw, 52vw" alt="김유빈 활동 기록 — 2026 청년의날 기념행사 현장 (연합뉴스 보도사진)" loading="lazy" width="860" height="592" />
@@ -848,7 +835,7 @@ const EDITIONS = [
   { n: "09", color: "var(--sky)", Icon: Home, title: "청약·공공임대 맞춤 추천 서비스\n집캐치(ZipCatch)",
     desc: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 수집해, 지역·주거비·가구 조건을 3단계로 입력하면 지금 지원할 수 있는 후보를 정리해 주는 소비자 서비스. 관심공고 저장·마감 알림과 운영용 CRM(매칭·고객·물건 관리)까지 설계·구현.",
     status: "Vercel 배포 완료", cta: "서비스 바로가기", url: "https://zipcatch.vercel.app", tags: ["청약홈 · LH API", "맞춤 추천", "Supabase · CRM"],
-    core: true, point: "자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않도록 분리 설계 — 미확인 자격은 불충족으로 단정하지 않고, 당첨 확률은 산출하지 않는다." },
+    group: "everyday-tools", origin: "independent", usage: "personal", point: "자격·예산·선호 적합도·마감 긴급도를 한 점수로 섞지 않도록 분리 설계 — 미확인 자격은 불충족으로 단정하지 않고, 당첨 확률은 산출하지 않는다." },
   { n: "10", color: "var(--apple)", Icon: MapPin, title: "감정평가사 필드워크\n3D 실지조사 시뮬레이터",
     desc: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집한다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계.",
     status: "Vercel 배포 완료", cta: "필드워크 체험", url: "https://appraiser-fieldwork.vercel.app/", tags: ["Three.js · WebGL", "실지조사 5단계", "조문 24 · 지목 28"],
@@ -856,11 +843,11 @@ const EDITIONS = [
   { n: "17", color: "var(--apple)", Icon: Cpu, title: "AI 에이전트 인력 운영 관제\nAtelier AX",
     desc: "AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 사람이 일하는 사무실처럼 보여 준다. 서버 없이 브라우저 안에서만 도는 공개 시연 모드를 함께 제공. 2.0에서는 아이디어를 설명하면 AI 팀(기획·디자인·개발·검수)이 6단계로 일하는 과정을 쉬운 말로 보여 주고 범위·설계·검토·공개 4곳에서 사용자 승인을 받는 ‘프로젝트 스튜디오’를 더했다.",
     status: "Vercel 배포 완료", cta: "관제 화면 보기", url: "https://atelier-ax.vercel.app/performance/", tags: ["AI Agent 관제", "프로젝트 스튜디오", "승인 워크플로"],
-    core: true, point: "에이전트가 한 일을 사람이 검증·승인해야 끝나는 구조 — 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않는다." },
+    group: "everyday-tools", origin: "independent", usage: "personal", point: "에이전트가 한 일을 사람이 검증·승인해야 끝나는 구조 — 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않는다." },
   { n: "12", color: "var(--sky)", Icon: LayoutGrid, title: "국민용 국정 상황판\n국정 한눈에",
     desc: "대통령 동정·대통령실·정부 정책·국무회의와 국회, 증시·환율·부동산·산업까지 국정과 경제를 한 화면에 모은 상황판. 공개 뉴스 RSS와 시세를 서버리스 함수가 모아 섹션별로 배정하고, 중복 기사를 걸러 언론사 원문 사진과 함께 보여준다. 섹션 필터·검색, 지수 추이 스파크라인, 라이트·다크 모드 지원.",
     status: "Vercel 배포 완료", cta: "상황판 보기", url: "https://gukjeong-hannune.vercel.app/", tags: ["공개 RSS · 시세 수집", "Vercel Serverless", "외부 라이브러리 0"],
-    core: true, point: "수집이 실패해도 화면이 비지 않게 — CDN 20분 캐시와 stale-while-revalidate로 즉시 응답하고, 실패하면 저장된 스냅샷으로 대체. 포털은 기사를 옮겨 실을 뿐 매체가 아니므로 출처·언론사 수에서 뺐다." },
+    group: "everyday-tools", origin: "independent", usage: "personal", point: "수집이 실패해도 화면이 비지 않게 — CDN 20분 캐시와 stale-while-revalidate로 즉시 응답하고, 실패하면 저장된 스냅샷으로 대체. 포털은 기사를 옮겨 실을 뿐 매체가 아니므로 출처·언론사 수에서 뺐다." },
   { n: "11", color: "var(--pink)", Icon: Quote, title: "성경 말씀 × 인문학 서재\nSalvation",
     desc: "\"지금, 어떤 마음이신가요?\"에서 시작해 마음 상태·주제별로 성경 말씀과 인문학·철학의 문장을 이어 주는 서재형 PWA. 오늘의 말씀, 말씀·인문학 서재, 묵상 노트·기도 제목·말씀 암송·통독 진도를 쌓는 '나의 성소', 마스코트 등불이(시편 119:105)가 안내하는 상담 챗봇까지 설계·구현.",
     status: "Vercel 배포 완료", cta: "서재 둘러보기", url: "https://malsseum-guwon.vercel.app/", tags: ["PWA · 오프라인", "Supabase 동기화", "위기 신호 안전장치"],
@@ -868,7 +855,7 @@ const EDITIONS = [
   { n: "16", color: "var(--lilac)", Icon: Scale, title: "법조 시장 상황판\n법조시장 한눈에",
     desc: "정비사업·사건 수요·변호사 공급·입법·규제·로펌 경쟁을 한 화면에 모아 로펌 전략팀이 바로 전략 판단으로 옮기도록 만든 법조 시장 상황판. 열린국회정보 발의 법률안, 국가법령정보센터 시행 예정 법령·판례, 대한변협 지방회별 회원현황을 하루 단위로 갱신하고, 민법 기간 계산 조문에 맞춘 기한 계산기를 함께 제공.",
     status: "Vercel 배포 완료", cta: "상황판 보기", url: "https://legal-pulse-pearl.vercel.app", tags: ["국회 · 법제처 · 대한변협", "Next.js · 일 단위 갱신", "기한 계산기"],
-    core: true, point: "출처 없는 예시 수치는 넣지 않는다 — 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않는다." },
+    group: "everyday-tools", origin: "independent", usage: "personal", point: "출처 없는 예시 수치는 넣지 않는다 — 인증키가 없거나 수집에 실패한 값은 '인증키 필요'·'불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않는다." },
   { n: "13", color: "var(--butter)", Icon: LayoutGrid, title: "식재료·생활용품 살림 기록 서비스\n곳간(Gotgan)",
     desc: "주문 화면이나 영수증을 찍으면 식재료 보관 기한과 생활용품 재구매 시점을 셈해 알려 주는 자취생·주부용 살림 기록 서비스. 구역별 곳간, 자동 장보기, 월별 가계, 달력 알림까지 설계·구현.",
     status: "Vercel 배포 완료", cta: "서비스 바로가기", url: "https://gotgan-three.vercel.app", tags: ["사진 판독 · Claude API", "PWA · 오프라인", "서버리스 보안 설계"],
@@ -900,183 +887,878 @@ const EDITIONS = [
   { n: "06", color: "var(--apple)", Icon: Cpu, title: "고객 메일 자동 분류 시스템\n— 급한 메일부터 알려 줍니다",
     desc: "회사로 들어오는 고객 메일을 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 광고처럼 넘겨도 되는 것'으로 나눠 보여 주는 업무 화면. 담당자는 위에서부터 차례로 처리하면 됩니다.",
     status: "Vercel 배포 완료", cta: "시스템 바로가기", url: "https://mail-dashboard-blue-six.vercel.app", tags: ["구글 업무도구 연동", "자동 분류", "업무 화면"],
-    core: true, point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
+    work: [["문제", "담당자가 메일함을 직접 열어 보며 무엇부터 답할지 판단하던 업무"], ["바꾼 흐름", "메일이 들어오면 자동으로 모아 '지금 답할 것 · 오늘 안에 볼 것 · 넘겨도 되는 것'으로 1차 분류"],
+      ["내 역할", "분류 기준 설계 · 시스템 구현"], ["상태", "Vercel 배포 — 업무 화면 공개"]],
+    group: "enterprise-systems", origin: "organizational", usage: "professional", point: "무엇을 '급함'으로 볼지 기준은 사람이 정하고, 1차 분류만 컴퓨터에 맡겼습니다." },
   { n: "07", color: "var(--apple)", Icon: Mail, title: "네이버웍스 메일 연동\n급여명세서 자동 발송 프로그램",
     desc: "네이버웍스(NAVER WORKS) 메일 API와 연동하여 급여명세서의 생성과 발송을 자동화한 사내 업무 프로그램. 반복되던 급여 명세 발송 절차를 표준화하여 처리 시간을 단축하고 오류 가능성을 축소.",
     status: "사내 운영 적용", cta: "사내 운영 · 비공개", url: "", tags: ["NAVER WORKS", "메일 자동화", "업무 자동화"],
-    core: true, point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
+    work: [["문제", "급여명세서를 사람이 만들고 한 명씩 보내던 반복 절차"], ["바꾼 흐름", "네이버웍스 메일 API로 명세서 생성과 발송을 자동화하고 절차를 표준화"],
+      ["내 역할", "API 연동 · 발송 자동화 구현"], ["상태", "사내 운영 적용"], ["공개 범위", "급여 정보를 다루어 화면과 코드는 비공개"]],
+    group: "enterprise-systems", origin: "organizational", usage: "professional", point: "반복되던 발송 절차를 표준화해 처리 시간을 줄이고 오류 가능성을 축소." },
 ];
 
-/* 화면에 보이는 순서와 번호 — 실생활·실무 시스템 7건을 먼저, 학습·콘텐츠·제안 작업은 "그 밖의 작업"에 */
-/* 07(네이버웍스 급여명세서)은 작업 목록이 아니라 경국 AX 데스크의 "실무" 칸(광명시흥 보상자료 옆)에 둔다 — 앵커 #ed-07 은 그 칸에 있다 */
-const EDITION_ORDER = ["09", "16", "17", "12", "06", "10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
-const EDITIONS_SHOWN = EDITION_ORDER.map((n, i) => ({ ...EDITIONS.find((e) => e.n === n), no: String(i + 1).padStart(2, "0") }));
+/* 어디에 보이는가 — 번호(n)가 곧 영구 id(#ed-NN)다. 화면 순서가 바뀌어도 링크는 그대로 이어진다.
+ *   everyday-tools     The Artifacts — 직접 기획 · 개발 · 배포하고 일상에서 쓰는 개인 제품 4가지(origin independent · usage personal)
+ *   enterprise-systems 경국 AX 지휘실 — 실무(07 네이버웍스 급여명세서) · 운영 흐름(06 고객 메일 자동 분류)
+ *   supplementary      Research Archive — 학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠
+ * 작업의 성격(누가 만들어 어디서 쓰는가)과 배포 상태는 따로 본다 — Vercel 배포는 회사 도입의 증거가 아니다. */
+const TOOL_ORDER = ["09", "16", "17", "12"];
+const ARCHIVE_ORDER = ["10", "14", "11", "15", "13", "05", "01", "02", "03", "04"];
+const edOf = (n) => { const e = EDITIONS.find((x) => x.n === n); return { ...e, group: e.group || "supplementary" }; };
+const pad2 = (i) => String(i).padStart(2, "0");
+const TOOLS = TOOL_ORDER.map((n, i) => ({ ...edOf(n), no: pad2(i + 1) }));
+const ARCHIVE = ARCHIVE_ORDER.map((n, i) => ({ ...edOf(n), no: pad2(i + 1) }));
+/* 네 가지 도구 — 왜 만들었는지 · 어떻게 쓰는지(작업 카드의 사실에서만) · 실제 화면 · 그 제품만의 공간 */
+const TOOL_META = {
+  "09": { name: "ZipCatch · 집캐치", shot: "zc-home", env: "The Housing Landscape", envKo: "지도 위 필지에서 아파트 단지가 솟고, 위치 표시가 꽂힙니다",
+    why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾기 어려웠습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다.",
+    made: "두 공고를 공공데이터 API로 모아, 지역 · 주거비 · 가구 조건 3단계 입력으로 지금 지원할 수 있는 후보를 정리하는 서비스.",
+    link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원" },
+  "16": { name: "법조시장 한눈에", shot: "lp-home", env: "The Regulatory Landscape", envKo: "개발 대상지 위로 법률안 · 법령 · 판례가 층으로 내려앉습니다",
+    why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 번에 보기 어려웠습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다.",
+    made: "국회 · 법제처 · 대한변협 공개 자료를 하루 단위로 갱신하는 상황판과, 민법 기간 계산 조문에 맞춘 기한 계산기.",
+    link: "흩어진 법률 정보를 리서치 흐름으로 — 출처와 연결 상태를 함께 공개" },
+  "17": { name: "Atelier AX", shot: "ax-live", env: "The Agent Workspace", envKo: "사무실 평면 위 네 역할 사이로 업무가 흐르고, 승인 책상에서 끝납니다",
+    why: "AI 에이전트가 무엇을 하는지 보이지 않으면 결과를 믿고 맡기기 어려웠습니다.", use: "AI 팀에 일을 맡기고 진행 단계와 승인 대기를 확인할 때 씁니다.",
+    made: "AI 직원에게 업무를 배정하고, 실행 과정을 관찰하고, 산출물을 사람이 검증 · 승인하는 관제 대시보드.",
+    link: "배정 · 실행 가시성 · 사람의 승인 — AX 를 운영하는 원칙 그 자체" },
+  "12": { name: "국정 한눈에", shot: "gk-home", env: "The National Information Landscape", envKo: "정책 · 국회 · 경제 · 시장 네 갈래가 한 판으로 모입니다",
+    why: "국정 소식과 경제 지표를 여러 포털과 앱을 오가며 봐야 했습니다.", use: "국정 · 정책 · 증시 · 환율의 흐름을 한 번에 훑을 때 씁니다.",
+    made: "공개 뉴스 RSS와 시세를 서버리스 함수로 모아 섹션별로 배정하고 중복 기사를 거른 국정 · 경제 상황판.",
+    link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기" },
+};
 
-function EditionCard({ e, i, onPlay }) {
-  const [more, setMore] = React.useState(false); /* 폰에서 설명 4줄만 보이고 펼친다 */
-  return (
-            <article id={"ed-" + e.n} className={"edition reveal" + (e.core ? " edition--core" : "")} style={{ "--accent-fill": e.color, transitionDelay: `${i * 90}ms` }}>
-              <div className="edition__chip">{e.status}</div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-                <span className="edition__num">{e.no}</span>
-                <span style={{ width: 52, height: 52, borderRadius: 16, background: e.color, display: "grid", placeItems: "center", color: "var(--ink)" }}>
-                  <e.Icon size={24} />
-                </span>
-              </div>
-              <span className="edition__index-band" />
-              <p className="font-play" style={{ fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-soft)", margin: "16px 0 6px" }}>Edition {e.no}</p>
-              <h3 className="font-ko" style={{ fontWeight: 800, fontSize: "clamp(1.3rem,2vw,1.55rem)", lineHeight: 1.28, margin: "0 0 14px", whiteSpace: "pre-line", letterSpacing: "-.01em" }}>{e.title}</h3>
-              <p className={"font-ko edition__desc" + (more ? " is-open" : "")} style={{ color: "var(--ink-soft)", lineHeight: 1.72, fontSize: ".96rem", flexGrow: 1 }}>{e.desc}</p>
-              <button type="button" className="edition__more font-sans" aria-expanded={more} onClick={() => setMore(!more)}>{more ? "접기" : "더 보기"}</button>
-              {e.point && <p className="edition__point font-ko"><b>컨설팅 포인트</b>{e.point}</p>}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, margin: "18px 0 22px" }}>
-                {e.tags.map((t) => <span key={t} className="font-sans" style={{ fontSize: ".72rem", fontWeight: 600, padding: ".32em .7em", borderRadius: 999, border: "1.5px solid var(--ink)", color: "var(--ink)" }}>{t}</span>)}
-              </div>
-              {e.video ? (
-                <button type="button" className="btn" style={{ alignSelf: "flex-start" }} onClick={() => onPlay(e)}>
-                  {e.cta} <PlayCircle size={16} />
-                </button>
-              ) : e.url ? (
-                <a href={e.url} target="_blank" rel="noreferrer" className="btn" style={{ alignSelf: "flex-start" }}>
-                  {e.cta} <ExternalLink size={16} />
-                </a>
-              ) : (
-                <span className="btn btn--ghost" style={{ alignSelf: "flex-start", cursor: "default", pointerEvents: "none" }}>{e.cta}</span>
-              )}
-            </article>
-  );
-}
-
-/* ============================================================ AX DESK — 법무법인 경국 */
-/* 정비사업의 법률·경제 위험을 다루는 사내 AX. 의뢰인·사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다 */
+/* ============================================================ AX INTELLIGENCE COMMAND — 법무법인 경국
+ * 정비사업의 법률 · 경제 위험을 다루는 사내 AX. 의뢰인 · 사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다.
+ * 가운데 캔버스(city.js 'ax')는 시스템마다 다른 공간 — 필지 위 규제 층 · 총회장 · 두 버전의 건물. 모두 가상 시연이다 */
 const AX_CASES = [
-  { id: "ax-reintel", no: "01", icon: "§", name: "RE:INTELLIGENCE", ko: "법령 변경 알림", enLine: "Regulatory Change Alert", title: "법이 바뀌면 바로 알려 주는 시스템", en: "RE:INTELLIGENCE · 정비사업 법률 리스크 관제",
+  { id: "ax-reintel", no: "01", name: "RE:INTELLIGENCE", ko: "법령 변경 알림", enLine: "Regulatory Change Alert", title: "법이 바뀌면 바로 알려 주는 시스템", watch: ["법령 개정", "고시 변경", "행정 공고", "조례 개정"],
     problem: "법령·고시가 바뀐 걸 늦게 알면 분쟁과 사업 지연으로 이어집니다.",
     solve: "사업지 주소를 기준으로 법령·고시·행정 공고의 변화를 모아, 그 사업의 어느 단계에 영향이 있는지 정리해 변호사에게 올립니다.",
     effect: "변호사가 먼저 검토할 변경사항을 바로 고릅니다.",
-    before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토" },
-  { id: "ax-assembly", no: "02", icon: "✓", name: "Assembly Risk Engine", ko: "총회 무효 위험 검사", enLine: "General Assembly Validity Check", title: "총회 전에 ‘무효 위험’을 찾는 시스템", en: "ASSEMBLY RISK ENGINE · 조합 총회결의 하자 검증",
+    before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토",
+    flow: "Source monitoring → Relevance → Lawyer review",
+    steps: [["사업지 선택", "Select", "가상 사업지 하나를 고릅니다. 실제 시스템은 사업지 주소를 기준으로 움직입니다."],
+      ["출처 감시", "Monitor", "법령 개정 · 고시 변경 · 행정 공고 · 조례 개정이 그 필지 위로 한 층씩 내려앉습니다."],
+      ["관련성 판단", "Relevance", "그 사업 단계에 영향이 있을 수 있는 변경만 ‘검토 후보’로 표시합니다. 법적 결론은 내리지 않습니다."],
+      ["변호사 검토", "Review", "후보는 변호사에게 올라가고, 판단은 변호사가 내립니다."]] },
+  { id: "ax-assembly", no: "02", name: "Assembly Risk Engine", ko: "총회 무효 위험 검사", enLine: "General Assembly Validity Check", title: "총회 전에 ‘무효 위험’을 찾는 시스템", watch: ["소집 통지", "조합원 명부", "의결권", "정족수"],
     problem: "소집 통지·정족수·의결권 중 하나만 틀려도 총회 결의가 효력 다툼에 휘말립니다.",
     solve: "통지, 조합원 명부, 의결권, 정족수, 안건별 결과를 서로 맞대어 보고 틀린 곳을 표시합니다.",
     effect: "총회 전에 다시 확인할 안건과 명부를 특정합니다.",
-    before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시" },
-  { id: "ax-contract", no: "03", icon: "⇄", name: "Contract Risk Intelligence", ko: "계약 변경 조항 비교", enLine: "Contract Change Redline", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", en: "CONTRACT RISK INTELLIGENCE · 계약변경 AI Redline",
+    before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시",
+    flow: "Documents → Rule check → Exceptions → Human verification",
+    steps: [["서류 모으기", "Collect", "소집 통지 · 조합원 명부 · 의결권(위임장) · 정족수 자료가 흩어져 있습니다."],
+      ["규칙 대조", "Rule check", "서류를 서로 맞대어 규칙대로 대조합니다."],
+      ["예외 표시", "Exception", "맞지 않는 곳을 표시합니다 — 화면의 불일치(의결권 · 좌석 세 곳)는 가상 예시입니다."],
+      ["사람의 확인", "Verify", "표시된 안건과 명부는 사람이 다시 확인합니다."]] },
+  { id: "ax-contract", no: "03", name: "Contract Risk Intelligence", ko: "계약 변경 조항 비교", enLine: "Contract Change Redline", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", watch: ["계약서 변경 전 · 후", "공사비 조항", "지급 조건", "책임 조항"],
     problem: "공사비 증액과 계약 조항 변경은 곧바로 조합원이 낼 돈의 문제가 됩니다.",
     solve: "바뀌기 전·후 공사도급계약서를 나란히 비교해 공사비, 지급조건, 책임 조항의 변화와 분쟁 소지를 표시합니다.",
     effect: "협상 전에 불리하게 바뀐 조항을 특정합니다.",
-    before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시" },
+    before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시",
+    flow: "Versions → Differences → Implications → Lawyer judgment" },
+];
+/* 계약 비교 시연의 조항 — 전부 가상이다(실제 계약서 아님) */
+const AX_CLAUSES = [
+  ["제○조 공사 범위", "지상 12층으로 시공한다.", "지상 15층으로 시공한다(설계 변경).", "범위 확대"],
+  ["제○조 공사비", "도급금액은 계약 시 확정한다.", "물가 변동 시 도급금액을 조정할 수 있다.", "비용 증가 가능"],
+  ["제○조 지급 조건", "기성은 매월 정산해 지급한다.", "기성은 매월 정산해 지급한다.", ""],
+  ["제○조 책임", "설계 변경 비용은 수급인이 부담한다.", "설계 변경 비용은 도급인이 부담한다.", "부담 주체 이전"],
 ];
 const AX_SUPPORT = [
-  { id: "ax-compensation", tag: "실무 · Practice", title: "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석", desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다." },
-  { id: "ed-07", tag: "실무 · Practice", title: "NAVER WORKS Payroll · 네이버웍스 급여명세서 자동 발송", desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다. 사내 운영 · 비공개." },
+  { id: "ax-compensation", tag: "실무 01 · Practice", title: "Compensation Analysis", ko: "광명시흥 3기 신도시 보상자료 분석", kind: "분석 · 발표 자료 77장 — 소프트웨어 시스템이 아닙니다",
+    desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다.",
+    steps: [["필지 확인", "Parcel"], ["감정평가 자료", "Appraisal"], ["보상협의", "Consultation"], ["재결", "Adjudication"]] },
+  { id: "ed-07", tag: "실무 02 · Practice", title: "NAVER WORKS Payroll", ko: "네이버웍스 급여명세서 자동 발송", kind: "사내 운영 · 급여 정보를 다루어 화면과 코드는 비공개",
+    desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다.",
+    steps: [["명세서 준비", "Prepare"], ["표준 양식", "Standardize"], ["메일 발송", "Send"], ["처리 완료", "Complete"]] },
 ];
 
-function AxDesk() {
+/* 단계 자동 재생 — 화면에 처음 들어오면 한 번 끝까지, 이후로는 누른 단계로 */
+function useStepper(ctl, n, gap) {
+  const [step, setStep] = React.useState(-1);
+  const timer = React.useRef(0);
+  const go = (i, ms) => { setStep(i); if (ctl.current) ctl.current.tween("k", i + 1, ms || 1100); };
+  const play = () => {
+    clearTimeout(timer.current);
+    let i = 0;
+    const tick = () => { go(i); i += 1; if (i < n) timer.current = setTimeout(tick, prefersCalm() ? 0 : gap || 1600); };
+    tick();
+  };
+  const stop = () => clearTimeout(timer.current);
+  React.useEffect(() => stop, []);
+  return { step, go: (i) => { stop(); go(i); }, play, stop, reset: () => { stop(); setStep(-1); } };
+}
+function useOnce(ref, fn, thr) {
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el || !window.IntersectionObserver) { fn(); return; }
+    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); fn(); } }, { threshold: thr || 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+}
+
+function AXCommand() {
+  const stage = React.useRef(null), cv = React.useRef(null), ctl = React.useRef(null);
+  const [sys, setSys] = React.useState(0);
+  const [split, setSplit] = React.useState(0);
+  const [site, setSite] = React.useState(0);
+  const S = useStepper(ctl, 4, 1700);
+  React.useEffect(() => {
+    ctl.current = window.City && window.City.mount(cv.current, "ax", { state: { sys: 0, k: 0 } });
+    return () => ctl.current && ctl.current.destroy();
+  }, []);
+  useOnce(stage, () => S.play(), 0.45);
+  const pick = (i) => {
+    if (i === sys) return;
+    S.reset(); setSys(i);
+    const c = ctl.current;
+    if (c) { c.set("sys", i); c.set("k", 0); c.set("inn", 0); c.tween("inn", 1, 900); c.set("s", split / 100); }
+    if (i !== 2) setTimeout(() => S.play(), 350);
+  };
+  const pickSite = (i) => { setSite(i); if (ctl.current) { ctl.current.set("site", i); ctl.current.set("k", 0); } S.play(); };
+  const setS = (v) => { setSplit(v); if (ctl.current) ctl.current.set("s", v / 100); };
+  const drag = (ev) => { if (sys !== 2) return; const r = ev.currentTarget.getBoundingClientRect(); setS(Math.round(clamp01((ev.clientX - r.left) / r.width) * 100)); };
+  const cur = AX_CASES[sys];
+  const after = split >= 50;
   return (
-    <div className="axd reveal" id="ax-desk" aria-labelledby="ax-desk-title">
-      <div className="axd__head">
-        <p className="axd__eyebrow font-sans"><i aria-hidden="true" />Kyunggook Law Firm · AX Projects — 법무법인 경국 AX 프로젝트</p>
-        <h3 id="ax-desk-title" className="font-ko">재개발·재건축 사업이 <em>법 · 총회 · 계약</em> 문제로 멈추지 않게</h3>
-        <p className="axd__lead font-ko">위험은 시스템이 먼저 찾고, 판단은 변호사가 내립니다. 사내에 직접 구축한 세 가지입니다.<span className="axd__lead-en font-sans">Systems flag the risk first; lawyers make the call.</span></p>
-      </div>
-      <div className="axd__grid">
-        {AX_CASES.map((c) => (
-          <article key={c.id} id={c.id} className="axd__case">
-            <div className="axd__top"><span className="axd__icon font-serif" aria-hidden="true">{c.icon}</span><span className="axd__no font-serif">{c.no}</span></div>
-            {/* 한눈에 알아보게 — 영문 제품명 + 한글 한 줄 이름, 그 아래 영문 · 한글 설명 */}
-            <h4 className="axd__title font-ko"><span className="axd__name font-sans" lang="en">{c.name}</span>{c.ko}</h4>
-            <p className="axd__en font-sans"><span lang="en">{c.enLine}</span> — {c.title}</p>
-            <dl className="axd__rows font-ko">
-              <div><dt>문제 <i lang="en">Problem</i></dt><dd>{c.problem}</dd></div>
-              <div><dt>해결 <i lang="en">Solution</i></dt><dd>{c.solve}</dd></div>
-              <div className="axd__eff"><dt>효과 <i lang="en">Impact</i></dt><dd>{c.effect}</dd></div>
-            </dl>
-            <div className="axd__ba font-ko">
-              <span><b>전 <i lang="en">Before</i></b>{c.before}</span>
-              <span><b>후 <i lang="en">After</i></b>{c.after}</span>
+    <section id="ax-desk" className="axc" aria-labelledby="axc-title">
+      <div className="wrap axc__wrap">
+        <header className="axc__mast">
+          <p className="axc__k font-ko">03 법무법인 경국 AX 지휘실 <span className="font-sans" lang="en">Gyunggook AX Intelligence Command</span></p>
+          <h2 id="axc-title" className="axc__title"><span className="font-ko">판단이 필요한 곳에,<br />실행 가능한 시스템을 설계합니다</span><span className="font-serif" lang="en">Legal AX · Risk Intelligence · Operational Execution</span></h2>
+          <p className="axc__lead font-ko">재개발 · 재건축 사업이 <b>법 · 총회 · 계약</b> 문제로 멈추지 않게 — 세 시스템은 같은 원칙으로 움직입니다. <b>관련 정보는 시스템이 먼저 찾아 정리하고, 판단은 변호사가 내립니다.</b> AI 가 법률 판단을 대신하지 않습니다.</p>
+        </header>
+
+        <div className="axc__console">
+          <nav className="axc__rail" aria-label="AX 시스템 고르기">
+            <p className="axc__lbl font-sans">Systems · 시스템</p>
+            <ol>
+              {AX_CASES.map((c, i) => (
+                <li key={c.id} id={c.id}>
+                  <button type="button" aria-pressed={i === sys} onClick={() => pick(i)}>
+                    <b className="font-serif">{c.no}</b>
+                    <span><em className="font-sans" lang="en">{c.name}</em><strong className="font-ko">{c.ko}</strong></span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+            <p className="axc__state font-ko">사내 구축 · 실제 화면과 자료는 비공개</p>
+          </nav>
+
+          <div className="axc__stage" ref={stage}>
+            <div className={"axc__canvas" + (sys === 2 ? " is-drag" : "")}
+              onPointerDown={(ev) => { if (sys === 2) { ev.currentTarget.setPointerCapture(ev.pointerId); drag(ev); } }}
+              onPointerMove={(ev) => { if (sys === 2 && ev.buttons) drag(ev); }}>
+              <canvas ref={cv} aria-hidden="true" />
+              <p className="axc__demo font-sans"><b>가상 시연</b> Conceptual demo — 실제 사업지 · 조합원 · 계약 자료가 아닙니다</p>
+              {sys === 0 && (
+                <div className="axc__sites font-ko" role="group" aria-label="가상 사업지">
+                  {["A", "B", "C"].map((t, i) => <button key={t} type="button" aria-pressed={i === site} onClick={() => pickSite(i)}>가상 사업지 {t}</button>)}
+                </div>
+              )}
             </div>
-            <p className="axd__state font-sans">사내 구축 · 화면 비공개 — In-house · Private</p>
-          </article>
+            <p className="sr-only" aria-live="polite">{cur.name} {cur.ko} — {sys === 2 ? (after ? "변경 후 계약서 표시" : "변경 전 계약서 표시") : S.step >= 0 ? cur.steps[S.step][0] + ": " + cur.steps[S.step][2] : ""}</p>
+            {sys !== 2 ? (
+              <ol className="axc__steps font-sans">
+                {cur.steps.map((st, i) => (
+                  <li key={st[0]}><button type="button" aria-current={i === S.step ? "step" : undefined} className={i <= S.step ? "is-done" : ""} onClick={() => S.go(i)}>
+                    <b>{pad2(i + 1)}</b><span className="font-ko">{st[0]}</span><em lang="en">{st[1]}</em>
+                  </button></li>
+                ))}
+                <li className="axc__replay"><button type="button" onClick={() => { if (ctl.current) ctl.current.set("k", 0); S.play(); }}>처음부터 ↺</button></li>
+              </ol>
+            ) : (
+              <div className="axc__cmp font-sans">
+                <button type="button" aria-pressed={!after} onClick={() => setS(0)}>변경 전</button>
+                <input type="range" min="0" max="100" value={split} onChange={(ev) => setS(+ev.target.value)} aria-label="계약서 변경 전 ↔ 변경 후" />
+                <button type="button" aria-pressed={after} onClick={() => setS(100)}>변경 후</button>
+              </div>
+            )}
+          </div>
+
+          <aside className="axc__insp" aria-live="off">
+            <p className="axc__lbl font-sans">Inspector · {cur.no}</p>
+            <h3 className="axc__name"><span className="font-sans" lang="en">{cur.name}</span><span className="font-ko">{cur.ko}</span></h3>
+            <p className="axc__en font-sans"><span lang="en">{cur.enLine}</span> — <span className="font-ko">{cur.title}</span></p>
+            <p className="axc__flow font-sans" lang="en">{cur.flow}</p>
+            {sys !== 2 ? (
+              <p className="axc__now font-ko">{S.step >= 0 ? <React.Fragment><b>{pad2(S.step + 1)} · {cur.steps[S.step][0]}</b>{cur.steps[S.step][2]}</React.Fragment> : <b>단계를 눌러 보세요</b>}</p>
+            ) : (
+              <ul className="axc__clauses font-ko" aria-label="가상 조항 비교">
+                {AX_CLAUSES.map(([k, v1, v2, tag]) => (
+                  <li key={k} className={tag && after ? "is-chg" : ""}>
+                    <b>{k}{tag && after && <i className="font-sans">{tag}</i>}</b>
+                    <span>{after ? v2 : v1}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <dl className="axc__rows font-ko">
+              <div><dt>문제 <i lang="en">Problem</i></dt><dd>{cur.problem}</dd></div>
+              <div><dt>해결 <i lang="en">Solution</i></dt><dd>{cur.solve}</dd></div>
+              <div><dt>효과 <i lang="en">Impact</i></dt><dd>{cur.effect}</dd></div>
+            </dl>
+            <p className="axc__ba font-ko"><span><b>전</b>{cur.before}</span><span><b>후</b>{cur.after}</span></p>
+            <ul className="axc__watch font-ko" aria-label="살펴보는 자료">{cur.watch.map((w) => <li key={w}>{w}</li>)}</ul>
+          </aside>
+        </div>
+
+        <header className="axc__subhead">
+          <h3 className="font-ko">법무법인 경국에서 맡은 실무 <span className="font-sans" lang="en">Practical Execution</span></h3>
+        </header>
+        <div className="axc__practice">
+          <PracticeComp item={AX_SUPPORT[0]} />
+          <PracticePayroll item={AX_SUPPORT[1]} ed={edOf("07")} />
+        </div>
+        <OpsMail e={edOf("06")} />
+        <p className="axc__note font-ko">의뢰인 · 사건 정보와 사내 화면은 공개하지 않습니다.</p>
+      </div>
+    </section>
+  );
+}
+const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+
+/* 실무 01 — 광명시흥 보상자료: 필지 → 감정평가 자료 → 보상협의 → 재결 (금액 · 보상액은 그리지 않는다) */
+function PracticeComp({ item }) {
+  const box = React.useRef(null), cv = React.useRef(null), ctl = React.useRef(null);
+  const S = useStepper(ctl, 4, 1500);
+  React.useEffect(() => {
+    ctl.current = window.City && window.City.mount(cv.current, "comp", {});
+    return () => ctl.current && ctl.current.destroy();
+  }, []);
+  useOnce(box, () => S.play(), 0.5);
+  return (
+    <article id={item.id} className="axp axp--comp" ref={box}>
+      <div className="axp__vis"><canvas ref={cv} aria-hidden="true" /><span className="axp__fic font-sans">개념도 · Concept</span></div>
+      <PracticeText item={item} step={S.step} go={S.go} />
+    </article>
+  );
+}
+/* 실무 02 — 네이버웍스 급여명세서: 명세서 → 표준 양식 → 메일 → 완료 (건물이 아니라 문서와 메일로) */
+function PracticePayroll({ item, ed }) {
+  const box = React.useRef(null), ctl = React.useRef(null);
+  const S = useStepper(ctl, 4, 1300);
+  useOnce(box, () => S.play(), 0.5);
+  return (
+    <article id={item.id} className="axp axp--mail" ref={box}>
+      <div className="axp__vis nw" data-step={S.step} aria-hidden="true">
+        <div className="nw__docs">{[0, 1, 2, 3, 4].map((i) => <i key={i} style={{ "--i": i }}><b /><b /><b /></i>)}</div>
+        <div className="nw__tpl"><span className="font-sans">TEMPLATE</span><i /><i /><i /></div>
+        <div className="nw__mail">{[0, 1, 2].map((i) => <i key={i} style={{ "--i": i }} />)}</div>
+        <div className="nw__done"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M5 12.5 10 17 19 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg><span className="font-sans">SENT</span></div>
+        <i className="nw__rail" />
+        <span className="axp__fic font-sans">개념도 · 실제 명세서 아님</span>
+      </div>
+      <PracticeText item={item} step={S.step} go={S.go} extra={ed.work && ed.work.slice(0, 3)} />
+    </article>
+  );
+}
+function PracticeText({ item, step, go, extra }) {
+  return (
+    <div className="axp__txt">
+      <p className="axp__tag font-sans">{item.tag}</p>
+      <h4 className="axp__title"><span className="font-sans" lang="en">{item.title}</span><span className="font-ko">{item.ko}</span></h4>
+      <p className="axp__kind font-ko">{item.kind}</p>
+      <ol className="axp__steps font-ko">
+        {item.steps.map(([ko, en], i) => (
+          <li key={ko}><button type="button" aria-current={i === step ? "step" : undefined} className={i <= step ? "is-done" : ""} onClick={() => go(i)}><b className="font-sans">{pad2(i + 1)}</b>{ko}<em className="font-sans" lang="en">{en}</em></button></li>
         ))}
-      </div>
-      <div className="axd__sub">
-        {AX_SUPPORT.map((c) => {
-          const Tag = c.href ? "a" : "div";
-          return (
-            <Tag key={c.id} id={c.id} className="axd__mini" {...(c.href ? { href: c.href } : {})}>
-              <span className="axd__mtag font-sans">{c.tag}</span>
-              <strong className="font-ko">{c.title}</strong>
-              <span className="axd__mdesc font-ko">{c.desc}</span>
-            </Tag>
-          );
-        })}
-      </div>
-      <p className="axd__note font-ko">의뢰인·사건 정보와 사내 화면은 공개하지 않습니다.</p>
+      </ol>
+      <p className="axp__desc font-ko">{item.desc}</p>
+      {extra && <dl className="axp__work font-ko">{extra.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>}
+    </div>
+  );
+}
+/* 운영 흐름 — 고객 메일 자동 분류(공개 업무 화면). 개인 제품이 아니고, 급여명세서 실무와도 별개다 */
+function OpsMail({ e }) {
+  const box = React.useRef(null);
+  const [on, setOn] = React.useState(false);
+  useOnce(box, () => setOn(true), 0.4);
+  const [t1, t2] = e.title.split("\n");
+  return (
+    <div id="work-systems" className={"axo" + (on ? " is-on" : "")} ref={box}>
+      <article id={"ed-" + e.n} className="axo__card">
+        <div className="axo__txt">
+          <p className="axc__k font-ko">운영 흐름 <span className="font-sans" lang="en">Operational Workflow</span></p>
+          <h4 className="font-ko">{t1}<small>{t2.replace(/^—\s*/, "")}</small></h4>
+          <p className="axo__desc font-ko">{e.desc}</p>
+          <dl className="axp__work font-ko">{e.work.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+          <p className="axo__point font-ko"><b>설계 원칙</b>{e.point}</p>
+          <a href={e.url} target="_blank" rel="noreferrer" className="btn btn--ghost axo__go">{e.cta} <ExternalLink size={15} /></a>
+        </div>
+        <div className="axo__lanes" aria-hidden="true">
+          {["지금 답할 것", "오늘 안에 볼 것", "넘겨도 되는 것"].map((l, i) => (
+            <div key={l} className="axo__lane" style={{ "--i": i }}><span className="font-ko">{l}</span>{[0, 1, 2].slice(0, 3 - i).map((k) => <i key={k} style={{ "--k": k }} />)}</div>
+          ))}
+          <span className="axp__fic font-sans">개념도 · 실제 메일 아님</span>
+        </div>
+      </article>
     </div>
   );
 }
 
-function Artifacts() {
-  const ref = useReveal();
-  const [playing, setPlaying] = React.useState(null);
+/* 무대(대화상자) 공통 — 스크롤 잠금 · 뒤 화면 inert · 초점 가두기 · Esc 닫기 · 닫으면 연 자리로 초점 복귀.
+ * 무대는 document.body 에 붙으므로(portal) #root 전체를 inert 로 만들어도 무대는 살아 있다. */
+function useStageDialog(open, panelRef, onClose) {
+  const closeRef = React.useRef(onClose);
+  closeRef.current = onClose;
   React.useEffect(() => {
-    if (!playing) return;
-    const onKey = (ev) => { if (ev.key === "Escape") setPlaying(null); };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [playing]);
+    if (!open) return;
+    const opener = document.activeElement;
+    const root = document.getElementById("root");
+    const html = document.documentElement;
+    html.classList.add("axs-lock");
+    if (root) root.inert = true;
+    const onKey = (ev) => {
+      if (ev.key === "Escape") { ev.preventDefault(); closeRef.current(); return; }
+      const box = panelRef.current;
+      if (ev.key !== "Tab" || !box) return;
+      const f = Array.prototype.filter.call(
+        box.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])'),
+        (n) => n.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1], cur = document.activeElement;
+      if (!box.contains(cur)) { ev.preventDefault(); first.focus(); }
+      else if (ev.shiftKey && cur === first) { ev.preventDefault(); last.focus(); }
+      else if (!ev.shiftKey && cur === last) { ev.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      html.classList.remove("axs-lock");
+      if (root) root.inert = false;
+      if (opener && opener.focus && document.contains(opener)) opener.focus({ preventScroll: true });
+    };
+  }, [open]);
+}
+const prefersCalm = () => !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+/* FLIP — a(원래 자리)에서 b(무대)로. reverse 면 무대가 원래 자리로 돌아간다 */
+function flipFrom(card, el, reverse) {
+  if (!card || !el || !el.animate || prefersCalm()) { if (el) el.style.opacity = "1"; return Promise.resolve(); }
+  const a = card.getBoundingClientRect(), b = el.getBoundingClientRect();
+  const from = `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`;
+  const kf = [{ transform: from, opacity: .7 }, { transform: "none", opacity: 1 }];
+  return el.animate(reverse ? kf.slice().reverse() : kf, { duration: reverse ? 420 : 680, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" }).finished.catch(() => {});
+}
+
+/* ============================================================ 제품 극장 — 카드가 무대로 펼쳐지고, 실제 화면이 층층이 열린다
+ * 화면은 2026. 11. 4. 각 서비스의 공개 화면을 그대로 캡처한 것(images/product). 기능 설명은 작업 카드에 적힌 사실만. */
+const THEATERS = {
+  "09": {
+    name: "ZipCatch", url: "https://zipcatch.vercel.app", open: "집캐치 열기",
+    cap: "2026. 11. 4. 실제 서비스 화면 캡처 — 화면 속 공고와 숫자는 캡처 시점의 공개 데이터입니다.",
+    ruleT: "추천 원칙",
+    rule: "자격 · 예산 · 선호 적합도 · 마감 긴급도를 한 점수로 섞지 않고 따로 보여 줍니다. 확인되지 않은 자격은 불충족으로 단정하지 않고, 당첨 확률은 계산하지 않습니다.",
+    layers: [
+      { img: "zc-home", k: "첫 화면", t: "지금 열려 있는 공고를 지도와 숫자로", d: "청약홈 분양공고와 LH 임대공고를 공공데이터 API로 모아, 지역별로 열려 있는 공고 수와 가장 가까운 마감을 먼저 보여 줍니다." },
+      { img: "zc-analyze", k: "조건 입력", t: "지역 · 주거비 · 가구 조건을 차례로", d: "가입 없이 조건을 단계별로 고르면, 그 조건으로 지금 지원할 수 있는 후보를 추립니다." },
+      { img: "zc-map", k: "지도 탐색", t: "보이는 범위의 공고를 바로 옆 목록으로", d: "범위(서울 · 수도권 · 전국)를 고르면 지도에 공고가 표시되고, 보이는 범위의 공고가 목록으로 정리됩니다." },
+      { img: "zc-notices", k: "후보 정리", t: "마감이 가까운 순으로, 조건별로 걸러서", d: "지역 · 유형 필터로 후보를 좁히고, 관심공고 저장과 마감 알림으로 이어집니다." },
+    ],
+  },
+  "17": {
+    name: "Atelier AX", url: "https://atelier-ax.vercel.app/", open: "관제 화면 열기",
+    cap: "2026. 11. 4. 공개 시연 모드 화면 캡처 — 화면 속 직원과 업무는 시연용 가상 데이터입니다.",
+    ruleT: "운영 원칙",
+    rule: "에이전트가 한 일은 사람이 검증 · 승인해야 끝납니다. 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않습니다.",
+    layers: [
+      { img: "ax-live", k: "라이브", t: "AI 직원이 일하는 모습을 사무실처럼", d: "출근 · 작업 · 대기 상태와 진행 단계를 한 화면에서 봅니다. 공개 시연 모드는 서버 없이 이 브라우저 안에서만 돕니다." },
+      { img: "ax-missions", k: "업무", t: "지시한 업무가 단계별로 넘어가는 과정", d: "업무를 지시하면 담당 직원 사이로 단계가 넘어가고, 도구 호출(웹 검색 · 파일 수정 · 코드 실행)과 인계가 실행 기록으로 남습니다." },
+      { img: "ax-approvals", k: "승인", t: "사람이 승인해야 끝나는 지점", d: "정책에 걸린 작업과 결재가 필요한 산출물은 승인 센터에서 사람이 검증 · 승인합니다." },
+      { img: "ax-performance", k: "성과", t: "처리 · 승인 · 반려를 직원별로", d: "종료된 업무와 최종 승인 · 반려를 직원별로 집계합니다." },
+    ],
+  },
+  "16": {
+    name: "법조시장 한눈에", url: "https://legal-pulse-pearl.vercel.app", open: "상황판 열기",
+    cap: "2026. 11. 5. 실제 서비스 화면 캡처 — 화면 속 법률안 · 법령 · 회원 수는 캡처 시점의 공개 데이터입니다.",
+    ruleT: "데이터 원칙",
+    rule: "출처 없는 예시 수치는 넣지 않습니다. 인증키가 없거나 수집에 실패한 값은 '인증키 필요' · '불러오지 못함'과 이유를 그대로 보여 주고, 지방회 합계가 맞지 않으면 화면에 올리지 않습니다.",
+    layers: [
+      { img: "lp-home", k: "요약", t: "법조 시장의 지금을 첫 화면에", d: "22대 국회 발의 법률안의 처리 현황, 개업 변호사 수, 다음 공휴일, 불변기간 만료일 계산기를 첫 화면에 모았습니다." },
+      { img: "lp-redev", k: "정비사업", t: "재개발 · 재건축 법률안과 판례", d: "정비사업 법률의 국회 발의 현황과 최근 본회의 통과, 시행 예정 개정과 분쟁 판례를 함께 봅니다." },
+      { img: "lp-family", k: "분야별", t: "분야마다 같은 틀로", d: "부동산 · 임대차, 가사, 상속, 형사, 노동, 기업까지 분야별로 발의 법률안 · 시행 예정 법령 · 공개 판례를 같은 틀로 보여 줍니다." },
+      { img: "lp-sources", k: "출처", t: "모든 수치의 출처와 연결 상태", d: "화면의 수치를 어느 공식 출처에서 받았는지, 연결 상태와 마지막으로 받은 시각을 함께 공개합니다." },
+    ],
+  },
+  "12": {
+    name: "국정 한눈에", url: "https://gukjeong-hannune.vercel.app/", open: "상황판 열기",
+    cap: "2026. 11. 5. 실제 서비스 화면 캡처 — 화면 속 기사와 지표는 캡처 시점의 공개 뉴스 · 시세입니다.",
+    ruleT: "수집 원칙",
+    rule: "수집이 실패해도 화면이 비지 않게 — CDN 20분 캐시와 stale-while-revalidate로 즉시 응답하고, 실패하면 저장된 스냅샷으로 대체합니다. 포털은 기사를 옮겨 실을 뿐 매체가 아니므로 출처 · 언론사 수에서 뺍니다.",
+    layers: [
+      { img: "gk-home", k: "오늘", t: "오늘의 국정을 첫 화면 한 장에", d: "날짜와 주요 지표, 분야별 소식을 첫 화면에 모읍니다. 섹션 필터 · 검색과 라이트 · 다크 모드를 지원합니다." },
+      { img: "gk-markets", k: "시장", t: "증시 · 환율 · 원자재를 추이와 함께", d: "코스피 · 코스닥 · 환율 · 해외 지수를 등락과 함께 작은 추이 그래프(스파크라인)로 보여 줍니다." },
+      { img: "gk-brief", k: "브리핑", t: "많이 다룬 소식을 세 줄로", d: "가장 많은 언론이 다룬 사안을 3줄 브리핑으로 정리하고, 24시간 보도 흐름과 분야별 보도량을 함께 보여 줍니다." },
+      { img: "gk-top", k: "기사", t: "중복을 걸러 분야별로", d: "공개 뉴스 RSS를 분야별로 배정하고 중복 기사를 걸러, 언론사 원문 사진과 함께 보여 줍니다." },
+    ],
+  },
+};
+
+function TheaterShot({ name, alt }) {
+  const set = (ext) => `images/product/${name}-720.${ext} 720w, images/product/${name}-1280.${ext} 1280w`;
+  /* 폰에서는 실제 모바일 화면 캡처를 쓴다 — 데스크톱 화면을 작게 줄여 보이지 않게 */
   return (
-    <React.Fragment>
-    <section id="artifacts" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0", background: "var(--ecru-deep)" }}>
-      <div className="wrap">
-        <SectionHead eyebrow="03 — Selected Works" titleEn="The Artifacts" titleKo="AI 전략 · 자동화 프로젝트" />
-        <p className="works-lead font-ko reveal">
-          맨 위는 법무법인 경국에서 정비사업의 법률·경제 위험을 다루는 <strong>AX 현황판</strong>, 그 아래는 직접 정의하고 구현해 <strong>배포하거나 사내 업무에 적용한 시스템 {EDITIONS_SHOWN.filter((e) => e.core).length}건</strong>입니다.
-          학습용 시뮬레이터, 개인 프로젝트, 제안서와 생성형 AI 콘텐츠는 아래에서 따로 펼쳐 볼 수 있습니다.
-        </p>
-        <AxDesk />
-        <div className="works-grid">
-          {EDITIONS_SHOWN.filter((e) => e.core).map((e, i) => (
-            <EditionCard key={e.n} e={e} i={i} onPlay={setPlaying} />
+    <picture>
+      <source media="(max-width: 760px)" type="image/avif" srcSet={`images/product/${name}-m600.avif`} />
+      <source media="(max-width: 760px)" type="image/webp" srcSet={`images/product/${name}-m600.webp`} />
+      <source type="image/avif" srcSet={set("avif")} sizes="(max-width: 860px) 92vw, 62vw" />
+      <source type="image/webp" srcSet={set("webp")} sizes="(max-width: 860px) 92vw, 62vw" />
+      <img src={`images/product/${name}-1280.webp`} alt={alt} width="1280" height="800" decoding="async" draggable="false" />
+    </picture>
+  );
+}
+
+/* 펼침 --f(0 접힘 → 1 층층이 펼침)와 집중 --q(0 전체 → 1 한 층 정면)를 rAF 로 직접 쓴다 — 드래그는 곧바로 반영 */
+/* 폰 극장 — 고른 화면이 카드(큐브 면)에서 떨어져 나와 화면 전체로 커진다(FLIP).
+ * 화면은 원래 폭(1:1)으로 보여 글자가 그대로 읽히고, 아래로 스크롤해 화면 전체를 본다.
+ * 옆으로 넘기면 다음 실제 화면, 두 번 누르면 2배 확대. 아래 썸네일 띠는 큰 화면에서 펼쳐져 나온다.
+ * 닫으면 같은 길로 그 카드 자리에 돌아간다 */
+function MobileTheater({ ed, card, onClose }) {
+  const T = THEATERS[ed.n];
+  const surf = React.useRef(null), track = React.useRef(null), closeBtn = React.useRef(null);
+  const [i, setI] = React.useState(0);
+  const [zoom, setZoom] = React.useState(-1);
+  const closing = React.useRef(false);
+  React.useEffect(() => {
+    if (card) card.classList.add("is-staged");
+    flipFrom(card, surf.current, false).then(() => closeBtn.current && closeBtn.current.focus({ preventScroll: true }));
+    return () => { if (card) card.classList.remove("is-staged"); };
+  }, []);
+  const close = () => {
+    if (closing.current) return;
+    closing.current = true;
+    if (track.current) track.current.scrollTo({ left: 0 });
+    flipFrom(card, surf.current, true).then(onClose);
+  };
+  useStageDialog(true, surf, close);
+  const onScroll = () => {
+    const el = track.current;
+    if (!el) return;
+    const k = Math.round(el.scrollLeft / el.clientWidth);
+    if (k !== i) { setI(k); setZoom(-1); }
+  };
+  const go = (k) => { const el = track.current; if (el) el.scrollTo({ left: k * el.clientWidth, behavior: prefersCalm() ? "auto" : "smooth" }); };
+  const L = T.layers[i];
+  return ReactDOM.createPortal(
+    <div className="pthm" role="dialog" aria-modal="true" aria-labelledby="pthm-title">
+      <div className="pthm__surface" ref={surf}>
+        <header className="pthm__head">
+          <div>
+            <p className="pthm__eyebrow font-sans">{T.name} · {String(i + 1).padStart(2, "0")} / {String(T.layers.length).padStart(2, "0")}</p>
+            <h3 id="pthm-title" className="font-ko"><b>{L.k}</b> {L.t}</h3>
+          </div>
+          <button type="button" className="pthm__close font-sans" ref={closeBtn} onClick={close}>닫기 ✕</button>
+        </header>
+        <div className="pthm__track" ref={track} onScroll={onScroll}>
+          {T.layers.map((l, k) => (
+            <section key={l.img} className={"pthm__page" + (zoom === k ? " is-zoom" : "")} aria-label={`${l.k} — ${l.t}`}>
+              <div className="pthm__shot" onDoubleClick={() => setZoom(zoom === k ? -1 : k)}>
+                <TheaterShot name={l.img} alt={`${T.name} ${l.k} 화면 — ${l.t}`} />
+              </div>
+              <p className="pthm__desc font-ko">{l.d}</p>
+            </section>
           ))}
         </div>
-        <details className="fold works-more reveal">
-          <summary>
-            <span className="fold__t">
-              <span className="eyebrow">Supplementary</span>
-              <strong className="font-ko">그 밖의 작업 <em>{EDITIONS_SHOWN.filter((e) => !e.core).length}건</em></strong>
-              <span className="fold__line font-ko">감정평가사 필드워크 · 성분관 · Salvation · 생성형 AI 영상</span>
-            </span>
-            <i className="fold__icon" aria-hidden="true" />
-          </summary>
-          <div className="works-grid works-grid--sub">
-            {EDITIONS_SHOWN.filter((e) => !e.core).map((e, i) => (
-              <EditionCard key={e.n} e={e} i={i} onPlay={setPlaying} />
+        <footer className="pthm__foot">
+          <ol className="pthm__thumbs">
+            {T.layers.map((l, k) => (
+              <li key={l.img} style={{ "--k": k }}>
+                <button type="button" aria-current={k === i ? "true" : undefined} onClick={() => go(k)} aria-label={`${l.k} 화면으로`}>
+                  <img src={`images/product/${l.img}-m600.webp`} alt="" loading="lazy" decoding="async" />
+                  <span className="font-sans">{l.k}</span>
+                </button>
+              </li>
             ))}
+          </ol>
+          <div className="pthm__bar">
+            <button type="button" className="pthm__zoom font-sans" onClick={() => setZoom(zoom === i ? -1 : i)} aria-pressed={zoom === i}>{zoom === i ? "원래 크기" : "2배 확대"}</button>
+            <a className="btn pthm__go" href={T.url} target="_blank" rel="noreferrer">{T.open} <ExternalLink size={14} /></a>
           </div>
-        </details>
+          <p className="pthm__cap font-ko">{T.cap}</p>
+        </footer>
       </div>
-    </section>
+    </div>,
+    document.body
+  );
+}
 
-    {playing && (
-      <div className="vlightbox" onClick={() => setPlaying(null)} role="dialog" aria-modal="true">
-        <div className="vlightbox__frame" onClick={(ev) => ev.stopPropagation()}>
-          <button type="button" className="vlightbox__close" onClick={() => setPlaying(null)} aria-label="닫기">✕</button>
-          <div className="vlightbox__meta">
-            <span className="font-play">Edition {playing.no}</span>
-            <h4 className="font-ko">{playing.title.replace("\n", " · ")}</h4>
+function ProductTheater(props) {
+  const [mob] = React.useState(() => !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches));
+  return mob ? <MobileTheater {...props} /> : <DesktopTheater {...props} />;
+}
+
+function DesktopTheater({ ed, card, onClose }) {
+  const T = THEATERS[ed.n];
+  const surf = React.useRef(null), stage = React.useRef(null), range = React.useRef(null), closeBtn = React.useRef(null);
+  const v = React.useRef({ f: 0, q: 0 }), anim = React.useRef({});
+  const [sel, setSel] = React.useState(-1);
+  const busy = React.useRef(false);
+  const put = (k, x) => {
+    v.current[k] = x;
+    if (stage.current) stage.current.style.setProperty("--" + k, x.toFixed(3));
+    if (k === "f" && range.current) range.current.value = String(Math.round(x * 100));
+  };
+  const tween = (k, to, ms) => new Promise((done) => {
+    cancelAnimationFrame(anim.current[k]);
+    if (prefersCalm()) { put(k, to); done(); return; }
+    const a = v.current[k], t0 = performance.now();
+    const step = (t) => {
+      const u = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - u, 3);
+      put(k, a + (to - a) * e);
+      if (u < 1) anim.current[k] = requestAnimationFrame(step); else done();
+    };
+    anim.current[k] = requestAnimationFrame(step);
+  });
+  React.useEffect(() => {
+    if (card) card.classList.add("is-staged");
+    put("f", 0); put("q", 0);
+    flipFrom(card, surf.current, false).then(() => {
+      if (closeBtn.current) closeBtn.current.focus({ preventScroll: true });
+      return tween("f", 1, 1200);
+    });
+    return () => { Object.values(anim.current).forEach(cancelAnimationFrame); if (card) card.classList.remove("is-staged"); };
+  }, []);
+  const pick = async (i) => {
+    if (busy.current) return;
+    busy.current = true;
+    if (v.current.q > 0) await tween("q", 0, 380);
+    setSel(i);
+    if (i >= 0) { if (v.current.f < 1) await tween("f", 1, 420); await tween("q", 1, 620); }
+    busy.current = false;
+  };
+  const close = async () => {
+    if (busy.current === "closing") return;
+    busy.current = "closing";
+    if (v.current.q > 0) await tween("q", 0, 260);
+    await tween("f", 0, 420);
+    await flipFrom(card, surf.current, true);
+    onClose();
+  };
+  useStageDialog(true, surf, close);
+  /* 직접 조작 — 무대를 옆으로 끌면 접고 편다. 끌지 않고 놓으면 그 층을 정면으로 */
+  const drag = React.useRef(null);
+  const down = (ev) => {
+    if (ev.button > 0) return;
+    drag.current = { x: ev.clientX, f: v.current.f, moved: false, w: ev.currentTarget.clientWidth };
+    ev.currentTarget.setPointerCapture(ev.pointerId);
+  };
+  const move = (ev) => {
+    const d = drag.current;
+    if (!d) return;
+    if (Math.abs(ev.clientX - d.x) > 6) {
+      if (!d.moved) { d.moved = true; cancelAnimationFrame(anim.current.f); if (v.current.q > 0) pick(-1); }
+      put("f", Math.max(0, Math.min(1, d.f + (ev.clientX - d.x) / (d.w * 0.55))));
+    }
+  };
+  const up = (ev) => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d || d.moved) return;
+    const hit = document.elementFromPoint(ev.clientX, ev.clientY);
+    const layer = hit && hit.closest && hit.closest("[data-layer]");
+    if (layer) { const i = +layer.getAttribute("data-layer"); pick(sel === i ? -1 : i); }
+  };
+  const cur = sel >= 0 ? T.layers[sel] : null;
+  const order = T.layers.map((l, i) => i).reverse(); /* 접혔을 때 첫 화면이 맨 위에 오도록 뒤에서부터 그린다 */
+  return ReactDOM.createPortal(
+    <div className="pth" role="dialog" aria-modal="true" aria-labelledby="pth-title" onClick={close}>
+      <div className="pth__surface" ref={surf} onClick={(ev) => ev.stopPropagation()}>
+        <div className="pth__in">
+          <div className="pth__stage" ref={stage} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={() => { drag.current = null; }}>
+            <div className={"pth__stack" + (sel >= 0 ? " has-sel" : "")}>
+              {order.map((i) => {
+                const L = T.layers[i];
+                return (
+                  <div key={L.img} data-layer={i} className={"pth__layer" + (i === sel ? " is-sel" : "")} style={{ "--i": i }}>
+                    <TheaterShot name={L.img} alt={`${T.name} ${L.k} 화면 — ${L.t}`} />
+                    <span className="pth__tag font-sans"><b>{String(i + 1).padStart(2, "0")}</b>{L.k}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="pth__hint font-sans" aria-hidden="true">← 끌어서 접고 펴기 · 화면을 누르면 정면으로 →</p>
           </div>
-          <video className="vlightbox__video" src={playing.video} controls autoPlay playsInline preload="metadata" controlsList="nodownload">
-            브라우저가 영상 재생을 지원하지 않습니다.
-          </video>
-          {playing.url ? (
-            <a className="vlightbox__fallback font-sans" href={playing.url} target="_blank" rel="noreferrer">영상이 보이지 않으면 원본 링크로 보기 →</a>
-          ) : null}
+
+          <aside className="pth__side">
+            <button type="button" className="pth__close font-sans" ref={closeBtn} onClick={close}>닫기 ✕</button>
+            <p className="pth__eyebrow font-sans">Edition {ed.no} · {T.name}</p>
+            <h3 id="pth-title" className="font-ko">{ed.title.split("\n")[0]}</h3>
+            {ed.origin === "independent" && <p className="pth__origin font-sans">직접 기획 · 개발 · 배포한 개인 제품 — 회사 도입 시스템 아님</p>}
+            <p className="pth__desc font-ko">{ed.desc}</p>
+            <ol className="pth__list">
+              {T.layers.map((L, i) => (
+                <li key={L.img}>
+                  <button type="button" aria-pressed={i === sel} onClick={() => pick(sel === i ? -1 : i)}>
+                    <b className="font-serif">{String(i + 1).padStart(2, "0")}</b>
+                    <span className="font-ko"><em>{L.k}</em>{L.t}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+            <div className="pth__detail font-ko" aria-live="polite">
+              {cur ? <p><b>{cur.k}</b>{cur.d}</p> : <p><b>{T.ruleT}</b>{T.rule}</p>}
+            </div>
+            <label className="pth__fold font-sans">접기 ↔ 펼치기
+              <input ref={range} type="range" min="0" max="100" defaultValue="0" aria-label="화면 층 펼치기"
+                onChange={(ev) => { cancelAnimationFrame(anim.current.f); put("f", +ev.target.value / 100); }} />
+            </label>
+            <div className="pth__foot">
+              <a className="btn" href={T.url} target="_blank" rel="noreferrer">{T.open} <ExternalLink size={15} /></a>
+              <p className="pth__cap font-ko">{T.cap}</p>
+            </div>
+          </aside>
         </div>
       </div>
-    )}
-    </React.Fragment>
+    </div>,
+    document.body
+  );
+}
+
+/* ============================================================ THE ARTIFACTS — 직접 만든 네 가지 도구만
+ * 제품마다 자기 공간(city.js 'tool-NN')이 있다. 화면에 들어오면 그 공간이 솟고(p),
+ * '실제 화면 펼쳐 보기'를 누르면 시그니처 전환 — 주변 건물은 깊이별로 가라앉고, 핵심 면(필지 · 층판 · 정보 층)이
+ * 떠올라 실제 제품 화면 사각형으로 바뀐다(o). 그 사각형이 곧 극장이 FLIP 으로 펼쳐지는 자리이고, 닫으면 같은 길로 되돌아간다 */
+function FlagshipTool({ e, onOpen, flip }) {
+  const cv = React.useRef(null), ctl = React.useRef(null);
+  const M = TOOL_META[e.n], T = THEATERS[e.n];
+  const [t1] = e.title.split("\n");
+  React.useEffect(() => {
+    ctl.current = window.City && window.City.mount(cv.current, "tool-" + e.n, {
+      scroll: ".fl", mode: "reveal", img: { d: `images/product/${M.shot}-720.webp`, m: `images/product/${M.shot}-m600.webp` },
+    });
+    return () => ctl.current && ctl.current.destroy();
+  }, []);
+  const open = () => onOpen(e, ctl.current);
+  const hover = (ev) => {
+    if (ev.pointerType !== "mouse" || !ctl.current) return;
+    const r = ev.currentTarget.getBoundingClientRect();
+    ctl.current.set("hx", ((ev.clientX - r.left) / r.width - 0.5) * 2);
+  };
+  return (
+    <article id={"ed-" + e.n} className={"fl" + (flip ? " fl--flip" : "")} style={{ "--accent-fill": e.color }} aria-labelledby={"fl-" + e.n}>
+      <div className="fl__stage" onPointerMove={hover} onPointerLeave={() => ctl.current && ctl.current.set("hx", 0)}>
+        <button type="button" className="fl__hit" onClick={open} aria-haspopup="dialog" aria-label={`${M.name} 실제 화면 펼쳐 보기`}>
+          <canvas ref={cv} aria-hidden="true" />
+        </button>
+        <p className="fl__env"><span className="font-serif" lang="en">{M.env}</span><span className="font-ko">{M.envKo}</span><em className="font-sans">개념도 · Concept</em></p>
+      </div>
+      <div className="fl__txt">
+        <p className="fl__badge font-sans"><b>직접 만들어 사용</b><span>{e.status}</span><span>{e.no} / 04</span></p>
+        <h3 id={"fl-" + e.n} className="fl__name"><small className="font-ko">{t1}</small><span className="font-serif">{M.name}</span></h3>
+        <ol className="fl__story font-ko">
+          <li><b>어떤 문제가 있었나</b>{M.why}</li>
+          <li><b>무엇을 만들었나</b>{M.made}</li>
+          <li><b>어떻게 쓰나</b>{M.use}</li>
+        </ol>
+        <p className="fl__link font-ko"><span>이어지는 역량</span>{M.link}</p>
+        <ol className="fl__layers font-ko">
+          {T.layers.map((L, i) => <li key={L.img}><b className="font-sans">{pad2(i + 1)}</b><span><em>{L.k}</em>{L.t}</span></li>)}
+        </ol>
+        <p className="fl__point font-ko"><b>설계 원칙</b>{e.point}</p>
+        <div className="fl__acts">
+          <button type="button" className="btn fl__open" aria-haspopup="dialog" onClick={open}>실제 화면 펼쳐 보기 <Layers size={16} /></button>
+          <a href={e.url} target="_blank" rel="noreferrer" className="btn btn--ghost">{e.cta} <ExternalLink size={15} /></a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ArtifactsSection() {
+  const ref = useReveal();
+  const [staged, setStaged] = React.useState(null); /* { e, card, c } */
+  const anchor = React.useRef(null);
+  const busy = React.useRef(false);
+  const onOpen = async (e, c) => {
+    if (busy.current) return;
+    busy.current = true;
+    /* 전환은 보여야 의미가 있다 — 무대가 화면에 다 들어오지 않았으면 먼저 가운데로 */
+    const st = document.querySelector("#ed-" + e.n + " .fl__hit");
+    if (st && c && !prefersCalm()) {
+      const r = st.getBoundingClientRect();
+      if (r.top < 56 || r.bottom > window.innerHeight) { st.scrollIntoView({ block: "center", behavior: "smooth" }); await new Promise((ok) => setTimeout(ok, 520)); }
+    }
+    if (c) await c.tween("o", 1, prefersCalm() ? 1 : 1050);
+    const a = anchor.current;
+    if (a && c) { const R = c.stageRect(); Object.assign(a.style, { left: R.left + "px", top: R.top + "px", width: R.width + "px", height: R.height + "px" }); }
+    setStaged({ e, card: c ? a : null, c });
+    busy.current = false;
+  };
+  const onClose = () => {
+    const c = staged && staged.c;
+    setStaged(null);
+    if (c) c.tween("o", 0, prefersCalm() ? 1 : 820);
+  };
+  return (
+    <section id="artifacts" ref={ref} className="arts" aria-labelledby="arts-title">
+      <div className="wrap">
+        <SectionHead no="04 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Four Independently Developed Products" />
+        <div id="tools" className="arts__intro reveal">
+          <p className="arts__lead font-ko" id="arts-title">문제를 발견하는 데서 끝내지 않고, 혼자 끝까지 만들어 배포한 <b>개인 제품</b> 네 가지입니다. 회사 시스템이 아닙니다.
+            <span>제품마다 어떤 문제가 있었는지 → 무엇을 만들었는지 → 어떻게 쓰는지 순서로 적었습니다. 법무법인 경국의 AX 는 바로 위에 있습니다.</span></p>
+          <ol className="arts__index">
+            {TOOLS.map((e) => (
+              <li key={e.n}><a href={"#ed-" + e.n}>
+                <b className="font-serif">{e.no}</b>
+                <span><strong className="font-ko">{TOOL_META[e.n].name}</strong><em className="font-sans" lang="en">{TOOL_META[e.n].env}</em></span>
+                <ArrowDown size={15} />
+              </a></li>
+            ))}
+          </ol>
+        </div>
+        {TOOLS.map((e, i) => <FlagshipTool key={e.n} e={e} flip={i % 2 === 1} onOpen={onOpen} />)}
+      </div>
+      <div ref={anchor} className="fl-anchor" aria-hidden="true" />
+      {staged && <ProductTheater ed={staged.e} card={staged.card} onClose={onClose} />}
+    </section>
+  );
+}
+
+/* ============================================================ POLICY — 현장의 문제를 제도의 언어로
+ * 같은 문제 해결 방식의 연장. 참석 · 제안 · 역할 · 수강을 섞지 않고 따로 적는다 — 제안은 채택이 아니고, 참석은 결정이 아니다.
+ * 특정 정당 · 진영의 홍보가 아니라, 정책 논의에 참여한 기록이다. 날짜 · 기관 · 역할은 이력(TRAJECTORY)과 같은 원문 */
+const POLICY = [
+  { k: "propose", ko: "제안하다", en: "Propose", items: [
+    { t: "국민통합위원회 2026 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 정책 제안 발표", d: "2026. 9. 29 · aT센터 · 자산 분야 트랙",
+      what: "청년 미래배당펀드팀으로 제안 · 발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계했습니다.", kind: "팀 제안 · 발표", href: "gallery.html#national-debate" },
+  ] },
+  { k: "deliberate", ko: "듣고, 의견을 전하다", en: "Deliberate", items: [
+    { t: "재정경제부 제1차관 청년 현장방문 및 간담회", d: "2026. 10. 27 · SVC Seoul", what: "법무법인 경국 소속으로 참석. 주거 · 일자리 · 서민금융에 대한 청년들의 현장 의견이 오간 자리입니다.", kind: "참석", href: "gallery.html#moef-youth" },
+    { t: "성평등가족부 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉", d: "2026. 10. 25 · 연세대", what: "청년 세대의 시각으로 정책 토론에 함께했습니다.", kind: "공론장 참여", href: "gallery.html#gender-forum" },
+    { t: "청와대 대통령 주관 2026 청년의날 기념행사", d: "2026", what: "청년 대표로 초청되어 참석했습니다.", kind: "초청 참석", href: "gallery.html#youth-day" },
+  ] },
+  { k: "participate", ko: "운영에 참여하다", en: "Participate", items: [
+    { t: "서초청년네트워크 9기 운영위원회 부위원장", d: "2026", what: "서초구 청년 정책 거버넌스에서 분과 의제 설정과 위원회 운영을 맡고 있습니다.", kind: "위원 · 부위원장", href: "#tl-seocho" },
+    { t: "서초구 가치디자인단 · 국민권익위원회 청년정책 패널 · 국무조정실 온라인 청년참여단", d: "2026", what: "구정 현장 활동과 청년 정책 과제에 대한 의견 수렴 · 제안에 참여합니다.", kind: "위촉 · 패널 · 참여단", href: "#tl-acrc-panel" },
+  ] },
+  { k: "learn", ko: "배우다", en: "Learn", items: [
+    { t: "2026 민주청년지도자 양성과정", d: "2026. 10. 24 – 12. 13 · 민주연구원", what: "정책 · 리더십 과정을 수강하고 있습니다.", kind: "수강 중", href: "gallery.html#dyl" },
+  ] },
+];
+function PolicySection() {
+  const ref = useReveal();
+  return (
+    <section id="policy" ref={ref} className="pol" aria-labelledby="pol-title">
+      <div className="wrap">
+        <header className="pol__head reveal">
+          <p className="sh__no font-ko">05 정책 참여 <span className="font-sans" lang="en">Policy Participation & Public Deliberation</span></p>
+          <h2 id="pol-title" className="pol__t font-ko">현장에서 발견한 문제를<br />제도의 언어로 옮깁니다</h2>
+          <p className="pol__lead font-ko">법률 · 부동산 현장의 문제는 결국 제도와 이해관계의 문제로 이어집니다. 그래서 소프트웨어를 만드는 데서 멈추지 않고,
+            정책 논의의 자리에 나가 듣고, 제안하고, 운영에 참여합니다.</p>
+          <p className="pol__note font-ko">참석과 제안은 정책 결정이 아닙니다. 채택 여부는 적지 않습니다.</p>
+        </header>
+        <div className="pol__grid">
+          {POLICY.map((g) => (
+            <div key={g.k} className={"pol__col pol__col--" + g.k + " reveal"}>
+              <h3 className="pol__h"><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
+              <ul>
+                {g.items.map((it) => (
+                  <li key={it.t}>
+                    <a href={it.href} className="pol__item">
+                      <span className="pol__kind font-ko">{it.kind}</span>
+                      <strong className="font-ko">{it.t}</strong>
+                      <span className="pol__d font-sans">{it.d}</span>
+                      <span className="pol__what font-ko">{it.what}</span>
+                      <span className="pol__go font-sans">근거 보기 <ArrowUpRight size={13} /></span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 성장 경로 — 연대순 목록 위에, 다루는 문제의 복잡도로 본 다섯 단계. 마지막 단계는 '지향'으로 따로 표시 */
+const GROWTH = [
+  { ko: "기술을 학습하다", en: "Learn", ev: "SSAFY 13기 이수(2025) · 서울대 AIED 4기 수료 · 명지대 AI 데이터 매니지먼트(트랙3 수료 · 나머지 수강)", href: "#tl-ssafy" },
+  { ko: "조직의 문제를 해결하다", en: "Solve", ev: "법무법인 경국 — 정비사업 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 보상자료 77장", href: "#ax-desk" },
+  { ko: "독립 제품으로 넓히다", en: "Build", ev: "집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에 — 직접 기획 · 개발 · 배포", href: "#tools" },
+  { ko: "제도와 정책의 현장에 서다", en: "Engage", ev: "국민 대토론회 정책 제안 발표 · 서초청년네트워크 부위원장 · 정책 간담회 · 공론장", href: "#policy" },
+  { ko: "더 무거운 결정의 영역으로", en: "Direction", ev: "기술 구현 · 법률 · 부동산의 산업 이해 · 제도에 대한 이해를 함께 갖추고, 결과에 책임지는 결정을 다루는 자리 — 앞으로의 방향입니다.", href: "#composite", aim: true },
+];
+function GrowthPath() {
+  return (
+    <ol className="grow reveal">
+      {GROWTH.map((g, i) => (
+        <li key={g.en} className={g.aim ? "grow__aim" : ""}>
+          <a href={g.href}>
+            <b className="font-serif">{pad2(i + 1)}</b>
+            <h3><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
+            <p className="font-ko">{g.ev}</p>
+            {g.aim && <span className="grow__tag font-ko">지향 · 진행 중</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/* ============================================================ RESEARCH ARCHIVE — 그 밖의 작업(조용한 목록)
+ * 학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠. 네 가지 도구와 겨루지 않도록 카드가 아닌 색인으로 */
+function ArchiveRow({ e, onPlay }) {
+  const [open, setOpen] = React.useState(false);
+  const [t1, t2] = e.title.split("\n");
+  return (
+    <li>
+      <article id={"ed-" + e.n} className={"ra__row" + (open ? " is-open" : "")}>
+        <span className="ra__no font-serif">{e.no}</span>
+        <div className="ra__main">
+          <h3 className="ra__t font-ko">{t1}{t2 && <small>{t2}</small>}</h3>
+          <p className="ra__desc font-ko" id={"ra-d-" + e.n}>{e.desc}</p>
+          {open && e.point && <p className="ra__point font-ko"><b>설계 포인트</b>{e.point}</p>}
+          <button type="button" className="ra__more font-sans" aria-expanded={open} aria-controls={"ra-d-" + e.n} onClick={() => setOpen(!open)}>{open ? "접기" : "자세히"}</button>
+        </div>
+        <div className="ra__meta font-sans">
+          <span className="ra__st">{e.status}</span>
+          <span className="ra__tags">{e.tags.join(" · ")}</span>
+        </div>
+        <div className="ra__act">
+          {e.video ? <button type="button" className="ra__go font-sans" onClick={() => onPlay(e)}>{e.cta} <PlayCircle size={14} /></button>
+            : e.url ? <a className="ra__go font-sans" href={e.url} target="_blank" rel="noreferrer">{e.cta} <ExternalLink size={14} /></a>
+            : <span className="ra__go ra__go--off font-sans">{e.cta}</span>}
+        </div>
+      </article>
+    </li>
+  );
+}
+function ResearchArchive() {
+  const [playing, setPlaying] = React.useState(null);
+  const vframe = React.useRef(null);
+  useStageDialog(!!playing, vframe, () => setPlaying(null));
+  return (
+    <section id="research" className="ra" aria-labelledby="ra-title">
+      <div className="wrap">
+        <header className="ra__head">
+          <p className="ra__k font-ko">연구 · 실험 기록 <span className="font-sans" lang="en">Research Archive</span></p>
+          <h2 id="ra-title" className="font-ko">그 밖의 작업 <em className="font-serif">{ARCHIVE.length}</em></h2>
+          <p className="ra__sub font-ko">학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠입니다. 네 가지 도구, 경국 AX 와는 성격이 다른 기록이라 따로 모았습니다.</p>
+        </header>
+        <ol className="ra__list">{ARCHIVE.map((e) => <ArchiveRow key={e.n} e={e} onPlay={setPlaying} />)}</ol>
+      </div>
+      {playing && ReactDOM.createPortal(
+        <div className="vlightbox" onClick={() => setPlaying(null)} role="dialog" aria-modal="true" aria-label={playing.title.replace("\n", " · ")}>
+          <div className="vlightbox__frame" ref={vframe} onClick={(ev) => ev.stopPropagation()}>
+            <button type="button" className="vlightbox__close" onClick={() => setPlaying(null)} aria-label="닫기">✕</button>
+            <div className="vlightbox__meta">
+              <span className="font-sans">Archive {playing.no}</span>
+              <h4 className="font-ko">{playing.title.replace("\n", " · ")}</h4>
+            </div>
+            <video className="vlightbox__video" src={playing.video} controls autoPlay playsInline preload="metadata" controlsList="nodownload">
+              브라우저가 영상 재생을 지원하지 않습니다.
+            </video>
+            {playing.url ? <a className="vlightbox__fallback font-sans" href={playing.url} target="_blank" rel="noreferrer">영상이 보이지 않으면 원본 링크로 보기 →</a> : null}
+          </div>
+        </div>
+      , document.body)}
+    </section>
   );
 }
 
@@ -1089,7 +1771,8 @@ function Lectures() {
     <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Side Practice — Lectures" titleEn="The Lectures" titleKo="AI · 부동산 강의 프로그램" />
+        <SectionHead no="강의 · 소통" ko="기술을 이해하는 것에서, 이해시키는 것으로" en="AI Education & Knowledge Translation"
+          lead="쓸모 있는 시스템은 쓰는 사람이 이해해야 자리 잡습니다. 실무에서 만든 것을 가르칠 수 있는 단위로 옮긴 제안 커리큘럼입니다." />
 
         <div className="side-note reveal">
           <span className="side-note__badge font-sans">In Preparation</span>
@@ -1185,7 +1868,7 @@ function Lectures() {
 /* ============================================================ ABOUT — 스크롤 스토리
  * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
  * 오른쪽 사진이 프로필 → 발표 → 청년의날 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
-const STORY_LINES = ["판단의 근거를 만들고,", "실행까지 책임지는", "자리에서 일합니다."];
+const STORY_LINES = ["조직에서 반복되는 문제를 찾고,", "기술로 풀 수 있는 부분을", "시스템으로 옮깁니다."];
 const STORY_SHOTS = [
   { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
     alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
@@ -1195,30 +1878,41 @@ const STORY_SHOTS = [
     alt: "김유빈 — 2026 청년의날 기념행사에서 대통령과 함께한 셀프 촬영", chip: "Youth Day 2026", cap: "청와대 청년의날 — 대통령과 함께" },
 ];
 
+/* 소개 — 한 편의 다큐멘터리처럼. 진행도 --p(0~1) 하나로 세 장면이 이어진다.
+ * 다음 사진은 액자 안에서 옆으로 열리며(가면을 transform 으로 — clip-path 없음) 들어오고,
+ * 앞 사진은 카메라가 지나가듯 커지며 반대쪽으로 밀려난다. 글은 같은 진행도로 함께 움직인다.
+ * 넓은 화면: 섹션이 고정된 동안 진행 · 좁은 화면: 액자가 화면을 지나가는 동안 진행 */
 function About() {
   const ref = React.useRef(null);
-  const barRef = React.useRef(null);
-  /* 연속값(진행도)은 DOM 에 직접 쓰고, React 는 사진·문장이 실제로 바뀌는 순간에만 다시 그린다.
-     예전엔 스크롤 매 프레임 setState → 섹션 전체 재렌더 → 저사양 폰에서 70ms 대 끊김. */
-  const [stage, setStage] = React.useState({ shot: 0, lines: 0, body: false });
+  const frameRef = React.useRef(null);
+  const mediaRef = React.useRef(null);
+  const [stage, setStage] = React.useState({ lines: 0, body: false });
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const wide = window.matchMedia("(min-width: 901px)");
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
     const on = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        const r = el.getBoundingClientRect();
-        const span = r.height - window.innerHeight;
-        const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
-        el.style.setProperty("--p", p.toFixed(3));
-        if (barRef.current) barRef.current.style.transform = "scaleX(" + p.toFixed(3) + ")";
-        const shot = Math.min(STORY_SHOTS.length - 1, Math.floor(p * STORY_SHOTS.length * 0.999));
+        let p = 1;
+        if (!calm.matches) {
+          const vh = window.innerHeight;
+          if (wide.matches) {
+            const r = el.getBoundingClientRect(), span = r.height - vh;
+            p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+          } else if (frameRef.current) {
+            const f = frameRef.current.getBoundingClientRect();
+            p = Math.min(1, Math.max(0, (vh * 0.9 - f.top) / (vh * 0.9)));
+          }
+        }
+        if (mediaRef.current) mediaRef.current.style.setProperty("--p", p.toFixed(4)); /* 사진 쪽에만 — 섹션 전체 재계산을 피한다 */
         let lines = 0;
-        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.06 + i * 0.16) lines = i + 1;
-        const body = p >= 0.5;
-        setStage((s) => (s.shot === shot && s.lines === lines && s.body === body ? s : { shot, lines, body }));
+        for (let i = 0; i < STORY_LINES.length; i++) if (p >= 0.04 + i * 0.12) lines = i + 1;
+        const body = p >= 0.42;
+        setStage((st) => (st.lines === lines && st.body === body ? st : { lines, body }));
       });
     };
     on();
@@ -1226,23 +1920,24 @@ function About() {
     window.addEventListener("resize", on, { passive: true });
     return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); cancelAnimationFrame(raf); };
   }, []);
-  const { shot } = stage;
   const lineOn = (i) => i < stage.lines;
-  const bodyOn = stage.body;
+  /* 장면 i 의 들어옴(--in)·나감(--out) — 앞 장면의 나감이 곧 다음 장면의 들어옴 */
+  const io = (i) => ({ "--in": i === 0 ? "1" : `var(--u${i})`, "--out": i === STORY_SHOTS.length - 1 ? "0" : `var(--u${i + 1})` });
 
   return (
     <section id="about" ref={ref} className="story">
       <div className="story__sticky">
         <div className="wrap story__grid">
           <div className="story__copy">
-            <p className="eyebrow">01 — Profile</p>
+            <p className="sh__no font-ko">01 소개 <span className="font-sans" lang="en">Profile</span></p>
             <h3 className="story__lead font-myeongjo">
               {STORY_LINES.map((l, i) => <span key={l} className={"story__line" + (lineOn(i) ? " on" : "")}>{l}</span>)}
             </h3>
-            <div className={"story__body" + (bodyOn ? " on" : "")}>
+            <div className={"story__body" + (stage.body ? " on" : "")}>
               <p className="font-ko">
-                흩어진 시장·업무 데이터를 모아 무엇을 먼저 할지 정하고, 그 결정을 자동화와 콘텐츠로 실행에 옮깁니다.
-                법률과 데이터를 대중이 이해하는 언어로 옮기는 일도 같은 자리에서 합니다.
+                법무법인 경국에서 정비사업 AX 와 전략기획을 맡아, 반복되는 업무를 시스템으로 옮겨 왔습니다.
+                필요한 도구는 직접 만들어 씁니다. 동시에 법률 · 부동산 · 정책의 제약과 이해관계를 공부하며,
+                기술의 결과가 실제 판단과 실행으로 이어지도록 하는 역량을 키우고 있습니다.
               </p>
               <p className="signature font-script" aria-hidden="true">Yubin Kim</p>
               <p className="story__addr font-ko"><MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국</p>
@@ -1253,22 +1948,27 @@ function About() {
             </div>
           </div>
 
-          <div className="story__media">
-            <div className="story__frame">
+          <div className="story__media" ref={mediaRef}>
+            <div className="story__frame" ref={frameRef}>
               {STORY_SHOTS.map((m, i) => (
-                <Pic key={m.name} name={m.name} fallback={m.src} className={"story__img" + (i === shot ? " on" : "")}
-                  sizes="(max-width: 900px) 88vw, 34vw" alt={m.alt} loading="lazy" style={m.pos ? { objectPosition: m.pos } : undefined} />
+                <div key={m.name} className="story__shot" style={io(i)}>
+                  <div className="story__shot-in">
+                    <Pic name={m.name} fallback={m.src} className="story__img"
+                      sizes="(max-width: 900px) 88vw, 34vw" alt={m.alt} loading="lazy" style={m.pos ? { objectPosition: m.pos } : undefined} />
+                  </div>
+                </div>
               ))}
+              <span className="story__count font-sans" aria-hidden="true"><b>01</b><b>02</b><b>03</b><i>/ 03</i></span>
             </div>
             <div className="story__caps">
               {STORY_SHOTS.map((m, i) => (
-                <p key={m.chip} className={"story__cap" + (i === shot ? " on" : "")}>
+                <p key={m.chip} className="story__cap" style={io(i)}>
                   <span className="font-sans">{String(i + 1).padStart(2, "0")} · {m.chip}</span>
                   <em className="font-ko">{m.cap}</em>
                 </p>
               ))}
             </div>
-            <div className="story__prog" aria-hidden="true"><i ref={barRef} /></div>
+            <div className="story__prog" aria-hidden="true"><i /></div>
           </div>
         </div>
       </div>
@@ -1298,12 +1998,12 @@ function Contact() {
       </div>
       <div className="wrap reveal" style={{ position: "relative", zIndex: 2, textAlign: "center", paddingBottom: "clamp(70px,10vw,120px)" }}>
         <p className="signature signature--light font-script" aria-hidden="true">Yubin Kim</p>
-        <p className="eyebrow contact-eyebrow">Inquiries — 채용 및 협업 제안</p>
-        <h2 className="font-serif contact-title">
-          Let’s define<br /><em>the next problem.</em>
+        <p className="contact-eyebrow font-ko">채용 · 협업 제안 <span className="font-sans" lang="en">Inquiries</span></p>
+        <h2 className="contact-title contact-title--ko font-myeongjo">
+          다음에 풀 문제를<br /><em>함께 정의하고 싶습니다.</em>
         </h2>
-        <p className="font-ko" style={{ color: "rgba(249,246,240,.7)", maxWidth: 560, margin: "26px auto 40px", lineHeight: 1.7, fontSize: "1.05rem" }}>
-          AI 전략 컨설팅 · 업무 자동화 · 데이터 기반 서비스 컨설팅 포지션의 제안을 기다립니다.<br />이메일로 연락 주시면 성실히 회신드리겠습니다.
+        <p className="font-ko" style={{ color: "rgba(249,246,240,.78)", maxWidth: 600, margin: "26px auto 40px", lineHeight: 1.75, fontSize: "1.05rem" }}>
+          AI 전략 · 업무 자동화, 법률 · 부동산의 디지털 전환, 정책과 기술이 만나는 과제에 관해 함께 이야기하고 싶습니다.<br />개인 메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
@@ -1352,12 +2052,93 @@ const CHANNELS = [
     tags: ["AI 카드뉴스", "시네마틱 영상", "브랜드 필름"],
     posts: [["6·3 지방선거 AI 카드뉴스 6종 & 내레이션 영상 — GPT Image-2 · Suno AI · ElevenLabs", "작업물", "#ed-01"]] },
 ];
+/* 현장 기록(Visual Journal) — 포트폴리오에 실린 본인 사진. Instagram 게시물이라고 하지 않는다.
+ * 들어올 때: 큰 사진이 시야로 커지고, 나머지는 서로 다른 거리(--dz)에서 다른 속도로 떠오른다(--cp, cine.js)
+ * 누르면: 그 사진이 제자리에서 떨어져 화면 가득 커지고(FLIP), 맥락과 원래 출처 링크가 아래에서 올라온다. 닫으면 제자리로 */
+const JOURNAL = [
+  { name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
+    d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
+  { name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
+    d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
+  { name: "dyl-qa", src: "images/dyl-qa.jpg", t: "민주청년지도자 양성과정 — 특강 질의", when: "2026. 10. 24 · 민주연구원", dz: 0.6,
+    d: "이광재 예산결산특별위원장의 특강에서 마이크를 잡고 직접 질문했습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl" }] },
+  { img: "images/zipconomy-demo-600.jpg", src: "images/zipconomy-demo.jpg", t: "한경 집코노미 박람회 — 집캐치 시연", when: "2026. 9. 30 · 코엑스 D홀", dz: 1.3,
+    d: "KREMA AI 전시관 부스에서 직접 만든 집캐치와 감정평가사 필드워크를 시연하고 질문을 받았습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#zipconomy" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224446565096" }] },
+  { name: "ssafy-presentation", src: "images/ssafy-presentation.jpg", t: "SSAFY 13기 — 프로젝트 아키텍처 발표", when: "삼성청년SW아카데미", dz: 0.8,
+    d: "삼성청년SW아카데미 13기에서 프로젝트 아키텍처를 발표했습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#g-ssafy-presentation" }] },
+  { name: "fw-gwanghwamun", src: "images/fw-gwanghwamun.jpg", t: "감정평가사 필드워크 — 광화문에서 시작", when: "직접 만든 3D 실지조사 시뮬레이터", dz: 1.6,
+    d: "서울을 직접 걸으며 의뢰 수임부터 등기촉탁까지 5단계를 수행하는 3D 학습 게임의 첫 장면입니다.",
+    links: [{ l: "작업 카드", h: "#ed-10" }, { l: "필드워크 체험", h: "https://appraiser-fieldwork.vercel.app/" }] },
+];
+function PhotoJournal() {
+  const [open, setOpen] = React.useState(-1);
+  const thumbs = React.useRef([]), big = React.useRef(null), box = React.useRef(null), closing = React.useRef(false);
+  React.useEffect(() => {
+    if (open < 0) return;
+    closing.current = false;
+    flipFrom(thumbs.current[open], big.current, false);
+  }, [open]);
+  const close = () => {
+    if (closing.current) return;
+    closing.current = true;
+    const k = open;
+    flipFrom(thumbs.current[k], big.current, true).then(() => setOpen(-1));
+  };
+  useStageDialog(open >= 0, box, close);
+  const J = open >= 0 ? JOURNAL[open] : null;
+  return (
+    <div className="jr" data-cine="pass">
+      <header className="jr__head reveal">
+        <p className="eyebrow">Visual Journal — 현장 기록</p>
+        <h3 className="font-myeongjo">현장에서 남긴 장면들</h3>
+        <p className="jr__note font-ko">포트폴리오에 실린 본인 사진입니다. Instagram 게시물을 옮겨 온 것이 아니라, 각 사진의 원래 기록(갤러리 · 블로그 · 보도)으로 이어집니다.</p>
+      </header>
+      <ul className="jr__grid">
+        {JOURNAL.map((j, i) => (
+          <li key={j.t} className={"jr__item" + (j.lead ? " jr__item--lead" : "")} style={{ "--dz": j.dz, "--i": i }}>
+            <button type="button" className="jr__btn" onClick={() => setOpen(i)} aria-haspopup="dialog" aria-label={j.t + " 크게 보기"}>
+              <span className="jr__frame" ref={(n) => (thumbs.current[i] = n)}>
+                {j.name ? <Pic name={j.name} fallback={j.src} sizes={j.lead ? "(max-width: 760px) 92vw, 52vw" : "(max-width: 760px) 46vw, 24vw"} alt="" loading="lazy" />
+                  : <img src={j.img} alt="" loading="lazy" decoding="async" />}
+              </span>
+              <span className="jr__cap"><b className="font-ko">{j.t}</b><small className="font-sans">{j.when}</small></span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      {J && ReactDOM.createPortal(
+        <div className="jrv" role="dialog" aria-modal="true" aria-label={J.t} ref={box} onClick={close}>
+          <figure className="jrv__fig" ref={big} onClick={(ev) => ev.stopPropagation()}>
+            <img src={J.src} alt={"김유빈 활동 기록 — " + J.t} decoding="async" />
+          </figure>
+          <div className="jrv__info" onClick={(ev) => ev.stopPropagation()}>
+            <p className="jrv__when font-sans">{J.when}</p>
+            <h4 className="font-ko">{J.t}</h4>
+            <p className="font-ko">{J.d}</p>
+            <div className="jrv__links">
+              {J.links.map(({ l, h }) => <a key={h} href={h} className="font-sans" {...(/^https?:/.test(h) ? { target: "_blank", rel: "noreferrer" } : {})} onClick={() => { if (!/^https?:/.test(h)) setOpen(-1); }}>{l} <ArrowUpRight size={13} /></a>)}
+              <button type="button" className="jrv__close font-sans" onClick={close}>닫기 ✕</button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </div>
+  );
+}
+
+/* Instagram 피드 미리보기 대신 — 채널 카드는 소개만, 사진은 아래 현장 기록으로 */
 function Channels() {
   const ref = useReveal();
   return (
     <section id="channels" ref={ref} className="ch-sec" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead eyebrow="Media & PR — Channels" titleEn="The Channels" titleKo="기록 · 홍보 채널" />
+        <SectionHead no="기록" ko="일한 과정을 기록하는 채널" en="Channels & Journal" />
         <p className="ch-lede font-myeongjo reveal">현장에서 보고, 만들고, 기록합니다. <span>일한 과정과 생각은 세 채널에 먼저 올라옵니다.</span></p>
         <div className="ch-grid">
           {CHANNELS.map((c, i) => (
@@ -1369,17 +2150,17 @@ function Channels() {
               </header>
               <p className="ch-pitch font-ko">{c.pitch}</p>
               <ul className="ch-tags font-sans" aria-label={c.name + " 분류"}>{c.tags.map((t) => <li key={t}>{t}</li>)}</ul>
-              {c.k === "ig" && <a className="ch-mosaic" href="#ed-01" aria-label="6·3 지방선거 AI 카드뉴스 6종 — 작업 카드로 이동">{[1, 2, 3, 4, 5, 6].map((j) => <span key={j} className="font-sans"><b>CARD</b>0{j}</span>)}</a>}
               <ol className="ch-posts" aria-label={c.name + " 최근 글"}>
                 {c.posts.map(([t, d, u]) => (
                   <li key={t}><a href={u} {...(u.startsWith("#") ? {} : { target: "_blank", rel: "noopener" })} className="font-ko"><time className="font-sans">{d}</time><span>{t}</span></a></li>
                 ))}
               </ol>
-              <a className="ch-cta font-sans" href={c.url} target="_blank" rel="me noopener">{c.name} 방문 <ArrowUpRight size={15} /></a>
+              <a className="lc-cta font-sans" href={c.url} target="_blank" rel="me noopener">{c.name} 방문 <ArrowUpRight size={15} /></a>
             </article>
           ))}
         </div>
-        <p className="ch-note font-sans reveal">최근 글은 각 채널 RSS 기준(2026.10.23) · 채널 이름을 누르면 새 창에서 열립니다.</p>
+        <PhotoJournal />
+        <p className="lc-note font-sans reveal">최근 글은 각 채널 RSS 기준(2026.10.23) · 채널 이름을 누르면 새 창에서 열립니다.</p>
       </div>
     </section>
   );
@@ -1421,23 +2202,16 @@ function Footer() {
 
 /* ---------- shared section header ---------- */
 /* 'The Composite' → 관사만 가는 이탤릭으로 — 클래식 표제의 리듬 */
-function splitTitle(t) {
-  const m = /^(The|At a)\s+(.+)$/.exec(t);
-  return m ? <React.Fragment><em className="sh-art">{m[1]}</em>{m[2]}</React.Fragment> : t;
-}
-function SectionHead({ eyebrow, titleEn, titleKo }) {
+/* 섹션 머리 — 한국어가 뜻을 맡고, 영어는 같은 묶음 안에서 전문 용어로 거든다(장식용 대문자 영어 제목 없음) */
+function SectionHead({ no, ko, en, lead }) {
   return (
-    <div className="reveal">
-      <div className="menu-rule" style={{ marginBottom: 26 }}><i /></div>
-      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}>
-        <div>
-          <p className="eyebrow" style={{ color: "var(--ink-soft)", marginBottom: 14 }}>{eyebrow}</p>
-          <h2 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(2.4rem,6vw,5rem)", lineHeight: .95, letterSpacing: "-.03em", margin: 0 }}>{splitTitle(titleEn)}</h2>
-        </div>
-        <p className="font-ko" style={{ fontWeight: 600, fontSize: "clamp(1rem,1.6vw,1.2rem)", color: "var(--ink-soft)", whiteSpace: "nowrap", flexShrink: 0, paddingBottom: ".4em" }}>{titleKo}</p>
-      </div>
-    </div>
+    <header className="sh reveal">
+      <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
+      {no && <p className="sh__no font-ko">{no}</p>}
+      <h2 className="sh__t"><span className="sh__ko font-ko">{ko}</span>{en && <span className="sh__en font-serif" lang="en">{en}</span>}</h2>
+      {lead && <p className="sh__lead font-ko">{lead}</p>}
+    </header>
   );
 }
 
-Object.assign(window, { Nav, Hero, Marquee, Composite, Ledger, Trajectory, Artifacts, EditionCard, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, HeroCity, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

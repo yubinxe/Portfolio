@@ -4,6 +4,7 @@
 - 정적 페이지: `index.html` · `gallery.html` · `lecture.html` · `career.html`
 - React 18 UMD: `sections.jsx` → `npm run build` → `dist/sections.js` (dist 도 커밋)
 - CSS: `styles.css`(예산 96KB) + `features.css`(V3 추가분, 예산 24KB). 새 스타일은 features.css 끝에.
+- 장면: `city.js`(Canvas 2D 건축 모형 — 히어로 · AX 지휘실 · 네 제품 공간) + `city.css`(V5 섹션). 순서: HeroCity → Ledger(이렇게 일합니다) → About → Composite(T/π) → AXCommand → ArtifactsSection(도구 4만) → PolicySection → ResearchArchive → Trajectory(성장 경로). 문장 근거는 `docs/content-matrix.md`
 - JS: `mnav.js`(모바일 메뉴) · `kb.js`(챗봇 지식) · `chatbot.js` · Vercel 함수 `api/chat.js` · `api/lead.js`
 - 배포: main push → GitHub Pages(canonical https://yubinxe.github.io/Portfolio/) + Vercel `portfolio` 자동. `vercel.json` 의 buildCommand ""·outputDirectory "." 유지.
 
@@ -11,10 +12,10 @@
 - `npm run build` — JSX 변경 후
 - `npm run seed:build` — kb.js 변경 후 필수
 - `npm run build:images` — 사진 추가 시(AVIF/WebP → images/opt/, sections.jsx `OPT` 맵)
-- `npm test` — 52건 모두 통과해야 커밋
+- `npm test` — 57건 모두 통과해야 커밋
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=41` · `features.css?v=16` · `dist/sections.js?v=40` · `chatbot.js?v=13` · `mnav.js?v=5` · `kb.js?v=20261106d`
+`styles.css?v=42` · `features.css?v=17` · `dist/sections.js?v=44` · `dist/app.js?v=8` · `chatbot.js?v=17` · `mnav.js?v=7` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=1` · `city.css?v=2`(index 전용) · `kb.js?v=20261107a`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.
