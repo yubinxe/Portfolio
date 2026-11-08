@@ -17,7 +17,7 @@ function App() {
     <div id="top">
       <Nav />
       <main>
-        <HeroCity />
+        <HeroClassic />
         <Ledger />
         <About />
         <Composite />

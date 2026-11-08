@@ -6,7 +6,8 @@
 | 주장 | 근거 | 실제 역할 | 섹션 | 출처 | 분류 |
 |---|---|---|---|---|---|
 | 업무 자동화를 구현한다 | 네이버웍스 급여명세서 자동 발송 · 고객 메일 자동 분류 | 구현(API 연동 · 분류 기준 설계) | AX 지휘실 실무 · 운영 흐름 | EDITIONS 07 · 06 | V |
-| 법률 AX 를 설계·구축했다 | RE:INTELLIGENCE · Assembly Risk Engine · Contract Risk Intelligence | 문제 정의 · 검토 규칙 설계 · 사내 구축(화면 비공개) | AX 지휘실 | AX_CASES · career.html | V |
+| 법률 AX 를 설계·구축했다 (A · 01–03) | RE:INTELLIGENCE · Assembly Risk Engine · Contract Risk Intelligence | 문제 정의 · 검토 규칙 설계 · 사내 구축(화면 비공개) | 경국 AX 6대 시스템 A 그룹 | AX_SYSTEMS(group A) · career.html | V |
+| 법률 AX 를 송무 · 리서치 · 사건 관리로 넓힌다 (B · 04–06) | 송무기록·쟁점·증거 분석 · 법령·문서 근거 탐색 · 사건 접수·기한·검토 업무관리 | 개인 구현 공개 시연(가상 사건 · 규칙 기반 · 모델 호출 없음) — 경국 도입 아님 | 경국 AX 6대 시스템 B 그룹 · legal-ax.html | AX_SYSTEMS(group B) · legal-ax-data.js · test/legal-ax.test.mjs | V |
 | 법률·부동산 실무 문제를 이해한다 | 광명시흥 3기 신도시 보상자료 분석(발표자료 77장) · 감정평가사 필드워크 시뮬레이터 | 분석·구조화(소프트웨어 아님) · 학습 도구 제작 | AX 지휘실 · 연구 기록 | AX_SUPPORT · EDITIONS 10 | V |
 | 독립적으로 제품을 만든다 | 집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에 (Vercel 배포) | 기획 · 개발 · 배포(개인 제품, 회사 시스템 아님) | The Artifacts | EDITIONS 09 · 16 · 17 · 12 | V |
 | 정책 제안을 발표했다 | 국민통합위원회 2026 국민 대토론회 ‘청년 초과세수 미래배당펀드’(2026. 9. 29 · aT센터) | 팀 제안 · 발표 (채택 여부 미기재) | 정책 참여 | TRAJECTORY tl-national-debate | V |
