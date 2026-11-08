@@ -276,7 +276,7 @@
    * p 0–.18 땅: 필지 선이 그려지고 채워진다 · .16–.40 도시가 솟는다(안쪽부터) · .38–.62 한 건물을 층으로 연다
    * .58–.84 토지 · 법령 · 계약 · 가치가 필지 모양의 층으로 겹친다 · .82–1 카메라가 위로 올라 다시 도면이 된다 */
   SCENES.hero = {
-    theme: "ivory", rest: 0.3, dpr: 1.75,
+    theme: "ivory", rest: 0.3, dpr: 1.75, intro: true,
     build: function (mob) {
       var D = district(20261106, { n: mob ? 5 : 7, cell: 16, road: 3.4, rot: -0.14, minA: mob ? 64 : 58, round: 1.12, hMax: 21 });
       var ps = D.parcels, feat = null, best = Infinity;
@@ -719,13 +719,15 @@
     var r = new Rd(canvas, THEME[S.theme || "ivory"]);
     var mob = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
     var M = S.build(mob, opt);
-    var st = { p: 0, o: 0, k: 0, s: 0, sys: 0, site: 0, inn: 1, hx: 0, intro: calm() ? 1 : 0, t0: performance.now() };
+    var st = { p: 0, o: 0, k: 0, s: 0, sys: 0, site: 0, inn: 1, hx: 0, intro: calm() || !S.intro ? 1 : 0, t0: performance.now() }; /* 선 긋기 intro 는 첫 장면만 */
     for (var key in (opt.state || {})) st[key] = opt.state[key];
     var loadImg = function () { if (opt.img && !M.img) { M.img = new Image(); M.img.decoding = "async"; M.img.onload = function () { dirty = true; req(true); }; M.img.src = mob ? opt.img.m : opt.img.d; } };
     var sec = opt.scroll ? canvas.closest(opt.scroll) : null, geo = { top: 0, h: 1 }, tw = {}, raf = 0, vis = false, act = false, dead = false, last = 0, ph = -1, dirty = true, lastP = -1;
     var phaseEl = opt.phaseEl ? canvas.closest(opt.phaseEl) : null;
+    var sized = false;
     function measure() {
-      r.size(mob ? (S.dpr || 1.35) : 1.5); /* 폰 — 선명도와 그리기 비용의 균형(첫 장면만 1.75) */
+      /* 화면에 처음 들어오기 전에는 캔버스 버퍼를 만들지 않는다(화면 밖 장면의 메모리 · 할당 지연) */
+      if (vis || sized) { r.size(mob ? (S.dpr || 1.35) : 1.5); sized = true; } /* 폰 — 선명도와 그리기 비용의 균형(첫 장면만 1.75) */
       if (sec) { var b = sec.getBoundingClientRect(); geo.top = b.top + (window.scrollY || 0); geo.h = b.height; }
       dirty = true; req(true);
     }
@@ -746,7 +748,7 @@
       if (sec && opt.mode !== "reveal") st.p = quiet ? (S.rest != null ? S.rest : 1) : prog();
       if (st.intro < 1) { st.intro = clamp((now - st.t0) / 1800, 0, 1); busy = true; }
       /* 상시 움직임(문서 흐름 · 업무 흐름)은 스크롤하는 동안 쉬었다가 멈추면 이어 간다 */
-      var live = S.live && act && !quiet && st.o < 0.01;
+      var live = S.live && !mob && act && !quiet && st.o < 0.01; /* 폰은 상시 움직임을 그리지 않는다 — 정지 화면 한 장 */
       if (live && now - scrolled < 260) { if (!busy && Math.round(st.p * 2000) === lastP && !dirty) { setTimeout(req, 280); return; } live = false; }
       if (live && !busy && now - last < 32) { req(); return; }
       /* 같은 상태면 다시 그리지 않는다 — 다 솟은 뒤의 스크롤은 그리기 0회 */
@@ -754,6 +756,7 @@
       if (!busy && !live && !dirty && pk === lastP) return;
       dirty = false; lastP = pk;
       last = now;
+      if (!sized) return;
       S.draw(r, M, st, now);
       if (phaseEl && S.phase) { var np = S.phase(st); if (np !== ph) { ph = np; phaseEl.setAttribute("data-phase", String(np)); } }
       if (busy) req(true); /* 진행 중인 전환은 화면 밖으로 밀려나도 끝까지 */
@@ -763,7 +766,7 @@
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         vis = e.isIntersecting; act = e.intersectionRatio >= 0.35;
-        if (vis) { loadImg(); req(); }
+        if (vis) { loadImg(); if (!sized) measure(); req(); }
         /* reveal — 처음 충분히 보일 때 한 번 솟는다(그 뒤 스크롤은 그리기 0회) */
         if (opt.mode === "reveal" && act && !st.revealed) { st.revealed = 1; if (calm()) { st.p = 1; dirty = true; } else api.tween("p", 1, 1500); }
       });

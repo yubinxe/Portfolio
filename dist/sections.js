@@ -352,7 +352,7 @@ const LECTURES = [
 
 
 const LECTURE_BASIS = [
-["삼성청년SW아카데미 13기", "소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다."],
+["삼성청년SW·AI아카데미 13기", "소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다."],
 ["서울대학교 AIED 4기", "AI 교육 전문가 과정에서 구조화된 프롬프트 아키텍처와 교수법을 체화했습니다."],
 ["한국부동산마케팅협회 4기", "AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립을 익혔습니다."],
 ["배포된 결과물 8건", "강의 사례는 전부 직접 만들어 운영 중인 산출물입니다. 시연 가능한 화면으로 수업합니다."]];
@@ -641,7 +641,7 @@ const TRAJECTORY = [
 { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 정책 제안 발표",
   desc: "〈2026 세대·젠더 분야 현장형 국민대화 국민 대토론회〉(2026. 9. 29 · aT센터) 자산 분야 트랙에서 청년 미래배당펀드팀으로 ‘청년 초과세수 미래배당펀드’를 제안·발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계." },
 { id: "tl-youth-day", group: "public", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
-  desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류." },
+  desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류.", proof: "gallery.html#youth-day", proofLabel: "대통령 주관 행사 현장 사진 보기" },
 { id: "tl-value-design", group: "public", year: "2026", color: "var(--sky)", title: "서초구 가치디자인단 위촉",
   desc: "서초구청 위촉식(2026. 9. 18)을 거쳐 가치디자인단으로 위촉되어 구정 현장 활동에 참여하고 있습니다." },
 { id: "tl-seocho", group: "public", year: "2026", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
@@ -652,21 +652,21 @@ const TRAJECTORY = [
   desc: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달." },
 { id: "tl-myongji", group: "edu", year: "2026", color: "var(--apple)", title: "명지대학교 AI 데이터 매니지먼트 과정 — 트랙3 수료 · 트랙1·2·4 수강",
   desc: "AI 데이터 매니지먼트 과정 네 개 트랙 중 트랙3을 수료했고, 트랙1·2·4를 수강 중이거나 수강할 예정입니다." },
-{ id: "tl-claude-rag", group: "edu", year: "2026", color: "var(--lilac)", title: "‘클로드 코드로 완성하는 상담 RAG 챗봇’ 교육 이수",
-  desc: "Claude Code로 문서 검색 기반(RAG) 상담 챗봇을 직접 구현하는 실습 교육(2026. 7. 25)." },
-{ id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
-  desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
+{ id: "tl-claude-rag", group: "edu", year: "2026", color: "var(--lilac)", title: "한국부동산마케팅협회(KREMA) — ‘클로드 코드로 완성하는 상담 RAG 챗봇 구축’ 실습 교육 이수 (2026. 7. 25 · 1일 6시간)",
+  desc: "문서 검색 · 벡터 DB · 서버리스 RAG API · 상담 화면을 하나로 잇는 구축 실습입니다. 부동산 상담이라는 도메인에 검색증강생성(RAG)을 연결해 본 교육으로, KREMA AI 마케팅 기획자 양성 4기와는 별개입니다." },
+{ id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 × 한국건설기술인협회 — 2026 스마트건설기술교육 이수 (2026. 6. 29 – 7. 3 · 5일 35시간)",
+  desc: "건국대학교 대학일자리플러스사업단과 한국건설기술인협회가 함께 연 프로그램에서 BIM · 스마트 건설안전 · 드론 · 건설로봇을 현업 전문가와 연구자에게 배웠습니다. 건설산업의 데이터와 현장 기술을 이해하기 위한 교육이며, 법정 건설기술인 의무교육이 아닙니다." },
 { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
   desc: "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-{ id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 수강 중",
-  desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
+{ id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 수료 (2026. 11. 7)",
+  desc: "서울특별시와 금융 교육기관이 협약해 운영하고 금융투자협회 금융투자교육원이 진행하는 핀테크 전문교육을 약 11주 동안 금 · 토요일에 이어 들었습니다. 금융 · 디지털 서비스의 구조와 산업을 이해하는 범위를 넓힌 과정입니다." },
 { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
   desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 설계 역량을 습득." },
 { id: "tl-snu-aied", group: "edu", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
   desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
-{ id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
+{ id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW·AI아카데미(SSAFY) 13기 이수",
   desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
-{ id: "tl-ssafy-ambassador", group: "public", year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
+{ id: "tl-ssafy-ambassador", group: "public", year: "2024", color: "var(--apple)", title: "삼성청년SW·AI아카데미(SSAFY) 홍보 앰배서더 활동",
   desc: "SSAFY 공식 홍보 앰배서더로 교육 과정과 성과를 콘텐츠로 알리고, 지원자 대상 커뮤니케이션과 대외 홍보 활동을 수행." },
 { id: "tl-army-startup", group: "honor", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상", proof: "gallery.html#cred-award-2023",
   desc: "軍·官·學 주관 2023 강원열린군대 스타트업 프로그램 성취도평가에서 팀 Home_Ally로 2위 입상(2023. 12. 31). HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
@@ -1030,8 +1030,17 @@ function AXCommand() {
     React.createElement("div", { className: "wrap axc__wrap" }, /*#__PURE__*/
     React.createElement("header", { className: "axc__mast" }, /*#__PURE__*/
     React.createElement("p", { className: "axc__k font-ko" }, "03 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D AX \uC9C0\uD718\uC2E4 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Gyunggook AX Intelligence Command")), /*#__PURE__*/
-    React.createElement("h2", { id: "axc-title", className: "axc__title" }, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, "\uD310\uB2E8\uC774 \uD544\uC694\uD55C \uACF3\uC5D0,", /*#__PURE__*/React.createElement("br", null), "\uC2E4\uD589 \uAC00\uB2A5\uD55C \uC2DC\uC2A4\uD15C\uC744 \uC124\uACC4\uD569\uB2C8\uB2E4"), /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, "Legal AX \xB7 Risk Intelligence \xB7 Operational Execution")), /*#__PURE__*/
-    React.createElement("p", { className: "axc__lead font-ko" }, "\uC7AC\uAC1C\uBC1C \xB7 \uC7AC\uAC74\uCD95 \uC0AC\uC5C5\uC774 ", /*#__PURE__*/React.createElement("b", null, "\uBC95 \xB7 \uCD1D\uD68C \xB7 \uACC4\uC57D"), " \uBB38\uC81C\uB85C \uBA48\uCD94\uC9C0 \uC54A\uAC8C \u2014 \uC138 \uC2DC\uC2A4\uD15C\uC740 \uAC19\uC740 \uC6D0\uCE59\uC73C\uB85C \uC6C0\uC9C1\uC785\uB2C8\uB2E4. ", /*#__PURE__*/React.createElement("b", null, "\uAD00\uB828 \uC815\uBCF4\uB294 \uC2DC\uC2A4\uD15C\uC774 \uBA3C\uC800 \uCC3E\uC544 \uC815\uB9AC\uD558\uACE0, \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4."), " AI \uAC00 \uBC95\uB960 \uD310\uB2E8\uC744 \uB300\uC2E0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
+    React.createElement("h2", { id: "axc-title", className: "axc__title" }, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, "\uBC95\uB960 \uC2E4\uBB34\uB97C \uC774\uD574\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC5C5\uBB34\uC758 \uAD6C\uC870\uB97C \uBC14\uAFB8\uB294 AX"), /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, "Legal Operations \xB7 Evidence Intelligence \xB7 Contract Review \xB7 Workflow Automation")), /*#__PURE__*/
+    React.createElement("div", { className: "axc__lead font-ko" }, /*#__PURE__*/
+    React.createElement("p", null, "\uBC95\uB960 \uC5C5\uBB34\uC758 \uD575\uC2EC\uC740 \uBB38\uC11C\uB97C \uB354 \uBE68\uB9AC \uC4F0\uB294 \uB370\uB9CC \uC788\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uBC29\uB300\uD55C \uAE30\uB85D\uC5D0\uC11C \uC911\uC694\uD55C \uC0AC\uC2E4\uC744 \uCC3E\uACE0, \uC8FC\uC7A5\uACFC \uC99D\uAC70\uB97C \uC787\uACE0, \uBC95\uB839\uC758 \uADFC\uAC70\uB97C \uD655\uC778\uD558\uACE0, \uC808\uCC28\uC640 \uAE30\uD55C\uC744 \uB193\uCE58\uC9C0 \uC54A\uB294 \uB370 \uC788\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC804\uB7B5\uAE30\uD68D\uACFC \uC1A1\uBB34 \xB7 \uC0AC\uBB34, \uC870\uC9C1 \uC6B4\uC601\uC744 \uACAA\uC73C\uBA70 \uBC1C\uACAC\uD55C \uBC18\uBCF5 \uC5C5\uBB34\uB97C \uCD9C\uBC1C\uC810\uC73C\uB85C \uC790\uB8CC\uB97C \uAD6C\uC870\uD654\uD558\uACE0 \uAC80\uD1A0 \uACFC\uC815\uC744 \uC790\uB3D9\uD654\uD574 \uC654\uC2B5\uB2C8\uB2E4. \uC815\uBE44\uC0AC\uC5C5 AX \uB97C \uBC14\uD0D5\uC73C\uB85C \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uAC80\uD1A0 \xB7 \uBC95\uB960 \uB9AC\uC11C\uCE58 \xB7 \uC0AC\uAC74 \uAD00\uB9AC\uB85C \uC801\uC6A9 \uBC94\uC704\uB97C \uB113\uD788\uACE0 \uC788\uC73C\uBA70, \uADF8 \uD655\uC7A5\uC740 \uC544\uB798\uC758 ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uAD6C\uD604 \uACF5\uAC1C \uC2DC\uC5F0"), "\uC73C\uB85C \uBA3C\uC800 \uBCF4\uC5EC \uB4DC\uB9BD\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "\uAE30\uC220\uC740 \uC815\uBCF4\uB97C \uC815\uB9AC\uD558\uACE0 \uAC80\uD1A0\uB97C \uB3D5\uC9C0\uB9CC, \uCD5C\uC885 \uBC95\uB960 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4."))
+    ), /*#__PURE__*/
+    React.createElement("ul", { className: "axc__states font-ko", "aria-label": "\uC2E4\uC801 \uC0C1\uD0DC \uAD6C\uBD84" }, /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--a" }, "A"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uC0AC\uB0B4 \uC2E4\uBB34 \uC801\uC6A9"), " \uC815\uBE44\uC0AC\uC5C5 AX 3\uC885(\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C) \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1(\uC0AC\uB0B4 \uC6B4\uC601 \uC801\uC6A9) \xB7 \uACE0\uAC1D \uBA54\uC77C \uC790\uB3D9 \uBD84\uB958(\uC5C5\uBB34 \uD654\uBA74 \uBC30\uD3EC)")), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--b" }, "B"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uAC1C\uC778 \uAD6C\uD604 \xB7 \uACF5\uAC1C \uC2DC\uC5F0"), " \uBC95\uB960 AX \uC5C5\uBB34\uCCB4\uACC4 \u2014 \uAC00\uC0C1 \uC0AC\uAC74\uC73C\uB85C \uC9C1\uC811 \uC368 \uBCF4\uB294 \uC2DC\uC5F0")), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uD5A5\uD6C4 \uACE0\uB3C4\uD654"), " \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uAC80\uD1A0\uC758 \uC2E4\uC81C \uC0AC\uAC74 \uC801\uC6A9 \u2014 \uAC80\uC99D \uC804\uC774\uB77C \uC644\uB8CC\uB85C \uC801\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4"))
+    )
     ), /*#__PURE__*/
 
     React.createElement("div", { className: "axc__console" }, /*#__PURE__*/
@@ -1116,6 +1125,12 @@ function AXCommand() {
     React.createElement(PracticePayroll, { item: AX_SUPPORT[1], ed: edOf("07") })
     ), /*#__PURE__*/
     React.createElement(OpsMail, { e: edOf("06") }), /*#__PURE__*/
+    React.createElement("a", { className: "axc__lax", href: "legal-ax.html" }, /*#__PURE__*/
+    React.createElement("span", { className: "axc__st axc__st--b font-sans" }, "B"), /*#__PURE__*/
+    React.createElement("span", { className: "axc__lax-t" }, /*#__PURE__*/React.createElement("small", { className: "font-ko" }, "\uAC1C\uC778 \uAD6C\uD604 \uACF5\uAC1C \uC2DC\uC5F0 \xB7 \uBAA8\uB4E0 \uC0AC\uAC74\uACFC \uBB38\uC11C\uB294 \uAC00\uC0C1 \uC790\uB8CC"), /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, "\uBC95\uB960 AX \uC5C5\uBB34\uCCB4\uACC4 \uC9C1\uC811 \uC0B4\uD3B4\uBCF4\uAE30"), /*#__PURE__*/
+    React.createElement("em", { className: "font-ko" }, "\uC18C\uC1A1\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uBCC0\uACBD \uBE44\uAD50 \xB7 \uBC95\uB839 \uADFC\uAC70 \uD655\uC778 \xB7 \uC0AC\uAC74 \uC9C4\uD589 \uAD00\uB9AC \u2014 \uBBFC\uC0AC \xB7 \uD615\uC0AC \xB7 \uAC00\uC0AC \xB7 \uAE30\uC5C5 \xB7 \uB178\uB3D9 \xB7 \uD589\uC815 \xB7 \uC815\uBE44\uC0AC\uC5C5 \uC77C\uACF1 \uBD84\uC57C")), /*#__PURE__*/
+    React.createElement(ArrowUpRight, { size: 20 })
+    ), /*#__PURE__*/
     React.createElement("p", { className: "axc__note font-ko" }, "\uC758\uB8B0\uC778 \xB7 \uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
     )
     ));
@@ -1679,7 +1694,7 @@ function PolicySection() {
 
 /* 성장 경로 — 연대순 목록 위에, 다루는 문제의 복잡도로 본 다섯 단계. 마지막 단계는 '지향'으로 따로 표시 */
 const GROWTH = [
-{ ko: "기술을 학습하다", en: "Learn", ev: "SSAFY 13기 이수(2025) · 서울대 AIED 4기 수료 · 명지대 AI 데이터 매니지먼트(트랙3 수료 · 나머지 수강)", href: "#tl-ssafy" },
+{ ko: "기술을 학습하다", en: "Learn", ev: "삼성청년SW·AI아카데미(SSAFY) 13기 이수(2025) · 서울대 AIED 4기 수료 · KREMA 상담 RAG 실습 · 건국대 스마트건설기술교육 · 서울 핀테크 아카데미 14기 수료", href: "#tl-ssafy" },
 { ko: "조직의 문제를 해결하다", en: "Solve", ev: "법무법인 경국 — 정비사업 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 보상자료 77장", href: "#ax-desk" },
 { ko: "독립 제품으로 넓히다", en: "Build", ev: "집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에 — 직접 기획 · 개발 · 배포", href: "#tools" },
 { ko: "제도와 정책의 현장에 서다", en: "Engage", ev: "국민 대토론회 정책 제안 발표 · 서초청년네트워크 부위원장 · 정책 간담회 · 공론장", href: "#policy" },
@@ -1874,7 +1889,7 @@ const STORY_SHOTS = [
 { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
   alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
 { name: "ssafy-presentation", src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
-  alt: "김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
+  alt: "김유빈 활동 기록 — 삼성청년SW·AI아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
 { name: "youth-day-selfie", src: "images/youth-day-selfie-600.jpg", pos: "30% 50%",
   alt: "김유빈 — 2026 청년의날 기념행사에서 대통령과 함께한 셀프 촬영", chip: "Youth Day 2026", cap: "청와대 청년의날 — 대통령과 함께" }];
 
@@ -2069,8 +2084,8 @@ const JOURNAL = [
 { img: "images/zipconomy-demo-600.jpg", src: "images/zipconomy-demo.jpg", t: "한경 집코노미 박람회 — 집캐치 시연", when: "2026. 9. 30 · 코엑스 D홀", dz: 1.3,
   d: "KREMA AI 전시관 부스에서 직접 만든 집캐치와 감정평가사 필드워크를 시연하고 질문을 받았습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#zipconomy" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224446565096" }] },
-{ name: "ssafy-presentation", src: "images/ssafy-presentation.jpg", t: "SSAFY 13기 — 프로젝트 아키텍처 발표", when: "삼성청년SW아카데미", dz: 0.8,
-  d: "삼성청년SW아카데미 13기에서 프로젝트 아키텍처를 발표했습니다.",
+{ name: "ssafy-presentation", src: "images/ssafy-presentation.jpg", t: "SSAFY 13기 — 프로젝트 아키텍처 발표", when: "삼성청년SW·AI아카데미", dz: 0.8,
+  d: "삼성청년SW·AI아카데미 13기에서 프로젝트 아키텍처를 발표했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#g-ssafy-presentation" }] },
 { name: "fw-gwanghwamun", src: "images/fw-gwanghwamun.jpg", t: "감정평가사 필드워크 — 광화문에서 시작", when: "직접 만든 3D 실지조사 시뮬레이터", dz: 1.6,
   d: "서울을 직접 걸으며 의뢰 수임부터 등기촉탁까지 5단계를 수행하는 3D 학습 게임의 첫 장면입니다.",

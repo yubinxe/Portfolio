@@ -351,7 +351,7 @@ const LECTURES = [
 ];
 
 const LECTURE_BASIS = [
-  ["삼성청년SW아카데미 13기", "소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다."],
+  ["삼성청년SW·AI아카데미 13기", "소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다."],
   ["서울대학교 AIED 4기", "AI 교육 전문가 과정에서 구조화된 프롬프트 아키텍처와 교수법을 체화했습니다."],
   ["한국부동산마케팅협회 4기", "AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립을 익혔습니다."],
   ["배포된 결과물 8건", "강의 사례는 전부 직접 만들어 운영 중인 산출물입니다. 시연 가능한 화면으로 수업합니다."],
@@ -640,7 +640,7 @@ const TRAJECTORY = [
   { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 정책 제안 발표",
     desc: "〈2026 세대·젠더 분야 현장형 국민대화 국민 대토론회〉(2026. 9. 29 · aT센터) 자산 분야 트랙에서 청년 미래배당펀드팀으로 ‘청년 초과세수 미래배당펀드’를 제안·발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계." },
   { id: "tl-youth-day", group: "public", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
-    desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류." },
+    desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류.", proof: "gallery.html#youth-day", proofLabel: "대통령 주관 행사 현장 사진 보기" },
   { id: "tl-value-design", group: "public", year: "2026", color: "var(--sky)", title: "서초구 가치디자인단 위촉",
     desc: "서초구청 위촉식(2026. 9. 18)을 거쳐 가치디자인단으로 위촉되어 구정 현장 활동에 참여하고 있습니다." },
   { id: "tl-seocho", group: "public", year: "2026", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
@@ -651,21 +651,21 @@ const TRAJECTORY = [
     desc: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달." },
   { id: "tl-myongji", group: "edu", year: "2026", color: "var(--apple)", title: "명지대학교 AI 데이터 매니지먼트 과정 — 트랙3 수료 · 트랙1·2·4 수강",
     desc: "AI 데이터 매니지먼트 과정 네 개 트랙 중 트랙3을 수료했고, 트랙1·2·4를 수강 중이거나 수강할 예정입니다." },
-  { id: "tl-claude-rag", group: "edu", year: "2026", color: "var(--lilac)", title: "‘클로드 코드로 완성하는 상담 RAG 챗봇’ 교육 이수",
-    desc: "Claude Code로 문서 검색 기반(RAG) 상담 챗봇을 직접 구현하는 실습 교육(2026. 7. 25)." },
-  { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 스마트건설기술교육 프로그램 이수",
-    desc: "BIM 설계 데이터 해석과 드론 측량, 건설 자동화 워크플로우를 실습 중심으로 다루며 부동산·건설 도메인을 데이터의 언어로 읽어내는 융합적 관점을 정립." },
+  { id: "tl-claude-rag", group: "edu", year: "2026", color: "var(--lilac)", title: "한국부동산마케팅협회(KREMA) — ‘클로드 코드로 완성하는 상담 RAG 챗봇 구축’ 실습 교육 이수 (2026. 7. 25 · 1일 6시간)",
+    desc: "문서 검색 · 벡터 DB · 서버리스 RAG API · 상담 화면을 하나로 잇는 구축 실습입니다. 부동산 상담이라는 도메인에 검색증강생성(RAG)을 연결해 본 교육으로, KREMA AI 마케팅 기획자 양성 4기와는 별개입니다." },
+  { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 × 한국건설기술인협회 — 2026 스마트건설기술교육 이수 (2026. 6. 29 – 7. 3 · 5일 35시간)",
+    desc: "건국대학교 대학일자리플러스사업단과 한국건설기술인협회가 함께 연 프로그램에서 BIM · 스마트 건설안전 · 드론 · 건설로봇을 현업 전문가와 연구자에게 배웠습니다. 건설산업의 데이터와 현장 기술을 이해하기 위한 교육이며, 법정 건설기술인 의무교육이 아닙니다." },
   { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
     desc: "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울특별시 핀테크 아카데미 14기 수강 중",
-    desc: "금융과 기술이 접합하는 지점에서 핀테크 산업 구조와 디지털 금융 서비스 설계 원리를 학습하고, 데이터 기반 금융 도메인으로 역량의 범위를 확장." },
+  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 수료 (2026. 11. 7)",
+    desc: "서울특별시와 금융 교육기관이 협약해 운영하고 금융투자협회 금융투자교육원이 진행하는 핀테크 전문교육을 약 11주 동안 금 · 토요일에 이어 들었습니다. 금융 · 디지털 서비스의 구조와 산업을 이해하는 범위를 넓힌 과정입니다." },
   { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
     desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 설계 역량을 습득." },
   { id: "tl-snu-aied", group: "edu", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
     desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
-  { id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW아카데미 (SSAFY) 13기 이수",
+  { id: "tl-ssafy", group: "edu", year: "2025", color: "var(--lilac)", title: "삼성청년SW·AI아카데미(SSAFY) 13기 이수",
     desc: "소프트웨어 아키텍처와 인공지능 알고리즘을 실무 프로젝트 중심으로 학습하여 엔지니어링 역량을 내재화." },
-  { id: "tl-ssafy-ambassador", group: "public", year: "2024", color: "var(--apple)", title: "삼성청년SW아카데미 (SSAFY) 홍보 앰배서더 활동",
+  { id: "tl-ssafy-ambassador", group: "public", year: "2024", color: "var(--apple)", title: "삼성청년SW·AI아카데미(SSAFY) 홍보 앰배서더 활동",
     desc: "SSAFY 공식 홍보 앰배서더로 교육 과정과 성과를 콘텐츠로 알리고, 지원자 대상 커뮤니케이션과 대외 홍보 활동을 수행." },
   { id: "tl-army-startup", group: "honor", year: "2023", color: "var(--pink)", title: "육군창업경진대회 · 강원열린군대 창업프로그램 2군단장상 수상", proof: "gallery.html#cred-award-2023",
     desc: "軍·官·學 주관 2023 강원열린군대 스타트업 프로그램 성취도평가에서 팀 Home_Ally로 2위 입상(2023. 12. 31). HVAC 기술에 기반한 리스크 관리 아이디어를 제안하고, 비즈니스 모델의 타당성을 공식 심사에서 검증." },
@@ -1029,8 +1029,17 @@ function AXCommand() {
       <div className="wrap axc__wrap">
         <header className="axc__mast">
           <p className="axc__k font-ko">03 법무법인 경국 AX 지휘실 <span className="font-sans" lang="en">Gyunggook AX Intelligence Command</span></p>
-          <h2 id="axc-title" className="axc__title"><span className="font-ko">판단이 필요한 곳에,<br />실행 가능한 시스템을 설계합니다</span><span className="font-serif" lang="en">Legal AX · Risk Intelligence · Operational Execution</span></h2>
-          <p className="axc__lead font-ko">재개발 · 재건축 사업이 <b>법 · 총회 · 계약</b> 문제로 멈추지 않게 — 세 시스템은 같은 원칙으로 움직입니다. <b>관련 정보는 시스템이 먼저 찾아 정리하고, 판단은 변호사가 내립니다.</b> AI 가 법률 판단을 대신하지 않습니다.</p>
+          <h2 id="axc-title" className="axc__title"><span className="font-ko">법률 실무를 이해하고,<br />업무의 구조를 바꾸는 AX</span><span className="font-serif" lang="en">Legal Operations · Evidence Intelligence · Contract Review · Workflow Automation</span></h2>
+          <div className="axc__lead font-ko">
+            <p>법률 업무의 핵심은 문서를 더 빨리 쓰는 데만 있지 않습니다. 방대한 기록에서 중요한 사실을 찾고, 주장과 증거를 잇고, 법령의 근거를 확인하고, 절차와 기한을 놓치지 않는 데 있습니다.</p>
+            <p>법무법인 경국에서 전략기획과 송무 · 사무, 조직 운영을 겪으며 발견한 반복 업무를 출발점으로 자료를 구조화하고 검토 과정을 자동화해 왔습니다. 정비사업 AX 를 바탕으로 송무기록 분석 · 계약 검토 · 법률 리서치 · 사건 관리로 적용 범위를 넓히고 있으며, 그 확장은 아래의 <b>개인 구현 공개 시연</b>으로 먼저 보여 드립니다.</p>
+            <p><b>기술은 정보를 정리하고 검토를 돕지만, 최종 법률 판단은 변호사가 내립니다.</b></p>
+          </div>
+          <ul className="axc__states font-ko" aria-label="실적 상태 구분">
+            <li><b className="axc__st axc__st--a">A</b><span><strong>사내 실무 적용</strong> 정비사업 AX 3종(사내 구축 · 화면 비공개) · 급여명세서 자동 발송(사내 운영 적용) · 고객 메일 자동 분류(업무 화면 배포)</span></li>
+            <li><b className="axc__st axc__st--b">B</b><span><strong>개인 구현 · 공개 시연</strong> 법률 AX 업무체계 — 가상 사건으로 직접 써 보는 시연</span></li>
+            <li><b className="axc__st axc__st--c">C</b><span><strong>향후 고도화</strong> 송무기록 분석 · 계약 검토의 실제 사건 적용 — 검증 전이라 완료로 적지 않습니다</span></li>
+          </ul>
         </header>
 
         <div className="axc__console">
@@ -1115,6 +1124,12 @@ function AXCommand() {
           <PracticePayroll item={AX_SUPPORT[1]} ed={edOf("07")} />
         </div>
         <OpsMail e={edOf("06")} />
+        <a className="axc__lax" href="legal-ax.html">
+          <span className="axc__st axc__st--b font-sans">B</span>
+          <span className="axc__lax-t"><small className="font-ko">개인 구현 공개 시연 · 모든 사건과 문서는 가상 자료</small><strong className="font-ko">법률 AX 업무체계 직접 살펴보기</strong>
+            <em className="font-ko">소송기록 분석 · 계약 변경 비교 · 법령 근거 확인 · 사건 진행 관리 — 민사 · 형사 · 가사 · 기업 · 노동 · 행정 · 정비사업 일곱 분야</em></span>
+          <ArrowUpRight size={20} />
+        </a>
         <p className="axc__note font-ko">의뢰인 · 사건 정보와 사내 화면은 공개하지 않습니다.</p>
       </div>
     </section>
@@ -1678,7 +1693,7 @@ function PolicySection() {
 
 /* 성장 경로 — 연대순 목록 위에, 다루는 문제의 복잡도로 본 다섯 단계. 마지막 단계는 '지향'으로 따로 표시 */
 const GROWTH = [
-  { ko: "기술을 학습하다", en: "Learn", ev: "SSAFY 13기 이수(2025) · 서울대 AIED 4기 수료 · 명지대 AI 데이터 매니지먼트(트랙3 수료 · 나머지 수강)", href: "#tl-ssafy" },
+  { ko: "기술을 학습하다", en: "Learn", ev: "삼성청년SW·AI아카데미(SSAFY) 13기 이수(2025) · 서울대 AIED 4기 수료 · KREMA 상담 RAG 실습 · 건국대 스마트건설기술교육 · 서울 핀테크 아카데미 14기 수료", href: "#tl-ssafy" },
   { ko: "조직의 문제를 해결하다", en: "Solve", ev: "법무법인 경국 — 정비사업 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 보상자료 77장", href: "#ax-desk" },
   { ko: "독립 제품으로 넓히다", en: "Build", ev: "집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에 — 직접 기획 · 개발 · 배포", href: "#tools" },
   { ko: "제도와 정책의 현장에 서다", en: "Engage", ev: "국민 대토론회 정책 제안 발표 · 서초청년네트워크 부위원장 · 정책 간담회 · 공론장", href: "#policy" },
@@ -1873,7 +1888,7 @@ const STORY_SHOTS = [
   { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
     alt: "김유빈 — 법무법인 경국 공식 프로필", chip: "Profile", cap: "김유빈 · Yubin Kim — 법무법인 경국" },
   { name: "ssafy-presentation", src: "images/ssafy-presentation-700.jpg", srcSet: "images/ssafy-presentation-500.jpg 500w, images/ssafy-presentation-700.jpg 700w, images/ssafy-presentation.jpg 1016w",
-    alt: "김유빈 활동 기록 — 삼성청년SW아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
+    alt: "김유빈 활동 기록 — 삼성청년SW·AI아카데미(SSAFY) 13기 프로젝트 발표", chip: "SSAFY 13기", cap: "프로젝트 아키텍처 발표" },
   { name: "youth-day-selfie", src: "images/youth-day-selfie-600.jpg", pos: "30% 50%",
     alt: "김유빈 — 2026 청년의날 기념행사에서 대통령과 함께한 셀프 촬영", chip: "Youth Day 2026", cap: "청와대 청년의날 — 대통령과 함께" },
 ];
@@ -2068,8 +2083,8 @@ const JOURNAL = [
   { img: "images/zipconomy-demo-600.jpg", src: "images/zipconomy-demo.jpg", t: "한경 집코노미 박람회 — 집캐치 시연", when: "2026. 9. 30 · 코엑스 D홀", dz: 1.3,
     d: "KREMA AI 전시관 부스에서 직접 만든 집캐치와 감정평가사 필드워크를 시연하고 질문을 받았습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#zipconomy" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224446565096" }] },
-  { name: "ssafy-presentation", src: "images/ssafy-presentation.jpg", t: "SSAFY 13기 — 프로젝트 아키텍처 발표", when: "삼성청년SW아카데미", dz: 0.8,
-    d: "삼성청년SW아카데미 13기에서 프로젝트 아키텍처를 발표했습니다.",
+  { name: "ssafy-presentation", src: "images/ssafy-presentation.jpg", t: "SSAFY 13기 — 프로젝트 아키텍처 발표", when: "삼성청년SW·AI아카데미", dz: 0.8,
+    d: "삼성청년SW·AI아카데미 13기에서 프로젝트 아키텍처를 발표했습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#g-ssafy-presentation" }] },
   { name: "fw-gwanghwamun", src: "images/fw-gwanghwamun.jpg", t: "감정평가사 필드워크 — 광화문에서 시작", when: "직접 만든 3D 실지조사 시뮬레이터", dz: 1.6,
     d: "서울을 직접 걸으며 의뢰 수임부터 등기촉탁까지 5단계를 수행하는 3D 학습 게임의 첫 장면입니다.",

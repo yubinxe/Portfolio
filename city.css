@@ -496,3 +496,19 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
   .tmap__cap em{color:rgba(251,248,242,.7)}
 }
 .comp-stage--t .cmap__cap em{text-transform:none!important;letter-spacing:.03em!important}
+/* V6 — AX 상태 구분 · 법률 AX 진입 */
+.axc__lead p{margin:0 0 10px}
+.axc__lead p:last-child{margin:0}
+.axc__states{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 0;padding:0;list-style:none}
+.axc__states li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px;font-size:.82rem;line-height:1.6;color:var(--v5-on-soft);border:1px solid var(--v5-on-faint)}
+.axc__states strong{display:block;font-size:.86rem;color:#F8F3E8}
+.axc__st{display:inline-grid;place-items:center;width:26px;height:26px;font:700 .8rem/1 "Inter",sans-serif;color:var(--v5-mid);background:var(--v5-goldon)}
+.axc__st--b{background:#E8EEF8;color:#13284B}
+.axc__st--c{background:transparent;color:var(--v5-goldon);border:1px dashed var(--v5-goldon)}
+.axc__lax{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;margin-top:20px;padding:22px 24px;color:#F8F3E8;text-decoration:none;background:linear-gradient(100deg,rgba(232,238,248,.1),rgba(220,192,138,.12));border:1px solid rgba(220,192,138,.55);transition:background .3s}
+.axc__lax:hover{background:linear-gradient(100deg,rgba(232,238,248,.16),rgba(220,192,138,.2))}
+.axc__lax-t{display:grid;gap:4px}
+.axc__lax small{font-size:.74rem;color:var(--v5-goldon)}
+.axc__lax strong{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:800;letter-spacing:-.02em}
+.axc__lax em{font-style:normal;font-size:.84rem;line-height:1.6;color:var(--v5-on-soft)}
+@media (max-width:860px){.axc__states{grid-template-columns:1fr}.axc__lax{grid-template-columns:auto minmax(0,1fr);padding:18px 16px}.axc__lax>svg{display:none}}

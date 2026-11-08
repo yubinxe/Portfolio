@@ -32,7 +32,7 @@
       ]
     },
     {
-      "source": "/(index|gallery|career|lecture)(.html)?",
+      "source": "/(index|gallery|career|lecture|legal-ax)(.html)?",
       "headers": [
         {
           "key": "Cache-Control",
