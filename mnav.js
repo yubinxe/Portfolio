@@ -11,7 +11,7 @@
   var onIndex = path === "index.html";
   var base = onIndex ? "" : "index.html";
   var LINKS = [
-    ["소개", base + "#about"], ["역량", base + "#composite"], ["프로젝트", base + "#artifacts"], ["이력", base + "#trajectory"],
+    ["소개", base + "#about"], ["역량", base + "#composite"], ["경국 AX", base + "#ax-desk"], ["직접 만든 도구", base + "#artifacts"], ["정책 참여", base + "#policy"], ["이력", base + "#trajectory"],
     ["강의", onIndex ? "#lectures" : "lecture.html"], ["채널", base + "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["연락", base + "#contact"],
   ];
   var current = { "gallery.html": "갤러리", "lecture.html": "강의", "career.html": "경력 상세" }[path];
@@ -19,7 +19,7 @@
 
   // 메인: 폰 헤더에 현재 섹션·읽은 정도 표시
   if (onIndex) (function () {
-    var S = "ledger:한눈에,about:소개,composite:역량,whyc:전략 사례,artifacts:프로젝트,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
+    var S = "glance:한눈에,about:소개,composite:역량,ax-desk:경국 AX,artifacts:네 가지 도구,policy:정책 참여,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
     var bar = document.createElement("div"), tag = document.createElement("a"), cur = "", tk = 0;
     bar.className = "yk-prog"; tag.className = "yk-now font-sans"; tag.href = "#top"; tag.setAttribute("aria-label", "현재 섹션, 맨 위로");
     document.body.append(bar, tag);
@@ -29,7 +29,7 @@
       bar.style.transform = "scaleX(" + (m > 0 ? Math.min(1, scrollY / m) : 0) + ")";
       S.forEach(function (x, i) { x = x.split(":"); var e = document.getElementById(x[0]); if (e && e.getBoundingClientRect().top < innerHeight * 0.4) { nm = x[1]; n = i + 1; } });
       tag.classList.toggle("solo", !!(hd && hd.classList.contains("nav-hide")));
-      if (nm !== cur) { cur = nm; tag.innerHTML = nm ? "<b>0" + n + "</b>" + nm : ""; tag.classList.toggle("on", !!nm); }
+      if (nm !== cur) { cur = nm; tag.textContent = nm; /* 섹션 번호는 각 섹션 머리에만 — 여기 번호와 어긋나지 않게 이름만 */ tag.classList.toggle("on", !!nm); }
     }
     addEventListener("scroll", function () { if (!tk) { tk = 1; requestAnimationFrame(upd); } }, { passive: true });
     addEventListener("resize", upd); setTimeout(upd, 600);

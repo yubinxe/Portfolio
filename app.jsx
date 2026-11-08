@@ -17,11 +17,14 @@ function App() {
     <div id="top">
       <Nav />
       <main>
-        <Hero />
+        <HeroCity />
         <Ledger />
         <About />
         <Composite />
-        <Artifacts />
+        <AXCommand />
+        <ArtifactsSection />
+        <PolicySection />
+        <ResearchArchive />
         <Trajectory />
         <Channels />
         <Lectures />
@@ -48,7 +51,10 @@ function App() {
 /* #root 에는 빌드 시점에 같은 컴포넌트로 미리 렌더한 HTML 이 들어 있다(scripts/prerender.mjs).
  * 검색 수집기는 JS 없이 본문을 읽고, 브라우저는 그 DOM 을 그대로 이어받는다(hydrate). */
 const rootEl = document.getElementById("root");
-const markMounted = () => document.documentElement.setAttribute("data-app", "ready");
+const markMounted = () => {
+  document.documentElement.setAttribute("data-app", "ready");
+  window.dispatchEvent(new Event("cine:scan")); /* 장면 엔진(cine.js)이 이어받은 DOM 을 다시 찾는다 */
+};
 function Mounted() {
   React.useEffect(markMounted, []);
   return <App />;

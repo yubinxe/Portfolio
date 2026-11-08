@@ -36,7 +36,7 @@
       title: "무엇이든 물어보세요",
       subtitle: "김유빈 님의 역량 · 프로젝트 · 경력을 안내합니다",
       greeting:
-        "안녕하세요, 반갑습니다 👋\n**김유빈 님의 포트폴리오 컨시어지, 유빈 AI**입니다.\n- 🧩 핵심 역량과 일하는 방식\n- 🗂️ 대표 프로젝트와 전략 판단\n- 🧭 경력 · 교육 · 수상 이력\n궁금한 것을 편하게 물어보세요. 답변 속 버튼을 누르면 해당 위치로 바로 모셔다 드릴게요 ✨",
+        "안녕하세요, **김유빈 님의 포트폴리오 안내**입니다.\n아래 네 가지 중 하나를 누르거나 편하게 물어보세요.",
       teaser: "궁금한 점이 있으신가요?",
       email: "yubin120866@gmail.com",
       model: "gpt-4o-mini",
@@ -52,6 +52,14 @@
   );
 
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* 서버가 없는 정적 호스팅(GitHub Pages)에서는 생성형 AI 가 아니라 사이트 내용(kb.js)으로 답한다.
+     그런 곳에서 'AI' 라고 내세우지 않도록 이름과 안내 문구를 바꾼다 */
+  var LOCAL_ONLY = (function () { try { return isStaticHost() && !getKey(); } catch (e) { return false; } })();
+  if (LOCAL_ONLY && !(window.YUBIN_CHAT_CONFIG && window.YUBIN_CHAT_CONFIG.brandKo)) CFG.brandKo = "유빈 안내 데스크";
+  var FOOT_AI = "답변은 포트폴리오 근거로 AI가 생성합니다";
+  var FOOT_LOCAL = "사이트에 적힌 내용으로 바로 답합니다 · 생성형 AI 아님";
+  var FOOT_NEUTRAL = "포트폴리오 근거로 답합니다"; /* 서버 응답을 확인하기 전에는 AI 라고 내세우지 않는다 */
+  var liveShown = false;
   var STORE_KEY = "yk_chat_history_v2";
   var DEEPLINK_KEY = "yk_deeplink";
 
@@ -217,6 +225,8 @@
     var flagged = null;
     try { flagged = sessionStorage.getItem(DEEPLINK_KEY); sessionStorage.removeItem(DEEPLINK_KEY); } catch (e) {}
     var hash = (location.hash || "").replace(/^#/, "");
+    /* 메인 페이지의 주소 #앵커는 페이지 스크립트가 맡는다 — 두 곳이 동시에 스크롤하면 자리가 어긋난다 */
+    if (flagged === null && hash && document.getElementById("manifesto")) return;
     if (flagged !== null || hash) {
       var h = hash || flagged;
       if (h) setTimeout(function () { scrollToHash(h); }, 260);
@@ -246,12 +256,12 @@
   var TONE = {
     "프로젝트": { e: "🗂️", lead: "관련 프로젝트를 정리해 드릴게요.", next: ["ed-09", "ed-06", "thesis", "trajectory", "composite"] },
     "역량": { e: "🧩", lead: "김유빈 님의 역량을 짚어 드릴게요.", next: ["projects", "ed-09", "thesis", "trajectory"] },
-    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["projects", "creds", "tl-youth-day", "tl-national-debate"] },
+    "궤적": { e: "🧭", lead: "이력을 정리해 드릴게요.", next: ["policy", "projects", "creds", "tl-national-debate"] },
     "자격": { e: "🎖️", lead: "자격과 수상 기록입니다.", next: ["trajectory", "tl-youth-day", "projects"] },
     "강의": { e: "🎓", lead: "강의 프로그램을 소개해 드릴게요.", next: ["projects", "composite", "contact"] },
     "연락": { e: "✉️", lead: "연락 방법을 안내해 드릴게요.", next: ["projects", "composite", "trajectory"] },
     "미디어": { e: "📰", lead: "미디어 기록을 모아 보았습니다.", next: ["tl-youth-day", "projects", "trajectory"] },
-    "인물": { e: "🙂", lead: "김유빈 님을 소개해 드릴게요.", next: ["composite", "projects", "trajectory"] },
+    "인물": { e: "🙂", lead: "김유빈 님을 소개해 드릴게요.", next: ["composite", "projects", "policy", "trajectory"] },
   };
   var ASK = {
     "composite": ["🧩 핵심 역량 요약", "핵심 역량을 한눈에 요약해 주세요"],
@@ -282,7 +292,7 @@
     var q = (query || "").toLowerCase();
     if (/(안녕|하이|hello|hi|반가)/.test(q) && q.length < 12) {
       return {
-        text: "반갑습니다 👋 **유빈 AI가 김유빈 님을 안내해 드릴게요.**\n- 🧩 무엇을 잘하는지 — 역량\n- 🗂️ 무엇을 만들었는지 — 프로젝트\n- 🧭 어떤 길을 걸어왔는지 — 이력\n✨ 아래에서 골라 보시거나 편하게 질문해 주세요.",
+        text: "반갑습니다 👋 **" + CFG.brandKo + "가 김유빈 님을 안내해 드릴게요.**\n- 🧩 무엇을 잘하는지 — 역량\n- 🗂️ 무엇을 만들었는지 — 프로젝트\n- 🧭 어떤 길을 걸어왔는지 — 이력\n✨ 아래에서 골라 보시거나 편하게 질문해 주세요.",
         ctas: followUps("인물", []),
       };
     }
@@ -483,6 +493,14 @@
 .yk-typing span:nth-child(2){ animation-delay:.18s; } .yk-typing span:nth-child(3){ animation-delay:.36s; }
 @keyframes yk-dots{ 0%,60%,100%{opacity:.35; transform:none;} 30%{opacity:1; transform:translateY(-3px);} }
 /* ---- 추천 칩 ---- */
+.yk-start{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:4px 2px 10px; }
+.yk-start__btn{ display:grid; gap:4px; min-height:84px; padding:14px 14px; text-align:left; font:inherit; border-radius:16px; border:1px solid rgba(201,174,122,.55); background:#fff; color:#0B1A33; cursor:pointer; box-shadow:0 10px 24px -18px rgba(11,26,51,.5); transition:transform .2s, box-shadow .2s; }
+.yk-start__btn b{ font-size:.96rem; font-weight:800; letter-spacing:-.01em; }
+.yk-start__btn small{ font-size:.74rem; color:#5A6273; line-height:1.4; }
+.yk-start__btn:active{ transform:scale(.98); }
+.yk-start__btn--accent{ background:#0B1A33; color:#F3EEE4; border-color:#0B1A33; }
+.yk-start__btn--accent small{ color:rgba(243,238,228,.75); }
+.yk-start__btn:focus-visible{ outline:3px solid #8FB8F2; outline-offset:2px; }
 .yk-quick{ display:flex; gap:7px; padding:8px 12px 6px; overflow-x:auto; flex:none; background:var(--yk-ivory); scrollbar-width:none; }
 .yk-quick::-webkit-scrollbar{ display:none; }
 .yk-chip{ flex:none; font:inherit; font-size:13px; font-weight:560; color:var(--yk-navy); background:#FFFFFF; border:none;
@@ -614,7 +632,7 @@
 
   /* ----------------------------------------------------------- build DOM */
   var history = loadHistory();
-  var root, panel, body, quick, textarea, sendBtn, teaser, busy = false, localMode = false, greeted = false;
+  var root, panel, body, quick, textarea, sendBtn, teaser, foot, busy = false, localMode = false, greeted = false;
   var consult = null; // { step, data:{} } — 진행 중 상담 흐름
 
   function build() {
@@ -686,7 +704,7 @@
     inputBar.appendChild(textarea);
     inputBar.appendChild(sendBtn);
 
-    var foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · 답변은 포트폴리오 근거로 생성됩니다');
+    foot = el("div", "yk-foot", '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + (LOCAL_ONLY ? FOOT_LOCAL : FOOT_NEUTRAL));
 
     var screen = el("div", "yk-screen");
     screen.appendChild(el("div", "yk-island", '<i class="yk-island__l">YK</i><i class="yk-island__r"><b></b><b></b><b></b><b></b></i>'));
@@ -737,7 +755,13 @@
     // 첫 방문 티저
     var teaserOff = false; try { teaserOff = localStorage.getItem("yk.teaser.off") === "1"; } catch (x) {}
     if (!REDUCED && !history.length && !teaserOff) {
-      setTimeout(function () { if (!root.classList.contains("open")) showTeaser(); }, 2600);
+      /* 폰 첫 화면(건축 모형)에서는 바로 가기 버튼을 가리지 않게 — 첫 장면을 지나간 뒤에 띄운다 */
+      var hero = document.getElementById("manifesto");
+      var later = function () { setTimeout(function () { if (!root.classList.contains("open")) showTeaser(); }, 2600); };
+      if (hero && window.innerWidth <= 760 && window.IntersectionObserver) {
+        var io = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) { io.disconnect(); later(); } });
+        io.observe(hero);
+      } else later();
     }
 
     resumeDeepLink();
@@ -771,6 +795,36 @@
   function hideQuick() { if (quick) quick.style.display = "none"; }
 
   function toggle() { root.classList.contains("open") ? close() : open(); }
+  /* 폰에서는 열자마자 입력창에 초점을 주지 않는다 — 키보드가 올라와 첫 화면(시작 버튼 4개)을 가리지 않게 */
+  var TOUCH = window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(max-width: 640px)").matches;
+  function focusInput() { if (!TOUCH && textarea) textarea.focus(); }
+  /* 첫 화면 — 큰 버튼 4개(자주 쓰는 서비스 · 업무 자동화 · 경력 · 연락). 한 번 누르면 아래 칩 줄로 바뀐다 */
+  function renderStart() {
+    var grid = el("div", "yk-start");
+    grid.setAttribute("role", "group");
+    grid.setAttribute("aria-label", "바로 시작하기");
+    SUGGESTIONS.slice(0, 4).forEach(function (s) {
+      var isConsult = s.query === "__consult__";
+      var b = el("button", "yk-start__btn" + (isConsult ? " yk-start__btn--accent" : ""), "<b>" + escapeHtml(s.label) + "</b>" + (s.sub ? "<small>" + escapeHtml(s.sub) + "</small>" : ""));
+      b.type = "button";
+      b.addEventListener("click", function () { grid.remove(); isConsult ? startConsult() : send(s.query); });
+      grid.appendChild(b);
+    });
+    body.appendChild(grid);
+    hideQuick();
+    return grid;
+  }
+  /* 화면 키보드가 올라오면 보이는 영역(visualViewport)에 맞춰 시트 높이를 줄인다 — 입력창과 마지막 답이 키보드 위에 */
+  function fitViewport() {
+    var vv = window.visualViewport;
+    if (!vv || !panel || window.innerWidth > 520) return;
+    if (!root.classList.contains("open")) { panel.style.height = ""; panel.style.bottom = ""; return; }
+    var kb = window.innerHeight - vv.height - vv.offsetTop;
+    if (kb > 80) { panel.style.height = Math.round(vv.height) + "px"; panel.style.bottom = Math.round(kb) + "px"; }
+    else { panel.style.height = ""; panel.style.bottom = ""; }
+    scrollBottom();
+  }
+  if (window.visualViewport) { window.visualViewport.addEventListener("resize", fitViewport); window.visualViewport.addEventListener("scroll", fitViewport); }
   function open() {
     root.classList.add("open");
     root.querySelector(".yk-fab").setAttribute("aria-expanded", "true");
@@ -781,8 +835,10 @@
       var d0 = new Date();
       body.appendChild(el("div", "yk-stamp", "오늘 " + (d0.getHours() < 12 ? "오전 " : "오후 ") + hhmm()));
       renderMessage("bot", CFG.greeting);
+      var start = renderStart();
+      if (TOUCH) setTimeout(function () { var f = start.querySelector("button"); f && f.focus({ preventScroll: true }); }, 340);
     }
-    setTimeout(function () { textarea && textarea.focus(); }, 340);
+    setTimeout(focusInput, 340);
     scrollBottom();
   }
   function close() {
@@ -791,6 +847,7 @@
     var inside = root.contains(document.activeElement) && document.activeElement !== fab;
     root.classList.remove("open");
     fab.setAttribute("aria-expanded", "false");
+    fitViewport();
     if (inside) fab.focus();
   }
 
@@ -893,6 +950,7 @@
       }
     }
     function onToken(tok) {
+      if (!liveShown && foot) { liveShown = true; foot.innerHTML = '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + FOOT_AI; } /* 실제로 생성 응답이 왔을 때만 AI 라고 표시 */
       acc += tok;
       ensureBubble();
       bubble.innerHTML = mdLite(acc);
@@ -914,11 +972,12 @@
         pushBot(acc, ctas);
       }
       setBusy(false);
-      textarea.focus();
+      focusInput();
     }
     function fallback() {
-      // 서버 실패 → 로컬 지식으로 타이핑 효과
+      // 서버 실패 → 로컬 지식으로 타이핑 효과 (안내 문구도 사실대로)
       localMode = true;
+      if (foot) foot.innerHTML = '<b>' + escapeHtml(CFG.brandKo) + '</b> · ' + FOOT_LOCAL;
       var la = localAnswer(text);
       ensureBubble();
       typeOut(bubble, la.text, function () {
@@ -972,7 +1031,7 @@
     var intro = "📝 **무료 상담 신청을 도와드릴게요.**\n세 가지만 여쭙겠습니다.\n" + CONSULT.steps[0].ask;
     renderMessage("bot", intro);
     pushBot(intro);
-    setTimeout(function () { textarea && textarea.focus(); }, 200);
+    setTimeout(focusInput, 200);
   }
   function consultStep(answer) {
     var step = CONSULT.steps[consult.step];

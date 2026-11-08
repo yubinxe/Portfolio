@@ -2046,8 +2046,8 @@ details[open] > summary .fold__icon::before, details[open] > summary .fold__icon
   .cmap__halo { animation: none; }
   .edition:hover, .lec-card:hover, .cred:hover { transform: none !important; }
 }
-#manifesto .wrap > p.font-ko { color: rgba(14, 26, 46, .86) !important; font-weight: 500; }
-#manifesto .wrap > p.font-ko:first-of-type { color: var(--ink) !important; font-weight: 600; }
+#manifesto .hero-sub > p.font-ko { color: rgba(14, 26, 46, .86) !important; font-weight: 500; }
+#manifesto .hero-sub > p.font-ko:first-child { color: var(--ink) !important; font-weight: 600; }
 
 /* ============================================================
    v35 — 시인성 · 버튼 채움 · 단락 폭 · 랜딩 · 프로필 스크롤 스토리
@@ -2097,7 +2097,8 @@ details.fold > summary:hover .fold__t strong { color: var(--navy); }
 .h-ltr:hover, #manifesto h1 .h-ltr:nth-child(odd):hover { color: var(--navy); }
 
 /* ---------- 랜딩: 흰 배경 · 내용을 위로 · 윗부분 산이 또렷하게 ---------- */
-#manifesto { background: #FFFFFF; align-items: flex-start !important; padding-top: clamp(112px, 14vh, 150px) !important; }
+#manifesto { background: #FFFFFF; }
+#manifesto .hero-scene__sticky { align-items: flex-start !important; padding-top: clamp(112px, 14vh, 150px) !important; }
 #manifesto .hero-photo__scrim { background: linear-gradient(180deg, #FFF 0%, #FFF 20%, rgba(255,255,255,.55) 36%, rgba(255,255,255,.2) 58%, rgba(255,255,255,.5) 86%, #FFF 100%); }
 #manifesto p.font-ko { text-shadow: 0 0 16px #FFF, 0 0 4px #FFF; }
 #manifesto .scroll-cue { color: var(--navy); }
