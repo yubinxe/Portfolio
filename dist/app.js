@@ -18,7 +18,7 @@ function App() {
     React.createElement("div", { id: "top" }, /*#__PURE__*/
     React.createElement(Nav, null), /*#__PURE__*/
     React.createElement("main", null, /*#__PURE__*/
-    React.createElement(HeroCity, null), /*#__PURE__*/
+    React.createElement(HeroClassic, null), /*#__PURE__*/
     React.createElement(Ledger, null), /*#__PURE__*/
     React.createElement(About, null), /*#__PURE__*/
     React.createElement(Composite, null), /*#__PURE__*/

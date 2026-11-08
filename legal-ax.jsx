@@ -4,10 +4,10 @@
  * 외부 제출 · 발송 · 업로드 없음. */
 const D = window.LAX_DATA, L = window.LAX;
 const TASKS = [
-  { k: "evidence", ko: "소송기록 분석해 보기", en: "Evidence Intelligence", m: ["RULE", "RETRIEVAL"] },
+  { k: "evidence", ko: "소송기록 분석해 보기", en: "Litigation Evidence Intelligence", m: ["RULE", "RETRIEVAL"] },
   { k: "contract", ko: "계약 변경사항 비교하기", en: "Contract Comparison", m: ["RULE"] },
-  { k: "research", ko: "법령·판례 근거 확인하기", en: "Legal Research", m: ["RETRIEVAL"] },
-  { k: "matter", ko: "사건 진행 현황 살펴보기", en: "Matter Workflow", m: ["RULE"] },
+  { k: "research", ko: "법령·문서 근거 탐색하기", en: "Legal Research Desk", m: ["RETRIEVAL"] },
+  { k: "matter", ko: "사건 진행 현황 살펴보기", en: "Matter Operations", m: ["RULE"] },
 ];
 const ASSIGNEES = ["담당 변호사 A(가상)", "담당 변호사 B(가상)", "담당 변호사 C(가상)", "담당 변호사 D(가상)", "담당 변호사 E(가상)", "담당 변호사 F(가상)", "담당 변호사 G(가상)", "미지정"];
 const KEY = "lax.state.v1";
@@ -352,7 +352,7 @@ function ContractView({ f, st, act }) {
         ))}
       </div>
       <p className="lx-rule">비교 방식: 조항(번호 · 제목)으로 두 버전을 맞추고 낱말 단위로 비교합니다. ‘중요 조항’은 조항 분류(대금 · 기간 · 해지 · 손해배상 · 책임 · 비밀유지 · 관할)와 숫자 · 부담 주체 변경 규칙에 걸렸다는 뜻이며, 법적 위험도나 유불리를 계산한 결과가 아닙니다.</p>
-      {cid === "construction" && <BuildingMorph />}
+      <ChangeSummary rows={rows} jump={jump} OPK={OPK} />
       <div className="lx-ct__grid">
         <nav className="lx-ct__nav" aria-label="조항 이동">
           {rows.map((r) => <button key={r.key} type="button" className={"lx-op--" + r.op} aria-current={sel === r.key ? "true" : undefined} onClick={() => jump(r.key)}>{(r.after || r.before).no} {(r.after || r.before).title}<i>{OPK[r.op]}</i></button>)}
@@ -401,20 +401,25 @@ function ClauseNote({ k, st, act, label }) {
     </div>
   );
 }
-/* 부동산 · 건설계약 — 포트폴리오 AX 지휘실의 두 버전 건물(city.js)을 그대로 이어 쓴다. 분석의 중심은 아래 문서 비교다 */
-function BuildingMorph() {
-  const cv = React.useRef(null), ctl = React.useRef(null);
-  const [after, setAfter] = React.useState(false);
-  React.useEffect(() => { ctl.current = window.City && window.City.mount(cv.current, "ax", { state: { sys: 2, s: 0 } }); return () => ctl.current && ctl.current.destroy(); }, []);
-  const set = (v) => { setAfter(v); if (ctl.current) ctl.current.tween("s", v ? 1 : 0, 700); };
+/* 변경 요약 — 두 버전 문서의 바뀐 조항만 한 줄씩(건물 그림 대신 문서 비교가 중심). 누르면 그 조항으로 */
+function ChangeSummary({ rows, jump, OPK }) {
+  const ch = rows.filter((r) => r.op !== "same");
   return (
-    <figure className="lx-bm">
-      <canvas ref={cv} aria-hidden="true" />
-      <figcaption>
-        <span>건축 모형 — 공사 범위(12층 → 15층) · 공사비 · 설계 변경 비용 부담 주체 (개념도)</span>
-        <span role="group" aria-label="모형 버전"><button type="button" aria-pressed={!after} onClick={() => set(false)}>변경 전</button><button type="button" aria-pressed={after} onClick={() => set(true)}>변경 후</button></span>
-      </figcaption>
-    </figure>
+    <section className="lx-sum" aria-label="변경 요약">
+      <h3>변경 요약 <span>바뀐 조항 {ch.length}건 · 특별 검토 항목 {ch.filter((r) => r.important).length}건 · 같은 조항 {rows.length - ch.length}건</span></h3>
+      <ol>
+        {ch.map((r) => {
+          const t = r.after || r.before;
+          return (
+            <li key={r.key}><button type="button" onClick={() => jump(r.key)}>
+              <b>{t.no} {t.title}</b><Chip kind={"op-" + r.op}>{OPK[r.op]}</Chip>
+              <span className="lx-sum__ba"><s>{r.before ? r.before.text : "— 없음"}</s><i aria-hidden="true">→</i><em>{r.after ? r.after.text : "— 삭제됨"}</em></span>
+              {r.flags.length > 0 && <small>{r.flags.map((f) => f.ko).join(" · ")}</small>}
+            </button></li>
+          );
+        })}
+      </ol>
+    </section>
   );
 }
 

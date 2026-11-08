@@ -5,10 +5,10 @@
  * 외부 제출 · 발송 · 업로드 없음. */
 const D = window.LAX_DATA,L = window.LAX;
 const TASKS = [
-{ k: "evidence", ko: "소송기록 분석해 보기", en: "Evidence Intelligence", m: ["RULE", "RETRIEVAL"] },
+{ k: "evidence", ko: "소송기록 분석해 보기", en: "Litigation Evidence Intelligence", m: ["RULE", "RETRIEVAL"] },
 { k: "contract", ko: "계약 변경사항 비교하기", en: "Contract Comparison", m: ["RULE"] },
-{ k: "research", ko: "법령·판례 근거 확인하기", en: "Legal Research", m: ["RETRIEVAL"] },
-{ k: "matter", ko: "사건 진행 현황 살펴보기", en: "Matter Workflow", m: ["RULE"] }];
+{ k: "research", ko: "법령·문서 근거 탐색하기", en: "Legal Research Desk", m: ["RETRIEVAL"] },
+{ k: "matter", ko: "사건 진행 현황 살펴보기", en: "Matter Operations", m: ["RULE"] }];
 
 const ASSIGNEES = ["담당 변호사 A(가상)", "담당 변호사 B(가상)", "담당 변호사 C(가상)", "담당 변호사 D(가상)", "담당 변호사 E(가상)", "담당 변호사 F(가상)", "담당 변호사 G(가상)", "미지정"];
 const KEY = "lax.state.v1";
@@ -352,8 +352,8 @@ function ContractView({ f, st, act }) {
     React.createElement("label", { key: o, className: "lx-op lx-op--" + o }, /*#__PURE__*/React.createElement("input", { type: "checkbox", checked: ops[o], onChange: (e) => setOps(Object.assign({}, ops, { [o]: e.target.checked })) }), OPK[o], " ", counts[o])
     )
     ), /*#__PURE__*/
-    React.createElement("p", { className: "lx-rule" }, "\uBE44\uAD50 \uBC29\uC2DD: \uC870\uD56D(\uBC88\uD638 \xB7 \uC81C\uBAA9)\uC73C\uB85C \uB450 \uBC84\uC804\uC744 \uB9DE\uCD94\uACE0 \uB0B1\uB9D0 \uB2E8\uC704\uB85C \uBE44\uAD50\uD569\uB2C8\uB2E4. \u2018\uC911\uC694 \uC870\uD56D\u2019\uC740 \uC870\uD56D \uBD84\uB958(\uB300\uAE08 \xB7 \uAE30\uAC04 \xB7 \uD574\uC9C0 \xB7 \uC190\uD574\uBC30\uC0C1 \xB7 \uCC45\uC784 \xB7 \uBE44\uBC00\uC720\uC9C0 \xB7 \uAD00\uD560)\uC640 \uC22B\uC790 \xB7 \uBD80\uB2F4 \uC8FC\uCCB4 \uBCC0\uACBD \uADDC\uCE59\uC5D0 \uAC78\uB838\uB2E4\uB294 \uB73B\uC774\uBA70, \uBC95\uC801 \uC704\uD5D8\uB3C4\uB098 \uC720\uBD88\uB9AC\uB97C \uACC4\uC0B0\uD55C \uACB0\uACFC\uAC00 \uC544\uB2D9\uB2C8\uB2E4."),
-    cid === "construction" && /*#__PURE__*/React.createElement(BuildingMorph, null), /*#__PURE__*/
+    React.createElement("p", { className: "lx-rule" }, "\uBE44\uAD50 \uBC29\uC2DD: \uC870\uD56D(\uBC88\uD638 \xB7 \uC81C\uBAA9)\uC73C\uB85C \uB450 \uBC84\uC804\uC744 \uB9DE\uCD94\uACE0 \uB0B1\uB9D0 \uB2E8\uC704\uB85C \uBE44\uAD50\uD569\uB2C8\uB2E4. \u2018\uC911\uC694 \uC870\uD56D\u2019\uC740 \uC870\uD56D \uBD84\uB958(\uB300\uAE08 \xB7 \uAE30\uAC04 \xB7 \uD574\uC9C0 \xB7 \uC190\uD574\uBC30\uC0C1 \xB7 \uCC45\uC784 \xB7 \uBE44\uBC00\uC720\uC9C0 \xB7 \uAD00\uD560)\uC640 \uC22B\uC790 \xB7 \uBD80\uB2F4 \uC8FC\uCCB4 \uBCC0\uACBD \uADDC\uCE59\uC5D0 \uAC78\uB838\uB2E4\uB294 \uB73B\uC774\uBA70, \uBC95\uC801 \uC704\uD5D8\uB3C4\uB098 \uC720\uBD88\uB9AC\uB97C \uACC4\uC0B0\uD55C \uACB0\uACFC\uAC00 \uC544\uB2D9\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement(ChangeSummary, { rows: rows, jump: jump, OPK: OPK }), /*#__PURE__*/
     React.createElement("div", { className: "lx-ct__grid" }, /*#__PURE__*/
     React.createElement("nav", { className: "lx-ct__nav", "aria-label": "\uC870\uD56D \uC774\uB3D9" },
     rows.map((r) => /*#__PURE__*/React.createElement("button", { key: r.key, type: "button", className: "lx-op--" + r.op, "aria-current": sel === r.key ? "true" : undefined, onClick: () => jump(r.key) }, (r.after || r.before).no, " ", (r.after || r.before).title, /*#__PURE__*/React.createElement("i", null, OPK[r.op])))
@@ -402,18 +402,23 @@ function ClauseNote({ k, st, act, label }) {
     ));
 
 }
-/* 부동산 · 건설계약 — 포트폴리오 AX 지휘실의 두 버전 건물(city.js)을 그대로 이어 쓴다. 분석의 중심은 아래 문서 비교다 */
-function BuildingMorph() {
-  const cv = React.useRef(null),ctl = React.useRef(null);
-  const [after, setAfter] = React.useState(false);
-  React.useEffect(() => {ctl.current = window.City && window.City.mount(cv.current, "ax", { state: { sys: 2, s: 0 } });return () => ctl.current && ctl.current.destroy();}, []);
-  const set = (v) => {setAfter(v);if (ctl.current) ctl.current.tween("s", v ? 1 : 0, 700);};
+/* 변경 요약 — 두 버전 문서의 바뀐 조항만 한 줄씩(건물 그림 대신 문서 비교가 중심). 누르면 그 조항으로 */
+function ChangeSummary({ rows, jump, OPK }) {
+  const ch = rows.filter((r) => r.op !== "same");
   return (/*#__PURE__*/
-    React.createElement("figure", { className: "lx-bm" }, /*#__PURE__*/
-    React.createElement("canvas", { ref: cv, "aria-hidden": "true" }), /*#__PURE__*/
-    React.createElement("figcaption", null, /*#__PURE__*/
-    React.createElement("span", null, "\uAC74\uCD95 \uBAA8\uD615 \u2014 \uACF5\uC0AC \uBC94\uC704(12\uCE35 \u2192 15\uCE35) \xB7 \uACF5\uC0AC\uBE44 \xB7 \uC124\uACC4 \uBCC0\uACBD \uBE44\uC6A9 \uBD80\uB2F4 \uC8FC\uCCB4 (\uAC1C\uB150\uB3C4)"), /*#__PURE__*/
-    React.createElement("span", { role: "group", "aria-label": "\uBAA8\uD615 \uBC84\uC804" }, /*#__PURE__*/React.createElement("button", { type: "button", "aria-pressed": !after, onClick: () => set(false) }, "\uBCC0\uACBD \uC804"), /*#__PURE__*/React.createElement("button", { type: "button", "aria-pressed": after, onClick: () => set(true) }, "\uBCC0\uACBD \uD6C4"))
+    React.createElement("section", { className: "lx-sum", "aria-label": "\uBCC0\uACBD \uC694\uC57D" }, /*#__PURE__*/
+    React.createElement("h3", null, "\uBCC0\uACBD \uC694\uC57D ", /*#__PURE__*/React.createElement("span", null, "\uBC14\uB010 \uC870\uD56D ", ch.length, "\uAC74 \xB7 \uD2B9\uBCC4 \uAC80\uD1A0 \uD56D\uBAA9 ", ch.filter((r) => r.important).length, "\uAC74 \xB7 \uAC19\uC740 \uC870\uD56D ", rows.length - ch.length, "\uAC74")), /*#__PURE__*/
+    React.createElement("ol", null,
+    ch.map((r) => {
+      const t = r.after || r.before;
+      return (/*#__PURE__*/
+        React.createElement("li", { key: r.key }, /*#__PURE__*/React.createElement("button", { type: "button", onClick: () => jump(r.key) }, /*#__PURE__*/
+        React.createElement("b", null, t.no, " ", t.title), /*#__PURE__*/React.createElement(Chip, { kind: "op-" + r.op }, OPK[r.op]), /*#__PURE__*/
+        React.createElement("span", { className: "lx-sum__ba" }, /*#__PURE__*/React.createElement("s", null, r.before ? r.before.text : "— 없음"), /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" }, "\u2192"), /*#__PURE__*/React.createElement("em", null, r.after ? r.after.text : "— 삭제됨")),
+        r.flags.length > 0 && /*#__PURE__*/React.createElement("small", null, r.flags.map((f) => f.ko).join(" · "))
+        )));
+
+    })
     )
     ));
 

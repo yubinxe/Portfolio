@@ -81,56 +81,47 @@ function Nav() {
 
 }
 
-/* ============================================================ HERO — THE LIVING CITY
- * 첫 장면 — 땅에서 판단까지. 그림은 city.js 의 캔버스 한 장(건축 모형), 글은 그 위의 HTML.
- *   0–18%  필지 경계가 그려지고 채워진다(첫 방문 1.8초 동안 선이 먼저 그어진다)
- *  18–38%  건물이 바닥 윤곽에서 솟는다 — 안쪽부터 시차를 두고, 카메라는 평면도에서 비스듬한 모형 시점으로
- *  38–60%  카메라가 대상 필지로 다가가고, 한 건물이 층판 9장으로 갈라진다(분해도)
- *  60–82%  토지 · 법령 · 계약 · 가치가 필지 모양 그대로 위로 쌓이고, 이웃 필지와 관계선이 이어진다
- *  82–100% 카메라가 위로 올라 다시 도면 — 금색 경계만 남고 다음 장으로 넘어간다
- * 장면 단계는 data-phase(0–4)로만 HTML 에 알려 자막을 바꾼다(스크롤 프레임마다 CSS 변수를 쓰지 않음) */
-const CITY_STEPS = [
-["01", "Land", "필지가 그려집니다"],
-["02", "Massing", "도시가 올라섭니다"],
-["03", "Section", "한 건물을 층으로 엽니다"],
-["04", "Intelligence", "토지 · 법령 · 계약 · 가치가 겹칩니다"],
-["05", "Plan", "판단은 다시 도면 위로"]];
-
-function HeroCity() {
-  const cv = React.useRef(null);
-  React.useEffect(() => {
-    const c = window.City && window.City.mount(cv.current, "hero", { scroll: ".city-hero", mode: "pin", phaseEl: ".city-hero" });
-    return () => c && c.destroy();
-  }, []);
+/* ============================================================ HERO — 사진 중심 첫 화면 (V6.1 복구)
+ * 기준: 7bfd9a1e780 의 사진형 Hero(강남 사진 · 중앙 YUBIN KIM · 간결한 CTA). 스크롤 고정 · 카메라 연출 · 건축 모형은 넣지 않는다.
+ * 첫 화면이 답할 것 — 누구인가(AI 전략·AX 실행) · 무엇을 하는가(구조화 · 실행) · 어디로 가면 근거가 있는가(CTA 셋) */
+function HeroClassic() {
+  const ref = useReveal();
   return (/*#__PURE__*/
-    React.createElement("section", { id: "manifesto", className: "city-hero", "data-phase": "0", "aria-labelledby": "hero-title" }, /*#__PURE__*/
-    React.createElement("div", { className: "city-hero__sticky" }, /*#__PURE__*/
-    React.createElement("canvas", { ref: cv, className: "city-hero__cv", "aria-hidden": "true" }), /*#__PURE__*/
-    React.createElement("div", { className: "city-hero__veil", "aria-hidden": "true" }), /*#__PURE__*/
-    React.createElement("div", { className: "wrap city-hero__copy" }, /*#__PURE__*/
-    React.createElement("p", { className: "lc-kicker font-ko" }, "\uAE40\uC720\uBE48 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Yubin Kim"), " \xB7 AI \uC804\uB7B5\xB7AX \uC2E4\uD589"), /*#__PURE__*/
-    React.createElement("h1", { id: "hero-title", className: "lc-name" }, /*#__PURE__*/
-    React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \uCEE8\uC124\uD305 "), /*#__PURE__*/
-    React.createElement("span", { "aria-hidden": "true" }, /*#__PURE__*/React.createElement("span", { className: "lc-name__l" }, "Yubin"), /*#__PURE__*/React.createElement("span", { className: "lc-name__l lc-name__l--2" }, "Kim"))
+    React.createElement("section", { id: "manifesto", ref: ref, className: "hero-scene hero-classic", "aria-labelledby": "hero-title" }, /*#__PURE__*/
+    React.createElement("div", { className: "hero-scene__sticky" }, /*#__PURE__*/
+    React.createElement("div", { className: "hero-photo", "aria-hidden": "true" }, /*#__PURE__*/
+
+    React.createElement(Pic, { name: "hero-gangnam", fallback: "images/hero-gangnam-1000.jpg?v=1", sizes: "(max-width: 700px) 130vh, (max-width: 1100px) 165vh, 100vw", fetchpriority: "high" })
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "hero-photo__scrim", "aria-hidden": "true" }), /*#__PURE__*/
+
+    React.createElement("div", { className: "wrap reveal hero-copy" }, /*#__PURE__*/
+    React.createElement("div", { className: "menu-rule hero-rule" }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
+    React.createElement("p", { className: "font-sans hero-kicker" }, "Seoul \xB7 Portfolio 2026"), /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow hero-eyebrow" }, "AI Strategy & Consulting"), /*#__PURE__*/
+    React.createElement("h1", { id: "hero-title", className: "font-serif hero-name" }, /*#__PURE__*/
+    React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \xB7 AX \uC2E4\uD589 "), /*#__PURE__*/
+    React.createElement("span", { "aria-hidden": "true", className: "hero-name__rows" }, /*#__PURE__*/
+    React.createElement("span", { className: "hero-row" }, "YUBIN".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, className: "h-ltr", style: { animationDelay: `${120 + i * 55}ms` } }, c))), /*#__PURE__*/
+    React.createElement("span", { className: "hero-row" }, "KIM".split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: "k" + i, className: "h-ltr", style: { animationDelay: `${120 + (i + 6) * 55}ms` } }, c)))
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "hero-sub" }, /*#__PURE__*/
+    React.createElement("p", { className: "font-ko hero-role" }, /*#__PURE__*/React.createElement("b", null, "AI \uC804\uB7B5 \xB7 AX \uC2E4\uD589"), /*#__PURE__*/React.createElement("span", null, "\uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0 \xB7 \uC815\uCC45 \uBD84\uC57C\uC5D0 \uAE30\uC220\uC744 \uC801\uC6A9\uD558\uB294 \uC2E4\uBB34\uD615 \uBB38\uC81C \uD574\uACB0\uC790")), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko hero-lead" }, "\uBCF5\uC7A1\uD55C \uBB38\uC81C\uB97C \uAD6C\uC870\uD654\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uAE30\uC220\uB85C \uC2E4\uD589\uD569\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko hero-proof" }, "\uBC95\uB960\uC0AC\uBB34\uC640 \uC870\uC9C1 \uC6B4\uC601\uC5D0\uC11C \uBC1C\uACAC\uD55C \uBB38\uC81C\uB97C \uB370\uC774\uD130\uC640 \uC18C\uD504\uD2B8\uC6E8\uC5B4\uB85C \uD574\uACB0\uD558\uACE0, \uC0AC\uB78C\uC758 \uD310\uB2E8\uACFC \uC758\uC0AC\uACB0\uC815\uC5D0 \uD544\uC694\uD55C \uADFC\uAC70\uB97C \uB9CC\uB4ED\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "hero-cta" }, /*#__PURE__*/
+    React.createElement("a", { href: "#tools", className: "btn hero-main" }, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
+    React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uBC95\uB960 AX 6\uB300 \uC2DC\uC2A4\uD15C"), /*#__PURE__*/
+    React.createElement("a", { href: "#contact", className: "btn btn--ghost" }, "\uD611\uC5C5 \uBB38\uC758")
+    )
     ), /*#__PURE__*/
 
-    React.createElement("p", { className: "lc-lead font-myeongjo" }, "\uBCF5\uC7A1\uD55C \uBB38\uC81C\uB97C \uAD6C\uC870\uD654\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uAE30\uC220\uB85C \uC2E4\uD589\uD569\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("p", { className: "lc-proof font-ko" }, "\uBC95\uB960\xB7\uBD80\uB3D9\uC0B0\xB7\uC815\uCC45\uC758 \uD604\uC7A5\uC5D0\uC11C AI\uAC00 \uB3C4\uC6B8 \uC218 \uC788\uB294 \uC77C\uACFC \uC0AC\uB78C\uC774 \uD310\uB2E8\uD574\uC57C \uD560 \uC77C\uC744 \uAD6C\uBD84\uD569\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("p", { className: "lc-role font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \u2014 \uC815\uBE44\uC0AC\uC5C5 AX \xB7 \uC804\uB7B5\uAE30\uD68D ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "AI Strategy \xB7 Practical AX \xB7 Human Judgment")), /*#__PURE__*/
-    React.createElement("div", { className: "lc-cta" }, /*#__PURE__*/
-    React.createElement("a", { href: "#tools", className: "btn lc-cta__main" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C 4\uAC00\uC9C0 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
-    React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uACBD\uAD6D AX \uC9C0\uD718\uC2E4"), /*#__PURE__*/
-    React.createElement("a", { href: "#contact", className: "btn btn--ghost lc-cta__ask", onClick: (ev) => {if (window.YubinChat) {ev.preventDefault();window.YubinChat.open();}} }, "\uC9C8\uBB38\uD558\uAE30"), /*#__PURE__*/
-    React.createElement("a", { href: "#contact", className: "btn btn--ghost" }, "\uC5F0\uB77D\uD558\uAE30")
+    React.createElement("a", { href: "#glance", className: "scroll-cue", "aria-label": "\uB2E4\uC74C \uB0B4\uC6A9\uC73C\uB85C" }, /*#__PURE__*/
+    React.createElement("span", { className: "font-sans" }, "SCROLL"), /*#__PURE__*/
+    React.createElement("i", null)
     )
-    ), /*#__PURE__*/
-    React.createElement("ol", { className: "lc-steps font-sans", "aria-hidden": "true" },
-    CITY_STEPS.map(([n, en, ko], i) => /*#__PURE__*/
-    React.createElement("li", { key: n, "data-i": i }, /*#__PURE__*/React.createElement("b", null, n), /*#__PURE__*/React.createElement("span", { className: "lc-steps__en" }, en), /*#__PURE__*/React.createElement("span", { className: "lc-steps__ko font-ko" }, ko))
-    )
-    ), /*#__PURE__*/
-    React.createElement("p", { className: "lc-note font-ko", "aria-hidden": "true" }, "\uAC1C\uB150 \uBAA8\uD615 \u2014 \uC2E4\uC81C \uC9C0\uBC88 \xB7 \uC6A9\uB3C4\uC9C0\uC5ED\uC774 \uC544\uB2D9\uB2C8\uB2E4"), /*#__PURE__*/
-    React.createElement("a", { href: "#glance", className: "lc-skip font-sans" }, "\uC7A5\uBA74 \uAC74\uB108\uB6F0\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 13 }))
     )
     ));
 
@@ -930,54 +921,104 @@ const TOOL_META = {
     link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기" }
 };
 
-/* ============================================================ AX INTELLIGENCE COMMAND — 법무법인 경국
- * 정비사업의 법률 · 경제 위험을 다루는 사내 AX. 의뢰인 · 사건 정보와 사내 화면은 공개하지 않고 문제 정의와 구조만 보인다.
- * 가운데 캔버스(city.js 'ax')는 시스템마다 다른 공간 — 필지 위 규제 층 · 총회장 · 두 버전의 건물. 모두 가상 시연이다 */
-const AX_CASES = [
-{ id: "ax-reintel", no: "01", name: "RE:INTELLIGENCE", ko: "법령 변경 알림", enLine: "Regulatory Change Alert", title: "법이 바뀌면 바로 알려 주는 시스템", watch: ["법령 개정", "고시 변경", "행정 공고", "조례 개정"],
-  problem: "법령·고시가 바뀐 걸 늦게 알면 분쟁과 사업 지연으로 이어집니다.",
-  solve: "사업지 주소를 기준으로 법령·고시·행정 공고의 변화를 모아, 그 사업의 어느 단계에 영향이 있는지 정리해 변호사에게 올립니다.",
-  effect: "변호사가 먼저 검토할 변경사항을 바로 고릅니다.",
-  before: "담당자가 사이트를 하나씩 찾아봄", after: "자동 수집 → 단계별 정리 → 변호사 검토",
-  flow: "Source monitoring → Relevance → Lawyer review",
-  steps: [["사업지 선택", "Select", "가상 사업지 하나를 고릅니다. 실제 시스템은 사업지 주소를 기준으로 움직입니다."],
-  ["출처 감시", "Monitor", "법령 개정 · 고시 변경 · 행정 공고 · 조례 개정이 그 필지 위로 한 층씩 내려앉습니다."],
-  ["관련성 판단", "Relevance", "그 사업 단계에 영향이 있을 수 있는 변경만 ‘검토 후보’로 표시합니다. 법적 결론은 내리지 않습니다."],
-  ["변호사 검토", "Review", "후보는 변호사에게 올라가고, 판단은 변호사가 내립니다."]] },
-{ id: "ax-assembly", no: "02", name: "Assembly Risk Engine", ko: "총회 무효 위험 검사", enLine: "General Assembly Validity Check", title: "총회 전에 ‘무효 위험’을 찾는 시스템", watch: ["소집 통지", "조합원 명부", "의결권", "정족수"],
-  problem: "소집 통지·정족수·의결권 중 하나만 틀려도 총회 결의가 효력 다툼에 휘말립니다.",
-  solve: "통지, 조합원 명부, 의결권, 정족수, 안건별 결과를 서로 맞대어 보고 틀린 곳을 표시합니다.",
-  effect: "총회 전에 다시 확인할 안건과 명부를 특정합니다.",
-  before: "서류를 사람이 한 장씩 대조", after: "규칙으로 자동 대조 → 위험 지점 표시",
-  flow: "Documents → Rule check → Exceptions → Human verification",
-  steps: [["서류 모으기", "Collect", "소집 통지 · 조합원 명부 · 의결권(위임장) · 정족수 자료가 흩어져 있습니다."],
-  ["규칙 대조", "Rule check", "서류를 서로 맞대어 규칙대로 대조합니다."],
-  ["예외 표시", "Exception", "맞지 않는 곳을 표시합니다 — 화면의 불일치(의결권 · 좌석 세 곳)는 가상 예시입니다."],
-  ["사람의 확인", "Verify", "표시된 안건과 명부는 사람이 다시 확인합니다."]] },
-{ id: "ax-contract", no: "03", name: "Contract Risk Intelligence", ko: "계약 변경 조항 비교", enLine: "Contract Change Redline", title: "계약서에서 바뀐 조항만 짚어 주는 시스템", watch: ["계약서 변경 전 · 후", "공사비 조항", "지급 조건", "책임 조항"],
-  problem: "공사비 증액과 계약 조항 변경은 곧바로 조합원이 낼 돈의 문제가 됩니다.",
-  solve: "바뀌기 전·후 공사도급계약서를 나란히 비교해 공사비, 지급조건, 책임 조항의 변화와 분쟁 소지를 표시합니다.",
-  effect: "협상 전에 불리하게 바뀐 조항을 특정합니다.",
-  before: "두 계약서를 눈으로 비교", after: "조항별 자동 비교 → 비용·책임 영향 표시",
-  flow: "Versions → Differences → Implications → Lawyer judgment" }];
+/* ============================================================ 경국 AX — 법률 AX 6대 시스템 (V6.1)
+ * GROUP A(01–03) 법무법인 경국 실무 기반 · 사내 구축(화면 비공개) — 정비사업 실무라서 건축 · 공간정보 · 문서로 보여 준다.
+ * GROUP B(04–06) 개인 구현 공개 시연 — legal-ax.html 과 같은 가상 데이터(legal-ax-data.js)와 같은 규칙(legal-ax-domain.js)을 그대로 쓴다.
+ * 두 그룹을 합쳐 '경국 도입 6종'이라 부르지 않는다. 소속 · 구축 주체 · 운영 상태를 항목마다 따로 적는다.
+ * 건축 모형(city.js)은 01 · 03 과 실무(보상자료)에서만 그리고, 04–06 을 고르면 캔버스 장면을 내린다. */
+const AX_SYSTEMS = [
+{ id: "ax-reintel", number: "01", group: "A", koreanTitle: "정비사업 법령·규제 변화 관제", englishName: "RE:INTELLIGENCE",
+  category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
+  problem: "정비사업은 사업 단계 · 토지이용규제 · 조례 · 고시 · 행정절차의 변화에 영향을 받습니다. 서로 다른 출처를 손으로 확인하면 검토 누락이 생길 수 있습니다.",
+  solution: "사업지를 기준으로 법령 · 고시 · 조례 · 행정 공고의 변화를 모으고, 그 사업의 어느 단계와 부지의 어느 요소에 관련되는지 정리해 변호사 검토로 올리는 구조를 설계했습니다.",
+  built: "법무법인 경국 사내에서 구축했습니다. 실제 화면과 자료는 공개하지 않으며, 이 화면의 사업지 · 변경은 가상입니다.",
+  human: "감지된 변경이 그 사업에 어떤 법적 효력을 갖는지는 변호사가 판단합니다. 시스템은 검토 대상을 드러낼 뿐입니다.",
+  interaction: "사업지 A/B/C 를 고르면 필지 · 건물 배치 · 사업 단계가 함께 바뀌고, 규제 레이어를 고르면 그 레이어가 부지의 어느 부분에 걸리는지 보입니다.",
+  demoPath: null, evidence: "career.html#practice-strategy" },
+{ id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 절차 검토", englishName: "Assembly Risk Engine",
+  category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
+  problem: "조합원 명부 · 의결권 · 위임장 · 소집 통지 · 정족수 · 안건별 결과 사이의 불일치를 사람이 반복해서 대조해야 합니다.",
+  solution: "서류를 서로 맞대는 대조 규칙을 정하고, 맞지 않는 곳을 '확인 필요' 예외 목록으로 모으는 구조를 설계했습니다.",
+  built: "법무법인 경국 사내에서 구축했습니다. 실제 명부 · 서류는 공개하지 않으며, 이 화면의 총회 · 조합원 · 수치는 가상입니다.",
+  human: "총회결의의 효력이나 무효 여부는 시스템이 정하지 않습니다. 예외 목록을 보고 변호사가 판단합니다.",
+  interaction: "안건을 고르면 의결권 · 정족수 대조가 바뀌고, 검토 규칙을 누르면 그 규칙이 보는 가상 서류와 해당 조합원 자리가 표시됩니다.",
+  demoPath: null, evidence: "career.html#practice-strategy" },
+{ id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경사항 검토", englishName: "Contract Risk Intelligence",
+  category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
+  problem: "계약 변경에 따라 공사 범위 · 공사비 · 지급조건 · 책임 부담이 달라질 수 있고, 두 계약서를 눈으로 비교하면 바뀐 조항을 놓치기 쉽습니다.",
+  solution: "변경 전 · 후 계약서를 조항 단위로 맞대고, 바뀐 조항을 대금 · 책임 · 손해배상 같은 검토 분류에 걸어 표시하는 구조를 설계했습니다.",
+  built: "법무법인 경국 사내에서 구축했습니다. 실제 계약서는 공개하지 않으며, 이 화면의 건축물 · 계약 조항은 가상입니다.",
+  human: "공사비 증액의 크기나 법적 책임의 유불리는 시스템이 계산하지 않습니다. 바뀐 곳만 보여 주고, 판단은 변호사가 내립니다.",
+  interaction: "변경 전 · 후 손잡이를 움직이면 건축물의 층수가 바뀌고, 그 변경과 연결된 계약 조항과 검토 항목이 차례로 강조됩니다.",
+  demoPath: "legal-ax.html#task=contract&field=realestate", evidence: "career.html#practice-strategy" },
+{ id: "ax-evidence", number: "04", group: "B", koreanTitle: "송무기록·쟁점·증거 분석", englishName: "Litigation Evidence Intelligence",
+  category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
+  problem: "사건기록에 흩어진 주장 · 사실 · 증거 · 시간의 흐름을 한 번에 파악하기 어렵습니다.",
+  solution: "주장마다 근거 자료를 잇고, 근거가 원문의 어느 문단에 있는지 기록하며, 주장과 자료의 기재가 다르면 규칙으로 표시하는 구조를 만들었습니다.",
+  built: "개인 구현 공개 시연입니다. 민사 · 형사 · 가사 등 일곱 분야의 가상 사건으로 실제 작동합니다(모델 호출 없음 · 규칙 기반 · 문서 검색).",
+  human: "자료가 다르다는 표시는 '추가 검토 필요'일 뿐, 사실인정이나 진술의 진위 판단이 아닙니다.",
+  interaction: "주장을 누르면 관련 증거가 강조되고, 증거를 누르면 그 문서의 원문 문단이 열립니다.",
+  demoPath: "legal-ax.html#task=evidence&field=civil", evidence: "legal-ax.html#task=evidence&field=civil" },
+{ id: "ax-research", number: "05", group: "B", koreanTitle: "법령·문서 근거 탐색", englishName: "Legal Research Desk",
+  category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
+  problem: "법률정보의 정확성은 답변의 유창함이 아니라 근거와 기준일의 확인에서 출발합니다.",
+  solution: "색인된 법령 조문과 사건 문서만 찾고, 요약과 원문을 나누어 보여 주며, 원문을 옮긴 시점과 출처 확인 상태를 함께 적었습니다.",
+  built: "개인 구현 공개 시연입니다. 판례 원문은 연동하지 않았으므로 판례 검색 기능이라고 부르지 않습니다.",
+  human: "조문의 현행 여부와 사안 적용은 국가법령정보센터 원문과 변호사의 검토로 확인합니다.",
+  interaction: "검색어와 자료 종류에 따라 결과가 바뀌고, 결과를 고르면 원문 · 요약 · 기준일이 바뀝니다. 사건 문서는 해당 문단으로 이어집니다.",
+  demoPath: "legal-ax.html#task=research&field=civil", evidence: "legal-ax.html#task=research&field=civil" },
+{ id: "ax-matter", number: "06", group: "B", koreanTitle: "사건 접수·기한·검토 업무관리", englishName: "Matter Operations",
+  category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
+  problem: "상담부터 자료 수집 · 담당자 지정 · 기한 확인 · 검토 승인까지 진행 상태가 여러 경로에 흩어집니다.",
+  solution: "사건 단계 · 담당자 · 필요 서류 · 기한 · 검토 상태를 한 화면에 두고, 바꾼 내용을 모두 가상 감사기록에 남기는 구조를 만들었습니다.",
+  built: "개인 구현 공개 시연입니다. 외부 제출 · 발송 기능은 없고, 상태는 이 브라우저 탭에만 저장됩니다.",
+  human: "법정기간은 자동으로 확정하지 않습니다. 송달일 · 기산점 · 공휴일 · 개별 절차를 변호사가 확인합니다.",
+  interaction: "담당자 · 서류 보유 · 업무 단계 · 검토 상태를 바꾸면 화면과 감사기록에 바로 반영되고, 상세 시연과 같은 기록을 씁니다.",
+  demoPath: "legal-ax.html#task=matter&field=civil", evidence: "legal-ax.html#task=matter&field=civil" }];
 
-/* 계약 비교 시연의 조항 — 전부 가상이다(실제 계약서 아님) */
-const AX_CLAUSES = [
-["제○조 공사 범위", "지상 12층으로 시공한다.", "지상 15층으로 시공한다(설계 변경).", "범위 확대"],
-["제○조 공사비", "도급금액은 계약 시 확정한다.", "물가 변동 시 도급금액을 조정할 수 있다.", "비용 증가 가능"],
-["제○조 지급 조건", "기성은 매월 정산해 지급한다.", "기성은 매월 정산해 지급한다.", ""],
-["제○조 책임", "설계 변경 비용은 수급인이 부담한다.", "설계 변경 비용은 도급인이 부담한다.", "부담 주체 이전"]];
+const AX_STATUS_KO = { "internal-built": "경국 사내 구축 · 화면 비공개", "internal-applied": "경국 사내 적용", "public-demo": "개인 구현 · 공개 시연", planned: "향후 고도화" };
+const AX_GROUPS = [
+{ k: "A", ko: "법무법인 경국 실무 기반 전문 AX", sub: "정비사업 · 사내 구축 · 화면 비공개" },
+{ k: "B", ko: "개인 구현 법률 AX 공개 시연", sub: "가상 사건 · 직접 작동 · 경국 도입 시스템 아님" }];
 
-const AX_SUPPORT = [
-{ id: "ax-compensation", tag: "실무 01 · Practice", title: "Compensation Analysis", ko: "광명시흥 3기 신도시 보상자료 분석", kind: "분석 · 발표 자료 77장 — 소프트웨어 시스템이 아닙니다",
-  desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다.",
-  steps: [["필지 확인", "Parcel"], ["감정평가 자료", "Appraisal"], ["보상협의", "Consultation"], ["재결", "Adjudication"]] },
-{ id: "ed-07", tag: "실무 02 · Practice", title: "NAVER WORKS Payroll", ko: "네이버웍스 급여명세서 자동 발송", kind: "사내 운영 · 급여 정보를 다루어 화면과 코드는 비공개",
-  desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다.",
-  steps: [["명세서 준비", "Prepare"], ["표준 양식", "Standardize"], ["메일 발송", "Send"], ["처리 완료", "Complete"]] }];
+/* 시스템 01 — 가상 사업지 세 곳. 단계 · 변경 감지는 가상이며 실제 고시 · 조례가 아니다 */
+const RE_STAGES = ["정비구역 지정", "조합 설립", "사업시행계획", "관리처분계획", "착공 · 분양", "준공 · 이전"];
+const RE_SITES = [
+{ k: "A", type: "재개발 · 노후 저층 주거지(가상)", stage: 2, flag: 2, change: "가상 조례 개정안 — 건축물 높이 기준 관련 문구 변경 감지", rel: "사업시행계획 — 건축계획(높이) 검토" },
+{ k: "B", type: "재건축 · 중층 아파트 단지(가상)", stage: 2, flag: 1, change: "가상 도시관리계획 결정 고시 — 용도지역 경계 조정 관련 고시 감지", rel: "사업시행계획 — 용적률 · 건축 규모의 전제 검토" },
+{ k: "C", type: "소규모 블록 정비(가상)", stage: 2, flag: 3, change: "가상 행정 공고 — 접도 도로 확폭 계획 공고 감지", rel: "사업시행계획 — 대지 경계 · 기반시설 부담 검토" }];
 
+const RE_LAYERS = [
+{ ko: "정비구역 경계", src: "정비계획 고시", where: "사업지 경계선 전체 — 금색 점선" },
+{ ko: "용도지역 구분", src: "토지이용규제", where: "사업지를 나누는 두 구역 — 색으로 구분" },
+{ ko: "높이 기준", src: "조례", where: "계획 매스 위의 기준면 — 남색 면" },
+{ ko: "접도 도로 · 기반시설", src: "행정 공고", where: "사업지의 한 변과 확폭 예정 띠" }];
 
-/* 단계 자동 재생 — 화면에 처음 들어오면 한 번 끝까지, 이후로는 누른 단계로 */
+/* 시스템 02 — 가상 총회. 수치는 시연용이며, 정족수 기준은 '가상 정관'의 시연 규칙이다(실제 요건은 법령 · 정관 확인) */
+const ASM = {
+  members: 120, direct: 26, proxy: 21, written: 41,
+  agendas: [
+  { id: "a1", ko: "제1호 안건 — 예산안 승인", rule: "half", yes: 58, no: 22, abst: 8 },
+  { id: "a2", ko: "제2호 안건 — 정비사업비 변경", rule: "twothirds", yes: 81, no: 5, abst: 2 },
+  { id: "a3", ko: "제3호 안건 — 임원 선임", rule: "direct", yes: 51, no: 30, abst: 7 }],
+
+  ruleKo: { half: "조합원 과반수 출석 · 출석 과반수 찬성", twothirds: "조합원 3분의 2 이상 찬성", direct: "과반수 출석 · 출석 과반수 찬성 · 조합원 20% 이상 직접 출석" },
+  exc: [
+  { id: "E1", ko: "위임장 2건 — 위임인 서명 대조 불일치", seats: [30, 41], dPresent: 2, dYes: 2, rule: "R3" },
+  { id: "E2", ko: "명부 미등재 의결권 1건 — 권리 승계 신고 확인 필요", seats: [60], dPresent: 1, dYes: 1, rule: "R2" },
+  { id: "E3", ko: "소집 통지 수령 확인 누락 3명", seats: [95, 101, 117], dPresent: 0, dYes: 0, rule: "R1" },
+  { id: "E4", ko: "서면결의서 · 현장 출석 중복 1건", seats: [5], dPresent: 1, dYes: 1, rule: "R4" }],
+
+  rules: [
+  { id: "R1", ko: "소집 통지 대조", docs: ["소집 공고문", "등기우편 발송 목록", "수령 확인 목록"], who: "absent" },
+  { id: "R2", ko: "조합원 명부 대조", docs: ["조합원 명부(기준일)", "권리 승계 신고서"], who: "written" },
+  { id: "R3", ko: "위임장 검토", docs: ["위임장 21건", "서명 대조표"], who: "proxy" },
+  { id: "R4", ko: "서면결의 · 출석 중복", docs: ["서면결의서 접수대장", "현장 출석부"], who: "direct" },
+  { id: "R5", ko: "정족수 · 의결 대조", docs: ["출석 집계표", "안건별 투표 결과표"], who: "all" }]
+
+};
+
+/* 단계 자동 재생 — 화면에 처음 들어오면 한 번 끝까지, 이후로는 누른 단계로 (실무 카드) */
 function useStepper(ctl, n, gap) {
   const [step, setStep] = React.useState(-1);
   const timer = React.useRef(0);
@@ -1002,118 +1043,139 @@ function useOnce(ref, fn, thr) {
   }, []);
 }
 
-function AXCommand() {
-  const stage = React.useRef(null),cv = React.useRef(null),ctl = React.useRef(null);
-  const [sys, setSys] = React.useState(0);
-  const [split, setSplit] = React.useState(0);
-  const [site, setSite] = React.useState(0);
-  const S = useStepper(ctl, 4, 1700);
+/* ---------------------------------------------------------------- 지연 로드 — 건축 엔진 · 법률 AX 데이터는 경국 AX 섹션 가까이에서만 */
+const AX_ASSETS = { city: "city.js?v=3", data: "legal-ax-data.js?v=1", domain: "legal-ax-domain.js?v=1" };
+const axLoading = {};
+function loadScript(src) {
+  if (!axLoading[src]) axLoading[src] = new Promise((ok, no) => {
+    const s = document.createElement("script");s.src = src;s.async = true;
+    s.onload = ok;s.onerror = () => {delete axLoading[src];no(new Error(src));};
+    document.head.appendChild(s);
+  });
+  return axLoading[src];
+}
+const AXReady = React.createContext({ city: false, lax: false });
+function useNear(ref, margin) {
+  const [near, setNear] = React.useState(false);
   React.useEffect(() => {
-    ctl.current = window.City && window.City.mount(cv.current, "ax", { state: { sys: 0, k: 0 } });
-    return () => ctl.current && ctl.current.destroy();
+    const el = ref.current;
+    if (!el || !window.IntersectionObserver) {setNear(true);return;}
+    const io = new IntersectionObserver((es) => {if (es[0].isIntersecting) {setNear(true);io.disconnect();}}, { rootMargin: margin || "900px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
-  useOnce(stage, () => S.play(), 0.45);
-  const pick = (i) => {
-    if (i === sys) return;
-    S.reset();setSys(i);
-    const c = ctl.current;
-    if (c) {c.set("sys", i);c.set("k", 0);c.set("inn", 0);c.tween("inn", 1, 900);c.set("s", split / 100);}
-    if (i !== 2) setTimeout(() => S.play(), 350);
-  };
-  const pickSite = (i) => {setSite(i);if (ctl.current) {ctl.current.set("site", i);ctl.current.set("k", 0);}S.play();};
-  const setS = (v) => {setSplit(v);if (ctl.current) ctl.current.set("s", v / 100);};
-  const drag = (ev) => {if (sys !== 2) return;const r = ev.currentTarget.getBoundingClientRect();setS(Math.round(clamp01((ev.clientX - r.left) / r.width) * 100));};
-  const cur = AX_CASES[sys];
-  const after = split >= 50;
+  return near;
+}
+function useScripts(on, list) {
+  const [ok, setOk] = React.useState(false);
+  React.useEffect(() => {
+    if (!on || ok) return;
+    let live = true;
+    Promise.all(list.map(loadScript)).then(() => {if (live) setOk(true);}, () => {});
+    return () => {live = false;};
+  }, [on]);
+  return ok;
+}
+/* 캔버스 장면 — 엔진이 준비되면 붙이고, 컴포넌트가 내려가면 정리한다(타이머 · 관찰자 · rAF) */
+function useScene(cv, name, state) {
+  const ready = React.useContext(AXReady).city;
+  const ctl = React.useRef(null),latest = React.useRef(state);
+  latest.current = state; /* 엔진이 늦게 오면 그때의 화면 상태로 붙인다 */
+  React.useEffect(() => {
+    if (!ready || !window.City) return;
+    ctl.current = window.City.mount(cv.current, name, { state: latest.current || {} });
+    return () => {if (ctl.current) ctl.current.destroy();ctl.current = null;};
+  }, [ready]);
+  return ctl;
+}
+
+/* ---------------------------------------------------------------- 법률 AX 상태 — 상세 시연(legal-ax.html)과 같은 탭 저장소를 쓴다 */
+const LAX_KEY = "lax.state.v1";
+function useLaxState() {
+  const D = window.LAX_DATA,L = window.LAX;
+  const [st, setSt] = React.useState(() => {
+    const base = L.initial(D);
+    try {const raw = sessionStorage.getItem(LAX_KEY);if (raw) {const s = JSON.parse(raw);if (s && s.v === base.v) return Object.assign(base, s);}} catch (e) {}
+    return base;
+  });
+  React.useEffect(() => {try {sessionStorage.setItem(LAX_KEY, JSON.stringify(st));} catch (e) {}}, [st]);
+  return [st, (a) => setSt((s) => L.reduce(s, a))];
+}
+const laxCase = (fid) => {const D = window.LAX_DATA;return D.cases.find((c) => c.id === D.fields.find((f) => f.id === fid).caseId);};
+
+function AXCommand() {
+  const sec = React.useRef(null),stage = React.useRef(null);
+  const near = useNear(sec);
+  const city = useScripts(near, [AX_ASSETS.city]);
+  const lax = useScripts(near, [AX_ASSETS.data, AX_ASSETS.domain]);
+  const [sys, setSys] = React.useState(0);
+  React.useEffect(() => {
+    /* #ax-evidence 같은 깊은 링크로 들어오면 그 시스템을 고른다 */
+    const pick = () => {const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === location.hash);if (i > -1) setSys(i);};
+    pick();window.addEventListener("hashchange", pick);
+    return () => window.removeEventListener("hashchange", pick);
+  }, []);
+  const cur = AX_SYSTEMS[sys];
+  const Demo = [Sys01, Sys02, Sys03, Sys04, Sys05, Sys06][sys];
   return (/*#__PURE__*/
-    React.createElement("section", { id: "ax-desk", className: "axc", "aria-labelledby": "axc-title" }, /*#__PURE__*/
+    React.createElement(AXReady.Provider, { value: { city, lax } }, /*#__PURE__*/
+    React.createElement("section", { id: "ax-desk", ref: sec, className: "axc", "aria-labelledby": "axc-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap axc__wrap" }, /*#__PURE__*/
     React.createElement("header", { className: "axc__mast" }, /*#__PURE__*/
-    React.createElement("p", { className: "axc__k font-ko" }, "03 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D AX \uC9C0\uD718\uC2E4 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Gyunggook AX Intelligence Command")), /*#__PURE__*/
+    React.createElement("p", { className: "axc__k font-ko" }, "03 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D AX ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Gyunggook AX \xB7 Six Legal AX Systems")), /*#__PURE__*/
     React.createElement("h2", { id: "axc-title", className: "axc__title" }, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, "\uBC95\uB960 \uC2E4\uBB34\uB97C \uC774\uD574\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC5C5\uBB34\uC758 \uAD6C\uC870\uB97C \uBC14\uAFB8\uB294 AX"), /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, "Legal Operations \xB7 Evidence Intelligence \xB7 Contract Review \xB7 Workflow Automation")), /*#__PURE__*/
     React.createElement("div", { className: "axc__lead font-ko" }, /*#__PURE__*/
-    React.createElement("p", null, "\uBC95\uB960 \uC5C5\uBB34\uC758 \uD575\uC2EC\uC740 \uBB38\uC11C\uB97C \uB354 \uBE68\uB9AC \uC4F0\uB294 \uB370\uB9CC \uC788\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uBC29\uB300\uD55C \uAE30\uB85D\uC5D0\uC11C \uC911\uC694\uD55C \uC0AC\uC2E4\uC744 \uCC3E\uACE0, \uC8FC\uC7A5\uACFC \uC99D\uAC70\uB97C \uC787\uACE0, \uBC95\uB839\uC758 \uADFC\uAC70\uB97C \uD655\uC778\uD558\uACE0, \uC808\uCC28\uC640 \uAE30\uD55C\uC744 \uB193\uCE58\uC9C0 \uC54A\uB294 \uB370 \uC788\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("p", null, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC804\uB7B5\uAE30\uD68D\uACFC \uC1A1\uBB34 \xB7 \uC0AC\uBB34, \uC870\uC9C1 \uC6B4\uC601\uC744 \uACAA\uC73C\uBA70 \uBC1C\uACAC\uD55C \uBC18\uBCF5 \uC5C5\uBB34\uB97C \uCD9C\uBC1C\uC810\uC73C\uB85C \uC790\uB8CC\uB97C \uAD6C\uC870\uD654\uD558\uACE0 \uAC80\uD1A0 \uACFC\uC815\uC744 \uC790\uB3D9\uD654\uD574 \uC654\uC2B5\uB2C8\uB2E4. \uC815\uBE44\uC0AC\uC5C5 AX \uB97C \uBC14\uD0D5\uC73C\uB85C \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uAC80\uD1A0 \xB7 \uBC95\uB960 \uB9AC\uC11C\uCE58 \xB7 \uC0AC\uAC74 \uAD00\uB9AC\uB85C \uC801\uC6A9 \uBC94\uC704\uB97C \uB113\uD788\uACE0 \uC788\uC73C\uBA70, \uADF8 \uD655\uC7A5\uC740 \uC544\uB798\uC758 ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uAD6C\uD604 \uACF5\uAC1C \uC2DC\uC5F0"), "\uC73C\uB85C \uBA3C\uC800 \uBCF4\uC5EC \uB4DC\uB9BD\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", null, "\uC815\uBE44\uC0AC\uC5C5 \uC2E4\uBB34\uC5D0\uC11C \uCD9C\uBC1C\uD55C AX \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C, \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D\uACFC \uBC95\uB960\uC815\uBCF4 \uD0D0\uC0C9, \uC0AC\uAC74 \uAD00\uB9AC\uAE4C\uC9C0 \uC801\uC6A9 \uBC94\uC704\uB97C \uD655\uC7A5\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "\uAE30\uC220\uC740 \uC815\uBCF4\uB97C \uC815\uB9AC\uD558\uACE0 \uAC80\uD1A0\uB97C \uB3D5\uC9C0\uB9CC, \uCD5C\uC885 \uBC95\uB960 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4."))
     ), /*#__PURE__*/
     React.createElement("ul", { className: "axc__states font-ko", "aria-label": "\uC2E4\uC801 \uC0C1\uD0DC \uAD6C\uBD84" }, /*#__PURE__*/
-    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--a" }, "A"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uC0AC\uB0B4 \uC2E4\uBB34 \uC801\uC6A9"), " \uC815\uBE44\uC0AC\uC5C5 AX 3\uC885(\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C) \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1(\uC0AC\uB0B4 \uC6B4\uC601 \uC801\uC6A9) \xB7 \uACE0\uAC1D \uBA54\uC77C \uC790\uB3D9 \uBD84\uB958(\uC5C5\uBB34 \uD654\uBA74 \uBC30\uD3EC)")), /*#__PURE__*/
-    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--b" }, "B"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uAC1C\uC778 \uAD6C\uD604 \xB7 \uACF5\uAC1C \uC2DC\uC5F0"), " \uBC95\uB960 AX \uC5C5\uBB34\uCCB4\uACC4 \u2014 \uAC00\uC0C1 \uC0AC\uAC74\uC73C\uB85C \uC9C1\uC811 \uC368 \uBCF4\uB294 \uC2DC\uC5F0")), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--a" }, "A"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uC0AC\uB0B4 \uC2E4\uBB34 \uC801\uC6A9"), " \uC815\uBE44\uC0AC\uC5C5 AX 3\uC885(01\u201303 \xB7 \uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C) \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1(\uC0AC\uB0B4 \uC6B4\uC601 \uC801\uC6A9) \xB7 \uACE0\uAC1D \uBA54\uC77C \uC790\uB3D9 \uBD84\uB958(\uC5C5\uBB34 \uD654\uBA74 \uBC30\uD3EC)")), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--b" }, "B"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uAC1C\uC778 \uAD6C\uD604 \xB7 \uACF5\uAC1C \uC2DC\uC5F0"), " \uBC95\uB960 AX 3\uC885(04\u201306) \u2014 \uAC00\uC0C1 \uC0AC\uAC74\uC73C\uB85C \uC9C1\uC811 \uC368 \uBCF4\uB294 \uC2DC\uC5F0. \uACBD\uAD6D\uC5D0\uC11C \uB3C4\uC785 \xB7 \uC6B4\uC601\uD55C \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4")), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uD5A5\uD6C4 \uACE0\uB3C4\uD654"), " \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uAC80\uD1A0\uC758 \uC2E4\uC81C \uC0AC\uAC74 \uC801\uC6A9 \u2014 \uAC80\uC99D \uC804\uC774\uB77C \uC644\uB8CC\uB85C \uC801\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4"))
     )
     ), /*#__PURE__*/
 
+    React.createElement("p", { className: "axc__count font-ko" }, /*#__PURE__*/React.createElement("b", null, "AX \uC2DC\uC2A4\uD15C 6\uC885"), " = \uACBD\uAD6D \uC2E4\uBB34 \uAE30\uBC18 3\uC885 + \uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0 3\uC885 ", /*#__PURE__*/React.createElement("span", null, "\u201816\uAC1C \uACB0\uACFC\uBB3C\u2019\uC740 \uC804\uCCB4 \uC791\uC5C5 \uAE30\uB85D \uC218\uB85C, \uC774 6\uC885\uACFC \uB530\uB85C \uC149\uB2C8\uB2E4.")), /*#__PURE__*/
     React.createElement("div", { className: "axc__console" }, /*#__PURE__*/
-    React.createElement("nav", { className: "axc__rail", "aria-label": "AX \uC2DC\uC2A4\uD15C \uACE0\uB974\uAE30" }, /*#__PURE__*/
-    React.createElement("p", { className: "axc__lbl font-sans" }, "Systems \xB7 \uC2DC\uC2A4\uD15C"), /*#__PURE__*/
+    React.createElement("nav", { className: "axc__nav", "aria-label": "AX 6\uB300 \uC2DC\uC2A4\uD15C \uACE0\uB974\uAE30" },
+    AX_GROUPS.map((g) => /*#__PURE__*/
+    React.createElement("div", { key: g.k, className: "axc__grp axc__grp--" + g.k.toLowerCase() }, /*#__PURE__*/
+    React.createElement("p", { className: "axc__gh font-ko" }, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--" + g.k.toLowerCase() }, g.k), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, g.ko), /*#__PURE__*/React.createElement("em", null, g.sub))), /*#__PURE__*/
     React.createElement("ol", null,
-    AX_CASES.map((c, i) => /*#__PURE__*/
-    React.createElement("li", { key: c.id, id: c.id }, /*#__PURE__*/
-    React.createElement("button", { type: "button", "aria-pressed": i === sys, onClick: () => pick(i) }, /*#__PURE__*/
-    React.createElement("b", { className: "font-serif" }, c.no), /*#__PURE__*/
-    React.createElement("span", null, /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, c.name), /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, c.ko))
+    AX_SYSTEMS.map((x, i) => x.group !== g.k ? null : /*#__PURE__*/
+    React.createElement("li", { key: x.id, id: x.id }, /*#__PURE__*/
+    React.createElement("button", { type: "button", "aria-pressed": i === sys, onClick: () => setSys(i) }, /*#__PURE__*/
+    React.createElement("b", { className: "font-serif" }, x.number), /*#__PURE__*/
+    React.createElement("span", null, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, x.koreanTitle), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, x.englishName), /*#__PURE__*/React.createElement("i", { className: "font-ko" }, AX_STATUS_KO[x.implementationStatus]))
+    )
+    )
+    )
     )
     )
     )
     ), /*#__PURE__*/
-    React.createElement("p", { className: "axc__state font-ko" }, "\uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uC2E4\uC81C \uD654\uBA74\uACFC \uC790\uB8CC\uB294 \uBE44\uACF5\uAC1C")
-    ), /*#__PURE__*/
 
-    React.createElement("div", { className: "axc__stage", ref: stage }, /*#__PURE__*/
-    React.createElement("div", { className: "axc__canvas" + (sys === 2 ? " is-drag" : ""),
-      onPointerDown: (ev) => {if (sys === 2) {ev.currentTarget.setPointerCapture(ev.pointerId);drag(ev);}},
-      onPointerMove: (ev) => {if (sys === 2 && ev.buttons) drag(ev);} }, /*#__PURE__*/
-    React.createElement("canvas", { ref: cv, "aria-hidden": "true" }), /*#__PURE__*/
-    React.createElement("p", { className: "axc__demo font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uAC00\uC0C1 \uC2DC\uC5F0"), " Conceptual demo \u2014 \uC2E4\uC81C \uC0AC\uC5C5\uC9C0 \xB7 \uC870\uD569\uC6D0 \xB7 \uACC4\uC57D \uC790\uB8CC\uAC00 \uC544\uB2D9\uB2C8\uB2E4"),
-    sys === 0 && /*#__PURE__*/
-    React.createElement("div", { className: "axc__sites font-ko", role: "group", "aria-label": "\uAC00\uC0C1 \uC0AC\uC5C5\uC9C0" },
-    ["A", "B", "C"].map((t, i) => /*#__PURE__*/React.createElement("button", { key: t, type: "button", "aria-pressed": i === site, onClick: () => pickSite(i) }, "\uAC00\uC0C1 \uC0AC\uC5C5\uC9C0 ", t))
+    React.createElement("div", { className: "axc__main", ref: stage }, /*#__PURE__*/
+    React.createElement("header", { className: "axc__mh" }, /*#__PURE__*/
+    React.createElement("p", { className: "font-sans" }, /*#__PURE__*/React.createElement("b", null, cur.number), " ", cur.englishName, /*#__PURE__*/React.createElement("span", { className: "axc__tag axc__tag--" + cur.group.toLowerCase() + " font-ko" }, AX_STATUS_KO[cur.implementationStatus])), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, cur.koreanTitle), /*#__PURE__*/
+    React.createElement("p", { className: "axc__how font-ko" }, cur.interaction)
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axc__demo-box" }, /*#__PURE__*/
+    React.createElement(Demo, { key: cur.id, sys: cur })
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "axc__story font-ko", "aria-label": cur.koreanTitle + " — 문제에서 판단까지" }, /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "01 \uBC1C\uACAC\uD55C \uBB38\uC81C"), cur.problem), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "02 \uC124\uACC4\uD55C \uAD6C\uC870"), cur.solution), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "03 \uC2E4\uC81C \uAD6C\uD604"), cur.built), /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "04 \uC0AC\uB78C\uC5D0\uAC8C \uB0A8\uB294 \uD310\uB2E8"), cur.human)
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "axc__links font-ko" },
+    cur.group === "B" ? /*#__PURE__*/
+    React.createElement("a", { className: "axc__go", href: cur.demoPath }, "\uC0C1\uC138 \uC2DC\uC5F0\uC5D0\uC11C \uC9C1\uC811 \uC368 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })) :
+    cur.demoPath ? /*#__PURE__*/React.createElement("a", { className: "axc__go axc__go--ghost", href: cur.demoPath }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0\uC5D0\uC11C \uAC19\uC740 \uAC00\uC0C1 \uACC4\uC57D\uC744 \uC870\uD56D\uBCC4\uB85C \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })) : null, /*#__PURE__*/
+    React.createElement("span", null, cur.group === "A" ? "사내 구축 시스템 — 실제 화면 · 자료 비공개, 위 시연은 가상" : "모든 사건 · 문서는 가상 자료 — 실제 의뢰인 정보 없음")
     )
-
-    ), /*#__PURE__*/
-    React.createElement("p", { className: "sr-only", "aria-live": "polite" }, cur.name, " ", cur.ko, " \u2014 ", sys === 2 ? after ? "변경 후 계약서 표시" : "변경 전 계약서 표시" : S.step >= 0 ? cur.steps[S.step][0] + ": " + cur.steps[S.step][2] : ""),
-    sys !== 2 ? /*#__PURE__*/
-    React.createElement("ol", { className: "axc__steps font-sans" },
-    cur.steps.map((st, i) => /*#__PURE__*/
-    React.createElement("li", { key: st[0] }, /*#__PURE__*/React.createElement("button", { type: "button", "aria-current": i === S.step ? "step" : undefined, className: i <= S.step ? "is-done" : "", onClick: () => S.go(i) }, /*#__PURE__*/
-    React.createElement("b", null, pad2(i + 1)), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, st[0]), /*#__PURE__*/React.createElement("em", { lang: "en" }, st[1])
-    ))
-    ), /*#__PURE__*/
-    React.createElement("li", { className: "axc__replay" }, /*#__PURE__*/React.createElement("button", { type: "button", onClick: () => {if (ctl.current) ctl.current.set("k", 0);S.play();} }, "\uCC98\uC74C\uBD80\uD130 \u21BA"))
-    ) : /*#__PURE__*/
-
-    React.createElement("div", { className: "axc__cmp font-sans" }, /*#__PURE__*/
-    React.createElement("button", { type: "button", "aria-pressed": !after, onClick: () => setS(0) }, "\uBCC0\uACBD \uC804"), /*#__PURE__*/
-    React.createElement("input", { type: "range", min: "0", max: "100", value: split, onChange: (ev) => setS(+ev.target.value), "aria-label": "\uACC4\uC57D\uC11C \uBCC0\uACBD \uC804 \u2194 \uBCC0\uACBD \uD6C4" }), /*#__PURE__*/
-    React.createElement("button", { type: "button", "aria-pressed": after, onClick: () => setS(100) }, "\uBCC0\uACBD \uD6C4")
-    )
-
-    ), /*#__PURE__*/
-
-    React.createElement("aside", { className: "axc__insp", "aria-live": "off" }, /*#__PURE__*/
-    React.createElement("p", { className: "axc__lbl font-sans" }, "Inspector \xB7 ", cur.no), /*#__PURE__*/
-    React.createElement("h3", { className: "axc__name" }, /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, cur.name), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, cur.ko)), /*#__PURE__*/
-    React.createElement("p", { className: "axc__en font-sans" }, /*#__PURE__*/React.createElement("span", { lang: "en" }, cur.enLine), " \u2014 ", /*#__PURE__*/React.createElement("span", { className: "font-ko" }, cur.title)), /*#__PURE__*/
-    React.createElement("p", { className: "axc__flow font-sans", lang: "en" }, cur.flow),
-    sys !== 2 ? /*#__PURE__*/
-    React.createElement("p", { className: "axc__now font-ko" }, S.step >= 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("b", null, pad2(S.step + 1), " \xB7 ", cur.steps[S.step][0]), cur.steps[S.step][2]) : /*#__PURE__*/React.createElement("b", null, "\uB2E8\uACC4\uB97C \uB20C\uB7EC \uBCF4\uC138\uC694")) : /*#__PURE__*/
-
-    React.createElement("ul", { className: "axc__clauses font-ko", "aria-label": "\uAC00\uC0C1 \uC870\uD56D \uBE44\uAD50" },
-    AX_CLAUSES.map(([k, v1, v2, tag]) => /*#__PURE__*/
-    React.createElement("li", { key: k, className: tag && after ? "is-chg" : "" }, /*#__PURE__*/
-    React.createElement("b", null, k, tag && after && /*#__PURE__*/React.createElement("i", { className: "font-sans" }, tag)), /*#__PURE__*/
-    React.createElement("span", null, after ? v2 : v1)
-    )
-    )
-    ), /*#__PURE__*/
-
-    React.createElement("dl", { className: "axc__rows font-ko" }, /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uBB38\uC81C ", /*#__PURE__*/React.createElement("i", { lang: "en" }, "Problem")), /*#__PURE__*/React.createElement("dd", null, cur.problem)), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD574\uACB0 ", /*#__PURE__*/React.createElement("i", { lang: "en" }, "Solution")), /*#__PURE__*/React.createElement("dd", null, cur.solve)), /*#__PURE__*/
-    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD6A8\uACFC ", /*#__PURE__*/React.createElement("i", { lang: "en" }, "Impact")), /*#__PURE__*/React.createElement("dd", null, cur.effect))
-    ), /*#__PURE__*/
-    React.createElement("p", { className: "axc__ba font-ko" }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, "\uC804"), cur.before), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, "\uD6C4"), cur.after)), /*#__PURE__*/
-    React.createElement("ul", { className: "axc__watch font-ko", "aria-label": "\uC0B4\uD3B4\uBCF4\uB294 \uC790\uB8CC" }, cur.watch.map((w) => /*#__PURE__*/React.createElement("li", { key: w }, w)))
     )
     ), /*#__PURE__*/
 
@@ -1128,24 +1190,380 @@ function AXCommand() {
     React.createElement("a", { className: "axc__lax", href: "legal-ax.html" }, /*#__PURE__*/
     React.createElement("span", { className: "axc__st axc__st--b font-sans" }, "B"), /*#__PURE__*/
     React.createElement("span", { className: "axc__lax-t" }, /*#__PURE__*/React.createElement("small", { className: "font-ko" }, "\uAC1C\uC778 \uAD6C\uD604 \uACF5\uAC1C \uC2DC\uC5F0 \xB7 \uBAA8\uB4E0 \uC0AC\uAC74\uACFC \uBB38\uC11C\uB294 \uAC00\uC0C1 \uC790\uB8CC"), /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, "\uBC95\uB960 AX \uC5C5\uBB34\uCCB4\uACC4 \uC9C1\uC811 \uC0B4\uD3B4\uBCF4\uAE30"), /*#__PURE__*/
-    React.createElement("em", { className: "font-ko" }, "\uC18C\uC1A1\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uBCC0\uACBD \uBE44\uAD50 \xB7 \uBC95\uB839 \uADFC\uAC70 \uD655\uC778 \xB7 \uC0AC\uAC74 \uC9C4\uD589 \uAD00\uB9AC \u2014 \uBBFC\uC0AC \xB7 \uD615\uC0AC \xB7 \uAC00\uC0AC \xB7 \uAE30\uC5C5 \xB7 \uB178\uB3D9 \xB7 \uD589\uC815 \xB7 \uC815\uBE44\uC0AC\uC5C5 \uC77C\uACF1 \uBD84\uC57C")), /*#__PURE__*/
+    React.createElement("em", { className: "font-ko" }, "\uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uBCC0\uACBD \uBE44\uAD50 \xB7 \uBC95\uB839 \xB7 \uBB38\uC11C \uADFC\uAC70 \uD0D0\uC0C9 \xB7 \uC0AC\uAC74 \uC9C4\uD589 \uAD00\uB9AC \u2014 \uBBFC\uC0AC \xB7 \uD615\uC0AC \xB7 \uAC00\uC0AC \xB7 \uAE30\uC5C5 \xB7 \uB178\uB3D9 \xB7 \uD589\uC815 \xB7 \uC815\uBE44\uC0AC\uC5C5 \uC77C\uACF1 \uBD84\uC57C")), /*#__PURE__*/
     React.createElement(ArrowUpRight, { size: 20 })
     ), /*#__PURE__*/
     React.createElement("p", { className: "axc__note font-ko" }, "\uC758\uB8B0\uC778 \xB7 \uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
     )
+    )
     ));
 
 }
+const AXWait = ({ t }) => /*#__PURE__*/React.createElement("p", { className: "axc__wait font-ko" }, t || "시연을 불러오는 중입니다…");
+
+/* 01 — 가상 사업지 · 규제 레이어 (건축 · 공간정보) */
+function Sys01() {
+  const cv = React.useRef(null);
+  const [site, setSite] = React.useState(0);
+  const [lay, setLay] = React.useState(2);
+  const [req, setReq] = React.useState({});
+  const ctl = useScene(cv, "reg", { site, lay, la: 1, req: req[site] ? 1 : 0 });
+  const S = RE_SITES[site];
+  const pickSite = (i) => {
+    if (i === site) return;
+    setSite(i);const c = ctl.current;
+    if (c) {c.set("site", i);c.set("req", req[i] ? 1 : 0);c.set("inn", 0);c.tween("inn", 1, 1100);}
+  };
+  const pickLay = (i) => {setLay(i);const c = ctl.current;if (c) {c.set("lay", i);c.set("la", 0);c.tween("la", 1, 750);}};
+  const ask = () => {const n = Object.assign({}, req, { [site]: !req[site] });setReq(n);if (ctl.current) ctl.current.set("req", n[site] ? 1 : 0);};
+  const hot = lay === S.flag;
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "ax1" }, /*#__PURE__*/
+    React.createElement("div", { className: "ax1__left" }, /*#__PURE__*/
+    React.createElement("div", { className: "ax1__board" }, /*#__PURE__*/
+    React.createElement("canvas", { ref: cv, "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("p", { className: "ax-fic font-ko" }, "\uAC00\uC0C1 \uC0AC\uC5C5\uC9C0 \xB7 \uAC1C\uB150 \uBAA8\uD615 \u2014 \uC2E4\uC81C \uC9C0\uBC88 \xB7 \uC6A9\uB3C4\uC9C0\uC5ED \xB7 \uB3C4\uC2DC\uACC4\uD68D\uC774 \uC544\uB2D9\uB2C8\uB2E4")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax1__sites font-ko", role: "group", "aria-label": "\uAC00\uC0C1 \uC0AC\uC5C5\uC9C0 \uACE0\uB974\uAE30" },
+    RE_SITES.map((x, i) => /*#__PURE__*/React.createElement("button", { key: x.k, type: "button", "aria-pressed": i === site, onClick: () => pickSite(i) }, /*#__PURE__*/React.createElement("b", null, "\uC0AC\uC5C5\uC9C0 ", x.k), /*#__PURE__*/React.createElement("span", null, x.type.replace("(가상)", ""))))
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax1__side font-ko" }, /*#__PURE__*/
+    React.createElement("p", { className: "ax1__site" }, /*#__PURE__*/React.createElement("b", null, "\uAC00\uC0C1 \uC0AC\uC5C5\uC9C0 ", S.k), S.type), /*#__PURE__*/
+    React.createElement("ol", { className: "ax1__stages", "aria-label": "\uC0AC\uC5C5 \uB2E8\uACC4(\uAC00\uC0C1)" }, RE_STAGES.map((t, i) => /*#__PURE__*/React.createElement("li", { key: t, className: i < S.stage ? "is-done" : i === S.stage ? "is-now" : "" }, t))), /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uADDC\uC81C \uB808\uC774\uC5B4 \u2014 \uB204\uB974\uBA74 \uBD80\uC9C0\uC758 \uD574\uB2F9 \uBD80\uBD84\uC774 \uD45C\uC2DC\uB429\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("div", { className: "ax1__layers", role: "group", "aria-label": "\uADDC\uC81C \uB808\uC774\uC5B4" },
+    RE_LAYERS.map((Ly, i) => /*#__PURE__*/
+    React.createElement("button", { key: Ly.ko, type: "button", "aria-pressed": i === lay, onClick: () => pickLay(i) }, /*#__PURE__*/
+    React.createElement("span", null, /*#__PURE__*/React.createElement("b", null, Ly.ko), /*#__PURE__*/React.createElement("em", null, Ly.src)), i === S.flag && /*#__PURE__*/React.createElement("i", null, "\uBCC0\uACBD \uAC10\uC9C0")
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ax1__where" }, /*#__PURE__*/React.createElement("b", null, RE_LAYERS[lay].ko), " \xB7 ", RE_LAYERS[lay].where), /*#__PURE__*/
+    React.createElement("div", { className: "ax1__cand" + (hot ? " is-hot" : "") }, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uBCC0\uACBD \uAC10\uC9C0 \uD6C4\uBCF4 ", /*#__PURE__*/React.createElement("span", null, "\uAC80\uD1A0 \uB300\uC0C1 \uD45C\uC2DC \xB7 \uBC95\uC801 \uD6A8\uB825 \uD310\uB2E8 \uC544\uB2D8")), /*#__PURE__*/
+    React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, S.change), "\uAD00\uB828 \uC0AC\uC5C5 \uB2E8\uACC4 \xB7 ", S.rel),
+    !hot && /*#__PURE__*/React.createElement("p", { className: "ax-muted" }, "\uC774 \uD6C4\uBCF4\uB294 \u2018", RE_LAYERS[S.flag].ko, "\u2019 \uB808\uC774\uC5B4\uC5D0 \uAC78\uB824 \uC788\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "ax-btn", "aria-pressed": !!req[site], onClick: ask }, req[site] ? "변호사 검토 요청됨(시연) — 판단 대기" : "변호사 검토 요청")
+    )
+    )
+    ));
+
+}
+
+/* 02 — 가상 총회장 평면 · 의결권 대조 (건물 없이 — 평면 · 도표 · 문서 관계) */
+function asmCount(ag, excl) {
+  const ex = excl ? ASM.exc : [];
+  const dP = ex.reduce((a, e) => a + e.dPresent, 0),dY = ex.reduce((a, e) => a + e.dYes, 0);
+  const present = ASM.direct + ASM.proxy + ASM.written - dP,yes = ag.yes - dY,half = Math.floor(ASM.members / 2) + 1;
+  const checks = [["출석", present, half, present >= half, "조합원 과반수 " + half + "명 이상"]];
+  if (ag.rule === "twothirds") {const t = Math.ceil(ASM.members * 2 / 3);checks.push(["찬성", yes, t, yes >= t, "조합원 3분의 2 " + t + "명 이상"]);} else
+  checks.push(["찬성", yes, Math.floor(present / 2) + 1, yes > present / 2, "출석 과반수 " + (Math.floor(present / 2) + 1) + "명 이상"]);
+  if (ag.rule === "direct") {const t = Math.ceil(ASM.members * 0.2),d = ASM.direct;checks.push(["직접 출석", d, t, d >= t, "조합원 20% " + t + "명 이상"]);}
+  return { present, yes, checks };
+}
+function Sys02() {
+  const [ag, setAg] = React.useState(1);
+  const [rule, setRule] = React.useState("R3");
+  const [excl, setExcl] = React.useState(false);
+  const A = ASM.agendas[ag],raw = asmCount(A, false),adj = asmCount(A, true),now = excl ? adj : raw;
+  const R = ASM.rules.find((x) => x.id === rule),hits = ASM.exc.filter((e) => e.rule === rule || rule === "R5");
+  const flip = raw.checks.some((c, i) => c[3] !== adj.checks[i][3]);
+  /* 좌석 — 앞줄부터 직접 출석 26 · 대리 21. 서면 41 · 미출석 32 는 옆 묶음 */
+  const seats = [];
+  for (let row = 0; row < 5; row++) {const n = 9 + row * 2,rad = 46 + row * 22;for (let k = 0; k < n; k++) {const a = (152 - k / (n - 1) * 124) * Math.PI / 180;seats.push([200 + Math.cos(a) * rad, 30 + Math.sin(a) * rad * 0.92]);}}
+  const kind = (m) => m < ASM.direct ? "direct" : m < ASM.direct + ASM.proxy ? "proxy" : m < ASM.direct + ASM.proxy + ASM.written ? "written" : "absent";
+  const flagged = new Set(hits.flatMap((e) => e.seats));
+  const lit = (m) => R.who === "all" || kind(m) === R.who;
+  const pctW = (v) => Math.min(100, v / ASM.members * 100) + "%";
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "ax2" }, /*#__PURE__*/
+    React.createElement("div", { className: "ax2__agendas font-ko", role: "group", "aria-label": "\uAC00\uC0C1 \uC548\uAC74" },
+    ASM.agendas.map((x, i) => /*#__PURE__*/React.createElement("button", { key: x.id, type: "button", "aria-pressed": i === ag, onClick: () => setAg(i) }, /*#__PURE__*/React.createElement("b", null, x.ko), /*#__PURE__*/React.createElement("em", null, "\uC2DC\uC5F0 \uADDC\uCE59 \xB7 ", ASM.ruleKo[x.rule])))
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax2__grid" }, /*#__PURE__*/
+    React.createElement("figure", { className: "ax2__plan" }, /*#__PURE__*/
+    React.createElement("svg", { viewBox: "0 0 400 262", role: "img", "aria-label": "가상 총회장 평면 — 조합원 " + ASM.members + "명 중 현장 " + (ASM.direct + ASM.proxy) + "석, 서면 " + ASM.written + ", 미출석 " + (ASM.members - ASM.direct - ASM.proxy - ASM.written) }, /*#__PURE__*/
+    React.createElement("rect", { x: "8", y: "8", width: "384", height: "246", fill: "none", stroke: "currentColor", strokeOpacity: ".25" }), /*#__PURE__*/
+    React.createElement("rect", { x: "160", y: "12", width: "80", height: "20", className: "ax2__dais" }), /*#__PURE__*/React.createElement("text", { x: "200", y: "26", textAnchor: "middle", className: "ax2__t" }, "\uB2E8\uC0C1 \xB7 \uC758\uC7A5\uC11D"), /*#__PURE__*/
+    React.createElement("rect", { x: "24", y: "16", width: "70", height: "22", className: "ax2__desk" }), /*#__PURE__*/React.createElement("text", { x: "59", y: "31", textAnchor: "middle", className: "ax2__t" }, "\uC811\uC218 \xB7 \uB300\uC870"),
+    seats.map((p, i) => {const m = i,inHall = m < ASM.direct + ASM.proxy;const k = inHall ? kind(m) : "empty";return (/*#__PURE__*/
+        React.createElement("g", { key: i, className: "ax2__seat ax2__seat--" + k + (inHall && lit(m) ? " is-lit" : "") + (flagged.has(m) ? " is-flag" : "") }, /*#__PURE__*/React.createElement("circle", { cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: "5" })));
+    }), /*#__PURE__*/
+    React.createElement("g", { className: "ax2__tray" }, /*#__PURE__*/React.createElement("rect", { x: "318", y: "176", width: "66", height: "70" }), /*#__PURE__*/React.createElement("text", { x: "351", y: "194", textAnchor: "middle", className: "ax2__t" }, "\uC11C\uBA74\uACB0\uC758"), /*#__PURE__*/React.createElement("text", { x: "351", y: "216", textAnchor: "middle", className: "ax2__n" }, ASM.written),
+    hits.some((e) => e.id === "E2" || e.id === "E4") && /*#__PURE__*/React.createElement("circle", { cx: "376", cy: "184", r: "5", className: "ax2__flagdot" })), /*#__PURE__*/
+    React.createElement("g", { className: "ax2__tray ax2__tray--abs" }, /*#__PURE__*/React.createElement("rect", { x: "16", y: "176", width: "66", height: "70" }), /*#__PURE__*/React.createElement("text", { x: "49", y: "194", textAnchor: "middle", className: "ax2__t" }, "\uBBF8\uCD9C\uC11D"), /*#__PURE__*/React.createElement("text", { x: "49", y: "216", textAnchor: "middle", className: "ax2__n" }, ASM.members - ASM.direct - ASM.proxy - ASM.written),
+    hits.some((e) => e.id === "E3") && /*#__PURE__*/React.createElement("circle", { cx: "74", cy: "184", r: "5", className: "ax2__flagdot" }))
+    ), /*#__PURE__*/
+    React.createElement("figcaption", { className: "font-ko" }, /*#__PURE__*/React.createElement("span", { className: "k k--d" }, "\uC9C1\uC811 \uCD9C\uC11D ", ASM.direct), /*#__PURE__*/React.createElement("span", { className: "k k--p" }, "\uB300\uB9AC(\uC704\uC784) ", ASM.proxy), /*#__PURE__*/React.createElement("span", { className: "k k--w" }, "\uC11C\uBA74 ", ASM.written), /*#__PURE__*/React.createElement("span", { className: "k k--f" }, "\uD655\uC778 \uD544\uC694 \uD45C\uC2DC"))
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax2__side font-ko" }, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uAC80\uD1A0 \uADDC\uCE59 \u2014 \uB204\uB974\uBA74 \uAD00\uB828 \uC11C\uB958 \xB7 \uC790\uB9AC\uAC00 \uD45C\uC2DC\uB429\uB2C8\uB2E4"), /*#__PURE__*/
+    React.createElement("div", { className: "ax2__rules", role: "group", "aria-label": "\uAC80\uD1A0 \uADDC\uCE59" },
+    ASM.rules.map((x) => /*#__PURE__*/React.createElement("button", { key: x.id, type: "button", "aria-pressed": x.id === rule, onClick: () => setRule(x.id) }, /*#__PURE__*/React.createElement("code", null, x.id), x.ko))
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ax2__docs" }, /*#__PURE__*/React.createElement("b", null, "\uC0B4\uD3B4\uBCF4\uB294 \uAC00\uC0C1 \uC11C\uB958"), R.docs.map((d) => /*#__PURE__*/React.createElement("span", { key: d }, d))), /*#__PURE__*/
+    React.createElement("ul", { className: "ax2__exc", "aria-label": "\uC608\uC678 \uBAA9\uB85D" },
+    hits.length ? hits.map((e) => /*#__PURE__*/React.createElement("li", { key: e.id }, /*#__PURE__*/React.createElement("code", null, e.id), e.ko, /*#__PURE__*/React.createElement("i", null, "\uD655\uC778 \uD544\uC694"))) : /*#__PURE__*/React.createElement("li", { className: "ax-muted" }, "\uC774 \uADDC\uCE59\uC5D0 \uAC78\uB9B0 \uC608\uC678 \uC5C6\uC74C")
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax2__q font-ko" }, /*#__PURE__*/
+    React.createElement("div", { className: "ax2__qh" }, /*#__PURE__*/React.createElement("p", { className: "ax-h" }, "\uC815\uC871\uC218 \xB7 \uC758\uACB0 \uB300\uC870 \u2014 ", A.ko), /*#__PURE__*/
+    React.createElement("label", { className: "ax-switch" }, /*#__PURE__*/React.createElement("input", { type: "checkbox", checked: excl, onChange: (e) => setExcl(e.target.checked) }), "\uC608\uC678 4\uAC74\uC744 \uBE7C\uACE0 \uB2E4\uC2DC \uB300\uC870")),
+    now.checks.map(([k, v, t, ok, ko], i) => /*#__PURE__*/
+    React.createElement("div", { key: k, className: "ax2__bar" }, /*#__PURE__*/
+    React.createElement("span", { className: "ax2__bl" }, /*#__PURE__*/React.createElement("b", null, k), v, "\uBA85 ", /*#__PURE__*/React.createElement("em", null, "\uAE30\uC900 ", ko)), /*#__PURE__*/
+    React.createElement("span", { className: "ax2__track" }, /*#__PURE__*/React.createElement("i", { style: { width: pctW(v) } }), /*#__PURE__*/React.createElement("s", { style: { left: pctW(t) } })), /*#__PURE__*/
+    React.createElement("span", { className: "ax2__res" + (ok ? "" : " is-no") }, ok ? "기준 충족(기계 대조)" : "기준 미달(기계 대조)", raw.checks[i][3] !== adj.checks[i][3] ? " · 예외에 따라 달라짐" : "")
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ax2__verdict" + (flip ? " is-hot" : "") }, flip ? "확인 필요 — 예외를 반영하는지에 따라 대조 결과가 달라집니다. 효력 판단은 변호사의 몫입니다." : "확인 필요 — 예외 목록(통지 · 명부 · 위임장 · 중복)을 사람이 확인해야 합니다. 시스템은 결의의 효력을 정하지 않습니다."), /*#__PURE__*/
+    React.createElement("p", { className: "ax-muted" }, "\uC815\uC871\uC218 \uAE30\uC900\uC740 \uC2DC\uC5F0\uC6A9 \uAC00\uC0C1 \uC815\uAD00\uC758 \uADDC\uCE59\uC785\uB2C8\uB2E4. \uC2E4\uC81C \uC758\uACB0 \uC694\uAC74\uC740 \u300C\uB3C4\uC2DC \uBC0F \uC8FC\uAC70\uD658\uACBD\uC815\uBE44\uBC95\u300D\uACFC \uD574\uB2F9 \uC870\uD569 \uC815\uAD00\uC744 \uD655\uC778\uD574\uC57C \uD569\uB2C8\uB2E4.")
+    )
+    ));
+
+}
+
+/* 03 — 12층 → 15층 설계 변경과 공사도급계약 조항(가상) — 가장 정교한 건축 모형 */
+const AX03_STEP = { scope: 0.05, cost: 0.3, design: 0.55, delay: 0.8 };
+function Sys03() {
+  const { lax } = React.useContext(AXReady);
+  const cv = React.useRef(null);
+  const [v, setV] = React.useState(0);
+  const [pick, setPick] = React.useState("");
+  const rows = lax ? window.LAX.diffContract(window.LAX_DATA.contracts.find((k) => k.id === "construction")) : [];
+  const on = (r) => r.op !== "same" && v / 100 >= (AX03_STEP[r.key] == null ? 2 : AX03_STEP[r.key]);
+  const hl = pick; /* 손잡이로는 조항이 차례로 켜지고(is-on), 카메라는 늘어난 층을 본다. 조항을 누르면 그 조항이 걸리는 곳으로 */
+  const ctl = useScene(cv, "build", { s: v / 100, hl });
+  React.useEffect(() => {if (ctl.current) ctl.current.set("hl", hl);}, [hl]);
+  const setS = (x) => {setV(x);if (ctl.current) ctl.current.set("s", x / 100);};
+  const toEnd = (to) => {setPick("");if (ctl.current) {ctl.current.tween("s", to / 100, 1100);}setV(to);};
+  const after = v >= 50;
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "ax3" }, /*#__PURE__*/
+    React.createElement("div", { className: "ax3__board" }, /*#__PURE__*/
+    React.createElement("canvas", { ref: cv, "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("p", { className: "ax-fic font-ko" }, "\uAC00\uC0C1 \uAC74\uCD95\uBB3C \xB7 \uAC1C\uB150 \uBAA8\uD615 \u2014 \uC2E4\uC81C \uC124\uACC4 \xB7 \uACC4\uC57D\uC774 \uC544\uB2D9\uB2C8\uB2E4")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax3__ctl font-ko" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", "aria-pressed": v === 0, onClick: () => toEnd(0) }, "\uBCC0\uACBD \uC804 \xB7 12\uCE35"), /*#__PURE__*/
+    React.createElement("input", { type: "range", min: "0", max: "100", value: v, onChange: (e) => {setPick("");setS(+e.target.value);}, "aria-label": "\uC124\uACC4 \uBCC0\uACBD \uC804 \u2194 \uBCC0\uACBD \uD6C4" }), /*#__PURE__*/
+    React.createElement("button", { type: "button", "aria-pressed": v === 100, onClick: () => toEnd(100) }, "\uBCC0\uACBD \uD6C4 \xB7 15\uCE35")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax3__clauses font-ko" }, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uC5F0\uACB0\uB41C \uACC4\uC57D \uC870\uD56D \u2014 ", lax ? "공사도급계약(가상) 변경 전 · 후" : "불러오는 중", " ", /*#__PURE__*/React.createElement("span", null, "\uB204\uB974\uBA74 \uAC74\uBB3C\uC758 \uD574\uB2F9 \uBD80\uBD84\uC744 \uBE44\uCDA5\uB2C8\uB2E4")),
+    lax ? /*#__PURE__*/
+    React.createElement("ol", null,
+    rows.map((r) => {
+      const lit = on(r),t = r.after || r.before;
+      return (/*#__PURE__*/
+        React.createElement("li", { key: r.key, className: (lit ? "is-on" : "") + (hl === r.key ? " is-sel" : "") + (r.op === "same" ? " is-same" : "") }, /*#__PURE__*/
+        React.createElement("button", { type: "button", "aria-pressed": hl === r.key, onClick: () => setPick(pick === r.key ? "" : r.key) }, /*#__PURE__*/
+        React.createElement("span", { className: "ax3__no" }, t.no, " ", t.title, /*#__PURE__*/React.createElement("i", null, r.op === "same" ? "변경 없음" : lit ? "변경 · 검토 필요" : "변경 예정")), /*#__PURE__*/
+        React.createElement("span", { className: "ax3__tx" }, r.op === "same" ? r.after.text : lit && after ? r.parts.filter((p) => p.op !== "del").map((p, j) => /*#__PURE__*/React.createElement("span", { key: j, className: "lx-d--" + p.op }, p.t)) : (r.before || r.after).text),
+        lit && r.flags.length > 0 && /*#__PURE__*/React.createElement("span", { className: "ax3__fl" }, r.flags.map((f) => f.ko).join(" · "))
+        )
+        ));
+
+    })
+    ) : /*#__PURE__*/
+    React.createElement(AXWait, null), /*#__PURE__*/
+    React.createElement("p", { className: "ax-muted" }, "\uACF5\uC0AC\uBE44 \uC99D\uC561\uB960 \xB7 \uCC45\uC784\uC758 \uD06C\uAE30\uB294 \uACC4\uC0B0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uBE44\uAD50 \uADDC\uCE59\uC740 \uC0C1\uC138 \uC2DC\uC5F0\uC758 \uACC4\uC57D \uBE44\uAD50\uC640 \uAC19\uC2B5\uB2C8\uB2E4.")
+    )
+    ));
+
+}
+
+/* 04 — 주장 → 증거 → 원문 문단 (legal-ax 의 사건 데이터 그대로) */
+const AX_FIELDS = [["civil", "민사"], ["criminal", "형사"], ["family", "가사"]];
+function Sys04() {
+  const { lax } = React.useContext(AXReady);
+  if (!lax) return /*#__PURE__*/React.createElement(AXWait, null);
+  return /*#__PURE__*/React.createElement(Sys04In, null);
+}
+function Sys04In() {
+  const L = window.LAX;
+  const [fid, setFid] = React.useState("civil");
+  const c = laxCase(fid),con = L.consistency(c);
+  const [claim, setClaim] = React.useState(c.claims[0].id);
+  const [ev, setEv] = React.useState(c.claims[0].evidence[0]);
+  const cl = c.claims.find((x) => x.id === claim) || c.claims[0];
+  const E = c.evidence.find((x) => x.id === ev) || c.evidence[0],doc = c.documents.find((d) => d.id === E.doc);
+  const pickField = (f) => {setFid(f);const cc = laxCase(f);setClaim(cc.claims[0].id);setEv(cc.claims[0].evidence[0]);};
+  const pickClaim = (x) => {setClaim(x.id);if (x.evidence.length) setEv(x.evidence[0]);};
+  const st = (id) => con.find((k) => k.claim === id) || {};
+  const party = (id) => c.participants.find((p) => p.id === id) || {};
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "ax4 font-ko" }, /*#__PURE__*/
+    React.createElement("div", { className: "axb__bar" }, /*#__PURE__*/
+    React.createElement("div", { role: "group", "aria-label": "\uAC00\uC0C1 \uC0AC\uAC74 \uBD84\uC57C" }, AX_FIELDS.map(([f, t]) => /*#__PURE__*/React.createElement("button", { key: f, type: "button", "aria-pressed": f === fid, onClick: () => pickField(f) }, t))), /*#__PURE__*/
+    React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, c.id), " ", c.title)
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax4__grid" }, /*#__PURE__*/
+    React.createElement("section", { "aria-label": "\uC8FC\uC7A5" }, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uC8FC\uC7A5 ", /*#__PURE__*/React.createElement("span", null, "\uB204\uB974\uBA74 \uAD00\uB828 \uC99D\uAC70 \uAC15\uC870")), /*#__PURE__*/
+    React.createElement("ul", { className: "ax4__claims" },
+    c.claims.map((x) => {const k = st(x.id);return (/*#__PURE__*/
+        React.createElement("li", { key: x.id }, /*#__PURE__*/React.createElement("button", { type: "button", "aria-pressed": x.id === claim, onClick: () => pickClaim(x) }, /*#__PURE__*/
+        React.createElement("small", null, party(x.party).name), /*#__PURE__*/React.createElement("span", null, "\u201C", x.text, "\u201D"), /*#__PURE__*/
+        React.createElement("i", { className: "ax-chip ax-chip--" + k.state }, k.state === "needs_check" ? "추가 검토 필요" : k.state === "matches" ? "자료 기재와 일치" : k.state === "no_rule" ? "대조할 기재 없음" : "—")
+        )));
+    })
+    )
+    ), /*#__PURE__*/
+    React.createElement("section", { "aria-label": "\uC0AC\uAC74\uC758 \uD750\uB984\uACFC \uC99D\uAC70" }, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uC0AC\uAC74\uC758 \uD750\uB984 \xB7 \uC99D\uAC70 ", /*#__PURE__*/React.createElement("span", null, "\uB204\uB974\uBA74 \uC6D0\uBB38 \uBB38\uB2E8")), /*#__PURE__*/
+    React.createElement("ol", { className: "ax4__tl" },
+    c.events.map((e) => /*#__PURE__*/
+    React.createElement("li", { key: e.id }, /*#__PURE__*/React.createElement("time", null, e.date), /*#__PURE__*/React.createElement("b", null, e.label), /*#__PURE__*/
+    React.createElement("span", null, e.evidence.map((id) => {const x = c.evidence.find((k) => k.id === id);if (!x) return null;const rel = cl.evidence.includes(id);return (/*#__PURE__*/
+        React.createElement("button", { key: id, type: "button", className: "ax4__ev" + (rel ? " is-rel" : "") + (id === ev ? " is-sel" : ""), "aria-pressed": id === ev, onClick: () => setEv(id) }, x.doc, " \xB6", x.loc.para));
+    }))
+    )
+    )
+    ),
+    cl.evidence.filter((id) => !c.events.some((e) => e.evidence.includes(id))).length > 0 && /*#__PURE__*/
+    React.createElement("p", { className: "ax4__more" }, "\uC774 \uC8FC\uC7A5\uC758 \uB2E4\uB978 \uADFC\uAC70 ", cl.evidence.filter((id) => !c.events.some((e) => e.evidence.includes(id))).map((id) => {const x = c.evidence.find((k) => k.id === id);return x ? /*#__PURE__*/React.createElement("button", { key: id, type: "button", className: "ax4__ev is-rel" + (id === ev ? " is-sel" : ""), onClick: () => setEv(id) }, x.doc, " \xB6", x.loc.para) : null;}))
+
+    ), /*#__PURE__*/
+    React.createElement("section", { "aria-label": "\uC6D0\uBB38 \uADFC\uAC70", className: "ax4__src" }, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uC6D0\uBB38 \uADFC\uAC70 ", /*#__PURE__*/React.createElement("span", null, doc.id, " \xB7 ", doc.type)), /*#__PURE__*/
+    React.createElement("h4", null, doc.title), /*#__PURE__*/
+    React.createElement("p", { className: "ax-muted" }, doc.date, " \xB7 ", party(doc.by).name || ""),
+    doc.paras.map((p, i) => i + 1 >= E.loc.para - 1 && i + 1 <= E.loc.para + 1 ? /*#__PURE__*/React.createElement("p", { key: i, className: "ax4__para" + (i + 1 === E.loc.para ? " is-sel" : "") }, /*#__PURE__*/React.createElement("i", null, "\xB6", i + 1), p) : null), /*#__PURE__*/
+    React.createElement("p", { className: "ax4__sum" }, /*#__PURE__*/React.createElement("b", null, E.id), E.summary)
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ax-method" }, /*#__PURE__*/React.createElement("b", null, "\uADDC\uCE59 \uAE30\uBC18 \uBD84\uC11D"), /*#__PURE__*/React.createElement("b", null, "\uBB38\uC11C \uAC80\uC0C9 \xB7 \uADFC\uAC70 \uD0D0\uC0C9"), " \uBAA8\uB378 \uD638\uCD9C \uC5C6\uC74C \xB7 \u2018\uCD94\uAC00 \uAC80\uD1A0 \uD544\uC694\u2019\uB294 \uC0AC\uC2E4\uC778\uC815\uC774 \uC544\uB2D9\uB2C8\uB2E4 \xB7 ", /*#__PURE__*/React.createElement("a", { href: "legal-ax.html#task=evidence&field=" + fid }, "\uC774 \uC0AC\uAC74\uC744 \uC0C1\uC138 \uC2DC\uC5F0\uC5D0\uC11C \uC5F4\uAE30 \u2192"))
+    ));
+
+}
+
+/* 05 — 법령 · 문서 근거 탐색 (색인된 자료만 · 요약과 원문 분리 · 기준일) */
+function Sys05() {
+  const { lax } = React.useContext(AXReady);
+  if (!lax) return /*#__PURE__*/React.createElement(AXWait, null);
+  return /*#__PURE__*/React.createElement(Sys05In, null);
+}
+function Sys05In() {
+  const D = window.LAX_DATA,L = window.LAX,c = laxCase("civil");
+  const [q, setQ] = React.useState("검수");
+  const [type, setType] = React.useState("all");
+  const res = L.search(D, q, type, c);
+  const [sel, setSel] = React.useState(null);
+  const cur = res.find((r) => r.id === sel) || res[0] || null;
+  const TYPE = [["all", "전체"], ["law", "법령 조문"], ["doc", "사건 문서"], ["precedent", "판례 검색 안내"]];
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "ax5 font-ko" }, /*#__PURE__*/
+    React.createElement("div", { className: "axb__bar ax5__q" }, /*#__PURE__*/
+    React.createElement("label", null, /*#__PURE__*/React.createElement("span", { className: "sr-only" }, "\uAC80\uC0C9\uC5B4"), /*#__PURE__*/React.createElement("input", { value: q, onChange: (e) => {setQ(e.target.value);setSel(null);}, placeholder: "\uC608: \uAC80\uC218 \xB7 \uC190\uD574\uBC30\uC0C1 \xB7 \uD589\uC815\uC2EC\uD310" })), /*#__PURE__*/
+    React.createElement("label", null, /*#__PURE__*/React.createElement("span", { className: "sr-only" }, "\uC790\uB8CC \uC885\uB958"), /*#__PURE__*/React.createElement("select", { value: type, onChange: (e) => {setType(e.target.value);setSel(null);} }, TYPE.map(([k, t]) => /*#__PURE__*/React.createElement("option", { key: k, value: k }, t)))), /*#__PURE__*/
+    React.createElement("div", { className: "ax5__chips", role: "group", "aria-label": "\uC608\uC2DC \uAC80\uC0C9\uC5B4" }, ["검수", "손해배상", "행정심판", "재산분할"].map((w) => /*#__PURE__*/React.createElement("button", { key: w, type: "button", onClick: () => {setQ(w);setSel(null);} }, w)))
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax5__grid" }, /*#__PURE__*/
+    React.createElement("ul", { className: "ax5__list", "aria-label": "\uAC80\uC0C9 \uACB0\uACFC" },
+    res.length ? res.slice(0, 8).map((r) => /*#__PURE__*/
+    React.createElement("li", { key: r.id }, /*#__PURE__*/React.createElement("button", { type: "button", "aria-pressed": cur && cur.id === r.id, onClick: () => setSel(r.id) },
+    r.kind === "doc" ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("small", null, "\uC0AC\uAC74 \uBB38\uC11C \xB7 ", r.doc.id, " \xB6", r.para), /*#__PURE__*/React.createElement("b", null, r.doc.title)) : /*#__PURE__*/
+    React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("small", null, r.s.type === "law" ? "법령 조문" : "판례 검색 안내"), /*#__PURE__*/React.createElement("b", null, r.s.law, " ", r.s.article, " ", r.s.title))
+    ))
+    ) : /*#__PURE__*/React.createElement("li", { className: "ax5__none" }, /*#__PURE__*/React.createElement("b", null, "\uAC80\uC0C9 \uACB0\uACFC \uC5C6\uC74C"), "\uC0C9\uC778\uB41C \uC608\uC2DC\uC790\uB8CC\uC5D0 \uB9DE\uB294 \uD56D\uBAA9\uC774 \uC5C6\uC2B5\uB2C8\uB2E4. \uC5C6\uB294 \uADFC\uAC70\uB97C \uB9CC\uB4E4\uC5B4 \uBCF4\uC5EC \uC8FC\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("article", { className: "ax5__detail", "aria-live": "polite" },
+    !cur ? /*#__PURE__*/React.createElement("p", { className: "ax-muted" }, "\uC67C\uCABD\uC5D0\uC11C \uACB0\uACFC\uB97C \uACE0\uB974\uBA74 \uC6D0\uBB38\uACFC \uC694\uC57D\uC774 \uB098\uB258\uC5B4 \uB098\uC635\uB2C8\uB2E4.") : cur.kind === "doc" ? /*#__PURE__*/
+    React.createElement(React.Fragment, null, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uC6D0\uBB38 \u2014 \uAC00\uC0C1 \uC0AC\uAC74 \uBB38\uC11C ", /*#__PURE__*/React.createElement("span", null, c.id)), /*#__PURE__*/
+    React.createElement("h4", null, cur.doc.title), /*#__PURE__*/
+    React.createElement("p", { className: "ax4__para is-sel" }, /*#__PURE__*/React.createElement("i", null, "\xB6", cur.para), cur.text), /*#__PURE__*/
+    React.createElement("a", { className: "ax5__go", href: "legal-ax.html#task=evidence&field=civil" }, "\uC0AC\uAC74 \uAE30\uB85D\uC5D0\uC11C \uC774 \uBB38\uC11C \uC5F4\uAE30 \u2192")
+    ) : /*#__PURE__*/
+
+    React.createElement(React.Fragment, null, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, cur.s.law, " ", cur.s.article, " ", /*#__PURE__*/React.createElement("i", { className: "ax-chip ax-chip--" + (cur.s.verbatim ? "matches" : "needs_check") }, cur.s.verbatim ? "작성 시점 원문" : "출처 확인 필요")), /*#__PURE__*/
+    React.createElement("h4", null, cur.s.title), /*#__PURE__*/
+    React.createElement("div", { className: "ax5__orig" }, /*#__PURE__*/React.createElement("b", null, "\uC6D0\uBB38"), cur.s.text.map((t, i) => /*#__PURE__*/React.createElement("p", { key: i }, t))), /*#__PURE__*/
+    React.createElement("p", { className: "ax5__sum" }, /*#__PURE__*/React.createElement("b", null, "\uC694\uC57D"), cur.s.summary), /*#__PURE__*/
+    React.createElement("p", { className: "ax-muted" }, "\uAE30\uC900\uC77C \xB7 ", cur.s.asOf), /*#__PURE__*/
+    React.createElement("a", { className: "ax5__go", href: cur.s.url, target: "_blank", rel: "noreferrer" }, cur.s.org, " \uC6D0\uBB38 \uD655\uC778 \u2197")
+    )
+
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ax-method" }, /*#__PURE__*/React.createElement("b", null, "\uBB38\uC11C \uAC80\uC0C9 \xB7 \uADFC\uAC70 \uD0D0\uC0C9"), " \uD310\uB840 \uC6D0\uBB38\uC740 \uC5F0\uB3D9\uD558\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4 \xB7 \uC870\uBB38\uC740 \uC62E\uAE34 \uC2DC\uC810\uC758 \uD14D\uC2A4\uD2B8\uC785\uB2C8\uB2E4 \xB7 ", /*#__PURE__*/React.createElement("a", { href: "legal-ax.html#task=research&field=civil" }, "\uC0C1\uC138 \uC2DC\uC5F0\uC5D0\uC11C \uC5F4\uAE30 \u2192"))
+    ));
+
+}
+
+/* 06 — 사건 접수 · 기한 · 검토 (상세 시연과 같은 상태 · 같은 감사기록) */
+const AX_ASSIGNEES = ["담당 변호사 A(가상)", "담당 변호사 B(가상)", "담당 변호사 C(가상)", "미지정"];
+function Sys06() {
+  const { lax } = React.useContext(AXReady);
+  if (!lax) return /*#__PURE__*/React.createElement(AXWait, null);
+  return /*#__PURE__*/React.createElement(Sys06In, null);
+}
+function Sys06In() {
+  const D = window.LAX_DATA,L = window.LAX,c = laxCase("civil");
+  const [st, act0] = useLaxState();
+  const act = (a) => act0(Object.assign({ case: c.id }, a));
+  const m = st.matters[c.id],miss = m.docs.filter((x) => !x).length,dl = c.matter.deadlines[0],calc = L.deadline(dl.base, dl.days);
+  const log = st.audit.filter((a) => a.case === c.id).slice(0, 4);
+  const iss = c.issues[0],ik = c.id + "/" + iss.id,iv = st.issues[ik] || iss.status;
+  return (/*#__PURE__*/
+    React.createElement("div", { className: "ax6 font-ko" }, /*#__PURE__*/
+    React.createElement("div", { className: "axb__bar" }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, c.id), " ", c.title)), /*#__PURE__*/
+    React.createElement("ol", { className: "ax6__stages", "aria-label": "\uC5C5\uBB34 \uB2E8\uACC4" }, D.stages.map((t, i) => /*#__PURE__*/React.createElement("li", { key: t, className: i < m.stage ? "is-done" : i === m.stage ? "is-now" : "" }, /*#__PURE__*/React.createElement("b", null, i + 1), t))), /*#__PURE__*/
+    React.createElement("div", { className: "ax6__ctl" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "ax-btn ax-btn--ghost", disabled: m.stage <= 0, onClick: () => act({ type: "stage", key: c.id, value: m.stage - 1, stageName: D.stages[m.stage - 1] }) }, "\u2190 \uC774\uC804 \uB2E8\uACC4"), /*#__PURE__*/
+    React.createElement("span", null, "\uD604\uC7AC ", /*#__PURE__*/React.createElement("b", null, D.stages[m.stage])), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "ax-btn", disabled: m.stage >= 6, onClick: () => act({ type: "stage", key: c.id, value: m.stage + 1, stageName: D.stages[m.stage + 1] }) }, "\uB2E4\uC74C \uB2E8\uACC4 \u2192")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ax6__grid" }, /*#__PURE__*/
+    React.createElement("section", null, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uB2F4\uB2F9\uC790"), /*#__PURE__*/
+    React.createElement("select", { value: m.assignee, onChange: (e) => act({ type: "assignee", key: c.id, value: e.target.value }), "aria-label": "\uB2F4\uB2F9\uC790" }, Array.from(new Set([m.assignee].concat(AX_ASSIGNEES))).map((a) => /*#__PURE__*/React.createElement("option", { key: a }, a))), /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uAC80\uD1A0 \uC0C1\uD0DC \xB7 ", iss.title), /*#__PURE__*/
+    React.createElement("select", { value: iv, onChange: (e) => act({ type: "status", key: ik, value: e.target.value, label: iss.title }), "aria-label": iss.title + " 검토 상태" }, L.STATUS.map((s) => /*#__PURE__*/React.createElement("option", { key: s.key, value: s.key }, s.ko))), /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uC774\uD574\uCDA9\uB3CC \uAC80\uD1A0"), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "ax-btn ax-btn--ghost", "aria-pressed": m.conflict === "reviewed", onClick: () => act({ type: "conflict", key: c.id, value: m.conflict === "reviewed" ? "needs_check" : "reviewed" }) }, m.conflict === "reviewed" ? "담당자 확인 표시됨" : "검토 필요 — 담당자 확인 표시"), /*#__PURE__*/
+    React.createElement("p", { className: "ax-muted" }, "\uC2DC\uC2A4\uD15C\uC740 \uC774\uD574\uCDA9\uB3CC\uC744 \uC790\uB3D9\uC73C\uB85C \uD310\uC815\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("section", null, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uD544\uC694 \uC11C\uB958 ", /*#__PURE__*/React.createElement("span", { className: miss ? "ax6__miss" : "" }, "\uB204\uB77D ", miss, "\uAC74")), /*#__PURE__*/
+    React.createElement("ul", { className: "ax6__docs" }, c.matter.docs.map(([name], i) => /*#__PURE__*/
+    React.createElement("li", { key: name }, /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", { type: "checkbox", checked: !!m.docs[i], onChange: (e) => act({ type: "doc", key: c.id, index: i, value: e.target.checked, label: name }) }), name, /*#__PURE__*/React.createElement("i", { className: m.docs[i] ? "is-ok" : "is-no" }, m.docs[i] ? "보유" : "누락")))
+    )), /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uAE30\uD55C \xB7 \uB9C8\uAC10"), /*#__PURE__*/
+    React.createElement("div", { className: "ax6__dl" }, /*#__PURE__*/React.createElement("b", null, dl.label), /*#__PURE__*/React.createElement("span", null, dl.base, " \uAE30\uC900 ", dl.days, "\uC77C \u2192 \uB2E8\uC21C \uACC4\uC0B0 ", calc.date), /*#__PURE__*/
+    React.createElement("label", null, /*#__PURE__*/React.createElement("input", { type: "checkbox", checked: !!m.deadlineChecked[dl.id], onChange: (e) => act({ type: "deadline", key: c.id, id: dl.id, value: e.target.checked, label: dl.label }) }), "\uAE30\uC0B0\uC810 \xB7 \uAE30\uAC04\uC744 \uB2F4\uB2F9 \uBCC0\uD638\uC0AC\uAC00 \uD655\uC778(\uC2DC\uC5F0)"), /*#__PURE__*/
+    React.createElement("em", null, calc.ko))
+    ), /*#__PURE__*/
+    React.createElement("section", null, /*#__PURE__*/
+    React.createElement("p", { className: "ax-h" }, "\uBCC0\uACBD \uC774\uB825 ", /*#__PURE__*/React.createElement("span", null, "\uAC00\uC0C1 \uAC10\uC0AC\uAE30\uB85D")), /*#__PURE__*/
+    React.createElement("ol", { className: "ax6__log" }, log.length ? log.map((a, i) => /*#__PURE__*/React.createElement("li", { key: i }, /*#__PURE__*/React.createElement("time", null, a.t.slice(5, 16).replace("T", " ")), a.text)) : /*#__PURE__*/React.createElement("li", { className: "ax-muted" }, "\uC544\uC9C1 \uBC14\uAFBC \uB0B4\uC6A9\uC774 \uC5C6\uC2B5\uB2C8\uB2E4. \uB2F4\uB2F9\uC790 \xB7 \uC11C\uB958 \xB7 \uB2E8\uACC4\uB97C \uBC14\uAFD4 \uBCF4\uC138\uC694.")), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "ax-btn ax-btn--ghost", disabled: true, title: "\uACF5\uAC1C \uC2DC\uC5F0\uC5D0\uC11C\uB294 \uC81C\uACF5\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4" }, "\uC804\uC790\uC18C\uC1A1 \uC81C\uCD9C \xB7 \uBA54\uC77C \uBC1C\uC1A1 \u2014 \uACF5\uAC1C \uC2DC\uC5F0 \uBBF8\uC81C\uACF5")
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ax-method" }, /*#__PURE__*/React.createElement("b", null, "\uADDC\uCE59 \uAE30\uBC18 \uBD84\uC11D"), " \uC0C1\uD0DC\uB294 \uC774 \uBE0C\uB77C\uC6B0\uC800 \uD0ED\uC5D0\uB9CC \uC800\uC7A5\uB418\uACE0, \uC0C1\uC138 \uC2DC\uC5F0\uACFC \uAC19\uC740 \uAE30\uB85D\uC744 \uC501\uB2C8\uB2E4 \xB7 ", /*#__PURE__*/React.createElement("a", { href: "legal-ax.html#task=matter&field=civil" }, "\uC0C1\uC138 \uC2DC\uC5F0\uC5D0\uC11C \uC774\uC5B4 \uBCF4\uAE30 \u2192"))
+    ));
+
+}
+
+const AX_SUPPORT = [
+{ id: "ax-compensation", tag: "실무 01 · Practice", title: "Compensation Analysis", ko: "광명시흥 3기 신도시 보상자료 분석", kind: "분석 · 발표 자료 77장 — 소프트웨어 시스템이 아닙니다",
+  desc: "보상 관련 발표자료 77장을 만들며 감정평가 → 보상협의 → 재결로 이어지는 절차와 쟁점을 정리했습니다.",
+  steps: [["필지 확인", "Parcel"], ["감정평가 자료", "Appraisal"], ["보상협의", "Consultation"], ["재결", "Adjudication"]] },
+{ id: "ed-07", tag: "실무 02 · Practice", title: "NAVER WORKS Payroll", ko: "네이버웍스 급여명세서 자동 발송", kind: "사내 운영 · 급여 정보를 다루어 화면과 코드는 비공개",
+  desc: "네이버웍스 메일 API로 급여명세서의 생성과 발송을 자동화해, 반복되던 발송 절차를 표준화했습니다.",
+  steps: [["명세서 준비", "Prepare"], ["표준 양식", "Standardize"], ["메일 발송", "Send"], ["처리 완료", "Complete"]] }];
+
 const clamp01 = (v) => v < 0 ? 0 : v > 1 ? 1 : v;
 
 /* 실무 01 — 광명시흥 보상자료: 필지 → 감정평가 자료 → 보상협의 → 재결 (금액 · 보상액은 그리지 않는다) */
 function PracticeComp({ item }) {
-  const box = React.useRef(null),cv = React.useRef(null),ctl = React.useRef(null);
+  const box = React.useRef(null),cv = React.useRef(null);
+  const ctl = useScene(cv, "comp", {});
   const S = useStepper(ctl, 4, 1500);
-  React.useEffect(() => {
-    ctl.current = window.City && window.City.mount(cv.current, "comp", {});
-    return () => ctl.current && ctl.current.destroy();
-  }, []);
   useOnce(box, () => S.play(), 0.5);
   return (/*#__PURE__*/
     React.createElement("article", { id: item.id, className: "axp axp--comp", ref: box }, /*#__PURE__*/
@@ -1534,33 +1952,31 @@ function DesktopTheater({ ed, card, onClose }) {
   );
 }
 
-/* ============================================================ THE ARTIFACTS — 직접 만든 네 가지 도구만
- * 제품마다 자기 공간(city.js 'tool-NN')이 있다. 화면에 들어오면 그 공간이 솟고(p),
- * '실제 화면 펼쳐 보기'를 누르면 시그니처 전환 — 주변 건물은 깊이별로 가라앉고, 핵심 면(필지 · 층판 · 정보 층)이
- * 떠올라 실제 제품 화면 사각형으로 바뀐다(o). 그 사각형이 곧 극장이 FLIP 으로 펼쳐지는 자리이고, 닫으면 같은 길로 되돌아간다 */
+/* ============================================================ THE ARTIFACTS — 직접 만든 네 가지 도구만 (V6.1: 제품 화면 중심으로 복구)
+ * 건물 · 도시 장면을 쓰지 않는다. 각 제품의 실제 화면 캡처(images/product) 네 장을 넘겨 보고,
+ * '실제 화면 펼쳐 보기'를 누르면 그 화면에서 제품 극장이 펼쳐진다(FLIP). 기능 설명은 작업 카드에 적힌 사실만 */
 function FlagshipTool({ e, onOpen, flip }) {
-  const cv = React.useRef(null),ctl = React.useRef(null);
+  const frame = React.useRef(null);
   const M = TOOL_META[e.n],T = THEATERS[e.n];
   const [t1] = e.title.split("\n");
-  React.useEffect(() => {
-    ctl.current = window.City && window.City.mount(cv.current, "tool-" + e.n, {
-      scroll: ".fl", mode: "reveal", img: { d: `images/product/${M.shot}-720.webp`, m: `images/product/${M.shot}-m600.webp` }
-    });
-    return () => ctl.current && ctl.current.destroy();
-  }, []);
-  const open = () => onOpen(e, ctl.current);
-  const hover = (ev) => {
-    if (ev.pointerType !== "mouse" || !ctl.current) return;
-    const r = ev.currentTarget.getBoundingClientRect();
-    ctl.current.set("hx", ((ev.clientX - r.left) / r.width - 0.5) * 2);
-  };
+  const [shot, setShot] = React.useState(0);
+  const open = () => onOpen(e, frame.current);
+  const L = T.layers[shot];
   return (/*#__PURE__*/
     React.createElement("article", { id: "ed-" + e.n, className: "fl" + (flip ? " fl--flip" : ""), style: { "--accent-fill": e.color }, "aria-labelledby": "fl-" + e.n }, /*#__PURE__*/
-    React.createElement("div", { className: "fl__stage", onPointerMove: hover, onPointerLeave: () => ctl.current && ctl.current.set("hx", 0) }, /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "fl__hit", onClick: open, "aria-haspopup": "dialog", "aria-label": `${M.name} 실제 화면 펼쳐 보기` }, /*#__PURE__*/
-    React.createElement("canvas", { ref: cv, "aria-hidden": "true" })
+    React.createElement("div", { className: "fl__stage" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", ref: frame, className: "fl__shot", onClick: open, "aria-haspopup": "dialog", "aria-label": `${M.name} 실제 화면 펼쳐 보기 — ${L.k}` }, /*#__PURE__*/
+    React.createElement("span", { className: "fl__chrome", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("em", { className: "font-sans" }, T.url.replace(/^https?:\/\//, "").replace(/\/$/, ""))), /*#__PURE__*/
+    React.createElement(TheaterShot, { name: L.img, alt: `${M.name} — ${L.t}` })
     ), /*#__PURE__*/
-    React.createElement("p", { className: "fl__env" }, /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, M.env), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, M.envKo), /*#__PURE__*/React.createElement("em", { className: "font-sans" }, "\uAC1C\uB150\uB3C4 \xB7 Concept"))
+    React.createElement("div", { className: "fl__thumbs", role: "group", "aria-label": `${M.name} 화면 고르기` },
+    T.layers.map((x, i) => /*#__PURE__*/
+    React.createElement("button", { key: x.img, type: "button", "aria-pressed": i === shot, onClick: () => setShot(i), onMouseEnter: (ev) => {if (ev.nativeEvent && ev.nativeEvent.pointerType !== "touch") setShot(i);} }, /*#__PURE__*/
+    React.createElement("b", { className: "font-sans" }, pad2(i + 1)), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, x.k)
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "fl__cap font-ko" }, /*#__PURE__*/React.createElement("b", null, L.t), L.d)
     ), /*#__PURE__*/
     React.createElement("div", { className: "fl__txt" }, /*#__PURE__*/
     React.createElement("p", { className: "fl__badge font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC0AC\uC6A9"), /*#__PURE__*/React.createElement("span", null, e.status), /*#__PURE__*/React.createElement("span", null, e.no, " / 04")), /*#__PURE__*/
@@ -1571,14 +1987,12 @@ function FlagshipTool({ e, onOpen, flip }) {
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "\uC5B4\uB5BB\uAC8C \uC4F0\uB098"), M.use)
     ), /*#__PURE__*/
     React.createElement("p", { className: "fl__link font-ko" }, /*#__PURE__*/React.createElement("span", null, "\uC774\uC5B4\uC9C0\uB294 \uC5ED\uB7C9"), M.link), /*#__PURE__*/
-    React.createElement("ol", { className: "fl__layers font-ko" },
-    T.layers.map((L, i) => /*#__PURE__*/React.createElement("li", { key: L.img }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, pad2(i + 1)), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("em", null, L.k), L.t)))
-    ), /*#__PURE__*/
-    React.createElement("p", { className: "fl__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uC124\uACC4 \uC6D0\uCE59"), e.point), /*#__PURE__*/
+    React.createElement("p", { className: "fl__point font-ko" }, /*#__PURE__*/React.createElement("b", null, T.ruleT), T.rule), /*#__PURE__*/
     React.createElement("div", { className: "fl__acts" }, /*#__PURE__*/
     React.createElement("button", { type: "button", className: "btn fl__open", "aria-haspopup": "dialog", onClick: open }, "\uC2E4\uC81C \uD654\uBA74 \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(Layers, { size: 16 })), /*#__PURE__*/
     React.createElement("a", { href: e.url, target: "_blank", rel: "noreferrer", className: "btn btn--ghost" }, e.cta, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 15 }))
-    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "fl__capnote font-ko" }, T.cap)
     )
     ));
 
@@ -1586,29 +2000,9 @@ function FlagshipTool({ e, onOpen, flip }) {
 
 function ArtifactsSection() {
   const ref = useReveal();
-  const [staged, setStaged] = React.useState(null); /* { e, card, c } */
-  const anchor = React.useRef(null);
-  const busy = React.useRef(false);
-  const onOpen = async (e, c) => {
-    if (busy.current) return;
-    busy.current = true;
-    /* 전환은 보여야 의미가 있다 — 무대가 화면에 다 들어오지 않았으면 먼저 가운데로 */
-    const st = document.querySelector("#ed-" + e.n + " .fl__hit");
-    if (st && c && !prefersCalm()) {
-      const r = st.getBoundingClientRect();
-      if (r.top < 56 || r.bottom > window.innerHeight) {st.scrollIntoView({ block: "center", behavior: "smooth" });await new Promise((ok) => setTimeout(ok, 520));}
-    }
-    if (c) await c.tween("o", 1, prefersCalm() ? 1 : 1050);
-    const a = anchor.current;
-    if (a && c) {const R = c.stageRect();Object.assign(a.style, { left: R.left + "px", top: R.top + "px", width: R.width + "px", height: R.height + "px" });}
-    setStaged({ e, card: c ? a : null, c });
-    busy.current = false;
-  };
-  const onClose = () => {
-    const c = staged && staged.c;
-    setStaged(null);
-    if (c) c.tween("o", 0, prefersCalm() ? 1 : 820);
-  };
+  const [staged, setStaged] = React.useState(null); /* { e, card } */
+  const onOpen = (e, card) => setStaged({ e, card });
+  const onClose = () => setStaged(null);
   return (/*#__PURE__*/
     React.createElement("section", { id: "artifacts", ref: ref, className: "arts", "aria-labelledby": "arts-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
@@ -1627,8 +2021,7 @@ function ArtifactsSection() {
     )
     ),
     TOOLS.map((e, i) => /*#__PURE__*/React.createElement(FlagshipTool, { key: e.n, e: e, flip: i % 2 === 1, onOpen: onOpen }))
-    ), /*#__PURE__*/
-    React.createElement("div", { ref: anchor, className: "fl-anchor", "aria-hidden": "true" }),
+    ),
     staged && /*#__PURE__*/React.createElement(ProductTheater, { ed: staged.e, card: staged.card, onClose: onClose })
     ));
 
@@ -2230,4 +2623,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, HeroCity, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
