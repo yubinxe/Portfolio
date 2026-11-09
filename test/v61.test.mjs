@@ -11,10 +11,10 @@ test("첫 화면은 사진형 Hero — 건축 캔버스 없음, CTA 세 개가 �
   const hero = jsx.slice(jsx.indexOf("function HeroClassic("), jsx.indexOf("function Sticker("));
   assert.ok(hero.includes('name="hero-gangnam"') && hero.includes("YUBIN") && hero.includes("KIM"));
   assert.ok(!/canvas|City\./.test(hero), "첫 화면에 캔버스 · 건축 엔진");
-  for (const [href, label] of [["#tools", "대표 프로젝트 보기"], ["#ax-desk", "법률 AX 6대 시스템"], ["#contact", "협업 문의"]]) {
+  for (const [href, label] of [["#trial-brief", "대표 프로젝트 보기"], ["#ax-desk", "법률 AX 6대 시스템"], ["#contact", "협업 문의"]]) {
     assert.ok(hero.includes(`href="${href}"`) && hero.includes(label), label);
   }
-  for (const id of ["tools", "ax-desk", "contact"]) assert.ok(new RegExp(`id="${id}"`).test(jsx), "앵커 없음 " + id);
+  for (const id of ["trial-brief", "tools", "ax-desk", "contact"]) assert.ok(new RegExp(`id="${id}"`).test(jsx), "앵커 없음 " + id);
 });
 
 test("건축 모형은 경국 AX 장면(reg · build · comp)만 — 히어로 · 네 제품 · 법률 AX 상세에는 없다", () => {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gyunggook Trial Brief — 기일 전 1페이지 사건 브리핑 (김유빈 개인 구현 시제품 · 가상 사건)</title>
+<meta name="description" content="김유빈(Yubin Kim)이 설계·구현한 기일 전 1페이지 사건 브리핑 시제품. 가상 민사사건 3건으로 문서 등록 → 정보 추출 → 정합성 검수(날짜·금액·당사자·증거번호) → 담당자 검토 · 변호사 승인 → A4 1장 브리핑 · PDF 출력을 직접 써 볼 수 있습니다. 법무법인 경국이 승인·도입한 서비스가 아니며, AI 모델을 호출하지 않는 규칙 기반 시연입니다." />
+<meta name="author" content="Yubin Kim 김유빈" />
+<meta name="theme-color" content="#13284B" />
+<link rel="canonical" href="https://yubinxe.github.io/Portfolio/trial-brief.html" />
+<link rel="icon" href="favicon.ico?v=4" sizes="48x48" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg?v=4" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Gyunggook Trial Brief — 재판 직전, 사건의 핵심을 한 장으로" />
+<meta property="og:description" content="기일 전 1페이지 사건 브리핑 시제품 · 가상 사건 · 개인 구현 (법무법인 경국 도입 서비스 아님)" />
+<meta property="og:image" content="https://yubinxe.github.io/Portfolio/images/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<link rel="stylesheet" href="trial-brief.css?v=1" />
+</head>
+<body>
+<div id="root">
+  <noscript>
+    <div style="max-width:720px;margin:0 auto;padding:40px 20px;font-family:'Pretendard Variable',system-ui,sans-serif;line-height:1.8;color:#0E1A2E">
+      <p><a href="index.html#trial-brief">← 김유빈 포트폴리오</a></p>
+      <h1>Gyunggook Trial Brief — 기일 전 1페이지 사건 브리핑</h1>
+      <p>개인 구현 시제품입니다. 법무법인 경국(Gyunggook)이 승인 · 도입한 서비스가 아니며, 모든 사건 · 인물 · 문서는 가상입니다.</p>
+      <p>이 화면은 JavaScript 로 동작합니다. 가상 민사사건 3건(누수 손해배상 · 계약금 반환 · 임대차보증금 반환)으로 문서 등록, 정보 추출, 정합성 검수, 담당자 검토 · 승인, A4 1장 브리핑 · PDF 출력을 시연합니다.</p>
+    </div>
+  </noscript>
+</div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
+<script src="trial-brief-data.js?v=1"></script>
+<script src="trial-brief-domain.js?v=1"></script>
+<script src="dist/trial-brief.js?v=1"></script>
+</body>
+</html>

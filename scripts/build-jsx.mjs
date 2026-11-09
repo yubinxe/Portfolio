@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-export const SOURCES = ["tweaks-panel.jsx", "icons.jsx", "sections.jsx", "app.jsx", "legal-ax.jsx"];
+export const SOURCES = ["tweaks-panel.jsx", "icons.jsx", "sections.jsx", "app.jsx", "legal-ax.jsx", "trial-brief.jsx"];
 
 export async function compile(file) {
   const code = await readFile(path.join(ROOT, file), "utf8");
