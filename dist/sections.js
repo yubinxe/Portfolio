@@ -107,12 +107,12 @@ function HeroClassic() {
     )
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-sub" }, /*#__PURE__*/
-    React.createElement("p", { className: "font-ko hero-role" }, /*#__PURE__*/React.createElement("b", null, "AI \uC804\uB7B5 \xB7 AX \uC2E4\uD589"), /*#__PURE__*/React.createElement("span", null, "\uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0 \xB7 \uC815\uCC45 \uBD84\uC57C\uC5D0 \uAE30\uC220\uC744 \uC801\uC6A9\uD558\uB294 \uC2E4\uBB34\uD615 \uBB38\uC81C \uD574\uACB0\uC790")), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko hero-role" }, /*#__PURE__*/React.createElement("b", null, "\uD604\uC5C5\uC758 \uBB38\uC81C\uB97C \uAE30\uC220\uB85C \uD574\uACB0\uD558\uB294 AX\xB7\uC804\uB7B5\uAE30\uD68D \uC2E4\uBB34\uC790")), /*#__PURE__*/
     React.createElement("p", { className: "font-ko hero-lead" }, "\uBCF5\uC7A1\uD55C \uBB38\uC81C\uB97C \uAD6C\uC870\uD654\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uAE30\uC220\uB85C \uC2E4\uD589\uD569\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko hero-proof" }, "\uBC95\uB960\uC0AC\uBB34\uC640 \uC870\uC9C1 \uC6B4\uC601\uC5D0\uC11C \uBC1C\uACAC\uD55C \uBB38\uC81C\uB97C \uB370\uC774\uD130\uC640 \uC18C\uD504\uD2B8\uC6E8\uC5B4\uB85C \uD574\uACB0\uD558\uACE0, \uC0AC\uB78C\uC758 \uD310\uB2E8\uACFC \uC758\uC0AC\uACB0\uC815\uC5D0 \uD544\uC694\uD55C \uADFC\uAC70\uB97C \uB9CC\uB4ED\uB2C8\uB2E4.")
+    React.createElement("p", { className: "font-ko hero-proof" }, "\uBC95\uB960\xB7\uBD80\uB3D9\uC0B0 \uBD84\uC57C\uC758 \uC2E4\uBB34 \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C \uC5C5\uBB34 \uD504\uB85C\uC138\uC2A4\uB97C \uBD84\uC11D\uD558\uACE0, AI\uC640 \uC790\uB3D9\uD654\uB97C \uD65C\uC6A9\uD55C \uAC1C\uC120 \uACFC\uC81C\uB97C \uC124\uACC4\xB7\uAD6C\uD604\uD569\uB2C8\uB2E4. \uD604\uC7A5\uC5D0\uC11C \uD655\uC778\uD55C \uBB38\uC81C\uB97C \uC2E4\uD589 \uAC00\uB2A5\uD55C \uC2DC\uC2A4\uD15C\uC73C\uB85C \uC804\uD658\uD558\uB294 \uB370 \uC9D1\uC911\uD569\uB2C8\uB2E4.")
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-cta" }, /*#__PURE__*/
-    React.createElement("a", { href: "#tools", className: "btn hero-main" }, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
+    React.createElement("a", { href: "#trial-brief", className: "btn hero-main" }, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uBC95\uB960 AX 6\uB300 \uC2DC\uC2A4\uD15C"), /*#__PURE__*/
     React.createElement("a", { href: "#contact", className: "btn btn--ghost" }, "\uD611\uC5C5 \uBB38\uC758")
     )
@@ -1135,6 +1135,7 @@ function AXCommand() {
     )
     ), /*#__PURE__*/
 
+    React.createElement(TrialBriefFeature, null), /*#__PURE__*/
     React.createElement("p", { className: "axc__count font-ko" }, /*#__PURE__*/React.createElement("b", null, "AX \uC2DC\uC2A4\uD15C 6\uC885"), " = \uACBD\uAD6D \uC2E4\uBB34 \uAE30\uBC18 3\uC885 + \uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0 3\uC885 ", /*#__PURE__*/React.createElement("span", null, "\u201816\uAC1C \uACB0\uACFC\uBB3C\u2019\uC740 \uC804\uCCB4 \uC791\uC5C5 \uAE30\uB85D \uC218\uB85C, \uC774 6\uC885\uACFC \uB530\uB85C \uC149\uB2C8\uB2E4.")), /*#__PURE__*/
     React.createElement("div", { className: "axc__console" }, /*#__PURE__*/
     React.createElement("nav", { className: "axc__nav", "aria-label": "AX 6\uB300 \uC2DC\uC2A4\uD15C \uACE0\uB974\uAE30" },
@@ -1195,6 +1196,42 @@ function AXCommand() {
     ), /*#__PURE__*/
     React.createElement("p", { className: "axc__note font-ko" }, "\uC758\uB8B0\uC778 \xB7 \uC0AC\uAC74 \uC815\uBCF4\uC640 \uC0AC\uB0B4 \uD654\uBA74\uC740 \uACF5\uAC1C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")
     )
+    )
+    ));
+
+}
+/* 대표 프로젝트 — Gyunggook Trial Brief (개인 구현 시제품 · 경국 도입 아님). 성과 칸에는 테스트로 확인한 것만 */
+const TB_CARD = {
+  cat: "법률 AX · 업무혁신 · 제품기획",
+  title: "재판 준비 업무를 한 장의 브리핑으로 구조화",
+  desc: "사건기록과 기일 준비사항을 연결해 변호사가 핵심 쟁점 · 증거 · 미결 과제를 빠르게 확인할 수 있는 1페이지 브리핑 시스템을 설계 · 구현한 프로젝트",
+  roles: ["법률 실무 프로세스 분석", "사건 데이터 · 정보구조 설계", "근거 기반 요약 · 정합성 검증", "사용자 중심 인터페이스 구현", "자동화 테스트 · 품질관리"],
+  proof: ["가상 민사사건 3건 — 문서 등록부터 A4 1장 PDF 출력까지 브라우저 자동 테스트 통과(Chromium · WebKit)", "넣어 둔 문서 불일치 · 누락 15건 모두 검출, 그 밖의 항목 표시 0건(테스트 자료 기준)", "실무 도입 · 시간 단축 효과는 측정하지 않음(미도입)"]
+};
+function TrialBriefFeature() {
+  return (/*#__PURE__*/
+    React.createElement("article", { id: "trial-brief", className: "axc__tb", "aria-labelledby": "tb-card-h" }, /*#__PURE__*/
+    React.createElement("a", { className: "axc__tb-shot", href: "trial-brief.html#case=TB-CV-01&view=brief", "aria-label": "Gyunggook Trial Brief 1\uD398\uC774\uC9C0 \uBE0C\uB9AC\uD551 \uD654\uBA74 \uC5F4\uAE30" }, /*#__PURE__*/
+    React.createElement("picture", null, /*#__PURE__*/
+    React.createElement("source", { media: "(max-width: 760px)", type: "image/avif", srcSet: "images/product/tb-brief-m600.avif" }), /*#__PURE__*/
+    React.createElement("source", { media: "(max-width: 760px)", type: "image/webp", srcSet: "images/product/tb-brief-m600.webp" }), /*#__PURE__*/
+    React.createElement("source", { type: "image/avif", srcSet: "images/product/tb-brief-720.avif 720w, images/product/tb-brief-1280.avif 1280w", sizes: "(max-width: 860px) 92vw, 40vw" }), /*#__PURE__*/
+    React.createElement("img", { src: "images/product/tb-brief-720.webp", srcSet: "images/product/tb-brief-720.webp 720w, images/product/tb-brief-1280.webp 1280w", sizes: "(max-width: 860px) 92vw, 40vw", alt: "Gyunggook Trial Brief \u2014 \uAC00\uC0C1 \uB204\uC218 \uC190\uD574\uBC30\uC0C1 \uC0AC\uAC74\uC758 A4 1\uC7A5 \uBE0C\uB9AC\uD551: \uAE30\uC77C \xB7 \uC0AC\uAC74 \uC694\uC57D \xB7 \uD575\uC2EC \uC7C1\uC810 \xB7 \uC99D\uAC70 \xB7 \uC704\uD5D8 \xB7 \uAC80\uD1A0 \uC0C1\uD0DC", width: "1280", height: "1818", loading: "lazy", decoding: "async" })
+    ), /*#__PURE__*/
+    React.createElement("span", { className: "font-ko" }, "\uC2E4\uC81C \uC2DC\uC81C\uD488 \uD654\uBA74 \xB7 \uAC00\uC0C1 \uC0AC\uAC74")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axc__tb-txt font-ko" }, /*#__PURE__*/
+    React.createElement("p", { className: "axc__tb-k" }, /*#__PURE__*/React.createElement("b", null, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8"), TB_CARD.cat, /*#__PURE__*/React.createElement("span", { className: "axc__tag axc__tag--b" }, "\uAC1C\uC778 \uAD6C\uD604 \uC2DC\uC81C\uD488 \xB7 \uACBD\uAD6D \uB3C4\uC785 \uC544\uB2D8")), /*#__PURE__*/
+    React.createElement("h3", { id: "tb-card-h" }, /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Gyunggook Trial Brief"), TB_CARD.title), /*#__PURE__*/
+    React.createElement("p", { className: "axc__tb-d" }, TB_CARD.desc), /*#__PURE__*/
+    React.createElement("dl", { className: "axc__tb-dl" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uB2F4\uB2F9"), /*#__PURE__*/React.createElement("dd", null, "\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8 \xB7 \uAE30\uD68D\uBD80\uD130 \uAD6C\uD604 \xB7 \uD14C\uC2A4\uD2B8\uAE4C\uC9C0 \uB2E8\uB3C5 \uC218\uD589")), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD575\uC2EC \uAE30\uC5EC"), /*#__PURE__*/React.createElement("dd", null, /*#__PURE__*/React.createElement("ul", null, TB_CARD.roles.map((r) => /*#__PURE__*/React.createElement("li", { key: r }, r))))), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uAC80\uC99D"), /*#__PURE__*/React.createElement("dd", null, /*#__PURE__*/React.createElement("ul", null, TB_CARD.proof.map((r) => /*#__PURE__*/React.createElement("li", { key: r }, r))))), /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC0C1\uD0DC"), /*#__PURE__*/React.createElement("dd", null, "\uACF5\uAC1C \uC2DC\uC81C\uD488 \u2014 \uADDC\uCE59 \uAE30\uBC18 \xB7 AI \uBAA8\uB378 \uBBF8\uC0AC\uC6A9 \xB7 \uC2E4\uC81C \uC0AC\uAC74\uC790\uB8CC \uC5C6\uC74C"))
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "axc__tb-flow" }, "\uC0AC\uAC74 \uC120\uD0DD \u2192 \uC790\uB8CC \uD655\uC778 \u2192 \uBD88\uC77C\uCE58 \uD0D0\uC9C0 \u2192 \uB2F4\uB2F9\uC790 \uAC80\uD1A0 \u2192 1\uD398\uC774\uC9C0 \uBE0C\uB9AC\uD551 \u2192 PDF \uCD9C\uB825"), /*#__PURE__*/
+    React.createElement("p", { className: "axc__links" }, /*#__PURE__*/React.createElement("a", { className: "axc__go", href: "trial-brief.html" }, "\uC2DC\uC81C\uD488 \uC9C1\uC811 \uC368 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/React.createElement("a", { className: "axc__go axc__go--ghost", href: "trial-brief.html#tb-case" }, "\uD504\uB85C\uC81D\uD2B8 \uAC1C\uC694(\uBB38\uC81C \u2192 \uD655\uC7A5)"))
     )
     ));
 

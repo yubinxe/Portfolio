@@ -1,11 +1,13 @@
 # Portfolio — 작업 규칙 (토큰 절약용 요약)
 
 ## 구조
-- 정적 페이지: `index.html` · `gallery.html` · `lecture.html` · `career.html` · `legal-ax.html`(법률 AX 공개 시연: `legal-ax-data.js` · `legal-ax-domain.js` · `legal-ax.jsx` → `dist/legal-ax.js` · `legal-ax.css`)
+- 정적 페이지: `index.html` · `gallery.html` · `lecture.html` · `career.html` · `legal-ax.html`(법률 AX 공개 시연: `legal-ax-data.js` · `legal-ax-domain.js` · `legal-ax.jsx` → `dist/legal-ax.js` · `legal-ax.css`) · `trial-brief.html`(대표 프로젝트 Gyunggook Trial Brief · 개인 시제품: `trial-brief-data.js` · `trial-brief-domain.js` · `trial-brief.jsx` → `dist/trial-brief.js` · `trial-brief.css` · 문서 `docs/trial-brief.md`)
 - React 18 UMD: `sections.jsx` → `npm run build` → `dist/sections.js` (dist 도 커밋)
 - CSS: `styles.css`(예산 96KB) + `features.css`(V3 추가분, 예산 24KB). 새 스타일은 features.css 끝에.
 - 순서: HeroClassic(사진형 첫 화면 · 7bfd9a1e780 기준) → Ledger → About → Composite(T/π) → AXCommand(법률 AX 6대 시스템) → ArtifactsSection(도구 4 · 제품 화면) → PolicySection → ResearchArchive → Trajectory. 문장 근거는 `docs/content-matrix.md`
 - 건축 모형 `city.js`(Canvas 2D · 장면 reg · build · comp)는 **경국 AX 섹션에서만** — 히어로 · 제품 · 역량 · legal-ax 에 건물 금지. index 는 AX 섹션 근처에서 `city.js` · `legal-ax-data.js` · `legal-ax-domain.js` 를 지연 로드(sections.jsx `AX_ASSETS` — 버전 바꾸면 여기도)
+- 경국 AX 섹션 맨 위 `#trial-brief` 대표 프로젝트 카드(TB_CARD — 성과 칸은 테스트로 확인한 것만). 히어로 ‘대표 프로젝트 보기’ → `#trial-brief`
+- 영문 회사명은 Gyunggook(다른 표기 금지). 회사명을 쓴다고 회사 승인 · 도입이 아님 — ‘개인 구현 · 경국 도입 아님’ 병기
 - AX 6종 = A 경국 실무 01–03(사내 구축 · 비공개) + B 개인 공개 시연 04–06(legal-ax 와 같은 데이터 · 같은 탭 저장소). B 를 경국 도입으로 쓰지 않기. 16개 결과물 수와 따로 셈
 - JS: `mnav.js`(모바일 메뉴) · `kb.js`(챗봇 지식) · `chatbot.js` · Vercel 함수 `api/chat.js` · `api/lead.js`
 - 배포: main push → GitHub Pages(canonical https://yubinxe.github.io/Portfolio/) + Vercel `portfolio` 자동. `vercel.json` 의 buildCommand ""·outputDirectory "." 유지.
@@ -14,10 +16,10 @@
 - `npm run build` — JSX 변경 후
 - `npm run seed:build` — kb.js 변경 후 필수
 - `npm run build:images` — 사진 추가 시(AVIF/WebP → images/opt/, sections.jsx `OPT` 맵)
-- `npm test` — 71건 모두 통과해야 커밋
+- `npm test` — 80건 모두 통과해야 커밋
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=17` · `dist/sections.js?v=46` · `dist/app.js?v=9` · `chatbot.js?v=17` · `mnav.js?v=7` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=4`(index 전용) · `kb.js?v=20261108b` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=17` · `dist/sections.js?v=47` · `dist/app.js?v=9` · `chatbot.js?v=17` · `mnav.js?v=7` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `kb.js?v=20261109a` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.

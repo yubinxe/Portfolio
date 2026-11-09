@@ -662,3 +662,23 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
   .ax1__sites{padding:8px}.ax1__sites button{padding:6px 8px}
   .ax-fic{top:auto;bottom:8px;left:8px;right:8px;font-size:.68rem}
 }
+
+/* ============================================================ 대표 프로젝트 — Gyunggook Trial Brief */
+.axc__tb{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,3vw,40px);align-items:start;margin-top:32px;padding:clamp(18px,2.4vw,28px);background:rgba(239,232,216,.05);border:1px solid rgba(220,192,138,.45);scroll-margin-top:80px}
+.axc__tb-shot{position:relative;display:block;max-height:560px;overflow:hidden;background:#fff;border:1px solid rgba(239,232,216,.3);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.axc__tb-shot img{display:block;width:100%;height:auto}
+.axc__tb-shot span{position:absolute;left:10px;bottom:10px;padding:3px 8px;font-size:.72rem;font-weight:700;color:#13284B;background:rgba(255,253,249,.94);border:1px solid rgba(19,40,75,.2)}
+.axc__tb-shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.9));pointer-events:none}
+.axc__tb-txt{display:flex;flex-direction:column;gap:12px;min-width:0}
+.axc__tb-k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0;font-size:.8rem;color:var(--v5-on-soft)}
+.axc__tb-k b{padding:3px 9px;font-size:.74rem;color:var(--v5-mid);background:var(--v5-goldon)}
+.axc__tb h3{display:grid;gap:4px;margin:0;font-size:clamp(1.35rem,2.4vw,1.85rem);font-weight:800;letter-spacing:-.025em;line-height:1.3;color:#F8F3E8}
+.axc__tb h3 .font-sans{font-size:.82rem;font-weight:700;letter-spacing:.04em;color:var(--v5-goldon)}
+.axc__tb-d{margin:0;font-size:.95rem;line-height:1.75;color:var(--v5-on)}
+.axc__tb-dl{display:grid;gap:0;margin:0;border-top:1px solid var(--v5-on-faint)}
+.axc__tb-dl div{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid var(--v5-on-faint)}
+.axc__tb-dl dt{font-size:.78rem;font-weight:800;color:var(--v5-goldon)}
+.axc__tb-dl dd{margin:0;font-size:.86rem;line-height:1.65;color:var(--v5-on-soft)}
+.axc__tb-dl ul{margin:0;padding-left:16px}
+.axc__tb-flow{margin:0;padding:8px 10px;font-size:.8rem;color:var(--v5-on);border:1px solid var(--v5-on-faint)}
+@media (max-width:860px){.axc__tb{grid-template-columns:1fr}.axc__tb-shot{max-height:420px}.axc__tb-dl div{grid-template-columns:64px minmax(0,1fr)}}

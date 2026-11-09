@@ -106,12 +106,12 @@ function HeroClassic() {
             </span>
           </h1>
           <div className="hero-sub">
-            <p className="font-ko hero-role"><b>AI 전략 · AX 실행</b><span>법률 · 부동산 · 정책 분야에 기술을 적용하는 실무형 문제 해결자</span></p>
+            <p className="font-ko hero-role"><b>현업의 문제를 기술로 해결하는 AX·전략기획 실무자</b></p>
             <p className="font-ko hero-lead">복잡한 문제를 구조화하고,<br />기술로 실행합니다.</p>
-            <p className="font-ko hero-proof">법률사무와 조직 운영에서 발견한 문제를 데이터와 소프트웨어로 해결하고, 사람의 판단과 의사결정에 필요한 근거를 만듭니다.</p>
+            <p className="font-ko hero-proof">법률·부동산 분야의 실무 경험을 바탕으로 업무 프로세스를 분석하고, AI와 자동화를 활용한 개선 과제를 설계·구현합니다. 현장에서 확인한 문제를 실행 가능한 시스템으로 전환하는 데 집중합니다.</p>
           </div>
           <div className="hero-cta">
-            <a href="#tools" className="btn hero-main">대표 프로젝트 보기 <ArrowDown size={15} /></a>
+            <a href="#trial-brief" className="btn hero-main">대표 프로젝트 보기 <ArrowDown size={15} /></a>
             <a href="#ax-desk" className="btn btn--ghost">법률 AX 6대 시스템</a>
             <a href="#contact" className="btn btn--ghost">협업 문의</a>
           </div>
@@ -1134,6 +1134,7 @@ function AXCommand() {
           </ul>
         </header>
 
+        <TrialBriefFeature />
         <p className="axc__count font-ko"><b>AX 시스템 6종</b> = 경국 실무 기반 3종 + 개인 공개 시연 3종 <span>‘16개 결과물’은 전체 작업 기록 수로, 이 6종과 따로 셉니다.</span></p>
         <div className="axc__console">
           <nav className="axc__nav" aria-label="AX 6대 시스템 고르기">
@@ -1196,6 +1197,42 @@ function AXCommand() {
       </div>
     </section>
     </AXReady.Provider>
+  );
+}
+/* 대표 프로젝트 — Gyunggook Trial Brief (개인 구현 시제품 · 경국 도입 아님). 성과 칸에는 테스트로 확인한 것만 */
+const TB_CARD = {
+  cat: "법률 AX · 업무혁신 · 제품기획",
+  title: "재판 준비 업무를 한 장의 브리핑으로 구조화",
+  desc: "사건기록과 기일 준비사항을 연결해 변호사가 핵심 쟁점 · 증거 · 미결 과제를 빠르게 확인할 수 있는 1페이지 브리핑 시스템을 설계 · 구현한 프로젝트",
+  roles: ["법률 실무 프로세스 분석", "사건 데이터 · 정보구조 설계", "근거 기반 요약 · 정합성 검증", "사용자 중심 인터페이스 구현", "자동화 테스트 · 품질관리"],
+  proof: ["가상 민사사건 3건 — 문서 등록부터 A4 1장 PDF 출력까지 브라우저 자동 테스트 통과(Chromium · WebKit)", "넣어 둔 문서 불일치 · 누락 15건 모두 검출, 그 밖의 항목 표시 0건(테스트 자료 기준)", "실무 도입 · 시간 단축 효과는 측정하지 않음(미도입)"],
+};
+function TrialBriefFeature() {
+  return (
+    <article id="trial-brief" className="axc__tb" aria-labelledby="tb-card-h">
+      <a className="axc__tb-shot" href="trial-brief.html#case=TB-CV-01&view=brief" aria-label="Gyunggook Trial Brief 1페이지 브리핑 화면 열기">
+        <picture>
+          <source media="(max-width: 760px)" type="image/avif" srcSet="images/product/tb-brief-m600.avif" />
+          <source media="(max-width: 760px)" type="image/webp" srcSet="images/product/tb-brief-m600.webp" />
+          <source type="image/avif" srcSet="images/product/tb-brief-720.avif 720w, images/product/tb-brief-1280.avif 1280w" sizes="(max-width: 860px) 92vw, 40vw" />
+          <img src="images/product/tb-brief-720.webp" srcSet="images/product/tb-brief-720.webp 720w, images/product/tb-brief-1280.webp 1280w" sizes="(max-width: 860px) 92vw, 40vw" alt="Gyunggook Trial Brief — 가상 누수 손해배상 사건의 A4 1장 브리핑: 기일 · 사건 요약 · 핵심 쟁점 · 증거 · 위험 · 검토 상태" width="1280" height="1818" loading="lazy" decoding="async" />
+        </picture>
+        <span className="font-ko">실제 시제품 화면 · 가상 사건</span>
+      </a>
+      <div className="axc__tb-txt font-ko">
+        <p className="axc__tb-k"><b>대표 프로젝트</b>{TB_CARD.cat}<span className="axc__tag axc__tag--b">개인 구현 시제품 · 경국 도입 아님</span></p>
+        <h3 id="tb-card-h"><span className="font-sans" lang="en">Gyunggook Trial Brief</span>{TB_CARD.title}</h3>
+        <p className="axc__tb-d">{TB_CARD.desc}</p>
+        <dl className="axc__tb-dl">
+          <div><dt>담당</dt><dd>개인 프로젝트 · 기획부터 구현 · 테스트까지 단독 수행</dd></div>
+          <div><dt>핵심 기여</dt><dd><ul>{TB_CARD.roles.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
+          <div><dt>검증</dt><dd><ul>{TB_CARD.proof.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
+          <div><dt>상태</dt><dd>공개 시제품 — 규칙 기반 · AI 모델 미사용 · 실제 사건자료 없음</dd></div>
+        </dl>
+        <p className="axc__tb-flow">사건 선택 → 자료 확인 → 불일치 탐지 → 담당자 검토 → 1페이지 브리핑 → PDF 출력</p>
+        <p className="axc__links"><a className="axc__go" href="trial-brief.html">시제품 직접 써 보기 <ArrowUpRight size={15} /></a><a className="axc__go axc__go--ghost" href="trial-brief.html#tb-case">프로젝트 개요(문제 → 확장)</a></p>
+      </div>
+    </article>
   );
 }
 const AXWait = ({ t }) => <p className="axc__wait font-ko">{t || "시연을 불러오는 중입니다…"}</p>;
