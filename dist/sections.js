@@ -81,6 +81,115 @@ function Nav() {
 
 }
 
+/* ============================================================ INTRO — ALPHA SHEEP · The First Move
+ * 사진형 첫 화면(HeroClassic) 앞의 스크롤 오프닝 타이틀. 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP → 선언 → 김유빈.
+ * 움직임은 cine.js 의 pin 진행도(--cp)를 intro.css 가 transform · opacity 로 계산한다 — 스크롤 중 React 재렌더 0회, 두 번째 스크롤 엔진 없음.
+ * 켜짐/꺼짐은 index.html <head> 의 짧은 스크립트가 첫 그리기 전에 정한다(html.ix-on / ix-off) — 레이아웃 흔들림 없음.
+ *   ix-on 이 없으면(JS 없음 · 움직임 줄이기 · 인트로 끄기 전 저장 불가) 고정 없이 여섯 문장을 짧은 정적 화면으로 보여 준다.
+ * SKIP INTRO 는 #manifesto 로 가는 평범한 링크라 React 가 실패해도 동작한다. ‘인트로 끄기’는 이 브라우저(localStorage)에만 기억 — 쿠키 · 추적 없음.
+ * 슬로건 ALPHA SHEEP 은 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건 — ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며 도서와 제휴 관계가 없다. */
+const IX_KEY = "yk.intro";
+const ixSet = (on) => {
+  try {if (on) localStorage.removeItem(IX_KEY);else localStorage.setItem(IX_KEY, "off");} catch (e) {}
+  const h = document.documentElement;
+  const calm = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  h.classList.toggle("ix-off", !on);
+  h.classList.toggle("ix-on", on && !calm);
+  h.classList.toggle("ix-active", on && !calm);
+  window.dispatchEvent(new Event("cine:scan"));
+  window.scrollTo(0, 0);
+  if (!on) {const t = document.getElementById("hero-title");if (t) {t.setAttribute("tabindex", "-1");t.focus({ preventScroll: true });}}
+};
+/* 무리 — 같은 방향으로 흐르는 짧은 선들. 줄마다 하나의 묶음(g)만 움직여 그리기 비용을 줄인다(선 64개 · 변환 4개) */
+const IX_ROWS = [0, 1, 2, 3].map((r) => {
+  const y = 372 + r * 52,out = [];
+  for (let k = 0; k < 16; k++) {const x = -260 + k * 132 + (r * 47 + k * 29) % 41;out.push([x, y + (k * 13 + r * 7) % 9 - 4, 34 + (k * 7 + r * 5) % 26]);}
+  return out;
+});
+function IntroSequence() {
+  const sec = React.useRef(null),stage = React.useRef(null),mark = React.useRef(null);
+  React.useEffect(() => {
+    const s = sec.current,st = stage.current,m = mark.current;
+    if (!s || !st) return;
+    /* 매치 컷 — 히어로 이름(YUBIN KIM)의 세로 중심과 고정 구간 길이를 재서 마지막 장면이 그 자리로 이어지게 한다 */
+    const measure = () => {
+      const hero = document.getElementById("manifesto"),name = hero && hero.querySelector(".hero-name");
+      if (name) {
+        const hr = hero.getBoundingClientRect(),nr = name.getBoundingClientRect();
+        st.style.setProperty("--hy", Math.round(nr.top - hr.top + nr.height / 2) + "px");
+      }
+      st.style.setProperty("--span", Math.max(0, s.offsetHeight - window.innerHeight) + "px");
+    };
+    measure();
+    let rt = 0;
+    const onResize = () => {clearTimeout(rt);rt = setTimeout(measure, 120);};
+    window.addEventListener("resize", onResize, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    /* 인트로가 화면을 차지하는 동안만 상단 메뉴를 숨긴다 — 스크롤 이벤트 없이 관찰자 두 개로 */
+    let seen = false,passed = false;
+    const h = document.documentElement;
+    const sync = () => h.classList.toggle("ix-active", h.classList.contains("ix-on") && seen && !passed);
+    const io1 = new IntersectionObserver((es) => {seen = es[0].isIntersecting;sync();});
+    const io2 = new IntersectionObserver((es) => {passed = es[0].boundingClientRect.top < 0;sync();});
+    io1.observe(s);if (m) io2.observe(m);
+    return () => {io1.disconnect();io2.disconnect();window.removeEventListener("resize", onResize);};
+  }, []);
+  const word = "ALPHA SHEEP";
+  return (/*#__PURE__*/
+    React.createElement("section", { id: "intro", ref: sec, className: "ix", "aria-label": "\uC778\uD2B8\uB85C \u2014 ALPHA SHEEP, \uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4. \uAE40\uC720\uBE48" }, /*#__PURE__*/
+    React.createElement("div", { ref: stage, className: "ix__stage", "data-cine": "pin", "data-cine-src": "#intro", "data-cine-rest": "1" }, /*#__PURE__*/
+    React.createElement("div", { className: "ix__bg", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("div", { className: "ix__light", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("div", { className: "ix__warm", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("svg", { className: "ix__flock", viewBox: "0 0 1600 900", preserveAspectRatio: "xMidYMid slice", "aria-hidden": "true", focusable: "false" },
+    IX_ROWS.map((row, r) => /*#__PURE__*/
+    React.createElement("g", { key: r, className: "ix__row ix__row--" + r },
+    row.map(([x, y, w], k) => /*#__PURE__*/React.createElement("line", { key: k, x1: x, y1: y, x2: x + w, y2: y }))
+    )
+    ), /*#__PURE__*/
+    React.createElement("path", { className: "ix__alpha", pathLength: "1", d: "M 742 476 C 860 476 930 470 1010 430 S 1180 300 1330 260 C 1460 226 1560 236 1660 250" }), /*#__PURE__*/
+    React.createElement("circle", { className: "ix__alpha-dot", cx: "742", cy: "476", r: "3.2" })
+    ), /*#__PURE__*/
+
+    React.createElement("p", { className: "ix__brand font-sans", "aria-hidden": "true" }, "Yubin Kim", /*#__PURE__*/React.createElement("span", null, "Portfolio 2026")), /*#__PURE__*/
+
+    React.createElement("div", { className: "ix__scene ix__s1" }, /*#__PURE__*/React.createElement("p", { className: "ix__year font-serif" }, "2027")), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s2" }, /*#__PURE__*/React.createElement("p", { className: "ix__tk" }, /*#__PURE__*/React.createElement("span", { className: "font-sans" }, "TREND KOREA"), " ", /*#__PURE__*/React.createElement("b", { className: "font-serif" }, "2027"))), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s3" }, /*#__PURE__*/React.createElement("p", { className: "ix__kw font-myeongjo" }, "2027\uB144\uC744 \uAD00\uD1B5\uD558\uB294 \uD0A4\uC6CC\uB4DC")), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s4" }, /*#__PURE__*/
+    React.createElement("p", { className: "ix__alpha-t font-serif", "aria-label": word },
+    word.split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, "aria-hidden": "true", className: c === " " ? "ix__sp" : "ix__l", style: { "--i": i, "--d": (i * 7 % 5 - 2) / 2, "--x": i - 5 } }, c === " " ? " " : c))
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s5" }, /*#__PURE__*/
+    React.createElement("p", { className: "ix__mf font-myeongjo" }, /*#__PURE__*/React.createElement("span", null, "\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C"), " ", /*#__PURE__*/React.createElement("span", null, "\uC591\uC774 \uB418\uB2E4.")), /*#__PURE__*/
+    React.createElement("p", { className: "ix__mf-en font-sans", lang: "en" }, "FOLLOW LESS. CREATE FIRST.")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s6" }, /*#__PURE__*/
+    React.createElement("div", { className: "ix__id" }, /*#__PURE__*/
+    React.createElement("p", { className: "ix__ko font-ko" }, "\uAE40\uC720\uBE48"), /*#__PURE__*/
+    React.createElement("p", { className: "ix__en font-serif", lang: "en" }, "KIM YUBIN"), /*#__PURE__*/
+    React.createElement("i", { className: "ix__rule", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("p", { className: "ix__tag font-ko" }, "\uC804\uB7B5\uC744 \uC124\uACC4\uD558\uACE0, \uAE30\uC220\uB85C \uC2E4\uD589\uD569\uB2C8\uB2E4.")
+    )
+    ), /*#__PURE__*/
+
+    React.createElement("p", { className: "ix__cue font-sans", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("span", null, "SCROLL TO BEGIN"), /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
+    React.createElement("p", { className: "ix__credit font-ko" }, "ALPHA SHEEP \u2014 \u300A\uD2B8\uB80C\uB4DC \uCF54\uB9AC\uC544 2027\u300B(\uAE40\uB09C\uB3C4 \uC678)\uC758 2027\uB144 \uC2AC\uB85C\uAC74\uC744 \uC778\uC6A9\uD588\uC2B5\uB2C8\uB2E4. \u2018\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4\u2019\uB294 \uAC1C\uC778\uC801 \uC7AC\uD574\uC11D\uC774\uBA70, \uB3C4\uC11C \xB7 \uC800\uC790\uC640 \uC81C\uD734 \uAD00\uACC4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("i", { className: "ix__bar", "aria-hidden": "true" }), /*#__PURE__*/
+
+    React.createElement("div", { className: "ix__ctl font-sans" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", role: "switch", "aria-checked": "true", className: "ix__switch", onClick: () => ixSet(false), "aria-label": "\uC778\uD2B8\uB85C \uC7AC\uC0DD \u2014 \uB044\uBA74 \uC774 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C\uB294 \uB2E4\uC74C \uBC29\uBB38\uBD80\uD130 \uBC14\uB85C \uBCF8\uBB38\uC774 \uC5F4\uB9BD\uB2C8\uB2E4", title: "\uB044\uBA74 \uB2E4\uC74C \uBC29\uBB38\uBD80\uD130 \uBC14\uB85C \uBCF8\uBB38\uC73C\uB85C" }, /*#__PURE__*/
+    React.createElement("span", { className: "font-ko" }, "\uC778\uD2B8\uB85C"), /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" })
+    ), /*#__PURE__*/
+    React.createElement("a", { className: "ix__skip", href: "#manifesto", onClick: () => document.documentElement.classList.remove("ix-active") }, "SKIP INTRO ", /*#__PURE__*/React.createElement("span", { "aria-hidden": "true" }, "\u2192"))
+    )
+    ), /*#__PURE__*/
+    React.createElement("i", { ref: mark, className: "ix__mark", "aria-hidden": "true" })
+    ));
+
+}
+
 /* ============================================================ HERO — 사진 중심 첫 화면 (V6.1 복구)
  * 기준: 7bfd9a1e780 의 사진형 Hero(강남 사진 · 중앙 YUBIN KIM · 간결한 CTA). 스크롤 고정 · 카메라 연출 · 건축 모형은 넣지 않는다.
  * 첫 화면이 답할 것 — 누구인가(AI 전략·AX 실행) · 무엇을 하는가(구조화 · 실행) · 어디로 가면 근거가 있는가(CTA 셋) */
@@ -118,6 +227,7 @@ function HeroClassic() {
     )
     ), /*#__PURE__*/
 
+    React.createElement("button", { type: "button", className: "ix-replay font-ko", onClick: () => ixSet(true) }, "\u25B6 \uC778\uD2B8\uB85C \uB2E4\uC2DC \uBCF4\uAE30"), /*#__PURE__*/
     React.createElement("a", { href: "#glance", className: "scroll-cue", "aria-label": "\uB2E4\uC74C \uB0B4\uC6A9\uC73C\uB85C" }, /*#__PURE__*/
     React.createElement("span", { className: "font-sans" }, "SCROLL"), /*#__PURE__*/
     React.createElement("i", null)
@@ -2660,4 +2770,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

@@ -80,6 +80,115 @@ function Nav() {
   );
 }
 
+/* ============================================================ INTRO — ALPHA SHEEP · The First Move
+ * 사진형 첫 화면(HeroClassic) 앞의 스크롤 오프닝 타이틀. 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP → 선언 → 김유빈.
+ * 움직임은 cine.js 의 pin 진행도(--cp)를 intro.css 가 transform · opacity 로 계산한다 — 스크롤 중 React 재렌더 0회, 두 번째 스크롤 엔진 없음.
+ * 켜짐/꺼짐은 index.html <head> 의 짧은 스크립트가 첫 그리기 전에 정한다(html.ix-on / ix-off) — 레이아웃 흔들림 없음.
+ *   ix-on 이 없으면(JS 없음 · 움직임 줄이기 · 인트로 끄기 전 저장 불가) 고정 없이 여섯 문장을 짧은 정적 화면으로 보여 준다.
+ * SKIP INTRO 는 #manifesto 로 가는 평범한 링크라 React 가 실패해도 동작한다. ‘인트로 끄기’는 이 브라우저(localStorage)에만 기억 — 쿠키 · 추적 없음.
+ * 슬로건 ALPHA SHEEP 은 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건 — ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며 도서와 제휴 관계가 없다. */
+const IX_KEY = "yk.intro";
+const ixSet = (on) => {
+  try { if (on) localStorage.removeItem(IX_KEY); else localStorage.setItem(IX_KEY, "off"); } catch (e) {}
+  const h = document.documentElement;
+  const calm = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  h.classList.toggle("ix-off", !on);
+  h.classList.toggle("ix-on", on && !calm);
+  h.classList.toggle("ix-active", on && !calm);
+  window.dispatchEvent(new Event("cine:scan"));
+  window.scrollTo(0, 0);
+  if (!on) { const t = document.getElementById("hero-title"); if (t) { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); } }
+};
+/* 무리 — 같은 방향으로 흐르는 짧은 선들. 줄마다 하나의 묶음(g)만 움직여 그리기 비용을 줄인다(선 64개 · 변환 4개) */
+const IX_ROWS = [0, 1, 2, 3].map((r) => {
+  const y = 372 + r * 52, out = [];
+  for (let k = 0; k < 16; k++) { const x = -260 + k * 132 + ((r * 47 + k * 29) % 41); out.push([x, y + ((k * 13 + r * 7) % 9) - 4, 34 + ((k * 7 + r * 5) % 26)]); }
+  return out;
+});
+function IntroSequence() {
+  const sec = React.useRef(null), stage = React.useRef(null), mark = React.useRef(null);
+  React.useEffect(() => {
+    const s = sec.current, st = stage.current, m = mark.current;
+    if (!s || !st) return;
+    /* 매치 컷 — 히어로 이름(YUBIN KIM)의 세로 중심과 고정 구간 길이를 재서 마지막 장면이 그 자리로 이어지게 한다 */
+    const measure = () => {
+      const hero = document.getElementById("manifesto"), name = hero && hero.querySelector(".hero-name");
+      if (name) {
+        const hr = hero.getBoundingClientRect(), nr = name.getBoundingClientRect();
+        st.style.setProperty("--hy", Math.round(nr.top - hr.top + nr.height / 2) + "px");
+      }
+      st.style.setProperty("--span", Math.max(0, s.offsetHeight - window.innerHeight) + "px");
+    };
+    measure();
+    let rt = 0;
+    const onResize = () => { clearTimeout(rt); rt = setTimeout(measure, 120); };
+    window.addEventListener("resize", onResize, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    /* 인트로가 화면을 차지하는 동안만 상단 메뉴를 숨긴다 — 스크롤 이벤트 없이 관찰자 두 개로 */
+    let seen = false, passed = false;
+    const h = document.documentElement;
+    const sync = () => h.classList.toggle("ix-active", h.classList.contains("ix-on") && seen && !passed);
+    const io1 = new IntersectionObserver((es) => { seen = es[0].isIntersecting; sync(); });
+    const io2 = new IntersectionObserver((es) => { passed = es[0].boundingClientRect.top < 0; sync(); });
+    io1.observe(s); if (m) io2.observe(m);
+    return () => { io1.disconnect(); io2.disconnect(); window.removeEventListener("resize", onResize); };
+  }, []);
+  const word = "ALPHA SHEEP";
+  return (
+    <section id="intro" ref={sec} className="ix" aria-label="인트로 — ALPHA SHEEP, 무리에서 벗어난 양이 되다. 김유빈">
+      <div ref={stage} className="ix__stage" data-cine="pin" data-cine-src="#intro" data-cine-rest="1">
+        <div className="ix__bg" aria-hidden="true" />
+        <div className="ix__light" aria-hidden="true" />
+        <div className="ix__warm" aria-hidden="true" />
+        <svg className="ix__flock" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          {IX_ROWS.map((row, r) => (
+            <g key={r} className={"ix__row ix__row--" + r}>
+              {row.map(([x, y, w], k) => <line key={k} x1={x} y1={y} x2={x + w} y2={y} />)}
+            </g>
+          ))}
+          <path className="ix__alpha" pathLength="1" d="M 742 476 C 860 476 930 470 1010 430 S 1180 300 1330 260 C 1460 226 1560 236 1660 250" />
+          <circle className="ix__alpha-dot" cx="742" cy="476" r="3.2" />
+        </svg>
+
+        <p className="ix__brand font-sans" aria-hidden="true">Yubin Kim<span>Portfolio 2026</span></p>
+
+        <div className="ix__scene ix__s1"><p className="ix__year font-serif">2027</p></div>
+        <div className="ix__scene ix__s2"><p className="ix__tk"><span className="font-sans">TREND KOREA</span> <b className="font-serif">2027</b></p></div>
+        <div className="ix__scene ix__s3"><p className="ix__kw font-myeongjo">2027년을 관통하는 키워드</p></div>
+        <div className="ix__scene ix__s4">
+          <p className="ix__alpha-t font-serif" aria-label={word}>
+            {word.split("").map((c, i) => <span key={i} aria-hidden="true" className={c === " " ? "ix__sp" : "ix__l"} style={{ "--i": i, "--d": (((i * 7) % 5) - 2) / 2, "--x": i - 5 }}>{c === " " ? " " : c}</span>)}
+          </p>
+        </div>
+        <div className="ix__scene ix__s5">
+          <p className="ix__mf font-myeongjo"><span>무리에서 벗어난</span> <span>양이 되다.</span></p>
+          <p className="ix__mf-en font-sans" lang="en">FOLLOW LESS. CREATE FIRST.</p>
+        </div>
+        <div className="ix__scene ix__s6">
+          <div className="ix__id">
+            <p className="ix__ko font-ko">김유빈</p>
+            <p className="ix__en font-serif" lang="en">KIM YUBIN</p>
+            <i className="ix__rule" aria-hidden="true" />
+            <p className="ix__tag font-ko">전략을 설계하고, 기술로 실행합니다.</p>
+          </div>
+        </div>
+
+        <p className="ix__cue font-sans" aria-hidden="true"><span>SCROLL TO BEGIN</span><i /></p>
+        <p className="ix__credit font-ko">ALPHA SHEEP — 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건을 인용했습니다. ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며, 도서 · 저자와 제휴 관계가 없습니다.</p>
+        <i className="ix__bar" aria-hidden="true" />
+
+        <div className="ix__ctl font-sans">
+          <button type="button" role="switch" aria-checked="true" className="ix__switch" onClick={() => ixSet(false)} aria-label="인트로 재생 — 끄면 이 브라우저에서는 다음 방문부터 바로 본문이 열립니다" title="끄면 다음 방문부터 바로 본문으로">
+            <span className="font-ko">인트로</span><i aria-hidden="true" />
+          </button>
+          <a className="ix__skip" href="#manifesto" onClick={() => document.documentElement.classList.remove("ix-active")}>SKIP INTRO <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <i ref={mark} className="ix__mark" aria-hidden="true" />
+    </section>
+  );
+}
+
 /* ============================================================ HERO — 사진 중심 첫 화면 (V6.1 복구)
  * 기준: 7bfd9a1e780 의 사진형 Hero(강남 사진 · 중앙 YUBIN KIM · 간결한 CTA). 스크롤 고정 · 카메라 연출 · 건축 모형은 넣지 않는다.
  * 첫 화면이 답할 것 — 누구인가(AI 전략·AX 실행) · 무엇을 하는가(구조화 · 실행) · 어디로 가면 근거가 있는가(CTA 셋) */
@@ -117,6 +226,7 @@ function HeroClassic() {
           </div>
         </div>
 
+        <button type="button" className="ix-replay font-ko" onClick={() => ixSet(true)}>▶ 인트로 다시 보기</button>
         <a href="#glance" className="scroll-cue" aria-label="다음 내용으로">
           <span className="font-sans">SCROLL</span>
           <i />
@@ -2659,4 +2769,4 @@ function SectionHead({ no, ko, en, lead }) {
   );
 }
 
-Object.assign(window, { Nav, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
