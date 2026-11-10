@@ -17,6 +17,7 @@ function App() {
     <div id="top">
       <Nav />
       <main>
+        <IntroSequence />
         <HeroClassic />
         <Ledger />
         <About />
