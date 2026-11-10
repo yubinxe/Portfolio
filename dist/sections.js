@@ -102,7 +102,7 @@ const ixSet = (on) => {
 };
 /* 무리 — 같은 방향으로 흐르는 짧은 선들. 줄마다 하나의 묶음(g)만 움직여 그리기 비용을 줄인다(선 64개 · 변환 4개) */
 const IX_ROWS = [0, 1, 2, 3].map((r) => {
-  const y = 372 + r * 52,out = [];
+  const y = [300, 344, 566, 610][r],out = []; /* 가운데 글자 띠(약 372~540)는 비운다 — 선이 문장을 가로지르지 않게 */
   for (let k = 0; k < 16; k++) {const x = -260 + k * 132 + (r * 47 + k * 29) % 41;out.push([x, y + (k * 13 + r * 7) % 9 - 4, 34 + (k * 7 + r * 5) % 26]);}
   return out;
 });
@@ -125,14 +125,13 @@ function IntroSequence() {
     const onResize = () => {clearTimeout(rt);rt = setTimeout(measure, 120);};
     window.addEventListener("resize", onResize, { passive: true });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-    /* 인트로가 화면을 차지하는 동안만 상단 메뉴를 숨긴다 — 스크롤 이벤트 없이 관찰자 두 개로 */
-    let seen = false,passed = false;
+    /* 인트로가 화면을 차지하는 동안만 상단 메뉴를 숨긴다 — 스크롤 이벤트 없이 관찰자 하나로.
+     * 표식(.ix__mark)은 고정 구간의 앞 90%를 덮고, 관찰 영역은 화면 맨 윗줄이다 — "화면 위쪽이 그 구간 안에 있는가"만 본다.
+     * 건너뛰기 뒤 맨 위로 한 번에 돌아와도(Home 키 · 맨 위로 링크) 상태가 맞는다(지나간 여부를 기억하지 않는다) */
     const h = document.documentElement;
-    const sync = () => h.classList.toggle("ix-active", h.classList.contains("ix-on") && seen && !passed);
-    const io1 = new IntersectionObserver((es) => {seen = es[0].isIntersecting;sync();});
-    const io2 = new IntersectionObserver((es) => {passed = es[0].boundingClientRect.top < 0;sync();});
-    io1.observe(s);if (m) io2.observe(m);
-    return () => {io1.disconnect();io2.disconnect();window.removeEventListener("resize", onResize);};
+    const io = new IntersectionObserver((es) => {h.classList.toggle("ix-active", h.classList.contains("ix-on") && es[es.length - 1].isIntersecting);}, { rootMargin: "0px 0px -99% 0px" });
+    if (m) io.observe(m);
+    return () => {io.disconnect();window.removeEventListener("resize", onResize);};
   }, []);
   const word = "ALPHA SHEEP";
   return (/*#__PURE__*/
@@ -147,13 +146,16 @@ function IntroSequence() {
     row.map(([x, y, w], k) => /*#__PURE__*/React.createElement("line", { key: k, x1: x, y1: y, x2: x + w, y2: y }))
     )
     ), /*#__PURE__*/
-    React.createElement("path", { className: "ix__alpha", pathLength: "1", d: "M 742 476 C 860 476 930 470 1010 430 S 1180 300 1330 260 C 1460 226 1560 236 1660 250" }), /*#__PURE__*/
-    React.createElement("circle", { className: "ix__alpha-dot", cx: "742", cy: "476", r: "3.2" })
+
+    React.createElement("path", { className: "ix__alpha ix__alpha--w", pathLength: "1", d: "M 520 344 C 700 344 800 340 900 312 S 1150 200 1330 160 C 1460 132 1570 130 1680 136" }), /*#__PURE__*/
+    React.createElement("circle", { className: "ix__alpha-dot ix__alpha--w", cx: "520", cy: "344", r: "3.2" }), /*#__PURE__*/
+    React.createElement("path", { className: "ix__alpha ix__alpha--n", pathLength: "1", d: "M 628 300 C 720 300 790 294 850 262 S 950 170 1030 132" }), /*#__PURE__*/
+    React.createElement("circle", { className: "ix__alpha-dot ix__alpha--n", cx: "628", cy: "300", r: "3.2" })
     ), /*#__PURE__*/
 
     React.createElement("p", { className: "ix__brand font-sans", "aria-hidden": "true" }, "Yubin Kim", /*#__PURE__*/React.createElement("span", null, "Portfolio 2026")), /*#__PURE__*/
 
-    React.createElement("div", { className: "ix__scene ix__s1" }, /*#__PURE__*/React.createElement("p", { className: "ix__year font-serif" }, "2027")), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s1" }, /*#__PURE__*/React.createElement("p", { className: "ix__year font-serif" }, "2027"), /*#__PURE__*/React.createElement("p", { className: "ix__year-sub font-myeongjo" }, "\uC2DC\uB300\uAC00 \uBC14\uB00C\uB294 \uC21C\uAC04")), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s2" }, /*#__PURE__*/React.createElement("p", { className: "ix__tk" }, /*#__PURE__*/React.createElement("span", { className: "font-sans" }, "TREND KOREA"), " ", /*#__PURE__*/React.createElement("b", { className: "font-serif" }, "2027"))), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s3" }, /*#__PURE__*/React.createElement("p", { className: "ix__kw font-myeongjo" }, "2027\uB144\uC744 \uAD00\uD1B5\uD558\uB294 \uD0A4\uC6CC\uB4DC")), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s4" }, /*#__PURE__*/
@@ -163,6 +165,7 @@ function IntroSequence() {
     ), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s5" }, /*#__PURE__*/
     React.createElement("p", { className: "ix__mf font-myeongjo" }, /*#__PURE__*/React.createElement("span", null, "\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C"), " ", /*#__PURE__*/React.createElement("span", null, "\uC591\uC774 \uB418\uB2E4.")), /*#__PURE__*/
+    React.createElement("p", { className: "ix__mf-ko font-ko" }, /*#__PURE__*/React.createElement("span", null, "\uD750\uB984\uC744 \uB530\uB974\uB294 \uC0AC\uB78C\uC774 \uC544\uB2C8\uB77C,"), " ", /*#__PURE__*/React.createElement("span", null, "\uBCC0\uD654\uB97C \uC2E4\uD589\uD558\uB294 \uC0AC\uB78C.")), /*#__PURE__*/
     React.createElement("p", { className: "ix__mf-en font-sans", lang: "en" }, "FOLLOW LESS. CREATE FIRST.")
     ), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s6" }, /*#__PURE__*/

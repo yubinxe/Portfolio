@@ -1,7 +1,7 @@
 /* ALPHA SHEEP 인트로 — 장면 순서 · 건너뛰기 · 출처 표기 · 대체 경로(JS 없음 · 움직임 줄이기) · 가벼운 구현 */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 const read = (f) => readFileSync(new URL("../" + f, import.meta.url), "utf8");
 const jsx = read("sections.jsx"), css = read("intro.css"), html = read("index.html");
 const block = jsx.slice(jsx.indexOf("function IntroSequence("), jsx.indexOf("/* ============================================================ HERO — 사진 중심"));
@@ -61,4 +61,23 @@ test("검색 · 접근성 — 프리렌더에 인트로 문장과 히어로 h1 �
   assert.ok(pre.includes("무리에서 벗어난") && pre.includes("김유빈") && /<h1[\s>]/.test(pre));
   assert.ok(pre.indexOf('id="intro"') < pre.indexOf('id="manifesto"'));
   assert.ok(/class="ix__flock"[^>]*aria-hidden="true"/.test(pre), "장식 그래픽 숨김");
+});
+
+test("보조 문장 · 선 경로 — 문장을 가로지르지 않는 줄, 넓은/좁은 화면 경로 분리, 개념 문장 두 줄", () => {
+  assert.ok(block.includes("시대가 바뀌는 순간") && block.includes("흐름을 따르는 사람이 아니라,") && block.includes("변화를 실행하는 사람."));
+  assert.ok(block.indexOf("양이 되다.") < block.indexOf("변화를 실행하는 사람.") && block.indexOf("변화를 실행하는 사람.") < block.indexOf("FOLLOW LESS. CREATE FIRST."));
+  assert.ok(/const y = \[300, 344, 566, 610\]\[r\]/.test(jsx), "무리의 줄은 가운데 글자 띠를 비운다");
+  assert.ok(block.includes("ix__alpha--w") && block.includes("ix__alpha--n") && /html\.ix-on \.ix__alpha--n\{display:block\}/.test(css));
+  assert.ok(!/\.ix__alpha\{[^}]*non-scaling-stroke/.test(css), "pathLength 점선에 non-scaling-stroke 금지(1920 에서 끝 조각 노출)");
+});
+
+test("상태 판정 · 건너뛰기 도착 — 한 번에 맨 위로 돌아와도 맞고, SKIP 은 히어로 맨 위에 선다", () => {
+  assert.ok(block.includes('rootMargin: "0px 0px -99% 0px"') && !/passed\s*=/.test(block), "지나간 여부를 기억하지 않는 관찰자");
+  assert.ok(/html\.ix-on \.ix__mark\{top:0;bottom:auto;height:calc\(\(100% - 100vh\) \* \.9\)\}/.test(css));
+  assert.ok(/html\.ix-on #manifesto\{margin-top:-100vh;scroll-margin-top:-84px\}/.test(css) && /scroll-padding-top:\s*84px/.test(read("features.css")), "scroll-padding 상쇄");
+  assert.ok(/@supports \(height:100svh\)\{html\.ix-on \.ix__stage\{--sh:100svh\}\}/.test(css), "폰 주소창(svh) 기준 글자 상자");
+});
+
+test("배포 — GitHub Pages 가 Jekyll 을 거치지 않는다(.nojekyll)", () => {
+  assert.ok(existsSync(new URL("../.nojekyll", import.meta.url)));
 });
