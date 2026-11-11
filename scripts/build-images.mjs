@@ -33,6 +33,10 @@ export const IMAGES = [
   ["moef-nameplate.jpg", "moef-nameplate"],
   ["moef-tour.jpg", "moef-tour"],
   ["moef-talk.jpg", "moef-talk"],
+  ["rei-day.jpg", "rei-day"],
+  ["rei-day-pose.jpg", "rei-day-pose"],
+  ["rei-day-sign.jpg", "rei-day-sign"],
+  ["rei-day-wall.jpg", "rei-day-wall"],
 ];
 export const WIDTHS = [480, 800, 1200];
 
