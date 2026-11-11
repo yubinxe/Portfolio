@@ -328,3 +328,8 @@ a.axd__mini:hover{border-color:var(--gold-text)}
 .axd__rows dt i{display:block;margin-top:1px;font-style:normal;font-weight:600;font-size:.56rem;letter-spacing:0;white-space:nowrap;opacity:.8}
 .axd__ba b i{font-style:normal;font-weight:600;font-size:.86em;letter-spacing:.04em;opacity:.75}
 .axd__lead-en{display:block;margin-top:4px;font-size:.82rem;letter-spacing:.02em;color:var(--ink-soft)}
+/* 현장 일지 — 부동산산업의 날(레드카펫 톤) · 행사 슬로건 · 보도 */
+.diary--brick{--dy:#A8322A}
+.diary__quote{margin:2px 0 12px;padding-left:12px;border-left:2px solid var(--dy);font-size:1.02rem;line-height:1.5;color:var(--navy);word-break:keep-all}
+.diary__quote span{display:block;margin-top:3px;font-size:.62rem;font-weight:700;letter-spacing:.14em;color:var(--gold-text)}
+.diary__press{margin:12px 0 4px}

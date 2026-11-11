@@ -20,7 +20,7 @@
 - `npm test` — 89건 모두 통과해야 커밋
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=17` · `dist/sections.js?v=49` · `dist/app.js?v=10` · `chatbot.js?v=17` · `mnav.js?v=7` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `intro.css?v=2`(index 전용) · `kb.js?v=20261109a` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=18` · `dist/sections.js?v=50` · `dist/app.js?v=10` · `chatbot.js?v=17` · `mnav.js?v=7` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `intro.css?v=2`(index 전용) · `kb.js?v=20261111a` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.

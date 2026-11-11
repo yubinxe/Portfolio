@@ -1038,6 +1038,21 @@
         "Verified": true
       },
       {
+        "Id": "tl-rei-day",
+        "Category": "궤적",
+        "Title": "2026 — 제11회 부동산산업의 날 부스 운영 · VIP 응대 및 설명",
+        "Body": "한국부동산경제단체연합회가 주최하고 한국공인중개사협회가 주관한 제11회 부동산산업의 날(2026. 11. 11 · 서울 강남구 건설회관)에서 행사장 부스를 운영하며 VIP 내빈을 응대하고 전시 내용을 설명했습니다. 국토교통부 · 한국부동산원 · 주택도시보증공사가 후원한 행사로, 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했습니다.",
+        "Tags": "vip, vip 응대, 건설회관, 국토교통부, 부동산 산업의 날, 부동산산업, 부동산산업의 날, 부스, 부스 운영, 의전, 프롭테크, 한국공인중개사협회, 한국부동산경제단체연합회",
+        "PrimaryLabel": "궤적에서 보기",
+        "PrimaryHref": "index.html#tl-rei-day",
+        "SecondaryLabel": "행사 현장 보기",
+        "SecondaryHref": "gallery.html#rei-day",
+        "SecondaryInferred": false,
+        "Anchor": "tl-rei-day",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
         "Id": "tl-seocho",
         "Category": "궤적",
         "Title": "2026 — 서초청년네트워크 9기 운영위원회 부위원장 (현재)",
@@ -1473,5 +1488,5 @@
       }
     ]
   },
-  "hash": "4e50e4dd8f34c389"
+  "hash": "ea7188e4dbba3b35"
 }
