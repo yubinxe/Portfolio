@@ -327,8 +327,8 @@ const DOMAINS = [
   desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다. 전략이 감이 아니라 근거 위에 서도록 데이터 구조를 먼저 설계합니다.",
   tags: ["공공데이터 API", "GWS 연동"] },
 { n: "06", tier: "applied", ko: "법률·부동산의 산업 이해", short: "법률·부동산", en: "Legal & Real Estate Intelligence",
-  desc: "정비사업의 법률 위험, 토지보상 절차, 청약·공공임대 공고를 실무와 제품으로 다뤘습니다. 법무법인 경국의 송무·사무, 건국대 스마트건설 교육, KREMA 4기, 분양대행자 자격이 바탕입니다.",
-  tags: ["법무법인 경국", "스마트건설 · KREMA 4기"] },
+  desc: "정비사업의 법률 위험, 토지보상 절차, 청약·공공임대 공고를 실무와 제품으로 다뤘습니다. 법무법인 경국의 송무·사무, 건국대 스마트건설 교육, KREMA 3기, 분양대행자 자격이 바탕입니다.",
+  tags: ["법무법인 경국", "스마트건설 · KREMA 3기"] },
 { n: "05", tier: "wide", ko: "정책·공공 의사결정 참여", short: "정책·공공", en: "Policy & Public Decision-Making",
   desc: "국민 대토론회에서 정책을 제안·발표했고, 서초청년네트워크 9기 운영위원회 부위원장 · 청년정책 패널로 활동합니다. 참석과 제안은 정책 결정이 아니라 논의에 참여한 기록입니다.",
   tags: ["국민 대토론회 제안 발표", "서초청년네트워크 부위원장"] },
@@ -347,9 +347,9 @@ const LECTURE_TRACKS = [
 { key: "foundation", label: "Track A — AI 파운데이션", ko: "도구를 쓰는 사람에서, 도구를 설계하는 사람으로",
   desc: "개념부터 에이전트 설계까지. SSAFY 13기의 엔지니어링 훈련과 서울대 AIED 4기의 프롬프트 아키텍처·교수법을 실무 언어로 옮긴 네 과정입니다." },
 { key: "domain", label: "Track B — 도메인 적용", ko: "만들어 본 사람만 가르칠 수 있는 것",
-  desc: "직접 설계·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 4기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
+  desc: "직접 설계·배포해 운영 중인 시스템에서 나온 네 과정. KREMA 3기의 시장 데이터 전략과 현장 산출물을 사례로 다룹니다." },
 { key: "realestate", label: "Track C — 부동산 · 자산관리", ko: "자산은 숫자로, 계약은 근거로",
-  desc: "AI와 나란히 서는 두 번째 전문 영역. 분양대행자 자격과 KREMA 4기, 법무법인 경국의 송무 실무, 정비사업 데이터 자동화와 부동산 직무 체험관 설계에서 나온 네 과정입니다." }];
+  desc: "AI와 나란히 서는 두 번째 전문 영역. 분양대행자 자격과 KREMA 3기, 법무법인 경국의 송무 실무, 정비사업 데이터 자동화와 부동산 직무 체험관 설계에서 나온 네 과정입니다." }];
 
 
 const LECTURES = [
@@ -402,7 +402,7 @@ const LECTURES = [
   who: "부동산 · 마케팅 · 정비사업 데이터 담당자",
   hours: "4시간(대시보드 실습)",
   modules: ["공공데이터 API 수집 설계", "나란히 놓아야 의미가 생기는 지표", "배포와 갱신 자동화"],
-  basis: "KREMA 4기 — AI 기반 부동산 시장 데이터 분석",
+  basis: "KREMA 3기 — AI 기반 부동산 시장 데이터 분석",
   proof: { label: "청약 인사이트 대시보드", href: "#ed-05" } },
 { id: "lec-07", n: "07", track: "domain", color: "var(--lilac)", Icon: Sparkle,
   title: "생성형 AI 브랜드 필름 제작",
@@ -410,7 +410,7 @@ const LECTURES = [
   who: "마케팅 · 홍보 · 브랜드 담당자",
   hours: "3시간(제작 실습)",
   modules: ["영상 프롬프트 아키텍처", "영상·내레이션·사운드 결합", "브랜드 톤 검수 기준"],
-  basis: "KREMA 4기 — 매체별 디지털 마케팅 전략",
+  basis: "KREMA 3기 — 매체별 디지털 마케팅 전략",
   proof: { label: "르엘 성수 브랜드 필름", href: "#ed-02" } },
 { id: "lec-08", n: "08", track: "domain", color: "var(--pink)", Icon: Newspaper,
   title: "제도의 언어를 대중의 언어로",
@@ -436,7 +436,7 @@ const LECTURES = [
   who: "분양대행 · 시행사 마케팅 · 상담 실무자",
   hours: "3시간",
   modules: ["관찰과 주장 구분 — 입지·조망 문구 검수", "청약 가점·자격을 상담에서 다시 계산하는 법", "채널별 예산과 상담 전환 설계"],
-  basis: "분양대행자 자격 · KREMA 4기 부동산 마케팅 기획자 과정",
+  basis: "분양대행자 자격 · KREMA 3기 부동산 마케팅 기획자 과정",
   proof: { label: "집캐치 청약 추천 서비스", href: "#ed-09" } },
 { id: "lec-11", n: "11", track: "realestate", color: "var(--sky)", Icon: Scale,
   title: "전세·임대차 안전 점검 — 계약 전에 확인할 것",
@@ -459,7 +459,7 @@ const LECTURES = [
 const LECTURE_BASIS = [
 ["삼성청년SW·AI아카데미 13기", "소프트웨어 아키텍처와 AI 알고리즘을 실무 프로젝트로 학습. 홍보 앰배서더로 지원자 대상 커뮤니케이션도 수행했습니다."],
 ["서울대학교 AIED 4기", "AI 교육 전문가 과정에서 구조화된 프롬프트 아키텍처와 교수법을 체화했습니다."],
-["한국부동산마케팅협회 4기", "AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립을 익혔습니다."],
+["한국부동산마케팅협회 3기", "AI 기반 시장 데이터 분석과 세그먼트 도출, 매체별 전략 수립을 익혔습니다."],
 ["배포된 결과물 8건", "강의 사례는 전부 직접 만들어 운영 중인 산출물입니다. 시연 가능한 화면으로 수업합니다."]];
 
 
@@ -760,14 +760,14 @@ const TRAJECTORY = [
 { id: "tl-myongji", group: "edu", year: "2026", color: "var(--apple)", title: "명지대학교 AI 데이터 매니지먼트 과정 — 트랙3 수료 · 트랙1·2·4 수강",
   desc: "AI 데이터 매니지먼트 과정 네 개 트랙 중 트랙3을 수료했고, 트랙1·2·4를 수강 중이거나 수강할 예정입니다." },
 { id: "tl-claude-rag", group: "edu", year: "2026", color: "var(--lilac)", title: "한국부동산마케팅협회(KREMA) — ‘클로드 코드로 완성하는 상담 RAG 챗봇 구축’ 실습 교육 이수 (2026. 7. 25 · 1일 6시간)",
-  desc: "문서 검색 · 벡터 DB · 서버리스 RAG API · 상담 화면을 하나로 잇는 구축 실습입니다. 부동산 상담이라는 도메인에 검색증강생성(RAG)을 연결해 본 교육으로, KREMA AI 마케팅 기획자 양성 4기와는 별개입니다." },
+  desc: "문서 검색 · 벡터 DB · 서버리스 RAG API · 상담 화면을 하나로 잇는 구축 실습입니다. 부동산 상담이라는 도메인에 검색증강생성(RAG)을 연결해 본 교육으로, KREMA AI 마케팅 기획자 양성 3기와는 별개입니다." },
 { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 × 한국건설기술인협회 — 2026 스마트건설기술교육 이수 (2026. 6. 29 – 7. 3 · 5일 35시간)",
   desc: "건국대학교 대학일자리플러스사업단과 한국건설기술인협회가 함께 연 프로그램에서 BIM · 스마트 건설안전 · 드론 · 건설로봇을 현업 전문가와 연구자에게 배웠습니다. 건설산업의 데이터와 현장 기술을 이해하기 위한 교육이며, 법정 건설기술인 의무교육이 아닙니다." },
 { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
   desc: "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
 { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 수료 (2026. 11. 7)",
   desc: "서울특별시와 금융 교육기관이 협약해 운영하고 금융투자협회 금융투자교육원이 진행하는 핀테크 전문교육을 약 11주 동안 금 · 토요일에 이어 들었습니다. 금융 · 디지털 서비스의 구조와 산업을 이해하는 범위를 넓힌 과정입니다." },
-{ id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 4기 수료",
+{ id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 3기 수료",
   desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 설계 역량을 습득." },
 { id: "tl-snu-aied", group: "edu", year: "2026", color: "var(--sky)", title: "서울대학교 AI 교육 전문가 과정 (AIED) 4기 수료",
   desc: "인공지능 메커니즘의 비즈니스 도메인 최적화 적용, 구조화된 프롬프트 엔지니어링 아키텍처의 이해와 교수법 체화." },
@@ -2364,7 +2364,7 @@ function Lectures() {
     React.createElement("p", { className: "font-myeongjo" }, "\uB9CC\uB4E4\uC5B4 \uBCF8 \uC0AC\uB78C\uB9CC \uAC00\uB974\uCE60 \uC218 \uC788\uB294 \uAC83\uC774 \uC788\uC2B5\uB2C8\uB2E4."
 
     ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 4\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uD604\uC7AC AI \uB450 \uD2B8\uB799\uACFC \uBD80\uB3D9\uC0B0\xB7\uC790\uC0B0\uAD00\uB9AC \uD55C \uD2B8\uB799, \uC5F4\uB450 \uACFC\uC815\uC758 \uCEE4\uB9AC\uD058\uB7FC\uC744 \uC124\uACC4\uD574 \uB450\uC5C8\uC2B5\uB2C8\uB2E4."
+    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 3\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uD604\uC7AC AI \uB450 \uD2B8\uB799\uACFC \uBD80\uB3D9\uC0B0\xB7\uC790\uC0B0\uAD00\uB9AC \uD55C \uD2B8\uB799, \uC5F4\uB450 \uACFC\uC815\uC758 \uCEE4\uB9AC\uD058\uB7FC\uC744 \uC124\uACC4\uD574 \uB450\uC5C8\uC2B5\uB2C8\uB2E4."
 
 
 
