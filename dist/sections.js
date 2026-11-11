@@ -12,6 +12,7 @@ const OPT = {
   "youth-day-venue": [480, 800, 1200], "youth-day-dialogue": [480, 800, 900],
   "moef-group": [480, 800, 1200, 1600], "moef-nameplate": [480, 675], "moef-tour": [480, 800, 1200, 1600], "moef-talk": [480, 800, 1200, 1600],
   "dyl-assembly": [480, 800, 1200], "dyl-entrance": [480, 675], "dyl-library": [480, 800, 1200], "dyl-lecture": [480, 800, 1200], "dyl-qa": [480, 800, 1200],
+  "rei-day": [480, 800, 1200, 1600], "rei-day-pose": [480, 800, 820], "rei-day-sign": [480, 800, 1200, 1560], "rei-day-wall": [480, 800, 1200, 1400],
   "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280]
 };
 function Pic({ name, fallback, sizes, alt = "", className, ...img }) {
@@ -734,6 +735,8 @@ const TRAJECTORY = [
   desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)를 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
 { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
   desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
+{ id: "tl-rei-day", group: "public", year: "2026", color: "var(--pink)", title: "제11회 부동산산업의 날 — 행사 부스 운영 · VIP 응대 및 설명",
+  desc: "한국부동산경제단체연합회가 주최하고 한국공인중개사협회가 주관한 제11회 부동산산업의 날(2026. 11. 11 · 서울 강남구 건설회관)에서 행사장 부스를 운영하며 VIP 내빈을 응대하고 전시 내용을 설명했습니다. 국토교통부 · 한국부동산원 · 주택도시보증공사가 후원한 행사로, 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가가 함께했습니다.", proof: "gallery.html#rei-day", proofLabel: "행사 현장 보기" },
 { id: "tl-moef-youth", group: "public", year: "2026", color: "var(--sky)", title: "재정경제부 제1차관 청년 현장방문 및 간담회 참석",
   desc: "권대영 재정경제부 제1차관이 서울 마포구 창업기업 지원시설 SVC Seoul에서 연 청년 현장방문 및 간담회(2026. 10. 27)에 법무법인 경국 소속으로 참석했습니다. 차관 취임 후 첫 현장 행보로 마련된 자리로, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융 등 3대 사회정책에 대한 현장 의견을 전했습니다.", proof: "gallery.html#moef-youth", proofLabel: "간담회 현장 보기" },
 { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
@@ -784,17 +787,19 @@ const TRAJECTORY = [
 
 /* 현장 일지 — 청와대 청년의날 다음 장. 날짜 도장으로 잇는다 (성평등 공론장은 대외활동 목록에만) */
 const DIARY = [
-{ id: "dyl", date: "10.24", day: "SAT", tone: "navy", chip: "입학 · 진행 중",
-  eyebrow: "Field Diary — 2026. 10. 24", title: "2026 민주청년지도자 양성과정 입학",
-  body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다. 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
-  facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["함께", "김민석 당대표 · 강득구 민주연구원장 · 이광재 예산결산특별위원장 · 박홍근 기획예산처 장관"], ["상태", "수강 중"]],
-  main: { name: "dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞에서 김민석 당대표와 함께", pos: "50% 33%", w: 675, h: 1200 },
+{ id: "rei-day", date: "11.11", day: "WED", tone: "brick", chip: "부스 운영 · VIP 응대",
+  eyebrow: "Field Diary — 2026. 11. 11", title: "제11회 부동산산업의 날 — 부스 운영 · VIP 응대 및 설명",
+  body: "부동산 관련 단체와 정부 · 공공기관이 함께하는 제11회 부동산산업의 날에서 행사장 부스를 운영했습니다. 찾아온 VIP 내빈을 맞이해 전시 내용을 직접 설명하고 질문에 답했습니다. 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했고, 오후에는 AI · 디지털 혁신 속 부동산산업의 발전 전략을 다루는 세미나가 이어졌습니다.",
+  quote: "새로운 가치, 함께하는 부동산! 변화와 혁신으로 미래를 열다!",
+  facts: [["주최·주관", "한국부동산경제단체연합회 · 한국공인중개사협회"], ["후원", "국토교통부 · 한국부동산원 · 주택도시보증공사"], ["장소", "건설회관 · 서울 강남구"], ["역할", "부스 운영 · VIP 응대 및 설명"]],
+  main: { name: "rei-day", alt: "김유빈 활동 기록 — 제11회 부동산산업의 날 포토월과 '11th 부동산산업의 날' 조형물 앞에서(2026. 11. 11 · 건설회관)", pos: "52% 50%", w: 1600, h: 900 },
   thumbs: [
-  { name: "dyl-qa", href: "gallery.html#g-dyl-qa", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강에서 마이크를 잡고 질문하는 모습", pos: "38% 45%" },
-  { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 강득구 민주연구원장과 함께", pos: "50% 40%" },
-  { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강을 마친 뒤 함께", pos: "45% 40%" }],
+  { name: "rei-day-pose", href: "gallery.html#g-rei-day-pose", alt: "김유빈 활동 기록 — 부동산 관련 단체 로고가 늘어선 포토월 앞에서 주먹을 쥔 모습", pos: "50% 30%" },
+  { name: "rei-day-wall", href: "gallery.html#g-rei-day-wall", alt: "김유빈 활동 기록 — '새로운 가치, 함께하는 부동산! 변화와 혁신으로 미래를 열다!' 행사 슬로건 아래 포토월", pos: "50% 35%" },
+  { name: "rei-day-sign", href: "gallery.html#g-rei-day-sign", alt: "김유빈 활동 기록 — 레드카펫 위 '11th 부동산산업의 날' 입체 조형물", pos: "30% 60%" }],
 
-  href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" },
+  press: [["헤럴드경제", "https://biz.heraldcorp.com/article/10933818"], ["아시아경제", "https://view.asiae.co.kr/article/2026111114372145206"], ["파이낸셜뉴스", "https://www.fnnews.com/news/202611101420258085"]],
+  href: "gallery.html#rei-day", cta: "행사 사진 전체 보기" },
 { id: "moef-youth", date: "10.27", day: "TUE", tone: "sage", chip: "간담회 참석",
   eyebrow: "Field Diary — 2026. 10. 27", title: "재정경제부 제1차관 청년 현장방문 및 간담회",
   body: "권대영 재정경제부 제1차관의 취임 후 첫 현장 행보로 마련된 청년 간담회에 법무법인 경국 소속으로 참석했습니다. 간담회에 앞서 SVC Seoul 입주 청년 창업기업의 AI 기반 주거지 탐색 · 공공사업 검색·매칭 서비스 시연 참관이 있었고, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융에 대한 현장 의견을 전했습니다.",
@@ -805,7 +810,18 @@ const DIARY = [
   { name: "moef-tour", href: "gallery.html#g-moef-tour", alt: "김유빈 활동 기록 — SVC Seoul 입주 기업의 서비스 시연을 살펴보는 권대영 재정경제부 제1차관", pos: "40% 35%" },
   { name: "moef-talk", href: "gallery.html#g-moef-talk", alt: "김유빈 활동 기록 — 시연 현장에서 권대영 재정경제부 제1차관과 청년들", pos: "55% 35%" }],
 
-  href: "gallery.html#moef-youth", cta: "간담회 사진 전체 보기" }];
+  href: "gallery.html#moef-youth", cta: "간담회 사진 전체 보기" },
+{ id: "dyl", date: "10.24", day: "SAT", tone: "navy", chip: "입학 · 진행 중",
+  eyebrow: "Field Diary — 2026. 10. 24", title: "2026 민주청년지도자 양성과정 입학",
+  body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다. 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
+  facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["함께", "김민석 당대표 · 강득구 민주연구원장 · 이광재 예산결산특별위원장 · 박홍근 기획예산처 장관"], ["상태", "수강 중"]],
+  main: { name: "dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞에서 김민석 당대표와 함께", pos: "50% 33%", w: 675, h: 1200 },
+  thumbs: [
+  { name: "dyl-qa", href: "gallery.html#g-dyl-qa", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강에서 마이크를 잡고 질문하는 모습", pos: "38% 45%" },
+  { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 강득구 민주연구원장과 함께", pos: "50% 40%" },
+  { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강을 마친 뒤 함께", pos: "45% 40%" }],
+
+  href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" }];
 
 
 function FieldDiary() {
@@ -820,7 +836,8 @@ function FieldDiary() {
     ), /*#__PURE__*/
     React.createElement("figcaption", { className: "tl-feature__body" }, /*#__PURE__*/
     React.createElement("p", { className: "eyebrow" }, d.eyebrow, " ", /*#__PURE__*/React.createElement("span", { className: "diary__chip font-sans" }, d.chip)), /*#__PURE__*/
-    React.createElement("h3", { className: "font-ko" }, d.title), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, d.title),
+    d.quote && /*#__PURE__*/React.createElement("p", { className: "diary__quote font-myeongjo" }, "\u201C", d.quote, "\u201D", /*#__PURE__*/React.createElement("span", { className: "font-sans" }, "\uD589\uC0AC \uC2AC\uB85C\uAC74")), /*#__PURE__*/
     React.createElement("p", { className: "font-ko" }, d.body), /*#__PURE__*/
     React.createElement("dl", { className: "diary__facts font-ko" },
     d.facts.map(([k, v]) => /*#__PURE__*/React.createElement("div", { key: k }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))
@@ -829,7 +846,8 @@ function FieldDiary() {
     d.thumbs.map((t) => /*#__PURE__*/
     React.createElement("a", { key: t.name, href: t.href }, /*#__PURE__*/React.createElement(Pic, { name: t.name, fallback: "images/" + t.name + "-600.jpg", sizes: "(max-width: 900px) 30vw, 16vw", alt: t.alt, loading: "lazy", width: "600", height: "338", style: { objectPosition: t.pos } }))
     )
-    ), /*#__PURE__*/
+    ),
+    d.press && /*#__PURE__*/React.createElement("p", { className: "g-press diary__press font-sans" }, "\uBCF4\uB3C4 \xB7 ", d.press.map(([n, u], k) => /*#__PURE__*/React.createElement(React.Fragment, { key: u }, k ? " · " : "", /*#__PURE__*/React.createElement("a", { href: u, target: "_blank", rel: "noreferrer" }, n)))), /*#__PURE__*/
     React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uD604\uC7A5 \uC0AC\uC9C4"), /*#__PURE__*/
     React.createElement("a", { href: d.href, className: "btn btn--ghost" }, d.cta, " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
     )
@@ -2618,6 +2636,9 @@ const JOURNAL = [
 { name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
   d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
+{ name: "rei-day", src: "images/rei-day.jpg", t: "제11회 부동산산업의 날 — 부스 운영", when: "2026. 11. 11 · 건설회관", dz: 0.5,
+  d: "제11회 부동산산업의 날 행사장 부스를 운영하며 VIP 내빈을 응대하고 전시 내용을 설명했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#rei-day" }, { l: "보도 · 헤럴드경제", h: "https://biz.heraldcorp.com/article/10933818" }] },
 { name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
   d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
