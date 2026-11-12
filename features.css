@@ -333,3 +333,43 @@ a.axd__mini:hover{border-color:var(--gold-text)}
 .diary__quote{margin:2px 0 12px;padding-left:12px;border-left:2px solid var(--dy);font-size:1.02rem;line-height:1.5;color:var(--navy);word-break:keep-all}
 .diary__quote span{display:block;margin-top:3px;font-size:.62rem;font-weight:700;letter-spacing:.14em;color:var(--gold-text)}
 .diary__press{margin:12px 0 4px}
+/* 경력 — Berlin 2022(교육 → 인턴십 두 단계 · 사진 · 증빙 요약) */
+.de22>div{min-width:0}
+.de22 p.de22__kicker{margin:0 0 6px;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text)}
+.de22 h3{font-size:1.14rem}
+.de22 p.de22__lead{max-width:none}
+.de22__grid{display:grid;grid-template-columns:1fr minmax(0,340px);gap:18px 26px;margin:16px 0 0;align-items:start}
+.de22__steps{position:relative;margin:0;padding:0 0 0 22px;list-style:none;display:grid;gap:16px}
+.de22__steps::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;border-left:2px solid var(--navy);opacity:.35}
+.de22__steps li{position:relative;display:grid;gap:3px;font-size:.88rem;line-height:1.6;color:var(--ink-soft)}
+.de22__steps li::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--ecru);border:2px solid var(--navy)}
+.de22__steps b{font-size:1rem;color:var(--navy)}
+.de22__steps i{font-style:normal;font-size:.76rem;letter-spacing:.01em}
+.de22__tag{font-size:.64rem;font-weight:700;letter-spacing:.12em;color:var(--gold-text)}
+.de22__when{font-size:.74rem;font-weight:600;color:var(--ink)}
+.de22__photo{margin:0}
+.de22__photo img{display:block;width:100%;height:auto;border:1px solid rgba(17,17,17,.12)}
+.de22__photo figcaption{margin-top:6px;font-size:.68rem;color:var(--ink-soft)}
+.de22__proof{display:grid;gap:8px;margin:18px 0 0;padding:12px 14px;background:var(--ecru);border-left:2px solid var(--navy)}
+.de22__proof div{display:grid;grid-template-columns:110px 1fr;gap:12px;font-size:.84rem;line-height:1.6}
+.de22__proof dt{font-weight:700;color:var(--gold-text)}
+.de22__proof dd{margin:0;color:var(--ink)}
+.de22__proof a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+.de22__caps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 0;padding:0;list-style:none}
+.de22__caps li{padding:10px 12px;border:1px solid rgba(17,17,17,.14);font-size:.8rem;line-height:1.55;color:var(--ink-soft)}
+.de22__caps b{display:block;margin-bottom:2px;font-size:.86rem;color:var(--navy)}
+.de22 p.de22__note{margin-top:12px;max-width:none;font-size:.8rem}
+@media (max-width:760px){.de22__grid{grid-template-columns:1fr}.de22__caps{grid-template-columns:1fr}.de22__proof div{grid-template-columns:1fr;gap:2px}}
+/* 갤러리 — Berlin 2022 증빙(증명서 · 추천서 원문 비공개 카드) */
+.de22g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,28px);margin-top:clamp(22px,3vw,34px);align-items:start}
+.de22g__photos{display:grid;grid-template-columns:2.04fr 1fr;gap:clamp(10px,1.3vw,16px)}
+.de22g__photos .g-card{margin:0;min-width:0}
+.de22g__photos .g-card a{display:block;overflow:hidden}
+#germany-2022 .de22g__photos .g-card a{aspect-ratio:auto;height:auto}
+#germany-2022 .de22g__photos .g-card img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:fill}
+.de22g__sealed{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;aspect-ratio:3/4;padding:24px;border:1px dashed rgba(27,42,74,.45);background:repeating-linear-gradient(135deg,var(--ecru) 0 14px,rgba(27,42,74,.035) 14px 15px);text-align:center}
+.de22g__sealed b{display:inline-block;padding:6px 16px;border:2px solid var(--navy);font-size:1.3rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);transform:rotate(-4deg)}
+.de22g__sealed strong{font-size:.9rem;color:var(--navy)}
+.de22g__sealed span{max-width:30ch;font-size:.8rem;line-height:1.6;color:var(--ink-soft)}
+.de22g__more{margin:12px 0 0;font-size:.86rem}.de22g__more a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:760px){.de22g,.de22g__photos{grid-template-columns:1fr}.de22g__sealed{aspect-ratio:auto;min-height:220px}}
