@@ -781,8 +781,10 @@ const TRAJECTORY = [
   desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
 { id: "tl-army-signal", group: "honor", year: "2022", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
   desc: "軍 특성화고 현장실습 기간 중 희생정신과 학업성적 우수로 타의 모범이 되어 육군정보통신학교장(준장)으로부터 상장을 수상(2022. 7. 1, 제183호)." },
-{ id: "tl-vattenfall", group: "public", year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
-  desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." }];
+{ id: "tl-vattenfall", group: "work", year: "2022", tag: "INTERNSHIP", color: "var(--butter)", title: "독일 Vattenfall Wärme Berlin AG 기술교육부서 인턴십 (2022. 10. 4 ~ 11. 21)",
+  desc: "독일 베를린 소재 Vattenfall Wärme Berlin AG 기술교육부서(Technical Training Department)에서 전기공학 · 배선 · 보호설비 · 기술기준 관련 실습에 참여했습니다. 2022년 11월 발급된 추천서에는 업무의 신뢰성, 성실한 수행과 팀워크에 대한 긍정적인 평가가 담겨 있습니다. 정규직 재직이 아닌 인턴십이며, 회사명은 2022년 당시 기준입니다.", proof: "career.html#cv-vattenfall", proofLabel: "인턴십 상세 · 증빙 요약" },
+{ id: "tl-osz-tiem", group: "edu", year: "2022", color: "var(--butter)", title: "독일 OSZ TIEM 전기기술 · 직업교육 참여 (2022. 9. 6 ~ 9. 30)",
+  desc: "독일 베를린 OSZ TIEM(Technische Informatik, Industrieelektronik und Energiemanagement)에서 전기공학 · 기술실습과 독일어 · 영어, 수학, 경제 · 사회 분야 수업에 참여했습니다. 교육 참여 증명서에는 과제 수행과 교육 현장에서의 성실한 태도에 대한 긍정적인 평가가 기재돼 있습니다. 학위 · 자격이 아닌 교육 참여 증명입니다.", proof: "gallery.html#germany-2022", proofLabel: "베를린 2022 기록 보기" }];
 
 
 /* 현장 일지 — 청와대 청년의날 다음 장. 날짜 도장으로 잇는다 (성평등 공론장은 대외활동 목록에만) */
@@ -857,11 +859,11 @@ function FieldDiary() {
 
 }
 
-/* 이력 그룹 — 핵심(실무·AI 교육)은 펼쳐 두고, 대외활동·수상은 눌러서 본다 */
+/* 이력 그룹 — 핵심(실무·AI 교육 · 2022 독일 기술교육)은 펼쳐 두고, 대외활동·수상은 눌러서 본다 */
 const TRAJ_GROUPS = [
 { key: "work", en: "Professional", ko: "실무 경력", open: true },
-{ key: "edu", en: "AI · Data Education", ko: "AI · 데이터 전문교육", open: true,
-  order: ["tl-myongji", "tl-fintech", "tl-claude-rag", "tl-snu-aied", "tl-krema", "tl-konkuk", "tl-ssafy"] },
+{ key: "edu", en: "AI · Data & Technical Education", ko: "AI · 데이터 · 기술 전문교육", open: true,
+  order: ["tl-myongji", "tl-fintech", "tl-claude-rag", "tl-snu-aied", "tl-krema", "tl-konkuk", "tl-ssafy", "tl-osz-tiem"] },
 { key: "public", en: "Leadership & Public", ko: "리더십 · 대외활동", open: false },
 { key: "honor", en: "Honors", ko: "수상 · 표창", open: false }];
 
