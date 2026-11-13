@@ -11,7 +11,7 @@
   var onIndex = path === "index.html";
   var base = onIndex ? "" : "index.html";
   var LINKS = [
-    ["소개", base + "#about"], ["역량", base + "#composite"], ["경국 AX", base + "#ax-desk"], ["직접 만든 도구", base + "#artifacts"], ["정책 참여", base + "#policy"], ["이력", base + "#trajectory"],
+    ["소개", base + "#about"], ["역량", base + "#composite"], ["실무 사례", base + "#cases"], ["법률 AI 전환", base + "#ax-desk"], ["직접 만든 도구", base + "#artifacts"], ["정책 참여", base + "#policy"], ["이력", base + "#trajectory"],
     ["강의", onIndex ? "#lectures" : "lecture.html"], ["채널", base + "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["연락", base + "#contact"],
   ];
   var current = { "gallery.html": "갤러리", "lecture.html": "강의", "career.html": "경력 상세" }[path];

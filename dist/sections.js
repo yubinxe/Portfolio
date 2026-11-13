@@ -51,7 +51,7 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-  ["소개", "#about"], ["역량", "#composite"], ["경국 AX", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
+  ["소개", "#about"], ["역량", "#composite"], ["실무 사례", "#cases"], ["법률 AI 전환", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
   ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]];
 
   return (/*#__PURE__*/
@@ -281,6 +281,53 @@ const GLANCE = [
   d: "정의한 문제를 자동화와 제품으로 옮깁니다.", ev: "경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 직접 만든 도구 4가지" },
 { n: "03", ko: "판단과 제도로 연결합니다", en: "Human & Institutional Decisions", href: "#policy",
   d: "결과를 판단하는 사람이 이해하도록 만들고, 정책 논의의 자리에 나갑니다.", ev: "변호사 검토로 끝나는 AX 구조 · 국민 대토론회 정책 제안 발표 · 청년 정책 거버넌스" }];
+
+/* ============================================================ 주요 실무 사례 — cases.html 사례집의 입구(첫 화면 다음)
+ * 목록은 cases-data.js 의 CASES 와 같은 id · 이름 · 범주(test/cases.test.mjs 가 대조). 범주는 실제 수행 · 공개 시연 · 향후 확장만 */
+const CASE_KIND = { actual: "실제 수행", demo: "공개 시연", future: "향후 확장" };
+const CASE_INDEX = [
+{ id: "bid", ko: "정비사업 입찰·용역비 분석 시스템", en: "Redevelopment Bid & Service Fee Analysis", kind: "demo", d: "용역 계약 금액을 사업 유형 · 규모로 비교하고 검토 필요 금액을 근거와 함께 표시" },
+{ id: "gwangmyeong", ko: "광명시흥 공익사업 보상자료 분석", en: "Gwangmyeong-Siheung Compensation Analysis", kind: "actual", d: "보상 자료를 절차와 쟁점으로 구조화 — 발표자료 77장" },
+{ id: "transformation", ko: "법률회사 AI 전환·업무혁신 사례", en: "Legal AX & Process Innovation", kind: "actual", d: "현업 관찰 → 문제 정의 → 설계 → 시연 · 테스트, 수행과 제안을 나눠 표기" },
+{ id: "automation", ko: "송무 실무 프로세스 개선 — 고객 메일 분류·급여명세서 자동화", en: "Workflow Automation", kind: "actual", d: "급여명세서 자동 발송 사내 운영 · 예외 처리 흐름 시연" },
+{ id: "reg-monitor", ko: "법령·규제 변화 관제 시스템", en: "RE:INTELLIGENCE · Regulatory Monitoring", kind: "actual", d: "개정 전후 조문 · 시행일 · 중요도 · 업무 분야 — 시연은 가상 조문" },
+{ id: "assembly", ko: "정비사업 총회결의 위험 검토 시스템", en: "Assembly Risk Engine", kind: "actual", d: "명부 · 의결권 · 위임장 대조, 정족수 시뮬레이션(요건은 입력값)" },
+{ id: "contract", ko: "공사도급계약 변경 위험 분석 시스템", en: "Contract Risk Intelligence", kind: "actual", d: "조항 단위 변경 강조 · 공사비 증감 · 검토 의견 → 승인 흐름" },
+{ id: "quality", ko: "법률 AI 품질 검증 및 위험 관리", en: "Legal AI Quality Assurance", kind: "demo", d: "근거 위치 · 정합성 규칙 R1–R8 · 자동 테스트(가상 사건 15건 검출)" }];
+
+const CASE_CAPS = [
+["법률산업 업무혁신", "Legal Operations", "법률 실무에서 현업 요구사항을 읽고 업무 프로세스를 개선합니다."],
+["AI · 데이터 기반 문제 해결", "AI & Data", "자료 수집 · 데이터 구조화 · 업무 자동화 · AI 시스템 구현과 검증."],
+["전략기획 · 사업적 사고", "Strategy", "조직의 문제를 구조화하고 기술과 경영 판단을 잇습니다."]];
+
+function CaseIndex() {
+  const ref = useReveal();
+  return (/*#__PURE__*/
+    React.createElement("section", { id: "cases", ref: ref, className: "cx", "aria-labelledby": "cx-title" }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap" }, /*#__PURE__*/
+    React.createElement("header", { className: "cx__head reveal" }, /*#__PURE__*/
+    React.createElement("p", { className: "cx__k font-ko" }, "\uC8FC\uC694 \uC2E4\uBB34 \uC0AC\uB840 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Case Studies")), /*#__PURE__*/
+    React.createElement("h2", { id: "cx-title", className: "cx__t font-myeongjo" }, "\uBC95\uB960 \uC2E4\uBB34\uB97C \uC774\uD574\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC5C5\uBB34\uCCB4\uACC4\uB97C \uB2E4\uC2DC \uC124\uACC4\uD558\uB2E4."), /*#__PURE__*/
+    React.createElement("p", { className: "cx__s font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC804\uB7B5\uAE30\uD68D\uC2E4\uC5D0\uC11C \uC218\uD589\uD55C \uBC95\uB960 AI \uC804\uD658, \uC5C5\uBB34 \uD504\uB85C\uC138\uC2A4 \uAC1C\uC120, \uB370\uC774\uD130 \uBD84\uC11D \uBC0F \uC2DC\uC2A4\uD15C \uAD6C\uD604 \uC0AC\uB840")
+    ), /*#__PURE__*/
+    React.createElement("ul", { className: "cx__caps reveal" },
+    CASE_CAPS.map(([ko, en, d], i) => /*#__PURE__*/React.createElement("li", { key: ko }, /*#__PURE__*/React.createElement("span", { className: "cx__n font-sans" }, "\uC81C", i + 1, "\uC5ED\uB7C9"), /*#__PURE__*/React.createElement("b", { className: "font-ko" }, ko), /*#__PURE__*/React.createElement("i", { className: "font-sans", lang: "en" }, en), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, d)))
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "cx__list reveal" },
+    CASE_INDEX.map((c, i) => /*#__PURE__*/
+    React.createElement("li", { key: c.id }, /*#__PURE__*/React.createElement("a", { href: "cases.html#" + c.id }, /*#__PURE__*/
+    React.createElement("span", { className: "cx__no font-sans" }, String(i + 1).padStart(2, "0")), /*#__PURE__*/
+    React.createElement("span", { className: "cx__body" }, /*#__PURE__*/React.createElement("b", { className: "font-ko" }, c.ko), /*#__PURE__*/React.createElement("i", { className: "font-sans", lang: "en" }, c.en), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, c.d)), /*#__PURE__*/
+    React.createElement("span", { className: "cx__kind cx__kind--" + c.kind + " font-ko" }, CASE_KIND[c.kind])
+    ))
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "cx__foot font-ko" }, /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--actual" }, "\uC2E4\uC81C \uC218\uD589"), " \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC9C1\uC811 \uC218\uD589(\uD654\uBA74 \xB7 \uC790\uB8CC \uBE44\uACF5\uAC1C) ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--demo" }, "\uACF5\uAC1C \uC2DC\uC5F0"), " \uC2E4\uBB34 \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C \uB9CC\uB4E0 \uAC00\uC0C1 \uB370\uC774\uD130 \uC2DC\uC5F0 ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--future" }, "\uD5A5\uD6C4 \uD655\uC7A5"), " \uC544\uC9C1 \uAD6C\uD604\uD558\uC9C0 \uC54A\uC740 \uAE30\uB2A5 \u2014 \uC0AC\uB840\uB9C8\uB2E4 \uB530\uB85C \uD45C\uC2DC\uD569\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", { className: "cx__cta" }, /*#__PURE__*/React.createElement("a", { className: "btn", href: "cases.html" }, "\uC2E4\uBB34 \uC0AC\uB840\uC9D1 \uC804\uCCB4 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })))
+    )
+    ));
+
+}
 
 function Ledger() {
   const ref = useReveal();
@@ -732,7 +779,7 @@ function FieldworkStrip() {
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
 { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
-  desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)를 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
+  desc: "정비사업의 법률·경제 위험을 다루는 법률 AI 전환을 기획·구축 — 법령·규제 변화 관제 시스템, 정비사업 총회결의 위험 검토 시스템, 공사도급계약 변경 위험 분석 시스템(사내 구축). 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)를 함께 수행.", proof: "cases.html", proofLabel: "실무 사례집 보기" },
 { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
   desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
 { id: "tl-rei-day", group: "public", year: "2026", color: "var(--pink)", title: "제11회 부동산산업의 날 — 행사 부스 운영 · VIP 응대 및 설명",
@@ -1060,7 +1107,7 @@ const TOOL_META = {
  * 두 그룹을 합쳐 '경국 도입 6종'이라 부르지 않는다. 소속 · 구축 주체 · 운영 상태를 항목마다 따로 적는다.
  * 건축 모형(city.js)은 01 · 03 과 실무(보상자료)에서만 그리고, 04–06 을 고르면 캔버스 장면을 내린다. */
 const AX_SYSTEMS = [
-{ id: "ax-reintel", number: "01", group: "A", koreanTitle: "정비사업 법령·규제 변화 관제", englishName: "RE:INTELLIGENCE",
+{ id: "ax-reintel", number: "01", group: "A", koreanTitle: "법령·규제 변화 관제 시스템", englishName: "RE:INTELLIGENCE · Regulatory Monitoring",
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "정비사업은 사업 단계 · 토지이용규제 · 조례 · 고시 · 행정절차의 변화에 영향을 받습니다. 서로 다른 출처를 손으로 확인하면 검토 누락이 생길 수 있습니다.",
   solution: "사업지를 기준으로 법령 · 고시 · 조례 · 행정 공고의 변화를 모으고, 그 사업의 어느 단계와 부지의 어느 요소에 관련되는지 정리해 변호사 검토로 올리는 구조를 설계했습니다.",
@@ -1068,7 +1115,7 @@ const AX_SYSTEMS = [
   human: "감지된 변경이 그 사업에 어떤 법적 효력을 갖는지는 변호사가 판단합니다. 시스템은 검토 대상을 드러낼 뿐입니다.",
   interaction: "사업지 A/B/C 를 고르면 필지 · 건물 배치 · 사업 단계가 함께 바뀌고, 규제 레이어를 고르면 그 레이어가 부지의 어느 부분에 걸리는지 보입니다.",
   demoPath: null, evidence: "career.html#practice-strategy" },
-{ id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 절차 검토", englishName: "Assembly Risk Engine",
+{ id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 위험 검토 시스템", englishName: "Assembly Risk Engine",
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "조합원 명부 · 의결권 · 위임장 · 소집 통지 · 정족수 · 안건별 결과 사이의 불일치를 사람이 반복해서 대조해야 합니다.",
   solution: "서류를 서로 맞대는 대조 규칙을 정하고, 맞지 않는 곳을 '확인 필요' 예외 목록으로 모으는 구조를 설계했습니다.",
@@ -1076,7 +1123,7 @@ const AX_SYSTEMS = [
   human: "총회결의의 효력이나 무효 여부는 시스템이 정하지 않습니다. 예외 목록을 보고 변호사가 판단합니다.",
   interaction: "안건을 고르면 의결권 · 정족수 대조가 바뀌고, 검토 규칙을 누르면 그 규칙이 보는 가상 서류와 해당 조합원 자리가 표시됩니다.",
   demoPath: null, evidence: "career.html#practice-strategy" },
-{ id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경사항 검토", englishName: "Contract Risk Intelligence",
+{ id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경 위험 분석 시스템", englishName: "Contract Risk Intelligence",
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "계약 변경에 따라 공사 범위 · 공사비 · 지급조건 · 책임 부담이 달라질 수 있고, 두 계약서를 눈으로 비교하면 바뀐 조항을 놓치기 쉽습니다.",
   solution: "변경 전 · 후 계약서를 조항 단위로 맞대고, 바뀐 조항을 대금 · 책임 · 손해배상 같은 검토 분류에 걸어 표시하는 구조를 설계했습니다.",
@@ -1255,7 +1302,7 @@ function AXCommand() {
     React.createElement("section", { id: "ax-desk", ref: sec, className: "axc", "aria-labelledby": "axc-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap axc__wrap" }, /*#__PURE__*/
     React.createElement("header", { className: "axc__mast" }, /*#__PURE__*/
-    React.createElement("p", { className: "axc__k font-ko" }, "03 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D AX ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Gyunggook AX \xB7 Six Legal AX Systems")), /*#__PURE__*/
+    React.createElement("p", { className: "axc__k font-ko" }, "03 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \xB7 \uBC95\uB960 AI \uC804\uD658 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Legal AX \xB7 Six Systems")), /*#__PURE__*/
     React.createElement("h2", { id: "axc-title", className: "axc__title" }, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, "\uBC95\uB960 \uC2E4\uBB34\uB97C \uC774\uD574\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC5C5\uBB34\uC758 \uAD6C\uC870\uB97C \uBC14\uAFB8\uB294 AX"), /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, "Legal Operations \xB7 Evidence Intelligence \xB7 Contract Review \xB7 Workflow Automation")), /*#__PURE__*/
     React.createElement("div", { className: "axc__lead font-ko" }, /*#__PURE__*/
     React.createElement("p", null, "\uC815\uBE44\uC0AC\uC5C5 \uC2E4\uBB34\uC5D0\uC11C \uCD9C\uBC1C\uD55C AX \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C, \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D\uACFC \uBC95\uB960\uC815\uBCF4 \uD0D0\uC0C9, \uC0AC\uAC74 \uAD00\uB9AC\uAE4C\uC9C0 \uC801\uC6A9 \uBC94\uC704\uB97C \uD655\uC7A5\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
@@ -2176,7 +2223,7 @@ function ArtifactsSection() {
   return (/*#__PURE__*/
     React.createElement("section", { id: "artifacts", ref: ref, className: "arts", "aria-labelledby": "arts-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
-    React.createElement(SectionHead, { no: "04 \uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C", ko: "\uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC2E4\uC81C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4", en: "Four Independently Developed Products" }), /*#__PURE__*/
+    React.createElement(SectionHead, { no: "04 \uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C", ko: "\uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC2E4\uC81C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4", en: "Selected Works \xB7 Four Independent Products" }), /*#__PURE__*/
     React.createElement("div", { id: "tools", className: "arts__intro reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "arts__lead font-ko", id: "arts-title" }, "\uBB38\uC81C\uB97C \uBC1C\uACAC\uD558\uB294 \uB370\uC11C \uB05D\uB0B4\uC9C0 \uC54A\uACE0, \uD63C\uC790 \uB05D\uAE4C\uC9C0 \uB9CC\uB4E4\uC5B4 \uBC30\uD3EC\uD55C ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uC81C\uD488"), " \uB124 \uAC00\uC9C0\uC785\uB2C8\uB2E4. \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4.", /*#__PURE__*/
     React.createElement("span", null, "\uC81C\uD488\uB9C8\uB2E4 \uC5B4\uB5A4 \uBB38\uC81C\uAC00 \uC788\uC5C8\uB294\uC9C0 \u2192 \uBB34\uC5C7\uC744 \uB9CC\uB4E4\uC5C8\uB294\uC9C0 \u2192 \uC5B4\uB5BB\uAC8C \uC4F0\uB294\uC9C0 \uC21C\uC11C\uB85C \uC801\uC5C8\uC2B5\uB2C8\uB2E4. \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC758 AX \uB294 \uBC14\uB85C \uC704\uC5D0 \uC788\uC2B5\uB2C8\uB2E4.")), /*#__PURE__*/
@@ -2796,4 +2843,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
