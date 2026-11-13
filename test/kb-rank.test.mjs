@@ -72,6 +72,8 @@ const CASES = [
   ["인스타그램 콘텐츠 만드신 적 있나요", ["ed-01"]],
   ["군대에서는 무슨 일을 하셨나요", ["tl-army", "tl-army-startup"]],
   ["독일 연수 다녀오셨다고요", ["tl-vattenfall"]],
+  ["정비사업 입찰 용역비 분석 사례 있나요?", ["cases"]],
+  ["실무 사례집 보여 주세요", ["cases"]],
   ["Vattenfall에서 일한 적이 있나요?", ["tl-vattenfall"]],
   ["독일 인턴십 기간은 언제인가요?", ["tl-vattenfall"]],
   ["OSZ TIEM은 어떤 기관인가요?", ["tl-osz-tiem"]],

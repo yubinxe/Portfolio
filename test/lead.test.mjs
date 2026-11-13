@@ -88,7 +88,7 @@ test("강의 의뢰는 같은 저장 경로를 쓰고 알림 제목만 [강의 �
 
 test("kb.js 카드 무결성: id 유일 · CTA href 형식 · 보조 CTA 가 주 CTA 와 중복되지 않음", () => {
   const ids = new Set();
-  const HREF = /^(https?:\/\/|mailto:|(index|career|gallery|lecture|legal-ax|trial-brief)\.html(#[\w-]+)?$)/;
+  const HREF = /^(https?:\/\/|mailto:|(index|career|gallery|lecture|legal-ax|trial-brief|cases)\.html(#[\w-]+)?$)/;
   for (const c of KB.cards) {
     assert.ok(!ids.has(c.id), "dup id " + c.id); ids.add(c.id);
     assert.ok(c.primary && HREF.test(c.primary.href), "bad primary " + c.id + " " + (c.primary && c.primary.href));

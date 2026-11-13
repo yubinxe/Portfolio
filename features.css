@@ -373,3 +373,25 @@ a.axd__mini:hover{border-color:var(--gold-text)}
 .de22g__sealed span{max-width:30ch;font-size:.8rem;line-height:1.6;color:var(--ink-soft)}
 .de22g__more{margin:12px 0 0;font-size:.86rem}.de22g__more a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
 @media (max-width:760px){.de22g,.de22g__photos{grid-template-columns:1fr}.de22g__sealed{aspect-ratio:auto;min-height:220px}}
+/* 주요 실무 사례(#cases) — 첫 화면 다음, cases.html 사례집의 입구. 한국어 제목 크게 · 영어는 작은 보조 표기 · 범주 배지 */
+.cx{position:relative;padding:clamp(64px,9vw,120px) 0 clamp(40px,6vw,72px);background:var(--ecru)}
+.cx__k{margin:0;font-size:.82rem;font-weight:700;color:var(--gold-text)}.cx__k span{margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.cx__t{margin:12px 0 0;font-size:clamp(1.9rem,5vw,3.3rem);font-weight:800;line-height:1.3;letter-spacing:-.02em;color:var(--navy)}
+.cx__s{margin:14px 0 0;max-width:44em;font-size:clamp(.98rem,1.7vw,1.1rem);line-height:1.75;color:var(--ink-soft)}
+.cx__caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0 0;padding:0;list-style:none}
+.cx__caps li{display:grid;align-content:start;gap:2px;padding:14px 16px;background:var(--paper);border:1px solid rgba(17,17,17,.12);border-top:3px solid var(--navy)}
+.cx__caps b{font-size:1.02rem;color:var(--navy)}.cx__caps i{font-style:normal;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text)}
+.cx__caps span:last-child{margin-top:4px;font-size:.86rem;line-height:1.6;color:var(--ink-soft)}
+.cx__n{font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--gold-text)}
+.cx__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:28px 0 0;padding:0;list-style:none}
+.cx__list a{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;min-height:84px;padding:14px 4px;text-decoration:none;color:var(--ink);border-bottom:1px solid rgba(17,17,17,.14);transition:background .2s}
+.cx__list a:hover,.cx__list a:focus-visible{background:var(--paper)}
+.cx__no{padding-top:3px;font-size:.84rem;font-weight:700;color:var(--gold-text)}
+.cx__body{display:grid;gap:1px;min-width:0}.cx__body b{font-size:1.02rem;line-height:1.45}.cx__body i{font-style:normal;font-size:.7rem;letter-spacing:.04em;color:var(--ink-soft)}
+.cx__body span{margin-top:4px;font-size:.84rem;line-height:1.55;color:var(--ink-soft)}
+.cx__kind{display:inline-block;padding:1px 8px;font-size:.7rem;font-weight:700;white-space:nowrap;border:1px solid;line-height:1.7}
+.cx__kind--actual{color:#fff;background:var(--navy);border-color:var(--navy)}.cx__kind--demo{color:#2F6B4F;background:rgba(47,107,79,.09);border-color:rgba(47,107,79,.45)}.cx__kind--future{color:var(--ink-soft);border-style:dashed;border-color:rgba(17,17,17,.3)}
+.cx__foot{margin:16px 0 0;font-size:.8rem;line-height:2;color:var(--ink-soft)}.cx__foot .cx__kind{margin:0 4px 0 10px}.cx__foot .cx__kind:first-child{margin-left:0}
+.cx__cta{margin:20px 0 0}
+@media (max-width:900px){.cx__caps,.cx__list{grid-template-columns:1fr}}
+@media (max-width:560px){.cx__list a{grid-template-columns:26px 1fr}.cx__list .cx__kind{grid-column:2;justify-self:start}}
