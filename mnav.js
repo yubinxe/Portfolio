@@ -19,7 +19,7 @@
 
   // 메인: 폰 헤더에 현재 섹션·읽은 정도 표시
   if (onIndex) (function () {
-    var S = "glance:한눈에,about:소개,composite:역량,ax-desk:경국 AX,artifacts:네 가지 도구,policy:정책 참여,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
+    var S = "glance:한눈에,cases:실무 사례,about:소개,composite:역량,ax-desk:법률 AI 전환,artifacts:네 가지 도구,policy:정책 참여,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
     var bar = document.createElement("div"), tag = document.createElement("a"), cur = "", tk = 0;
     bar.className = "yk-prog"; tag.className = "yk-now font-sans"; tag.href = "#top"; tag.setAttribute("aria-label", "현재 섹션, 맨 위로");
     document.body.append(bar, tag);
@@ -50,9 +50,15 @@
             (i < 9 ? "0" : "") + (i + 1) + "</span>" + l[0] + "</a></li>";
         }).join("") +
       "</ol></nav>" +
+      '<div class="mnav__row"><a class="mnav__cv" href="resume.html">1페이지 이력</a>' +
+        (onIndex ? '<button type="button" class="mnav__ix" role="switch" aria-checked="true">인트로 <b>켜짐</b><i aria-hidden="true"></i></button>' : "") + "</div>" +
       '<a class="mnav__cta" href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D" data-lecture-consult="">강의 의뢰하기</a>' +
     "</div>";
   document.body.appendChild(panel);
+  /* 인트로 스위치 — 메인의 window.ykIntro(sections.jsx)와 같은 상태. 다른 페이지에는 두지 않는다 */
+  var ixb = panel.querySelector(".mnav__ix");
+  function ixSync() { if (!ixb || !window.ykIntro) return; var on = window.ykIntro.pref(); ixb.setAttribute("aria-checked", on ? "true" : "false"); ixb.querySelector("b").textContent = on ? "켜짐" : "꺼짐"; }
+  if (ixb) { ixb.addEventListener("click", function () { if (window.ykIntro) { window.ykIntro.setPref(!window.ykIntro.pref()); ixSync(); } }); addEventListener("ix:change", ixSync); setTimeout(ixSync, 0); }
 
   var lastBtn = null;
   function btns() { return document.querySelectorAll("[data-mnav-toggle]"); }
@@ -61,6 +67,7 @@
 
   function open(btn) {
     lastBtn = btn || null;
+    ixSync();
     panel.hidden = false;
     // 다음 프레임에 클래스를 붙여야 전환이 보인다
     requestAnimationFrame(function () { panel.classList.add("on"); });
