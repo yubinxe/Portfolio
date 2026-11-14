@@ -30,13 +30,15 @@ html.ix-off .ix{display:none}
 .ix__tag{font-size:clamp(.95rem,2vw,1.2rem);font-weight:500;color:rgba(245,242,235,.86)}
 .ix__credit{max-width:640px;margin:28px auto 0!important;font-size:.72rem;line-height:1.6;color:rgba(245,242,235,.56)}
 .ix__ctl{position:absolute;top:-60px;right:0;display:flex;gap:8px;align-items:center}
-.ix__skip,.ix__switch{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;font:600 .72rem/1 "Inter","Pretendard Variable",sans-serif;letter-spacing:.14em;color:#F5F2EB;text-decoration:none;background:rgba(8,13,26,.55);border:1px solid rgba(245,242,235,.32);cursor:pointer}
-.ix__skip:hover,.ix__switch:hover{border-color:#78AFFF;color:#fff}
-.ix__skip:focus-visible,.ix__switch:focus-visible{outline:2px solid #78AFFF;outline-offset:3px}
+.ix__cv,.ix__skip,.ix__switch{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;font:600 .72rem/1 "Inter","Pretendard Variable",sans-serif;letter-spacing:.14em;color:#F5F2EB;text-decoration:none;background:rgba(8,13,26,.55);border:1px solid rgba(245,242,235,.32);cursor:pointer}
+.ix__cv:hover,.ix__skip:hover,.ix__switch:hover{border-color:#78AFFF;color:#fff}
+.ix__cv:focus-visible,.ix__skip:focus-visible,.ix__switch:focus-visible{outline:2px solid #78AFFF;outline-offset:3px}
 .ix__switch{letter-spacing:.02em}
-.ix__switch span{font-size:.76rem;font-weight:600}
+.ix__switch span{font-size:.76rem;font-weight:600}.ix__switch b{font-size:.72rem;font-weight:600;opacity:.8}
+.ix__cv{letter-spacing:.02em;font-size:.78rem;color:#080D1A;background:#F5F2EB;border-color:#F5F2EB}.ix__cv:hover{color:#080D1A;background:#fff}
 .ix__switch i{position:relative;width:30px;height:16px;border-radius:999px;background:#78AFFF}
 .ix__switch i::after{content:"";position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#080D1A}
+.ix__switch[aria-checked="false"] i{background:rgba(245,242,235,.3)}.ix__switch[aria-checked="false"] i::after{right:auto;left:2px;background:#F5F2EB}
 .ix__mark{position:absolute;left:0;bottom:0;width:1px;height:1px}
 /* 정적 구성일 때는 상단 메뉴가 어두운 인트로 위에 놓인다 — 처음부터 불투명 막대로 읽히게 */
 html:not(.ix-on):not(.ix-off) header.hnav{background:rgba(247,244,238,.96);border-bottom-color:rgba(14,26,46,.12)}
@@ -135,9 +137,9 @@ html.ix-on header.hnav{transition:transform .45s cubic-bezier(.2,.8,.2,1),opacit
 }
 @media (max-width:760px){
   .ix__ctl{gap:6px}
-  .ix__skip,.ix__switch{min-height:44px;padding:0 12px}
+  .ix__cv,.ix__skip,.ix__switch{min-height:44px;padding:0 12px}
   .ix__switch i{width:26px;height:14px}.ix__switch i::after{width:10px;height:10px}
 }
-@media (max-width:420px){html.ix-on .ix__brand{display:none}.ix__ctl{left:16px;right:16px!important;justify-content:flex-end}}
+@media (max-width:420px){html.ix-on .ix__brand{display:none}.ix__ctl{left:16px;right:16px!important;justify-content:flex-end;flex-wrap:wrap}.ix__switch b{display:none}.ix__cv{order:-1}}
 @media (prefers-reduced-motion:reduce){.ix__year,.ix__year-sub,.ix__cue i{animation:none!important}}
 @media print{.ix{display:none!important}#manifesto{margin-top:0!important}}

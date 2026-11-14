@@ -18,12 +18,22 @@ test("장면 순서 — 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP 
   assert.ok(read("app.jsx").indexOf("<IntroSequence />") < read("app.jsx").indexOf("<HeroClassic />"), "인트로는 히어로 앞");
 });
 
-test("건너뛰기 — SKIP INTRO 는 JS 없이도 동작하는 링크, 인트로 끄기는 스위치 · 히어로에서 다시 켤 수 있다", () => {
+test("건너뛰기 · 인트로 제어 — SKIP 은 선호를 바꾸지 않는 링크, 스위치는 실제 상태(aria-checked), 선호와 재생을 나눈다", () => {
   assert.ok(/<a className="ix__skip" href="#manifesto"/.test(block), "SKIP INTRO 링크");
-  assert.ok(block.includes('role="switch"') && block.includes("ixSet(false)"), "인트로 끄기 스위치");
-  assert.ok(jsx.includes('className="ix-replay font-ko" onClick={() => ixSet(true)}'), "다시 보기");
+  const skip = block.slice(block.indexOf('className="ix__skip"'), block.indexOf("SKIP INTRO"));
+  assert.ok(!/setPref|localStorage/.test(skip), "SKIP 은 저장된 선호를 바꾸지 않는다");
+  assert.ok(block.includes('<a className="ix__cv font-ko" href="resume.html" onClick={() => ykIntro.skipSession()}>1페이지 이력 보기</a>'), "인트로에서 바로 1페이지 이력");
+  assert.ok(block.includes('<IxSwitch className="ix__switch" />'), "인트로 안 스위치");
+  assert.ok(/role="switch" aria-checked=\{pref\}/.test(jsx), "aria-checked 는 실제 선호");
+  assert.ok(jsx.includes('<IxSwitch className="hnav__ix" />') && jsx.includes('href="resume.html" className="hnav__cv'), "상단 메뉴에 스위치 · 1페이지 이력");
+  assert.ok(jsx.includes('className="ix-replay font-ko" onClick={() => ykIntro.replay()}'), "다시 보기는 replay");
+  const setPref = jsx.slice(jsx.indexOf("  setPref(on) {"), jsx.indexOf("  replay() {"));
+  assert.ok(!/scrollTo\(/.test(setPref.replace(/ixHide\(\)/g, "")), "선호를 켜는 것만으로 맨 위로 이동하지 않는다");
+  assert.ok(/replay\(\) \{[\s\S]*?scrollTo\(\{ top: 0/.test(jsx), "맨 위 이동은 replay 에서만");
   assert.ok(!/document\.cookie/.test(jsx), "쿠키 사용 금지");
-  assert.ok(/localStorage\.(setItem|removeItem)\(IX_KEY/.test(jsx));
+  assert.ok(/localStorage\.(setItem|removeItem)\(IX_KEY/.test(jsx) && jsx.includes('IX_KEY = "yk.intro"'), "기존 저장 키 유지");
+  assert.ok(jsx.includes('IX_SESSION = "yk.intro.s"') && /sessionStorage\.setItem\(IX_SESSION/.test(jsx), "이번 탭 건너뛰기는 sessionStorage");
+  assert.ok(/role="status" aria-live="polite"/.test(jsx), "설정 결과만 알림");
 });
 
 test("첫 그리기 전 결정 — 움직임 줄이기 · 끄기 저장 · 깊은 링크(#)를 head 스크립트가 반영", () => {
@@ -31,6 +41,7 @@ test("첫 그리기 전 결정 — 움직임 줄이기 · 끄기 저장 · 깊�
   const s = head.match(/<script>([^<]*ix-on[^<]*)<\/script>/);
   assert.ok(s, "head 스크립트");
   assert.ok(s[1].includes("prefers-reduced-motion: reduce") && s[1].includes('"yk.intro"') && s[1].includes("location.hash"));
+  assert.ok(s[1].includes('sessionStorage.getItem("yk.intro.s")') && s[1].includes("ix-pref-off"), "선호와 이번 탭 건너뛰기를 나눠 읽는다");
   assert.ok(head.indexOf("ix-on") < head.indexOf('rel="stylesheet"'), "스타일보다 먼저");
   assert.ok(head.includes('href="intro.css?v='));
 });
