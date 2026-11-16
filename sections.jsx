@@ -858,6 +858,8 @@ const TRAJECTORY = [
     desc: "서울시 매력일자리 3기 교육생으로 AI 활용 마케팅기획자 양성과정에 참여했습니다(교육과정 · 경력 아님). 수료 후 회원사 매칭으로 법무법인 경국에 입사했습니다." },
   { id: "tl-rei-day", group: "public", year: "2026", color: "var(--pink)", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
     desc: "한국부동산경제단체연합회가 주최하고 한국공인중개사협회가 주관한 제11회 부동산산업의 날(2026. 11. 11 · 서울 강남구 건설회관)에서 한국부동산마케팅협회(KREMA) 홍보부스에 참여해 직접 개발한 집캐치를 발표 · 시연하고 내빈을 응대했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다", proof: "gallery.html#rei-day", proofLabel: "행사 현장 보기" },
+  { id: "tl-seoripul-reporter", group: "public", year: "2026", color: "var(--sky)", title: "서초구 제5기 서리풀기자단 — 취재 · 기사 작성",
+    desc: "2026년 제5기 서리풀기자단으로 지역의 공간 · 문화 현장을 취재하고, 서초구 소식지 2026년 11월호에 공동 기명으로 기사가 실렸습니다(서리풀 아트테리어 · 루이스폴센 · 두성종이). 구민 기자단 활동이며 서울시민기자단과 별개입니다.", proof: "gallery.html#seoripul-reporter", proofLabel: "소식지 지면 보기" },
   { id: "tl-moef-youth", group: "public", year: "2026", color: "var(--sky)", title: "재정경제부 제1차관 청년 현장방문 및 간담회 참석",
     desc: "권대영 재정경제부 제1차관이 서울 마포구 창업기업 지원시설 SVC Seoul에서 연 청년 현장방문 및 간담회(2026. 10. 27)에 법무법인 경국 소속으로 참석했습니다. 차관 취임 후 첫 현장 행보로 마련된 자리로, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융 등 3대 사회정책에 대한 현장 의견을 전했습니다.", proof: "gallery.html#moef-youth", proofLabel: "간담회 현장 보기" },
   { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",

@@ -11,6 +11,7 @@
 - 사례집 `cases.html`: 단일 원천 `cases-data.js`(8편) → `cases-render.js`(문자열 렌더 · 계산) → `scripts/build-cases.mjs`(npm run build 가 프리렌더) · `cases.js`(시연 상호작용만, 상태는 메모리). 범주는 실제 수행(actual) · 공개 시연(demo) · 향후 확장(future)만 — 섞지 않기. 결과는 측정 · 시뮬레이션 · 정성으로만. index `CASE_INDEX`(sections.jsx)는 cases-data 와 같은 id · 이름 · 범주(test/cases.test.mjs)
 - 국문 대표 명칭: 법령·규제 변화 관제 시스템(RE:INTELLIGENCE) · 정비사업 총회결의 위험 검토 시스템(Assembly Risk Engine) · 공사도급계약 변경 위험 분석 시스템(Contract Risk Intelligence) · 내비 ‘실무 사례’ · ‘법률 AI 전환’. 영어는 작은 보조 표기
 - 인트로 제어(V7): 선호 = localStorage `yk.intro`(다음 방문 재생 여부) · 재생 = html.ix-off 유무 · 이번 탭 건너뛰기 = sessionStorage `yk.intro.s`. `window.ykIntro.setPref/replay/skipSession`(sections.jsx) — 선호를 켜도 스크롤하지 않음, 맨 위 이동은 replay 뿐. 스위치는 인트로 안 · 상단 메뉴(.hnav__ix) · 모바일 메뉴(.mnav__ix) 세 곳, 같은 상태(ix:change). SKIP 은 선호를 바꾸지 않음
+- 게재 · 취재 기록 `records-data.js`(단일 원천 · kind = official/citizen/press/field) → `scripts/build-records.mjs`(npm run build) → gallery `#seoripul-reporter`. 새 지면은 배열에 한 건 + build. 서리풀기자단(제5기, 2026. 9–)은 서울시민기자단과 별개 · 공동 기명 · 단독 집필로 쓰지 않기 · 모르는 호수/날짜는 null
 - 1페이지 이력 `resume.html`(+`resume.css`, 인쇄 = A4 1쪽 → `resume.pdf`). 상단 메뉴 · 인트로 · 모바일 메뉴에서 연결. 의견 · 협업은 mailto(제목 자동) — 보냈다고 표시하지 않음. 폼 · 저장 백엔드 없음. 전화번호 · 생년 비공개. 사실 근거는 본인 이력서/경력기술서(2026. 11)와 content-matrix
 - 영문 회사명은 Gyunggook(다른 표기 금지). 회사명을 쓴다고 회사 승인 · 도입이 아님 — ‘개인 구현 · 경국 도입 아님’ 병기
 - AX 6종 = A 경국 실무 01–03(사내 구축 · 비공개) + B 개인 공개 시연 04–06(legal-ax 와 같은 데이터 · 같은 탭 저장소). B 를 경국 도입으로 쓰지 않기. 16개 결과물 수와 따로 셈
@@ -21,11 +22,11 @@
 - `npm run build` — JSX 변경 후
 - `npm run seed:build` — kb.js 변경 후 필수
 - `npm run build:images` — 사진 추가 시(AVIF/WebP → images/opt/, sections.jsx `OPT` 맵)
-- `npm run build:resume-pdf` — resume.html · resume.css 를 고친 뒤 필수(A4 1쪽 resume.pdf · 지문 docs/resume-pdf.json, 테스트가 대조)
+- `npm run build:resume-pdf` — resume.html · resume.css 를 고친 뒤 필수(로컬은 NODE_PATH=gamgak/node_modules CHROME_PATH=설치된 chrome.exe)(A4 1쪽 resume.pdf · 지문 docs/resume-pdf.json, 테스트가 대조)
 - `npm test` — 106건 모두 통과해야 커밋
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=22` · `dist/sections.js?v=53` · `dist/app.js?v=11` · `chatbot.js?v=17` · `mnav.js?v=9` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `intro.css?v=3`(index 전용) · `kb.js?v=20261114a` · resume: `resume.css?v=1` · cases: `cases.css?v=1` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=22` · `dist/sections.js?v=53` · `dist/app.js?v=11` · `chatbot.js?v=17` · `mnav.js?v=9` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `intro.css?v=3`(index 전용) · `kb.js?v=20261114a` · resume: `resume.css?v=2` · cases: `cases.css?v=1` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.

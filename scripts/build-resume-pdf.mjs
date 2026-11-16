@@ -15,7 +15,7 @@ try { ({ chromium } = require("playwright")); } catch (e) { console.error("Playw
 
 export const resumeHash = () => createHash("sha256").update(readFileSync(path.join(ROOT, "resume.html"))).update(readFileSync(path.join(ROOT, "resume.css"))).digest("hex").slice(0, 16);
 
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}); /* 설치된 Chrome 을 쓰려면 CHROME_PATH */
 const page = await browser.newPage();
 await page.goto(pathToFileURL(path.join(ROOT, "resume.html")).href, { waitUntil: "networkidle" });
 await page.evaluate(() => document.fonts.ready);

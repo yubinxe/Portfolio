@@ -24,8 +24,8 @@ function pdfText(buf) {
   return out;
 }
 
-test("증빙 PDF 7개 · 각 3MB 이하", () => {
-  assert.equal(pdfs.length, 7, pdfs.join(","));
+test("증빙 PDF 8개 · 각 3MB 이하", () => {
+  assert.equal(pdfs.length, 8, pdfs.join(","));
   for (const f of pdfs) assert.ok(statSync(`${DIR}/${f}`).size < 3 * 1024 * 1024, f);
 });
 
@@ -58,7 +58,7 @@ test("재직증명서 · 건강보험 확인서는 저장소에 없음", () => {
 test("갤러리 내려받기 링크가 모두 실제 파일", () => {
   const g = readFileSync("gallery.html", "utf8");
   const hrefs = [...g.matchAll(/href="(assets\/evidence\/[^"]+\.pdf)"/g)].map((m) => m[1]);
-  assert.ok(hrefs.length >= 7, "링크 수 " + hrefs.length);
+  assert.ok(hrefs.length >= 8, "링크 수 " + hrefs.length);
   for (const h of hrefs) assert.ok(existsSync(h), h);
   assert.ok(g.includes('id="evidence-pdf"'));
 });
