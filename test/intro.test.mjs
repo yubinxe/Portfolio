@@ -19,8 +19,8 @@ test("장면 순서 — 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP 
 });
 
 test("건너뛰기 · 인트로 제어 — SKIP 은 선호를 바꾸지 않는 링크, 스위치는 실제 상태(aria-checked), 선호와 재생을 나눈다", () => {
-  assert.ok(/<a className="ix__skip" href="#manifesto"/.test(block), "SKIP INTRO 링크");
-  const skip = block.slice(block.indexOf('className="ix__skip"'), block.indexOf("SKIP INTRO"));
+  assert.ok(/<a className="ix__skip font-ko" href="#manifesto"/.test(block), "바로 본문 보기 링크(JS 없이도 동작)");
+  const skip = block.slice(block.indexOf('className="ix__skip'), block.indexOf("바로 본문 보기 <span"));
   assert.ok(!/setPref|localStorage/.test(skip), "SKIP 은 저장된 선호를 바꾸지 않는다");
   assert.ok(block.includes('<a className="ix__cv font-ko" href="resume.html" onClick={() => ykIntro.skipSession()}>1페이지 이력 보기</a>'), "인트로에서 바로 1페이지 이력");
   assert.ok(block.includes('<IxSwitch className="ix__switch" />'), "인트로 안 스위치");
@@ -57,11 +57,11 @@ test("가벼운 구현 — 외부 애니메이션 라이브러리 · 큰 블러 
   assert.ok(!/\b(gsap|ScrollTrigger|Lenis)\b/.test(block), "인트로 코드의 외부 라이브러리");
   assert.ok(!/filter\s*:\s*blur|backdrop-filter/.test(css), "블러");
   assert.ok(!/<video/.test(block), "동영상");
-  assert.ok(block.includes('data-cine="pin"'), "기존 cine.js 진행도 재사용");
-  assert.ok(/@media \(prefers-reduced-motion:no-preference\)\{\s*html\.ix-on \.ix\{height:/.test(css), "고정 장면은 움직임 허용 + ix-on 일 때만");
+  assert.ok(!block.includes("data-cine"), "인트로는 스크롤 진행도(cine.js)에 묶지 않는다");
+  assert.ok(/@media \(prefers-reduced-motion:no-preference\)\{\s*html\.ix-on \.ix\{position:fixed/.test(css), "고정 막은 움직임 허용 + ix-on 일 때만");
   assert.ok(/html\.ix-off \.ix\{display:none\}/.test(css) && /@media print\{\.ix\{display:none/.test(css));
   /* 장면 움직임에 쓰는 속성은 transform · opacity 뿐 — width · height · top · left · letter-spacing 을 진행도로 바꾸지 않는다 */
-  for (const m of css.matchAll(/[{;]\s*([a-z-]+):[^;{}]*var\(--(p|cp|y1|t[0-9][io]?|t4o|t6t|m|fo|e|al|alo|fl|warm)\)/g)) {
+  for (const m of css.matchAll(/[{;]\s*([a-z-]+):[^;{}]*var\(--(t|a1s?|y1|sw|t[2-6][iort]|g2|k5|en5|tg|m|fo|e|al|alo|fl|rec|warm|dim)[,)]/g)) {
     assert.ok(/^(transform|opacity|stroke-dashoffset|text-shadow|--[a-z0-9]+)$/.test(m[1]), "진행도로 바꾸는 속성: " + m[1]);
   }
 });
@@ -82,11 +82,28 @@ test("보조 문장 · 선 경로 — 문장을 가로지르지 않는 줄, 넓�
   assert.ok(!/\.ix__alpha\{[^}]*non-scaling-stroke/.test(css), "pathLength 점선에 non-scaling-stroke 금지(1920 에서 끝 조각 노출)");
 });
 
-test("상태 판정 · 건너뛰기 도착 — 한 번에 맨 위로 돌아와도 맞고, SKIP 은 히어로 맨 위에 선다", () => {
-  assert.ok(block.includes('rootMargin: "0px 0px -99% 0px"') && !/passed\s*=/.test(block), "지나간 여부를 기억하지 않는 관찰자");
-  assert.ok(/html\.ix-on \.ix__mark\{top:0;bottom:auto;height:calc\(\(100% - 100vh\) \* \.9\)\}/.test(css));
-  assert.ok(/html\.ix-on #manifesto\{margin-top:-100vh;scroll-margin-top:-84px\}/.test(css) && /scroll-padding-top:\s*84px/.test(read("features.css")), "scroll-padding 상쇄");
+test("시간 기반 재생 — 스크롤 속도와 분리, 정지 구간 · 이름 장면은 가속하지 않는다", () => {
+  assert.ok(/const IX_T = \{ end: 11\.7, name: 9\.0, rate: 1\.25, boost: [\d.]+, hold: \d+ \}/.test(jsx), "시간표");
+  assert.ok(/const IX_HOLD = \[\[/.test(jsx) && /t >= IX_T\.name \|\| IX_HOLD\.some/.test(jsx), "정지 구간 · 이름 장면 가속 없음");
+  assert.ok(/now < fastUntil && !ixHeld\(t\) \? IX_T\.boost : 1/.test(block), "입력은 가속만");
+  assert.ok(/e\.deltaY > 0 \|\| e\.deltaX > 0\) fast\(\)/.test(block) && !/deltaY\s*[*/]/.test(block), "delta 크기를 장면 이동량으로 쓰지 않는다");
+  assert.ok(/Math\.min\(0\.05, \(now - last\) \/ 1000\)/.test(block), "탭 복귀 때 한 번에 건너뛰지 않게 dt 상한");
+  assert.ok(/st\.style\.setProperty\("--t"/.test(block) && !/--cp/.test(css.replace(/\/\*[\s\S]*?\*\//g, "")), "진행 원천은 --t 하나");
+  for (const k of ["--a1:", "--t2i:", "--t3i:", "--t4i:", "--t5i:", "--t6i:", "--m:", "--fo:"]) assert.ok(css.includes(k), k);
+});
+
+test("잠금은 재생 중에만 — 끝 · 건너뛰기 · Esc · 페이지 이탈 · 오류 · 안전 시간 · 스크립트 실패에서 해제", () => {
+  assert.ok(/html\.ix-lock,html\.ix-lock body\{overflow:hidden!important/.test(css), "배경 스크롤 잠금은 ix-lock 일 때만");
+  assert.ok(/h\.classList\.remove\("ix-on", "ix-active", "ix-lock"\)/.test(block), "멈추면 잠금 해제");
+  assert.ok(/e\.key === "Escape"\) \{ stop\(true\)/.test(block), "Esc 건너뛰기");
+  assert.ok(block.includes('addEventListener("pagehide", onHide)') && block.includes('addEventListener("error", onErr)'), "이탈 · 오류 정리");
+  assert.ok(/safety = setTimeout\(\(\) => stop\(false\)/.test(block), "안전 시간 초과");
+  assert.ok(/inertize\(true\)/.test(block) && /inertize\(false\)/.test(block), "재생 중에만 인트로 밖 inert");
+  const head = html.slice(0, html.indexOf("</head>"));
+  assert.ok(/setTimeout\(function\(\)\{if\(!window\.__ixRun\)\{h\.classList\.remove\("ix-on","ix-active","ix-lock"\)/.test(head), "스크립트 실패 시 막 걷기");
+  assert.ok(/off\|\|skip\|\|location\.hash\)h\.classList\.add\("ix-off"\)/.test(head), "깊은 링크는 바로 본문");
   assert.ok(/@supports \(height:100svh\)\{html\.ix-on \.ix__stage\{--sh:100svh\}\}/.test(css), "폰 주소창(svh) 기준 글자 상자");
+  assert.ok(!/html\.ix-on #manifesto\{margin-top/.test(css), "히어로를 인트로 아래로 끌어올리지 않는다(고정 막 방식)");
 });
 
 test("배포 — GitHub Pages 가 Jekyll 을 거치지 않는다(.nojekyll)", () => {

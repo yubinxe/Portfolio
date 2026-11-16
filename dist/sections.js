@@ -85,12 +85,16 @@ function Nav() {
 
 }
 
-/* ============================================================ INTRO — ALPHA SHEEP · The First Move
- * 사진형 첫 화면(HeroClassic) 앞의 스크롤 오프닝 타이틀. 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP → 선언 → 김유빈.
- * 움직임은 cine.js 의 pin 진행도(--cp)를 intro.css 가 transform · opacity 로 계산한다 — 스크롤 중 React 재렌더 0회, 두 번째 스크롤 엔진 없음.
+/* ============================================================ INTRO — ALPHA SHEEP · The First Move (V7.1 · 시간 기반 재생)
+ * 사진형 첫 화면(HeroClassic) 앞의 오프닝 타이틀. 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP → 선언 → 김유빈.
+ * V7.1 — 장면을 스크롤 진행도(--cp)에 묶지 않는다. 스크롤 길이 520vh 대신 화면 고정 막(position:fixed) 위에서
+ *   시간 기반 재생기(requestAnimationFrame) 하나가 --t(초)를 쓰고, intro.css 가 장면마다 transform · opacity 로 계산한다.
+ *   휠 · 트랙패드 · 스와이프 · 방향키는 ‘더 빨리 보고 싶다’는 의사로만 해석해 장면 사이 전환만 잠깐 1.6배로 당긴다 —
+ *   입력이 아무리 커도 장면을 건너뛰지 않고, 문장이 다 보이는 정지 구간 · 이름 장면은 가속하지 않아 최소 노출 시간이 보장된다.
+ *   재생 중에만 배경 스크롤을 잠그고(html.ix-lock), 끝 · 건너뛰기 · 페이지 이탈 · 오류 · 안전 시간 초과 때 즉시 푼다.
  * 켜짐/꺼짐은 index.html <head> 의 짧은 스크립트가 첫 그리기 전에 정한다(html.ix-on / ix-off) — 레이아웃 흔들림 없음.
- *   ix-on 이 없으면(JS 없음 · 움직임 줄이기 · 인트로 끄기 전 저장 불가) 고정 없이 여섯 문장을 짧은 정적 화면으로 보여 준다.
- * SKIP INTRO 는 #manifesto 로 가는 평범한 링크라 React 가 실패해도 동작한다. ‘인트로 끄기’는 이 브라우저(localStorage)에만 기억 — 쿠키 · 추적 없음.
+ *   ix-on 이 없으면(JS 없음 · 움직임 줄이기) 고정 없이 여섯 문장을 짧은 정적 화면으로 보여 준다. 깊은 링크(#)는 바로 본문.
+ * ‘바로 본문 보기’는 #manifesto 로 가는 평범한 링크라 React 가 실패해도 동작한다. ‘인트로 끄기’는 이 브라우저(localStorage)에만 기억 — 쿠키 · 추적 없음.
  * 슬로건 ALPHA SHEEP 은 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건 — ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며 도서와 제휴 관계가 없다. */
 /* 인트로 제어 — 두 상태를 나눈다.
  *  선호(pref): localStorage yk.intro("off"면 꺼짐, 없으면 켜짐) — 다음 방문에 재생할지. 기존 방문자 값 그대로.
@@ -111,6 +115,7 @@ function ixKeepPlace(change) {
   if (a) {const d = a.getBoundingClientRect().top - before;if (Math.abs(d) > 1) window.scrollBy({ top: d, left: 0, behavior: "instant" });}
 }
 function ixHide() {
+  if (window.__ixStop && window.__ixStop(true)) return; /* 재생 중이면 재생기가 잠금을 풀고 히어로로 넘긴다 */
   const h = document.documentElement,intro = document.getElementById("intro");
   const inIntro = !!intro && ixPlaying() && intro.getBoundingClientRect().bottom > window.innerHeight * 0.5;
   const off = () => {h.classList.add("ix-off");h.classList.remove("ix-on", "ix-active");};
@@ -135,6 +140,7 @@ const ykIntro = {
     window.dispatchEvent(new Event("cine:scan"));
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     ixEmit("");
+    window.dispatchEvent(new Event("ix:play"));
     const sw = document.querySelector(".ix__ctl .ix__switch");if (sw) sw.focus({ preventScroll: true });
   },
   /* 인트로를 이번 탭에서만 건너뛴다 — 선호는 그대로(1페이지 이력으로 갔다가 돌아올 때 처음부터 다시 보지 않게) */
@@ -180,43 +186,107 @@ const IX_ROWS = [0, 1, 2, 3].map((r) => {
   for (let k = 0; k < 16; k++) {const x = -260 + k * 132 + (r * 47 + k * 29) % 41;out.push([x, y + (k * 13 + r * 7) % 9 - 4, 34 + (k * 7 + r * 5) % 26]);}
   return out;
 });
+/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 9.4초, 스크롤로 가속하면 약 7초 */
+const IX_T = { end: 11.7, name: 9.0, rate: 1.25, boost: 1.6, hold: 650 };
+/* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면(9.0~)은 통째로 가속 없음 */
+const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.9, 8.75]];
+const ixHeld = (t) => t >= IX_T.name || IX_HOLD.some(([a, b]) => t >= a && t < b);
 function IntroSequence() {
-  const sec = React.useRef(null),stage = React.useRef(null),mark = React.useRef(null);
+  const sec = React.useRef(null),stage = React.useRef(null);
   React.useEffect(() => {
-    const s = sec.current,st = stage.current,m = mark.current;
-    if (!s || !st) return;
-    /* 매치 컷 — 히어로 이름(YUBIN KIM)의 세로 중심과 고정 구간 길이를 재서 마지막 장면이 그 자리로 이어지게 한다 */
+    const h = document.documentElement,st = stage.current;
+    if (!st) return;
+    let raf = 0,t = 0,last = 0,fastUntil = 0,running = false,safety = 0,touchY = null;
+    const write = () => st.style.setProperty("--t", t.toFixed(3));
+    /* 매치 컷 — 히어로 이름(YUBIN KIM)의 화면 속 세로 중심. 재생 중에는 맨 위에 고정이라 화면 좌표 그대로 쓴다 */
     const measure = () => {
-      const hero = document.getElementById("manifesto"),name = hero && hero.querySelector(".hero-name");
-      if (name) {
-        const hr = hero.getBoundingClientRect(),nr = name.getBoundingClientRect();
-        st.style.setProperty("--hy", Math.round(nr.top - hr.top + nr.height / 2) + "px");
-      }
-      st.style.setProperty("--span", Math.max(0, s.offsetHeight - window.innerHeight) + "px");
+      const name = document.querySelector("#manifesto .hero-name");
+      if (name) {const r = name.getBoundingClientRect();st.style.setProperty("--hy", Math.round(r.top + r.height / 2) + "px");}
     };
-    measure();
-    let rt = 0;
-    const onResize = () => {clearTimeout(rt);rt = setTimeout(measure, 120);};
-    window.addEventListener("resize", onResize, { passive: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-    /* 인트로가 화면을 차지하는 동안만 상단 메뉴를 숨긴다 — 스크롤 이벤트 없이 관찰자 하나로.
-     * 표식(.ix__mark)은 고정 구간의 앞 90%를 덮고, 관찰 영역은 화면 맨 윗줄이다 — "화면 위쪽이 그 구간 안에 있는가"만 본다.
-     * 건너뛰기 뒤 맨 위로 한 번에 돌아와도(Home 키 · 맨 위로 링크) 상태가 맞는다(지나간 여부를 기억하지 않는다) */
-    const h = document.documentElement;
-    const io = new IntersectionObserver((es) => {h.classList.toggle("ix-active", h.classList.contains("ix-on") && es[es.length - 1].isIntersecting);}, { rootMargin: "0px 0px -99% 0px" });
-    if (m) io.observe(m);
+    /* 입력은 ‘빨리 보고 싶다’는 의사 — 잠깐 가속만 한다. delta 크기는 보지 않는다(큰 휠 한 번이 여러 장면이 되지 않게) */
+    const fast = () => {fastUntil = performance.now() + IX_T.hold;};
+    const onWheel = (e) => {if (e.deltaY > 0 || e.deltaX > 0) fast();};
+    const onTouchStart = (e) => {touchY = e.touches[0] ? e.touches[0].clientY : null;};
+    const onTouchMove = (e) => {if (touchY != null && e.touches[0] && touchY - e.touches[0].clientY > 6) fast();};
+    const onKey = (e) => {
+      if (e.key === "Escape") {stop(true);return;}
+      const ctl = e.target && e.target.closest && e.target.closest("a,button,input,textarea,select");
+      if (!ctl && ["ArrowDown", "PageDown", " ", "Spacebar", "End"].includes(e.key)) {e.preventDefault();fast();}
+    };
+    const frame = (now) => {
+      if (!running) return;
+      const dt = Math.min(0.05, (now - last) / 1000);last = now; /* 탭이 숨었다 돌아와도 한 번에 건너뛰지 않게 */
+      t = Math.min(IX_T.end, t + dt * IX_T.rate * (now < fastUntil && !ixHeld(t) ? IX_T.boost : 1));
+      write();
+      if (t >= IX_T.end) {stop(false);return;}
+      raf = requestAnimationFrame(frame);
+    };
+    /* 재생 중에는 인트로 밖(숨은 상단 메뉴 · 막 뒤의 본문)을 inert 로 — Tab · 스크린리더가 인트로 조작부터 만나게 */
+    const inertize = (on) => {
+      const intro = sec.current;
+      const walk = (parent) => {
+        for (const el of Array.from(parent.children)) {
+          if (el === intro || /^(SCRIPT|STYLE|LINK)$/.test(el.tagName)) continue;
+          if (intro && el.contains(intro)) {walk(el);continue;}
+          if (on && !el.inert) {el.inert = true;el.setAttribute("data-ix-inert", "");} else
+          if (!on && el.hasAttribute("data-ix-inert")) {el.inert = false;el.removeAttribute("data-ix-inert");}
+        }
+      };
+      walk(document.body);
+    };
+    const listen = (on) => {
+      const m = on ? "addEventListener" : "removeEventListener";
+      window[m]("wheel", onWheel, { passive: true });window[m]("keydown", onKey);
+      window[m]("touchstart", onTouchStart, { passive: true });window[m]("touchmove", onTouchMove, { passive: true });
+    };
+    /* 끝 — 잠금 해제 · 인트로 걷기 · (건너뛰었으면) 히어로로 초점. 이미 멈췄으면 false */
+    function stop(skipped) {
+      if (!running) return false;
+      running = false;cancelAnimationFrame(raf);clearTimeout(safety);listen(false);inertize(false);
+      h.classList.remove("ix-on", "ix-active", "ix-lock");h.classList.add("ix-off");
+      window.dispatchEvent(new Event("cine:scan"));
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      const title = document.getElementById("hero-title");
+      if (title && skipped) {title.setAttribute("tabindex", "-1");title.focus({ preventScroll: true });}
+      ixEmit("");
+      return true;
+    }
+    function start() {
+      if (!h.classList.contains("ix-on") || h.classList.contains("ix-off") || ixCalm()) return;
+      cancelAnimationFrame(raf);clearTimeout(safety);
+      t = 0;write();running = true;window.__ixRun = true;
+      h.classList.add("ix-active", "ix-lock");
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      measure();listen(true);inertize(true);
+      /* 안전장치 — 어떤 이유로든 재생이 멈추면 정해진 시간 뒤 잠금을 푼다 */
+      safety = setTimeout(() => stop(false), IX_T.end / IX_T.rate * 1000 + 5000);
+      last = performance.now();raf = requestAnimationFrame(frame);
+    }
+    window.__ixStop = stop;
+    const onPlay = () => start();
+    const onHide = () => stop(false);
+    const onErr = () => {if (running) stop(false);};
+    const onResize = () => {if (running) measure();};
     /* 1페이지 이력에서 ‘뒤로’ 돌아왔을 때(페이지 캐시 복원) — 이번 탭에서 건너뛰기로 했다면 인트로를 다시 세우지 않는다 */
     const onShow = (e) => {let skip = false;try {skip = sessionStorage.getItem(IX_SESSION) === "skip";} catch (x) {}if (e.persisted && skip && ixPlaying()) {ixHide();ixEmit("");}};
-    window.addEventListener("pageshow", onShow);
-    return () => {io.disconnect();window.removeEventListener("resize", onResize);window.removeEventListener("pageshow", onShow);};
+    window.addEventListener("ix:play", onPlay);window.addEventListener("pagehide", onHide);window.addEventListener("error", onErr);
+    window.addEventListener("resize", onResize, { passive: true });window.addEventListener("pageshow", onShow);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => {if (running) measure();});
+    start();
+    return () => {
+      stop(false);delete window.__ixStop;
+      window.removeEventListener("ix:play", onPlay);window.removeEventListener("pagehide", onHide);window.removeEventListener("error", onErr);
+      window.removeEventListener("resize", onResize);window.removeEventListener("pageshow", onShow);
+    };
   }, []);
   const word = "ALPHA SHEEP";
   return (/*#__PURE__*/
     React.createElement("section", { id: "intro", ref: sec, className: "ix", "aria-label": "\uC778\uD2B8\uB85C \u2014 ALPHA SHEEP, \uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4. \uAE40\uC720\uBE48" }, /*#__PURE__*/
-    React.createElement("div", { ref: stage, className: "ix__stage", "data-cine": "pin", "data-cine-src": "#intro", "data-cine-rest": "1" }, /*#__PURE__*/
+    React.createElement("div", { ref: stage, className: "ix__stage" }, /*#__PURE__*/
     React.createElement("div", { className: "ix__bg", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("div", { className: "ix__light", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("div", { className: "ix__warm", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("div", { className: "ix__vig", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("svg", { className: "ix__flock", viewBox: "0 0 1600 900", preserveAspectRatio: "xMidYMid slice", "aria-hidden": "true", focusable: "false" },
     IX_ROWS.map((row, r) => /*#__PURE__*/
     React.createElement("g", { key: r, className: "ix__row ix__row--" + r },
@@ -233,12 +303,13 @@ function IntroSequence() {
     React.createElement("p", { className: "ix__brand font-sans", "aria-hidden": "true" }, "Yubin Kim", /*#__PURE__*/React.createElement("span", null, "Portfolio 2026")), /*#__PURE__*/
 
     React.createElement("div", { className: "ix__scene ix__s1" }, /*#__PURE__*/React.createElement("p", { className: "ix__year font-serif" }, "2027"), /*#__PURE__*/React.createElement("p", { className: "ix__year-sub font-myeongjo" }, "\uC2DC\uB300\uAC00 \uBC14\uB00C\uB294 \uC21C\uAC04")), /*#__PURE__*/
-    React.createElement("div", { className: "ix__scene ix__s2" }, /*#__PURE__*/React.createElement("p", { className: "ix__tk" }, /*#__PURE__*/React.createElement("span", { className: "font-sans" }, "TREND KOREA"), " ", /*#__PURE__*/React.createElement("b", { className: "font-serif" }, "2027"))), /*#__PURE__*/
+    React.createElement("div", { className: "ix__scene ix__s2" }, /*#__PURE__*/React.createElement("p", { className: "ix__tk" }, /*#__PURE__*/React.createElement("i", { className: "ix__guide", "aria-hidden": "true" }), /*#__PURE__*/React.createElement("span", { className: "font-sans" }, "TREND KOREA"), " ", /*#__PURE__*/React.createElement("b", { className: "font-serif" }, "2027"), /*#__PURE__*/React.createElement("i", { className: "ix__guide", "aria-hidden": "true" }))), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s3" }, /*#__PURE__*/React.createElement("p", { className: "ix__kw font-myeongjo" }, "2027\uB144\uC744 \uAD00\uD1B5\uD558\uB294 \uD0A4\uC6CC\uB4DC")), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s4" }, /*#__PURE__*/
     React.createElement("p", { className: "ix__alpha-t font-serif", "aria-label": word },
-    word.split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, "aria-hidden": "true", className: c === " " ? "ix__sp" : "ix__l", style: { "--i": i, "--d": (i * 7 % 5 - 2) / 2, "--x": i - 5 } }, c === " " ? " " : c))
-    )
+    word.split("").map((c, i) => /*#__PURE__*/React.createElement("span", { key: i, "aria-hidden": "true", className: c === " " ? "ix__sp" : "ix__l", style: { "--i": i } }, /*#__PURE__*/React.createElement("i", null, c === " " ? " " : c)))
+    ), /*#__PURE__*/
+    React.createElement("i", { className: "ix__alpha-rule", "aria-hidden": "true" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s5" }, /*#__PURE__*/
     React.createElement("p", { className: "ix__mf font-myeongjo" }, /*#__PURE__*/React.createElement("span", null, "\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C"), " ", /*#__PURE__*/React.createElement("span", null, "\uC591\uC774 \uB418\uB2E4.")), /*#__PURE__*/
@@ -254,17 +325,16 @@ function IntroSequence() {
     )
     ), /*#__PURE__*/
 
-    React.createElement("p", { className: "ix__cue font-sans", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("span", null, "SCROLL TO BEGIN"), /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
+    React.createElement("p", { className: "ix__cue font-ko", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("span", null, "\uC2A4\uD06C\uB864\uD558\uBA74 \uBE60\uB974\uAC8C", /*#__PURE__*/React.createElement("em", null, " \xB7 Esc \uBC14\uB85C \uBCF8\uBB38")), /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
     React.createElement("p", { className: "ix__credit font-ko" }, "ALPHA SHEEP \u2014 \u300A\uD2B8\uB80C\uB4DC \uCF54\uB9AC\uC544 2027\u300B(\uAE40\uB09C\uB3C4 \uC678)\uC758 2027\uB144 \uC2AC\uB85C\uAC74\uC744 \uC778\uC6A9\uD588\uC2B5\uB2C8\uB2E4. \u2018\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4\u2019\uB294 \uAC1C\uC778\uC801 \uC7AC\uD574\uC11D\uC774\uBA70, \uB3C4\uC11C \xB7 \uC800\uC790\uC640 \uC81C\uD734 \uAD00\uACC4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("i", { className: "ix__bar", "aria-hidden": "true" }), /*#__PURE__*/
 
     React.createElement("div", { className: "ix__ctl font-sans" }, /*#__PURE__*/
     React.createElement("a", { className: "ix__cv font-ko", href: "resume.html", onClick: () => ykIntro.skipSession() }, "1\uD398\uC774\uC9C0 \uC774\uB825 \uBCF4\uAE30"), /*#__PURE__*/
     React.createElement(IxSwitch, { className: "ix__switch" }), /*#__PURE__*/
-    React.createElement("a", { className: "ix__skip", href: "#manifesto", onClick: () => document.documentElement.classList.remove("ix-active") }, "SKIP INTRO ", /*#__PURE__*/React.createElement("span", { "aria-hidden": "true" }, "\u2192"))
+    React.createElement("a", { className: "ix__skip font-ko", href: "#manifesto", onClick: (e) => {if (window.__ixStop && window.__ixStop(true)) e.preventDefault();} }, "\uBC14\uB85C \uBCF8\uBB38 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement("span", { "aria-hidden": "true" }, "\u2192"))
     )
-    ), /*#__PURE__*/
-    React.createElement("i", { ref: mark, className: "ix__mark", "aria-hidden": "true" })
+    )
     ));
 
 }
