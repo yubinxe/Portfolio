@@ -25,7 +25,7 @@
 - `npm test` — 106건 모두 통과해야 커밋
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=21` · `dist/sections.js?v=53` · `dist/app.js?v=11` · `chatbot.js?v=17` · `mnav.js?v=9` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `intro.css?v=3`(index 전용) · `kb.js?v=20261114a` · resume: `resume.css?v=1` · cases: `cases.css?v=1` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=22` · `dist/sections.js?v=53` · `dist/app.js?v=11` · `chatbot.js?v=17` · `mnav.js?v=9` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=5`(index 전용) · `intro.css?v=3`(index 전용) · `kb.js?v=20261114a` · resume: `resume.css?v=1` · cases: `cases.css?v=1` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=2` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=1` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.
@@ -36,3 +36,4 @@
 - `.story__line`·`.comp-row`(미활성) 흐림은 스크롤 연출 의도. 대비 경고 무시.
 - GitHub Pages 는 `.nojekyll` 로 Jekyll 을 건너뛴다(2026-11-10 Jekyll 빌드 실패로 인트로가 canonical 에 안 올라갔던 일) — 지우지 말 것.
 - Berlin 2022(OSZ TIEM 교육 · Vattenfall Wärme Berlin AG 인턴십): Vattenfall 추천서는 회사 내부 등급 문서 — 원문 · 사본 · 변형본을 저장소에 넣지 않는다(test/germany.test.mjs 가 검사). 사진은 참가자 얼굴 비식별, OSZ 증명서는 교장 서명 가림. 학위 · 자격 · 정규직으로 쓰지 않기
+- 증빙 PDF `assets/evidence/`(gallery #evidence-pdf): 공개본은 생년월일만 가림(성명 · 직인 · 발급번호 원본). 주민등록번호 · 주소가 있는 재직증명서 · 건강보험 확인서는 저장소에 넣지 않는다 — 제출용 원본은 로컬 `Documents/# 김유빈/증빙/` 에만. test/evidence.test.mjs 가 생년월일 · 주민번호 형식을 검사
