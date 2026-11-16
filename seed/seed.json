@@ -1128,6 +1128,21 @@
         "Verified": true
       },
       {
+        "Id": "tl-seoripul-reporter",
+        "Category": "궤적",
+        "Title": "2026 — 서초구 제5기 서리풀기자단 · 취재 · 기사 작성",
+        "Body": "2026년 서초구 제5기 서리풀기자단으로 지역의 공간 · 문화 현장을 취재하고 기사를 씁니다. 서초구 소식지 2026년 11월호에 ‘서리풀 아트테리어’ · 루이스폴센 · 두성종이를 소개한 지면이 여러 기자 공동 기명으로 실렸습니다. 구민 기자단 활동이며, 서울시민기자단과는 별개 활동입니다(직장 경력 · 공무원 · 언론사 기자 아님).",
+        "Tags": "5기, 기사, 기자단, 서리풀, 서리풀기자단, 서초구, 서초구 소식지, 제5기, 취재",
+        "PrimaryLabel": "지면 보기",
+        "PrimaryHref": "gallery.html#seoripul-reporter",
+        "SecondaryLabel": "경력 상세",
+        "SecondaryHref": "career.html#cv-seoripul-reporter",
+        "SecondaryInferred": false,
+        "Anchor": "seoripul-reporter",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
         "Id": "tl-seoul-pledge",
         "Category": "궤적",
         "Title": "2026 — 민선 9기 서울시장 공약평가단 활동",
@@ -1563,5 +1578,5 @@
       }
     ]
   },
-  "hash": "61bbf8830e234ec6"
+  "hash": "08f389483c2ba6ce"
 }
