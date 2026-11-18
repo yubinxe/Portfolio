@@ -80,6 +80,7 @@ const CASES = [
   ["이력서 한 장으로 볼 수 있나요?", ["resume"]],
   ["명지대 그랜드마스터 배지가 뭐예요?", ["tl-myongji"]],
   ["서울시장 공약평가단 활동했나요?", ["tl-seoul-pledge"]],
+  ["하정우 부위원장이랑 만난 적 있어요?", ["tl-dyl"]],
   ["Vattenfall에서 일한 적이 있나요?", ["tl-vattenfall"]],
   ["독일 인턴십 기간은 언제인가요?", ["tl-vattenfall"]],
   ["OSZ TIEM은 어떤 기관인가요?", ["tl-osz-tiem"]],

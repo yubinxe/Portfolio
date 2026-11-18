@@ -12,7 +12,8 @@ const OPT = {
   "youth-day-venue": [480, 800, 1200], "youth-day-dialogue": [480, 800, 900],
   "moef-group": [480, 800, 1200, 1600], "moef-nameplate": [480, 675], "moef-tour": [480, 800, 1200, 1600], "moef-talk": [480, 800, 1200, 1600],
   "dyl-assembly": [480, 800, 1200], "dyl-entrance": [480, 675], "dyl-library": [480, 800, 1200], "dyl-lecture": [480, 800, 1200], "dyl-qa": [480, 800, 1200],
-  "rei-day": [480, 800, 1200, 1600], "rei-day-pose": [480, 800, 820], "rei-day-sign": [480, 800, 1200, 1560], "rei-day-wall": [480, 800, 1200, 1400],
+  "rei-day": [480, 800, 1200, 1600],
+  "dyl-1114-group": [480, 800, 1200, 1600], "dyl-1114-group2": [480, 800, 1200, 1600], "dyl-1114-qa": [480, 800, 1200, 1600], "dyl-1114-qa2": [480, 800, 1200, 1600], "dyl-1114-selfie": [480, 800, 1200, 1600],
   "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280]
 };
 function Pic({ name, fallback, sizes, alt = "", className, ...img }) {
@@ -936,7 +937,7 @@ const TRAJECTORY = [
 { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
   desc: "‘청년이 생각하는 성평등정책, 어디까지?’를 주제로 연세대 백양누리 그랜드볼룸에서 열린 공개형 공론장(2026. 10. 25)에 참석해 청년 세대의 시각으로 정책 토론에 함께했고, 현장에서 성평등가족부 장관과 함께했습니다.", proof: "gallery.html#gender-forum", proofLabel: "공론장 현장 보기" },
 { id: "tl-dyl", group: "public", year: "2026", color: "var(--sky)", title: "2026 민주청년지도자 양성과정 입학 · 수강 중",
-  desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 현장 보기" },
+  desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다. 11월 14일 질의 · 발표 세션에서 마이크를 잡고 발언했고, 강득구 민주연구원장 · 김경수 청와대 정무특보, 하정우 부위원장과 함께했습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 · 11. 14 현장 보기" },
 { id: "tl-zipconomy", group: "public", year: "2026", color: "var(--butter)", title: "한경 집코노미 박람회 2026 — KREMA AI 전시관 서비스 시연·발표",
   desc: "코엑스 D홀 KREMA AI 전시관 C-10 부스에서 청약·공공임대 맞춤 추천 서비스 집캐치와 3D 감정평가 필드워크를 소개하고, 제작 배경과 작동 방식을 설명하며 관람객 질문에 답했습니다.", proof: "gallery.html#zipconomy", proofLabel: "박람회 현장 보기" },
 { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 자산분과 정책 제안 발표 · 참여 팀 중 1위",
@@ -985,19 +986,27 @@ const TRAJECTORY = [
 
 /* 현장 일지 — 청와대 청년의날 다음 장. 날짜 도장으로 잇는다 (성평등 공론장은 대외활동 목록에만) */
 const DIARY = [
+{ id: "dyl-1114", date: "11.14", day: "SAT", tone: "navy", chip: "질의 · 발표",
+  eyebrow: "Field Diary — 2026. 11. 14", title: "2026 민주청년지도자 양성과정 — 질의 · 발표 세션",
+  body: "민주연구원의 2026 민주청년지도자 양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께했고, 하정우 부위원장과도 현장에서 함께했습니다. 10월 24일 입학 뒤 이어 가는 과정입니다.",
+  facts: [["주최·주관", "민주연구원"], ["일자", "2026. 11. 14"], ["함께", "강득구 민주연구원장 · 김경수 청와대 정무특보 · 하정우 부위원장"], ["역할", "질의 · 발표 세션 발언"]],
+  main: { name: "dyl-1114-group", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정(2026. 11. 14) 단체 사진, 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께", pos: "50% 55%", w: 1600, h: 1066 },
+  thumbs: [
+  { name: "dyl-1114-qa", href: "gallery.html#g-dyl-1114-qa", alt: "김유빈 활동 기록 — 질의 · 발표 세션에서 마이크를 잡고 발언하는 모습(2026. 11. 14)", pos: "45% 35%" },
+  { name: "dyl-1114-selfie", href: "gallery.html#g-dyl-1114-selfie", alt: "김유빈 활동 기록 — 하정우 부위원장과 함께(2026. 11. 14)", pos: "50% 35%" }],
+
+  href: "gallery.html#dyl-1114", cta: "11. 14 사진 전체 보기" },
 { id: "rei-day", date: "11.11", day: "WED", tone: "brick", chip: "집캐치 발표 · 내빈 응대",
   eyebrow: "Field Diary — 2026. 11. 11", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
   body: "제11회 부동산산업의 날에서 한국부동산마케팅협회(KREMA) 홍보부스에 참여해, 직접 개발한 청약 · 공공임대 공고 탐색 서비스 집캐치를 발표 · 시연하고 찾아온 내빈을 응대했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다. 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했습니다.",
   quote: "새로운 가치, 함께하는 부동산! 변화와 혁신으로 미래를 열다!",
   facts: [["주최·주관", "한국부동산경제단체연합회 · 한국공인중개사협회"], ["후원", "국토교통부 · 한국부동산원 · 주택도시보증공사"], ["장소", "건설회관 · 서울 강남구"], ["역할", "KREMA 홍보부스 · 집캐치 발표 · 시연 · 내빈 응대"]],
   main: { name: "rei-day", alt: "김유빈 활동 기록 — 제11회 부동산산업의 날 포토월과 '11th 부동산산업의 날' 조형물 앞에서(2026. 11. 11 · 건설회관)", pos: "52% 50%", w: 1600, h: 900 },
-  thumbs: [
-  { name: "rei-day-pose", href: "gallery.html#g-rei-day-pose", alt: "김유빈 활동 기록 — 부동산 관련 단체 로고가 늘어선 포토월 앞에서 주먹을 쥔 모습", pos: "50% 30%" },
-  { name: "rei-day-wall", href: "gallery.html#g-rei-day-wall", alt: "김유빈 활동 기록 — '새로운 가치, 함께하는 부동산! 변화와 혁신으로 미래를 열다!' 행사 슬로건 아래 포토월", pos: "50% 35%" },
-  { name: "rei-day-sign", href: "gallery.html#g-rei-day-sign", alt: "김유빈 활동 기록 — 레드카펫 위 '11th 부동산산업의 날' 입체 조형물", pos: "30% 60%" }],
-
-  press: [["한국경제 · 집캐치 소개", "https://www.hankyung.com/article/202611110211i"], ["중앙일보 · 집캐치 소개", "https://www.joongang.co.kr/article/25477695"], ["서울파이낸스", "https://www.seoulfn.com/news/articleView.html?idxno=642571"], ["헤럴드경제", "https://biz.heraldcorp.com/article/10933818"]],
-  href: "gallery.html#rei-day", cta: "행사 사진 전체 보기" },
+  thumbs: [],
+  clips: [["한국경제 · 2026. 11. 11", "‘부동산산업의 날’ 43명 표창…마케팅협회, AI 인재 양성 성과 공개", "매력일자리에 참여한 청년 김유빈 씨는 청약홈과 LH 청약플러스의 청약·공공임대 모집공고를 지도에 모아 보여주는 ‘집캐치’를 선보였다.", "https://www.hankyung.com/article/202611110211i"],
+  ["중앙일보 · 2026. 11. 11", "한국부동산마케팅협회 4명, ‘부동산산업의 날’ 국토부 장관 표창", "서울시 매력일자리 참여자 김유빈 씨가 개발한 ‘집캐치(ZIPCATCH)’도 소개됐다.", "https://www.joongang.co.kr/article/25477695"]],
+  press: [["서울파이낸스 · 집캐치 소개", "https://www.seoulfn.com/news/articleView.html?idxno=642571"], ["헤럴드경제 · 행사", "https://biz.heraldcorp.com/article/10933818"]],
+  href: "gallery.html#rei-day", cta: "현장 사진 · 보도 보기" },
 { id: "moef-youth", date: "10.27", day: "TUE", tone: "sage", chip: "간담회 참석",
   eyebrow: "Field Diary — 2026. 10. 27", title: "재정경제부 제1차관 청년 현장방문 및 간담회",
   body: "권대영 재정경제부 제1차관의 취임 후 첫 현장 행보로 마련된 청년 간담회에 법무법인 경국 소속으로 참석했습니다. 간담회에 앞서 SVC Seoul 입주 청년 창업기업의 AI 기반 주거지 탐색 · 공공사업 검색·매칭 서비스 시연 참관이 있었고, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융에 대한 현장 의견을 전했습니다.",
@@ -1039,14 +1048,17 @@ function FieldDiary() {
     React.createElement("p", { className: "font-ko" }, d.body), /*#__PURE__*/
     React.createElement("dl", { className: "diary__facts font-ko" },
     d.facts.map(([k, v]) => /*#__PURE__*/React.createElement("div", { key: k }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))
-    ), /*#__PURE__*/
-    React.createElement("div", { className: "tl-feature__thumbs" + (d.thumbs.length === 2 ? " diary__thumbs--2" : "") },
+    ),
+    d.thumbs.length > 0 && /*#__PURE__*/React.createElement("div", { className: "tl-feature__thumbs" + (d.thumbs.length === 2 ? " diary__thumbs--2" : "") },
     d.thumbs.map((t) => /*#__PURE__*/
     React.createElement("a", { key: t.name, href: t.href }, /*#__PURE__*/React.createElement(Pic, { name: t.name, fallback: "images/" + t.name + "-600.jpg", sizes: "(max-width: 900px) 30vw, 16vw", alt: t.alt, loading: "lazy", width: "600", height: "338", style: { objectPosition: t.pos } }))
     )
     ),
+    d.clips && /*#__PURE__*/React.createElement("div", { className: "diary__clips" }, d.clips.map(([src, t, q, u]) => /*#__PURE__*/
+    React.createElement("a", { key: u, className: "clip", href: u, target: "_blank", rel: "noreferrer" }, /*#__PURE__*/React.createElement("span", { className: "clip__src font-sans" }, src), /*#__PURE__*/React.createElement("b", { className: "clip__t font-ko" }, t), /*#__PURE__*/React.createElement("q", { className: "clip__q font-myeongjo" }, q))
+    )),
     d.press && /*#__PURE__*/React.createElement("p", { className: "g-press diary__press font-sans" }, "\uBCF4\uB3C4 \xB7 ", d.press.map(([n, u], k) => /*#__PURE__*/React.createElement(React.Fragment, { key: u }, k ? " · " : "", /*#__PURE__*/React.createElement("a", { href: u, target: "_blank", rel: "noreferrer" }, n)))), /*#__PURE__*/
-    React.createElement("p", { className: "tl-feature__credit font-sans" }, "\uD604\uC7A5 \uC0AC\uC9C4"), /*#__PURE__*/
+    React.createElement("p", { className: "tl-feature__credit font-sans" }, d.clips ? "현장 사진 · 보도 인용은 기사 원문의 한 문장" : "현장 사진"), /*#__PURE__*/
     React.createElement("a", { href: d.href, className: "btn btn--ghost" }, d.cta, " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
     )
     )
@@ -2835,9 +2847,9 @@ const JOURNAL = [
 { name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
   d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
-{ name: "rei-day", src: "images/rei-day.jpg", t: "제11회 부동산산업의 날 — 집캐치 발표 · 시연", when: "2026. 11. 11 · 건설회관", dz: 0.5,
-  d: "한국부동산마케팅협회(KREMA) 홍보부스에서 직접 개발한 집캐치를 발표 · 시연하고 내빈을 응대했습니다. 한국경제 · 중앙일보가 실명으로 소개했습니다.",
-  links: [{ l: "갤러리에서 보기", h: "gallery.html#rei-day" }, { l: "보도 · 한국경제", h: "https://www.hankyung.com/article/202611110211i" }] },
+{ name: "dyl-1114-qa2", src: "images/dyl-1114-qa2.jpg", t: "민주청년지도자 양성과정 — 질의 · 발표 세션", when: "2026. 11. 14 · 민주연구원", dz: 0.5,
+  d: "양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보, 하정우 부위원장과 함께했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl-1114" }] },
 { name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
   d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
