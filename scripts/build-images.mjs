@@ -34,6 +34,8 @@ export const IMAGES = [
   ["moef-tour.jpg", "moef-tour"],
   ["moef-talk.jpg", "moef-talk"],
   ["rei-day.jpg", "rei-day"],
+  ["rei-day-booth.jpg", "rei-day-booth"],
+  ["rei-day-seminar.jpg", "rei-day-seminar"],
   ["dyl-1114-group.jpg", "dyl-1114-group"],
   ["dyl-1114-group2.jpg", "dyl-1114-group2"],
   ["dyl-1114-qa.jpg", "dyl-1114-qa"],
