@@ -535,3 +535,69 @@ i.cx__kind{font-style:normal}
 .story--flow .story__sticky{position:static;height:auto;display:block;overflow:visible}
 .story--flow .story__line{color:var(--navy)}
 .story--flow .story__body{opacity:1;transform:none}
+/* V9.4 — 이력(#trajectory)을 내릴 때마다 다르게. 기본(정적 · 프리렌더 · 움직임 줄이기)은 그대로 보이고, .tlx(JS · 움직임 허용) 아래에서만 숨김 → 등장 */
+.tl-ribbon{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:clamp(34px,4vw,50px) 0 0;padding:0;list-style:none}
+.tl-ribbon a{display:grid;gap:2px;padding:14px 16px;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--hair);border-top:3px solid var(--navy);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.tl-ribbon a:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(17,17,17,.08)}
+.tl-ribbon b{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:500;line-height:1;color:var(--navy)}
+.tl-ribbon span{font-size:.88rem;font-weight:800}
+.tl-ribbon i{font-style:normal;font-size:.66rem;letter-spacing:.08em;color:var(--ink-soft)}
+.tl-group{scroll-margin-top:96px}
+.tl-group__label{align-self:start}
+.tl-dial{display:flex;align-items:baseline;gap:6px;margin:14px 0 0;color:var(--gold-text)}
+.tl-dial b{display:inline-block;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:500;line-height:1;color:var(--navy)}
+.tl-dial i{font-style:normal;font-size:.8rem;font-weight:600;letter-spacing:.06em}
+.tl-meter{display:block;width:100%;max-width:180px;height:2px;margin-top:10px;background:var(--hair)}
+.tl-meter i{display:block;height:100%;background:var(--gold-text);transform-origin:left;transform:scaleX(var(--tlp,1))}
+.tl-list{position:relative;padding-left:22px}
+.tl-spine{position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:var(--hair)}
+.tl-spine i{display:block;width:100%;height:100%;background:linear-gradient(var(--gold-text),var(--navy));transform-origin:top;transform:scaleY(var(--tlp,1))}
+.tl-group .tl-row::after{content:"";position:absolute;left:-22px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--ecru);border:2px solid var(--hair-strong,rgba(17,17,17,.3));transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .3s,border-color .3s}
+.tl-group .tl-row + .tl-row::after{top:24px}
+@media (min-width:801px){.tl-group__label{position:sticky;top:96px}}
+@media (max-width:800px){.tl-ribbon{grid-template-columns:repeat(2,minmax(0,1fr))}.tl-dial{margin-top:8px}.tl-dial b{font-size:1.8rem}}
+
+/* 움직임 — .tlx 아래에서만 */
+@keyframes tlxFlip{0%{transform:rotateX(90deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes tlxStamp{0%{transform:scale(2.2) rotate(-14deg);opacity:0}60%{transform:scale(.92) rotate(-4deg);opacity:1}100%{transform:scale(1) rotate(-3deg)}}
+@keyframes tlxShine{from{background-position:-160% 0}to{background-position:260% 0}}
+@keyframes tlxPulse{0%,100%{box-shadow:0 0 0 0 rgba(115,92,48,.45)}50%{box-shadow:0 0 0 10px rgba(115,92,48,0)}}
+.tlx [data-tlx]{transition:opacity .8s var(--ease),transform .8s var(--ease),filter .9s var(--ease),clip-path 1s var(--ease)}
+/* 한눈 요약 — 차례로 떠오름 */
+.tlx [data-tlx="chip"]{opacity:0;transform:translateY(24px) scale(.96)}
+.tlx [data-tlx="chip"]:nth-child(2){transition-delay:.08s}.tlx [data-tlx="chip"]:nth-child(3){transition-delay:.16s}.tlx [data-tlx="chip"]:nth-child(4){transition-delay:.24s}
+.tlx [data-tlx="chip"].is-in{opacity:1;transform:none}
+/* 성장 경로 — 계단: 한 칸씩 올라오고, 위 선이 왼쪽부터 그어진다 */
+.tlx .grow{position:relative}
+.tlx .grow::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--gold-text);transform-origin:left;transform:scaleX(var(--gp,0));z-index:1}
+.tlx [data-tlx="step"]{opacity:0;transform:translateY(calc(20px + var(--i) * 14px));transition-delay:calc(var(--i) * .11s)}
+.tlx [data-tlx="step"].is-in{opacity:1;transform:translateY(calc(var(--i) * -3px))}
+.tlx .grow__aim.is-in a{animation:tlxPulse 2.4s ease-in-out 1.2s 3}
+/* 현장 일지 · 하이라이트 — 사진이 현상되듯(흐림 · 세피아 → 선명), 날짜 도장이 찍히듯 */
+.tlx [data-tlx="diary"]{opacity:0;transform:translateX(-36px)}
+.tlx [data-tlx="diary"].diary__item--rev{transform:translateX(36px)}
+.tlx [data-tlx="diary"].is-in{opacity:1;transform:none}
+#trajectory.tlx [data-tlx="diary"] .tl-feature__main img{filter:sepia(.9) blur(6px) brightness(1.25) contrast(.8);transition:filter 1.8s var(--ease) .25s}
+#trajectory.tlx [data-tlx="diary"].is-in .tl-feature__main img{filter:none}
+.tlx [data-tlx="diary"] .diary__stamp{opacity:0}
+.tlx [data-tlx="diary"].is-in .diary__stamp{animation:tlxStamp .7s cubic-bezier(.34,1.56,.64,1) .9s both}
+.tlx [data-tlx="diary"] .diary__facts>div,.tlx [data-tlx="diary"] .tl-feature__thumbs>a{opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.tlx [data-tlx="diary"].is-in .diary__facts>div,.tlx [data-tlx="diary"].is-in .tl-feature__thumbs>a{opacity:1;transform:none}
+.tlx [data-tlx="diary"].is-in .diary__facts>div:nth-child(2),.tlx [data-tlx="diary"].is-in .tl-feature__thumbs>a:nth-child(2){transition-delay:.12s}
+.tlx [data-tlx="diary"].is-in .diary__facts>div:nth-child(3),.tlx [data-tlx="diary"].is-in .tl-feature__thumbs>a:nth-child(3){transition-delay:.24s}
+.tlx [data-tlx="diary"].is-in .diary__facts>div:nth-child(4){transition-delay:.36s}
+/* 이력 줄 — 그룹마다 다른 등장 */
+.tlx [data-kind="work"] [data-tlx="row"]{opacity:0;transform:translateX(40px)}
+.tlx [data-kind="edu"] [data-tlx="row"]{opacity:0;transform:perspective(700px) rotateX(-55deg);transform-origin:top}
+.tlx [data-kind="public"] [data-tlx="row"]{opacity:0;transform:translateY(26px);filter:blur(4px)}
+.tlx [data-kind="honor"] [data-tlx="row"]{opacity:0;transform:scale(.9);clip-path:inset(0 100% 0 0)}
+.tlx [data-tlx="row"].is-in{opacity:1;transform:none;filter:none;clip-path:inset(0 0 0 0)}
+.tlx [data-kind="honor"] [data-tlx="row"].is-in h3{background:linear-gradient(100deg,transparent 30%,rgba(220,192,138,.55) 50%,transparent 70%) no-repeat;background-size:60% 100%;animation:tlxShine 1.4s ease .3s 1 both}
+/* 지금 읽는 줄 — 금색 점 · 나머지는 살짝 물러남(많은 이력을 한 줄씩 읽게) */
+.tlx .tl-row{transition:opacity .45s var(--ease),transform .8s var(--ease),filter .9s var(--ease),clip-path 1s var(--ease),background .45s var(--ease)}
+.tlx .tl-list:has(.tl-row.is-on) .tl-row.is-in:not(.is-on){opacity:.55}
+.tlx .tl-row.is-on::after{background:var(--gold-text);border-color:var(--gold-text);transform:scale(1.35)}
+.tlx .tl-row.is-on .tl-year{color:var(--navy)}
+.tlx .tl-dial b.flip{animation:tlxFlip .45s var(--ease)}
+.tlx .tl-dial{perspective:400px}
+@media (prefers-reduced-motion:reduce){.tlx [data-tlx]{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
