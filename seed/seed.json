@@ -33,6 +33,21 @@
         "Verified": true
       },
       {
+        "Id": "ax-c",
+        "Category": "프로젝트",
+        "Title": "범용 AX 확장 3종(C) — 개인 구현 · 공개 시연 (가상 벤치마크 검증)",
+        "Body": "정비사업 · 법률 밖 데이터 · 운영 · 기획 현장을 위한 개인 구현 공개 시연입니다. 모든 데이터는 가상이며 외부 AI 호출 없이 결정론적 코드로 동작합니다(경국 도입 시스템 아님).\n- C-1 데이터 교차검증 게이트(ReconcileGate) — CSV · 요약 텍스트 · API JSON 을 단위 환산 뒤 대조, 불일치 · 누락 · 중복 · 이상치만 사유 필수 승인 큐로. 심은 결함 15건 중 15건 검출 · 오탐 0건\n- C-2 리스크 차단형 인바운드 트리아지 — 정책 조항 ID 를 인용한 초안, 고위험 · 근거 미달이면 자동 발송을 코드로 차단. 고위험 12건 중 12건 차단(미탐지 0)\n- C-3 의사결정 메모 팩트체커 — 브리핑의 숫자 · 날짜 · 고유명사를 원문 줄과 1:1 대조, 미해결 시 내보내기 잠금. 고의 왜곡 10건 중 10건 탐지\n수치는 빌드 때 실제로 돌린 테스트 결과이며, 실무 도입 효과는 측정하지 않았습니다.",
+        "Tags": "c-1, c-2, c-3, circuit breaker, claim, reconcilegate, 교차검증, 범용, 범용 ax, 벤치마크, 정합성 게이트, 트리아지, 팩트 체크, 팩트체크, 확장 3종, 회로 차단",
+        "PrimaryLabel": "범용 AX 3종 보기",
+        "PrimaryHref": "index.html#ax-c",
+        "SecondaryLabel": "법률 AI 전환",
+        "SecondaryHref": "index.html#ax-desk",
+        "SecondaryInferred": false,
+        "Anchor": "ax-c",
+        "Source": "kb.js@2026.10.23a",
+        "Verified": true
+      },
+      {
         "Id": "ax-compensation",
         "Category": "프로젝트",
         "Title": "Compensation Analysis · 광명시흥 3기 신도시 보상자료 분석 · 정보 구조화",
@@ -125,10 +140,10 @@
       {
         "Id": "composite",
         "Category": "역량",
-        "Title": "역량 구조 — AI 전략·AX 실행을 줄기로 한 T자(π자로 넓혀 가는 중)",
-        "Body": "모든 역량의 깊이가 같지 않습니다.\n[줄기 — 실증된 깊이] 01 AI 전략 · 02 AX 실행·업무 자동화 · 03 데이터 기반 판단\n[적용 영역] 06 법률·부동산의 산업 이해 — 법무법인 경국, 광명시흥 보상자료, 건국대 스마트건설, KREMA 4기\n[넓어지는 영역] 05 정책·공공 의사결정 참여 · 04 설명·교육·소통\n두 번째 깊이로 법률·부동산·제도적 의사결정이 형성되는 중입니다(자격이나 완성된 전문성이 아님). 숙련도 점수는 쓰지 않습니다.",
-        "Tags": "composite, 강점, 도메인, 무엇, 여섯, 역량, 융합, 잘, 핵심",
-        "PrimaryLabel": "융합 역량 보기",
+        "Title": "역량 구조 — 여섯 축으로 보는 역량 지도",
+        "Body": "숙련도 점수가 아니라 근거가 있는 여섯 영역입니다.\n01 AI 전략 · 문제정의 — 광명시흥 보상자료 77장 구조화 · 고객 메일 우선순위 기준\n02 AX 실행 · 업무자동화 — 정비사업 AX 3종 · 급여명세서 자동 발송(사내 운영), 범용 AX 3종(개인 공개 시연)\n03 데이터 · 정합성 검증 — Trial Brief 정합성 규칙 R1–R8, 범용 AX 교차검증 · 팩트체크(가상 벤치마크)\n04 법률 · 부동산 도메인 — 법무법인 경국 실무 · KREMA 4기 · 분양대행자 자격\n05 제품 기획 · 단독 배포 — 집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에\n06 정책 · 소통 · 거버넌스 — 국민 대토론회 자산분과 참여 팀 중 1위 · 서초청년네트워크 부위원장 · 서울대 AIED 4기",
+        "Tags": "6축, composite, 강점, 도메인, 무엇, 여섯, 역량, 육각형, 융합, 잘, 핵심",
+        "PrimaryLabel": "역량 지도 보기",
         "PrimaryHref": "index.html#composite",
         "SecondaryLabel": "실무 도구",
         "SecondaryHref": "index.html#arsenal",
@@ -185,10 +200,10 @@
       {
         "Id": "dom-data",
         "Category": "역량",
-        "Title": "데이터 기반 판단",
-        "Body": "공공데이터 API와 Google Workspace API를 의사결정 가능한 화면으로 번역합니다. 청약 인사이트 대시보드와 고객 메일 자동 분류 시스템을 직접 구축·배포했습니다.",
+        "Title": "데이터 · 정합성 검증",
+        "Body": "숫자는 원문과 대조되기 전까지 확정하지 않습니다. 공공데이터 API와 Google Workspace API를 의사결정 가능한 화면으로 번역하고, Trial Brief 정합성 규칙 R1–R8 · 범용 AX 교차검증 · 팩트체크(가상 벤치마크)로 검증 구조를 만들었습니다.",
         "Tags": "api, gws, 공공데이터, 대시보드, 데이터, 시각화, 인프라",
-        "PrimaryLabel": "데이터 기반 판단",
+        "PrimaryLabel": "데이터 · 정합성 검증",
         "PrimaryHref": "index.html#dom-03",
         "SecondaryLabel": "청약 대시보드 카드",
         "SecondaryHref": "index.html#ed-05",
@@ -200,7 +215,7 @@
       {
         "Id": "dom-domain",
         "Category": "역량",
-        "Title": "법률·부동산의 산업 이해 (적용 영역)",
+        "Title": "법률 · 부동산 도메인",
         "Body": "AI 전략·AX 가 실제로 쓰이는 영역입니다.\n- 법률 — 법무법인 경국 송무·사무, 정비사업 법률 위험을 다루는 경국 AX\n- 부동산 — 광명시흥 3기 신도시 보상자료 구조화(발표자료 77장), 집캐치, 건국대 스마트건설(BIM · 드론 측량), 분양대행자 자격\n두 번째 깊이(법률·부동산·제도적 의사결정)로 형성되는 중이며, 자격 취득을 뜻하지 않습니다.",
         "Tags": "bim, 건설, 공공, 도메인, 법률, 법무, 부동산, 송무, 정책",
         "PrimaryLabel": "법률·부동산",
@@ -325,7 +340,7 @@
         "Tags": "vercel, 공공데이터, 대시보드, 부동산, 시각화, 청약",
         "PrimaryLabel": "작업 카드",
         "PrimaryHref": "index.html#ed-05",
-        "SecondaryLabel": "데이터 기반 판단",
+        "SecondaryLabel": "데이터 · 정합성 검증",
         "SecondaryHref": "index.html#dom-03",
         "SecondaryInferred": false,
         "Anchor": "ed-05",
@@ -1578,5 +1593,5 @@
       }
     ]
   },
-  "hash": "ccb2bf529891dad8"
+  "hash": "c42b58dcb0c1f73d"
 }

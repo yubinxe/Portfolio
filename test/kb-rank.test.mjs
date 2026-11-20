@@ -19,6 +19,8 @@ const CASES = [
   ["정책 참여는 어떤 걸 했나요?", ["policy"]],
   ["공론장이나 정책 거버넌스 활동", ["policy", "tl-gender-forum", "tl-seocho"]],
   ["역량 구조가 궁금해요", ["composite"]],
+  ["범용 AX 3종은 뭐예요?", ["ax-c"]],
+  ["교차검증 게이트랑 팩트체크 시연", ["ax-c"]],
   ["핵심 역량을 한눈에 요약해 주세요", ["composite"]],
   ["전략기획 경험이 있나요?", ["dom-strategy"]],
   ["전략 컨설팅 경험이 있나요?", ["dom-strategy"]],

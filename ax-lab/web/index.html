@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>범용 AX 3종 — 김유빈 개인 구현 · 공개 시연</title>
+<meta name="description" content="데이터 교차검증 게이트 · 리스크 차단형 인바운드 트리아지 · 의사결정 메모 팩트체커 — 결정론적 검증 엔진과 가상 벤치마크로 동작하는 공개 시연 3종." />
+<meta name="theme-color" content="#13284B" />
+<link rel="canonical" href="https://yubinxe.github.io/Portfolio/ax/" />
+<link rel="icon" href="../favicon.ico" sizes="48x48" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<style>
+:root{--ink:#0E1A2E;--navy:#13284B;--paper:#FFFDF9;--ecru:#F7F4EE;--gold-t:#735C30;--soft:#4A5365;--hair:rgba(14,26,46,.14)}
+*{box-sizing:border-box}body{margin:0;background:var(--ecru);color:var(--ink);font:15px/1.65 "Pretendard Variable",Pretendard,system-ui,sans-serif;word-break:keep-all}
+main{max-width:980px;margin:0 auto;padding:28px 16px 48px}a{color:var(--navy)}
+.k{margin:0;font-size:.8rem;font-weight:700;color:var(--gold-t)}h1{margin:6px 0 8px;font-size:clamp(1.5rem,4vw,2.2rem);letter-spacing:-.03em}
+.lab{margin:12px 0 20px;padding:8px 12px;font-size:.86rem;background:#E8EEF8;border-left:3px solid var(--navy)}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+li a{display:grid;gap:4px;padding:16px 18px;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--hair)}
+li a:hover,li a:focus-visible{border-color:var(--navy)}
+li b{font-size:.78rem;color:var(--gold-t)}li strong{font-size:1.06rem}li span{font-size:.88rem;color:var(--soft)}
+footer{margin-top:22px;font-size:.78rem;color:var(--soft)}
+</style>
+</head>
+<body>
+<main>
+  <p class="k"><a href="../index.html#ax-c">← 김유빈 포트폴리오</a> · 범용 AX 확장 3종</p>
+  <h1>AI 가 틀릴 때 멈추는 구조를 먼저 만듭니다</h1>
+  <p class="lab"><b>개인 구현 · 공개 시연 (가상 벤치마크 검증)</b> — 모든 데이터는 가상이며 외부 AI 호출 없이 결정론적 코드로 동작합니다. 법무법인 경국(Gyunggook) 도입 시스템이 아닙니다.</p>
+  <ol>
+    <li><a href="reconcile-gate/"><b>C-1 · 데이터 교차검증 게이트</b><strong>ReconcileGate</strong><span>CSV · 요약 텍스트 · API JSON 의 단위 · 숫자 불일치, 누락, 중복, 이상치를 가려 사람 승인 큐로 — 정제 CSV · 감사기록 JSON</span></a></li>
+    <li><a href="ops-triage/"><b>C-2 · 리스크 차단형 인바운드 트리아지</b><strong>Ops Triage &amp; Circuit Breaker</strong><span>고위험 · 근거 미달 요청의 자동 발송을 코드로 잠그고, 정책 조항 ID 와 차단 사유를 붙여 승인 대기로</span></a></li>
+    <li><a href="claim-verifier/"><b>C-3 · 의사결정 메모 팩트체커</b><strong>Claim-to-Source Verifier</strong><span>1페이지 임원 브리핑의 숫자 · 날짜 · 고유명사를 원문 줄과 1:1 대조 — 미해결이면 내보내기 잠김</span></a></li>
+  </ol>
+  <footer>테스트 결과: <a href="eval-report.json">eval-report.json</a>(빌드 때 Vitest · 벤치마크를 실제로 실행해 기록) · 소스: 저장소 ax-lab/</footer>
+</main>
+</body>
+</html>
