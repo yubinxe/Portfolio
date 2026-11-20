@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="resume.css?v=3" />
 <script>/* 움직임: JS 가 있고 '움직임 줄이기'가 아닐 때만 숨김 → 등장. 인쇄 · PDF 는 항상 정지 화면 */
 try { if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !/[?&]static\b/.test(location.search)) document.documentElement.classList.add("rv-live"); } catch (e) {}</script>
-<link rel="stylesheet" href="polish.css?v=1" />
+<link rel="stylesheet" href="polish.css?v=2" />
 <script>/* 장면 전환 막 — 앞 페이지에서 막이 올라온 채로 넘어왔으면 첫 페인트부터 덮어 둔다(polish.js 가 걷는다) */try{if(sessionStorage.getItem("yk.pl.t")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("pl-enter")}catch(e){}</script>
 </head>
 <body>
@@ -169,6 +169,6 @@ try { if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !/[?&]stati
   </article>
 </main>
 <script src="resume.js?v=1" defer></script>
-<script src="polish.js?v=1" defer></script>
+<script src="polish.js?v=2" defer></script>
 </body>
 </html>

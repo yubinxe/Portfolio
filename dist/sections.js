@@ -499,6 +499,32 @@ function CaseIndex() {
 
 }
 
+/* 목적별 입구 — 처음 온 사람이 1–2분 안에 다음 장으로 넘어가도록 세 갈래 */
+const ENTRY = [
+{ k: "01", who: "채용 담당자", hint: "1–2분 요약", line: "한 장 이력과 실무 사례 8선", steps: [["Résumé", "resume.html"], ["실무 사례집", "cases.html"]] },
+{ k: "02", who: "실무 · 기술 검증", hint: "직접 작동", line: "시제품과 공개 시연을 직접 써 보기", steps: [["Trial Brief", "trial-brief.html"], ["법률 AX 시연", "legal-ax.html"], ["범용 AX 3종", "#ax-c"]] },
+{ k: "03", who: "신뢰 · 현장 증거", hint: "보도 · 기록", line: "언론 보도 · 현장 사진 · 비공개 기록", steps: [["11.11 보도 · 현장", "gallery.html#rei-day"], ["비공개 기록 열람실", "vault.html"]] }];
+
+function EntryTracks() {
+  return (/*#__PURE__*/
+    React.createElement("section", { id: "entry", className: "entry", "aria-labelledby": "entry-h" }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap" }, /*#__PURE__*/
+    React.createElement("h2", { id: "entry-h", className: "entry__h font-ko" }, "\uC5B4\uB514\uC11C\uBD80\uD130 \uBCF4\uC2DC\uACA0\uC5B4\uC694? ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Start Here")), /*#__PURE__*/
+    React.createElement("ol", { className: "entry__list" },
+    ENTRY.map((e) => /*#__PURE__*/
+    React.createElement("li", { key: e.k, className: "entry__item" }, /*#__PURE__*/
+    React.createElement("p", { className: "entry__k font-sans" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, e.k), e.hint), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, e.who), /*#__PURE__*/
+    React.createElement("p", { className: "entry__line font-ko" }, e.line), /*#__PURE__*/
+    React.createElement("p", { className: "entry__steps font-ko" }, e.steps.map(([t, h], k) => /*#__PURE__*/React.createElement(React.Fragment, { key: h }, k ? /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" }, "\u2192") : null, /*#__PURE__*/React.createElement("a", { href: h }, t))))
+    )
+    )
+    )
+    )
+    ));
+
+}
+
 function Ledger() {
   const ref = useReveal();
   /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
@@ -1036,16 +1062,6 @@ const TRAJECTORY = [
 
 /* 현장 일지 — 청와대 청년의날 다음 장. 날짜 도장으로 잇는다 (성평등 공론장은 대외활동 목록에만) */
 const DIARY = [
-{ id: "dyl-1114", date: "11.14", day: "SAT", tone: "navy", chip: "질의 · 발표",
-  eyebrow: "Field Diary — 2026. 11. 14", title: "2026 민주청년지도자 양성과정 — 질의 · 발표 세션",
-  body: "민주연구원의 2026 민주청년지도자 양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께했고, 하정우 부위원장과도 현장에서 함께했습니다. 10월 24일 입학 뒤 이어 가는 과정입니다.",
-  facts: [["주최·주관", "민주연구원"], ["일자", "2026. 11. 14"], ["함께", "강득구 민주연구원장 · 김경수 청와대 정무특보 · 하정우 부위원장"], ["역할", "질의 · 발표 세션 발언"]],
-  main: { name: "dyl-1114-group", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정(2026. 11. 14) 단체 사진, 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께", pos: "50% 55%", w: 1600, h: 1066 },
-  thumbs: [
-  { name: "dyl-1114-qa", href: "gallery.html#g-dyl-1114-qa", alt: "김유빈 활동 기록 — 질의 · 발표 세션에서 마이크를 잡고 발언하는 모습(2026. 11. 14)", pos: "45% 35%" },
-  { name: "dyl-1114-selfie", href: "gallery.html#g-dyl-1114-selfie", alt: "김유빈 활동 기록 — 하정우 부위원장과 함께(2026. 11. 14)", pos: "50% 35%" }],
-
-  href: "gallery.html#dyl-1114", cta: "11. 14 사진 전체 보기" },
 { id: "rei-day", date: "11.11", day: "WED", tone: "brick", chip: "집캐치 발표 · 내빈 응대",
   eyebrow: "Field Diary — 2026. 11. 11", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
   body: "제11회 부동산산업의 날에서 한국부동산마케팅협회(KREMA) 홍보부스에 참여해, 직접 개발한 청약 · 공공임대 공고 탐색 서비스 집캐치를 발표 · 시연하고 찾아온 내빈을 응대했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다. 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했습니다.",
@@ -1070,18 +1086,7 @@ const DIARY = [
   { name: "moef-tour", href: "gallery.html#g-moef-tour", alt: "김유빈 활동 기록 — SVC Seoul 입주 기업의 서비스 시연을 살펴보는 권대영 재정경제부 제1차관", pos: "40% 35%" },
   { name: "moef-talk", href: "gallery.html#g-moef-talk", alt: "김유빈 활동 기록 — 시연 현장에서 권대영 재정경제부 제1차관과 청년들", pos: "55% 35%" }],
 
-  href: "gallery.html#moef-youth", cta: "간담회 사진 전체 보기" },
-{ id: "dyl", date: "10.24", day: "SAT", tone: "navy", chip: "입학 · 진행 중",
-  eyebrow: "Field Diary — 2026. 10. 24", title: "2026 민주청년지도자 양성과정 입학",
-  body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다. 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
-  facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["함께", "김민석 당대표 · 강득구 민주연구원장 · 이광재 예산결산특별위원장 · 박홍근 기획예산처 장관"], ["상태", "수강 중"]],
-  main: { name: "dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞에서 김민석 당대표와 함께", pos: "50% 33%", w: 675, h: 1200 },
-  thumbs: [
-  { name: "dyl-qa", href: "gallery.html#g-dyl-qa", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강에서 마이크를 잡고 질문하는 모습", pos: "38% 45%" },
-  { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 강득구 민주연구원장과 함께", pos: "50% 40%" },
-  { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강을 마친 뒤 함께", pos: "45% 40%" }],
-
-  href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" }];
+  href: "gallery.html#moef-youth", cta: "간담회 사진 전체 보기" }];
 
 
 function FieldDiary() {
@@ -1358,7 +1363,8 @@ const TOOL_META = {
     why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾기 어려웠습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다.",
     made: "두 공고를 공공데이터 API로 모아, 지역 · 주거비 · 가구 조건 3단계 입력으로 지금 지원할 수 있는 후보를 정리하는 서비스.",
     link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원",
-    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리", extra: "한국경제 · 중앙일보 소개" },
+    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리", extra: "한국경제 · 중앙일보 소개",
+    press: [["한국경제 보도", "https://www.hankyung.com/article/202611110211i"], ["중앙일보 보도", "https://www.joongang.co.kr/article/25477695"], ["11.11 시연 현장", "gallery.html#rei-day"]] },
   "16": { name: "법조시장 한눈에", shot: "lp-home", env: "The Regulatory Landscape", envKo: "개발 대상지 위로 법률안 · 법령 · 판례가 층으로 내려앉습니다",
     why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 번에 보기 어려웠습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다.",
     made: "국회 · 법제처 · 대한변협 공개 자료를 하루 단위로 갱신하는 상황판과, 민법 기간 계산 조문에 맞춘 기한 계산기.",
@@ -1579,12 +1585,19 @@ function AXCommand() {
   }, []);
   React.useEffect(() => {
     /* #ax-evidence 같은 깊은 링크로 들어오면 그 시스템을 고른다 */
-    const pick = () => {const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === location.hash);if (i > -1) setSys(i);};
+    const pick = () => {
+      const h = location.hash;
+      const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === h);
+      if (i > -1) setSys(i);else
+      if (h === "#ax-c") setSys(AX_SYSTEMS.length);else
+      {const j = AX_C.findIndex((c) => "#ax-" + c.id === h);if (j > -1) setSys(AX_SYSTEMS.length + j);}
+    };
     pick();window.addEventListener("hashchange", pick);
     return () => window.removeEventListener("hashchange", pick);
   }, []);
-  const cur = AX_SYSTEMS[sys];
-  const Demo = [Sys01, Sys02, Sys03, Sys04, Sys05, Sys06][sys];
+  const isC = sys >= AX_SYSTEMS.length;
+  const cur = isC ? null : AX_SYSTEMS[sys];
+  const Demo = isC ? null : [Sys01, Sys02, Sys03, Sys04, Sys05, Sys06][sys];
   return (/*#__PURE__*/
     React.createElement(AXReady.Provider, { value: { city, lax } }, /*#__PURE__*/
     React.createElement("section", { id: "ax-desk", ref: sec, className: "axc", "aria-labelledby": "axc-title" }, /*#__PURE__*/
@@ -1632,9 +1645,23 @@ function AXCommand() {
     )
     )
     )
-    )
     ), /*#__PURE__*/
+    React.createElement("div", { className: "axc__grp axc__grp--c", id: "ax-c" }, /*#__PURE__*/
+    React.createElement("p", { className: "axc__gh font-ko" }, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uBC94\uC6A9 AX \uD655\uC7A5 3\uC885"), /*#__PURE__*/React.createElement("em", null, "\uB370\uC774\uD130 \xB7 \uC6B4\uC601 \xB7 \uAE30\uD68D \u2014 \uAC00\uC0C1 \uBCA4\uCE58\uB9C8\uD06C \uAC80\uC99D"))), /*#__PURE__*/
+    React.createElement("ol", null,
+    AX_C.map((c, j) => /*#__PURE__*/
+    React.createElement("li", { key: c.code, id: "ax-" + c.id }, /*#__PURE__*/
+    React.createElement("button", { type: "button", "aria-pressed": sys === AX_SYSTEMS.length + j, onClick: () => setSys(AX_SYSTEMS.length + j) }, /*#__PURE__*/
+    React.createElement("b", { className: "font-serif" }, c.code), /*#__PURE__*/
+    React.createElement("span", null, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, c.ko), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, c.en.split(" · ")[0]), /*#__PURE__*/React.createElement("i", { className: "font-ko" }, "\uAC1C\uC778 \uAD6C\uD604 \xB7 \uACF5\uAC1C \uC2DC\uC5F0"))
+    )
+    )
+    )
+    )
+    )
+    ),
 
+    isC ? /*#__PURE__*/React.createElement(AXCWindow, { c: AX_C[sys - AX_SYSTEMS.length] }) : /*#__PURE__*/
     React.createElement("div", { className: "axc__main", ref: stage }, /*#__PURE__*/
     React.createElement("header", { className: "axc__mh" }, /*#__PURE__*/
     React.createElement("p", { className: "font-sans" }, /*#__PURE__*/React.createElement("b", null, cur.number), " ", cur.englishName, /*#__PURE__*/React.createElement("span", { className: "axc__tag axc__tag--" + cur.group.toLowerCase() + " font-ko" }, AX_STATUS_KO[cur.implementationStatus])), /*#__PURE__*/
@@ -1659,12 +1686,12 @@ function AXCommand() {
     cur.group === "B" ? /*#__PURE__*/
     React.createElement("a", { className: "axc__go", href: cur.demoPath }, "\uC0C1\uC138 \uC2DC\uC5F0\uC5D0\uC11C \uC9C1\uC811 \uC368 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })) :
     cur.demoPath ? /*#__PURE__*/React.createElement("a", { className: "axc__go axc__go--ghost", href: cur.demoPath }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0\uC5D0\uC11C \uAC19\uC740 \uAC00\uC0C1 \uACC4\uC57D\uC744 \uC870\uD56D\uBCC4\uB85C \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })) : null, /*#__PURE__*/
-    React.createElement("span", null, cur.group === "A" ? "사내 구축 시스템 — 실제 화면 · 자료 비공개, 위 시연은 가상" : "모든 사건 · 문서는 가상 자료 — 실제 의뢰인 정보 없음")
+    React.createElement("span", null, cur.group === "A" ? "사내 구축 시스템 — 실제 화면 · 자료 비공개, 위 시연은 가상" : "모든 사건 · 문서는 가상 자료 — 실제 의뢰인 정보 없음"),
+    cur.group === "A" && /*#__PURE__*/React.createElement("a", { className: "axc__vault", href: "vault.html" }, "\uBE44\uACF5\uAC1C \uAE30\uB85D \uC5F4\uB78C\uC2E4(\uC554\uD638) \u2192")
     )
     )
-    ), /*#__PURE__*/
 
-    React.createElement(AXCExpansion, null), /*#__PURE__*/
+    ), /*#__PURE__*/
 
     React.createElement("header", { className: "axc__subhead" }, /*#__PURE__*/
     React.createElement("h3", { className: "font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uB9E1\uC740 \uC2E4\uBB34 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Practical Execution"))
@@ -1686,35 +1713,27 @@ function AXCommand() {
     ));
 
 }
-/* C — 범용 AX 확장 3종. 수치 칸은 AX_C(=ax/eval-report.json) 그대로, 값이 없으면 '준비 중' */
-function AXCExpansion() {
+/* C — 범용 AX 확장 3종. 콘솔에서 고르면 그 자리에서 실제 앱이 창(iframe)으로 뜬다. 수치 칸은 AX_C(=ax/eval-report.json) 그대로 */
+function AXCWindow({ c }) {
+  const proof = axcProof(c);
   return (/*#__PURE__*/
-    React.createElement("section", { id: "ax-c", className: "axcx", "aria-labelledby": "axcx-h" }, /*#__PURE__*/
-    React.createElement("header", { className: "axcx__head" }, /*#__PURE__*/
-    React.createElement("p", { className: "axc__gh font-ko" }, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", { id: "axcx-h" }, "\uBC94\uC6A9 AX \uD655\uC7A5 3\uC885"), /*#__PURE__*/React.createElement("em", null, "\uC815\uBE44\uC0AC\uC5C5 \xB7 \uBC95\uB960 \uBC16 \uB370\uC774\uD130 \xB7 \uC6B4\uC601 \xB7 \uAE30\uD68D \uD604\uC7A5 \u2014 ", AX_C_LABEL))), /*#__PURE__*/
-    React.createElement("p", { className: "axcx__rule font-ko" }, "AI \uB294 \uAD6C\uC870\uB9CC \uC77D\uACE0, \uACC4\uC0B0 \xB7 \uB300\uC870 \xB7 \uCC28\uB2E8\uC740 \uCF54\uB4DC\uAC00 \uD569\uB2C8\uB2E4. \uC218\uCE58\uB294 \uBE4C\uB4DC \uB54C \uC2E4\uC81C\uB85C \uB3CC\uB9B0 \uD14C\uC2A4\uD2B8 \uACB0\uACFC\uC785\uB2C8\uB2E4.")
-    ), /*#__PURE__*/
-    React.createElement("ol", { className: "axcx__list" },
-    AX_C.map((c) => {
-      const proof = axcProof(c);
-      return (/*#__PURE__*/
-        React.createElement("li", { key: c.code, className: "axcx__card" }, /*#__PURE__*/
-        React.createElement("p", { className: "axcx__k font-sans" }, /*#__PURE__*/React.createElement("b", null, c.code), c.en), /*#__PURE__*/
-        React.createElement("h4", { className: "font-ko" }, c.ko), /*#__PURE__*/
-        React.createElement("p", { className: "axcx__line font-ko" }, c.line), /*#__PURE__*/
-        React.createElement("p", { className: "axcx__dom font-ko" }, c.domains.map((d) => /*#__PURE__*/React.createElement("span", { key: d }, d))), /*#__PURE__*/
-        React.createElement("p", { className: "axcx__mech font-ko" }, c.mechanism), /*#__PURE__*/
-        React.createElement("p", { className: "axcx__proof font-ko" },
-        c.tests ? /*#__PURE__*/React.createElement("span", { className: "axcx__t" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "npm test ", c.tests.passed, "/", c.tests.total), " \uD1B5\uACFC") : /*#__PURE__*/React.createElement("span", { className: "axcx__t axcx__t--wait" }, "\uD14C\uC2A4\uD2B8 \uC900\uBE44 \uC911"),
-        proof ? /*#__PURE__*/React.createElement("span", null, proof) : /*#__PURE__*/React.createElement("span", { className: "axcx__t--wait" }, "\uAC80\uC99D \uC218\uCE58 \uC900\uBE44 \uC911")
-        ), /*#__PURE__*/
-        React.createElement("p", { className: "axcx__st font-ko" }, /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, AX_C_LABEL)),
-        c.url ? /*#__PURE__*/React.createElement("a", { className: "axc__go", href: c.url }, "\uC9C1\uC811 \uC368 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })) : /*#__PURE__*/React.createElement("span", { className: "axc__go axc__go--off font-ko", "aria-disabled": "true" }, "\uBC30\uD3EC \uC900\uBE44 \uC911")
-        ));
-
-    })
-    ), /*#__PURE__*/
-    React.createElement("p", { className: "axc__note font-ko" }, "\uBAA8\uB4E0 \uB370\uC774\uD130\uB294 \uAC00\uC0C1\uC785\uB2C8\uB2E4 \u2014 \uC2E4\uC81C \uAE30\uC5C5 \xB7 \uACE0\uAC1D \uC790\uB8CC \uC5C6\uC74C \xB7 \uC678\uBD80 AI \uD638\uCD9C \uC5C6\uC74C \xB7 \uACBD\uAD6D \uB3C4\uC785 \uC2DC\uC2A4\uD15C \uC544\uB2D8. \uC2E4\uBB34 \uB3C4\uC785 \xB7 \uC2DC\uAC04 \uB2E8\uCD95 \uD6A8\uACFC\uB294 \uCE21\uC815\uD558\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. ", /*#__PURE__*/React.createElement("a", { href: "ax/eval-report.json" }, "\uD14C\uC2A4\uD2B8 \uB9AC\uD3EC\uD2B8(JSON)"))
+    React.createElement("div", { className: "axc__main axc__main--c" }, /*#__PURE__*/
+    React.createElement("header", { className: "axc__mh" }, /*#__PURE__*/
+    React.createElement("p", { className: "font-sans" }, /*#__PURE__*/React.createElement("b", null, c.code), " ", c.en, /*#__PURE__*/React.createElement("span", { className: "axc__tag axc__tag--c font-ko" }, AX_C_LABEL)), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, c.ko), /*#__PURE__*/
+    React.createElement("p", { className: "axc__line font-ko" }, c.line), /*#__PURE__*/
+    React.createElement("p", { className: "axc__badges font-ko" }, c.tests ? /*#__PURE__*/React.createElement("span", null, "npm test ", c.tests.passed, "/", c.tests.total) : /*#__PURE__*/React.createElement("span", null, "\uD14C\uC2A4\uD2B8 \uC900\uBE44 \uC911"), proof ? /*#__PURE__*/React.createElement("span", null, proof) : null, /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0"))
+    ),
+    c.url ? /*#__PURE__*/
+    React.createElement("div", { className: "axc__win", key: c.id }, /*#__PURE__*/
+    React.createElement("p", { className: "axc__win-bar", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("span", { className: "font-sans" }, c.url)), /*#__PURE__*/
+    React.createElement("iframe", { src: c.url, title: c.ko + " — 실제 앱(가상 데이터)", loading: "lazy" })
+    ) : /*#__PURE__*/
+    React.createElement("p", { className: "axc__wait font-ko" }, "\uBC30\uD3EC \uC900\uBE44 \uC911"), /*#__PURE__*/
+    React.createElement("p", { className: "axc__links font-ko" },
+    c.url && /*#__PURE__*/React.createElement("a", { className: "axc__go", href: c.url, "data-win": true }, "\uD06C\uAC8C \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/
+    React.createElement("span", null, "\uBAA8\uB4E0 \uB370\uC774\uD130\uB294 \uAC00\uC0C1 \xB7 \uC678\uBD80 AI \uD638\uCD9C \uC5C6\uC74C \xB7 \uACBD\uAD6D \uB3C4\uC785 \uC544\uB2D8 \xB7 ", /*#__PURE__*/React.createElement("a", { href: "ax/eval-report.json", "data-win": true }, "\uD14C\uC2A4\uD2B8 \uB9AC\uD3EC\uD2B8"))
+    )
     ));
 
 }
@@ -2544,7 +2563,8 @@ function FlagshipTool({ e, onOpen, flip }) {
     React.createElement("p", { className: "fl__badge font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC0AC\uC6A9"), /*#__PURE__*/React.createElement("span", null, e.status), /*#__PURE__*/React.createElement("span", null, e.no, " / 04")), /*#__PURE__*/
     React.createElement("h3", { id: "fl-" + e.n, className: "fl__name" }, /*#__PURE__*/React.createElement("small", { className: "font-ko" }, t1), /*#__PURE__*/React.createElement("span", { className: "font-serif" }, M.name)), /*#__PURE__*/
     React.createElement("p", { className: "fl__line font-ko" }, M.line), /*#__PURE__*/
-    React.createElement("p", { className: "fl__badges font-ko" }, /*#__PURE__*/React.createElement("span", null, M.extra), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0")), /*#__PURE__*/
+    React.createElement("p", { className: "fl__badges font-ko" }, /*#__PURE__*/React.createElement("span", null, M.extra), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0")),
+    M.press && /*#__PURE__*/React.createElement("p", { className: "fl__press font-ko" }, M.press.map(([t, h]) => /*#__PURE__*/React.createElement("a", { key: h, href: h, target: /^https?:/.test(h) ? "_blank" : undefined, rel: "noreferrer" }, t))), /*#__PURE__*/
     React.createElement("details", { className: "fl__more font-ko" }, /*#__PURE__*/
     React.createElement("summary", null, "\uBB38\uC81C \u2192 \uC81C\uC791 \u2192 \uC0AC\uC6A9 3\uB2E8\uACC4 \uBCF4\uAE30"), /*#__PURE__*/
     React.createElement("ol", { className: "fl__story" }, /*#__PURE__*/
@@ -2717,7 +2737,13 @@ function ResearchArchive() {
     React.createElement("h2", { id: "ra-title", className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", { className: "font-serif" }, ARCHIVE.length)), /*#__PURE__*/
     React.createElement("p", { className: "ra__sub font-ko" }, "\uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130 \xB7 \uAC1C\uC778 \uC2E4\uD5D8 \xB7 \uC81C\uC548\uC11C \xB7 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uC785\uB2C8\uB2E4. \uB124 \uAC00\uC9C0 \uB3C4\uAD6C, \uACBD\uAD6D AX \uC640\uB294 \uC131\uACA9\uC774 \uB2E4\uB978 \uAE30\uB85D\uC774\uB77C \uB530\uB85C \uBAA8\uC558\uC2B5\uB2C8\uB2E4.")
     ), /*#__PURE__*/
-    React.createElement("ol", { className: "ra__list" }, ARCHIVE.map((e) => /*#__PURE__*/React.createElement(ArchiveRow, { key: e.n, e: e, onPlay: setPlaying })))
+    React.createElement("ol", { className: "ra__list" }, ARCHIVE.slice(0, 3).map((e) => /*#__PURE__*/React.createElement(ArchiveRow, { key: e.n, e: e, onPlay: setPlaying }))),
+    ARCHIVE.length > 3 && /*#__PURE__*/
+    React.createElement("details", { className: "fold ra__more" }, /*#__PURE__*/
+    React.createElement("summary", null, /*#__PURE__*/React.createElement("span", { className: "fold__t" }, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, "\uB098\uBA38\uC9C0 ", ARCHIVE.length - 3, "\uAC1C \uBCF4\uAE30")), /*#__PURE__*/React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })), /*#__PURE__*/
+    React.createElement("ol", { className: "ra__list" }, ARCHIVE.slice(3).map((e) => /*#__PURE__*/React.createElement(ArchiveRow, { key: e.n, e: e, onPlay: setPlaying })))
+    )
+
     ),
     playing && ReactDOM.createPortal(/*#__PURE__*/
       React.createElement("div", { className: "vlightbox", onClick: () => setPlaying(null), role: "dialog", "aria-modal": "true", "aria-label": playing.title.replace("\n", " · ") }, /*#__PURE__*/
@@ -3005,6 +3031,14 @@ function Contact() {
     React.createElement("p", { className: "font-ko", style: { color: "rgba(249,246,240,.78)", maxWidth: 600, margin: "26px auto 40px", lineHeight: 1.75, fontSize: "1.05rem" } }, "AI \uC804\uB7B5 \xB7 \uC5C5\uBB34 \uC790\uB3D9\uD654, \uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0\uC758 \uB514\uC9C0\uD138 \uC804\uD658, \uC815\uCC45\uACFC \uAE30\uC220\uC774 \uB9CC\uB098\uB294 \uACFC\uC81C\uC5D0 \uAD00\uD574 \uD568\uAED8 \uC774\uC57C\uAE30\uD558\uACE0 \uC2F6\uC2B5\uB2C8\uB2E4.", /*#__PURE__*/
     React.createElement("br", null), "\uAC1C\uC778 \uBA54\uC77C\uB85C \uC5F0\uB77D \uC8FC\uC2DC\uBA74 \uC131\uC2E4\uD788 \uD68C\uC2E0\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4."
     ), /*#__PURE__*/
+    React.createElement("p", { className: "ct-roles font-ko" }, /*#__PURE__*/
+    React.createElement("a", { href: "#ax-desk" }, /*#__PURE__*/React.createElement("b", null, "AX \xB7 \uC5C5\uBB34\uC790\uB3D9\uD654"), " \uD3EC\uC9C0\uC158\uC774\uB77C\uBA74 \u2014 \uACBD\uAD6D AX 3\uC885 \xB7 \uBC94\uC6A9 AX 3\uC885 \u2192"), /*#__PURE__*/
+    React.createElement("a", { href: "#trial-brief" }, /*#__PURE__*/React.createElement("b", null, "\uC11C\uBE44\uC2A4 \uAE30\uD68D \xB7 PM"), " \uD3EC\uC9C0\uC158\uC774\uB77C\uBA74 \u2014 Trial Brief \xB7 \uC9D1\uCE90\uCE58 \u2192")
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "ct-quick font-ko" }, /*#__PURE__*/
+    React.createElement("a", { href: "resume.pdf", download: "\uAE40\uC720\uBE48_Resume.pdf" }, "R\xE9sum\xE9 PDF"), /*#__PURE__*/
+    React.createElement("a", { href: "mailto:yubin120866@gmail.com?subject=%5B%EB%B9%84%EA%B3%B5%EA%B0%9C%20%EA%B8%B0%EB%A1%9D%20%EC%97%B4%EB%9E%8C%20%EB%AC%B8%EC%9D%98%5D%20%EA%B9%80%EC%9C%A0%EB%B9%88%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4" }, "\uBE44\uACF5\uAC1C \uAE30\uB85D \uC5F4\uB78C \uBB38\uC758")
+    ), /*#__PURE__*/
     React.createElement("div", { style: { display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" } }, /*#__PURE__*/
     React.createElement("a", { href: "mailto:yubin120866@gmail.com", className: "btn", style: { background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" } }, /*#__PURE__*/
     React.createElement(Mail, { size: 16 }), " \uC774\uBA54\uC77C \uBCF4\uB0B4\uAE30"
@@ -3059,15 +3093,15 @@ const JOURNAL = [
 { name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
   d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
-{ name: "dyl-1114-qa2", src: "images/dyl-1114-qa2.jpg", t: "민주청년지도자 양성과정 — 질의 · 발표 세션", when: "2026. 11. 14 · 민주연구원", dz: 0.5,
-  d: "양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보, 하정우 부위원장과 함께했습니다.",
-  links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl-1114" }] },
+{ name: "rei-day", src: "images/rei-day.jpg", t: "제11회 부동산산업의 날 — 집캐치 발표 · 시연", when: "2026. 11. 11 · 건설회관", dz: 0.5,
+  d: "KREMA 홍보부스에서 직접 만든 집캐치를 발표 · 시연했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#rei-day" }, { l: "한국경제 보도", h: "https://www.hankyung.com/article/202611110211i" }] },
 { name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
   d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
-{ name: "dyl-qa", src: "images/dyl-qa.jpg", t: "민주청년지도자 양성과정 — 특강 질의", when: "2026. 10. 24 · 민주연구원", dz: 0.6,
-  d: "이광재 예산결산특별위원장의 특강에서 마이크를 잡고 직접 질문했습니다.",
-  links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl" }] },
+{ img: "images/debate-pitch-600.jpg", src: "images/debate-pitch.jpg", t: "국민 대토론회 — 자산분과 정책 제안 발표", when: "2026. 9. 29 · aT센터", dz: 0.6,
+  d: "청년 미래배당펀드팀으로 자산분과 본무대에서 발표했습니다 — 참여 팀 중 1위. 제안이며 정책 채택이 아닙니다.",
+  links: [{ l: "갤러리에서 보기", h: "gallery.html#national-debate" }] },
 { img: "images/zipconomy-demo-600.jpg", src: "images/zipconomy-demo.jpg", t: "한경 집코노미 박람회 — 집캐치 시연", when: "2026. 9. 30 · 코엑스 D홀", dz: 1.3,
   d: "KREMA AI 전시관 부스에서 직접 만든 집캐치와 감정평가사 필드워크를 시연하고 질문을 받았습니다.",
   links: [{ l: "갤러리에서 보기", h: "gallery.html#zipconomy" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224446565096" }] },
@@ -3217,4 +3251,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

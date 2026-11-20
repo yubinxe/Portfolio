@@ -602,3 +602,34 @@ i.cx__kind{font-style:normal}
 .tlx .tl-dial{perspective:400px}
 @media (prefers-reduced-motion:reduce){.tlx [data-tlx]{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
 #trajectory{overflow-x:clip}
+/* V10 — 목적별 입구(히어로 아래) */
+.entry{padding:clamp(40px,6vw,72px) 0 clamp(20px,3vw,32px)}
+.entry__h{display:flex;align-items:baseline;gap:12px;margin:0 0 18px;font-size:clamp(1.15rem,2vw,1.45rem);font-weight:800;color:var(--navy)}
+.entry__h span{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text)}
+.entry__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.entry__item{display:grid;gap:6px;padding:18px 18px 16px;background:var(--paper);border:1px solid rgba(17,17,17,.12);border-top:3px solid var(--navy);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.entry__item:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(17,17,17,.08)}
+.entry__k{display:flex;align-items:baseline;gap:8px;margin:0;font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--gold-text)}
+.entry__k b{font-size:1.5rem;font-weight:500;line-height:1;color:var(--navy)}
+.entry__item h3{margin:0;font-size:1.1rem;font-weight:800}
+.entry__line{margin:0;font-size:.86rem;color:var(--ink-soft)}
+.entry__steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:6px 0 0;font-size:.86rem;font-weight:700}
+.entry__steps a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(19,40,75,.3);padding-bottom:1px}
+.entry__steps a:hover{border-color:var(--navy)}
+.entry__steps i{font-style:normal;color:var(--gold-text)}
+@media (max-width:860px){.entry__list{grid-template-columns:1fr}}
+/* 집캐치 카드 ↔ 보도 · 현장 */
+.fl__press{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:.84rem;font-weight:700}
+.fl__press a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(19,40,75,.3)}
+/* 연락 — 포지션별 바로가기 */
+.ct-roles{display:grid;gap:8px;max-width:640px;margin:0 auto 18px;text-align:left}
+.ct-roles a{display:block;padding:12px 16px;font-size:.92rem;color:rgba(249,246,240,.86);text-decoration:none;border:1px solid rgba(249,246,240,.22);transition:background .3s,border-color .3s}
+.ct-roles a:hover{background:rgba(249,246,240,.06);border-color:rgba(220,192,138,.6)}
+.ct-roles b{color:#DCC08A;margin-right:4px}
+.ct-quick{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin:0 0 26px;font-size:.86rem;font-weight:700}
+.ct-quick a{color:#DCC08A;text-decoration:none;border-bottom:1px solid rgba(220,192,138,.5)}
+/* 그 밖의 작업 — 나머지 접기 · 보도 기록(기사 사진 없이 매체 이름) */
+.ra__more{margin-top:10px;border-top:1px solid rgba(17,17,17,.14)}.ra__more>summary{padding:16px 0}
+.rec__img--press{display:grid;align-content:center;justify-items:start;gap:8px;min-height:180px;padding:24px;text-decoration:none;color:var(--navy);background:repeating-linear-gradient(0deg,#FFFDF8 0 27px,#F3EEE3 27px 28px)}
+.rec__img--press b{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800}
+.rec__img--press span{font-size:.78rem;letter-spacing:.14em;color:var(--gold-text)}

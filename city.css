@@ -725,3 +725,15 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
 .fl__more summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;font-weight:800;border:1px solid currentColor}
 .fl__more[open] summary::before{content:"−"}
 .fl__more .fl__link,.fl__more .fl__point{margin:10px 0 0}
+/* V10 — C(범용 AX 3종)는 B 아래 콘솔 안에서, 고르면 같은 자리에서 앱이 창으로 */
+.axc__grp--c i{color:#BFE3CF}
+.axc__nav .axc__grp--c button b{font-size:.92rem}
+.axc__tag--c{color:#BFE3CF;border-color:rgba(191,227,207,.5)}
+.axc__win{display:flex;flex-direction:column;height:clamp(460px,64vh,680px);overflow:hidden;background:#FBF9F4;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.35),0 0 0 .5px rgba(220,192,138,.4)}
+.axc__win-bar{display:flex;align-items:center;gap:8px;flex:none;height:38px;margin:0;padding:0 14px;background:linear-gradient(#F4F1EA,#ECE7DD);border-bottom:1px solid rgba(14,22,40,.12)}
+.axc__win-bar i{width:11px;height:11px;border-radius:50%;background:#E5534B}.axc__win-bar i:nth-child(2){background:#E9B949}.axc__win-bar i:nth-child(3){background:#58B36A}
+.axc__win-bar span{margin:0 auto;padding:5px 12px;font-size:.74rem;color:#4A5365;background:rgba(255,255,255,.7);border-radius:6px}
+.axc__win iframe{flex:1;width:100%;border:0;background:#fff}
+.axc__vault{margin-left:auto;font-size:.82rem;font-weight:700;color:var(--v5-goldon);text-decoration:none;border-bottom:1px solid rgba(220,192,138,.5)}
+.axc__links a:not(.axc__go){color:var(--v5-goldon)}
+@media (max-width:760px){.axc__win{height:560px}}

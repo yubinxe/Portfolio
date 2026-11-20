@@ -19,6 +19,7 @@ function App() {
       <main>
         <IntroSequence />
         <HeroClassic />
+        <EntryTracks />
         <Ledger />
         <CaseIndex />
         <About />

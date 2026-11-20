@@ -15,6 +15,16 @@ export function renderRecords(list = RECORDS) {
   const sorted = [...list].sort((a, b) => (b.year * 100 + (b.month || 0)) - (a.year * 100 + (a.month || 0)));
   return sorted.map((r) => {
     const img = r.images[0];
+    /* 외부 언론 보도 — 기사 사진은 옮기지 않는다. 매체 이름을 지면처럼 세우고 원문 링크만 */
+    if (!img) {
+      const when = `${esc(r.publisher)} · ${esc(r.issue || r.year)}`;
+      return `<article class="rec rec--press reveal" id="rec-${esc(r.id)}">`
+        + `<a class="rec__img rec__img--press" href="${esc(r.sourceUrl)}" target="_blank" rel="noreferrer" aria-label="기사 원문 — ${esc(r.publisher)}"><b class="font-myeongjo">${esc(r.publisher)}</b><span class="font-sans">${esc(r.issue || r.year)}</span></a>`
+        + `<div class="rec__body"><p class="rec__k font-sans"><span>${esc(KIND[r.kind])}</span>${when}</p>`
+        + `<h3 class="font-ko">${esc(r.title)}</h3><p class="rec__sum font-ko">${esc(r.summary)}</p>`
+        + `<dl class="rec__meta font-ko"><div><dt>계기</dt><dd>${esc(r.role)}</dd></div><div><dt>표기</dt><dd>${esc(r.credit)}</dd></div></dl>`
+        + `<p class="rec__more font-sans"><a href="${esc(r.sourceUrl)}" target="_blank" rel="noreferrer">기사 원문 보기</a></p></div></article>`;
+    }
     const when = r.issue ? `${esc(r.publisher)} · ${esc(r.issue)}` : `${esc(r.publisher)} · ${r.year}`;
     const more = r.images.slice(1).map((m, i) => ` · <a href="${esc(m.src)}" target="_blank" rel="noreferrer">지면 ${i + 2}</a>`).join("");
     const src = r.sourceUrl ? ` · <a href="${esc(r.sourceUrl)}" target="_blank" rel="noreferrer">원문 보기</a>` : "";
