@@ -50,7 +50,7 @@
             (i < 9 ? "0" : "") + (i + 1) + "</span>" + l[0] + "</a></li>";
         }).join("") +
       "</ol></nav>" +
-      '<div class="mnav__row"><a class="mnav__cv" href="resume.html">1페이지 이력</a>' +
+      '<div class="mnav__row"><a class="mnav__cv" href="resume.html" lang="fr">Résumé</a>' +
         (onIndex ? '<button type="button" class="mnav__ix" role="switch" aria-checked="true">인트로 <b>켜짐</b><i aria-hidden="true"></i></button>' : "") + "</div>" +
       '<a class="mnav__cta" href="mailto:yubin120866@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9D%98%EB%A2%B0%5D" data-lecture-consult="">강의 의뢰하기</a>' +
     "</div>";

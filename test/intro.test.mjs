@@ -22,7 +22,7 @@ test("건너뛰기 · 인트로 제어 — SKIP 은 선호를 바꾸지 않는 �
   assert.ok(/<a className="ix__skip font-ko" href="#manifesto"/.test(block), "바로 본문 보기 링크(JS 없이도 동작)");
   const skip = block.slice(block.indexOf('className="ix__skip'), block.indexOf("바로 본문 보기 <span"));
   assert.ok(!/setPref|localStorage/.test(skip), "SKIP 은 저장된 선호를 바꾸지 않는다");
-  assert.ok(block.includes('<a className="ix__cv font-ko" href="resume.html" onClick={() => ykIntro.skipSession()}>1페이지 이력 보기</a>'), "인트로에서 바로 1페이지 이력");
+  assert.ok(block.includes('<a className="ix__cv font-ko" href="resume.html" onClick={() => ykIntro.skipSession()}><span lang="fr">Résumé</span> 보기</a>'), "인트로에서 바로 Résumé");
   assert.ok(block.includes('<IxSwitch className="ix__switch" />'), "인트로 안 스위치");
   assert.ok(/role="switch" aria-checked=\{pref\}/.test(jsx), "aria-checked 는 실제 선호");
   assert.ok(jsx.includes('<IxSwitch className="hnav__ix" />') && jsx.includes('href="resume.html" className="hnav__cv'), "상단 메뉴에 스위치 · 1페이지 이력");
