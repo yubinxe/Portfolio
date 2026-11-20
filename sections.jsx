@@ -2535,7 +2535,7 @@ function DesktopTheater({ ed, card, onClose }) {
 /* ============================================================ THE ARTIFACTS — 직접 만든 네 가지 도구만 (V6.1: 제품 화면 중심으로 복구)
  * 건물 · 도시 장면을 쓰지 않는다. 각 제품의 실제 화면 캡처(images/product) 네 장을 넘겨 보고,
  * '실제 화면 펼쳐 보기'를 누르면 그 화면에서 제품 극장이 펼쳐진다(FLIP). 기능 설명은 작업 카드에 적힌 사실만 */
-function FlagshipTool({ e, onOpen, flip }) {
+function FlagshipTool({ e, onOpen, flip, hidden }) {
   const frame = React.useRef(null);
   const M = TOOL_META[e.n], T = THEATERS[e.n];
   const [t1] = e.title.split("\n");
@@ -2543,7 +2543,7 @@ function FlagshipTool({ e, onOpen, flip }) {
   const open = () => onOpen(e, frame.current);
   const L = T.layers[shot];
   return (
-    <article id={"ed-" + e.n} className={"fl" + (flip ? " fl--flip" : "")} style={{ "--accent-fill": e.color }} aria-labelledby={"fl-" + e.n}>
+    <article id={"ed-" + e.n} className={"fl" + (flip ? " fl--flip" : "")} style={{ "--accent-fill": e.color }} aria-labelledby={"fl-" + e.n} hidden={hidden}>
       <div className="fl__stage">
         <button type="button" ref={frame} className="fl__shot" onClick={open} aria-haspopup="dialog" aria-label={`${M.name} 실제 화면 펼쳐 보기 — ${L.k}`}>
           <span className="fl__chrome" aria-hidden="true"><i /><i /><i /><em className="font-sans">{T.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}</em></span>
@@ -2589,23 +2589,36 @@ function ArtifactsSection() {
   const [staged, setStaged] = React.useState(null); /* { e, card } */
   const onOpen = (e, card) => setStaged({ e, card });
   const onClose = () => setStaged(null);
+  const [sel, setSel] = useHashPick(TOOLS.map((e) => ["ed-" + e.n, "fl-" + e.n]));
+  const stage = React.useRef(null);
+  const pick = (i) => { setSel(i); requestAnimationFrame(() => bringIn(stage.current)); };
   return (
     <section id="artifacts" ref={ref} className="arts" aria-labelledby="arts-title">
       <div className="wrap">
         <SectionHead no="04 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Selected Works · Four Independent Products" />
         <div id="tools" className="arts__intro reveal">
           <p className="arts__lead font-ko" id="arts-title">혼자 끝까지 만들어 배포한 <b>개인 제품</b> 4종 — 회사 시스템이 아닙니다.</p>
-          <ol className="arts__index">
-            {TOOLS.map((e) => (
-              <li key={e.n}><a href={"#ed-" + e.n}>
-                <b className="font-serif">{e.no}</b>
-                <span><strong className="font-ko">{TOOL_META[e.n].name}</strong><em className="font-sans" lang="en">{TOOL_META[e.n].env}</em></span>
-                <ArrowDown size={15} />
-              </a></li>
-            ))}
-          </ol>
+          <p className="wk__hint font-sans" aria-hidden="true">카드를 고르면 아래에 펼쳐집니다</p>
         </div>
-        {TOOLS.map((e, i) => <FlagshipTool key={e.n} e={e} flip={i % 2 === 1} onOpen={onOpen} />)}
+        <ol className="wk reveal" aria-label="직접 만든 도구 4종">
+          {TOOLS.map((e, i) => {
+            const M = TOOL_META[e.n];
+            return (
+              <li key={e.n} className={"wk__c" + (i === 0 ? " wk__c--lead" : "")} style={{ "--i": i }}>
+                <button type="button" className="wk__b" aria-pressed={sel === i} aria-controls={"ed-" + e.n} onClick={() => pick(i)}>
+                  <span className="wk__shot" aria-hidden="true"><TheaterShot name={THEATERS[e.n].layers[0].img} alt="" /></span>
+                  <span className="wk__no font-serif" aria-hidden="true">{e.no}</span>
+                  <span className="wk__t"><strong className="font-ko">{M.name}</strong><em className="font-sans" lang="en">{M.env}</em></span>
+                  <span className="wk__l font-ko">{M.line}</span>
+                  <span className="wk__fig font-sans">Fig. {e.no} — {M.extra}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+        <div className="wk__stage" ref={stage}>
+          {TOOLS.map((e, i) => <FlagshipTool key={e.n} e={e} hidden={sel !== i} onOpen={onOpen} />)}
+        </div>
       </div>
       {staged && <ProductTheater ed={staged.e} card={staged.card} onClose={onClose} />}
     </section>
@@ -2768,6 +2781,9 @@ function ResearchArchive() {
 const LECTURE_MAILTO = "mailto:yubin120866@gmail.com?subject=";
 function Lectures() {
   const ref = useReveal();
+  const [lsel, setLsel] = useHashPick(LECTURE_TRACKS.map((tr) => ["lt-" + tr.key].concat(LECTURES.filter((l) => l.track === tr.key).map((l) => l.id))));
+  const lstage = React.useRef(null);
+  const lpick = (i) => { setLsel(i); requestAnimationFrame(() => bringIn(lstage.current)); };
   return (
     <section id="lectures" ref={ref} className="side-practice" style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="speckle" style={{ opacity: .22 }} />
@@ -2775,44 +2791,31 @@ function Lectures() {
         <SectionHead no="강의 · 소통" ko="기술을 이해하는 것에서, 이해시키는 것으로" en="AI Education & Knowledge Translation"
           lead="쓸모 있는 시스템은 쓰는 사람이 이해해야 자리 잡습니다. 실무에서 만든 것을 가르칠 수 있는 단위로 옮긴 제안 커리큘럼입니다." />
 
-        <div className="side-note reveal">
-          <span className="side-note__badge font-sans">In Preparation</span>
-          <p className="font-ko">
-            본업은 <strong>AI 전략 컨설팅</strong>입니다. 강의는 실무에서 직접 만들고 운영한 경험을 나누기 위해
-            <strong> 별도로 설계한 프로그램</strong>으로, 아직 출강 이력은 없습니다.
-            커리큘럼과 근거를 먼저 공개해 두고, 첫 강의가 진행되면 이력에 연도와 함께 추가하겠습니다. <strong>강의 의뢰는 언제든 받습니다.</strong>
-          </p>
-        </div>
-
-        <div className="lec-intro reveal">
-          <p className="font-myeongjo">
-            만들어 본 사람만 가르칠 수 있는 것이 있습니다.
-          </p>
-          <p className="font-ko lec-intro__sub">
-            SSAFY 13기의 엔지니어링 훈련, 서울대 AIED 4기의 프롬프트 아키텍처와 교수법,
-            KREMA 3기의 시장 데이터 전략 — 배운 것을 실제로 만들어 운영해 본 뒤에 강의 모듈로 옮겼습니다.
-            현재 AI 두 트랙과 부동산·자산관리 한 트랙, 열두 과정의 커리큘럼을 설계해 두었습니다.
-          </p>
-        </div>
-
-        {LECTURE_TRACKS.map((tr) => (
-          <div key={tr.key} className="lec-track">
-            <div className="lec-track__head reveal">
-              <span className="lec-track__label font-sans">{tr.label}</span>
-              <h3 className="font-ko">{tr.ko}</h3>
-              <p className="font-ko">{tr.desc}</p>
-            </div>
-            <details className="fold lec-fold">
-              <summary>
-                <span className="fold__t">
-                  <strong className="font-ko">과정 {LECTURES.filter((l) => l.track === tr.key).length}개 보기</strong>
-                  <span className="fold__line font-ko">{LECTURES.filter((l) => l.track === tr.key).map((l) => l.title.split(" — ")[0]).join(" · ")}</span>
-                </span>
-                <i className="fold__icon" aria-hidden="true" />
-              </summary>
-            <div className="lec-grid">
+        <p className="lec-pre font-ko reveal"><span className="side-note__badge font-sans">In Preparation</span>
+          <span>실무에서 만든 것을 옮긴 <strong>제안 커리큘럼</strong>입니다 — 아직 출강 이력은 없고, 첫 강의가 열리면 연도와 함께 적겠습니다.</span></p>
+        <ol className="wk wk--3 reveal" aria-label="강의 트랙 3개">
+          {LECTURE_TRACKS.map((tr, i) => {
+            const L = LECTURES.filter((l) => l.track === tr.key);
+            return (
+              <li key={tr.key} className="wk__c" style={{ "--i": i }}>
+                <button type="button" className="wk__b" aria-pressed={lsel === i} aria-controls={"lt-" + tr.key} onClick={() => lpick(i)}>
+                  <span className="wk__no font-serif" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
+                  <span className="wk__k font-sans">{tr.label.split(" — ")[1] || tr.label}</span>
+                  <span className="wk__t"><strong className="font-ko">{tr.ko}</strong></span>
+                  <span className="wk__l font-ko">{L.map((l) => l.title.split(" — ")[0]).join(" · ")}</span>
+                  <span className="wk__fig font-sans">과정 {L.length}개</span>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+        <div className="wk__stage" ref={lstage}>
+          {LECTURE_TRACKS.map((tr, k) => (
+            <div key={tr.key} id={"lt-" + tr.key} className="lec-track" hidden={lsel !== k}>
+              <p className="lec-track__desc font-ko">{tr.desc}</p>
+              <div className="lec-grid">
               {LECTURES.filter((l) => l.track === tr.key).map((l, i) => (
-                <article key={l.id} id={l.id} className="lec-card reveal" style={{ "--accent-fill": l.color, transitionDelay: `${i * 70}ms` }}>
+                <article key={l.id} id={l.id} className="lec-card" style={{ "--accent-fill": l.color, "--i": i }}>
                   <div className="lec-card__head">
                     <span className="lec-card__n font-cond">{l.n}</span>
                     <span className="lec-card__icon" style={{ background: l.color }}><l.Icon size={20} /></span>
@@ -2823,10 +2826,13 @@ function Lectures() {
                     <div><dt>대상</dt><dd>{l.who}</dd></div>
                     <div><dt>구성</dt><dd>{l.hours}</dd></div>
                   </dl>
-                  <ul className="lec-card__mods font-ko">
-                    {l.modules.map((m) => <li key={m}>{m}</li>)}
-                  </ul>
-                  <p className="lec-card__basis font-ko"><GraduationCap size={14} /> {l.basis}</p>
+                  <details className="lec-card__more font-ko">
+                    <summary>모듈 {l.modules.length}개 · 근거</summary>
+                    <ul className="lec-card__mods font-ko">
+                      {l.modules.map((m) => <li key={m}>{m}</li>)}
+                    </ul>
+                    <p className="lec-card__basis font-ko"><GraduationCap size={14} /> {l.basis}</p>
+                  </details>
                   <div className="lec-card__links">
                     <a href={l.proof.href} className="lec-card__proof font-sans">
                       {l.proof.label} <ArrowUpRight size={14} />
@@ -2839,10 +2845,10 @@ function Lectures() {
                     className="lec-card__ask font-sans" data-lecture-consult={l.id}>이 과정 의뢰하기 <span aria-hidden="true">→</span></a>
                 </article>
               ))}
+              </div>
             </div>
-            </details>
-          </div>
-        ))}
+          ))}
+        </div>
 
         <div className="lec-basis reveal">
           <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
@@ -3236,6 +3242,31 @@ function Footer() {
   );
 }
 
+/* ---------- 고르기 + 깊은 링크 — groups[i] 에 든 id 로 들어오면 i 를 고르고 그 자리로 ---------- */
+function useHashPick(groups) {
+  const [sel, setSel] = React.useState(0);
+  React.useEffect(() => {
+    const go = () => {
+      let h = ""; try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+      if (!h) return;
+      const i = groups.findIndex((g) => g.indexOf(h) >= 0);
+      if (i < 0) return;
+      setSel(i);
+      requestAnimationFrame(() => requestAnimationFrame(() => { const el = document.getElementById(h); if (el) el.scrollIntoView({ block: "start" }); }));
+    };
+    go();
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, []);
+  return [sel, setSel];
+}
+/* 고른 상세가 화면 아래쪽에 있으면 부드럽게 올려 보여 준다 */
+function bringIn(el) {
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  if (r.top > window.innerHeight * .62 || r.top < 0) el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+}
+
 /* ---------- shared section header ---------- */
 /* 'The Composite' → 관사만 가는 이탤릭으로 — 클래식 표제의 리듬 */
 /* 섹션 머리 — 한국어가 뜻을 맡고, 영어는 같은 묶음 안에서 전문 용어로 거든다(장식용 대문자 영어 제목 없음) */
@@ -3244,7 +3275,7 @@ function SectionHead({ no, ko, en, lead }) {
     <header className="sh reveal" data-no={no && /^\d+/.test(no) ? no.match(/^\d+/)[0] : undefined}>
       <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
       {no && <p className="sh__no font-ko">{no}</p>}
-      <h2 className="sh__t"><span className="sh__ko font-ko">{ko}</span>{en && <span className="sh__en font-serif" lang="en">{en}</span>}</h2>
+      <h2 className="sh__t"><span className="sh__ko font-ko">{ko.includes(", ") ? <><span className="sh__ka">{ko.slice(0, ko.indexOf(", ") + 1)}</span> <span className="sh__kb">{ko.slice(ko.indexOf(", ") + 2)}</span></> : ko}</span>{en && <span className="sh__en font-serif" lang="en">{en}</span>}</h2>
       {lead && <p className="sh__lead font-ko">{lead}</p>}
     </header>
   );
