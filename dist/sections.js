@@ -3208,7 +3208,7 @@ function Footer() {
 /* 섹션 머리 — 한국어가 뜻을 맡고, 영어는 같은 묶음 안에서 전문 용어로 거든다(장식용 대문자 영어 제목 없음) */
 function SectionHead({ no, ko, en, lead }) {
   return (/*#__PURE__*/
-    React.createElement("header", { className: "sh reveal" }, /*#__PURE__*/
+    React.createElement("header", { className: "sh reveal", "data-no": no && /^\d+/.test(no) ? no.match(/^\d+/)[0] : undefined }, /*#__PURE__*/
     React.createElement("div", { className: "menu-rule", style: { marginBottom: 22 } }, /*#__PURE__*/React.createElement("i", null)),
     no && /*#__PURE__*/React.createElement("p", { className: "sh__no font-ko" }, no), /*#__PURE__*/
     React.createElement("h2", { className: "sh__t" }, /*#__PURE__*/React.createElement("span", { className: "sh__ko font-ko" }, ko), en && /*#__PURE__*/React.createElement("span", { className: "sh__en font-serif", lang: "en" }, en)),

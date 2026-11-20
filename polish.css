@@ -1,0 +1,74 @@
+/* polish.css v1 — 영화 같은 포트폴리오의 ‘손길’ 층(사이트 공통, polish.js 와 짝).
+ * 원칙: 내용 · 배치는 그대로, 움직임과 질감만 더한다. html.pl(움직임 허용 · JS)일 때만 숨김 → 등장, 그 밖에는 정적 그대로.
+ * 장면 전환 막 · 필름 낟알 · 단어 단위 제목 등장 · 사진 걷힘 · 버튼 쓸림 · 커서 말풍선 · 자석 단추 · 장(章) 표시 · 큰 장 번호 */
+:root{--pl-ease:cubic-bezier(.77,0,.18,1);--pl-out:cubic-bezier(.16,1,.3,1);--pl-ink:#13284B;--pl-gold:#9C7E48}
+
+/* 1) 장면 전환 막 — 다른 페이지로 갈 때 남색 막이 올라오고, 도착한 페이지에서 걷힌다 */
+.pl-curtain{position:fixed;inset:0;z-index:10000;pointer-events:none;display:grid;place-items:center;background:var(--pl-ink);transform:translateY(100%);will-change:transform}
+.pl-curtain b{font:500 italic clamp(1.6rem,4vw,2.6rem)/1 "Cormorant Garamond","Playfair Display",serif;letter-spacing:.06em;color:#EFE3C8;opacity:0;transform:translateY(14px);transition:opacity .4s ease .12s,transform .6s var(--pl-out) .12s}
+.pl-curtain i{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--pl-gold);transform-origin:left;transform:scaleX(0);transition:transform .5s var(--pl-ease) .1s}
+.pl-curtain.is-in{transform:none;transition:transform .5s var(--pl-ease)}
+.pl-curtain.is-in b{opacity:1;transform:none}.pl-curtain.is-in i{transform:scaleX(1)}
+html.pl-enter .pl-curtain{transform:none}
+html.pl-enter .pl-curtain b{opacity:1;transform:none}
+.pl-curtain.is-out{transform:translateY(-100%);transition:transform .75s var(--pl-ease) .05s}
+/* 막이 생기기 전(첫 페인트) 깜빡임 방지 — head 스크립트가 붙인 pl-enter 동안 body 를 같은 색으로 덮는다 */
+html.pl-enter body::before{content:"";position:fixed;inset:0;z-index:9999;background:var(--pl-ink)}
+
+/* 2) 필름 낟알 — 화면 전체에 아주 옅게, 데스크톱만 */
+.pl-grain{position:fixed;inset:-60%;z-index:9990;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:plGrain .8s steps(4) infinite}
+@keyframes plGrain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+/* 3) 제목 — 단어마다 가림막 아래에서 올라온다 */
+.pl-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.pl-wi{display:inline-block}
+html.pl .pl-split .pl-wi{transform:translateY(105%) rotate(4deg);transform-origin:left bottom;transition:transform 1.05s var(--pl-out) calc(var(--w,0) * 55ms + 80ms)}
+html.pl .pl-split.pl-in .pl-wi{transform:none}
+
+/* 4) 사진 — 아래에서 위로 걷히며 확대가 풀린다 */
+html.pl .pl-unveil{clip-path:inset(0 0 100% 0);transition:clip-path 1.2s var(--pl-ease)}
+html.pl .pl-unveil img{transform:scale(1.18);transition:transform 1.6s var(--pl-out)}
+html.pl .pl-unveil.pl-in{clip-path:inset(0 0 0 0)}
+html.pl .pl-unveil.pl-in img{transform:none}
+
+/* 5) 단추 — 마우스를 올리면 색이 한쪽에서 쓸려 들어오고, 화살표가 한 칸 나간다 */
+html.pl .btn{position:relative;overflow:hidden;isolation:isolate}
+html.pl .btn::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--pl-gold);transform:scaleX(0);transform-origin:right;transition:transform .6s var(--pl-ease)}
+html.pl .btn--ghost::after{background:var(--pl-ink)}
+html.pl .btn:hover::after,html.pl .btn:focus-visible::after{transform:scaleX(1);transform-origin:left}
+html.pl .btn--ghost:hover,html.pl .btn--ghost:focus-visible{color:#FBF8F2!important;border-color:var(--pl-ink)!important}
+html.pl .btn svg{transition:transform .5s var(--pl-out)!important}
+html.pl .btn:hover svg{transform:translate(3px,-3px)!important}
+.pl-mag{transition:translate .6s var(--pl-out)}
+
+/* 6) 본문 링크 — 밑줄이 왼쪽에서 그어진다 */
+html.pl main p a:not([class]),html.pl .tl-body p a:not([class]){text-decoration:none;background:linear-gradient(currentColor,currentColor) left 100%/0 1px no-repeat;transition:background-size .5s var(--pl-ease)}
+html.pl main p a:not([class]):hover,html.pl .tl-body p a:not([class]):hover{background-size:100% 1px}
+
+/* 7) 커서 말풍선 — 기존 링 안에 짧은 동사(보기 · 열기 · ↗ · 재생) */
+.cursor-ring .pl-lab{position:absolute;inset:0;display:grid;place-items:center;font:600 12px/1 "Inter","Pretendard Variable",sans-serif;letter-spacing:.06em;color:var(--pl-ink);opacity:0;transform:scale(.6);transition:opacity .25s ease,transform .35s var(--pl-out)}
+.cursor-ring.pl-has-lab{width:72px!important;height:72px!important;background:rgba(239,227,200,.92)!important;border-color:var(--pl-gold)!important;backdrop-filter:blur(2px)}
+.cursor-ring.pl-has-lab .pl-lab{opacity:1;transform:none}
+
+/* 8) 장(章) 표시 — 지금 보는 장면 번호와 이름(데스크톱, 첫 화면 제외) */
+.pl-hud{position:fixed;left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,24px);z-index:60;display:flex;align-items:baseline;gap:10px;padding:7px 12px 7px 10px;pointer-events:none;font:600 .7rem/1 "Inter","Pretendard Variable",sans-serif;letter-spacing:.08em;color:var(--pl-ink);background:rgba(249,246,240,.82);backdrop-filter:blur(6px);border:1px solid rgba(19,40,75,.14);opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s var(--pl-out)}
+.pl-hud.is-on{opacity:1;transform:none}
+.pl-hud b{font:500 1.15rem/1 "Cormorant Garamond",serif;letter-spacing:0;color:var(--pl-gold);min-width:1.4em;display:inline-block}
+.pl-hud em{font-style:normal;font-weight:500;color:#6A6A6A}
+.pl-hud span{display:inline-block;max-width:16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:"Pretendard Variable",sans-serif;letter-spacing:.02em}
+.pl-hud .pl-flip{animation:plFlip .5s var(--pl-out)}
+@keyframes plFlip{from{opacity:0;transform:translateY(60%)}to{opacity:1;transform:none}}
+.pl-hud__bar{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--pl-gold);transform-origin:left;transform:scaleX(var(--pl-p,0))}
+
+/* 9) 큰 장 번호 — 섹션 머리 뒤에 윤곽선 숫자가 천천히 흘러간다 */
+.sh{position:relative;isolation:isolate}
+.sh[data-no]::before{content:attr(data-no);position:absolute;right:0;top:-.15em;z-index:-1;font:500 clamp(6rem,15vw,13rem)/1 "Cormorant Garamond","Playfair Display",serif;color:transparent;-webkit-text-stroke:1px rgba(156,126,72,.28);pointer-events:none;transform:translate3d(0,calc(var(--pl-y,0) * 1px),0)}
+
+/* 10) 사진 카드 — 손끝을 따라 아주 조금 기울고, 빛이 지나간다(데스크톱) */
+html.pl .pl-tilt{transform:perspective(900px) rotateX(calc(var(--ty,0) * 1deg)) rotateY(calc(var(--tx,0) * 1deg));transition:transform .5s var(--pl-out)}
+html.pl .pl-tilt::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(240px circle at var(--gx,50%) var(--gy,50%),rgba(255,248,230,.28),transparent 60%);opacity:0;transition:opacity .4s ease}
+html.pl .pl-tilt:hover::after{opacity:1}
+
+@media (pointer:coarse),(max-width:900px){.pl-grain,.pl-hud{display:none}.sh[data-no]::before{font-size:clamp(4.4rem,22vw,7rem)}}
+@media (prefers-reduced-motion:reduce){.pl-grain,.pl-curtain{display:none}html.pl-enter body::before{display:none}}
+@media print{.pl-grain,.pl-hud,.pl-curtain,.sh[data-no]::before{display:none!important}}
