@@ -1089,7 +1089,7 @@ function FieldDiary() {
     React.createElement("div", { className: "diary" }, /*#__PURE__*/
     React.createElement("p", { className: "diary__lead font-ko" }, /*#__PURE__*/React.createElement("span", { className: "diary__pulse", "aria-hidden": "true" }), "\uCCAD\uC640\uB300 \uCCAD\uB144\uC758\uB0A0, \uADF8\uB2E4\uC74C \uC7A5 \u2014 \uD604\uC7A5 \uC77C\uC9C0"),
     DIARY.map((d, i) => /*#__PURE__*/
-    React.createElement("figure", { key: d.id, "data-cine": "pass", className: "tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "") }, /*#__PURE__*/
+    React.createElement("figure", { key: d.id, "data-cine": "pass", "data-tlx": "diary", className: "tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "") }, /*#__PURE__*/
     React.createElement("a", { className: "tl-feature__main diary__main", href: d.href }, /*#__PURE__*/
     React.createElement(Pic, { name: d.main.name, fallback: "images/" + d.main.name + ".jpg", sizes: "(max-width: 900px) 92vw, 52vw", alt: d.main.alt, loading: "lazy", width: d.main.w || 1200, height: d.main.h || 675, style: { objectPosition: d.main.pos } }), /*#__PURE__*/
     React.createElement("span", { className: "diary__stamp", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, d.date), /*#__PURE__*/React.createElement("i", { className: "font-sans" }, d.day, " \xB7 2026"))
@@ -1134,9 +1134,10 @@ const tlYear = (e) => e.year === "Now" ? 9999 : Number(e.year) || 0;
 
 function TlRows({ rows }) {
   return (/*#__PURE__*/
-    React.createElement("div", { className: "tl-list" },
-    rows.map((e) => /*#__PURE__*/
-    React.createElement("div", { key: e.id, id: e.id, className: "tl-row" }, /*#__PURE__*/
+    React.createElement("div", { className: "tl-list" }, /*#__PURE__*/
+    React.createElement("span", { className: "tl-spine", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", null)),
+    rows.map((e, i) => /*#__PURE__*/
+    React.createElement("div", { key: e.id, id: e.id, className: "tl-row", "data-tlx": "row", "data-n": i + 1, style: { "--i": i } }, /*#__PURE__*/
     React.createElement("span", { className: "tl-year font-serif" }, e.year), /*#__PURE__*/
     React.createElement("div", { className: "tl-body" }, /*#__PURE__*/
     React.createElement("h3", { className: "font-ko" },
@@ -1152,8 +1153,56 @@ function TlRows({ rows }) {
 
 }
 
+/* 성장 경로 · 현장 일지 · 이력 목록을 내릴 때마다 다르게 — 움직임 줄이기 · JS 없음이면 아무것도 숨기지 않는다(프리렌더 그대로).
+ * 등장(IntersectionObserver)은 한 번, 진행도(--tlp · --gp)와 ‘지금 읽는 줄’은 섹션 근처에서만 rAF 로 계산 */
+function useTrajectoryMotion(ref) {
+  React.useEffect(() => {
+    const sec = ref.current;
+    if (!sec || !window.matchMedia || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    sec.classList.add("tlx");
+    const seen = new IntersectionObserver((es) => es.forEach((e) => {if (e.isIntersecting) {e.target.classList.add("is-in");seen.unobserve(e.target);}}), { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+    sec.querySelectorAll("[data-tlx]").forEach((n) => {if (!n.closest("details:not([open])")) seen.observe(n);});
+    /* 접힌 그룹을 펼치면 그 안의 줄이 차례로 들어온다(접힌 내용은 관찰 대상이 아니므로 직접) */
+    const onToggle = (e) => {
+      if (!e.target.open || !sec.contains(e.target)) return;
+      e.target.querySelectorAll("[data-tlx]:not(.is-in)").forEach((n, i) => setTimeout(() => n.classList.add("is-in"), 60 + i * 110));
+      onScroll();
+    };
+    sec.addEventListener("toggle", onToggle, true);
+    let raf = 0,near = false;
+    const frame = () => {
+      raf = 0;
+      const vh = window.innerHeight,mid = vh * 0.46;
+      const grow = sec.querySelector(".grow");
+      if (grow) {const r = grow.getBoundingClientRect();grow.style.setProperty("--gp", Math.min(1, Math.max(0, (vh * 0.92 - r.top) / (vh * 0.6))).toFixed(3));}
+      sec.querySelectorAll(".tl-group").forEach((g) => {
+        const list = g.querySelector(".tl-list");
+        if (!list || !list.offsetParent) return;
+        const r = list.getBoundingClientRect();
+        if (r.bottom < -40 || r.top > vh + 40) return;
+        g.style.setProperty("--tlp", Math.min(1, Math.max(0, (mid - r.top) / Math.max(1, r.height))).toFixed(3));
+        let best = null,bd = 1e9;
+        list.querySelectorAll(".tl-row").forEach((row) => {const rr = row.getBoundingClientRect();const d = Math.abs(rr.top + rr.height / 2 - mid);if (d < bd) {bd = d;best = row;}});
+        list.querySelectorAll(".tl-row.is-on").forEach((row) => {if (row !== best) row.classList.remove("is-on");});
+        if (best && !best.classList.contains("is-on")) {
+          best.classList.add("is-on");
+          const dial = g.querySelector(".tl-dial b");
+          if (dial) {dial.textContent = String(best.getAttribute("data-n")).padStart(2, "0");dial.classList.remove("flip");void dial.offsetWidth;dial.classList.add("flip");}
+        }
+      });
+    };
+    const onScroll = () => {if (near && !raf) raf = requestAnimationFrame(frame);};
+    const io = new IntersectionObserver((es) => {near = es.some((e) => e.isIntersecting);if (near) onScroll();}, { rootMargin: "200px 0px" });
+    io.observe(sec);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {seen.disconnect();io.disconnect();sec.removeEventListener("toggle", onToggle, true);window.removeEventListener("scroll", onScroll);window.removeEventListener("resize", onScroll);cancelAnimationFrame(raf);sec.classList.remove("tlx");};
+  }, []);
+}
+
 function Trajectory() {
   const ref = useReveal();
+  useTrajectoryMotion(ref);
   return (/*#__PURE__*/
     React.createElement("section", { id: "trajectory", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
@@ -1161,7 +1210,7 @@ function Trajectory() {
       lead: "\uC5F0\uB300\uC21C \uBAA9\uB85D\uBCF4\uB2E4 \uBA3C\uC800, \uB2E4\uB8E8\uB294 \uBB38\uC81C\uAC00 \uC5B4\uB5BB\uAC8C \uCEE4\uC838 \uC654\uB294\uC9C0 \uBD05\uB2C8\uB2E4. \uC2DC\uAE30\uB294 \uC11C\uB85C \uACB9\uCE69\uB2C8\uB2E4 \u2014 \uC544\uB798 \uB2E8\uACC4\uB294 \uC21C\uC11C\uAC00 \uC544\uB2C8\uB77C \uBB38\uC81C\uC758 \uBCF5\uC7A1\uB3C4\uC785\uB2C8\uB2E4." }), /*#__PURE__*/
     React.createElement(GrowthPath, null), /*#__PURE__*/
 
-    React.createElement("figure", { className: "tl-feature reveal", "data-cine": "pass" }, /*#__PURE__*/
+    React.createElement("figure", { className: "tl-feature reveal", "data-cine": "pass", "data-tlx": "diary" }, /*#__PURE__*/
     React.createElement("a", { className: "tl-feature__main", href: "gallery.html#youth-day" }, /*#__PURE__*/
     React.createElement(Pic, { name: "youth-day-yonhap", fallback: "images/youth-day-yonhap.jpg",
       sizes: "(max-width: 900px) 92vw, 52vw", alt: "\uAE40\uC720\uBE48 \uD65C\uB3D9 \uAE30\uB85D \u2014 2026 \uCCAD\uB144\uC758\uB0A0 \uAE30\uB150\uD589\uC0AC \uD604\uC7A5 (\uC5F0\uD569\uB274\uC2A4 \uBCF4\uB3C4\uC0AC\uC9C4)", loading: "lazy", width: "860", height: "592" })
@@ -1183,6 +1232,12 @@ function Trajectory() {
     )
     ), /*#__PURE__*/
     React.createElement(FieldDiary, null), /*#__PURE__*/
+    React.createElement("ol", { className: "tl-ribbon font-ko", "aria-label": "\uC774\uB825 \uD55C\uB208\uC5D0" },
+    TRAJ_GROUPS.map((g) => {
+      const n = g.order ? g.order.length : TRAJECTORY.filter((e) => e.group === g.key).length;
+      return /*#__PURE__*/React.createElement("li", { key: g.key, "data-tlx": "chip" }, /*#__PURE__*/React.createElement("a", { href: "#tlg-" + g.key }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, n), /*#__PURE__*/React.createElement("span", null, g.ko), /*#__PURE__*/React.createElement("i", { className: "font-sans", lang: "en" }, g.en)));
+    })
+    ), /*#__PURE__*/
     React.createElement("div", { className: "tl-groups" },
     TRAJ_GROUPS.map((g) => {
       const rows = (g.order ?
@@ -1190,10 +1245,12 @@ function Trajectory() {
       TRAJECTORY.filter((e) => e.group === g.key)).
       slice().sort((x, y) => tlYear(y) - tlYear(x));
       return (/*#__PURE__*/
-        React.createElement("div", { key: g.key, className: "tl-group reveal" }, /*#__PURE__*/
+        React.createElement("div", { key: g.key, id: "tlg-" + g.key, className: "tl-group reveal", "data-kind": g.key }, /*#__PURE__*/
         React.createElement("div", { className: "tl-group__label" }, /*#__PURE__*/
         React.createElement("p", { className: "eyebrow" }, g.en), /*#__PURE__*/
-        React.createElement("h3", { className: "font-ko" }, g.ko)
+        React.createElement("h3", { className: "font-ko" }, g.ko), /*#__PURE__*/
+        React.createElement("p", { className: "tl-dial", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, "01"), /*#__PURE__*/React.createElement("i", { className: "font-sans" }, "/ ", String(rows.length).padStart(2, "0"))), /*#__PURE__*/
+        React.createElement("span", { className: "tl-meter", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", null))
         ),
         g.open ? /*#__PURE__*/React.createElement(TlRows, { rows: rows }) : /*#__PURE__*/
         React.createElement("details", { className: "fold tl-fold" }, /*#__PURE__*/
@@ -2607,7 +2664,7 @@ function GrowthPath() {
   return (/*#__PURE__*/
     React.createElement("ol", { className: "grow reveal" },
     GROWTH.map((g, i) => /*#__PURE__*/
-    React.createElement("li", { key: g.en, className: g.aim ? "grow__aim" : "" }, /*#__PURE__*/
+    React.createElement("li", { key: g.en, className: g.aim ? "grow__aim" : "", "data-tlx": "step", style: { "--i": i } }, /*#__PURE__*/
     React.createElement("a", { href: g.href }, /*#__PURE__*/
     React.createElement("b", { className: "font-serif" }, pad2(i + 1)), /*#__PURE__*/
     React.createElement("h3", null, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, g.ko), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, g.en)), /*#__PURE__*/

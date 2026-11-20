@@ -1088,7 +1088,7 @@ function FieldDiary() {
     <div className="diary">
       <p className="diary__lead font-ko"><span className="diary__pulse" aria-hidden="true" />청와대 청년의날, 그다음 장 — 현장 일지</p>
       {DIARY.map((d, i) => (
-        <figure key={d.id} data-cine="pass" className={"tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "")}>
+        <figure key={d.id} data-cine="pass" data-tlx="diary" className={"tl-feature diary__item reveal diary--" + d.tone + (i % 2 ? " diary__item--rev" : "")}>
           <a className="tl-feature__main diary__main" href={d.href}>
             <Pic name={d.main.name} fallback={"images/" + d.main.name + ".jpg"} sizes="(max-width: 900px) 92vw, 52vw" alt={d.main.alt} loading="lazy" width={d.main.w || 1200} height={d.main.h || 675} style={{ objectPosition: d.main.pos }} />
             <span className="diary__stamp" aria-hidden="true"><b className="font-serif">{d.date}</b><i className="font-sans">{d.day} · 2026</i></span>
@@ -1134,8 +1134,9 @@ const tlYear = (e) => (e.year === "Now" ? 9999 : Number(e.year) || 0);
 function TlRows({ rows }) {
   return (
     <div className="tl-list">
-      {rows.map((e) => (
-        <div key={e.id} id={e.id} className="tl-row">
+      <span className="tl-spine" aria-hidden="true"><i /></span>
+      {rows.map((e, i) => (
+        <div key={e.id} id={e.id} className="tl-row" data-tlx="row" data-n={i + 1} style={{ "--i": i }}>
           <span className="tl-year font-serif">{e.year}</span>
           <div className="tl-body">
             <h3 className="font-ko">
@@ -1151,8 +1152,56 @@ function TlRows({ rows }) {
   );
 }
 
+/* 성장 경로 · 현장 일지 · 이력 목록을 내릴 때마다 다르게 — 움직임 줄이기 · JS 없음이면 아무것도 숨기지 않는다(프리렌더 그대로).
+ * 등장(IntersectionObserver)은 한 번, 진행도(--tlp · --gp)와 ‘지금 읽는 줄’은 섹션 근처에서만 rAF 로 계산 */
+function useTrajectoryMotion(ref) {
+  React.useEffect(() => {
+    const sec = ref.current;
+    if (!sec || !window.matchMedia || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    sec.classList.add("tlx");
+    const seen = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); seen.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+    sec.querySelectorAll("[data-tlx]").forEach((n) => { if (!n.closest("details:not([open])")) seen.observe(n); });
+    /* 접힌 그룹을 펼치면 그 안의 줄이 차례로 들어온다(접힌 내용은 관찰 대상이 아니므로 직접) */
+    const onToggle = (e) => {
+      if (!e.target.open || !sec.contains(e.target)) return;
+      e.target.querySelectorAll("[data-tlx]:not(.is-in)").forEach((n, i) => setTimeout(() => n.classList.add("is-in"), 60 + i * 110));
+      onScroll();
+    };
+    sec.addEventListener("toggle", onToggle, true);
+    let raf = 0, near = false;
+    const frame = () => {
+      raf = 0;
+      const vh = window.innerHeight, mid = vh * 0.46;
+      const grow = sec.querySelector(".grow");
+      if (grow) { const r = grow.getBoundingClientRect(); grow.style.setProperty("--gp", Math.min(1, Math.max(0, (vh * 0.92 - r.top) / (vh * 0.6))).toFixed(3)); }
+      sec.querySelectorAll(".tl-group").forEach((g) => {
+        const list = g.querySelector(".tl-list");
+        if (!list || !list.offsetParent) return;
+        const r = list.getBoundingClientRect();
+        if (r.bottom < -40 || r.top > vh + 40) return;
+        g.style.setProperty("--tlp", Math.min(1, Math.max(0, (mid - r.top) / Math.max(1, r.height))).toFixed(3));
+        let best = null, bd = 1e9;
+        list.querySelectorAll(".tl-row").forEach((row) => { const rr = row.getBoundingClientRect(); const d = Math.abs(rr.top + rr.height / 2 - mid); if (d < bd) { bd = d; best = row; } });
+        list.querySelectorAll(".tl-row.is-on").forEach((row) => { if (row !== best) row.classList.remove("is-on"); });
+        if (best && !best.classList.contains("is-on")) {
+          best.classList.add("is-on");
+          const dial = g.querySelector(".tl-dial b");
+          if (dial) { dial.textContent = String(best.getAttribute("data-n")).padStart(2, "0"); dial.classList.remove("flip"); void dial.offsetWidth; dial.classList.add("flip"); }
+        }
+      });
+    };
+    const onScroll = () => { if (near && !raf) raf = requestAnimationFrame(frame); };
+    const io = new IntersectionObserver((es) => { near = es.some((e) => e.isIntersecting); if (near) onScroll(); }, { rootMargin: "200px 0px" });
+    io.observe(sec);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => { seen.disconnect(); io.disconnect(); sec.removeEventListener("toggle", onToggle, true); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(raf); sec.classList.remove("tlx"); };
+  }, []);
+}
+
 function Trajectory() {
   const ref = useReveal();
+  useTrajectoryMotion(ref);
   return (
     <section id="trajectory" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0" }}>
       <div className="wrap">
@@ -1160,7 +1209,7 @@ function Trajectory() {
           lead="연대순 목록보다 먼저, 다루는 문제가 어떻게 커져 왔는지 봅니다. 시기는 서로 겹칩니다 — 아래 단계는 순서가 아니라 문제의 복잡도입니다." />
         <GrowthPath />
 
-        <figure className="tl-feature reveal" data-cine="pass">
+        <figure className="tl-feature reveal" data-cine="pass" data-tlx="diary">
           <a className="tl-feature__main" href="gallery.html#youth-day">
             <Pic name="youth-day-yonhap" fallback="images/youth-day-yonhap.jpg"
               sizes="(max-width: 900px) 92vw, 52vw" alt="김유빈 활동 기록 — 2026 청년의날 기념행사 현장 (연합뉴스 보도사진)" loading="lazy" width="860" height="592" />
@@ -1182,6 +1231,12 @@ function Trajectory() {
           </figcaption>
         </figure>
         <FieldDiary />
+        <ol className="tl-ribbon font-ko" aria-label="이력 한눈에">
+          {TRAJ_GROUPS.map((g) => {
+            const n = g.order ? g.order.length : TRAJECTORY.filter((e) => e.group === g.key).length;
+            return <li key={g.key} data-tlx="chip"><a href={"#tlg-" + g.key}><b className="font-serif">{n}</b><span>{g.ko}</span><i className="font-sans" lang="en">{g.en}</i></a></li>;
+          })}
+        </ol>
         <div className="tl-groups">
           {TRAJ_GROUPS.map((g) => {
             const rows = (g.order
@@ -1189,10 +1244,12 @@ function Trajectory() {
               : TRAJECTORY.filter((e) => e.group === g.key)
             ).slice().sort((x, y) => tlYear(y) - tlYear(x));
             return (
-              <div key={g.key} className="tl-group reveal">
+              <div key={g.key} id={"tlg-" + g.key} className="tl-group reveal" data-kind={g.key}>
                 <div className="tl-group__label">
                   <p className="eyebrow">{g.en}</p>
                   <h3 className="font-ko">{g.ko}</h3>
+                  <p className="tl-dial" aria-hidden="true"><b className="font-serif">01</b><i className="font-sans">/ {String(rows.length).padStart(2, "0")}</i></p>
+                  <span className="tl-meter" aria-hidden="true"><i /></span>
                 </div>
                 {g.open ? <TlRows rows={rows} /> : (
                   <details className="fold tl-fold">
@@ -2606,7 +2663,7 @@ function GrowthPath() {
   return (
     <ol className="grow reveal">
       {GROWTH.map((g, i) => (
-        <li key={g.en} className={g.aim ? "grow__aim" : ""}>
+        <li key={g.en} className={g.aim ? "grow__aim" : ""} data-tlx="step" style={{ "--i": i }}>
           <a href={g.href}>
             <b className="font-serif">{pad2(i + 1)}</b>
             <h3><span className="font-ko">{g.ko}</span><em className="font-sans" lang="en">{g.en}</em></h3>
