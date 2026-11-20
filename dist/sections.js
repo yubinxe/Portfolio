@@ -100,7 +100,7 @@ function Nav() {
     React.createElement("span", { className: "mnav-btn__bars", "aria-hidden": "true" }), "\uBA54\uB274"
     ),
     playing ? /*#__PURE__*/React.createElement(IxSwitch, { className: "hnav__ix" }) : /*#__PURE__*/React.createElement(AdminNavBtn, null), /*#__PURE__*/
-    React.createElement("a", { href: "resume.html", className: "hnav__cv font-ko" }, "1\uD398\uC774\uC9C0 \uC774\uB825"), /*#__PURE__*/
+    React.createElement("a", { href: "resume.html", className: "hnav__cv", lang: "fr" }, "R\xE9sum\xE9"), /*#__PURE__*/
     React.createElement("a", { href: "#contact", className: "btn hnav__contact" }, "Contact ", /*#__PURE__*/
     React.createElement(ArrowUpRight, { size: 14 })
     )
@@ -170,7 +170,7 @@ const ykIntro = {
     window.dispatchEvent(new Event("ix:play"));
     const sw = document.querySelector(".ix__ctl .ix__switch");if (sw) sw.focus({ preventScroll: true });
   },
-  /* 인트로를 이번 탭에서만 건너뛴다 — 선호는 그대로(1페이지 이력으로 갔다가 돌아올 때 처음부터 다시 보지 않게) */
+  /* 인트로를 이번 탭에서만 건너뛴다 — 선호는 그대로(Résumé 로 갔다가 돌아올 때 처음부터 다시 보지 않게) */
   skipSession() {try {sessionStorage.setItem(IX_SESSION, "skip");} catch (e) {}}
 };
 if (typeof window !== "undefined") window.ykIntro = ykIntro;
@@ -294,7 +294,7 @@ function IntroSequence() {
     const onHide = () => stop(false);
     const onErr = () => {if (running) stop(false);};
     const onResize = () => {if (running) measure();};
-    /* 1페이지 이력에서 ‘뒤로’ 돌아왔을 때(페이지 캐시 복원) — 이번 탭에서 건너뛰기로 했다면 인트로를 다시 세우지 않는다 */
+    /* Résumé 에서 ‘뒤로’ 돌아왔을 때(페이지 캐시 복원) — 이번 탭에서 건너뛰기로 했다면 인트로를 다시 세우지 않는다 */
     const onShow = (e) => {let skip = false;try {skip = sessionStorage.getItem(IX_SESSION) === "skip";} catch (x) {}if (e.persisted && skip && ixPlaying()) {ixHide();ixEmit("");}};
     window.addEventListener("ix:play", onPlay);window.addEventListener("pagehide", onHide);window.addEventListener("error", onErr);
     window.addEventListener("resize", onResize, { passive: true });window.addEventListener("pageshow", onShow);
@@ -357,7 +357,7 @@ function IntroSequence() {
     React.createElement("i", { className: "ix__bar", "aria-hidden": "true" }), /*#__PURE__*/
 
     React.createElement("div", { className: "ix__ctl font-sans" }, /*#__PURE__*/
-    React.createElement("a", { className: "ix__cv font-ko", href: "resume.html", onClick: () => ykIntro.skipSession() }, "1\uD398\uC774\uC9C0 \uC774\uB825 \uBCF4\uAE30"), /*#__PURE__*/
+    React.createElement("a", { className: "ix__cv font-ko", href: "resume.html", onClick: () => ykIntro.skipSession() }, /*#__PURE__*/React.createElement("span", { lang: "fr" }, "R\xE9sum\xE9"), " \uBCF4\uAE30"), /*#__PURE__*/
     React.createElement(IxSwitch, { className: "ix__switch" }), /*#__PURE__*/
     React.createElement("a", { className: "ix__skip font-ko", href: "#manifesto", onClick: (e) => {if (window.__ixStop && window.__ixStop(true)) e.preventDefault();} }, "\uBC14\uB85C \uBCF8\uBB38 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement("span", { "aria-hidden": "true" }, "\u2192"))
     )
@@ -2812,6 +2812,24 @@ function About() {
   const frameRef = React.useRef(null);
   const mediaRef = React.useRef(null);
   const [stage, setStage] = React.useState({ lines: 0, body: false });
+  /* 화면 높이가 낮으면(노트북 · 창 줄임) 고정 장면 아래가 잘린다 — 내용이 화면에 다 들어가지 않으면 고정을 풀고 보통 흐름으로 */
+  const [flow, setFlow] = React.useState(false);
+  const flowRef = React.useRef(false);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => {
+      const grid = el.querySelector(".story__grid");
+      const nav = document.querySelector("header.hnav");
+      const f = !!grid && window.innerWidth > 900 && grid.offsetHeight + (nav ? nav.offsetHeight : 80) + 32 > window.innerHeight;
+      if (f !== flowRef.current) {flowRef.current = f;setFlow(f);window.dispatchEvent(new Event("scroll"));}
+    };
+    measure();
+    const t = setTimeout(measure, 1200);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    window.addEventListener("resize", measure, { passive: true });
+    return () => {clearTimeout(t);window.removeEventListener("resize", measure);};
+  }, []);
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -2823,7 +2841,7 @@ function About() {
       raf = requestAnimationFrame(() => {
         raf = 0;
         let p = 1;
-        if (!calm.matches) {
+        if (!calm.matches && !flowRef.current) {
           const vh = window.innerHeight;
           if (wide.matches) {
             const r = el.getBoundingClientRect(),span = r.height - vh;
@@ -2850,7 +2868,7 @@ function About() {
   const io = (i) => ({ "--in": i === 0 ? "1" : `var(--u${i})`, "--out": i === STORY_SHOTS.length - 1 ? "0" : `var(--u${i + 1})` });
 
   return (/*#__PURE__*/
-    React.createElement("section", { id: "about", ref: ref, className: "story" }, /*#__PURE__*/
+    React.createElement("section", { id: "about", ref: ref, className: "story" + (flow ? " story--flow" : "") }, /*#__PURE__*/
     React.createElement("div", { className: "story__sticky" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap story__grid" }, /*#__PURE__*/
     React.createElement("div", { className: "story__copy" }, /*#__PURE__*/

@@ -530,3 +530,8 @@ header.hnav .wrap{gap:18px}
 .scan b{flex:1 1 100%;font-size:clamp(.95rem,1.2vw,1.04rem);font-weight:700;line-height:1.5;color:var(--ink)}
 .scan__badge{padding:1px 8px;font-size:.74rem;font-weight:700;color:var(--gold-text);background:rgba(156,126,72,.1);border:1px solid rgba(115,92,48,.35)}
 i.cx__kind{font-style:normal}
+/* 소개(#about) — 내용이 화면 높이를 넘으면 고정 장면을 풀어 아래가 잘리지 않게(sections.jsx About 의 flow) */
+.story.story--flow{height:auto;padding:clamp(100px,10vw,136px) 0 clamp(64px,8vw,100px)}
+.story--flow .story__sticky{position:static;height:auto;display:block;overflow:visible}
+.story--flow .story__line{color:var(--navy)}
+.story--flow .story__body{opacity:1;transform:none}

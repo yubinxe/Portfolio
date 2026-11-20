@@ -1,109 +1,191 @@
-/* resume.css v2 — 1페이지 이력. 30초 안에 읽히는 정보 위계: 인물 → 한 문장 → 일하는 방식 3 → 대표 증빙 3 → 외부 기록 → 연락.
- * 화면 = 종이 한 장처럼(데스크톱) · 세로 읽기(모바일), 인쇄 = A4 세로 정확히 1쪽.
- * 아이보리 · 남색 · 절제된 금색, 명조(이름 · 핵심 문장) + 고딕(본문). 카드 · 아이콘 · 숫자 카운터 · 애니메이션 없음 */
-:root{--ink:#0E1A2E;--navy:#13284B;--paper:#FFFDF9;--ecru:#F3EFE6;--gold:#9C7E48;--gold-t:#735C30;--soft:#4A5365;--hair:rgba(14,26,46,.14);--hair2:rgba(14,26,46,.3)}
+/* resume.css v3 — Résumé. 본인 레쥬메 PDF(1쪽)를 웹으로: 인물 → 숫자 4 → 보도 → 경력 → 프로젝트 4 → 교육 · 자격 → 연락.
+ * 화면 = ‘살아 움직이는 지면’(숨 쉬는 초상 · 천천히 움직이는 현장 사진 · 잉크로 써지는 이름 · 차오르는 숫자),
+ * 움직임 줄이기 · JS 없음 = 정지 화면, 인쇄 = A4 세로 정확히 1쪽(움직임 · 현장 사진 없음). 아이보리 · 남색 · 절제된 금색 */
+:root{--ink:#0E1A2E;--navy:#13284B;--paper:#FFFDF9;--ecru:#F3EFE6;--gold:#9C7E48;--gold-t:#735C30;--soft:#4A5365;--hair:rgba(14,26,46,.14);--hair2:rgba(14,26,46,.3);--ease:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:72px}
 body{margin:0;background:var(--ecru);color:var(--ink);font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
 a{color:var(--navy)}
 :focus-visible{outline:3px solid #2D5BA8;outline-offset:2px}
-.rv-bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:10px max(16px,env(safe-area-inset-left));background:rgba(243,239,230,.96);border-bottom:1px solid var(--hair)}
+
+/* 도구 막대 */
+.rv-bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:10px max(16px,env(safe-area-inset-left));background:rgba(243,239,230,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--hair)}
 .rv-back{font-size:.88rem;font-weight:700;text-decoration:none}
+.rv-bar__t{margin:0 auto 0 0;font:italic 600 1.2rem/1 "Cormorant Garamond",serif;letter-spacing:.04em;color:var(--gold-t)}
 .rv-tools{display:flex;flex-wrap:wrap;gap:8px}
-.rv-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font:inherit;font-size:.86rem;font-weight:700;color:var(--navy);text-decoration:none;background:var(--paper);border:1px solid var(--navy);cursor:pointer}
+.rv-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font:inherit;font-size:.86rem;font-weight:700;color:var(--navy);text-decoration:none;background:var(--paper);border:1px solid var(--navy);cursor:pointer;transition:background .2s,color .2s}
 .rv-btn--solid{background:var(--navy);color:#fff}
 .rv-btn:hover{background:var(--navy);color:#fff}
-.rv{padding:clamp(16px,3vw,40px) 16px 56px}
-.rv-doc{max-width:860px;margin:0 auto;padding:clamp(24px,5vw,60px);background:var(--paper);border:1px solid var(--hair);box-shadow:0 18px 50px rgba(14,26,46,.08)}
 
-/* 01 인물 */
-.rv-id{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--navy)}
-.rv-k{margin:0;font-size:.74rem;font-weight:700;color:var(--gold-t)}.rv-k span{margin:0 6px;font:600 .64rem "Inter",sans-serif;letter-spacing:.18em;text-transform:uppercase}.rv-k time{font-weight:500;color:var(--soft)}
-.rv-id h1{margin:12px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:clamp(2.4rem,7vw,3.4rem);line-height:1.05;letter-spacing:-.03em;color:var(--navy)}
-.rv-id h1 span{display:inline-block;margin-left:12px;font:500 clamp(.8rem,1.8vw,1rem) "Inter",sans-serif;letter-spacing:.22em;text-transform:uppercase;vertical-align:.5em;color:var(--soft)}
-.rv-role{margin:14px 0 0;font-size:1.06rem;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
-.rv-role em{margin-left:10px;padding-left:10px;font-style:normal;font-weight:500;font-size:.88rem;color:var(--soft);border-left:1px solid var(--hair2)}
-.rv-lead{margin:6px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:clamp(1.12rem,2.6vw,1.34rem);color:var(--gold-t)}
-.rv-photo{width:124px;height:156px;object-fit:cover;object-position:50% 20%;filter:saturate(.92)}
+/* 종이 */
+.rv{padding:clamp(16px,3vw,40px) 16px max(64px,env(safe-area-inset-bottom))}
+.rv-doc{position:relative;max-width:920px;margin:0 auto;padding:clamp(22px,4.6vw,56px);background:var(--paper);border:1px solid var(--hair);box-shadow:0 18px 50px rgba(14,26,46,.08)}
+.rv-doc::before{content:"";position:absolute;inset:10px;border:1px solid rgba(156,126,72,.22);pointer-events:none}
 
-/* 02 핵심 관점 — 문서의 중심 문장 */
-.rv-thesis{margin:30px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:clamp(1.36rem,3.4vw,1.9rem);line-height:1.45;letter-spacing:-.025em;color:var(--navy);text-wrap:balance}
-.rv-thesis::before{content:"";display:block;width:36px;height:2px;margin-bottom:16px;background:var(--gold)}
-.rv-thesis__sub{max-width:40em;margin:12px 0 0;font-size:.96rem;line-height:1.75;color:var(--soft)}
+/* 인물 */
+.rv-id{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-bottom:20px;border-bottom:2px solid var(--navy)}
+.rv-k{margin:0;font:600 .7rem "Inter",sans-serif;letter-spacing:.2em;color:var(--gold-t)}
+.rv-k time{margin-left:8px;color:var(--soft)}
+.rv-tag{margin:8px 0 0;font:600 .66rem "Inter",sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--soft)}
+.rv-id h1{margin:12px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:clamp(2.4rem,7vw,3.5rem);line-height:1.05;letter-spacing:-.03em;color:var(--navy)}
+.rv-id h1 span{display:inline-block;margin-left:14px;font:500 clamp(.8rem,1.8vw,1rem) "Inter",sans-serif;letter-spacing:.3em;vertical-align:.5em;color:var(--soft)}
+.rv-lead{margin:12px 0 0;max-width:34em;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:clamp(1.06rem,2.4vw,1.28rem);line-height:1.6;color:var(--ink)}
+.rv-links{display:flex;flex-wrap:wrap;gap:4px 18px;margin:12px 0 0;font-size:.84rem}
+.rv-links b{margin-right:6px;font:700 .72rem "Inter",sans-serif;color:var(--gold-t)}
+.rv-links a{text-decoration:none;border-bottom:1px solid var(--hair2)}
 
-/* 섹션 공통 */
-.rv-sec{margin-top:34px}
-.rv-sec h2{display:flex;align-items:baseline;gap:10px;margin:0 0 14px;padding-bottom:8px;font-size:1.02rem;font-weight:800;color:var(--navy);border-bottom:1px solid var(--hair)}
-.rv-sec h2 span{font:600 .74rem "Inter",sans-serif;letter-spacing:.08em;color:var(--gold-t)}
-.rv-sec h2 small{margin-left:auto;font:600 .62rem "Inter",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+/* 움직이는 사진(공통) — 액자 · 낟알 · 가장자리 그늘 */
+.living{position:relative;margin:0;overflow:hidden;background:#d9d2c3}
+.living img{display:block;width:100%;height:100%;object-fit:cover}
+.living::after{content:"";position:absolute;inset:-50%;pointer-events:none;opacity:.12;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.living::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 38px rgba(40,28,10,.32)}
+.living figcaption{position:absolute;left:8px;bottom:6px;z-index:2;font:italic 500 .78rem "Cormorant Garamond",serif;letter-spacing:.06em;color:#FFF8EA;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 
-/* 일하는 방식 3 — 카드가 아닌 세 단(段) */
-.rv-caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none}
-.rv-caps li{padding:2px 20px 0;font-size:.9rem;line-height:1.65;color:var(--soft);border-left:1px solid var(--hair)}
-.rv-caps li:first-child{padding-left:0;border-left:0}
-.rv-caps b{display:block;margin-bottom:6px;font-size:1.02rem;letter-spacing:-.01em;color:var(--ink)}
+.rv-portrait{width:150px;height:188px;border:6px solid #fff;outline:1px solid var(--hair2);box-shadow:0 10px 24px rgba(14,26,46,.18);transform:rotate(1.2deg)}
+.rv-portrait img{object-position:50% 20%;filter:sepia(.18) saturate(.9) contrast(1.02)}
 
-/* 대표 증빙 3 */
-.rv-cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.rv-case{display:flex;flex-direction:column}
-.rv-case__k{margin:0;font-size:.76rem;font-weight:800;color:var(--gold-t)}.rv-case__k em{display:block;margin-top:2px;font-style:normal;font-weight:500;color:var(--soft)}
-.rv-case h3{margin:8px 0 6px;font-size:1rem;line-height:1.45;letter-spacing:-.01em;color:var(--navy)}
-.rv-case p{margin:0 0 10px;font-size:.88rem;line-height:1.65}
-.rv-case__a{margin-top:auto;font-size:.8rem;font-weight:700;text-decoration:none;border-bottom:1px solid var(--hair2);align-self:flex-start}
-.rv-case__a:hover{border-color:var(--navy)}
+/* 숫자 4 */
+.rv-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:22px 0 0;border-bottom:1px solid var(--hair)}
+.rv-stat{display:grid;gap:2px;padding:4px 14px 16px;border-left:1px solid var(--hair)}
+.rv-stat:first-child{padding-left:0;border-left:0}
+.rv-stat b{font:500 clamp(2rem,4.6vw,2.8rem)/1 "Cormorant Garamond",serif;color:var(--navy);font-variant-numeric:lining-nums tabular-nums}
+.rv-stat b span{font-weight:600}
+.rv-stat strong{margin-top:6px;font-size:.86rem;line-height:1.4}
+.rv-stat em{font-style:normal;font-size:.74rem;line-height:1.45;color:var(--soft)}
 
-/* 외부 기록 */
-.rv-proof{display:grid;margin:0;padding:0;list-style:none}
-.rv-proof li{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:8px 0;font-size:.88rem;line-height:1.55;border-bottom:1px solid var(--hair)}
-.rv-proof li:first-child{padding-top:0}
-.rv-proof b{font-weight:700;color:var(--ink)}.rv-proof span{color:var(--soft)}
-.rv-proof a{text-underline-offset:3px}
-.rv-small{margin:12px 0 0;font-size:.8rem;line-height:1.6;color:var(--soft)}.rv-small b{margin-right:5px;color:var(--ink)}.rv-small b:not(:first-child){margin-left:10px}
+/* 보도 */
+.rv-press{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:center;margin:22px 0 0;padding:16px;background:#F7F2E7;border:1px solid rgba(156,126,72,.35)}
+.rv-reel{height:150px;border:4px solid #fff;outline:1px solid var(--hair)}
+.rv-reel img{position:absolute;inset:0;filter:sepia(.25) saturate(.85)}
+.rv-press__k{margin:0;font:700 .72rem "Inter",sans-serif;letter-spacing:.22em;color:var(--gold-t)}
+.rv-press__k time{margin-left:10px;letter-spacing:.08em;color:var(--soft)}
+.rv-quote{margin:8px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:clamp(.98rem,2vw,1.12rem);line-height:1.7;color:var(--ink)}
+.rv-press__src{margin:8px 0 0;font-size:.8rem;color:var(--soft)}
+.rv-press__src span{margin-left:8px}
 
-/* 연락 */
+/* 섹션 */
+.rv-sec{margin-top:28px}
+.rv-sec h2{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;padding-bottom:7px;font-size:1.02rem;font-weight:800;color:var(--navy);border-bottom:1px solid var(--hair)}
+.rv-sec h2>span{font:600 .76rem "Inter",sans-serif;letter-spacing:.08em;color:var(--gold-t)}
+.rv-sec h2 small{margin-left:auto;font:600 .62rem "Inter",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.rv-kind{font-style:normal;padding:0 6px;font-size:.7rem;font-weight:700;color:#fff;background:var(--navy)}
+
+.rv-job{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 20px}
+.rv-when{grid-row:span 2;margin:0;font:600 .82rem "Inter",sans-serif;color:var(--gold-t)}
+.rv-job__who b{font-size:1.04rem}
+.rv-job__who span{margin-left:8px;font-size:.84rem;color:var(--soft)}
+.rv-bul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:5px}
+.rv-bul li{position:relative;padding-left:14px;font-size:.9rem;line-height:1.6}
+.rv-bul li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:1px;background:var(--gold)}
+
+.rv-builds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.rv-build{display:grid;grid-template-columns:96px minmax(0,1fr);grid-template-rows:auto 1fr auto;gap:2px 14px;padding:12px;border:1px solid var(--hair);background:#fff;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.rv-build:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(14,26,46,.1)}
+.rv-shot{grid-row:1/4;height:100%;min-height:96px;border:1px solid var(--hair)}
+.rv-shot img{object-position:50% 0}
+.rv-build__k{margin:0;font-size:.92rem;font-weight:800;line-height:1.4;color:var(--navy)}
+.rv-build__k em{display:block;font-style:normal;font-size:.72rem;font-weight:600;color:var(--gold-t)}
+.rv-build p:not(.rv-build__k){margin:4px 0 0;font-size:.84rem;line-height:1.6}
+.rv-build a{align-self:end;justify-self:start;margin-top:4px;font-size:.78rem;font-weight:700;text-decoration:none;border-bottom:1px solid var(--hair2)}
+
+.rv-two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0 28px}
+.rv-rows{margin:0;padding:0;list-style:none;display:grid}
+.rv-rows li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;padding:6px 0;font-size:.86rem;line-height:1.5;border-bottom:1px solid var(--hair)}
+.rv-rows time{font:600 .78rem "Inter","Pretendard Variable",sans-serif;color:var(--gold-t)}
+.rv-note{margin:8px 0 0;font-size:.76rem;color:var(--soft)}
+
 .rv-contact h2{border-bottom-color:var(--navy)}
-.rv-contact-line{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-size:.95rem;font-weight:600}
+.rv-contact-line{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-size:.94rem;font-weight:600}
 .rv-contact-line a{text-decoration:none;border-bottom:1px solid var(--hair2)}
 .rv-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .rv-mailnote{margin:8px 0 0;font-size:.76rem;color:var(--soft)}
-.rv-foot{margin-top:26px;padding-top:10px;font-size:.74rem;color:var(--soft);border-top:1px solid var(--hair)}
+.rv-foot{display:flex;justify-content:space-between;gap:16px;margin-top:26px;padding-top:10px;font-size:.74rem;color:var(--soft);border-top:1px solid var(--hair)}
+
+/* ---------- 살아 움직이는 지면(html.rv-live 일 때만) ---------- */
+@keyframes rvBreathe{0%{transform:scale(1.02) translate(0,0)}50%{transform:scale(1.075) translate(-1.5%,-1%)}100%{transform:scale(1.04) translate(1%,.6%)}}
+@keyframes rvGrain{0%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(3%,-4%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(0,0)}}
+@keyframes rvFlicker{0%,100%{opacity:0}46%{opacity:0}48%{opacity:.16}50%{opacity:.04}52%{opacity:.12}54%{opacity:0}}
+@keyframes rvReel{0%{opacity:0;transform:scale(1.12) translate(2%,1%)}6%{opacity:1}33%{opacity:1;transform:scale(1.02) translate(-2%,-1%)}39%{opacity:0}100%{opacity:0}}
+@keyframes rvPan{0%,8%{object-position:50% 0}50%,58%{object-position:50% 100%}100%{object-position:50% 0}}
+@keyframes rvInk{from{clip-path:inset(0 100% 0 0);filter:blur(2px)}to{clip-path:inset(0 0 0 0);filter:none}}
+@keyframes rvSway{0%,100%{transform:rotate(1.2deg)}50%{transform:rotate(-.6deg)}}
+
+.rv-live .living::after{animation:rvGrain .9s steps(3) infinite}
+.rv-live .rv-portrait{animation:rvSway 9s ease-in-out infinite;transition:transform .6s var(--ease)}
+.rv-live .rv-portrait img{animation:rvBreathe 11s ease-in-out infinite alternate}
+.rv-live .rv-portrait .rv-glint{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 60% at 30% 10%,rgba(255,244,214,.9),transparent 60%);animation:rvFlicker 7s linear infinite;pointer-events:none}
+.rv-live .rv-reel img{opacity:0;animation:rvReel 15s ease-in-out infinite}
+.rv-live .rv-reel img:nth-of-type(2){animation-delay:5s}
+.rv-live .rv-reel img:nth-of-type(3){animation-delay:10s}
+.rv-live .rv-shot img{animation:rvPan 14s ease-in-out infinite}
+.rv-live .rv-build:nth-child(2) .rv-shot img{animation-delay:-3.5s}
+.rv-live .rv-build:nth-child(3) .rv-shot img{animation-delay:-7s;animation-name:rvBreathe;animation-duration:9s;animation-direction:alternate}
+.rv-live .rv-build:nth-child(4) .rv-shot img{animation-delay:-10.5s}
+.rv-live .rv-build:hover .rv-shot img{animation-play-state:paused}
+.rv-live .rv-ink{animation:rvInk 1.6s var(--ease) .2s both}
+.rv-live .rv-lead,.rv-live .rv-links,.rv-live .rv-tag{opacity:0;transform:translateY(8px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv-live.rv-ready .rv-tag{opacity:1;transform:none;transition-delay:.1s}
+.rv-live.rv-ready .rv-lead{opacity:1;transform:none;transition-delay:.9s}
+.rv-live.rv-ready .rv-links{opacity:1;transform:none;transition-delay:1.2s}
+.rv-live [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv-live [data-reveal].is-in{opacity:1;transform:none}
+.rv-live .rv-stat:nth-child(2){transition-delay:.12s}.rv-live .rv-stat:nth-child(3){transition-delay:.24s}.rv-live .rv-stat:nth-child(4){transition-delay:.36s}
+.rv-live .rv-build:nth-child(even){transition-delay:.12s}
+.rv-live [data-stagger]>li{opacity:0;transform:translateX(-10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rv-live [data-stagger].is-in>li{opacity:1;transform:none}
+.rv-live .rv-sec h2{background:linear-gradient(var(--navy),var(--navy)) left bottom/0 1px no-repeat;transition:background-size 1.2s var(--ease)}
+.rv-live .rv-sec h2.is-in{background-size:100% 1px}
+.rv-live .rv-quote .w{display:inline-block;opacity:.08;filter:blur(1.5px);transition:opacity .5s ease,filter .5s ease}
+.rv-live .rv-quote.is-in .w{opacity:1;filter:none}
 
 @media (max-width:760px){
-  body{font-size:16px}
-  .rv{padding:12px 10px 40px}
+  .rv{padding:12px 10px 48px}
   .rv-doc{padding:24px 18px}
-  .rv-id{grid-template-columns:1fr auto;gap:14px;align-items:start}.rv-photo{width:78px;height:98px}
-  .rv-role em{display:block;margin:4px 0 0;padding:0;border:0}
-  .rv-thesis{margin-top:24px}
-  .rv-caps,.rv-cases{grid-template-columns:1fr;gap:18px}
-  .rv-caps li{padding:0 0 0 14px;border-left:2px solid var(--gold)}.rv-caps li:first-child{padding-left:14px;border-left:2px solid var(--gold)}
-  .rv-proof li{grid-template-columns:1fr;gap:2px}
-  .rv-sec{margin-top:30px}
+  .rv-doc::before{inset:6px}
+  .rv-id{grid-template-columns:1fr auto;gap:14px;align-items:start}
+  .rv-portrait{width:92px;height:116px;border-width:4px}.rv-portrait figcaption{display:none}
+  .rv-bar__t{display:none}
+  .rv-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rv-stat{padding:12px 10px 12px 0;border-left:0;border-top:1px solid var(--hair)}
+  .rv-stat:nth-child(even){padding-left:12px;border-left:1px solid var(--hair)}
+  .rv-stat:nth-child(-n+2){border-top:0}
+  .rv-press{grid-template-columns:1fr;padding:12px}
+  .rv-reel{height:190px}
+  .rv-job{grid-template-columns:1fr}
+  .rv-when{grid-row:auto}
+  .rv-job__who span{display:block;margin:2px 0 0}
+  .rv-builds,.rv-two{grid-template-columns:1fr}
+  .rv-build{grid-template-columns:84px minmax(0,1fr)}
   .rv-sec h2 small{display:none}
-  .rv-k{font-size:.82rem}.rv-k span{font-size:.72rem}.rv-k time{display:block;margin-top:2px}
-  .rv-id h1 span{font-size:.78rem}.rv-sec h2 span{font-size:.8rem}
+  .rv-foot{flex-direction:column}
 }
 
-/* 인쇄 · PDF — A4 세로 1쪽. 버튼 · 메일 안내 · 그림자 없이 */
-@page{size:A4;margin:13mm 14mm}
+/* 인쇄 · PDF — A4 세로 1쪽. 정지 화면 · 버튼 · 현장 사진 없음 */
+@page{size:A4;margin:11mm 12mm}
 @media print{
-  body{background:#fff;font-size:9.4pt;line-height:1.55}
-  .rv-bar,.rv-cta,.rv-mailnote{display:none!important}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  [data-reveal],[data-stagger]>li,.rv-lead,.rv-links,.rv-tag,.rv-quote .w{opacity:1!important;transform:none!important;filter:none!important}
+  .rv-ink{clip-path:none!important}
+  body{background:#fff;font-size:8.6pt;line-height:1.45}
+  .rv-bar,.rv-cta,.rv-mailnote,.rv-reel,.rv-shot,.rv-doc::before,.rv-glint,.living figcaption,.living::after,.living::before{display:none!important}
   .rv{padding:0}
   .rv-doc{max-width:none;padding:0;border:0;box-shadow:none;background:#fff}
-  .rv-id{padding-bottom:12px;gap:18px}
-  .rv-id h1{margin-top:6px;font-size:28pt}.rv-id h1 span{font-size:9pt}
-  .rv-role{margin-top:8px;font-size:11pt}.rv-role em{font-size:9pt}.rv-lead{font-size:12.5pt}
-  .rv-photo{width:92px;height:115px}
-  .rv-thesis{margin-top:18px;font-size:16pt}.rv-thesis::before{margin-bottom:10px}
-  .rv-thesis__sub{margin-top:8px;font-size:9.4pt}
-  .rv-sec{margin-top:20px}.rv-sec h2{margin-bottom:10px;padding-bottom:5px;font-size:10.5pt}
-  .rv-caps li{font-size:8.8pt;padding:0 14px}.rv-caps li:first-child{padding-left:0}.rv-caps b{font-size:10pt;margin-bottom:4px}
-  .rv-cases{gap:16px}.rv-case__k{font-size:7.8pt}.rv-case h3{font-size:10pt;margin:5px 0 4px}.rv-case p{font-size:8.8pt;margin-bottom:6px}.rv-case__a{font-size:8pt}
-  .rv-proof li{grid-template-columns:120px 1fr;padding:5px 0;font-size:8.8pt}
-  .rv-small{margin-top:8px;font-size:8pt}
-  .rv-contact-line{font-size:9.6pt}
-  .rv-foot{margin-top:14px;padding-top:6px;font-size:7.4pt}
-  .rv-doc,.rv-sec,.rv-case{break-inside:avoid}
+  .rv-id{padding-bottom:8px;gap:14px}
+  .rv-id h1{margin-top:4px;font-size:24pt}.rv-id h1 span{font-size:8pt}
+  .rv-tag{margin-top:3px;font-size:6.6pt}.rv-k{font-size:6.8pt}
+  .rv-lead{margin-top:6px;font-size:10.6pt}.rv-links{margin-top:6px;font-size:8pt}
+  .rv-portrait{width:74px;height:92px;border-width:3px;box-shadow:none;transform:none!important}
+  .rv-portrait img{transform:none!important}
+  .rv-stats{margin-top:10px}.rv-stat{padding:2px 10px 8px}.rv-stat b{font-size:19pt}.rv-stat strong{margin-top:2px;font-size:7.8pt}.rv-stat em{font-size:6.8pt}
+  .rv-press{display:block;margin-top:10px;padding:7px 10px}.rv-quote{margin-top:3px;font-size:8.8pt;line-height:1.5}.rv-press__k{font-size:6.8pt}.rv-press__src{margin-top:3px;font-size:7pt}
+  .rv-sec{margin-top:11px}.rv-sec h2{margin-bottom:6px;padding-bottom:3px;font-size:9.4pt;background:none!important;border-bottom:1px solid var(--hair)!important}
+  .rv-job{grid-template-columns:96px minmax(0,1fr);gap:2px 12px}.rv-job__who b{font-size:9.2pt}.rv-job__who span{font-size:7.8pt}
+  .rv-bul{gap:2px}.rv-bul li{font-size:8.2pt;line-height:1.45}
+  .rv-builds{gap:6px 14px}.rv-build{display:block;padding:5px 8px;border-color:var(--hair)}.rv-build__k{font-size:8.6pt}.rv-build__k em{display:inline;margin-left:6px;font-size:7pt}.rv-build p:not(.rv-build__k){margin-top:1px;font-size:7.8pt;line-height:1.4}.rv-build a{font-size:7pt}
+  .rv-two{gap:0 18px}.rv-rows li{grid-template-columns:48px minmax(0,1fr);gap:6px;padding:2px 0;font-size:7.8pt}.rv-rows time{font-size:7pt}.rv-note{margin-top:3px;font-size:6.8pt}
+  .rv-contact-line{font-size:8.4pt}
+  .rv-foot{margin-top:9px;padding-top:4px;font-size:6.6pt}
+  .rv-doc,.rv-sec,.rv-build,.rv-press{break-inside:avoid}
   a{color:var(--navy);text-decoration:none}
 }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
