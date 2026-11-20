@@ -3207,7 +3207,7 @@ function Footer() {
 /* 섹션 머리 — 한국어가 뜻을 맡고, 영어는 같은 묶음 안에서 전문 용어로 거든다(장식용 대문자 영어 제목 없음) */
 function SectionHead({ no, ko, en, lead }) {
   return (
-    <header className="sh reveal">
+    <header className="sh reveal" data-no={no && /^\d+/.test(no) ? no.match(/^\d+/)[0] : undefined}>
       <div className="menu-rule" style={{ marginBottom: 22 }}><i /></div>
       {no && <p className="sh__no font-ko">{no}</p>}
       <h2 className="sh__t"><span className="sh__ko font-ko">{ko}</span>{en && <span className="sh__en font-serif" lang="en">{en}</span>}</h2>

@@ -601,3 +601,4 @@ i.cx__kind{font-style:normal}
 .tlx .tl-dial b.flip{animation:tlxFlip .45s var(--ease)}
 .tlx .tl-dial{perspective:400px}
 @media (prefers-reduced-motion:reduce){.tlx [data-tlx]{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
+#trajectory{overflow-x:clip}
