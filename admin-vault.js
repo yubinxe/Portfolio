@@ -71,18 +71,24 @@
 
   function animateNumber(el, target, isFloat) {
     if (!el) return;
+    var fmt = function (v) {
+      return isFloat
+        ? v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : Math.round(v).toLocaleString("en-US");
+    };
     var start = performance.now();
     var dur = 760;
+    var done = false;
     function frame(now) {
+      if (done) return;
       var p = Math.min(1, (now - start) / dur);
       var eased = 1 - Math.pow(1 - p, 3);
-      var val = target * eased;
-      el.textContent = isFloat
-        ? val.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-        : Math.round(val).toLocaleString("en-US");
+      el.textContent = fmt(target * eased);
       if (p < 1) requestAnimationFrame(frame);
+      else done = true;
     }
     requestAnimationFrame(frame);
+    setTimeout(function () { if (!done) { done = true; el.textContent = fmt(target); } }, dur + 120);
   }
 
   function esc(s) {
