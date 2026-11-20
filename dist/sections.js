@@ -50,8 +50,10 @@ function AdminNavBtn() {
   React.useEffect(() => {
     const sync = () => setUnlocked(!!(window.ykAdmin && window.ykAdmin.isUnlocked()));
     sync();
+    const tid = setTimeout(sync, 120);
     window.addEventListener("yk:admin-change", sync);
-    return () => window.removeEventListener("yk:admin-change", sync);
+    window.addEventListener("load", sync);
+    return () => {clearTimeout(tid);window.removeEventListener("yk:admin-change", sync);window.removeEventListener("load", sync);};
   }, []);
   return (/*#__PURE__*/
     React.createElement("button", {
@@ -1547,13 +1549,11 @@ function AXCommand() {
     adminData && /*#__PURE__*/
     React.createElement("div", { className: "axc__admin-bar font-ko", role: "region", "aria-label": "\uAD00\uB9AC\uC790 \uD574\uAE08 \uC2E4\uBB34 \uB370\uC774\uD130 \uC694\uC57D" }, /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/
-    React.createElement("b", null, "ADMIN UNLOCKED \xB7 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC2E4\uBB34 \uB370\uC774\uD130 \uBC31\uBCF8 \uC5F0\uACB0\uB428"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/
+    React.createElement("b", null, "GALERIE PRIV\xC9E UNLOCKED \xB7 GYUNGGOOK \uC2E4\uBB34 \uC544\uCE74\uC774\uBE0C"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/
     React.createElement("span", null, "\uC0AC\uB0B4 NAS ", adminData.kpis.totalFiles.toLocaleString(), " \uD30C\uC77C (", adminData.kpis.totalGb, " GB \xB7 ", adminData.kpis.totalChunks.toLocaleString(), " FTS5 \uCCAD\uD06C) \xB7 \uC0C1\uC5C5 \uCF54\uD37C\uC2A4 ", adminData.kpis.corpusDocs, "\uAC74")
     ), /*#__PURE__*/
     React.createElement("div", { className: "axc__admin-btns" }, /*#__PURE__*/
-    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.open("backbone") }, "\uB370\uC774\uD130 \uBC31\uBCF8 \uCC28\uD2B8"), /*#__PURE__*/
-    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.open("systems") }, "\uBE44\uACF5\uAC1C 3\uB300 \uC2DC\uC2A4\uD15C \uC2EC\uCE35"), /*#__PURE__*/
-    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.open("commercial") }, "\uC0C1\uC5C5\uD654\xB7\uC9D1\uCE90\uCE58 RAG"), /*#__PURE__*/
+    React.createElement("button", { type: "button", onClick: () => {window.location.href = "vault.html";} }, "\uC804\uC2DC\uAD00 \uC785\uC7A5 (Galerie Priv\xE9e) \u2192"), /*#__PURE__*/
     React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.lock() }, "\uC7A0\uAE08")
     )
     ), /*#__PURE__*/

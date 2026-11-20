@@ -49,8 +49,10 @@ function AdminNavBtn() {
   React.useEffect(() => {
     const sync = () => setUnlocked(!!(window.ykAdmin && window.ykAdmin.isUnlocked()));
     sync();
+    const tid = setTimeout(sync, 120);
     window.addEventListener("yk:admin-change", sync);
-    return () => window.removeEventListener("yk:admin-change", sync);
+    window.addEventListener("load", sync);
+    return () => { clearTimeout(tid); window.removeEventListener("yk:admin-change", sync); window.removeEventListener("load", sync); };
   }, []);
   return (
     <button
@@ -1546,13 +1548,11 @@ function AXCommand() {
         {adminData && (
           <div className="axc__admin-bar font-ko" role="region" aria-label="관리자 해금 실무 데이터 요약">
             <div>
-              <b>ADMIN UNLOCKED · 법무법인 경국 실무 데이터 백본 연결됨</b><br />
+              <b>GALERIE PRIVÉE UNLOCKED · GYUNGGOOK 실무 아카이브</b><br />
               <span>사내 NAS {adminData.kpis.totalFiles.toLocaleString()} 파일 ({adminData.kpis.totalGb} GB · {adminData.kpis.totalChunks.toLocaleString()} FTS5 청크) · 상업 코퍼스 {adminData.kpis.corpusDocs}건</span>
             </div>
             <div className="axc__admin-btns">
-              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.open("backbone")}>데이터 백본 차트</button>
-              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.open("systems")}>비공개 3대 시스템 심층</button>
-              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.open("commercial")}>상업화·집캐치 RAG</button>
+              <button type="button" onClick={() => { window.location.href = "vault.html"; }}>전시관 입장 (Galerie Privée) →</button>
               <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.lock()}>잠금</button>
             </div>
           </div>
