@@ -433,14 +433,14 @@ const GLANCE = [
  * 목록은 cases-data.js 의 CASES 와 같은 id · 이름 · 범주(test/cases.test.mjs 가 대조). 범주는 실제 수행 · 공개 시연 · 향후 확장만 */
 const CASE_KIND = { actual: "실제 수행", demo: "공개 시연", future: "향후 확장" };
 const CASE_INDEX = [
-{ id: "bid", ko: "정비사업 입찰·용역비 분석 시스템", en: "Redevelopment Bid & Service Fee Analysis", kind: "actual", d: "공공입찰 · 용역비 데이터 정기 수집 · 정형화로 단가 비교 기준선 — 시연은 가상 28건" },
-{ id: "gwangmyeong", ko: "광명시흥 공익사업 보상자료 분석", en: "Gwangmyeong-Siheung Compensation Analysis", kind: "actual", d: "보상 자료를 절차와 쟁점으로 구조화 — 발표자료 77장" },
-{ id: "transformation", ko: "법률회사 AI 전환·업무혁신 사례", en: "Legal AX & Process Innovation", kind: "actual", d: "반대하던 송무팀을 설득해 AX 3종을 상급자 검수 후 전사 온보딩" },
-{ id: "automation", ko: "송무 실무 프로세스 개선 — 고객 메일 분류·급여명세서 자동화", en: "Workflow Automation", kind: "actual", d: "급여명세서 자동 발송 사내 운영 · 예외 처리 흐름 시연" },
-{ id: "reg-monitor", ko: "법령·규제 변화 관제 시스템", en: "RE:INTELLIGENCE · Regulatory Monitoring", kind: "actual", d: "개정 전후 조문 · 시행일 · 중요도 · 업무 분야 — 시연은 가상 조문" },
-{ id: "assembly", ko: "정비사업 총회결의 위험 검토 시스템", en: "Assembly Risk Engine", kind: "actual", d: "명부 · 의결권 · 위임장 대조, 정족수 시뮬레이션(요건은 입력값)" },
-{ id: "contract", ko: "공사도급계약 변경 위험 분석 시스템", en: "Contract Risk Intelligence", kind: "actual", d: "조항 단위 변경 강조 · 공사비 증감 · 검토 의견 → 승인 흐름" },
-{ id: "quality", ko: "법률 AI 품질 검증 및 위험 관리", en: "Legal AI Quality Assurance", kind: "demo", d: "근거 위치 · 정합성 규칙 R1–R8 · 자동 테스트(가상 사건 15건 검출)" }];
+{ id: "bid", ko: "정비사업 입찰·용역비 분석 시스템", en: "Redevelopment Bid & Service Fee Analysis", kind: "actual", line: "흩어진 입찰 · 용역비 → 정기 수집해 단가 비교 기준선으로", badge: "사내 내부 기준선" },
+{ id: "gwangmyeong", ko: "광명시흥 공익사업 보상자료 분석", en: "Gwangmyeong-Siheung Compensation Analysis", kind: "actual", line: "방대한 보상자료 → 절차 · 쟁점 뼈대로 재구성", badge: "77장 구조화" },
+{ id: "transformation", ko: "법률회사 AI 전환·업무혁신 사례", en: "Legal AX & Process Innovation", kind: "actual", line: "반대하던 송무팀 설득 → 상급자 검수 후 전사 적용", badge: "AX 3종 전사 온보딩" },
+{ id: "automation", ko: "송무 실무 프로세스 개선 — 고객 메일 분류·급여명세서 자동화", en: "Workflow Automation", kind: "actual", line: "수작업 메일 · 명세서 → 분류 · 발송 자동화와 예외 처리", badge: "급여명세서 사내 운영" },
+{ id: "reg-monitor", ko: "법령·규제 변화 관제 시스템", en: "RE:INTELLIGENCE · Regulatory Monitoring", kind: "actual", line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 검토 큐", badge: "사내 구축" },
+{ id: "assembly", ko: "정비사업 총회결의 위험 검토 시스템", en: "Assembly Risk Engine", kind: "actual", line: "명부 · 위임장 수작업 대조 → 정족수 시뮬레이션", badge: "사내 구축" },
+{ id: "contract", ko: "공사도급계약 변경 위험 분석 시스템", en: "Contract Risk Intelligence", kind: "actual", line: "조항 변경 누락 위험 → 조항 단위 비교 · 승인 흐름", badge: "사내 구축" },
+{ id: "quality", ko: "법률 AI 품질 검증 및 위험 관리", en: "Legal AI Quality Assurance", kind: "demo", line: "그럴듯한 답 → 근거 위치 · 정합성 규칙 R1–R8 로 검증", badge: "가상 사건 15건 전수 검출" }];
 
 const CASE_CAPS = [
 ["법률산업 업무혁신", "Legal Operations", "법률 실무에서 현업 요구사항을 읽고 업무 프로세스를 개선합니다."],
@@ -455,21 +455,19 @@ function CaseIndex() {
     React.createElement("header", { className: "cx__head reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "cx__k font-ko" }, "\uC8FC\uC694 \uC2E4\uBB34 \uC0AC\uB840 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Case Studies")), /*#__PURE__*/
     React.createElement("h2", { id: "cx-title", className: "cx__t font-myeongjo" }, "\uBC95\uB960 \uC2E4\uBB34\uB97C \uC774\uD574\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC5C5\uBB34\uCCB4\uACC4\uB97C \uB2E4\uC2DC \uC124\uACC4\uD558\uB2E4."), /*#__PURE__*/
-    React.createElement("p", { className: "cx__s font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC804\uB7B5\uAE30\uD68D\uC2E4\uC5D0\uC11C \uC218\uD589\uD55C \uBC95\uB960 AI \uC804\uD658, \uC5C5\uBB34 \uD504\uB85C\uC138\uC2A4 \uAC1C\uC120, \uB370\uC774\uD130 \uBD84\uC11D \uBC0F \uC2DC\uC2A4\uD15C \uAD6C\uD604 \uC0AC\uB840")
+    React.createElement("p", { className: "cx__s font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC804\uB7B5\uAE30\uD68D\uC2E4\uC758 \uBC95\uB960 AI \uC804\uD658 \xB7 \uD504\uB85C\uC138\uC2A4 \uAC1C\uC120 \xB7 \uC2DC\uC2A4\uD15C \uAD6C\uD604")
     ), /*#__PURE__*/
-    React.createElement("ul", { className: "cx__caps reveal" },
-    CASE_CAPS.map(([ko, en, d], i) => /*#__PURE__*/React.createElement("li", { key: ko }, /*#__PURE__*/React.createElement("span", { className: "cx__n font-sans" }, "\uC81C", i + 1, "\uC5ED\uB7C9"), /*#__PURE__*/React.createElement("b", { className: "font-ko" }, ko), /*#__PURE__*/React.createElement("i", { className: "font-sans", lang: "en" }, en), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, d)))
-    ), /*#__PURE__*/
+    React.createElement("p", { className: "cx__chips reveal font-ko" }, CASE_CAPS.map(([ko]) => /*#__PURE__*/React.createElement("span", { key: ko }, ko))), /*#__PURE__*/
     React.createElement("ol", { className: "cx__list reveal" },
     CASE_INDEX.map((c, i) => /*#__PURE__*/
     React.createElement("li", { key: c.id }, /*#__PURE__*/React.createElement("a", { href: "cases.html#" + c.id }, /*#__PURE__*/
     React.createElement("span", { className: "cx__no font-sans" }, String(i + 1).padStart(2, "0")), /*#__PURE__*/
-    React.createElement("span", { className: "cx__body" }, /*#__PURE__*/React.createElement("b", { className: "font-ko" }, c.ko), /*#__PURE__*/React.createElement("i", { className: "font-sans", lang: "en" }, c.en), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, c.d)), /*#__PURE__*/
+    React.createElement("span", { className: "cx__body" }, /*#__PURE__*/React.createElement("b", { className: "font-ko", title: c.en }, c.ko), /*#__PURE__*/React.createElement("span", { className: "cx__line font-ko" }, c.line), /*#__PURE__*/React.createElement("span", { className: "cx__badge font-ko" }, c.badge)), /*#__PURE__*/
     React.createElement("span", { className: "cx__kind cx__kind--" + c.kind + " font-ko" }, CASE_KIND[c.kind])
     ))
     )
     ), /*#__PURE__*/
-    React.createElement("p", { className: "cx__foot font-ko" }, /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--actual" }, "\uC2E4\uC81C \uC218\uD589"), " \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC9C1\uC811 \uC218\uD589(\uD654\uBA74 \xB7 \uC790\uB8CC \uBE44\uACF5\uAC1C) ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--demo" }, "\uACF5\uAC1C \uC2DC\uC5F0"), " \uC2E4\uBB34 \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C \uB9CC\uB4E0 \uAC00\uC0C1 \uB370\uC774\uD130 \uC2DC\uC5F0 ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--future" }, "\uD5A5\uD6C4 \uD655\uC7A5"), " \uC544\uC9C1 \uAD6C\uD604\uD558\uC9C0 \uC54A\uC740 \uAE30\uB2A5 \u2014 \uC0AC\uB840\uB9C8\uB2E4 \uB530\uB85C \uD45C\uC2DC\uD569\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", { className: "cx__foot font-ko" }, /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--actual" }, "\uC2E4\uC81C \uC218\uD589"), " \uACBD\uAD6D\uC5D0\uC11C \uC9C1\uC811 \uC218\uD589(\uC790\uB8CC \uBE44\uACF5\uAC1C) ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--demo" }, "\uACF5\uAC1C \uC2DC\uC5F0"), " \uAC00\uC0C1 \uB370\uC774\uD130 \uC2DC\uC5F0 ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--future" }, "\uD5A5\uD6C4 \uD655\uC7A5"), " \uBBF8\uAD6C\uD604 \u2014 \uC138\uBD80 \uB9E5\uB77D\uC740 \uC0AC\uB840\uC9D1\uC5D0\uC11C."), /*#__PURE__*/
     React.createElement("p", { className: "cx__cta" }, /*#__PURE__*/React.createElement("a", { className: "btn", href: "cases.html" }, "\uC2E4\uBB34 \uC0AC\uB840\uC9D1 \uC804\uCCB4 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })))
     )
     ));
@@ -507,34 +505,145 @@ function Ledger() {
 
 }
 
-/* ============================================================ COMPOSITE — 융합 역량 */
-/* 역량은 깊이가 다르다 — 줄기(실증된 깊이) · 적용 영역 · 넓어지는 영역. 숙련도 점수 · 퍼센트는 쓰지 않는다.
- * id(dom-NN)는 고정이고 화면 순서는 tier 순서다. 두 번째 깊이(법률·부동산·제도적 의사결정)는 '형성 중'으로만 적는다 */
-const DOMAINS = [
-{ n: "01", tier: "core", ko: "AI 전략", short: "AI 전략", en: "AI Strategy",
-  desc: "무엇을 먼저 하고 무엇을 AI에 맡길지 정합니다. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 ‘급함’으로 볼지 기준을 세웠습니다.",
-  tags: ["문제 정의 · 우선순위", "보상자료 77장 구조화"] },
-{ n: "02", tier: "core", ko: "AX 실행 · 업무 자동화", short: "AX 실행", en: "AX Implementation",
-  desc: "반복되는 판단의 앞단을 시스템으로 옮기고, 사람은 기준을 정하는 자리에 남깁니다. 경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류를 만들었고, SSAFY 13기 · 서울대 AIED 4기에서 구조를 익혔습니다.",
-  tags: ["경국 AX 3종", "SSAFY 13기 · 서울대 AIED 4기"] },
-{ n: "03", tier: "core", ko: "데이터 기반 판단", short: "데이터", en: "Data-Based Reasoning",
-  desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다. 전략이 감이 아니라 근거 위에 서도록 데이터 구조를 먼저 설계합니다.",
-  tags: ["공공데이터 API", "GWS 연동"] },
-{ n: "06", tier: "applied", ko: "법률·부동산의 산업 이해", short: "법률·부동산", en: "Legal & Real Estate Intelligence",
-  desc: "정비사업의 법률 위험, 토지보상 절차, 청약·공공임대 공고를 실무와 제품으로 다뤘습니다. 법무법인 경국의 송무·사무, 건국대 스마트건설 교육, KREMA 4기, 분양대행자 자격이 바탕입니다.",
-  tags: ["법무법인 경국", "스마트건설 · KREMA 4기"] },
-{ n: "05", tier: "wide", ko: "정책·공공 의사결정 참여", short: "정책·공공", en: "Policy & Public Decision-Making",
-  desc: "국민 대토론회에서 정책을 제안·발표했고, 서초청년네트워크 9기 운영위원회 부위원장 · 청년정책 패널로 활동합니다. 참석과 제안은 정책 결정이 아니라 논의에 참여한 기록입니다.",
-  tags: ["국민 대토론회 제안 발표", "서초청년네트워크 부위원장"] },
-{ n: "04", tier: "wide", ko: "설명·교육·소통", short: "설명·소통", en: "Knowledge Translation & Communication",
-  desc: "서울대 AIED 4기에서 교수법을 익혔고, 박람회 시연 · SSAFY 홍보 앰배서더 · 서울시민기자단으로 기술과 정책을 이해하기 쉬운 말로 옮겨 왔습니다. 강의는 제안 커리큘럼입니다.",
-  tags: ["서울대 AIED 4기", "SSAFY 홍보 앰배서더"] }];
+/* ============================================================ 범용 AX 확장 3종(C) — 개인 구현 · 공개 시연
+ * 앱은 ax-lab/(Vite · React · TypeScript · Vitest) → ax/ 로 빌드. 아래 수치는 ax/eval-report.json(빌드 때 Vitest 와 벤치마크를 실제로 실행한 값)과
+ * 같아야 하며 test/ax-c.test.mjs 가 대조한다. 실제 값이 없으면 url · tests · m 을 null 로 두면 '준비 중'으로 표시된다(가짜 수치 금지) */
+const AX_C_LABEL = "개인 구현 · 공개 시연 (가상 벤치마크 검증)";
+const AX_C = [
+{ code: "C-1", id: "reconcile-gate", ko: "데이터 교차검증 게이트", en: "ReconcileGate · Data Reconciliation & Anomaly Gate",
+  domains: ["부동산 · 자산관리", "구매 · 정산", "경영기획 · 재무"],
+  line: "양식이 다른 대장 · 요약 · API → 단위 환산 뒤 불일치만 승인 큐로",
+  mechanism: "결정론적 파서 → 단위 환산 · 키 매칭 → MATCH · MISMATCH · MISSING · DUP · ANOMALY → 사유 필수 승인 → 정제 CSV · 감사기록",
+  url: "ax/reconcile-gate/", tests: { passed: 13, total: 13 }, m: { planted: 15, detected: 15, falsePositives: 0 } },
+{ code: "C-2", id: "ops-triage", ko: "리스크 차단형 인바운드 트리아지", en: "Ops Triage & Circuit Breaker",
+  domains: ["CS · 운영", "B2B SaaS · 영업", "이커머스"],
+  line: "고위험 · 근거 미달 요청 → 자동 발송을 코드로 잠그고 승인 대기로",
+  mechanism: "의도 · 긴급도 · 위험 등급 → 정책 조항 ID 인용 초안 → 차단 사유 코드 → HARD BLOCK · 승인 발송",
+  url: "ax/ops-triage/", tests: { passed: 12, total: 12 }, m: { trapTotal: 12, trapBlocked: 12, missed: 0, normalTotal: 8, normalAllowed: 8, citeCorrect: 18, citeTotal: 18 } },
+{ code: "C-3", id: "claim-verifier", ko: "의사결정 메모 팩트체커", en: "Claim-to-Source Verifier",
+  domains: ["전략기획", "리서치 · 컨설팅", "경영지원 · 임원 보고"],
+  line: "브리핑의 숫자 · 날짜 · 고유명사 → 원문 줄과 1:1 대조 후 승인",
+  mechanism: "Stage 1 초안 → Stage 2 독립 검증(수치 · 단위 · 기간 · 고유명사 · 인과) → 미해결 시 내보내기 잠금",
+  url: "ax/claim-verifier/", tests: { passed: 11, total: 11 }, m: { cases: 10, detected: 10, located: 10, falsePositives: 0 } }];
 
-const TIERS = [
-{ key: "core", ko: "줄기 — 실증된 깊이", en: "Core Depth" },
-{ key: "applied", ko: "적용 영역", en: "Applied Domain" },
-{ key: "wide", ko: "넓어지는 영역", en: "Expanding Domains" }];
+const axcProof = (c) => {
+  if (!c.m) return null;
+  if (c.code === "C-1") return `심은 결함 ${c.m.planted}건 중 ${c.m.detected}건 검출 · 오탐 ${c.m.falsePositives}건`;
+  if (c.code === "C-2") return `고위험 ${c.m.trapTotal}건 중 ${c.m.trapBlocked}건 차단(미탐지 ${c.m.missed}) · 정상 ${c.m.normalTotal}건 중 ${c.m.normalAllowed}건 자동 발송`;
+  return `고의 왜곡 ${c.m.cases}건 중 ${c.m.detected}건 탐지 · 위치 특정 ${c.m.located}건 · 오탐 ${c.m.falsePositives}건`;
+};
 
+/* ============================================================ COMPOSITE — 6축 역량 지도
+ * 숙련도 점수 · 퍼센트를 쓰지 않는다 — 육각형은 근거가 있는 여섯 영역의 지도이고, 꼭짓점마다 [핵심 한 줄] + [대표 실적 2] + [자격 · 교육]만 보인다.
+ * id(dom-NN)는 챗봇 · 깊은 링크가 쓰므로 고정(dom-04 는 정책 · 소통 축의 별칭). 실적 문장은 사이트 본문 · docs/content-matrix.md 에 근거 */
+const HEX = [
+{ id: "dom-01", ko: "AI 전략 · 문제정의", short: "AI 전략", en: "AI Strategy & Problem Framing", href: "cases.html#gwangmyeong",
+  line: "무엇을 먼저 하고, 무엇을 AI에 맡길지 정합니다",
+  wins: [["광명시흥 공익사업 보상자료 77장 구조화", "actual"], ["고객 메일 ‘급함’ 우선순위 기준 설계", "actual"]],
+  badges: ["법무법인 경국 전략기획실", "명지대 AI 데이터 매니지먼트 그랜드마스터"] },
+{ id: "dom-02", ko: "AX 실행 · 업무자동화", short: "AX 실행", en: "AX Implementation", href: "#ax-desk",
+  line: "반복되는 판단의 앞단을 시스템으로 옮깁니다",
+  wins: [["정비사업 AX 3종 · 급여명세서 자동 발송 — 사내 운영", "actual"], ["범용 AX 3종(C-1 ~ C-3) 구현 · 가상 벤치마크 검증", "demo"]],
+  badges: ["SSAFY 13기", "서울대 AIED 4기"] },
+{ id: "dom-03", ko: "데이터 · 정합성 검증", short: "데이터 검증", en: "Data Integrity & Verification", href: "#ax-c",
+  line: "숫자는 원문과 대조되기 전까지 확정하지 않습니다",
+  wins: [["Trial Brief 정합성 규칙 R1–R8 — 가상 사건 15건 전수 검출", "demo"], [() => `교차검증 결함 ${AX_C[0].m.detected}/${AX_C[0].m.planted} · 왜곡 탐지 ${AX_C[2].m.detected}/${AX_C[2].m.cases}(가상 벤치마크)`, "demo"]],
+  badges: ["공공데이터 API", "서울 핀테크 아카데미 14기"] },
+{ id: "dom-06", ko: "법률 · 부동산 도메인", short: "법률·부동산", en: "Legal & Real Estate", href: "career.html",
+  line: "정비사업 · 보상 · 청약 실무를 제품의 언어로 옮깁니다",
+  wins: [["법무법인 경국 송무 · 정비사업 실무", "actual"], ["제11회 부동산산업의 날 — 집캐치 발표 · 시연", "actual"]],
+  badges: ["KREMA 4기", "분양대행자 자격", "건국대 스마트건설"] },
+{ id: "dom-07", ko: "제품 기획 · 단독 배포", short: "제품·배포", en: "Product & Shipping", href: "#tools",
+  line: "필요한 도구는 혼자 끝까지 만들어 배포합니다",
+  wins: [["집캐치 — 한국경제 · 중앙일보 실명 소개", "demo"], ["법조시장 한눈에 · Atelier AX · 국정 한눈에", "demo"]],
+  badges: ["React", "Vercel", "공공데이터 API"] },
+{ id: "dom-05", alias: ["dom-04"], ko: "정책 · 소통 · 거버넌스", short: "정책·소통", en: "Policy, Communication & Governance", href: "#policy",
+  line: "현장의 문제를 제도의 언어로 옮깁니다",
+  wins: [["국민 대토론회 자산분과 참여 팀 중 1위(제안 · 발표)", "actual"], ["서초청년네트워크 9기 운영위원회 부위원장", "actual"]],
+  badges: ["서울대 AIED 4기", "민선 9기 서울시장 공약평가단"] }];
+
+const HEX_C = 200,HEX_R = 132;
+const hexPt = (i, r) => {const a = (-90 + i * 60) * Math.PI / 180;return [HEX_C + r * Math.cos(a), HEX_C + r * Math.sin(a)];};
+const hexPts = (r) => HEX.map((_, i) => hexPt(i, r).map((v) => v.toFixed(1)).join(",")).join(" ");
+const hexMid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+
+function HexMap() {
+  const box = React.useRef(null);
+  const [act, setAct] = React.useState(0);
+  const [drawn, setDrawn] = React.useState(false);
+  React.useEffect(() => {
+    const el = box.current;
+    if (!el || !("IntersectionObserver" in window)) {setDrawn(true);return;}
+    const io = new IntersectionObserver((es) => {if (es.some((e) => e.isIntersecting)) {setDrawn(true);io.disconnect();}}, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  React.useEffect(() => {
+    /* #dom-01 같은 깊은 링크(챗봇 · 외부)로 들어오면 그 축을 고른다 */
+    const pick = () => {const h = location.hash.slice(1);const i = HEX.findIndex((x) => x.id === h || (x.alias || []).includes(h));if (i > -1) setAct(i);};
+    pick();window.addEventListener("hashchange", pick);
+    return () => window.removeEventListener("hashchange", pick);
+  }, []);
+  const cur = HEX[act];
+  const v = hexPt(act, HEX_R),pv = hexPt((act + 5) % 6, HEX_R),nv = hexPt((act + 1) % 6, HEX_R);
+  const sector = [[HEX_C, HEX_C], hexMid(v, pv), v, hexMid(v, nv)].map((p) => p.map((x) => x.toFixed(1)).join(",")).join(" ");
+  const tilt = v[0] > HEX_C + 1 ? 3 : v[0] < HEX_C - 1 ? -3 : 0; /* 고른 축 쪽으로 격자만 살짝 기운다 */
+  const onKey = (e) => {
+    const k = e.key;
+    if (k === "ArrowRight" || k === "ArrowDown") {e.preventDefault();setAct((act + 1) % 6);} else
+    if (k === "ArrowLeft" || k === "ArrowUp") {e.preventDefault();setAct((act + 5) % 6);} else
+    if (k === "Home") {e.preventDefault();setAct(0);} else if (k === "End") {e.preventDefault();setAct(5);}
+  };
+  React.useEffect(() => {const b = box.current && box.current.querySelector('.hex__tabs [aria-selected="true"]');if (b && box.current.contains(document.activeElement) && document.activeElement !== b && document.activeElement.closest(".hex__tabs")) b.focus();}, [act]);
+  return (/*#__PURE__*/
+    React.createElement("div", { ref: box, className: "hex" + (drawn ? " is-drawn" : "") }, /*#__PURE__*/
+    React.createElement("div", { className: "hex__fig" }, /*#__PURE__*/
+    React.createElement("svg", { viewBox: "-64 8 528 384", "aria-hidden": "true", focusable: "false" }, /*#__PURE__*/
+    React.createElement("g", { className: "hex__grid", style: { transform: `rotate(${tilt}deg)` } },
+    [0.25, 0.5, 0.75, 1].map((k, i) => /*#__PURE__*/React.createElement("polygon", { key: k, points: hexPts(HEX_R * k), pathLength: "1", style: { "--d": i * 0.12 + "s" } })),
+    HEX.map((x, i) => {const [px, py] = hexPt(i, HEX_R);return /*#__PURE__*/React.createElement("line", { key: x.id, className: i === act ? "on" : "", x1: HEX_C, y1: HEX_C, x2: px.toFixed(1), y2: py.toFixed(1), pathLength: "1", style: { "--d": 0.3 + i * 0.05 + "s" } });})
+    ), /*#__PURE__*/
+    React.createElement("polygon", { className: "hex__sector", points: sector }), /*#__PURE__*/
+    React.createElement("g", { className: "hex__orbit", style: { transform: `rotate(${act * 60}deg)` } }, /*#__PURE__*/React.createElement("circle", { cx: HEX_C, cy: HEX_C - HEX_R - 16, r: "4" })),
+    HEX.map((x, i) => {
+      const [nx, ny] = hexPt(i, HEX_R),[lx, ly] = hexPt(i, HEX_R + 34);
+      const anchor = lx > HEX_C + 5 ? "start" : lx < HEX_C - 5 ? "end" : "middle";
+      return (/*#__PURE__*/
+        React.createElement("g", { key: x.id, className: "hex__node" + (i === act ? " on" : ""), style: { "--d": 0.55 + i * 0.07 + "s" }, onClick: () => setAct(i), onMouseEnter: (e) => {if (e.nativeEvent && e.nativeEvent.pointerType !== "touch") setAct(i);} }, /*#__PURE__*/
+        React.createElement("circle", { className: "hex__hit", cx: nx.toFixed(1), cy: ny.toFixed(1), r: "24" }), /*#__PURE__*/
+        React.createElement("circle", { className: "hex__dot", cx: nx.toFixed(1), cy: ny.toFixed(1), r: "7" }), /*#__PURE__*/
+        React.createElement("text", { x: lx.toFixed(1), y: (ly + (i === 0 ? -4 : i === 3 ? 8 : 0)).toFixed(1), textAnchor: anchor, dominantBaseline: "middle", className: "font-ko" }, x.short)
+        ));
+
+    })
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "hex__note font-ko" }, "\uC219\uB828\uB3C4 \uC810\uC218\uAC00 \uC544\uB2C8\uB77C \uADFC\uAC70\uAC00 \uC788\uB294 \uC5EC\uC12F \uC601\uC5ED\uC758 \uC9C0\uB3C4\uC785\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "hex__side" }, /*#__PURE__*/
+    React.createElement("div", { className: "hex__tabs", role: "tablist", "aria-label": "\uC5ED\uB7C9 6\uCD95", onKeyDown: onKey },
+    HEX.map((x, i) => /*#__PURE__*/
+    React.createElement("button", { key: x.id, id: x.id, type: "button", role: "tab", "aria-selected": i === act, "aria-controls": "hex-panel", tabIndex: i === act ? 0 : -1, onClick: () => setAct(i) }, /*#__PURE__*/
+    React.createElement("b", { className: "font-serif" }, String(i + 1).padStart(2, "0")), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, x.short)
+    )
+    ),
+    HEX.flatMap((x) => (x.alias || []).map((a) => /*#__PURE__*/React.createElement("span", { key: a, id: a, className: "hex__alias", "aria-hidden": "true" })))
+    ), /*#__PURE__*/
+    React.createElement("div", { id: "hex-panel", role: "tabpanel", "aria-labelledby": cur.id, className: "hex__panel", key: cur.id }, /*#__PURE__*/
+    React.createElement("p", { className: "hex__k font-sans" }, String(act + 1).padStart(2, "0"), " / 06 \xB7 ", /*#__PURE__*/React.createElement("span", { lang: "en" }, cur.en)), /*#__PURE__*/
+    React.createElement("h3", { className: "hex__t font-ko" }, cur.ko), /*#__PURE__*/
+    React.createElement("p", { className: "hex__line font-myeongjo" }, cur.line), /*#__PURE__*/
+    React.createElement("p", { className: "hex__h font-ko" }, "\uB300\uD45C \uC2E4\uC801"), /*#__PURE__*/
+    React.createElement("ol", { className: "hex__wins font-ko" },
+    cur.wins.map(([t, k]) => {const txt = typeof t === "function" ? t() : t;return /*#__PURE__*/React.createElement("li", { key: txt }, /*#__PURE__*/React.createElement("span", null, txt), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--" + k }, k === "actual" ? "실제 수행" : "개인 공개 시연"));})
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "hex__h font-ko" }, "\uC790\uACA9 \xB7 \uAD50\uC721"), /*#__PURE__*/
+    React.createElement("p", { className: "hex__badges font-ko" }, cur.badges.map((b) => /*#__PURE__*/React.createElement("span", { key: b }, b))), /*#__PURE__*/
+    React.createElement("a", { className: "hex__go font-ko", href: cur.href }, "\uADFC\uAC70 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
+    )
+    )
+    ));
+
+}
 
 /* ============================================================ LECTURES — 강의 프로그램 */
 const LECTURE_TRACKS = [
@@ -682,102 +791,17 @@ const CASES = [
   judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." }];
 
 
-/* T/π 역량 구조 — 위 가로줄은 넓이(연결된 영역), 아래 굵은 줄기는 실증된 깊이(AI 전략·AX 실행).
- * 왼쪽의 점선 줄기는 형성 중인 두 번째 깊이(법률·부동산·제도적 의사결정) — 자격이나 완성된 전문성이 아니다 */
-const TMAP = { "06": [5, 28], "01": [29, 58], "05": [58, 79], "04": [79, 100] }; /* 가로줄 칸 — 왼쪽 · 오른쪽 % */
-function TShapeMap({ active, onPick }) {
-  const cur = DOMAINS[active] || DOMAINS[0];
-  const coreOn = cur.tier === "core";
-  const seg = (n) => TMAP[n];
-  const btn = (n, label, i) => {
-    const [l, r] = seg(n);
-    const on = n === "01" ? coreOn : cur.n === n;
-    return (/*#__PURE__*/
-      React.createElement("button", { key: n, type: "button", className: "tmap__seg" + (on ? " on" : "") + (n === "01" ? " tmap__seg--core" : ""), style: { left: l + "%", width: r - l + "%" },
-        "aria-pressed": on, onMouseEnter: () => onPick(i), onFocus: () => onPick(i), onClick: () => onPick(i) }, /*#__PURE__*/
-      React.createElement("span", { className: "font-ko" }, label)
-      ));
-
-  };
-  return (/*#__PURE__*/
-    React.createElement("div", { className: "tmap", role: "group", "aria-label": "T\uC790 \xB7 \u03C0\uC790 \uC5ED\uB7C9 \uAD6C\uC870 \u2014 \uCE78\uC744 \uB204\uB974\uBA74 \uC124\uBA85\uC774 \uBC14\uB01D\uB2C8\uB2E4" }, /*#__PURE__*/
-    React.createElement("div", { className: "tmap__bar" },
-    btn("06", "법률·부동산", DOMAINS.findIndex((d) => d.n === "06")),
-    btn("01", "AI 전략·AX 실행", coreOn ? active : 0),
-    btn("05", "정책·공공", DOMAINS.findIndex((d) => d.n === "05")),
-    btn("04", "설명·소통", DOMAINS.findIndex((d) => d.n === "04"))
-    ), /*#__PURE__*/
-    React.createElement("div", { className: "tmap__stem", style: { left: TMAP["01"][0] + "%", width: TMAP["01"][1] - TMAP["01"][0] + "%" } },
-    DOMAINS.filter((d) => d.tier === "core").map((d) => {
-      const i = DOMAINS.indexOf(d);
-      return (/*#__PURE__*/
-        React.createElement("button", { key: d.n, type: "button", className: "tmap__lv" + (i === active ? " on" : ""), "aria-pressed": i === active,
-          onMouseEnter: () => onPick(i), onFocus: () => onPick(i), onClick: () => onPick(i) }, /*#__PURE__*/
-        React.createElement("b", { className: "font-serif" }, d.n), /*#__PURE__*/React.createElement("span", { className: "font-ko" }, d.short)
-        ));
-
-    }), /*#__PURE__*/
-    React.createElement("p", { className: "tmap__cap font-ko" }, "\uC2E4\uC99D\uB41C \uAE4A\uC774", /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, "Demonstrated"))
-    ), /*#__PURE__*/
-    React.createElement("div", { className: "tmap__stem2" + (cur.n === "06" ? " on" : ""), style: { left: TMAP["06"][0] + 4 + "%", width: TMAP["06"][1] - TMAP["06"][0] - 8 + "%" } }, /*#__PURE__*/
-    React.createElement("p", { className: "font-ko" }, "\uB450 \uBC88\uC9F8 \uAE4A\uC774", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", null, "\uBC95\uB960\xB7\uBD80\uB3D9\uC0B0 \xB7", /*#__PURE__*/React.createElement("br", null), "\uC81C\uB3C4\uC801 \uC758\uC0AC\uACB0\uC815"), /*#__PURE__*/React.createElement("em", null, "\uD615\uC131 \uC911"))
-    )
-    ));
-
-}
-
 function Composite() {
   const ref = useReveal();
   const bandRef = useReveal();
-  const [active, setActive] = React.useState(0);
-  const rows = React.useRef([]);
-
-  React.useEffect(() => {
-    const io = new IntersectionObserver(
-      (es) => es.forEach((e) => {if (e.isIntersecting) setActive(Number(e.target.getAttribute("data-i")));}),
-      { rootMargin: "-42% 0px -46% 0px" }
-    );
-    rows.current.forEach((n) => n && io.observe(n));
-    return () => io.disconnect();
-  }, []);
-
   return (/*#__PURE__*/
     React.createElement(React.Fragment, null, /*#__PURE__*/
     React.createElement("section", { id: "composite", ref: ref, style: { position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .2 } }), /*#__PURE__*/
     React.createElement("div", { className: "wrap", style: { position: "relative", zIndex: 1 } }, /*#__PURE__*/
-    React.createElement(SectionHead, { no: "02 \uC5ED\uB7C9 \uAD6C\uC870", ko: "AI \uC804\uB7B5\xB7AX \uC2E4\uD589\uC744 \uC904\uAE30\uB85C", en: "AI Strategy & AX Implementation",
-      lead: "\uBAA8\uB4E0 \uC5ED\uB7C9\uC758 \uAE4A\uC774\uAC00 \uAC19\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uC2E4\uC81C \uACB0\uACFC\uBB3C\uB85C \uC99D\uBA85\uD55C \uC904\uAE30\uB294 \uD558\uB098\uC774\uACE0, \uBC95\uB960\xB7\uBD80\uB3D9\uC0B0\uC740 \uADF8 \uC904\uAE30\uAC00 \uC4F0\uC774\uB294 \uC601\uC5ED, \uC815\uCC45\xB7\uC18C\uD1B5\uC740 \uB113\uD600 \uAC00\uB294 \uC601\uC5ED\uC785\uB2C8\uB2E4." }), /*#__PURE__*/
-
-    React.createElement("div", { className: "comp-stage comp-stage--t" }, /*#__PURE__*/
-    React.createElement("div", { className: "comp-stage__sticky" }, /*#__PURE__*/
-    React.createElement(TShapeMap, { active: active, onPick: setActive }), /*#__PURE__*/
-    React.createElement("div", { className: "cmap__cap" }, /*#__PURE__*/
-    React.createElement("span", { className: "font-sans" }, TIERS.find((t) => t.key === DOMAINS[active].tier).ko), /*#__PURE__*/
-    React.createElement("strong", { className: "font-ko" }, DOMAINS[active].ko), /*#__PURE__*/
-    React.createElement("em", { className: "font-sans", lang: "en" }, DOMAINS[active].en)
-    )
-    ), /*#__PURE__*/
-
-    React.createElement("div", { className: "comp-track" },
-    TIERS.map((t) => /*#__PURE__*/
-    React.createElement(React.Fragment, { key: t.key }, /*#__PURE__*/
-    React.createElement("p", { className: "comp-group font-ko" + (t.key !== "core" ? " comp-group--sub" : "") }, t.ko, " ", /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, t.en)),
-    DOMAINS.filter((d) => d.tier === t.key).map((d) => {
-      const i = DOMAINS.indexOf(d);
-      return (/*#__PURE__*/
-        React.createElement("article", { key: d.n, "data-i": i, id: "dom-" + d.n, ref: (el) => rows.current[i] = el,
-          className: "comp-row comp-row--" + t.key + (i === active ? " on" : ""), onMouseEnter: () => setActive(i) }, /*#__PURE__*/
-        React.createElement("h3", { className: "comp-row__t" }, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, d.ko), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, d.en)), /*#__PURE__*/
-        React.createElement("p", { className: "font-ko" }, d.desc), /*#__PURE__*/
-        React.createElement("div", { className: "comp-row__tags font-ko" }, d.tags.map((x) => /*#__PURE__*/React.createElement("span", { key: x }, x)))
-        ));
-
-    })
-    )
-    )
-    )
-    ), /*#__PURE__*/
+    React.createElement(SectionHead, { no: "02 \uC5ED\uB7C9 \uAD6C\uC870", ko: "\uC5EC\uC12F \uCD95\uC73C\uB85C \uBCF4\uB294 \uC5ED\uB7C9 \uC9C0\uB3C4", en: "Six-Axis Capability Map",
+      lead: "\uAF2D\uC9D3\uC810\uC744 \uACE0\uB974\uBA74 \uD575\uC2EC \uD55C \uC904 \xB7 \uB300\uD45C \uC2E4\uC801 2\uAC1C \xB7 \uAD00\uB828 \uC790\uACA9\uACFC \uAD50\uC721\uB9CC \uBCF4\uC785\uB2C8\uB2E4." }), /*#__PURE__*/
+    React.createElement(HexMap, null), /*#__PURE__*/
 
     React.createElement("div", { className: "folds reveal" }, /*#__PURE__*/
     React.createElement("details", { className: "arsenal fold", id: "arsenal" }, /*#__PURE__*/
@@ -1251,19 +1275,23 @@ const TOOL_META = {
   "09": { name: "ZipCatch · 집캐치", shot: "zc-home", env: "The Housing Landscape", envKo: "지도 위 필지에서 아파트 단지가 솟고, 위치 표시가 꽂힙니다",
     why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾기 어려웠습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다.",
     made: "두 공고를 공공데이터 API로 모아, 지역 · 주거비 · 가구 조건 3단계 입력으로 지금 지원할 수 있는 후보를 정리하는 서비스.",
-    link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원" },
+    link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원",
+    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리", extra: "한국경제 · 중앙일보 소개" },
   "16": { name: "법조시장 한눈에", shot: "lp-home", env: "The Regulatory Landscape", envKo: "개발 대상지 위로 법률안 · 법령 · 판례가 층으로 내려앉습니다",
     why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 번에 보기 어려웠습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다.",
     made: "국회 · 법제처 · 대한변협 공개 자료를 하루 단위로 갱신하는 상황판과, 민법 기간 계산 조문에 맞춘 기한 계산기.",
-    link: "흩어진 법률 정보를 리서치 흐름으로 — 출처와 연결 상태를 함께 공개" },
+    link: "흩어진 법률 정보를 리서치 흐름으로 — 출처와 연결 상태를 함께 공개",
+    line: "기관마다 흩어진 법조 정보 → 매일 갱신 상황판 · 기한 계산기", extra: "국회 · 법제처 · 대한변협 공개 자료" },
   "17": { name: "Atelier AX", shot: "ax-live", env: "The Agent Workspace", envKo: "사무실 평면 위 네 역할 사이로 업무가 흐르고, 승인 책상에서 끝납니다",
     why: "AI 에이전트가 무엇을 하는지 보이지 않으면 결과를 믿고 맡기기 어려웠습니다.", use: "AI 팀에 일을 맡기고 진행 단계와 승인 대기를 확인할 때 씁니다.",
     made: "AI 직원에게 업무를 배정하고, 실행 과정을 관찰하고, 산출물을 사람이 검증 · 승인하는 관제 대시보드.",
-    link: "배정 · 실행 가시성 · 사람의 승인 — AX 를 운영하는 원칙 그 자체" },
+    link: "배정 · 실행 가시성 · 사람의 승인 — AX 를 운영하는 원칙 그 자체",
+    line: "보이지 않는 AI 작업 → 배정 · 실행 관찰 · 사람 승인 대시보드", extra: "사람 승인 단계" },
   "12": { name: "국정 한눈에", shot: "gk-home", env: "The National Information Landscape", envKo: "정책 · 국회 · 경제 · 시장 네 갈래가 한 판으로 모입니다",
     why: "국정 소식과 경제 지표를 여러 포털과 앱을 오가며 봐야 했습니다.", use: "국정 · 정책 · 증시 · 환율의 흐름을 한 번에 훑을 때 씁니다.",
     made: "공개 뉴스 RSS와 시세를 서버리스 함수로 모아 섹션별로 배정하고 중복 기사를 거른 국정 · 경제 상황판.",
-    link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기" }
+    link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기",
+    line: "여러 포털의 국정 · 경제 소식 → 중복 거른 한 장 상황판", extra: "RSS · 시세 서버리스 수집" }
 };
 
 /* ============================================================ 경국 AX — 법률 AX 6대 시스템 (V6.1)
@@ -1273,6 +1301,7 @@ const TOOL_META = {
  * 건축 모형(city.js)은 01 · 03 과 실무(보상자료)에서만 그리고, 04–06 을 고르면 캔버스 장면을 내린다. */
 const AX_SYSTEMS = [
 { id: "ax-reintel", number: "01", group: "A", koreanTitle: "법령·규제 변화 관제 시스템", englishName: "RE:INTELLIGENCE · Regulatory Monitoring",
+  line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 변호사 검토 큐", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "정비사업은 사업 단계 · 토지이용규제 · 조례 · 고시 · 행정절차의 변화에 영향을 받습니다. 서로 다른 출처를 손으로 확인하면 검토 누락이 생길 수 있습니다.",
   solution: "사업지를 기준으로 법령 · 고시 · 조례 · 행정 공고의 변화를 모으고, 그 사업의 어느 단계와 부지의 어느 요소에 관련되는지 정리해 변호사 검토로 올리는 구조를 설계했습니다.",
@@ -1281,6 +1310,7 @@ const AX_SYSTEMS = [
   interaction: "사업지 A/B/C 를 고르면 필지 · 건물 배치 · 사업 단계가 함께 바뀌고, 규제 레이어를 고르면 그 레이어가 부지의 어느 부분에 걸리는지 보입니다.",
   demoPath: null, evidence: "career.html#practice-strategy" },
 { id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 위험 검토 시스템", englishName: "Assembly Risk Engine",
+  line: "명부 · 위임장 수작업 대조 → 의결권 · 정족수 시뮬레이션", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "조합원 명부 · 의결권 · 위임장 · 소집 통지 · 정족수 · 안건별 결과 사이의 불일치를 사람이 반복해서 대조해야 합니다.",
   solution: "서류를 서로 맞대는 대조 규칙을 정하고, 맞지 않는 곳을 '확인 필요' 예외 목록으로 모으는 구조를 설계했습니다.",
@@ -1289,6 +1319,7 @@ const AX_SYSTEMS = [
   interaction: "안건을 고르면 의결권 · 정족수 대조가 바뀌고, 검토 규칙을 누르면 그 규칙이 보는 가상 서류와 해당 조합원 자리가 표시됩니다.",
   demoPath: null, evidence: "career.html#practice-strategy" },
 { id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경 위험 분석 시스템", englishName: "Contract Risk Intelligence",
+  line: "조항 변경 누락 위험 → 조항 단위 비교 · 공사비 증감 · 승인", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "계약 변경에 따라 공사 범위 · 공사비 · 지급조건 · 책임 부담이 달라질 수 있고, 두 계약서를 눈으로 비교하면 바뀐 조항을 놓치기 쉽습니다.",
   solution: "변경 전 · 후 계약서를 조항 단위로 맞대고, 바뀐 조항을 대금 · 책임 · 손해배상 같은 검토 분류에 걸어 표시하는 구조를 설계했습니다.",
@@ -1297,6 +1328,7 @@ const AX_SYSTEMS = [
   interaction: "변경 전 · 후 손잡이를 움직이면 건축물의 층수가 바뀌고, 그 변경과 연결된 계약 조항과 검토 항목이 차례로 강조됩니다.",
   demoPath: "legal-ax.html#task=contract&field=realestate", evidence: "career.html#practice-strategy" },
 { id: "ax-evidence", number: "04", group: "B", koreanTitle: "송무기록·쟁점·증거 분석", englishName: "Litigation Evidence Intelligence",
+  line: "흩어진 주장 · 증거 → 원문 문단까지 잇는 근거 지도", badges: ["가상 사건 7개 분야", "규칙 기반 · 모델 호출 없음"],
   category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
   problem: "사건기록에 흩어진 주장 · 사실 · 증거 · 시간의 흐름을 한 번에 파악하기 어렵습니다.",
   solution: "주장마다 근거 자료를 잇고, 근거가 원문의 어느 문단에 있는지 기록하며, 주장과 자료의 기재가 다르면 규칙으로 표시하는 구조를 만들었습니다.",
@@ -1305,6 +1337,7 @@ const AX_SYSTEMS = [
   interaction: "주장을 누르면 관련 증거가 강조되고, 증거를 누르면 그 문서의 원문 문단이 열립니다.",
   demoPath: "legal-ax.html#task=evidence&field=civil", evidence: "legal-ax.html#task=evidence&field=civil" },
 { id: "ax-research", number: "05", group: "B", koreanTitle: "법령·문서 근거 탐색", englishName: "Legal Research Desk",
+  line: "유창한 답 대신 → 조문 원문 · 기준일을 확인하는 탐색", badges: ["색인 조문 · 사건 문서", "판례 원문 미연동"],
   category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
   problem: "법률정보의 정확성은 답변의 유창함이 아니라 근거와 기준일의 확인에서 출발합니다.",
   solution: "색인된 법령 조문과 사건 문서만 찾고, 요약과 원문을 나누어 보여 주며, 원문을 옮긴 시점과 출처 확인 상태를 함께 적었습니다.",
@@ -1313,6 +1346,7 @@ const AX_SYSTEMS = [
   interaction: "검색어와 자료 종류에 따라 결과가 바뀌고, 결과를 고르면 원문 · 요약 · 기준일이 바뀝니다. 사건 문서는 해당 문단으로 이어집니다.",
   demoPath: "legal-ax.html#task=research&field=civil", evidence: "legal-ax.html#task=research&field=civil" },
 { id: "ax-matter", number: "06", group: "B", koreanTitle: "사건 접수·기한·검토 업무관리", englishName: "Matter Operations",
+  line: "흩어진 진행 상태 → 단계 · 기한 · 검토를 한 화면에", badges: ["가상 감사기록", "외부 발송 없음"],
   category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
   problem: "상담부터 자료 수집 · 담당자 지정 · 기한 확인 · 검토 승인까지 진행 상태가 여러 경로에 흩어집니다.",
   solution: "사건 단계 · 담당자 · 필요 서류 · 기한 · 검토 상태를 한 화면에 두고, 바꾼 내용을 모두 가상 감사기록에 남기는 구조를 만들었습니다.",
@@ -1470,18 +1504,17 @@ function AXCommand() {
     React.createElement("p", { className: "axc__k font-ko" }, "03 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \xB7 \uBC95\uB960 AI \uC804\uD658 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Legal AX \xB7 Six Systems")), /*#__PURE__*/
     React.createElement("h2", { id: "axc-title", className: "axc__title" }, /*#__PURE__*/React.createElement("span", { className: "font-ko" }, "\uBC95\uB960 \uC2E4\uBB34\uB97C \uC774\uD574\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC5C5\uBB34\uC758 \uAD6C\uC870\uB97C \uBC14\uAFB8\uB294 AX"), /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, "Legal Operations \xB7 Evidence Intelligence \xB7 Contract Review \xB7 Workflow Automation")), /*#__PURE__*/
     React.createElement("div", { className: "axc__lead font-ko" }, /*#__PURE__*/
-    React.createElement("p", null, "\uC815\uBE44\uC0AC\uC5C5 \uC2E4\uBB34\uC5D0\uC11C \uCD9C\uBC1C\uD55C AX \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C, \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D\uACFC \uBC95\uB960\uC815\uBCF4 \uD0D0\uC0C9, \uC0AC\uAC74 \uAD00\uB9AC\uAE4C\uC9C0 \uC801\uC6A9 \uBC94\uC704\uB97C \uD655\uC7A5\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "\uAE30\uC220\uC740 \uC815\uBCF4\uB97C \uC815\uB9AC\uD558\uACE0 \uAC80\uD1A0\uB97C \uB3D5\uC9C0\uB9CC, \uCD5C\uC885 \uBC95\uB960 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4."))
+    React.createElement("p", null, "\uC815\uBE44\uC0AC\uC5C5 \uC2E4\uBB34\uC758 AX \uB97C \uC1A1\uBB34 \xB7 \uC815\uBCF4 \uD0D0\uC0C9 \xB7 \uBC94\uC6A9 \uAE30\uC5C5 \uC6B4\uC601\uC73C\uB85C \uB113\uD799\uB2C8\uB2E4. ", /*#__PURE__*/React.createElement("b", null, "\uCD5C\uC885 \uBC95\uB960 \uD310\uB2E8\uC740 \uBCC0\uD638\uC0AC\uAC00 \uB0B4\uB9BD\uB2C8\uB2E4."))
     ), /*#__PURE__*/
     React.createElement("ul", { className: "axc__states font-ko", "aria-label": "\uC2E4\uC801 \uC0C1\uD0DC \uAD6C\uBD84" }, /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--a" }, "A"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uC0AC\uB0B4 \uC2E4\uBB34 \uC801\uC6A9"), " \uC815\uBE44\uC0AC\uC5C5 AX 3\uC885(01\u201303 \xB7 \uC0AC\uB0B4 \uAD6C\uCD95 \xB7 \uD654\uBA74 \uBE44\uACF5\uAC1C) \xB7 \uAE09\uC5EC\uBA85\uC138\uC11C \uC790\uB3D9 \uBC1C\uC1A1(\uC0AC\uB0B4 \uC6B4\uC601 \uC801\uC6A9) \xB7 \uACE0\uAC1D \uBA54\uC77C \uC790\uB3D9 \uBD84\uB958(\uC5C5\uBB34 \uD654\uBA74 \uBC30\uD3EC)")), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--b" }, "B"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uAC1C\uC778 \uAD6C\uD604 \xB7 \uACF5\uAC1C \uC2DC\uC5F0"), " \uBC95\uB960 AX 3\uC885(04\u201306) \u2014 \uAC00\uC0C1 \uC0AC\uAC74\uC73C\uB85C \uC9C1\uC811 \uC368 \uBCF4\uB294 \uC2DC\uC5F0. \uACBD\uAD6D\uC5D0\uC11C \uB3C4\uC785 \xB7 \uC6B4\uC601\uD55C \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4")), /*#__PURE__*/
-    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uD5A5\uD6C4 \uACE0\uB3C4\uD654"), " \uC1A1\uBB34\uAE30\uB85D \uBD84\uC11D \xB7 \uACC4\uC57D \uAC80\uD1A0\uC758 \uC2E4\uC81C \uC0AC\uAC74 \uC801\uC6A9 \u2014 \uAC80\uC99D \uC804\uC774\uB77C \uC644\uB8CC\uB85C \uC801\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4"))
+    React.createElement("li", null, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "\uBC94\uC6A9 AX \uD655\uC7A5 3\uC885"), " \uB370\uC774\uD130 \uAD50\uCC28\uAC80\uC99D \xB7 \uC778\uBC14\uC6B4\uB4DC \uD2B8\uB9AC\uC544\uC9C0 \xB7 \uC758\uC0AC\uACB0\uC815 \uBA54\uBAA8 \uD329\uD2B8\uCCB4\uD06C \u2014 ", AX_C_LABEL))
     )
     ), /*#__PURE__*/
 
     React.createElement(TrialBriefFeature, null), /*#__PURE__*/
-    React.createElement("p", { className: "axc__count font-ko" }, /*#__PURE__*/React.createElement("b", null, "AX \uC2DC\uC2A4\uD15C 6\uC885"), " = \uACBD\uAD6D \uC2E4\uBB34 \uAE30\uBC18 3\uC885 + \uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0 3\uC885 ", /*#__PURE__*/React.createElement("span", null, "\u201816\uAC1C \uACB0\uACFC\uBB3C\u2019\uC740 \uC804\uCCB4 \uC791\uC5C5 \uAE30\uB85D \uC218\uB85C, \uC774 6\uC885\uACFC \uB530\uB85C \uC149\uB2C8\uB2E4.")), /*#__PURE__*/
+    React.createElement("p", { className: "axc__count font-ko" }, /*#__PURE__*/React.createElement("b", null, "AX \uC2DC\uC2A4\uD15C 6\uC885"), " = \uACBD\uAD6D \uC2E4\uBB34 \uAE30\uBC18 3\uC885 + \uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0 3\uC885 ", /*#__PURE__*/React.createElement("span", null, "\uBC94\uC6A9 AX \uD655\uC7A5 3\uC885(C)\uACFC \u201816\uAC1C \uACB0\uACFC\uBB3C\u2019\uC740 \uB530\uB85C \uC149\uB2C8\uB2E4.")), /*#__PURE__*/
     React.createElement("div", { className: "axc__console" }, /*#__PURE__*/
     React.createElement("nav", { className: "axc__nav", "aria-label": "AX 6\uB300 \uC2DC\uC2A4\uD15C \uACE0\uB974\uAE30" },
     AX_GROUPS.map((g) => /*#__PURE__*/
@@ -1505,16 +1538,21 @@ function AXCommand() {
     React.createElement("header", { className: "axc__mh" }, /*#__PURE__*/
     React.createElement("p", { className: "font-sans" }, /*#__PURE__*/React.createElement("b", null, cur.number), " ", cur.englishName, /*#__PURE__*/React.createElement("span", { className: "axc__tag axc__tag--" + cur.group.toLowerCase() + " font-ko" }, AX_STATUS_KO[cur.implementationStatus])), /*#__PURE__*/
     React.createElement("h3", { className: "font-ko" }, cur.koreanTitle), /*#__PURE__*/
-    React.createElement("p", { className: "axc__how font-ko" }, cur.interaction)
+    React.createElement("p", { className: "axc__line font-ko" }, cur.line), /*#__PURE__*/
+    React.createElement("p", { className: "axc__badges font-ko" }, cur.badges.map((b) => /*#__PURE__*/React.createElement("span", { key: b }, b)), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--" + (cur.group === "A" ? "actual" : "demo") }, cur.group === "A" ? "실제 수행" : "개인 공개 시연"))
     ), /*#__PURE__*/
     React.createElement("div", { className: "axc__demo-box" }, /*#__PURE__*/
     React.createElement(Demo, { key: cur.id, sys: cur })
     ), /*#__PURE__*/
-    React.createElement("ol", { className: "axc__story font-ko", "aria-label": cur.koreanTitle + " — 문제에서 판단까지" }, /*#__PURE__*/
+    React.createElement("details", { className: "axc__more font-ko", key: cur.id }, /*#__PURE__*/
+    React.createElement("summary", null, "\uBB38\uC81C\uC5D0\uC11C \uD310\uB2E8\uAE4C\uC9C0 4\uB2E8\uACC4 \xB7 \uC870\uC791 \uBC29\uBC95"), /*#__PURE__*/
+    React.createElement("p", { className: "axc__how" }, cur.interaction), /*#__PURE__*/
+    React.createElement("ol", { className: "axc__story", "aria-label": cur.koreanTitle + " — 문제에서 판단까지" }, /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "01 \uBC1C\uACAC\uD55C \uBB38\uC81C"), cur.problem), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "02 \uC124\uACC4\uD55C \uAD6C\uC870"), cur.solution), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "03 \uC2E4\uC81C \uAD6C\uD604"), cur.built), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "04 \uC0AC\uB78C\uC5D0\uAC8C \uB0A8\uB294 \uD310\uB2E8"), cur.human)
+    )
     ), /*#__PURE__*/
     React.createElement("p", { className: "axc__links font-ko" },
     cur.group === "B" ? /*#__PURE__*/
@@ -1524,6 +1562,8 @@ function AXCommand() {
     )
     )
     ), /*#__PURE__*/
+
+    React.createElement(AXCExpansion, null), /*#__PURE__*/
 
     React.createElement("header", { className: "axc__subhead" }, /*#__PURE__*/
     React.createElement("h3", { className: "font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uB9E1\uC740 \uC2E4\uBB34 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Practical Execution"))
@@ -1545,11 +1585,45 @@ function AXCommand() {
     ));
 
 }
+/* C — 범용 AX 확장 3종. 수치 칸은 AX_C(=ax/eval-report.json) 그대로, 값이 없으면 '준비 중' */
+function AXCExpansion() {
+  return (/*#__PURE__*/
+    React.createElement("section", { id: "ax-c", className: "axcx", "aria-labelledby": "axcx-h" }, /*#__PURE__*/
+    React.createElement("header", { className: "axcx__head" }, /*#__PURE__*/
+    React.createElement("p", { className: "axc__gh font-ko" }, /*#__PURE__*/React.createElement("b", { className: "axc__st axc__st--c" }, "C"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", { id: "axcx-h" }, "\uBC94\uC6A9 AX \uD655\uC7A5 3\uC885"), /*#__PURE__*/React.createElement("em", null, "\uC815\uBE44\uC0AC\uC5C5 \xB7 \uBC95\uB960 \uBC16 \uB370\uC774\uD130 \xB7 \uC6B4\uC601 \xB7 \uAE30\uD68D \uD604\uC7A5 \u2014 ", AX_C_LABEL))), /*#__PURE__*/
+    React.createElement("p", { className: "axcx__rule font-ko" }, "AI \uB294 \uAD6C\uC870\uB9CC \uC77D\uACE0, \uACC4\uC0B0 \xB7 \uB300\uC870 \xB7 \uCC28\uB2E8\uC740 \uCF54\uB4DC\uAC00 \uD569\uB2C8\uB2E4. \uC218\uCE58\uB294 \uBE4C\uB4DC \uB54C \uC2E4\uC81C\uB85C \uB3CC\uB9B0 \uD14C\uC2A4\uD2B8 \uACB0\uACFC\uC785\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "axcx__list" },
+    AX_C.map((c) => {
+      const proof = axcProof(c);
+      return (/*#__PURE__*/
+        React.createElement("li", { key: c.code, className: "axcx__card" }, /*#__PURE__*/
+        React.createElement("p", { className: "axcx__k font-sans" }, /*#__PURE__*/React.createElement("b", null, c.code), c.en), /*#__PURE__*/
+        React.createElement("h4", { className: "font-ko" }, c.ko), /*#__PURE__*/
+        React.createElement("p", { className: "axcx__line font-ko" }, c.line), /*#__PURE__*/
+        React.createElement("p", { className: "axcx__dom font-ko" }, c.domains.map((d) => /*#__PURE__*/React.createElement("span", { key: d }, d))), /*#__PURE__*/
+        React.createElement("p", { className: "axcx__mech font-ko" }, c.mechanism), /*#__PURE__*/
+        React.createElement("p", { className: "axcx__proof font-ko" },
+        c.tests ? /*#__PURE__*/React.createElement("span", { className: "axcx__t" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "npm test ", c.tests.passed, "/", c.tests.total), " \uD1B5\uACFC") : /*#__PURE__*/React.createElement("span", { className: "axcx__t axcx__t--wait" }, "\uD14C\uC2A4\uD2B8 \uC900\uBE44 \uC911"),
+        proof ? /*#__PURE__*/React.createElement("span", null, proof) : /*#__PURE__*/React.createElement("span", { className: "axcx__t--wait" }, "\uAC80\uC99D \uC218\uCE58 \uC900\uBE44 \uC911")
+        ), /*#__PURE__*/
+        React.createElement("p", { className: "axcx__st font-ko" }, /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, AX_C_LABEL)),
+        c.url ? /*#__PURE__*/React.createElement("a", { className: "axc__go", href: c.url }, "\uC9C1\uC811 \uC368 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })) : /*#__PURE__*/React.createElement("span", { className: "axc__go axc__go--off font-ko", "aria-disabled": "true" }, "\uBC30\uD3EC \uC900\uBE44 \uC911")
+        ));
+
+    })
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "axc__note font-ko" }, "\uBAA8\uB4E0 \uB370\uC774\uD130\uB294 \uAC00\uC0C1\uC785\uB2C8\uB2E4 \u2014 \uC2E4\uC81C \uAE30\uC5C5 \xB7 \uACE0\uAC1D \uC790\uB8CC \uC5C6\uC74C \xB7 \uC678\uBD80 AI \uD638\uCD9C \uC5C6\uC74C \xB7 \uACBD\uAD6D \uB3C4\uC785 \uC2DC\uC2A4\uD15C \uC544\uB2D8. \uC2E4\uBB34 \uB3C4\uC785 \xB7 \uC2DC\uAC04 \uB2E8\uCD95 \uD6A8\uACFC\uB294 \uCE21\uC815\uD558\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. ", /*#__PURE__*/React.createElement("a", { href: "ax/eval-report.json" }, "\uD14C\uC2A4\uD2B8 \uB9AC\uD3EC\uD2B8(JSON)"))
+    ));
+
+}
 /* 대표 프로젝트 — Gyunggook Trial Brief (개인 구현 시제품 · 경국 도입 아님). 성과 칸에는 테스트로 확인한 것만 */
 const TB_CARD = {
   cat: "법률 AX · 업무혁신 · 제품기획",
   title: "재판 준비 업무를 한 장의 브리핑으로 구조화",
   desc: "사건기록과 기일 준비사항을 연결해 변호사가 핵심 쟁점 · 증거 · 미결 과제를 빠르게 확인할 수 있는 1페이지 브리핑 시스템을 설계 · 구현한 프로젝트",
+  line: "사건기록 · 기일 준비 → 쟁점 · 증거 · 미결 과제 1페이지 브리핑",
+  badges: ["불일치 · 누락 15건 전수 검출", "그 밖의 표시 0건", "A4 1장 PDF"],
   roles: ["법률 실무 프로세스 분석", "사건 데이터 · 정보구조 설계", "근거 기반 요약 · 정합성 검증", "사용자 중심 인터페이스 구현", "자동화 테스트 · 품질관리"],
   proof: ["가상 민사사건 3건 — 문서 등록부터 A4 1장 PDF 출력까지 브라우저 자동 테스트 통과(Chromium · WebKit)", "넣어 둔 문서 불일치 · 누락 15건 모두 검출, 그 밖의 항목 표시 0건(테스트 자료 기준)", "실무 도입 · 시간 단축 효과는 측정하지 않음(미도입)"]
 };
@@ -1568,12 +1642,17 @@ function TrialBriefFeature() {
     React.createElement("div", { className: "axc__tb-txt font-ko" }, /*#__PURE__*/
     React.createElement("p", { className: "axc__tb-k" }, /*#__PURE__*/React.createElement("b", null, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8"), TB_CARD.cat, /*#__PURE__*/React.createElement("span", { className: "axc__tag axc__tag--b" }, "\uAC1C\uC778 \uAD6C\uD604 \uC2DC\uC81C\uD488 \xB7 \uACBD\uAD6D \uB3C4\uC785 \uC544\uB2D8")), /*#__PURE__*/
     React.createElement("h3", { id: "tb-card-h" }, /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Gyunggook Trial Brief"), TB_CARD.title), /*#__PURE__*/
+    React.createElement("p", { className: "axc__line" }, TB_CARD.line), /*#__PURE__*/
+    React.createElement("p", { className: "axc__badges" }, TB_CARD.badges.map((b) => /*#__PURE__*/React.createElement("span", { key: b }, b)), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0")), /*#__PURE__*/
+    React.createElement("details", { className: "axc__more" }, /*#__PURE__*/
+    React.createElement("summary", null, "\uB2F4\uB2F9 \xB7 \uAE30\uC5EC \xB7 \uAC80\uC99D \uC0C1\uC138"), /*#__PURE__*/
     React.createElement("p", { className: "axc__tb-d" }, TB_CARD.desc), /*#__PURE__*/
     React.createElement("dl", { className: "axc__tb-dl" }, /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uB2F4\uB2F9"), /*#__PURE__*/React.createElement("dd", null, "\uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8 \xB7 \uAE30\uD68D\uBD80\uD130 \uAD6C\uD604 \xB7 \uD14C\uC2A4\uD2B8\uAE4C\uC9C0 \uB2E8\uB3C5 \uC218\uD589")), /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uD575\uC2EC \uAE30\uC5EC"), /*#__PURE__*/React.createElement("dd", null, /*#__PURE__*/React.createElement("ul", null, TB_CARD.roles.map((r) => /*#__PURE__*/React.createElement("li", { key: r }, r))))), /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uAC80\uC99D"), /*#__PURE__*/React.createElement("dd", null, /*#__PURE__*/React.createElement("ul", null, TB_CARD.proof.map((r) => /*#__PURE__*/React.createElement("li", { key: r }, r))))), /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uC0C1\uD0DC"), /*#__PURE__*/React.createElement("dd", null, "\uACF5\uAC1C \uC2DC\uC81C\uD488 \u2014 \uADDC\uCE59 \uAE30\uBC18 \xB7 AI \uBAA8\uB378 \uBBF8\uC0AC\uC6A9 \xB7 \uC2E4\uC81C \uC0AC\uAC74\uC790\uB8CC \uC5C6\uC74C"))
+    )
     ), /*#__PURE__*/
     React.createElement("p", { className: "axc__tb-flow" }, "\uC0AC\uAC74 \uC120\uD0DD \u2192 \uC790\uB8CC \uD655\uC778 \u2192 \uBD88\uC77C\uCE58 \uD0D0\uC9C0 \u2192 \uB2F4\uB2F9\uC790 \uAC80\uD1A0 \u2192 1\uD398\uC774\uC9C0 \uBE0C\uB9AC\uD551 \u2192 PDF \uCD9C\uB825"), /*#__PURE__*/
     React.createElement("p", { className: "axc__links" }, /*#__PURE__*/React.createElement("a", { className: "axc__go", href: "trial-brief.html" }, "\uC2DC\uC81C\uD488 \uC9C1\uC811 \uC368 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })), /*#__PURE__*/React.createElement("a", { className: "axc__go axc__go--ghost", href: "trial-brief.html#tb-case" }, "\uD504\uB85C\uC81D\uD2B8 \uAC1C\uC694(\uBB38\uC81C \u2192 \uD655\uC7A5)"))
@@ -2363,13 +2442,18 @@ function FlagshipTool({ e, onOpen, flip }) {
     React.createElement("div", { className: "fl__txt" }, /*#__PURE__*/
     React.createElement("p", { className: "fl__badge font-sans" }, /*#__PURE__*/React.createElement("b", null, "\uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC0AC\uC6A9"), /*#__PURE__*/React.createElement("span", null, e.status), /*#__PURE__*/React.createElement("span", null, e.no, " / 04")), /*#__PURE__*/
     React.createElement("h3", { id: "fl-" + e.n, className: "fl__name" }, /*#__PURE__*/React.createElement("small", { className: "font-ko" }, t1), /*#__PURE__*/React.createElement("span", { className: "font-serif" }, M.name)), /*#__PURE__*/
-    React.createElement("ol", { className: "fl__story font-ko" }, /*#__PURE__*/
+    React.createElement("p", { className: "fl__line font-ko" }, M.line), /*#__PURE__*/
+    React.createElement("p", { className: "fl__badges font-ko" }, /*#__PURE__*/React.createElement("span", null, M.extra), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--demo" }, "\uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0")), /*#__PURE__*/
+    React.createElement("details", { className: "fl__more font-ko" }, /*#__PURE__*/
+    React.createElement("summary", null, "\uBB38\uC81C \u2192 \uC81C\uC791 \u2192 \uC0AC\uC6A9 3\uB2E8\uACC4 \uBCF4\uAE30"), /*#__PURE__*/
+    React.createElement("ol", { className: "fl__story" }, /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "\uC5B4\uB5A4 \uBB38\uC81C\uAC00 \uC788\uC5C8\uB098"), M.why), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "\uBB34\uC5C7\uC744 \uB9CC\uB4E4\uC5C8\uB098"), M.made), /*#__PURE__*/
     React.createElement("li", null, /*#__PURE__*/React.createElement("b", null, "\uC5B4\uB5BB\uAC8C \uC4F0\uB098"), M.use)
     ), /*#__PURE__*/
-    React.createElement("p", { className: "fl__link font-ko" }, /*#__PURE__*/React.createElement("span", null, "\uC774\uC5B4\uC9C0\uB294 \uC5ED\uB7C9"), M.link), /*#__PURE__*/
-    React.createElement("p", { className: "fl__point font-ko" }, /*#__PURE__*/React.createElement("b", null, T.ruleT), T.rule), /*#__PURE__*/
+    React.createElement("p", { className: "fl__link" }, /*#__PURE__*/React.createElement("span", null, "\uC774\uC5B4\uC9C0\uB294 \uC5ED\uB7C9"), M.link), /*#__PURE__*/
+    React.createElement("p", { className: "fl__point" }, /*#__PURE__*/React.createElement("b", null, T.ruleT), T.rule)
+    ), /*#__PURE__*/
     React.createElement("div", { className: "fl__acts" }, /*#__PURE__*/
     React.createElement("button", { type: "button", className: "btn fl__open", "aria-haspopup": "dialog", onClick: open }, "\uC2E4\uC81C \uD654\uBA74 \uD3BC\uCCD0 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(Layers, { size: 16 })), /*#__PURE__*/
     React.createElement("a", { href: e.url, target: "_blank", rel: "noreferrer", className: "btn btn--ghost" }, e.cta, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 15 }))
@@ -2390,8 +2474,7 @@ function ArtifactsSection() {
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { no: "04 \uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C", ko: "\uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC2E4\uC81C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4", en: "Selected Works \xB7 Four Independent Products" }), /*#__PURE__*/
     React.createElement("div", { id: "tools", className: "arts__intro reveal" }, /*#__PURE__*/
-    React.createElement("p", { className: "arts__lead font-ko", id: "arts-title" }, "\uBB38\uC81C\uB97C \uBC1C\uACAC\uD558\uB294 \uB370\uC11C \uB05D\uB0B4\uC9C0 \uC54A\uACE0, \uD63C\uC790 \uB05D\uAE4C\uC9C0 \uB9CC\uB4E4\uC5B4 \uBC30\uD3EC\uD55C ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uC81C\uD488"), " \uB124 \uAC00\uC9C0\uC785\uB2C8\uB2E4. \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4.", /*#__PURE__*/
-    React.createElement("span", null, "\uC81C\uD488\uB9C8\uB2E4 \uC5B4\uB5A4 \uBB38\uC81C\uAC00 \uC788\uC5C8\uB294\uC9C0 \u2192 \uBB34\uC5C7\uC744 \uB9CC\uB4E4\uC5C8\uB294\uC9C0 \u2192 \uC5B4\uB5BB\uAC8C \uC4F0\uB294\uC9C0 \uC21C\uC11C\uB85C \uC801\uC5C8\uC2B5\uB2C8\uB2E4. \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC758 AX \uB294 \uBC14\uB85C \uC704\uC5D0 \uC788\uC2B5\uB2C8\uB2E4.")), /*#__PURE__*/
+    React.createElement("p", { className: "arts__lead font-ko", id: "arts-title" }, "\uD63C\uC790 \uB05D\uAE4C\uC9C0 \uB9CC\uB4E4\uC5B4 \uBC30\uD3EC\uD55C ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uC81C\uD488"), " 4\uC885 \u2014 \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("ol", { className: "arts__index" },
     TOOLS.map((e) => /*#__PURE__*/
     React.createElement("li", { key: e.n }, /*#__PURE__*/React.createElement("a", { href: "#ed-" + e.n }, /*#__PURE__*/
@@ -2660,6 +2743,12 @@ function Lectures() {
 /* ============================================================ ABOUT — 스크롤 스토리
  * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
  * 오른쪽 사진이 프로필 → 발표 → 청년의날 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
+/* 소개 — 서술 문단 대신 [문제 → 설계] 한 줄 + 실적 배지 + 구분 라벨 */
+const ABOUT_SCAN = [
+["반복 송무 → 정비사업 AX 3종 · 급여명세서 자동 발송", "사내 운영", "actual"],
+["필요한 도구 → 직접 만들어 배포(집캐치 · Trial Brief · 범용 AX)", "공개 배포", "demo"],
+["현장의 문제 → 국민 대토론회 정책 제안 · 발표", "자산분과 1위", "actual"]];
+
 const STORY_LINES = ["조직에서 반복되는 문제를 찾고,", "기술로 풀 수 있는 부분을", "시스템으로 옮깁니다."];
 const STORY_SHOTS = [
 { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
@@ -2726,10 +2815,10 @@ function About() {
     STORY_LINES.map((l, i) => /*#__PURE__*/React.createElement("span", { key: l, className: "story__line" + (lineOn(i) ? " on" : "") }, l))
     ), /*#__PURE__*/
     React.createElement("div", { className: "story__body" + (stage.body ? " on" : "") }, /*#__PURE__*/
-    React.createElement("p", { className: "font-ko" }, "\uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC5D0\uC11C \uC815\uBE44\uC0AC\uC5C5 AX \uC640 \uC804\uB7B5\uAE30\uD68D\uC744 \uB9E1\uC544, \uBC18\uBCF5\uB418\uB294 \uC5C5\uBB34\uB97C \uC2DC\uC2A4\uD15C\uC73C\uB85C \uC62E\uACA8 \uC654\uC2B5\uB2C8\uB2E4. \uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uC501\uB2C8\uB2E4. \uB3D9\uC2DC\uC5D0 \uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0 \xB7 \uC815\uCC45\uC758 \uC81C\uC57D\uACFC \uC774\uD574\uAD00\uACC4\uB97C \uACF5\uBD80\uD558\uBA70, \uAE30\uC220\uC758 \uACB0\uACFC\uAC00 \uC2E4\uC81C \uD310\uB2E8\uACFC \uC2E4\uD589\uC73C\uB85C \uC774\uC5B4\uC9C0\uB3C4\uB85D \uD558\uB294 \uC5ED\uB7C9\uC744 \uD0A4\uC6B0\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
-
-
-
+    React.createElement("ul", { className: "scan font-ko", "aria-label": "\uD55C\uB208\uC5D0 \uBCF4\uB294 \uC18C\uAC1C" },
+    ABOUT_SCAN.map(([line, badge, kind]) => /*#__PURE__*/
+    React.createElement("li", { key: line }, /*#__PURE__*/React.createElement("b", null, line), /*#__PURE__*/React.createElement("span", { className: "scan__badge" }, badge), /*#__PURE__*/React.createElement("i", { className: "cx__kind cx__kind--" + kind }, CASE_KIND[kind]))
+    )
     ), /*#__PURE__*/
     React.createElement("p", { className: "signature font-script", "aria-hidden": "true" }, "Yubin Kim"), /*#__PURE__*/
     React.createElement("p", { className: "story__addr font-ko" }, /*#__PURE__*/React.createElement(MapPin, { size: 15 }), " \uC11C\uC6B8 \uC11C\uCD08\uAD6C \uC11C\uCD08\uB300\uB85C 264 \uBC95\uC870\uD0C0\uC6CC 15F \u2014 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D"), /*#__PURE__*/

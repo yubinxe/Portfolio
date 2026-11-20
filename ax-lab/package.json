@@ -1,0 +1,26 @@
+{
+  "name": "ax-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "범용 AX 3종(C-1 ReconcileGate · C-2 Ops Triage · C-3 Claim Verifier) — 개인 구현 · 공개 시연(가상 벤치마크 검증). 빌드 결과는 ../ax/ 로 나가 GitHub Pages · Vercel 이 그대로 서빙한다",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vitest run --reporter=default --reporter=json --outputFile=.vitest.json && vite build && vite-node scripts/report.ts",
+    "test": "vitest run",
+    "report": "vitest run --reporter=json --outputFile=.vitest.json && vite-node scripts/report.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.9",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vite-node": "^2.1.8",
+    "vitest": "^2.1.8"
+  }
+}

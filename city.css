@@ -682,3 +682,46 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
 .axc__tb-dl ul{margin:0;padding-left:16px}
 .axc__tb-flow{margin:0;padding:8px 10px;font-size:.8rem;color:var(--v5-on);border:1px solid var(--v5-on-faint)}
 @media (max-width:860px){.axc__tb{grid-template-columns:1fr}.axc__tb-shot{max-height:420px}.axc__tb-dl div{grid-template-columns:64px minmax(0,1fr)}}
+/* V8 — 압축: 첫 화면은 [문제 → 설계] 한 줄 · 실적 배지 · 구분 라벨, 세부는 접기 */
+.axc__line{margin:10px 0 0;font-size:clamp(1rem,1.5vw,1.12rem);font-weight:700;line-height:1.55;color:#F8F3E8;word-break:keep-all}
+.axc__badges{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px!important;margin:10px 0 0!important}
+.axc__badges span{padding:2px 9px;font-size:.76rem;font-weight:700;letter-spacing:0;color:var(--v5-goldon);border:1px solid rgba(220,192,138,.5)}
+.axc .cx__kind--actual{color:var(--v5-mid);background:var(--v5-goldon);border-color:var(--v5-goldon)}
+.axc .cx__kind--demo{color:#BFE3CF;background:rgba(47,107,79,.25);border-color:rgba(191,227,207,.5)}
+.axc__more{border-top:1px solid var(--v5-on-faint)}
+.axc__more summary{display:flex;align-items:center;gap:8px;min-height:44px;font-size:.86rem;font-weight:700;color:var(--v5-goldon);cursor:pointer;list-style:none}
+.axc__more summary::-webkit-details-marker{display:none}
+.axc__more summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;font-weight:800;border:1px solid currentColor}
+.axc__more[open] summary::before{content:"−"}
+.axc__more .axc__how{margin:0 0 10px}
+.axc__tb .axc__more .axc__tb-d{margin:0 0 10px}
+.axcx{margin-top:clamp(40px,6vw,72px);padding-top:24px;border-top:1px solid var(--v5-on-faint);scroll-margin-top:72px}
+.axcx__head{display:grid;gap:8px;margin-bottom:18px}
+.axcx__head .axc__gh{padding:0}
+.axcx__head .axc__gh strong{font-size:clamp(1.15rem,2vw,1.45rem)}
+.axcx__rule{margin:0;font-size:.86rem;color:var(--v5-on-soft)}
+.axcx__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.axcx__card{display:flex;flex-direction:column;gap:10px;padding:18px;background:rgba(239,232,216,.04);border:1px solid rgba(220,192,138,.35);border-top:3px solid var(--v5-goldon)}
+.axcx__k{display:flex;flex-wrap:wrap;gap:4px 8px;margin:0;font-size:.72rem;letter-spacing:.03em;color:var(--v5-on-soft)}
+.axcx__k b{color:var(--v5-goldon)}
+.axcx__card h4{margin:0;font-size:1.12rem;font-weight:800;color:#F8F3E8;word-break:keep-all}
+.axcx__line{margin:0;font-size:.95rem;font-weight:700;line-height:1.55;color:#F8F3E8;word-break:keep-all}
+.axcx__dom{display:flex;flex-wrap:wrap;gap:4px;margin:0}
+.axcx__dom span{padding:1px 7px;font-size:.72rem;color:var(--v5-on-soft);border:1px solid var(--v5-on-faint)}
+.axcx__mech{margin:0;font-size:.8rem;line-height:1.6;color:var(--v5-on-soft);word-break:keep-all}
+.axcx__proof{display:grid;gap:4px;margin:0;padding:10px 0;font-size:.84rem;line-height:1.5;color:#F8F3E8;border-top:1px solid var(--v5-on-faint);border-bottom:1px solid var(--v5-on-faint)}
+.axcx__t b{margin-right:4px;color:#BFE3CF}
+.axcx__t--wait{color:var(--v5-slate)}
+.axcx__st{margin:0}
+.axcx__card .axc__go{align-self:flex-start;margin-top:auto}
+.axc__go--off{color:var(--v5-slate);background:transparent;border:1px dashed var(--v5-slate)}
+@media (max-width:1000px){.axcx__list{grid-template-columns:1fr}}
+.fl__line{margin:0;font-size:clamp(1.02rem,1.5vw,1.14rem);font-weight:700;line-height:1.55;color:var(--v5-ink);word-break:keep-all}
+.fl__badges{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0}
+.fl__badges span{padding:2px 9px;font-size:.76rem;font-weight:700;color:var(--v5-gold-t);background:rgba(156,126,72,.1);border:1px solid rgba(115,92,48,.35)}
+.fl__more{border-top:1px solid var(--hair)}
+.fl__more summary{display:flex;align-items:center;gap:8px;min-height:44px;font-size:.86rem;font-weight:700;color:var(--v5-navy);cursor:pointer;list-style:none}
+.fl__more summary::-webkit-details-marker{display:none}
+.fl__more summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;font-weight:800;border:1px solid currentColor}
+.fl__more[open] summary::before{content:"−"}
+.fl__more .fl__link,.fl__more .fl__point{margin:10px 0 0}

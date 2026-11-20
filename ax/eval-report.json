@@ -1,0 +1,65 @@
+{
+  "label": "개인 구현 · 공개 시연 (가상 벤치마크 검증)",
+  "generated": "npm run build (ax-lab) — vitest run 결과와 벤치마크 재실행 값",
+  "vitest": {
+    "total": 36,
+    "passed": 36,
+    "failed": 0,
+    "success": true
+  },
+  "apps": {
+    "C-1": {
+      "id": "reconcile-gate",
+      "tests": {
+        "tests": 13,
+        "passed": 13
+      },
+      "planted": 15,
+      "detected": 15,
+      "falsePositives": 0,
+      "scenarios": 3
+    },
+    "C-2": {
+      "id": "ops-triage",
+      "tests": {
+        "tests": 12,
+        "passed": 12
+      },
+      "tickets": 20,
+      "trap": {
+        "total": 12,
+        "blocked": 12,
+        "missed": 0
+      },
+      "normal": {
+        "total": 8,
+        "allowed": 8,
+        "overBlocked": 0
+      },
+      "cite": {
+        "total": 18,
+        "correct": 18
+      },
+      "codes": {
+        "total": 12,
+        "matched": 12
+      }
+    },
+    "C-3": {
+      "id": "claim-verifier",
+      "tests": {
+        "tests": 11,
+        "passed": 11
+      },
+      "cases": 10,
+      "detected": 10,
+      "located": 10,
+      "falsePositives": 0,
+      "clean": {
+        "sentences": 10,
+        "verified": 10,
+        "flagged": 0
+      }
+    }
+  }
+}

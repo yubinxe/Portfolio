@@ -462,3 +462,57 @@ header.hnav .wrap{gap:24px}
 /* 부동산산업의 날 — 세로 사진 2장(부스 · 세미나 배너), 같은 사진 반복 없이 */
 .clipset__pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .clipset__tall{margin:0}.clipset__tall a{display:block;overflow:hidden;aspect-ratio:4/5}.clipset__tall img{width:100%;height:100%;object-fit:cover}
+/* V8 — 6축 역량 지도(#composite). 점수 없는 근거 지도: 동심 육각 격자 · 축 · 꼭짓점, 고른 축만 금색. 그려짐은 스크롤 진입 1회 */
+.hex{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;margin:clamp(28px,4vw,44px) 0 clamp(28px,4vw,40px)}
+.hex__fig{position:relative;margin:0 auto;width:100%;max-width:520px}
+.hex__fig svg{display:block;width:100%;height:auto;overflow:visible}
+.hex__grid{transform-origin:200px 200px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
+.hex__grid polygon{fill:none;stroke:rgba(17,17,17,.2);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+.hex__grid polygon:last-child{stroke:rgba(17,17,17,.42)}
+.hex__grid line{stroke:rgba(17,17,17,.16);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s ease var(--d,0s),stroke .3s}
+.hex__grid line.on{stroke:var(--gold-text);stroke-width:1.6}
+.hex.is-drawn .hex__grid polygon,.hex.is-drawn .hex__grid line{stroke-dashoffset:0}
+.hex__sector{fill:rgba(156,126,72,.16);stroke:rgba(115,92,48,.55);stroke-width:1;opacity:0;transition:opacity .5s ease .9s}
+.hex.is-drawn .hex__sector{opacity:1;transition:opacity .4s ease}
+.hex__orbit{transform-origin:200px 200px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
+.hex__orbit circle{fill:var(--gold-text)}
+.hex__node{cursor:pointer;opacity:0;transform-box:fill-box;transition:opacity .5s ease var(--d,0s)}
+.hex.is-drawn .hex__node{opacity:1}
+.hex__hit{fill:transparent}
+.hex__dot{fill:var(--ecru);stroke:var(--ink);stroke-width:1.4;transform-box:fill-box;transform-origin:center;transition:transform .45s cubic-bezier(.34,1.56,.64,1),fill .3s}
+.hex__node.on .hex__dot{fill:var(--gold-text);stroke:var(--gold-text);transform:scale(1.55)}
+.hex__node:hover .hex__dot{transform:scale(1.3)}
+.hex__node text{font-size:14px;font-weight:700;fill:var(--ink-soft);transition:fill .3s}
+.hex__node.on text{fill:var(--ink)}
+
+.hex__note{margin:6px 0 0;text-align:center;font-size:.76rem;color:var(--ink-soft)}
+.hex__tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 16px}
+.hex__tabs button{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 10px;text-align:left;background:var(--paper);border:1px solid rgba(17,17,17,.14);cursor:pointer;transition:border-color .2s,background .2s;scroll-margin-top:120px}
+.hex__tabs button b{font-size:.86rem;color:var(--gold-text)}
+.hex__tabs button span{font-size:.84rem;font-weight:700;line-height:1.3}
+.hex__tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--ecru)}
+.hex__tabs button[aria-selected="true"] b{color:#DCC08A}
+.hex__alias{position:absolute;width:1px;height:1px;overflow:hidden}
+.hex__panel{padding:clamp(18px,2.4vw,26px);background:var(--paper);border:1px solid rgba(17,17,17,.14);border-top:3px solid var(--ink);animation:hexIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes hexIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hex__k{margin:0;font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--gold-text)}
+.hex__t{margin:6px 0 0;font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.3}
+.hex__line{margin:10px 0 0;font-size:clamp(1.02rem,1.5vw,1.16rem);font-weight:700;line-height:1.55;color:var(--ink)}
+.hex__h{margin:16px 0 6px;font-size:.74rem;font-weight:800;letter-spacing:.04em;color:var(--ink-soft)}
+.hex__wins{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.hex__wins li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;padding:9px 0;font-size:.93rem;font-weight:600;line-height:1.5;border-bottom:1px solid rgba(17,17,17,.1)}
+.hex__badges{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.hex__badges span{padding:3px 9px;font-size:.78rem;font-weight:600;background:var(--ecru);border:1px solid rgba(17,17,17,.14)}
+.hex__go{display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:.84rem;font-weight:700;color:var(--ink);text-underline-offset:3px}
+@media (max-width:900px){.hex{grid-template-columns:1fr}.hex__fig{max-width:400px}}
+@media (max-width:480px){.hex__tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.hex__node text{font-size:18px}}
+@media (prefers-reduced-motion:reduce){.hex__grid,.hex__orbit,.hex__dot,.hex__panel{transition:none;animation:none}.hex__grid polygon,.hex__grid line{stroke-dashoffset:0;transition:none}.hex__node,.hex__sector{opacity:1;transition:none}}
+/* V8 — 스캔 구조: [문제 → 설계] 한 줄 · 실적 배지 · 구분 라벨 */
+.cx__chips{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0}.cx__chips span{padding:4px 10px;font-size:.8rem;font-weight:700;border:1px solid rgba(17,17,17,.2)}
+.cx__body .cx__line{margin-top:3px;font-size:.86rem;line-height:1.5;color:var(--ink)}
+.cx__body .cx__badge{justify-self:start;margin-top:5px;padding:1px 8px;font-size:.72rem;font-weight:700;color:var(--gold-text);background:rgba(156,126,72,.1);border:1px solid rgba(115,92,48,.35)}
+.scan{display:grid;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid rgba(17,17,17,.14)}
+.scan li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:11px 0;border-bottom:1px solid rgba(17,17,17,.14)}
+.scan b{flex:1 1 100%;font-size:clamp(.95rem,1.2vw,1.04rem);font-weight:700;line-height:1.5;color:var(--ink)}
+.scan__badge{padding:1px 8px;font-size:.74rem;font-weight:700;color:var(--gold-text);background:rgba(156,126,72,.1);border:1px solid rgba(115,92,48,.35)}
+i.cx__kind{font-style:normal}
