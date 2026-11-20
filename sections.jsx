@@ -1552,7 +1552,7 @@ function AXCommand() {
               <span>사내 NAS {adminData.kpis.totalFiles.toLocaleString()} 파일 ({adminData.kpis.totalGb} GB · {adminData.kpis.totalChunks.toLocaleString()} FTS5 청크) · 상업 코퍼스 {adminData.kpis.corpusDocs}건</span>
             </div>
             <div className="axc__admin-btns">
-              <button type="button" onClick={() => { window.location.href = "vault.html"; }}>전시관 입장 (Galerie Privée) →</button>
+              <button type="button" onClick={() => { window.location.href = "vault.html?v=2"; }}>전시관 입장 (Galerie Privée) →</button>
               <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.lock()}>잠금</button>
             </div>
           </div>

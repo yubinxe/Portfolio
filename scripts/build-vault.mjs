@@ -269,7 +269,10 @@ const vaultPayload = {
       outcome: "반발하던 송무 실무진에 ‘반복 대조=프로그램 / 소송 대응=사람’ 역할 분담을 제시하고 상급자 검수를 거쳐 전사 온보딩 완료. NAVER WORKS 급여명세서 자동 발송 사내 인계 및 고객 메일 우선순위 분류 화면 구축."
     }
   ],
-  commercialTracks: signals.commercial_tracks,
+  commercialTracks: signals.commercial_tracks.map((t) => ({
+    ...t,
+    core_asset: String(t.core_asset || "").replace(/kyungguk/gi, "Gyunggook")
+  })),
   ragSeed: ragSeed
 };
 

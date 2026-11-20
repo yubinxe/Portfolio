@@ -1553,7 +1553,7 @@ function AXCommand() {
     React.createElement("span", null, "\uC0AC\uB0B4 NAS ", adminData.kpis.totalFiles.toLocaleString(), " \uD30C\uC77C (", adminData.kpis.totalGb, " GB \xB7 ", adminData.kpis.totalChunks.toLocaleString(), " FTS5 \uCCAD\uD06C) \xB7 \uC0C1\uC5C5 \uCF54\uD37C\uC2A4 ", adminData.kpis.corpusDocs, "\uAC74")
     ), /*#__PURE__*/
     React.createElement("div", { className: "axc__admin-btns" }, /*#__PURE__*/
-    React.createElement("button", { type: "button", onClick: () => {window.location.href = "vault.html";} }, "\uC804\uC2DC\uAD00 \uC785\uC7A5 (Galerie Priv\xE9e) \u2192"), /*#__PURE__*/
+    React.createElement("button", { type: "button", onClick: () => {window.location.href = "vault.html?v=2";} }, "\uC804\uC2DC\uAD00 \uC785\uC7A5 (Galerie Priv\xE9e) \u2192"), /*#__PURE__*/
     React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.lock() }, "\uC7A0\uAE08")
     )
     ), /*#__PURE__*/

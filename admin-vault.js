@@ -4,7 +4,7 @@
   if (window.ykAdmin) return;
 
   var SESS_KEY = "yk.admin.v2";
-  var VAULT_URL = "vault-data.enc.json?v=4";
+  var VAULT_URL = "vault-data.enc.json?v=5";
   var CSS_URL = "admin-vault.css?v=4";
   var unlockedData = null;
   var encBundle = null;
@@ -216,7 +216,7 @@
         setTimeout(function () { curtain.classList.add("is-show"); }, 120);
         setTimeout(function () {
           emitChange();
-          window.location.href = "vault.html";
+          window.location.href = "vault.html?v=2";
         }, 720);
       } catch (e) {
         busy = false;
@@ -448,7 +448,7 @@
 
   function open(preferredTab) {
     if (unlockedData) {
-      window.location.href = "vault.html" + (preferredTab ? "#" + preferredTab : "");
+      window.location.href = "vault.html?v=2" + (preferredTab ? "#" + preferredTab : "");
       return;
     }
     buildUi();
