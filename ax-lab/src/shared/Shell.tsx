@@ -15,7 +15,7 @@ export function Shell({ app, title, question, children, right }: { app: AppId; t
   return (
     <div className="ax">
       <header className="ax-top">
-        <a className="ax-back" href="../../index.html#ax-c">← 김유빈 포트폴리오</a>
+        <a className="ax-back" href="../../index.html#ax-c" target="_top">← 김유빈 포트폴리오</a>
         <p className="ax-brand"><b>{me.code} {me.en}</b><span>{me.ko}</span></p>
         <nav className="ax-apps" aria-label="범용 AX 3종">
           {APPS.map((a) => <a key={a.id} href={"../" + a.id + "/"} aria-current={a.id === app ? "page" : undefined}>{a.code} {a.ko}</a>)}

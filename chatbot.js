@@ -788,8 +788,11 @@
   }
   function showTeaser() {
     teaser.classList.add("show");
-    // 폰에서는 배너가 본문 버튼을 가리므로 잠깐 보여 주고 접는다 (말풍선 버튼은 그대로 남는다)
-    if (window.matchMedia("(max-width: 640px)").matches) setTimeout(hideTeaser, 6000);
+    // 배너가 본문 아래쪽을 가리지 않도록 — 잠깐 보여 주고 접고, 스크롤을 시작하면 바로 접는다(말풍선 버튼은 그대로 남는다)
+    setTimeout(hideTeaser, window.matchMedia("(max-width: 640px)").matches ? 5000 : 8000);
+    var y0 = window.scrollY;
+    var onS = function () { if (Math.abs(window.scrollY - y0) > 40) { hideTeaser(); window.removeEventListener("scroll", onS); } };
+    window.addEventListener("scroll", onS, { passive: true });
   }
   function hideTeaser() { teaser && teaser.classList.remove("show"); }
   function hideQuick() { if (quick) quick.style.display = "none"; }

@@ -498,6 +498,32 @@ function CaseIndex() {
   );
 }
 
+/* 목적별 입구 — 처음 온 사람이 1–2분 안에 다음 장으로 넘어가도록 세 갈래 */
+const ENTRY = [
+  { k: "01", who: "채용 담당자", hint: "1–2분 요약", line: "한 장 이력과 실무 사례 8선", steps: [["Résumé", "resume.html"], ["실무 사례집", "cases.html"]] },
+  { k: "02", who: "실무 · 기술 검증", hint: "직접 작동", line: "시제품과 공개 시연을 직접 써 보기", steps: [["Trial Brief", "trial-brief.html"], ["법률 AX 시연", "legal-ax.html"], ["범용 AX 3종", "#ax-c"]] },
+  { k: "03", who: "신뢰 · 현장 증거", hint: "보도 · 기록", line: "언론 보도 · 현장 사진 · 비공개 기록", steps: [["11.11 보도 · 현장", "gallery.html#rei-day"], ["비공개 기록 열람실", "vault.html"]] },
+];
+function EntryTracks() {
+  return (
+    <section id="entry" className="entry" aria-labelledby="entry-h">
+      <div className="wrap">
+        <h2 id="entry-h" className="entry__h font-ko">어디서부터 보시겠어요? <span className="font-sans" lang="en">Start Here</span></h2>
+        <ol className="entry__list">
+          {ENTRY.map((e) => (
+            <li key={e.k} className="entry__item">
+              <p className="entry__k font-sans"><b className="font-serif">{e.k}</b>{e.hint}</p>
+              <h3 className="font-ko">{e.who}</h3>
+              <p className="entry__line font-ko">{e.line}</p>
+              <p className="entry__steps font-ko">{e.steps.map(([t, h], k) => <React.Fragment key={h}>{k ? <i aria-hidden="true">→</i> : null}<a href={h}>{t}</a></React.Fragment>)}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 function Ledger() {
   const ref = useReveal();
   /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
@@ -1035,16 +1061,6 @@ const TRAJECTORY = [
 
 /* 현장 일지 — 청와대 청년의날 다음 장. 날짜 도장으로 잇는다 (성평등 공론장은 대외활동 목록에만) */
 const DIARY = [
-  { id: "dyl-1114", date: "11.14", day: "SAT", tone: "navy", chip: "질의 · 발표",
-    eyebrow: "Field Diary — 2026. 11. 14", title: "2026 민주청년지도자 양성과정 — 질의 · 발표 세션",
-    body: "민주연구원의 2026 민주청년지도자 양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께했고, 하정우 부위원장과도 현장에서 함께했습니다. 10월 24일 입학 뒤 이어 가는 과정입니다.",
-    facts: [["주최·주관", "민주연구원"], ["일자", "2026. 11. 14"], ["함께", "강득구 민주연구원장 · 김경수 청와대 정무특보 · 하정우 부위원장"], ["역할", "질의 · 발표 세션 발언"]],
-    main: { name: "dyl-1114-group", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정(2026. 11. 14) 단체 사진, 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께", pos: "50% 55%", w: 1600, h: 1066 },
-    thumbs: [
-      { name: "dyl-1114-qa", href: "gallery.html#g-dyl-1114-qa", alt: "김유빈 활동 기록 — 질의 · 발표 세션에서 마이크를 잡고 발언하는 모습(2026. 11. 14)", pos: "45% 35%" },
-      { name: "dyl-1114-selfie", href: "gallery.html#g-dyl-1114-selfie", alt: "김유빈 활동 기록 — 하정우 부위원장과 함께(2026. 11. 14)", pos: "50% 35%" },
-    ],
-    href: "gallery.html#dyl-1114", cta: "11. 14 사진 전체 보기" },
   { id: "rei-day", date: "11.11", day: "WED", tone: "brick", chip: "집캐치 발표 · 내빈 응대",
     eyebrow: "Field Diary — 2026. 11. 11", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
     body: "제11회 부동산산업의 날에서 한국부동산마케팅협회(KREMA) 홍보부스에 참여해, 직접 개발한 청약 · 공공임대 공고 탐색 서비스 집캐치를 발표 · 시연하고 찾아온 내빈을 응대했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다. 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했습니다.",
@@ -1070,17 +1086,6 @@ const DIARY = [
       { name: "moef-talk", href: "gallery.html#g-moef-talk", alt: "김유빈 활동 기록 — 시연 현장에서 권대영 재정경제부 제1차관과 청년들", pos: "55% 35%" },
     ],
     href: "gallery.html#moef-youth", cta: "간담회 사진 전체 보기" },
-  { id: "dyl", date: "10.24", day: "SAT", tone: "navy", chip: "입학 · 진행 중",
-    eyebrow: "Field Diary — 2026. 10. 24", title: "2026 민주청년지도자 양성과정 입학",
-    body: "민주연구원이 주최·주관하는 ‘2026 민주청년지도자 양성과정’에 입학했습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다. 청년의날에 들었던 정책의 언어를 이번에는 직접 배우고 토론하는 자리입니다.",
-    facts: [["주최·주관", "민주연구원"], ["기간", "2026. 10. 24 – 12. 13"], ["함께", "김민석 당대표 · 강득구 민주연구원장 · 이광재 예산결산특별위원장 · 박홍근 기획예산처 장관"], ["상태", "수강 중"]],
-    main: { name: "dyl-entrance", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정 입학식 현수막 앞에서 김민석 당대표와 함께", pos: "50% 33%", w: 675, h: 1200 },
-    thumbs: [
-      { name: "dyl-qa", href: "gallery.html#g-dyl-qa", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강에서 마이크를 잡고 질문하는 모습", pos: "38% 45%" },
-      { name: "dyl-library", href: "gallery.html#g-dyl-library", alt: "김유빈 활동 기록 — 민주연구원 서가 앞에서 강득구 민주연구원장과 함께", pos: "50% 40%" },
-      { name: "dyl-lecture", href: "gallery.html#g-dyl-lecture", alt: "김유빈 활동 기록 — 이광재 예산결산특별위원장의 특강을 마친 뒤 함께", pos: "45% 40%" },
-    ],
-    href: "gallery.html#dyl", cta: "입학식 사진 전체 보기" },
 ];
 
 function FieldDiary() {
@@ -1357,7 +1362,8 @@ const TOOL_META = {
     why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾기 어려웠습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다.",
     made: "두 공고를 공공데이터 API로 모아, 지역 · 주거비 · 가구 조건 3단계 입력으로 지금 지원할 수 있는 후보를 정리하는 서비스.",
     link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원",
-    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리", extra: "한국경제 · 중앙일보 소개" },
+    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리", extra: "한국경제 · 중앙일보 소개",
+    press: [["한국경제 보도", "https://www.hankyung.com/article/202611110211i"], ["중앙일보 보도", "https://www.joongang.co.kr/article/25477695"], ["11.11 시연 현장", "gallery.html#rei-day"]] },
   "16": { name: "법조시장 한눈에", shot: "lp-home", env: "The Regulatory Landscape", envKo: "개발 대상지 위로 법률안 · 법령 · 판례가 층으로 내려앉습니다",
     why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 번에 보기 어려웠습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다.",
     made: "국회 · 법제처 · 대한변협 공개 자료를 하루 단위로 갱신하는 상황판과, 민법 기간 계산 조문에 맞춘 기한 계산기.",
@@ -1578,12 +1584,19 @@ function AXCommand() {
   }, []);
   React.useEffect(() => {
     /* #ax-evidence 같은 깊은 링크로 들어오면 그 시스템을 고른다 */
-    const pick = () => { const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === location.hash); if (i > -1) setSys(i); };
+    const pick = () => {
+      const h = location.hash;
+      const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === h);
+      if (i > -1) setSys(i);
+      else if (h === "#ax-c") setSys(AX_SYSTEMS.length);
+      else { const j = AX_C.findIndex((c) => "#ax-" + c.id === h); if (j > -1) setSys(AX_SYSTEMS.length + j); }
+    };
     pick(); window.addEventListener("hashchange", pick);
     return () => window.removeEventListener("hashchange", pick);
   }, []);
-  const cur = AX_SYSTEMS[sys];
-  const Demo = [Sys01, Sys02, Sys03, Sys04, Sys05, Sys06][sys];
+  const isC = sys >= AX_SYSTEMS.length;
+  const cur = isC ? null : AX_SYSTEMS[sys];
+  const Demo = isC ? null : [Sys01, Sys02, Sys03, Sys04, Sys05, Sys06][sys];
   return (
     <AXReady.Provider value={{ city, lax }}>
     <section id="ax-desk" ref={sec} className="axc" aria-labelledby="axc-title">
@@ -1632,8 +1645,22 @@ function AXCommand() {
                 </ol>
               </div>
             ))}
+            <div className="axc__grp axc__grp--c" id="ax-c">
+              <p className="axc__gh font-ko"><b className="axc__st axc__st--c">C</b><span><strong>범용 AX 확장 3종</strong><em>데이터 · 운영 · 기획 — 가상 벤치마크 검증</em></span></p>
+              <ol>
+                {AX_C.map((c, j) => (
+                  <li key={c.code} id={"ax-" + c.id}>
+                    <button type="button" aria-pressed={sys === AX_SYSTEMS.length + j} onClick={() => setSys(AX_SYSTEMS.length + j)}>
+                      <b className="font-serif">{c.code}</b>
+                      <span><strong className="font-ko">{c.ko}</strong><em className="font-sans" lang="en">{c.en.split(" · ")[0]}</em><i className="font-ko">개인 구현 · 공개 시연</i></span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </nav>
 
+          {isC ? <AXCWindow c={AX_C[sys - AX_SYSTEMS.length]} /> : (
           <div className="axc__main" ref={stage}>
             <header className="axc__mh">
               <p className="font-sans"><b>{cur.number}</b> {cur.englishName}<span className={"axc__tag axc__tag--" + cur.group.toLowerCase() + " font-ko"}>{AX_STATUS_KO[cur.implementationStatus]}</span></p>
@@ -1659,11 +1686,11 @@ function AXCommand() {
                 ? <a className="axc__go" href={cur.demoPath}>상세 시연에서 직접 써 보기 <ArrowUpRight size={15} /></a>
                 : cur.demoPath ? <a className="axc__go axc__go--ghost" href={cur.demoPath}>개인 공개 시연에서 같은 가상 계약을 조항별로 보기 <ArrowUpRight size={15} /></a> : null}
               <span>{cur.group === "A" ? "사내 구축 시스템 — 실제 화면 · 자료 비공개, 위 시연은 가상" : "모든 사건 · 문서는 가상 자료 — 실제 의뢰인 정보 없음"}</span>
+              {cur.group === "A" && <a className="axc__vault" href="vault.html">비공개 기록 열람실(암호) →</a>}
             </p>
           </div>
+          )}
         </div>
-
-        <AXCExpansion />
 
         <header className="axc__subhead">
           <h3 className="font-ko">법무법인 경국에서 맡은 실무 <span className="font-sans" lang="en">Practical Execution</span></h3>
@@ -1685,36 +1712,28 @@ function AXCommand() {
     </AXReady.Provider>
   );
 }
-/* C — 범용 AX 확장 3종. 수치 칸은 AX_C(=ax/eval-report.json) 그대로, 값이 없으면 '준비 중' */
-function AXCExpansion() {
+/* C — 범용 AX 확장 3종. 콘솔에서 고르면 그 자리에서 실제 앱이 창(iframe)으로 뜬다. 수치 칸은 AX_C(=ax/eval-report.json) 그대로 */
+function AXCWindow({ c }) {
+  const proof = axcProof(c);
   return (
-    <section id="ax-c" className="axcx" aria-labelledby="axcx-h">
-      <header className="axcx__head">
-        <p className="axc__gh font-ko"><b className="axc__st axc__st--c">C</b><span><strong id="axcx-h">범용 AX 확장 3종</strong><em>정비사업 · 법률 밖 데이터 · 운영 · 기획 현장 — {AX_C_LABEL}</em></span></p>
-        <p className="axcx__rule font-ko">AI 는 구조만 읽고, 계산 · 대조 · 차단은 코드가 합니다. 수치는 빌드 때 실제로 돌린 테스트 결과입니다.</p>
+    <div className="axc__main axc__main--c">
+      <header className="axc__mh">
+        <p className="font-sans"><b>{c.code}</b> {c.en}<span className="axc__tag axc__tag--c font-ko">{AX_C_LABEL}</span></p>
+        <h3 className="font-ko">{c.ko}</h3>
+        <p className="axc__line font-ko">{c.line}</p>
+        <p className="axc__badges font-ko">{c.tests ? <span>npm test {c.tests.passed}/{c.tests.total}</span> : <span>테스트 준비 중</span>}{proof ? <span>{proof}</span> : null}<i className="cx__kind cx__kind--demo">개인 공개 시연</i></p>
       </header>
-      <ol className="axcx__list">
-        {AX_C.map((c) => {
-          const proof = axcProof(c);
-          return (
-            <li key={c.code} className="axcx__card">
-              <p className="axcx__k font-sans"><b>{c.code}</b>{c.en}</p>
-              <h4 className="font-ko">{c.ko}</h4>
-              <p className="axcx__line font-ko">{c.line}</p>
-              <p className="axcx__dom font-ko">{c.domains.map((d) => <span key={d}>{d}</span>)}</p>
-              <p className="axcx__mech font-ko">{c.mechanism}</p>
-              <p className="axcx__proof font-ko">
-                {c.tests ? <span className="axcx__t"><b className="font-sans">npm test {c.tests.passed}/{c.tests.total}</b> 통과</span> : <span className="axcx__t axcx__t--wait">테스트 준비 중</span>}
-                {proof ? <span>{proof}</span> : <span className="axcx__t--wait">검증 수치 준비 중</span>}
-              </p>
-              <p className="axcx__st font-ko"><i className="cx__kind cx__kind--demo">{AX_C_LABEL}</i></p>
-              {c.url ? <a className="axc__go" href={c.url}>직접 써 보기 <ArrowUpRight size={15} /></a> : <span className="axc__go axc__go--off font-ko" aria-disabled="true">배포 준비 중</span>}
-            </li>
-          );
-        })}
-      </ol>
-      <p className="axc__note font-ko">모든 데이터는 가상입니다 — 실제 기업 · 고객 자료 없음 · 외부 AI 호출 없음 · 경국 도입 시스템 아님. 실무 도입 · 시간 단축 효과는 측정하지 않았습니다. <a href="ax/eval-report.json">테스트 리포트(JSON)</a></p>
-    </section>
+      {c.url ? (
+        <div className="axc__win" key={c.id}>
+          <p className="axc__win-bar" aria-hidden="true"><i /><i /><i /><span className="font-sans">{c.url}</span></p>
+          <iframe src={c.url} title={c.ko + " — 실제 앱(가상 데이터)"} loading="lazy" />
+        </div>
+      ) : <p className="axc__wait font-ko">배포 준비 중</p>}
+      <p className="axc__links font-ko">
+        {c.url && <a className="axc__go" href={c.url} data-win>크게 보기 <ArrowUpRight size={15} /></a>}
+        <span>모든 데이터는 가상 · 외부 AI 호출 없음 · 경국 도입 아님 · <a href="ax/eval-report.json" data-win>테스트 리포트</a></span>
+      </p>
+    </div>
   );
 }
 /* 대표 프로젝트 — Gyunggook Trial Brief (개인 구현 시제품 · 경국 도입 아님). 성과 칸에는 테스트로 확인한 것만 */
@@ -2544,6 +2563,7 @@ function FlagshipTool({ e, onOpen, flip }) {
         <h3 id={"fl-" + e.n} className="fl__name"><small className="font-ko">{t1}</small><span className="font-serif">{M.name}</span></h3>
         <p className="fl__line font-ko">{M.line}</p>
         <p className="fl__badges font-ko"><span>{M.extra}</span><i className="cx__kind cx__kind--demo">개인 공개 시연</i></p>
+        {M.press && <p className="fl__press font-ko">{M.press.map(([t, h]) => <a key={h} href={h} target={/^https?:/.test(h) ? "_blank" : undefined} rel="noreferrer">{t}</a>)}</p>}
         <details className="fl__more font-ko">
           <summary>문제 → 제작 → 사용 3단계 보기</summary>
           <ol className="fl__story">
@@ -2716,7 +2736,13 @@ function ResearchArchive() {
           <h2 id="ra-title" className="font-ko">그 밖의 작업 <em className="font-serif">{ARCHIVE.length}</em></h2>
           <p className="ra__sub font-ko">학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠입니다. 네 가지 도구, 경국 AX 와는 성격이 다른 기록이라 따로 모았습니다.</p>
         </header>
-        <ol className="ra__list">{ARCHIVE.map((e) => <ArchiveRow key={e.n} e={e} onPlay={setPlaying} />)}</ol>
+        <ol className="ra__list">{ARCHIVE.slice(0, 3).map((e) => <ArchiveRow key={e.n} e={e} onPlay={setPlaying} />)}</ol>
+        {ARCHIVE.length > 3 && (
+          <details className="fold ra__more">
+            <summary><span className="fold__t"><strong className="font-ko">나머지 {ARCHIVE.length - 3}개 보기</strong></span><i className="fold__icon" aria-hidden="true" /></summary>
+            <ol className="ra__list">{ARCHIVE.slice(3).map((e) => <ArchiveRow key={e.n} e={e} onPlay={setPlaying} />)}</ol>
+          </details>
+        )}
       </div>
       {playing && ReactDOM.createPortal(
         <div className="vlightbox" onClick={() => setPlaying(null)} role="dialog" aria-modal="true" aria-label={playing.title.replace("\n", " · ")}>
@@ -3004,6 +3030,14 @@ function Contact() {
         <p className="font-ko" style={{ color: "rgba(249,246,240,.78)", maxWidth: 600, margin: "26px auto 40px", lineHeight: 1.75, fontSize: "1.05rem" }}>
           AI 전략 · 업무 자동화, 법률 · 부동산의 디지털 전환, 정책과 기술이 만나는 과제에 관해 함께 이야기하고 싶습니다.<br />개인 메일로 연락 주시면 성실히 회신드리겠습니다.
         </p>
+        <p className="ct-roles font-ko">
+          <a href="#ax-desk"><b>AX · 업무자동화</b> 포지션이라면 — 경국 AX 3종 · 범용 AX 3종 →</a>
+          <a href="#trial-brief"><b>서비스 기획 · PM</b> 포지션이라면 — Trial Brief · 집캐치 →</a>
+        </p>
+        <p className="ct-quick font-ko">
+          <a href="resume.pdf" download="김유빈_Resume.pdf">Résumé PDF</a>
+          <a href="mailto:yubin120866@gmail.com?subject=%5B%EB%B9%84%EA%B3%B5%EA%B0%9C%20%EA%B8%B0%EB%A1%9D%20%EC%97%B4%EB%9E%8C%20%EB%AC%B8%EC%9D%98%5D%20%EA%B9%80%EC%9C%A0%EB%B9%88%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4">비공개 기록 열람 문의</a>
+        </p>
         <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="mailto:yubin120866@gmail.com" className="btn" style={{ background: "var(--ecru)", color: "var(--ink)", borderColor: "var(--ecru)" }}>
             <Mail size={16} /> 이메일 보내기
@@ -3058,15 +3092,15 @@ const JOURNAL = [
   { name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
     d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
-  { name: "dyl-1114-qa2", src: "images/dyl-1114-qa2.jpg", t: "민주청년지도자 양성과정 — 질의 · 발표 세션", when: "2026. 11. 14 · 민주연구원", dz: 0.5,
-    d: "양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보, 하정우 부위원장과 함께했습니다.",
-    links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl-1114" }] },
+  { name: "rei-day", src: "images/rei-day.jpg", t: "제11회 부동산산업의 날 — 집캐치 발표 · 시연", when: "2026. 11. 11 · 건설회관", dz: 0.5,
+    d: "KREMA 홍보부스에서 직접 만든 집캐치를 발표 · 시연했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#rei-day" }, { l: "한국경제 보도", h: "https://www.hankyung.com/article/202611110211i" }] },
   { name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
     d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
-  { name: "dyl-qa", src: "images/dyl-qa.jpg", t: "민주청년지도자 양성과정 — 특강 질의", when: "2026. 10. 24 · 민주연구원", dz: 0.6,
-    d: "이광재 예산결산특별위원장의 특강에서 마이크를 잡고 직접 질문했습니다.",
-    links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl" }] },
+  { img: "images/debate-pitch-600.jpg", src: "images/debate-pitch.jpg", t: "국민 대토론회 — 자산분과 정책 제안 발표", when: "2026. 9. 29 · aT센터", dz: 0.6,
+    d: "청년 미래배당펀드팀으로 자산분과 본무대에서 발표했습니다 — 참여 팀 중 1위. 제안이며 정책 채택이 아닙니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#national-debate" }] },
   { img: "images/zipconomy-demo-600.jpg", src: "images/zipconomy-demo.jpg", t: "한경 집코노미 박람회 — 집캐치 시연", when: "2026. 9. 30 · 코엑스 D홀", dz: 1.3,
     d: "KREMA AI 전시관 부스에서 직접 만든 집캐치와 감정평가사 필드워크를 시연하고 질문을 받았습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#zipconomy" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224446565096" }] },
@@ -3216,4 +3250,4 @@ function SectionHead({ no, ko, en, lead }) {
   );
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

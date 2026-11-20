@@ -20,6 +20,7 @@ function App() {
     React.createElement("main", null, /*#__PURE__*/
     React.createElement(IntroSequence, null), /*#__PURE__*/
     React.createElement(HeroClassic, null), /*#__PURE__*/
+    React.createElement(EntryTracks, null), /*#__PURE__*/
     React.createElement(Ledger, null), /*#__PURE__*/
     React.createElement(CaseIndex, null), /*#__PURE__*/
     React.createElement(About, null), /*#__PURE__*/
