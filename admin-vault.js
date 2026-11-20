@@ -4,8 +4,8 @@
   if (window.ykAdmin) return;
 
   var SESS_KEY = "yk.admin.s";
-  var VAULT_URL = "vault-data.enc.json?v=2";
-  var CSS_URL = "admin-vault.css?v=2";
+  var VAULT_URL = "vault-data.enc.json?v=3";
+  var CSS_URL = "admin-vault.css?v=3";
   var unlockedData = null;
   var encBundle = null;
   var rootEl = null;
@@ -111,7 +111,7 @@
         '<div class="ykv-top">' +
           '<div class="ykv-top__brand">' +
             '<span class="ykv-badge" id="ykv-badge"><i></i><span id="ykv-badge-txt">LOCKED · AES-256-GCM</span></span>' +
-            '<span class="ykv-top__title">Yubin Kim · 경국 AX &amp; 상업화 데이터 콘솔</span>' +
+            '<span class="ykv-top__title">Galerie Privée · Law Firm Gyunggook Archive</span>' +
           '</div>' +
           '<div class="ykv-top__acts">' +
             '<button type="button" class="ykv-btn-sm ykv-btn-sm--lock" id="ykv-lock-btn" hidden>즉시 잠금 (공개 모드)</button>' +
@@ -148,15 +148,16 @@
       '<div class="ykv-auth">' +
         '<div class="ykv-curtain" id="ykv-curtain">' +
           '<div class="ykv-ring is-unlocking"><svg viewBox="0 0 68 68"><circle class="ykv-ring__track" cx="34" cy="34" r="30"/><circle class="ykv-ring__prog" cx="34" cy="34" r="30"/></svg><span class="ykv-ring__icon">✓</span></div>' +
-          '<div style="font-size:15px;font-weight:700;letter-spacing:.04em">PBKDF2 키 검증 완료 · 경국 실무 데이터 복호화 중</div>' +
+          '<div style="font-size:15px;font-weight:700;letter-spacing:.12em;color:#E8CA82">GALERIE PRIVÉE · GYUNGGOOK</div>' +
+          '<div style="font-size:13px;opacity:.88">전시관 아카이브로 입장합니다...</div>' +
           '<div class="ykv-curtain__bar"><div class="ykv-curtain__fill"></div></div>' +
         '</div>' +
         '<div class="ykv-auth__head">' +
           '<div class="ykv-ring" id="ykv-ring"><svg viewBox="0 0 68 68"><circle class="ykv-ring__track" cx="34" cy="34" r="30"/><circle class="ykv-ring__prog" cx="34" cy="34" r="30"/></svg>' +
             '<svg class="ykv-ring__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' +
           '</div>' +
-          '<h2 class="ykv-auth__h">Admin 실무 금고 해금</h2>' +
-          '<p class="ykv-auth__sub">대외 공개 화면에서는 경국 내부 구축 상세가 비공개 처리됩니다.<br/>간편 4자리 PIN 또는 관리자 ID/PW로 실제 데이터 백본을 해금하세요.</p>' +
+          '<h2 class="ykv-auth__h">Galerie Privée · Admin 입장</h2>' +
+          '<p class="ykv-auth__sub">대외 공개 화면에서는 Gyunggook 사내 구축 상세가 숨겨집니다.<br/>PIN 4자리 또는 ID/PW를 입력하면 전용 실무 전시관 페이지가 열립니다.</p>' +
         '</div>' +
         '<div class="ykv-mode-tabs">' +
           '<button type="button" class="ykv-mode-tab is-on" data-m="pin">간편 PIN (4자리)</button>' +
@@ -212,11 +213,11 @@
         try { sessionStorage.setItem(SESS_KEY, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
 
         ring.classList.add("is-unlocking");
-        setTimeout(function () { curtain.classList.add("is-show"); }, 140);
+        setTimeout(function () { curtain.classList.add("is-show"); }, 120);
         setTimeout(function () {
           emitChange();
-          renderWorkspace();
-        }, 780);
+          window.location.href = "vault.html";
+        }, 720);
       } catch (e) {
         busy = false;
         errEl.textContent = e && e.message && e.message.indexOf("HTTPS") > -1
@@ -281,7 +282,7 @@
 
     dlg.classList.add("is-unlocked");
     bd.querySelector("#ykv-badge").classList.add("is-live");
-    bd.querySelector("#ykv-badge-txt").textContent = "UNLOCKED · KYUNGGUK AX VAULT";
+    bd.querySelector("#ykv-badge-txt").textContent = "UNLOCKED · GYUNGGOOK ARCHIVE";
     bd.querySelector("#ykv-lock-btn").hidden = false;
 
     var tab = "backbone";
@@ -446,16 +447,12 @@
   }
 
   function open(preferredTab) {
-    buildUi();
     if (unlockedData) {
-      renderWorkspace();
-      if (preferredTab) {
-        var btn = rootEl.querySelector('.ykv-tab[data-t="' + preferredTab + '"]');
-        if (btn) btn.click();
-      }
-    } else {
-      renderAuth();
+      window.location.href = "vault.html" + (preferredTab ? "#" + preferredTab : "");
+      return;
     }
+    buildUi();
+    renderAuth();
     requestAnimationFrame(function () { rootEl.classList.add("is-open"); });
   }
 

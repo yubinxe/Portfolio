@@ -1,0 +1,236 @@
+/* vault.css — Musée du Louvre "Galerie Privée · Gyunggook" Exhibition Styling */
+:root{
+  --lv-obsidian:#080B12;
+  --lv-noir:#0E131F;
+  --lv-navy:#141E3A;
+  --lv-marble:#F4EFE6;
+  --lv-paper:#FBF8F3;
+  --lv-gold:#C8A253;
+  --lv-gold-bright:#E8CA82;
+  --lv-gold-dim:rgba(200,162,83,.28);
+  --lv-ink:#161922;
+  --lv-ink-soft:#4B5162;
+  --lv-ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--lv-obsidian);color:#EAE4D8}
+body{margin:0;font-family:"Pretendard Variable","Pretendard",system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.font-serif{font-family:"Cormorant Garamond","Nanum Myeongjo",serif}
+.font-myeongjo{font-family:"Nanum Myeongjo",serif}
+
+/* Sticky Top Curatorial Bar */
+.lv-nav{
+  position:sticky;top:0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:13px clamp(16px,3.5vw,48px);
+  background:rgba(8,11,18,.88);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--lv-gold-dim);
+}
+.lv-nav__brand{display:flex;align-items:center;gap:12px;min-width:0}
+.lv-nav__crest{
+  width:28px;height:28px;display:grid;place-items:center;flex:none;
+  border:1px solid var(--lv-gold);color:var(--lv-gold-bright);font-size:12px;font-weight:700;
+}
+.lv-nav__title{display:flex;flex-direction:column;line-height:1.15}
+.lv-nav__title b{font-family:"Cormorant Garamond",serif;font-size:16px;letter-spacing:.12em;color:var(--lv-gold-bright);text-transform:uppercase}
+.lv-nav__title small{font-size:11px;color:rgba(244,239,230,.65);letter-spacing:.04em}
+.lv-nav__salons{display:flex;gap:clamp(10px,1.5vw,24px);overflow-x:auto}
+.lv-nav__salons a{
+  color:rgba(244,239,230,.78);text-decoration:none;font-size:12.5px;font-weight:600;
+  white-space:nowrap;padding:6px 2px;border-bottom:1px solid transparent;transition:all .2s;
+}
+.lv-nav__salons a:hover{color:var(--lv-gold-bright);border-bottom-color:var(--lv-gold)}
+.lv-nav__acts{display:flex;align-items:center;gap:8px;flex:none}
+.lv-pill{
+  padding:7px 14px;font:inherit;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer;
+  border:1px solid rgba(244,239,230,.24);color:#F4EFE6;background:transparent;white-space:nowrap;transition:all .2s;
+}
+.lv-pill:hover{border-color:var(--lv-gold);color:var(--lv-gold-bright)}
+.lv-pill--gold{background:rgba(200,162,83,.16);border-color:var(--lv-gold);color:var(--lv-gold-bright)}
+.lv-pill--gold:hover{background:var(--lv-gold);color:var(--lv-obsidian)}
+
+/* Locked Rotunda Gate (Only shown when unauthenticated on vault.html) */
+.lv-gate{
+  min-height:100svh;display:grid;place-items:center;padding:24px;
+  background:radial-gradient(circle at 50% 24%,rgba(200,162,83,.14),transparent 54%),
+             radial-gradient(circle at 80% 80%,rgba(20,30,58,.55),transparent 55%),
+             var(--lv-obsidian);
+}
+.lv-gate__card{
+  width:100%;max-width:490px;padding:34px 28px;background:var(--lv-marble);color:var(--lv-ink);
+  border:1px solid var(--lv-gold);box-shadow:0 36px 96px rgba(0,0,0,.65);
+  position:relative;
+}
+.lv-gate__frame{position:absolute;inset:8px;border:1px solid rgba(200,162,83,.42);pointer-events:none}
+
+/* Curtain Transition */
+.lv-curtain{
+  position:fixed;inset:0;z-index:9999;pointer-events:none;
+  display:grid;place-items:center;background:var(--lv-obsidian);
+  opacity:0;transition:opacity .45s var(--lv-ease);
+}
+.lv-curtain.is-show{opacity:1;pointer-events:auto}
+.lv-curtain__in{text-align:center;color:var(--lv-gold-bright)}
+.lv-curtain__in b{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:.18em;display:block}
+.lv-curtain__line{width:0;height:1px;background:var(--lv-gold);margin:16px auto 0;transition:width .7s var(--lv-ease)}
+.lv-curtain.is-show .lv-curtain__line{width:240px}
+
+/* Hero Rotunda (Unlocked Exhibition) */
+.lv-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px)}
+.lv-hero{
+  position:relative;padding:clamp(56px,9vw,108px) 0 clamp(54px,8vw,96px);
+  background:radial-gradient(ellipse 70% 55% at 50% 10%,rgba(200,162,83,.16),transparent 65%),
+             linear-gradient(180deg,var(--lv-obsidian) 0%,var(--lv-noir) 100%);
+  border-bottom:1px solid var(--lv-gold-dim);
+}
+.lv-eyebrow{
+  font-size:11.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--lv-gold);margin:0 0 14px;display:flex;align-items:center;gap:12px;
+}
+.lv-eyebrow::after{content:"";flex:1;max-width:120px;height:1px;background:var(--lv-gold-dim)}
+.lv-hero h1{
+  margin:0;font-weight:500;line-height:1.12;letter-spacing:-.02em;color:#F8F4EC;
+  font-size:clamp(2.2rem,5.4vw,4.6rem);
+}
+.lv-hero h1 em{display:block;font-style:italic;color:var(--lv-gold-bright);font-size:.58em;letter-spacing:.08em;margin-top:10px}
+.lv-hero__lead{
+  max-width:740px;margin:22px 0 0;font-size:clamp(1rem,1.5vw,1.16rem);
+  line-height:1.85;color:rgba(244,239,230,.82);
+}
+
+/* Marble Monoliths */
+.lv-monoliths{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;
+  margin-top:clamp(34px,5vw,56px);
+}
+.lv-mono{
+  position:relative;padding:24px 20px;background:rgba(255,255,255,.03);
+  border:1px solid var(--lv-gold-dim);border-top:2px solid var(--lv-gold);
+  transition:transform .35s var(--lv-ease),background .35s;
+}
+.lv-mono:hover{transform:translateY(-4px);background:rgba(200,162,83,.07)}
+.lv-mono__n{
+  font-family:"Cormorant Garamond",serif;font-size:clamp(2.2rem,3.6vw,3.1rem);
+  font-weight:600;color:var(--lv-gold-bright);line-height:1;font-variant-numeric:tabular-nums;
+}
+.lv-mono__u{font-size:10.5px;letter-spacing:.2em;color:var(--lv-gold);margin-top:8px;font-weight:700}
+.lv-mono__l{font-size:14px;font-weight:700;color:#F4EFE6;margin-top:8px}
+.lv-mono__s{font-size:12px;color:rgba(244,239,230,.64);margin-top:4px;line-height:1.5}
+
+/* Principles Oath Strip */
+.lv-oaths{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;
+  margin-top:30px;padding-top:28px;border-top:1px solid rgba(244,239,230,.12);
+}
+.lv-oath{padding:14px 14px;background:rgba(255,255,255,.025);border:1px solid rgba(244,239,230,.1)}
+.lv-oath b{font-family:"Cormorant Garamond",serif;font-size:15px;color:var(--lv-gold);letter-spacing:.14em}
+.lv-oath h3{margin:6px 0;font-size:13.5px;color:#F8F4EC;line-height:1.4}
+.lv-oath p{margin:0;font-size:12px;line-height:1.6;color:rgba(244,239,230,.66)}
+
+/* Alternating Louvre Marble & Obsidian Salons */
+.lv-salon{padding:clamp(56px,7.5vw,92px) 0;border-bottom:1px solid rgba(200,162,83,.22)}
+.lv-salon--marble{background:var(--lv-marble);color:var(--lv-ink)}
+.lv-salon--obsidian{background:var(--lv-noir);color:#F4EFE6}
+.lv-salon__head{margin-bottom:34px}
+.lv-salon__head h2{margin:0;font-size:clamp(1.7rem,3.4vw,2.75rem);font-weight:600;line-height:1.2;letter-spacing:-.02em}
+.lv-salon--marble .lv-salon__head h2{color:var(--lv-navy)}
+.lv-salon__sub{margin:10px 0 0;font-size:15px;line-height:1.75;max-width:760px}
+.lv-salon--marble .lv-salon__sub{color:var(--lv-ink-soft)}
+.lv-salon--obsidian .lv-salon__sub{color:rgba(244,239,230,.76)}
+
+/* Salon I: La Grande Galerie des Systèmes */
+.lv-gal-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:24px}
+.lv-gal-btn{
+  text-align:left;padding:14px 14px;background:var(--lv-paper);border:1px solid rgba(22,25,34,.16);
+  cursor:pointer;transition:all .24s var(--lv-ease);position:relative;
+}
+.lv-gal-btn::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--lv-gold);transform:scaleX(0);transition:transform .28s var(--lv-ease)}
+.lv-gal-btn:hover,.lv-gal-btn.is-on{border-color:var(--lv-navy);background:#fff;box-shadow:0 12px 28px rgba(20,30,58,.1);transform:translateY(-2px)}
+.lv-gal-btn.is-on{background:var(--lv-navy);color:#F8F4EC}
+.lv-gal-btn.is-on::after{transform:scaleX(1)}
+.lv-gal-btn small{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--lv-gold);font-weight:700}
+.lv-gal-btn b{display:block;font-size:13.5px;margin-top:4px;line-height:1.35}
+
+.lv-exhibit{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:28px;padding:30px;
+  background:#fff;border:1px solid rgba(20,30,58,.2);box-shadow:0 24px 64px rgba(10,16,38,.09);
+  position:relative;
+}
+.lv-exhibit::before{content:"";position:absolute;inset:8px;border:1px solid rgba(200,162,83,.35);pointer-events:none}
+.lv-exhibit__meta{font-size:11.5px;letter-spacing:.14em;font-weight:700;color:#735C30;text-transform:uppercase}
+.lv-exhibit h3{margin:8px 0 12px;font-size:clamp(1.35rem,2.4vw,1.9rem);color:var(--lv-navy)}
+.lv-exhibit__desc{font-size:14.5px;line-height:1.85;color:#2E3442;margin:0 0 16px}
+.lv-badges{display:flex;flex-wrap:wrap;gap:8px}
+.lv-badge{padding:5px 11px;font-size:12px;font-weight:700;background:#F5EFE4;color:var(--lv-navy);border:1px solid rgba(200,162,83,.5)}
+.lv-pipe{display:grid;gap:10px;align-content:start}
+.lv-pipe-step{
+  padding:13px 16px;background:var(--lv-paper);border:1px solid rgba(22,25,34,.14);
+  cursor:pointer;font-size:13.5px;line-height:1.55;transition:all .2s var(--lv-ease);position:relative;
+}
+.lv-pipe-step.is-on{background:var(--lv-navy);color:#F8F4EC;border-color:var(--lv-gold);transform:translateX(6px)}
+
+/* Salon II: Cabinet des Données */
+.lv-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.lv-panel{
+  padding:26px;background:rgba(255,255,255,.035);border:1px solid var(--lv-gold-dim);position:relative;
+}
+.lv-panel h3{margin:0 0 6px;font-size:17px;color:var(--lv-gold-bright)}
+.lv-panel__sub{font-size:12.5px;color:rgba(244,239,230,.64);margin:0 0 20px}
+.lv-astrolabe{display:grid;grid-template-columns:190px 1fr;gap:20px;align-items:center}
+.lv-donut{width:180px;height:180px;margin:0 auto}
+.lv-donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+.lv-donut__bg{fill:none;stroke:rgba(244,239,230,.1);stroke-width:14}
+.lv-donut__fg{fill:none;stroke:var(--lv-gold-bright);stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .8s var(--lv-ease)}
+.lv-row{
+  display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 12px;margin-bottom:8px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(244,239,230,.1);cursor:pointer;transition:all .2s;
+}
+.lv-row:hover,.lv-row.is-on{border-color:var(--lv-gold);background:rgba(200,162,83,.12)}
+.lv-row__bar{grid-column:1/-1;height:5px;background:rgba(255,255,255,.08)}
+.lv-row__bar i{display:block;height:100%;background:linear-gradient(90deg,var(--lv-gold),var(--lv-gold-bright));transition:width .7s var(--lv-ease)}
+.lv-placard{
+  margin-top:16px;padding:16px 18px;background:rgba(8,11,18,.7);border-left:3px solid var(--lv-gold);
+  font-size:13.5px;line-height:1.75;color:#EAE4D8;
+}
+
+/* Salon III: Chronicles (피와 땀, 눈물의 연대기) */
+.lv-chronicles{display:grid;gap:22px;position:relative;padding-left:28px;border-left:1px solid var(--lv-gold)}
+.lv-act{
+  position:relative;padding:26px 28px;background:#fff;border:1px solid rgba(20,30,58,.18);
+  box-shadow:0 14px 36px rgba(10,16,38,.06);
+}
+.lv-act::before{
+  content:"";position:absolute;left:-35px;top:30px;width:13px;height:13px;border-radius:50%;
+  background:var(--lv-navy);border:2px solid var(--lv-gold);
+}
+.lv-act__period{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:#735C30}
+.lv-act__act{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:700;color:var(--lv-navy);margin:4px 0}
+.lv-act h3{margin:4px 0 12px;font-size:clamp(1.15rem,2vw,1.45rem);color:#141824}
+.lv-act p{margin:0 0 14px;font-size:14.2px;line-height:1.85;color:#2E3442}
+
+/* Salon IV: Commercial & NAS Matrix */
+.lv-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.lv-tbl th,.lv-tbl td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(244,239,230,.12)}
+.lv-tbl th{color:var(--lv-gold-bright);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.lv-search{
+  width:100%;padding:12px 16px;font:inherit;font-size:14px;
+  background:rgba(255,255,255,.06);color:#F8F4EC;border:1px solid var(--lv-gold-dim);
+}
+.lv-search:focus{outline:none;border-color:var(--lv-gold-bright)}
+.lv-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.lv-chip{padding:6px 13px;font-size:12px;font-weight:700;background:rgba(255,255,255,.05);color:#EAE4D8;border:1px solid rgba(244,239,230,.16);cursor:pointer}
+.lv-chip.is-on{background:var(--lv-gold);color:var(--lv-obsidian);border-color:var(--lv-gold)}
+.lv-rag-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.lv-rag-card{padding:16px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(244,239,230,.12)}
+.lv-rag-card h4{margin:4px 0 8px;font-size:14.5px;color:#F8F4EC;line-height:1.45}
+.lv-rag-card p{margin:0;font-size:12.8px;line-height:1.68;color:rgba(244,239,230,.74)}
+
+@media (max-width:1024px){
+  .lv-monoliths,.lv-oaths,.lv-gal-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lv-exhibit,.lv-data-grid,.lv-astrolabe,.lv-rag-grid{grid-template-columns:1fr}
+  .lv-nav__salons{display:none}
+}
+@media (max-width:600px){
+  .lv-monoliths,.lv-oaths,.lv-gal-nav{grid-template-columns:1fr}
+}

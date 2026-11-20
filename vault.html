@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>GALERIE PRIVÉE · GYUNGGOOK — 김유빈 실무 아카이브</title>
+<link rel="icon" href="favicon.ico?v=4" sizes="48x48" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+<link rel="stylesheet" href="admin-vault.css?v=3" />
+<link rel="stylesheet" href="vault.css?v=1" />
+</head>
+<body>
+<div class="lv-curtain" id="lv-curtain" aria-hidden="true">
+  <div class="lv-curtain__in">
+    <b>GALERIE PRIVÉE · GYUNGGOOK</b>
+    <span style="font-size:12px;letter-spacing:.2em;opacity:.8">AES-256-GCM VERIFIED · ARCHIVE UNLOCKED</span>
+    <div class="lv-curtain__line"></div>
+  </div>
+</div>
+
+<div id="lv-root"></div>
+
+<script>
+(function () {
+  "use strict";
+  var SESS_KEY = "yk.admin.s";
+  var VAULT_URL = "vault-data.enc.json?v=3";
+  var root = document.getElementById("lv-root");
+  var data = null;
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function b64ToBytes(b64) {
+    var bin = atob(b64), arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return arr;
+  }
+  async function unwrapAndDecrypt(wrapObj, passphrase, bundle) {
+    var enc = new TextEncoder();
+    var baseKey = await crypto.subtle.importKey("raw", enc.encode(passphrase), "PBKDF2", false, ["deriveKey"]);
+    var kek = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: b64ToBytes(wrapObj.salt), iterations: wrapObj.iterations, hash: "SHA-256" },
+      baseKey, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+    );
+    var dekRaw = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64ToBytes(wrapObj.iv) }, kek, b64ToBytes(wrapObj.wrapped));
+    var dek = await crypto.subtle.importKey("raw", dekRaw, { name: "AES-GCM" }, false, ["decrypt"]);
+    var plainBuf = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64ToBytes(bundle.iv) }, dek, b64ToBytes(bundle.ciphertext));
+    return JSON.parse(new TextDecoder().decode(plainBuf));
+  }
+
+  function lockAndExit() {
+    data = null;
+    try { sessionStorage.removeItem(SESS_KEY); } catch (e) {}
+    location.href = "index.html";
+  }
+
+  function renderGate() {
+    var mode = "pin", pin = "", busy = false;
+    root.innerHTML =
+      '<main class="lv-gate">' +
+        '<div class="lv-gate__card">' +
+          '<div class="lv-gate__frame"></div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:11px;letter-spacing:.16em;font-weight:700;color:#735C30">' +
+            '<span>MUSÉE PRIVÉ · GYUNGGOOK</span><a href="index.html" style="color:#141E3A;text-decoration:none">← 공개 포트폴리오</a>' +
+          '</div>' +
+          '<h1 class="font-myeongjo" style="margin:0 0 8px;font-size:24px;color:#141E3A">비공개 실무 아카이브 입장</h1>' +
+          '<p style="margin:0 0 18px;font-size:13px;line-height:1.65;color:#4B5162">대외적으로는 비공개 처리된 법무법인 경국(Gyunggook) 전략기획실 작업물 · 22만 건 데이터 백본 · 현장 연대기 전시관입니다.</p>' +
+          '<div class="ykv-mode-tabs">' +
+            '<button type="button" class="ykv-mode-tab is-on" data-m="pin">간편 PIN (4자리)</button>' +
+            '<button type="button" class="ykv-mode-tab" data-m="pw">ID / PW 로그인</button>' +
+          '</div>' +
+          '<div id="ykv-pane-pin" class="ykv-pin-wrap">' +
+            '<div class="ykv-pin-dots"><div class="ykv-pin-dot is-active"></div><div class="ykv-pin-dot"></div><div class="ykv-pin-dot"></div><div class="ykv-pin-dot"></div></div>' +
+            '<div class="ykv-keypad">' + [1,2,3,4,5,6,7,8,9,"초기화",0,"⌫"].map(function (k) {
+              return '<button type="button" class="ykv-key' + (typeof k === "string" ? " ykv-key--util" : "") + '" data-k="' + k + '">' + k + '</button>';
+            }).join("") + '</div>' +
+          '</div>' +
+          '<form id="ykv-pane-pw" class="ykv-form" hidden>' +
+            '<div class="ykv-field"><label>관리자 ID</label><input id="ykv-id" type="text" placeholder="Admin ID" /></div>' +
+            '<div class="ykv-field"><label>비밀번호</label><input id="ykv-pw" type="password" placeholder="Password" /></div>' +
+            '<button type="submit" class="ykv-submit">전시관 입장</button>' +
+          '</form>' +
+          '<div class="ykv-err" id="ykv-err"></div>' +
+        '</div>' +
+      '</main>';
+
+    var dots = root.querySelectorAll(".ykv-pin-dot"), errEl = root.querySelector("#ykv-err");
+    function updateDots() {
+      dots.forEach(function (d, i) { d.textContent = i < pin.length ? "●" : ""; d.classList.toggle("is-filled", i < pin.length); d.classList.toggle("is-active", i === pin.length && pin.length < 4); });
+    }
+    async function tryUnlock(method, creds) {
+      if (busy) return; busy = true; errEl.textContent = "";
+      try {
+        var res = await fetch(VAULT_URL, { cache: "no-store" });
+        var bundle = await res.json();
+        data = method === "pin"
+          ? await unwrapAndDecrypt(bundle.pinWrap, "PIN::" + creds.pin, bundle)
+          : await unwrapAndDecrypt(bundle.pwWrap, creds.id + "::" + creds.pw, bundle);
+        try { sessionStorage.setItem(SESS_KEY, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
+        var cur = document.getElementById("lv-curtain"); cur.classList.add("is-show");
+        setTimeout(function () { renderExhibition(); setTimeout(function () { cur.classList.remove("is-show"); }, 350); }, 720);
+      } catch (e) {
+        busy = false;
+        errEl.textContent = method === "pin" ? "PIN 번호가 일치하지 않습니다." : "ID 또는 비밀번호가 일치하지 않습니다.";
+        if (method === "pin") { root.querySelector("#ykv-pane-pin").classList.add("is-shake"); setTimeout(function () { root.querySelector("#ykv-pane-pin").classList.remove("is-shake"); pin = ""; updateDots(); }, 400); }
+      }
+    }
+    root.querySelectorAll(".ykv-mode-tab").forEach(function (t) {
+      t.addEventListener("click", function () {
+        mode = t.dataset.m; errEl.textContent = "";
+        root.querySelectorAll(".ykv-mode-tab").forEach(function (x) { x.classList.toggle("is-on", x === t); });
+        root.querySelector("#ykv-pane-pin").hidden = mode !== "pin";
+        root.querySelector("#ykv-pane-pw").hidden = mode !== "pw";
+      });
+    });
+    function pushDigit(d) { if (busy || mode !== "pin" || pin.length >= 4) return; pin += d; updateDots(); if (pin.length === 4) tryUnlock("pin", { pin: pin }); }
+    root.querySelectorAll(".ykv-key").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.dataset.k;
+        if (k === "초기화") { pin = ""; errEl.textContent = ""; updateDots(); }
+        else if (k === "⌫") { pin = pin.slice(0, -1); updateDots(); }
+        else pushDigit(k);
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (data || mode !== "pin") return;
+      if (/^[0-9]$/.test(e.key)) { e.preventDefault(); pushDigit(e.key); }
+      else if (e.key === "Backspace") { e.preventDefault(); pin = pin.slice(0, -1); updateDots(); }
+    });
+    root.querySelector("#ykv-pane-pw").addEventListener("submit", function (e) {
+      e.preventDefault(); tryUnlock("pw", { id: root.querySelector("#ykv-id").value.trim(), pw: root.querySelector("#ykv-pw").value });
+    });
+  }
+
+  function renderExhibition() {
+    var sysIdx = 0, stepIdx = 0, fmtIdx = 0, wfIdx = 0, domFilter = "ALL", qText = "";
+    var maxWf = Math.max.apply(null, data.workflowSignals.map(function (w) { return w.hits; }));
+    var circ = 2 * Math.PI * 52;
+
+    root.innerHTML =
+      '<header class="lv-nav">' +
+        '<div class="lv-nav__brand"><span class="lv-nav__crest">G</span><div class="lv-nav__title"><b>Galerie Privée · Gyunggook</b><small>2026. 06 – 11 실무 아카이브 (Authenticated)</small></div></div>' +
+        '<nav class="lv-nav__salons"><a href="#salon-0">서문 · 원칙</a><a href="#salon-1">I. 시스템 명작관</a><a href="#salon-2">II. 데이터 해부실</a><a href="#salon-3">III. 현장의 연대기</a><a href="#salon-4">IV. 상업화 아틀리에</a></nav>' +
+        '<div class="lv-nav__acts"><a class="lv-pill" href="index.html">← 공개 포트폴리오</a><button type="button" class="lv-pill lv-pill--gold" id="lv-lock">즉시 잠금 · 공개 전환</button></div>' +
+      '</header>' +
+
+      '<section id="salon-0" class="lv-hero">' +
+        '<div class="lv-wrap">' +
+          '<p class="lv-eyebrow">Musée Privé · Law Firm Gyunggook Archive</p>' +
+          '<h1 class="font-myeongjo">보이지 않는 현장에서 깎아 올린<br/>실무와 기술의 전당<em>Galerie Privée de Yubin Kim — 피와 땀, 그리고 검증의 기록</em></h1>' +
+          '<p class="lv-hero__lead">' + esc(data.meta.securityNote) + '</p>' +
+          '<div class="lv-monoliths">' +
+            data.monoliths.map(function (m) {
+              return '<article class="lv-mono"><div class="lv-mono__n">' + esc(m.fig) + '</div><div class="lv-mono__u">' + esc(m.unit) + '</div><div class="lv-mono__l">' + esc(m.label) + '</div><div class="lv-mono__s">' + esc(m.sub) + '</div></article>';
+            }).join("") +
+          '</div>' +
+          '<div class="lv-oaths">' +
+            data.principles.map(function (p) {
+              return '<div class="lv-oath"><b>PRINCIPLE ' + esc(p.no) + '</b><h3>' + esc(p.title) + '</h3><p>' + esc(p.desc) + '</p></div>';
+            }).join("") +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      '<section id="salon-1" class="lv-salon lv-salon--marble">' +
+        '<div class="lv-wrap">' +
+          '<header class="lv-salon__head"><p class="lv-eyebrow" style="color:#735C30">Salon I · La Grande Galerie des Systèmes</p><h2 class="font-myeongjo">법무법인 경국(Gyunggook) 전사 구축 아키텍처</h2><p class="lv-salon__sub">단순 프롬프트가 아니라, 현장의 저항을 설득하고 상급자 검수를 넘어 전 구성원 일상으로 편입시킨 실제 시스템 5작(作)입니다.</p></header>' +
+          '<div class="lv-gal-nav" id="lv-gal-nav"></div>' +
+          '<div class="lv-exhibit" id="lv-exhibit"></div>' +
+        '</div>' +
+      '</section>' +
+
+      '<section id="salon-2" class="lv-salon lv-salon--obsidian">' +
+        '<div class="lv-wrap">' +
+          '<header class="lv-salon__head"><p class="lv-eyebrow">Salon II · Cabinet des Données</p><h2 class="font-myeongjo">222,486건 비정형 법률 데이터의 해부와 병목 실증</h2><p class="lv-salon__sub">외부 클라우드 업로드 없이 1.18TB NAS를 스트리밍 분석해 도출한 한국형 Legal·부동산 AX의 실제 데이터 지형도입니다.</p></header>' +
+          '<div class="lv-data-grid" id="lv-data-grid"></div>' +
+          '<div class="lv-panel" style="margin-top:24px"><h3>사내 공유폴더 도메인별 인덱싱 분포 (Gyunggook \\\\SERVER)</h3>' +
+            '<table class="lv-tbl"><thead><tr><th>도메인</th><th>전체 파일</th><th>용량(GB)</th><th>본문 추출 완료</th><th>미추출(OCR 대상)</th><th>Trigram 청크</th></tr></thead><tbody>' +
+              data.shares.map(function (sh) {
+                return '<tr><td><b>' + esc(sh.domain) + '</b></td><td>' + sh.totalFiles.toLocaleString() + '</td><td>' + sh.totalGb + '</td><td>' + sh.extractedFiles.toLocaleString() + '</td><td>' + sh.pendingFiles.toLocaleString() + '</td><td>' + sh.chunks.toLocaleString() + '</td></tr>';
+              }).join("") +
+            '</tbody></table>' +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      '<section id="salon-3" class="lv-salon lv-salon--marble">' +
+        '<div class="lv-wrap">' +
+          '<header class="lv-salon__head"><p class="lv-eyebrow" style="color:#735C30">Salon III · Salle de Terrain</p><h2 class="font-myeongjo">2026년 6월부터 11월까지 — 발로 뛴 현장과 160시간의 사투</h2><p class="lv-salon__sub">검찰·법원·주민센터 외근과 서면 편집에서 출발해, 광명시흥 77장 보상 분석·집캐치 16일 204커밋·전사 AX 온보딩으로 이어진 서사입니다.</p></header>' +
+          '<div class="lv-chronicles">' +
+            data.chronicles.map(function (c) {
+              return '<article class="lv-act"><div class="lv-act__period">' + esc(c.period) + '</div><div class="lv-act__act">' + esc(c.act) + '</div><h3 class="font-myeongjo">' + esc(c.headline) + '</h3><p>' + esc(c.story) + '</p><div class="lv-badges">' + c.artifacts.map(function (a) { return '<span class="lv-badge">' + esc(a) + '</span>'; }).join("") + '</div></article>';
+            }).join("") +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      '<section id="salon-4" class="lv-salon lv-salon--obsidian">' +
+        '<div class="lv-wrap">' +
+          '<header class="lv-salon__head"><p class="lv-eyebrow">Salon IV · Atelier Commercial</p><h2 class="font-myeongjo">상업화 3대 트랙 &amp; 통합 RAG 코퍼스 (' + data.kpis.corpusDocs + '건 · ' + data.kpis.corpusChars.toLocaleString() + '자)</h2><p class="lv-salon__sub">법무법인 경국 검증 아키텍처 × 집캐치(ZipCatch) × Blog-PR-HQ 4시간 자율 발행 코퍼스가 하나의 수익·데이터 플라이휠로 결합됩니다.</p></header>' +
+          '<div class="lv-rag-grid" style="margin-bottom:24px">' +
+            data.commercialTracks.map(function (tr) {
+              return '<div class="lv-panel" style="padding:20px"><h3>' + esc(tr.track) + '</h3><p class="lv-panel__sub" style="margin-bottom:8px;color:#E8CA82">' + esc(tr.target_buyers) + '</p><p style="margin:0;font-size:13px;line-height:1.65;color:rgba(244,239,230,.84)"><strong>핵심 자산:</strong> ' + esc(tr.core_asset) + '<br/><strong>수익 모델:</strong> ' + esc(tr.hook) + '</p></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="lv-panel" id="lv-rag-panel"></div>' +
+        '</div>' +
+      '</section>';
+
+    root.querySelector("#lv-lock").addEventListener("click", lockAndExit);
+
+    function drawSalon1() {
+      var gal = root.querySelector("#lv-gal-nav"), ex = root.querySelector("#lv-exhibit");
+      var s = data.internalSystems[sysIdx];
+      gal.innerHTML = data.internalSystems.map(function (x, i) {
+        return '<button type="button" class="lv-gal-btn' + (i === sysIdx ? " is-on" : "") + '" data-s="' + i + '"><small>' + esc(x.code) + '</small><b>' + esc(x.title) + '</b></button>';
+      }).join("");
+      ex.innerHTML =
+        '<div>' +
+          '<div class="lv-exhibit__meta">' + esc(s.code) + ' · ' + esc(s.status) + '</div>' +
+          '<h3 class="font-myeongjo">' + esc(s.title) + '</h3>' +
+          '<p style="margin:-6px 0 14px;font-size:12.5px;color:#735C30;font-weight:700">' + esc(s.en) + '</p>' +
+          '<p class="lv-exhibit__desc">' + esc(s.narrative) + '</p>' +
+          '<div class="lv-badges">' + s.metrics.map(function (m) { return '<span class="lv-badge">' + esc(m) + '</span>'; }).join("") + '</div>' +
+        '</div>' +
+        '<div class="lv-pipe">' +
+          '<div class="lv-exhibit__meta" style="margin-bottom:2px">ARCHITECTURAL PIPELINE (단계 클릭 시 강조)</div>' +
+          s.pipeline.map(function (st, i) {
+            return '<div class="lv-pipe-step' + (i === stepIdx ? " is-on" : "") + '" data-st="' + i + '">' + esc(st) + '</div>';
+          }).join("") +
+        '</div>';
+      gal.querySelectorAll("[data-s]").forEach(function (b) { b.addEventListener("click", function () { sysIdx = Number(b.dataset.s); stepIdx = 0; drawSalon1(); }); });
+      ex.querySelectorAll("[data-st]").forEach(function (b) { b.addEventListener("click", function () { stepIdx = Number(b.dataset.st); drawSalon1(); }); });
+    }
+
+    function drawSalon2() {
+      var dg = root.querySelector("#lv-data-grid");
+      var fmt = data.formatBottlenecks[fmtIdx], wf = data.workflowSignals[wfIdx];
+      var offset = circ * (1 - (fmt.coveragePct / 100));
+      dg.innerHTML =
+        '<div class="lv-panel">' +
+          '<h3>포맷별 추출률 아스트롤라베 &amp; 병목 진단</h3><p class="lv-panel__sub">왼쪽 링은 선택 포맷의 본문 파싱 커버리지 · 클릭해 해법 열람</p>' +
+          '<div class="lv-astrolabe">' +
+            '<div class="lv-donut" style="position:relative;display:grid;place-items:center">' +
+              '<svg viewBox="0 0 120 120"><circle class="lv-donut__bg" cx="60" cy="60" r="52"/><circle class="lv-donut__fg" cx="60" cy="60" r="52" stroke-dasharray="' + circ.toFixed(1) + '" stroke-dashoffset="' + offset.toFixed(1) + '"/></svg>' +
+              '<div style="position:absolute;text-align:center"><b class="font-serif" style="font-size:28px;color:#E8CA82">' + fmt.coveragePct + '%</b><div style="font-size:10px;letter-spacing:.1em;opacity:.75">' + esc(fmt.ext) + '</div></div>' +
+            '</div>' +
+            '<div>' + data.formatBottlenecks.map(function (f, i) {
+              return '<div class="lv-row' + (i === fmtIdx ? " is-on" : "") + '" data-f="' + i + '"><span><strong>' + esc(f.ext) + '</strong> <small style="opacity:.7">(' + f.total.toLocaleString() + '건)</small></span><span style="color:#E8CA82;font-weight:700">' + f.coveragePct + '%</span><div class="lv-row__bar"><i style="width:' + Math.max(4, f.coveragePct) + '%"></i></div></div>';
+            }).join("") + '</div>' +
+          '</div>' +
+          '<div class="lv-placard"><strong>' + esc(fmt.label) + ' · ' + fmt.gb + ' GB</strong><br/>' + esc(fmt.insight) + '</div>' +
+        '</div>' +
+        '<div class="lv-panel">' +
+          '<h3>법률·정비사업 워크플로 수요 스펙트럼</h3><p class="lv-panel__sub">22만 건 NAS 메타·FTS5 빈도순 실증 데이터 · 클릭 시 실무 해법 표시</p>' +
+          data.workflowSignals.map(function (w, i) {
+            var pct = Math.round((w.hits / maxWf) * 100);
+            return '<div class="lv-row' + (i === wfIdx ? " is-on" : "") + '" data-w="' + i + '"><span><strong>' + esc(w.label) + '</strong></span><span style="color:#E8CA82;font-weight:800">' + w.hits.toLocaleString() + '건</span><div class="lv-row__bar"><i style="width:' + pct + '%"></i></div></div>';
+          }).join("") +
+          '<div class="lv-placard"><strong>' + esc(wf.label) + '</strong><br/>' + esc(wf.engineeringNote) + '</div>' +
+        '</div>';
+      dg.querySelectorAll("[data-f]").forEach(function (el) { el.addEventListener("click", function () { fmtIdx = Number(el.dataset.f); drawSalon2(); }); });
+      dg.querySelectorAll("[data-w]").forEach(function (el) { el.addEventListener("click", function () { wfIdx = Number(el.dataset.w); drawSalon2(); }); });
+    }
+
+    function drawSalon4() {
+      var rp = root.querySelector("#lv-rag-panel");
+      var doms = ["ALL", "LegalAX", "RealEstate_Supply", "Youth_Governance", "Quant_Fintech", "AI_Engineering"];
+      var filtered = (data.ragSeed || []).filter(function (it) {
+        return (domFilter === "ALL" || it.domain === domFilter) && (!qText || (it.title + " " + it.excerpt + " " + (it.tags || []).join(" ")).toLowerCase().indexOf(qText.toLowerCase()) > -1);
+      });
+      rp.innerHTML =
+        '<h3>통합 상업용 RAG 지식베이스 실시간 탐색 (' + filtered.length + '건)</h3>' +
+        '<p class="lv-panel__sub">4시간 자율 발행 루틴과 연동되어 축적되는 공개 칼럼·집캐치 스펙 지식 검색 엔진</p>' +
+        '<input class="lv-search" id="lv-q" type="search" placeholder="키워드 검색 (신통기획, 기본법, 집캐치, 퀀트, 서초)..." value="' + esc(qText) + '" />' +
+        '<div class="lv-chips">' + doms.map(function (dm) { return '<button type="button" class="lv-chip' + (dm === domFilter ? " is-on" : "") + '" data-dm="' + dm + '">' + dm + '</button>'; }).join("") + '</div>' +
+        '<div class="lv-rag-grid">' + filtered.slice(0, 10).map(function (it) {
+          return '<article class="lv-rag-card"><div style="font-size:11px;color:#C8A253;font-weight:700">' + esc(it.domain) + ' · ' + esc(it.platform) + '</div><h4>' + esc(it.title) + '</h4><p>' + esc(it.excerpt) + '…</p></article>';
+        }).join("") + '</div>';
+      rp.querySelector("#lv-q").addEventListener("input", function (e) { qText = e.target.value; drawSalon4(); setTimeout(function () { var i = rp.querySelector("#lv-q"); if (i) { i.focus(); i.setSelectionRange(qText.length, qText.length); } }, 0); });
+      rp.querySelectorAll("[data-dm]").forEach(function (b) { b.addEventListener("click", function () { domFilter = b.dataset.dm; drawSalon4(); }); });
+    }
+
+    drawSalon1(); drawSalon2(); drawSalon4();
+  }
+
+  try {
+    var saved = sessionStorage.getItem(SESS_KEY);
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      if (parsed && parsed.d && Date.now() - parsed.t < 1000 * 60 * 60 * 6) data = parsed.d;
+    }
+  } catch (e) {}
+
+  if (data) renderExhibition();
+  else renderGate();
+})();
+</script>
+</body>
+</html>
