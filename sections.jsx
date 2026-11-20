@@ -49,8 +49,10 @@ function AdminNavBtn() {
   React.useEffect(() => {
     const sync = () => setUnlocked(!!(window.ykAdmin && window.ykAdmin.isUnlocked()));
     sync();
+    const tid = setTimeout(sync, 120);
     window.addEventListener("yk:admin-change", sync);
-    return () => window.removeEventListener("yk:admin-change", sync);
+    window.addEventListener("load", sync);
+    return () => { clearTimeout(tid); window.removeEventListener("yk:admin-change", sync); window.removeEventListener("load", sync); };
   }, []);
   return (
     <button

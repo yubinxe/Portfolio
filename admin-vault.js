@@ -4,8 +4,8 @@
   if (window.ykAdmin) return;
 
   var SESS_KEY = "yk.admin.s";
-  var VAULT_URL = "vault-data.enc.json?v=1";
-  var CSS_URL = "admin-vault.css?v=1";
+  var VAULT_URL = "vault-data.enc.json?v=2";
+  var CSS_URL = "admin-vault.css?v=2";
   var unlockedData = null;
   var encBundle = null;
   var rootEl = null;
