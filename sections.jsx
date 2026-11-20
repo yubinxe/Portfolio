@@ -44,8 +44,29 @@ function useReveal() {
 }
 
 /* ============================================================ NAV */
+function AdminNavBtn() {
+  const [unlocked, setUnlocked] = React.useState(false);
+  React.useEffect(() => {
+    const sync = () => setUnlocked(!!(window.ykAdmin && window.ykAdmin.isUnlocked()));
+    sync();
+    window.addEventListener("yk:admin-change", sync);
+    return () => window.removeEventListener("yk:admin-change", sync);
+  }, []);
+  return (
+    <button
+      type="button"
+      className={"hnav__admin font-sans" + (unlocked ? " is-open" : "")}
+      onClick={() => window.ykAdmin && window.ykAdmin.open()}
+      title={unlocked ? "Admin 실무 금고 해금됨 (클릭해 열기)" : "Admin 로그인 (PIN / ID·PW)"}
+    >
+      <i aria-hidden="true" />
+      <span>{unlocked ? "Admin · 해금" : "Admin"}</span>
+    </button>
+  );
+}
 function Nav() {
   const [solid, setSolid] = React.useState(false);
+  const { playing } = useIx();
   React.useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
     window.addEventListener("scroll", on, { passive: true });
@@ -59,7 +80,7 @@ function Nav() {
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
     }}>
-      <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
+      <div className="wrap hnav__wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
           <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="32" height="32" style={{ display: "block" }} />
           <span className="hnav__name">
@@ -67,18 +88,20 @@ function Nav() {
             <small>AI Strategy &amp; Consulting</small>
           </span>
         </a>
-        <nav aria-label="주요 메뉴" style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }} className="font-sans">
-          <div className="nav-desktop" style={{ display: "flex", gap: "clamp(14px,2.4vw,32px)" }}>
+        <nav aria-label="주요 메뉴" className="font-sans hnav__nav">
+          <div className="nav-desktop">
             {links.map(([t, h]) => <a key={t} className="navlink" href={h}>{t}</a>)}
           </div>
-          <button type="button" className="mnav-btn" data-mnav-toggle="" aria-expanded="false" aria-controls="mnav">
-            <span className="mnav-btn__bars" aria-hidden="true" />메뉴
-          </button>
-          <IxSwitch className="hnav__ix" />
-          <a href="resume.html" className="hnav__cv font-ko">1페이지 이력</a>
-          <a href="#contact" className="btn hnav__contact" style={{ padding: ".55em 1.1em", fontSize: ".85rem" }}>
-            Contact <ArrowUpRight size={14} />
-          </a>
+          <div className="hnav__actions">
+            <button type="button" className="mnav-btn" data-mnav-toggle="" aria-expanded="false" aria-controls="mnav">
+              <span className="mnav-btn__bars" aria-hidden="true" />메뉴
+            </button>
+            {playing ? <IxSwitch className="hnav__ix" /> : <AdminNavBtn />}
+            <a href="resume.html" className="hnav__cv font-ko">1페이지 이력</a>
+            <a href="#contact" className="btn hnav__contact">
+              Contact <ArrowUpRight size={14} />
+            </a>
+          </div>
         </nav>
       </div>
       <IxNotice />
@@ -1487,6 +1510,13 @@ function AXCommand() {
   const city = useScripts(near, [AX_ASSETS.city]);
   const lax = useScripts(near, [AX_ASSETS.data, AX_ASSETS.domain]);
   const [sys, setSys] = React.useState(0);
+  const [adminData, setAdminData] = React.useState(null);
+  React.useEffect(() => {
+    const sync = () => setAdminData(window.ykAdmin && window.ykAdmin.isUnlocked() ? window.ykAdmin.getData() : null);
+    sync();
+    window.addEventListener("yk:admin-change", sync);
+    return () => window.removeEventListener("yk:admin-change", sync);
+  }, []);
   React.useEffect(() => {
     /* #ax-evidence 같은 깊은 링크로 들어오면 그 시스템을 고른다 */
     const pick = () => { const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === location.hash); if (i > -1) setSys(i); };
@@ -1513,6 +1543,20 @@ function AXCommand() {
         </header>
 
         <TrialBriefFeature />
+        {adminData && (
+          <div className="axc__admin-bar font-ko" role="region" aria-label="관리자 해금 실무 데이터 요약">
+            <div>
+              <b>ADMIN UNLOCKED · 법무법인 경국 실무 데이터 백본 연결됨</b><br />
+              <span>사내 NAS {adminData.kpis.totalFiles.toLocaleString()} 파일 ({adminData.kpis.totalGb} GB · {adminData.kpis.totalChunks.toLocaleString()} FTS5 청크) · 상업 코퍼스 {adminData.kpis.corpusDocs}건</span>
+            </div>
+            <div className="axc__admin-btns">
+              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.open("backbone")}>데이터 백본 차트</button>
+              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.open("systems")}>비공개 3대 시스템 심층</button>
+              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.open("commercial")}>상업화·집캐치 RAG</button>
+              <button type="button" onClick={() => window.ykAdmin && window.ykAdmin.lock()}>잠금</button>
+            </div>
+          </div>
+        )}
         <p className="axc__count font-ko"><b>AX 시스템 6종</b> = 경국 실무 기반 3종 + 개인 공개 시연 3종 <span>범용 AX 확장 3종(C)과 ‘16개 결과물’은 따로 셉니다.</span></p>
         <div className="axc__console">
           <nav className="axc__nav" aria-label="AX 6대 시스템 고르기">

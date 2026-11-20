@@ -45,8 +45,29 @@ function useReveal() {
 }
 
 /* ============================================================ NAV */
+function AdminNavBtn() {
+  const [unlocked, setUnlocked] = React.useState(false);
+  React.useEffect(() => {
+    const sync = () => setUnlocked(!!(window.ykAdmin && window.ykAdmin.isUnlocked()));
+    sync();
+    window.addEventListener("yk:admin-change", sync);
+    return () => window.removeEventListener("yk:admin-change", sync);
+  }, []);
+  return (/*#__PURE__*/
+    React.createElement("button", {
+      type: "button",
+      className: "hnav__admin font-sans" + (unlocked ? " is-open" : ""),
+      onClick: () => window.ykAdmin && window.ykAdmin.open(),
+      title: unlocked ? "Admin 실무 금고 해금됨 (클릭해 열기)" : "Admin 로그인 (PIN / ID·PW)" }, /*#__PURE__*/
+
+    React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("span", null, unlocked ? "Admin · 해금" : "Admin")
+    ));
+
+}
 function Nav() {
   const [solid, setSolid] = React.useState(false);
+  const { playing } = useIx();
   React.useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
     window.addEventListener("scroll", on, { passive: true });
@@ -60,7 +81,7 @@ function Nav() {
     React.createElement("header", { className: "hnav" + (solid ? " is-solid" : ""), style: {
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 50
       } }, /*#__PURE__*/
-    React.createElement("div", { className: "wrap", style: { display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 } }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap hnav__wrap", style: { display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 } }, /*#__PURE__*/
     React.createElement("a", { href: "#top", style: { textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 } }, /*#__PURE__*/
     React.createElement("img", { src: "images/favicon.svg?v=4", alt: "YK \u2014 \uAE40\uC720\uBE48 CI", width: "32", height: "32", style: { display: "block" } }), /*#__PURE__*/
     React.createElement("span", { className: "hnav__name" }, /*#__PURE__*/
@@ -68,17 +89,19 @@ function Nav() {
     React.createElement("small", null, "AI Strategy & Consulting")
     )
     ), /*#__PURE__*/
-    React.createElement("nav", { "aria-label": "\uC8FC\uC694 \uBA54\uB274", style: { display: "flex", alignItems: "center", gap: "clamp(14px,2.4vw,32px)" }, className: "font-sans" }, /*#__PURE__*/
-    React.createElement("div", { className: "nav-desktop", style: { display: "flex", gap: "clamp(14px,2.4vw,32px)" } },
+    React.createElement("nav", { "aria-label": "\uC8FC\uC694 \uBA54\uB274", className: "font-sans hnav__nav" }, /*#__PURE__*/
+    React.createElement("div", { className: "nav-desktop" },
     links.map(([t, h]) => /*#__PURE__*/React.createElement("a", { key: t, className: "navlink", href: h }, t))
     ), /*#__PURE__*/
+    React.createElement("div", { className: "hnav__actions" }, /*#__PURE__*/
     React.createElement("button", { type: "button", className: "mnav-btn", "data-mnav-toggle": "", "aria-expanded": "false", "aria-controls": "mnav" }, /*#__PURE__*/
     React.createElement("span", { className: "mnav-btn__bars", "aria-hidden": "true" }), "\uBA54\uB274"
-    ), /*#__PURE__*/
-    React.createElement(IxSwitch, { className: "hnav__ix" }), /*#__PURE__*/
+    ),
+    playing ? /*#__PURE__*/React.createElement(IxSwitch, { className: "hnav__ix" }) : /*#__PURE__*/React.createElement(AdminNavBtn, null), /*#__PURE__*/
     React.createElement("a", { href: "resume.html", className: "hnav__cv font-ko" }, "1\uD398\uC774\uC9C0 \uC774\uB825"), /*#__PURE__*/
-    React.createElement("a", { href: "#contact", className: "btn hnav__contact", style: { padding: ".55em 1.1em", fontSize: ".85rem" } }, "Contact ", /*#__PURE__*/
+    React.createElement("a", { href: "#contact", className: "btn hnav__contact" }, "Contact ", /*#__PURE__*/
     React.createElement(ArrowUpRight, { size: 14 })
+    )
     )
     )
     ), /*#__PURE__*/
@@ -1488,6 +1511,13 @@ function AXCommand() {
   const city = useScripts(near, [AX_ASSETS.city]);
   const lax = useScripts(near, [AX_ASSETS.data, AX_ASSETS.domain]);
   const [sys, setSys] = React.useState(0);
+  const [adminData, setAdminData] = React.useState(null);
+  React.useEffect(() => {
+    const sync = () => setAdminData(window.ykAdmin && window.ykAdmin.isUnlocked() ? window.ykAdmin.getData() : null);
+    sync();
+    window.addEventListener("yk:admin-change", sync);
+    return () => window.removeEventListener("yk:admin-change", sync);
+  }, []);
   React.useEffect(() => {
     /* #ax-evidence 같은 깊은 링크로 들어오면 그 시스템을 고른다 */
     const pick = () => {const i = AX_SYSTEMS.findIndex((x) => "#" + x.id === location.hash);if (i > -1) setSys(i);};
@@ -1513,7 +1543,21 @@ function AXCommand() {
     )
     ), /*#__PURE__*/
 
-    React.createElement(TrialBriefFeature, null), /*#__PURE__*/
+    React.createElement(TrialBriefFeature, null),
+    adminData && /*#__PURE__*/
+    React.createElement("div", { className: "axc__admin-bar font-ko", role: "region", "aria-label": "\uAD00\uB9AC\uC790 \uD574\uAE08 \uC2E4\uBB34 \uB370\uC774\uD130 \uC694\uC57D" }, /*#__PURE__*/
+    React.createElement("div", null, /*#__PURE__*/
+    React.createElement("b", null, "ADMIN UNLOCKED \xB7 \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D \uC2E4\uBB34 \uB370\uC774\uD130 \uBC31\uBCF8 \uC5F0\uACB0\uB428"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/
+    React.createElement("span", null, "\uC0AC\uB0B4 NAS ", adminData.kpis.totalFiles.toLocaleString(), " \uD30C\uC77C (", adminData.kpis.totalGb, " GB \xB7 ", adminData.kpis.totalChunks.toLocaleString(), " FTS5 \uCCAD\uD06C) \xB7 \uC0C1\uC5C5 \uCF54\uD37C\uC2A4 ", adminData.kpis.corpusDocs, "\uAC74")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "axc__admin-btns" }, /*#__PURE__*/
+    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.open("backbone") }, "\uB370\uC774\uD130 \uBC31\uBCF8 \uCC28\uD2B8"), /*#__PURE__*/
+    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.open("systems") }, "\uBE44\uACF5\uAC1C 3\uB300 \uC2DC\uC2A4\uD15C \uC2EC\uCE35"), /*#__PURE__*/
+    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.open("commercial") }, "\uC0C1\uC5C5\uD654\xB7\uC9D1\uCE90\uCE58 RAG"), /*#__PURE__*/
+    React.createElement("button", { type: "button", onClick: () => window.ykAdmin && window.ykAdmin.lock() }, "\uC7A0\uAE08")
+    )
+    ), /*#__PURE__*/
+
     React.createElement("p", { className: "axc__count font-ko" }, /*#__PURE__*/React.createElement("b", null, "AX \uC2DC\uC2A4\uD15C 6\uC885"), " = \uACBD\uAD6D \uC2E4\uBB34 \uAE30\uBC18 3\uC885 + \uAC1C\uC778 \uACF5\uAC1C \uC2DC\uC5F0 3\uC885 ", /*#__PURE__*/React.createElement("span", null, "\uBC94\uC6A9 AX \uD655\uC7A5 3\uC885(C)\uACFC \u201816\uAC1C \uACB0\uACFC\uBB3C\u2019\uC740 \uB530\uB85C \uC149\uB2C8\uB2E4.")), /*#__PURE__*/
     React.createElement("div", { className: "axc__console" }, /*#__PURE__*/
     React.createElement("nav", { className: "axc__nav", "aria-label": "AX 6\uB300 \uC2DC\uC2A4\uD15C \uACE0\uB974\uAE30" },
