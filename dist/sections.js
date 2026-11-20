@@ -2536,7 +2536,7 @@ function DesktopTheater({ ed, card, onClose }) {
 /* ============================================================ THE ARTIFACTS — 직접 만든 네 가지 도구만 (V6.1: 제품 화면 중심으로 복구)
  * 건물 · 도시 장면을 쓰지 않는다. 각 제품의 실제 화면 캡처(images/product) 네 장을 넘겨 보고,
  * '실제 화면 펼쳐 보기'를 누르면 그 화면에서 제품 극장이 펼쳐진다(FLIP). 기능 설명은 작업 카드에 적힌 사실만 */
-function FlagshipTool({ e, onOpen, flip }) {
+function FlagshipTool({ e, onOpen, flip, hidden }) {
   const frame = React.useRef(null);
   const M = TOOL_META[e.n],T = THEATERS[e.n];
   const [t1] = e.title.split("\n");
@@ -2544,7 +2544,7 @@ function FlagshipTool({ e, onOpen, flip }) {
   const open = () => onOpen(e, frame.current);
   const L = T.layers[shot];
   return (/*#__PURE__*/
-    React.createElement("article", { id: "ed-" + e.n, className: "fl" + (flip ? " fl--flip" : ""), style: { "--accent-fill": e.color }, "aria-labelledby": "fl-" + e.n }, /*#__PURE__*/
+    React.createElement("article", { id: "ed-" + e.n, className: "fl" + (flip ? " fl--flip" : ""), style: { "--accent-fill": e.color }, "aria-labelledby": "fl-" + e.n, hidden: hidden }, /*#__PURE__*/
     React.createElement("div", { className: "fl__stage" }, /*#__PURE__*/
     React.createElement("button", { type: "button", ref: frame, className: "fl__shot", onClick: open, "aria-haspopup": "dialog", "aria-label": `${M.name} 실제 화면 펼쳐 보기 — ${L.k}` }, /*#__PURE__*/
     React.createElement("span", { className: "fl__chrome", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("em", { className: "font-sans" }, T.url.replace(/^https?:\/\//, "").replace(/\/$/, ""))), /*#__PURE__*/
@@ -2590,23 +2590,36 @@ function ArtifactsSection() {
   const [staged, setStaged] = React.useState(null); /* { e, card } */
   const onOpen = (e, card) => setStaged({ e, card });
   const onClose = () => setStaged(null);
+  const [sel, setSel] = useHashPick(TOOLS.map((e) => ["ed-" + e.n, "fl-" + e.n]));
+  const stage = React.useRef(null);
+  const pick = (i) => {setSel(i);requestAnimationFrame(() => bringIn(stage.current));};
   return (/*#__PURE__*/
     React.createElement("section", { id: "artifacts", ref: ref, className: "arts", "aria-labelledby": "arts-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement(SectionHead, { no: "04 \uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C", ko: "\uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC2E4\uC81C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4", en: "Selected Works \xB7 Four Independent Products" }), /*#__PURE__*/
     React.createElement("div", { id: "tools", className: "arts__intro reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "arts__lead font-ko", id: "arts-title" }, "\uD63C\uC790 \uB05D\uAE4C\uC9C0 \uB9CC\uB4E4\uC5B4 \uBC30\uD3EC\uD55C ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uC81C\uD488"), " 4\uC885 \u2014 \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("ol", { className: "arts__index" },
-    TOOLS.map((e) => /*#__PURE__*/
-    React.createElement("li", { key: e.n }, /*#__PURE__*/React.createElement("a", { href: "#ed-" + e.n }, /*#__PURE__*/
-    React.createElement("b", { className: "font-serif" }, e.no), /*#__PURE__*/
-    React.createElement("span", null, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, TOOL_META[e.n].name), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, TOOL_META[e.n].env)), /*#__PURE__*/
-    React.createElement(ArrowDown, { size: 15 })
-    ))
+    React.createElement("p", { className: "wk__hint font-sans", "aria-hidden": "true" }, "\uCE74\uB4DC\uB97C \uACE0\uB974\uBA74 \uC544\uB798\uC5D0 \uD3BC\uCCD0\uC9D1\uB2C8\uB2E4")
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "wk reveal", "aria-label": "\uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C 4\uC885" },
+    TOOLS.map((e, i) => {
+      const M = TOOL_META[e.n];
+      return (/*#__PURE__*/
+        React.createElement("li", { key: e.n, className: "wk__c" + (i === 0 ? " wk__c--lead" : ""), style: { "--i": i } }, /*#__PURE__*/
+        React.createElement("button", { type: "button", className: "wk__b", "aria-pressed": sel === i, "aria-controls": "ed-" + e.n, onClick: () => pick(i) }, /*#__PURE__*/
+        React.createElement("span", { className: "wk__shot", "aria-hidden": "true" }, /*#__PURE__*/React.createElement(TheaterShot, { name: THEATERS[e.n].layers[0].img, alt: "" })), /*#__PURE__*/
+        React.createElement("span", { className: "wk__no font-serif", "aria-hidden": "true" }, e.no), /*#__PURE__*/
+        React.createElement("span", { className: "wk__t" }, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, M.name), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, M.env)), /*#__PURE__*/
+        React.createElement("span", { className: "wk__l font-ko" }, M.line), /*#__PURE__*/
+        React.createElement("span", { className: "wk__fig font-sans" }, "Fig. ", e.no, " \u2014 ", M.extra)
+        )
+        ));
+
+    })
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "wk__stage", ref: stage },
+    TOOLS.map((e, i) => /*#__PURE__*/React.createElement(FlagshipTool, { key: e.n, e: e, hidden: sel !== i, onOpen: onOpen }))
     )
-    )
-    ),
-    TOOLS.map((e, i) => /*#__PURE__*/React.createElement(FlagshipTool, { key: e.n, e: e, flip: i % 2 === 1, onOpen: onOpen }))
     ),
     staged && /*#__PURE__*/React.createElement(ProductTheater, { ed: staged.e, card: staged.card, onClose: onClose })
     ));
@@ -2769,6 +2782,9 @@ function ResearchArchive() {
 const LECTURE_MAILTO = "mailto:yubin120866@gmail.com?subject=";
 function Lectures() {
   const ref = useReveal();
+  const [lsel, setLsel] = useHashPick(LECTURE_TRACKS.map((tr) => ["lt-" + tr.key].concat(LECTURES.filter((l) => l.track === tr.key).map((l) => l.id))));
+  const lstage = React.useRef(null);
+  const lpick = (i) => {setLsel(i);requestAnimationFrame(() => bringIn(lstage.current));};
   return (/*#__PURE__*/
     React.createElement("section", { id: "lectures", ref: ref, className: "side-practice", style: { position: "relative", padding: "clamp(80px,12vw,150px) 0" } }, /*#__PURE__*/
     React.createElement("div", { className: "speckle", style: { opacity: .22 } }), /*#__PURE__*/
@@ -2776,44 +2792,31 @@ function Lectures() {
     React.createElement(SectionHead, { no: "\uAC15\uC758 \xB7 \uC18C\uD1B5", ko: "\uAE30\uC220\uC744 \uC774\uD574\uD558\uB294 \uAC83\uC5D0\uC11C, \uC774\uD574\uC2DC\uD0A4\uB294 \uAC83\uC73C\uB85C", en: "AI Education & Knowledge Translation",
       lead: "\uC4F8\uBAA8 \uC788\uB294 \uC2DC\uC2A4\uD15C\uC740 \uC4F0\uB294 \uC0AC\uB78C\uC774 \uC774\uD574\uD574\uC57C \uC790\uB9AC \uC7A1\uC2B5\uB2C8\uB2E4. \uC2E4\uBB34\uC5D0\uC11C \uB9CC\uB4E0 \uAC83\uC744 \uAC00\uB974\uCE60 \uC218 \uC788\uB294 \uB2E8\uC704\uB85C \uC62E\uAE34 \uC81C\uC548 \uCEE4\uB9AC\uD058\uB7FC\uC785\uB2C8\uB2E4." }), /*#__PURE__*/
 
-    React.createElement("div", { className: "side-note reveal" }, /*#__PURE__*/
-    React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko" }, "\uBCF8\uC5C5\uC740 ", /*#__PURE__*/
-    React.createElement("strong", null, "AI \uC804\uB7B5 \uCEE8\uC124\uD305"), "\uC785\uB2C8\uB2E4. \uAC15\uC758\uB294 \uC2E4\uBB34\uC5D0\uC11C \uC9C1\uC811 \uB9CC\uB4E4\uACE0 \uC6B4\uC601\uD55C \uACBD\uD5D8\uC744 \uB098\uB204\uAE30 \uC704\uD574", /*#__PURE__*/
-    React.createElement("strong", null, " \uBCC4\uB3C4\uB85C \uC124\uACC4\uD55C \uD504\uB85C\uADF8\uB7A8"), "\uC73C\uB85C, \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uC2B5\uB2C8\uB2E4. \uCEE4\uB9AC\uD058\uB7FC\uACFC \uADFC\uAC70\uB97C \uBA3C\uC800 \uACF5\uAC1C\uD574 \uB450\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC9C4\uD589\uB418\uBA74 \uC774\uB825\uC5D0 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uCD94\uAC00\uD558\uACA0\uC2B5\uB2C8\uB2E4. ", /*#__PURE__*/
-    React.createElement("strong", null, "\uAC15\uC758 \uC758\uB8B0\uB294 \uC5B8\uC81C\uB4E0 \uBC1B\uC2B5\uB2C8\uB2E4.")
-    )
+    React.createElement("p", { className: "lec-pre font-ko reveal" }, /*#__PURE__*/React.createElement("span", { className: "side-note__badge font-sans" }, "In Preparation"), /*#__PURE__*/
+    React.createElement("span", null, "\uC2E4\uBB34\uC5D0\uC11C \uB9CC\uB4E0 \uAC83\uC744 \uC62E\uAE34 ", /*#__PURE__*/React.createElement("strong", null, "\uC81C\uC548 \uCEE4\uB9AC\uD058\uB7FC"), "\uC785\uB2C8\uB2E4 \u2014 \uC544\uC9C1 \uCD9C\uAC15 \uC774\uB825\uC740 \uC5C6\uACE0, \uCCAB \uAC15\uC758\uAC00 \uC5F4\uB9AC\uBA74 \uC5F0\uB3C4\uC640 \uD568\uAED8 \uC801\uACA0\uC2B5\uB2C8\uB2E4.")), /*#__PURE__*/
+    React.createElement("ol", { className: "wk wk--3 reveal", "aria-label": "\uAC15\uC758 \uD2B8\uB799 3\uAC1C" },
+    LECTURE_TRACKS.map((tr, i) => {
+      const L = LECTURES.filter((l) => l.track === tr.key);
+      return (/*#__PURE__*/
+        React.createElement("li", { key: tr.key, className: "wk__c", style: { "--i": i } }, /*#__PURE__*/
+        React.createElement("button", { type: "button", className: "wk__b", "aria-pressed": lsel === i, "aria-controls": "lt-" + tr.key, onClick: () => lpick(i) }, /*#__PURE__*/
+        React.createElement("span", { className: "wk__no font-serif", "aria-hidden": "true" }, String.fromCharCode(65 + i)), /*#__PURE__*/
+        React.createElement("span", { className: "wk__k font-sans" }, tr.label.split(" — ")[1] || tr.label), /*#__PURE__*/
+        React.createElement("span", { className: "wk__t" }, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, tr.ko)), /*#__PURE__*/
+        React.createElement("span", { className: "wk__l font-ko" }, L.map((l) => l.title.split(" — ")[0]).join(" · ")), /*#__PURE__*/
+        React.createElement("span", { className: "wk__fig font-sans" }, "\uACFC\uC815 ", L.length, "\uAC1C")
+        )
+        ));
+
+    })
     ), /*#__PURE__*/
-
-    React.createElement("div", { className: "lec-intro reveal" }, /*#__PURE__*/
-    React.createElement("p", { className: "font-myeongjo" }, "\uB9CC\uB4E4\uC5B4 \uBCF8 \uC0AC\uB78C\uB9CC \uAC00\uB974\uCE60 \uC218 \uC788\uB294 \uAC83\uC774 \uC788\uC2B5\uB2C8\uB2E4."
-
-    ), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko lec-intro__sub" }, "SSAFY 13\uAE30\uC758 \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1 \uD6C8\uB828, \uC11C\uC6B8\uB300 AIED 4\uAE30\uC758 \uD504\uB86C\uD504\uD2B8 \uC544\uD0A4\uD14D\uCC98\uC640 \uAD50\uC218\uBC95, KREMA 3\uAE30\uC758 \uC2DC\uC7A5 \uB370\uC774\uD130 \uC804\uB7B5 \u2014 \uBC30\uC6B4 \uAC83\uC744 \uC2E4\uC81C\uB85C \uB9CC\uB4E4\uC5B4 \uC6B4\uC601\uD574 \uBCF8 \uB4A4\uC5D0 \uAC15\uC758 \uBAA8\uB4C8\uB85C \uC62E\uACBC\uC2B5\uB2C8\uB2E4. \uD604\uC7AC AI \uB450 \uD2B8\uB799\uACFC \uBD80\uB3D9\uC0B0\xB7\uC790\uC0B0\uAD00\uB9AC \uD55C \uD2B8\uB799, \uC5F4\uB450 \uACFC\uC815\uC758 \uCEE4\uB9AC\uD058\uB7FC\uC744 \uC124\uACC4\uD574 \uB450\uC5C8\uC2B5\uB2C8\uB2E4."
-
-
-
-    )
-    ),
-
-    LECTURE_TRACKS.map((tr) => /*#__PURE__*/
-    React.createElement("div", { key: tr.key, className: "lec-track" }, /*#__PURE__*/
-    React.createElement("div", { className: "lec-track__head reveal" }, /*#__PURE__*/
-    React.createElement("span", { className: "lec-track__label font-sans" }, tr.label), /*#__PURE__*/
-    React.createElement("h3", { className: "font-ko" }, tr.ko), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko" }, tr.desc)
-    ), /*#__PURE__*/
-    React.createElement("details", { className: "fold lec-fold" }, /*#__PURE__*/
-    React.createElement("summary", null, /*#__PURE__*/
-    React.createElement("span", { className: "fold__t" }, /*#__PURE__*/
-    React.createElement("strong", { className: "font-ko" }, "\uACFC\uC815 ", LECTURES.filter((l) => l.track === tr.key).length, "\uAC1C \uBCF4\uAE30"), /*#__PURE__*/
-    React.createElement("span", { className: "fold__line font-ko" }, LECTURES.filter((l) => l.track === tr.key).map((l) => l.title.split(" — ")[0]).join(" · "))
-    ), /*#__PURE__*/
-    React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })
-    ), /*#__PURE__*/
+    React.createElement("div", { className: "wk__stage", ref: lstage },
+    LECTURE_TRACKS.map((tr, k) => /*#__PURE__*/
+    React.createElement("div", { key: tr.key, id: "lt-" + tr.key, className: "lec-track", hidden: lsel !== k }, /*#__PURE__*/
+    React.createElement("p", { className: "lec-track__desc font-ko" }, tr.desc), /*#__PURE__*/
     React.createElement("div", { className: "lec-grid" },
     LECTURES.filter((l) => l.track === tr.key).map((l, i) => /*#__PURE__*/
-    React.createElement("article", { key: l.id, id: l.id, className: "lec-card reveal", style: { "--accent-fill": l.color, transitionDelay: `${i * 70}ms` } }, /*#__PURE__*/
+    React.createElement("article", { key: l.id, id: l.id, className: "lec-card", style: { "--accent-fill": l.color, "--i": i } }, /*#__PURE__*/
     React.createElement("div", { className: "lec-card__head" }, /*#__PURE__*/
     React.createElement("span", { className: "lec-card__n font-cond" }, l.n), /*#__PURE__*/
     React.createElement("span", { className: "lec-card__icon", style: { background: l.color } }, /*#__PURE__*/React.createElement(l.Icon, { size: 20 }))
@@ -2824,10 +2827,13 @@ function Lectures() {
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uB300\uC0C1"), /*#__PURE__*/React.createElement("dd", null, l.who)), /*#__PURE__*/
     React.createElement("div", null, /*#__PURE__*/React.createElement("dt", null, "\uAD6C\uC131"), /*#__PURE__*/React.createElement("dd", null, l.hours))
     ), /*#__PURE__*/
+    React.createElement("details", { className: "lec-card__more font-ko" }, /*#__PURE__*/
+    React.createElement("summary", null, "\uBAA8\uB4C8 ", l.modules.length, "\uAC1C \xB7 \uADFC\uAC70"), /*#__PURE__*/
     React.createElement("ul", { className: "lec-card__mods font-ko" },
     l.modules.map((m) => /*#__PURE__*/React.createElement("li", { key: m }, m))
     ), /*#__PURE__*/
-    React.createElement("p", { className: "lec-card__basis font-ko" }, /*#__PURE__*/React.createElement(GraduationCap, { size: 14 }), " ", l.basis), /*#__PURE__*/
+    React.createElement("p", { className: "lec-card__basis font-ko" }, /*#__PURE__*/React.createElement(GraduationCap, { size: 14 }), " ", l.basis)
+    ), /*#__PURE__*/
     React.createElement("div", { className: "lec-card__links" }, /*#__PURE__*/
     React.createElement("a", { href: l.proof.href, className: "lec-card__proof font-sans" },
     l.proof.label, " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })
@@ -3237,6 +3243,31 @@ function Footer() {
 
 }
 
+/* ---------- 고르기 + 깊은 링크 — groups[i] 에 든 id 로 들어오면 i 를 고르고 그 자리로 ---------- */
+function useHashPick(groups) {
+  const [sel, setSel] = React.useState(0);
+  React.useEffect(() => {
+    const go = () => {
+      let h = "";try {h = decodeURIComponent(location.hash.slice(1));} catch (e) {return;}
+      if (!h) return;
+      const i = groups.findIndex((g) => g.indexOf(h) >= 0);
+      if (i < 0) return;
+      setSel(i);
+      requestAnimationFrame(() => requestAnimationFrame(() => {const el = document.getElementById(h);if (el) el.scrollIntoView({ block: "start" });}));
+    };
+    go();
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, []);
+  return [sel, setSel];
+}
+/* 고른 상세가 화면 아래쪽에 있으면 부드럽게 올려 보여 준다 */
+function bringIn(el) {
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  if (r.top > window.innerHeight * .62 || r.top < 0) el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+}
+
 /* ---------- shared section header ---------- */
 /* 'The Composite' → 관사만 가는 이탤릭으로 — 클래식 표제의 리듬 */
 /* 섹션 머리 — 한국어가 뜻을 맡고, 영어는 같은 묶음 안에서 전문 용어로 거든다(장식용 대문자 영어 제목 없음) */
@@ -3245,7 +3276,7 @@ function SectionHead({ no, ko, en, lead }) {
     React.createElement("header", { className: "sh reveal", "data-no": no && /^\d+/.test(no) ? no.match(/^\d+/)[0] : undefined }, /*#__PURE__*/
     React.createElement("div", { className: "menu-rule", style: { marginBottom: 22 } }, /*#__PURE__*/React.createElement("i", null)),
     no && /*#__PURE__*/React.createElement("p", { className: "sh__no font-ko" }, no), /*#__PURE__*/
-    React.createElement("h2", { className: "sh__t" }, /*#__PURE__*/React.createElement("span", { className: "sh__ko font-ko" }, ko), en && /*#__PURE__*/React.createElement("span", { className: "sh__en font-serif", lang: "en" }, en)),
+    React.createElement("h2", { className: "sh__t" }, /*#__PURE__*/React.createElement("span", { className: "sh__ko font-ko" }, ko.includes(", ") ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", { className: "sh__ka" }, ko.slice(0, ko.indexOf(", ") + 1)), " ", /*#__PURE__*/React.createElement("span", { className: "sh__kb" }, ko.slice(ko.indexOf(", ") + 2))) : ko), en && /*#__PURE__*/React.createElement("span", { className: "sh__en font-serif", lang: "en" }, en)),
     lead && /*#__PURE__*/React.createElement("p", { className: "sh__lead font-ko" }, lead)
     ));
 
