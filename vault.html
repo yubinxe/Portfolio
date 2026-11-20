@@ -11,8 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
-<link rel="stylesheet" href="admin-vault.css?v=3" />
-<link rel="stylesheet" href="vault.css?v=1" />
+<link rel="stylesheet" href="admin-vault.css?v=4" />
+<link rel="stylesheet" href="vault.css?v=2" />
 </head>
 <body>
 <div class="lv-curtain" id="lv-curtain" aria-hidden="true">
@@ -28,8 +28,8 @@
 <script>
 (function () {
   "use strict";
-  var SESS_KEY = "yk.admin.s";
-  var VAULT_URL = "vault-data.enc.json?v=3";
+  var SESS_KEY = "yk.admin.v2";
+  var VAULT_URL = "vault-data.enc.json?v=4";
   var root = document.getElementById("lv-root");
   var data = null;
 
@@ -296,12 +296,20 @@
     var saved = sessionStorage.getItem(SESS_KEY);
     if (saved) {
       var parsed = JSON.parse(saved);
-      if (parsed && parsed.d && Date.now() - parsed.t < 1000 * 60 * 60 * 6) data = parsed.d;
+      if (parsed && parsed.d && parsed.d.meta && parsed.d.meta.version === "2026.11-louvre-v2" && Date.now() - parsed.t < 1000 * 60 * 60 * 6) {
+        data = parsed.d;
+      } else {
+        sessionStorage.removeItem(SESS_KEY);
+      }
     }
   } catch (e) {}
 
-  if (data) renderExhibition();
-  else renderGate();
+  if (data) {
+    try { renderExhibition(); }
+    catch (err) { data = null; try { sessionStorage.removeItem(SESS_KEY); } catch (x) {} renderGate(); }
+  } else {
+    renderGate();
+  }
 })();
 </script>
 </body>

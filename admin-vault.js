@@ -3,9 +3,9 @@
   "use strict";
   if (window.ykAdmin) return;
 
-  var SESS_KEY = "yk.admin.s";
-  var VAULT_URL = "vault-data.enc.json?v=3";
-  var CSS_URL = "admin-vault.css?v=3";
+  var SESS_KEY = "yk.admin.v2";
+  var VAULT_URL = "vault-data.enc.json?v=4";
+  var CSS_URL = "admin-vault.css?v=4";
   var unlockedData = null;
   var encBundle = null;
   var rootEl = null;
@@ -473,9 +473,11 @@
     var saved = sessionStorage.getItem(SESS_KEY);
     if (saved) {
       var parsed = JSON.parse(saved);
-      if (parsed && parsed.d && Date.now() - parsed.t < 1000 * 60 * 60 * 6) {
+      if (parsed && parsed.d && parsed.d.meta && parsed.d.meta.version === "2026.11-louvre-v2" && Date.now() - parsed.t < 1000 * 60 * 60 * 6) {
         unlockedData = parsed.d;
         setTimeout(emitChange, 50);
+      } else {
+        sessionStorage.removeItem(SESS_KEY);
       }
     }
   } catch (e) {}
