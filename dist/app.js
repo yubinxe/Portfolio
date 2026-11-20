@@ -21,6 +21,7 @@ function App() {
     React.createElement(IntroSequence, null), /*#__PURE__*/
     React.createElement(HeroClassic, null), /*#__PURE__*/
     React.createElement(Ledger, null), /*#__PURE__*/
+    React.createElement(CaseIndex, null), /*#__PURE__*/
     React.createElement(About, null), /*#__PURE__*/
     React.createElement(Composite, null), /*#__PURE__*/
     React.createElement(AXCommand, null), /*#__PURE__*/

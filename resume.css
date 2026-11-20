@@ -1,0 +1,109 @@
+/* resume.css v2 — 1페이지 이력. 30초 안에 읽히는 정보 위계: 인물 → 한 문장 → 일하는 방식 3 → 대표 증빙 3 → 외부 기록 → 연락.
+ * 화면 = 종이 한 장처럼(데스크톱) · 세로 읽기(모바일), 인쇄 = A4 세로 정확히 1쪽.
+ * 아이보리 · 남색 · 절제된 금색, 명조(이름 · 핵심 문장) + 고딕(본문). 카드 · 아이콘 · 숫자 카운터 · 애니메이션 없음 */
+:root{--ink:#0E1A2E;--navy:#13284B;--paper:#FFFDF9;--ecru:#F3EFE6;--gold:#9C7E48;--gold-t:#735C30;--soft:#4A5365;--hair:rgba(14,26,46,.14);--hair2:rgba(14,26,46,.3)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ecru);color:var(--ink);font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--navy)}
+:focus-visible{outline:3px solid #2D5BA8;outline-offset:2px}
+.rv-bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:10px max(16px,env(safe-area-inset-left));background:rgba(243,239,230,.96);border-bottom:1px solid var(--hair)}
+.rv-back{font-size:.88rem;font-weight:700;text-decoration:none}
+.rv-tools{display:flex;flex-wrap:wrap;gap:8px}
+.rv-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font:inherit;font-size:.86rem;font-weight:700;color:var(--navy);text-decoration:none;background:var(--paper);border:1px solid var(--navy);cursor:pointer}
+.rv-btn--solid{background:var(--navy);color:#fff}
+.rv-btn:hover{background:var(--navy);color:#fff}
+.rv{padding:clamp(16px,3vw,40px) 16px 56px}
+.rv-doc{max-width:860px;margin:0 auto;padding:clamp(24px,5vw,60px);background:var(--paper);border:1px solid var(--hair);box-shadow:0 18px 50px rgba(14,26,46,.08)}
+
+/* 01 인물 */
+.rv-id{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--navy)}
+.rv-k{margin:0;font-size:.74rem;font-weight:700;color:var(--gold-t)}.rv-k span{margin:0 6px;font:600 .64rem "Inter",sans-serif;letter-spacing:.18em;text-transform:uppercase}.rv-k time{font-weight:500;color:var(--soft)}
+.rv-id h1{margin:12px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:clamp(2.4rem,7vw,3.4rem);line-height:1.05;letter-spacing:-.03em;color:var(--navy)}
+.rv-id h1 span{display:inline-block;margin-left:12px;font:500 clamp(.8rem,1.8vw,1rem) "Inter",sans-serif;letter-spacing:.22em;text-transform:uppercase;vertical-align:.5em;color:var(--soft)}
+.rv-role{margin:14px 0 0;font-size:1.06rem;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+.rv-role em{margin-left:10px;padding-left:10px;font-style:normal;font-weight:500;font-size:.88rem;color:var(--soft);border-left:1px solid var(--hair2)}
+.rv-lead{margin:6px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:clamp(1.12rem,2.6vw,1.34rem);color:var(--gold-t)}
+.rv-photo{width:124px;height:156px;object-fit:cover;object-position:50% 20%;filter:saturate(.92)}
+
+/* 02 핵심 관점 — 문서의 중심 문장 */
+.rv-thesis{margin:30px 0 0;font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:clamp(1.36rem,3.4vw,1.9rem);line-height:1.45;letter-spacing:-.025em;color:var(--navy);text-wrap:balance}
+.rv-thesis::before{content:"";display:block;width:36px;height:2px;margin-bottom:16px;background:var(--gold)}
+.rv-thesis__sub{max-width:40em;margin:12px 0 0;font-size:.96rem;line-height:1.75;color:var(--soft)}
+
+/* 섹션 공통 */
+.rv-sec{margin-top:34px}
+.rv-sec h2{display:flex;align-items:baseline;gap:10px;margin:0 0 14px;padding-bottom:8px;font-size:1.02rem;font-weight:800;color:var(--navy);border-bottom:1px solid var(--hair)}
+.rv-sec h2 span{font:600 .74rem "Inter",sans-serif;letter-spacing:.08em;color:var(--gold-t)}
+.rv-sec h2 small{margin-left:auto;font:600 .62rem "Inter",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+
+/* 일하는 방식 3 — 카드가 아닌 세 단(段) */
+.rv-caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none}
+.rv-caps li{padding:2px 20px 0;font-size:.9rem;line-height:1.65;color:var(--soft);border-left:1px solid var(--hair)}
+.rv-caps li:first-child{padding-left:0;border-left:0}
+.rv-caps b{display:block;margin-bottom:6px;font-size:1.02rem;letter-spacing:-.01em;color:var(--ink)}
+
+/* 대표 증빙 3 */
+.rv-cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.rv-case{display:flex;flex-direction:column}
+.rv-case__k{margin:0;font-size:.76rem;font-weight:800;color:var(--gold-t)}.rv-case__k em{display:block;margin-top:2px;font-style:normal;font-weight:500;color:var(--soft)}
+.rv-case h3{margin:8px 0 6px;font-size:1rem;line-height:1.45;letter-spacing:-.01em;color:var(--navy)}
+.rv-case p{margin:0 0 10px;font-size:.88rem;line-height:1.65}
+.rv-case__a{margin-top:auto;font-size:.8rem;font-weight:700;text-decoration:none;border-bottom:1px solid var(--hair2);align-self:flex-start}
+.rv-case__a:hover{border-color:var(--navy)}
+
+/* 외부 기록 */
+.rv-proof{display:grid;margin:0;padding:0;list-style:none}
+.rv-proof li{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:8px 0;font-size:.88rem;line-height:1.55;border-bottom:1px solid var(--hair)}
+.rv-proof li:first-child{padding-top:0}
+.rv-proof b{font-weight:700;color:var(--ink)}.rv-proof span{color:var(--soft)}
+.rv-proof a{text-underline-offset:3px}
+.rv-small{margin:12px 0 0;font-size:.8rem;line-height:1.6;color:var(--soft)}.rv-small b{margin-right:5px;color:var(--ink)}.rv-small b:not(:first-child){margin-left:10px}
+
+/* 연락 */
+.rv-contact h2{border-bottom-color:var(--navy)}
+.rv-contact-line{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0;font-size:.95rem;font-weight:600}
+.rv-contact-line a{text-decoration:none;border-bottom:1px solid var(--hair2)}
+.rv-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.rv-mailnote{margin:8px 0 0;font-size:.76rem;color:var(--soft)}
+.rv-foot{margin-top:26px;padding-top:10px;font-size:.74rem;color:var(--soft);border-top:1px solid var(--hair)}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .rv{padding:12px 10px 40px}
+  .rv-doc{padding:24px 18px}
+  .rv-id{grid-template-columns:1fr auto;gap:14px;align-items:start}.rv-photo{width:78px;height:98px}
+  .rv-role em{display:block;margin:4px 0 0;padding:0;border:0}
+  .rv-thesis{margin-top:24px}
+  .rv-caps,.rv-cases{grid-template-columns:1fr;gap:18px}
+  .rv-caps li{padding:0 0 0 14px;border-left:2px solid var(--gold)}.rv-caps li:first-child{padding-left:14px;border-left:2px solid var(--gold)}
+  .rv-proof li{grid-template-columns:1fr;gap:2px}
+  .rv-sec{margin-top:30px}
+  .rv-sec h2 small{display:none}
+  .rv-k{font-size:.82rem}.rv-k span{font-size:.72rem}.rv-k time{display:block;margin-top:2px}
+  .rv-id h1 span{font-size:.78rem}.rv-sec h2 span{font-size:.8rem}
+}
+
+/* 인쇄 · PDF — A4 세로 1쪽. 버튼 · 메일 안내 · 그림자 없이 */
+@page{size:A4;margin:13mm 14mm}
+@media print{
+  body{background:#fff;font-size:9.4pt;line-height:1.55}
+  .rv-bar,.rv-cta,.rv-mailnote{display:none!important}
+  .rv{padding:0}
+  .rv-doc{max-width:none;padding:0;border:0;box-shadow:none;background:#fff}
+  .rv-id{padding-bottom:12px;gap:18px}
+  .rv-id h1{margin-top:6px;font-size:28pt}.rv-id h1 span{font-size:9pt}
+  .rv-role{margin-top:8px;font-size:11pt}.rv-role em{font-size:9pt}.rv-lead{font-size:12.5pt}
+  .rv-photo{width:92px;height:115px}
+  .rv-thesis{margin-top:18px;font-size:16pt}.rv-thesis::before{margin-bottom:10px}
+  .rv-thesis__sub{margin-top:8px;font-size:9.4pt}
+  .rv-sec{margin-top:20px}.rv-sec h2{margin-bottom:10px;padding-bottom:5px;font-size:10.5pt}
+  .rv-caps li{font-size:8.8pt;padding:0 14px}.rv-caps li:first-child{padding-left:0}.rv-caps b{font-size:10pt;margin-bottom:4px}
+  .rv-cases{gap:16px}.rv-case__k{font-size:7.8pt}.rv-case h3{font-size:10pt;margin:5px 0 4px}.rv-case p{font-size:8.8pt;margin-bottom:6px}.rv-case__a{font-size:8pt}
+  .rv-proof li{grid-template-columns:120px 1fr;padding:5px 0;font-size:8.8pt}
+  .rv-small{margin-top:8px;font-size:8pt}
+  .rv-contact-line{font-size:9.6pt}
+  .rv-foot{margin-top:14px;padding-top:6px;font-size:7.4pt}
+  .rv-doc,.rv-sec,.rv-case{break-inside:avoid}
+  a{color:var(--navy);text-decoration:none}
+}

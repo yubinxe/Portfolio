@@ -34,9 +34,13 @@ export const IMAGES = [
   ["moef-tour.jpg", "moef-tour"],
   ["moef-talk.jpg", "moef-talk"],
   ["rei-day.jpg", "rei-day"],
-  ["rei-day-pose.jpg", "rei-day-pose"],
-  ["rei-day-sign.jpg", "rei-day-sign"],
-  ["rei-day-wall.jpg", "rei-day-wall"],
+  ["rei-day-booth.jpg", "rei-day-booth"],
+  ["rei-day-seminar.jpg", "rei-day-seminar"],
+  ["dyl-1114-group.jpg", "dyl-1114-group"],
+  ["dyl-1114-group2.jpg", "dyl-1114-group2"],
+  ["dyl-1114-qa.jpg", "dyl-1114-qa"],
+  ["dyl-1114-qa2.jpg", "dyl-1114-qa2"],
+  ["dyl-1114-selfie.jpg", "dyl-1114-selfie"],
 ];
 export const WIDTHS = [480, 800, 1200];
 

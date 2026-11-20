@@ -20,6 +20,7 @@ function App() {
         <IntroSequence />
         <HeroClassic />
         <Ledger />
+        <CaseIndex />
         <About />
         <Composite />
         <AXCommand />

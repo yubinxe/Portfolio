@@ -11,7 +11,9 @@ const OPT = {
   "youth-day-venue": [480, 800, 1200], "youth-day-dialogue": [480, 800, 900],
   "moef-group": [480, 800, 1200, 1600], "moef-nameplate": [480, 675], "moef-tour": [480, 800, 1200, 1600], "moef-talk": [480, 800, 1200, 1600],
   "dyl-assembly": [480, 800, 1200], "dyl-entrance": [480, 675], "dyl-library": [480, 800, 1200], "dyl-lecture": [480, 800, 1200], "dyl-qa": [480, 800, 1200],
-  "rei-day": [480, 800, 1200, 1600], "rei-day-pose": [480, 800, 820], "rei-day-sign": [480, 800, 1200, 1560], "rei-day-wall": [480, 800, 1200, 1400],
+  "rei-day": [480, 800, 1200, 1600],
+  "rei-day-booth": [480, 800, 1200], "rei-day-seminar": [480, 800, 1200],
+  "dyl-1114-group": [480, 800, 1200, 1600], "dyl-1114-group2": [480, 800, 1200, 1600], "dyl-1114-qa": [480, 800, 1200, 1600], "dyl-1114-qa2": [480, 800, 1200, 1600], "dyl-1114-selfie": [480, 800, 1200, 1600],
   "fw-gwanghwamun": [480, 800, 1200, 1280], "fw-street": [480, 800, 1200, 1280], "fw-map": [480, 800, 1200, 1280], "fw-phone": [480, 800, 1200, 1280],
 };
 function Pic({ name, fallback, sizes, alt = "", className, ...img }) {
@@ -50,7 +52,7 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["소개", "#about"], ["역량", "#composite"], ["경국 AX", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
+    ["소개", "#about"], ["역량", "#composite"], ["실무 사례", "#cases"], ["법률 AI 전환", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
     ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
@@ -72,74 +74,220 @@ function Nav() {
           <button type="button" className="mnav-btn" data-mnav-toggle="" aria-expanded="false" aria-controls="mnav">
             <span className="mnav-btn__bars" aria-hidden="true" />메뉴
           </button>
-          <a href="#contact" className="btn" style={{ padding: ".55em 1.1em", fontSize: ".85rem" }}>
+          <IxSwitch className="hnav__ix" />
+          <a href="resume.html" className="hnav__cv font-ko">1페이지 이력</a>
+          <a href="#contact" className="btn hnav__contact" style={{ padding: ".55em 1.1em", fontSize: ".85rem" }}>
             Contact <ArrowUpRight size={14} />
           </a>
         </nav>
       </div>
+      <IxNotice />
     </header>
   );
 }
 
-/* ============================================================ INTRO — ALPHA SHEEP · The First Move
- * 사진형 첫 화면(HeroClassic) 앞의 스크롤 오프닝 타이틀. 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP → 선언 → 김유빈.
- * 움직임은 cine.js 의 pin 진행도(--cp)를 intro.css 가 transform · opacity 로 계산한다 — 스크롤 중 React 재렌더 0회, 두 번째 스크롤 엔진 없음.
+/* ============================================================ INTRO — ALPHA SHEEP · The First Move (V7.1 · 시간 기반 재생)
+ * 사진형 첫 화면(HeroClassic) 앞의 오프닝 타이틀. 2027 → TREND KOREA 2027 → 키워드 → ALPHA SHEEP → 선언 → 김유빈.
+ * V7.1 — 장면을 스크롤 진행도(--cp)에 묶지 않는다. 스크롤 길이 520vh 대신 화면 고정 막(position:fixed) 위에서
+ *   시간 기반 재생기(requestAnimationFrame) 하나가 --t(초)를 쓰고, intro.css 가 장면마다 transform · opacity 로 계산한다.
+ *   휠 · 트랙패드 · 스와이프 · 방향키는 ‘더 빨리 보고 싶다’는 의사로만 해석해 장면 사이 전환만 잠깐 1.6배로 당긴다 —
+ *   입력이 아무리 커도 장면을 건너뛰지 않고, 문장이 다 보이는 정지 구간 · 이름 장면은 가속하지 않아 최소 노출 시간이 보장된다.
+ *   재생 중에만 배경 스크롤을 잠그고(html.ix-lock), 끝 · 건너뛰기 · 페이지 이탈 · 오류 · 안전 시간 초과 때 즉시 푼다.
  * 켜짐/꺼짐은 index.html <head> 의 짧은 스크립트가 첫 그리기 전에 정한다(html.ix-on / ix-off) — 레이아웃 흔들림 없음.
- *   ix-on 이 없으면(JS 없음 · 움직임 줄이기 · 인트로 끄기 전 저장 불가) 고정 없이 여섯 문장을 짧은 정적 화면으로 보여 준다.
- * SKIP INTRO 는 #manifesto 로 가는 평범한 링크라 React 가 실패해도 동작한다. ‘인트로 끄기’는 이 브라우저(localStorage)에만 기억 — 쿠키 · 추적 없음.
+ *   ix-on 이 없으면(JS 없음 · 움직임 줄이기) 고정 없이 여섯 문장을 짧은 정적 화면으로 보여 준다. 깊은 링크(#)는 바로 본문.
+ * ‘바로 본문 보기’는 #manifesto 로 가는 평범한 링크라 React 가 실패해도 동작한다. ‘인트로 끄기’는 이 브라우저(localStorage)에만 기억 — 쿠키 · 추적 없음.
  * 슬로건 ALPHA SHEEP 은 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건 — ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며 도서와 제휴 관계가 없다. */
-const IX_KEY = "yk.intro";
-const ixSet = (on) => {
-  try { if (on) localStorage.removeItem(IX_KEY); else localStorage.setItem(IX_KEY, "off"); } catch (e) {}
-  const h = document.documentElement;
-  const calm = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  h.classList.toggle("ix-off", !on);
-  h.classList.toggle("ix-on", on && !calm);
-  h.classList.toggle("ix-active", on && !calm);
+/* 인트로 제어 — 두 상태를 나눈다.
+ *  선호(pref): localStorage yk.intro("off"면 꺼짐, 없으면 켜짐) — 다음 방문에 재생할지. 기존 방문자 값 그대로.
+ *  재생(playing): 지금 화면에 인트로 장면이 있는지 — html.ix-off 가 없으면 재생 중. 이번 탭에서만 건너뛰기는 sessionStorage yk.intro.s
+ * 선호를 켜는 것만으로는 스크롤하지 않는다(지금 보던 자리 유지). 맨 위로 가서 다시 재생하는 것은 replay() 뿐이다.
+ * 인트로 안 스위치 · 상단 메뉴 스위치 · 모바일 메뉴 스위치는 같은 상태를 쓴다(ix:change 이벤트) */
+const IX_KEY = "yk.intro", IX_SESSION = "yk.intro.s";
+const ixCalm = () => !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+const ixPref = () => { try { return localStorage.getItem(IX_KEY) !== "off"; } catch (e) { return true; } };
+const ixPlaying = () => !document.documentElement.classList.contains("ix-off");
+const ixEmit = (msg, offerReplay) => window.dispatchEvent(new CustomEvent("ix:change", { detail: { msg: msg || "", replay: !!offerReplay } }));
+/* 인트로를 걷어 내도 지금 보던 섹션이 화면에서 튀지 않게 — 기준 섹션의 위치를 지킨다 */
+function ixKeepPlace(change) {
+  const secs = Array.prototype.filter.call(document.querySelectorAll("#root section[id]"), (x) => x.id !== "intro");
+  const a = secs.find((x) => x.getBoundingClientRect().bottom > 90), before = a ? a.getBoundingClientRect().top : 0;
+  change();
   window.dispatchEvent(new Event("cine:scan"));
-  window.scrollTo(0, 0);
-  if (!on) { const t = document.getElementById("hero-title"); if (t) { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); } }
+  if (a) { const d = a.getBoundingClientRect().top - before; if (Math.abs(d) > 1) window.scrollBy({ top: d, left: 0, behavior: "instant" }); }
+}
+function ixHide() {
+  if (window.__ixStop && window.__ixStop(true)) return; /* 재생 중이면 재생기가 잠금을 풀고 히어로로 넘긴다 */
+  const h = document.documentElement, intro = document.getElementById("intro");
+  const inIntro = !!intro && ixPlaying() && intro.getBoundingClientRect().bottom > window.innerHeight * 0.5;
+  const off = () => { h.classList.add("ix-off"); h.classList.remove("ix-on", "ix-active"); };
+  if (inIntro) {
+    off(); window.dispatchEvent(new Event("cine:scan")); window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    const t = document.getElementById("hero-title"); if (t) { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); }
+  } else ixKeepPlace(off);
+}
+const ykIntro = {
+  pref: ixPref, playing: ixPlaying,
+  setPref(on) {
+    try { if (on) localStorage.removeItem(IX_KEY); else localStorage.setItem(IX_KEY, "off"); } catch (e) {}
+    document.documentElement.classList.toggle("ix-pref-off", !on);
+    if (!on) { if (ixPlaying()) ixHide(); ixEmit("인트로를 껐습니다. 다음 방문부터 바로 본문이 열립니다."); }
+    else ixEmit("인트로를 켰습니다. 다음 방문부터 재생됩니다.", !ixPlaying());
+  },
+  replay() {
+    const h = document.documentElement;
+    try { sessionStorage.removeItem(IX_SESSION); } catch (e) {}
+    h.classList.remove("ix-off");
+    if (!ixCalm()) h.classList.add("ix-on", "ix-active");
+    window.dispatchEvent(new Event("cine:scan"));
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    ixEmit("");
+    window.dispatchEvent(new Event("ix:play"));
+    const sw = document.querySelector(".ix__ctl .ix__switch"); if (sw) sw.focus({ preventScroll: true });
+  },
+  /* 인트로를 이번 탭에서만 건너뛴다 — 선호는 그대로(1페이지 이력으로 갔다가 돌아올 때 처음부터 다시 보지 않게) */
+  skipSession() { try { sessionStorage.setItem(IX_SESSION, "skip"); } catch (e) {} },
 };
+if (typeof window !== "undefined") window.ykIntro = ykIntro;
+function useIx() {
+  const [st, set] = React.useState({ pref: true, playing: true });
+  React.useEffect(() => {
+    const up = () => set({ pref: ixPref(), playing: ixPlaying() });
+    up(); window.addEventListener("ix:change", up); window.addEventListener("pageshow", up);
+    return () => { window.removeEventListener("ix:change", up); window.removeEventListener("pageshow", up); };
+  }, []);
+  return st;
+}
+function IxSwitch({ className }) {
+  const { pref } = useIx();
+  return (
+    <button type="button" role="switch" aria-checked={pref} className={className + " ixsw font-sans"} onClick={() => ykIntro.setPref(!pref)}
+      aria-label={"인트로 " + (pref ? "켜짐 — 누르면 끄고 바로 본문으로" : "꺼짐 — 누르면 다음 방문부터 재생")}>
+      <span className="font-ko">인트로</span><b className="font-ko">{pref ? "켜짐" : "꺼짐"}</b><i aria-hidden="true" />
+    </button>
+  );
+}
+/* 상태 안내 — 설정을 바꿨을 때만 짧게(aria-live polite). 켰을 때는 ‘지금 보기’로 다시 재생할 수 있다 */
+function IxNotice() {
+  const [n, set] = React.useState(null);
+  React.useEffect(() => {
+    let t = 0;
+    const on = (e) => { const d = e.detail || {}; if (!d.msg) { set(null); return; } set(d); clearTimeout(t); t = setTimeout(() => set(null), 6000); };
+    window.addEventListener("ix:change", on);
+    return () => { window.removeEventListener("ix:change", on); clearTimeout(t); };
+  }, []);
+  return (
+    <div className={"ixn font-ko" + (n ? " is-on" : "")} role="status" aria-live="polite">
+      {n && <><span>{n.msg}</span>{n.replay && <button type="button" onClick={() => ykIntro.replay()}>지금 보기</button>}</>}
+    </div>
+  );
+}
 /* 무리 — 같은 방향으로 흐르는 짧은 선들. 줄마다 하나의 묶음(g)만 움직여 그리기 비용을 줄인다(선 64개 · 변환 4개) */
 const IX_ROWS = [0, 1, 2, 3].map((r) => {
   const y = [300, 344, 566, 610][r], out = []; /* 가운데 글자 띠(약 372~540)는 비운다 — 선이 문장을 가로지르지 않게 */
   for (let k = 0; k < 16; k++) { const x = -260 + k * 132 + ((r * 47 + k * 29) % 41); out.push([x, y + ((k * 13 + r * 7) % 9) - 4, 34 + ((k * 7 + r * 5) % 26)]); }
   return out;
 });
+/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 9.4초, 스크롤로 가속하면 약 7초 */
+const IX_T = { end: 11.7, name: 9.0, rate: 1.25, boost: 1.6, hold: 650 };
+/* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면(9.0~)은 통째로 가속 없음 */
+const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.9, 8.75]];
+const ixHeld = (t) => t >= IX_T.name || IX_HOLD.some(([a, b]) => t >= a && t < b);
 function IntroSequence() {
-  const sec = React.useRef(null), stage = React.useRef(null), mark = React.useRef(null);
+  const sec = React.useRef(null), stage = React.useRef(null);
   React.useEffect(() => {
-    const s = sec.current, st = stage.current, m = mark.current;
-    if (!s || !st) return;
-    /* 매치 컷 — 히어로 이름(YUBIN KIM)의 세로 중심과 고정 구간 길이를 재서 마지막 장면이 그 자리로 이어지게 한다 */
+    const h = document.documentElement, st = stage.current;
+    if (!st) return;
+    let raf = 0, t = 0, last = 0, fastUntil = 0, running = false, safety = 0, touchY = null;
+    const write = () => st.style.setProperty("--t", t.toFixed(3));
+    /* 매치 컷 — 히어로 이름(YUBIN KIM)의 화면 속 세로 중심. 재생 중에는 맨 위에 고정이라 화면 좌표 그대로 쓴다 */
     const measure = () => {
-      const hero = document.getElementById("manifesto"), name = hero && hero.querySelector(".hero-name");
-      if (name) {
-        const hr = hero.getBoundingClientRect(), nr = name.getBoundingClientRect();
-        st.style.setProperty("--hy", Math.round(nr.top - hr.top + nr.height / 2) + "px");
-      }
-      st.style.setProperty("--span", Math.max(0, s.offsetHeight - window.innerHeight) + "px");
+      const name = document.querySelector("#manifesto .hero-name");
+      if (name) { const r = name.getBoundingClientRect(); st.style.setProperty("--hy", Math.round(r.top + r.height / 2) + "px"); }
     };
-    measure();
-    let rt = 0;
-    const onResize = () => { clearTimeout(rt); rt = setTimeout(measure, 120); };
-    window.addEventListener("resize", onResize, { passive: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-    /* 인트로가 화면을 차지하는 동안만 상단 메뉴를 숨긴다 — 스크롤 이벤트 없이 관찰자 하나로.
-     * 표식(.ix__mark)은 고정 구간의 앞 90%를 덮고, 관찰 영역은 화면 맨 윗줄이다 — "화면 위쪽이 그 구간 안에 있는가"만 본다.
-     * 건너뛰기 뒤 맨 위로 한 번에 돌아와도(Home 키 · 맨 위로 링크) 상태가 맞는다(지나간 여부를 기억하지 않는다) */
-    const h = document.documentElement;
-    const io = new IntersectionObserver((es) => { h.classList.toggle("ix-active", h.classList.contains("ix-on") && es[es.length - 1].isIntersecting); }, { rootMargin: "0px 0px -99% 0px" });
-    if (m) io.observe(m);
-    return () => { io.disconnect(); window.removeEventListener("resize", onResize); };
+    /* 입력은 ‘빨리 보고 싶다’는 의사 — 잠깐 가속만 한다. delta 크기는 보지 않는다(큰 휠 한 번이 여러 장면이 되지 않게) */
+    const fast = () => { fastUntil = performance.now() + IX_T.hold; };
+    const onWheel = (e) => { if (e.deltaY > 0 || e.deltaX > 0) fast(); };
+    const onTouchStart = (e) => { touchY = e.touches[0] ? e.touches[0].clientY : null; };
+    const onTouchMove = (e) => { if (touchY != null && e.touches[0] && touchY - e.touches[0].clientY > 6) fast(); };
+    const onKey = (e) => {
+      if (e.key === "Escape") { stop(true); return; }
+      const ctl = e.target && e.target.closest && e.target.closest("a,button,input,textarea,select");
+      if (!ctl && ["ArrowDown", "PageDown", " ", "Spacebar", "End"].includes(e.key)) { e.preventDefault(); fast(); }
+    };
+    const frame = (now) => {
+      if (!running) return;
+      const dt = Math.min(0.05, (now - last) / 1000); last = now; /* 탭이 숨었다 돌아와도 한 번에 건너뛰지 않게 */
+      t = Math.min(IX_T.end, t + dt * IX_T.rate * (now < fastUntil && !ixHeld(t) ? IX_T.boost : 1));
+      write();
+      if (t >= IX_T.end) { stop(false); return; }
+      raf = requestAnimationFrame(frame);
+    };
+    /* 재생 중에는 인트로 밖(숨은 상단 메뉴 · 막 뒤의 본문)을 inert 로 — Tab · 스크린리더가 인트로 조작부터 만나게 */
+    const inertize = (on) => {
+      const intro = sec.current;
+      const walk = (parent) => {
+        for (const el of Array.from(parent.children)) {
+          if (el === intro || /^(SCRIPT|STYLE|LINK)$/.test(el.tagName)) continue;
+          if (intro && el.contains(intro)) { walk(el); continue; }
+          if (on && !el.inert) { el.inert = true; el.setAttribute("data-ix-inert", ""); }
+          else if (!on && el.hasAttribute("data-ix-inert")) { el.inert = false; el.removeAttribute("data-ix-inert"); }
+        }
+      };
+      walk(document.body);
+    };
+    const listen = (on) => {
+      const m = on ? "addEventListener" : "removeEventListener";
+      window[m]("wheel", onWheel, { passive: true }); window[m]("keydown", onKey);
+      window[m]("touchstart", onTouchStart, { passive: true }); window[m]("touchmove", onTouchMove, { passive: true });
+    };
+    /* 끝 — 잠금 해제 · 인트로 걷기 · (건너뛰었으면) 히어로로 초점. 이미 멈췄으면 false */
+    function stop(skipped) {
+      if (!running) return false;
+      running = false; cancelAnimationFrame(raf); clearTimeout(safety); listen(false); inertize(false);
+      h.classList.remove("ix-on", "ix-active", "ix-lock"); h.classList.add("ix-off");
+      window.dispatchEvent(new Event("cine:scan"));
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      const title = document.getElementById("hero-title");
+      if (title && skipped) { title.setAttribute("tabindex", "-1"); title.focus({ preventScroll: true }); }
+      ixEmit("");
+      return true;
+    }
+    function start() {
+      if (!h.classList.contains("ix-on") || h.classList.contains("ix-off") || ixCalm()) return;
+      cancelAnimationFrame(raf); clearTimeout(safety);
+      t = 0; write(); running = true; window.__ixRun = true;
+      h.classList.add("ix-active", "ix-lock");
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      measure(); listen(true); inertize(true);
+      /* 안전장치 — 어떤 이유로든 재생이 멈추면 정해진 시간 뒤 잠금을 푼다 */
+      safety = setTimeout(() => stop(false), (IX_T.end / IX_T.rate) * 1000 + 5000);
+      last = performance.now(); raf = requestAnimationFrame(frame);
+    }
+    window.__ixStop = stop;
+    const onPlay = () => start();
+    const onHide = () => stop(false);
+    const onErr = () => { if (running) stop(false); };
+    const onResize = () => { if (running) measure(); };
+    /* 1페이지 이력에서 ‘뒤로’ 돌아왔을 때(페이지 캐시 복원) — 이번 탭에서 건너뛰기로 했다면 인트로를 다시 세우지 않는다 */
+    const onShow = (e) => { let skip = false; try { skip = sessionStorage.getItem(IX_SESSION) === "skip"; } catch (x) {} if (e.persisted && skip && ixPlaying()) { ixHide(); ixEmit(""); } };
+    window.addEventListener("ix:play", onPlay); window.addEventListener("pagehide", onHide); window.addEventListener("error", onErr);
+    window.addEventListener("resize", onResize, { passive: true }); window.addEventListener("pageshow", onShow);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (running) measure(); });
+    start();
+    return () => {
+      stop(false); delete window.__ixStop;
+      window.removeEventListener("ix:play", onPlay); window.removeEventListener("pagehide", onHide); window.removeEventListener("error", onErr);
+      window.removeEventListener("resize", onResize); window.removeEventListener("pageshow", onShow);
+    };
   }, []);
   const word = "ALPHA SHEEP";
   return (
     <section id="intro" ref={sec} className="ix" aria-label="인트로 — ALPHA SHEEP, 무리에서 벗어난 양이 되다. 김유빈">
-      <div ref={stage} className="ix__stage" data-cine="pin" data-cine-src="#intro" data-cine-rest="1">
+      <div ref={stage} className="ix__stage">
         <div className="ix__bg" aria-hidden="true" />
         <div className="ix__light" aria-hidden="true" />
         <div className="ix__warm" aria-hidden="true" />
+        <div className="ix__vig" aria-hidden="true" />
         <svg className="ix__flock" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
           {IX_ROWS.map((row, r) => (
             <g key={r} className={"ix__row ix__row--" + r}>
@@ -156,12 +304,13 @@ function IntroSequence() {
         <p className="ix__brand font-sans" aria-hidden="true">Yubin Kim<span>Portfolio 2026</span></p>
 
         <div className="ix__scene ix__s1"><p className="ix__year font-serif">2027</p><p className="ix__year-sub font-myeongjo">시대가 바뀌는 순간</p></div>
-        <div className="ix__scene ix__s2"><p className="ix__tk"><span className="font-sans">TREND KOREA</span> <b className="font-serif">2027</b></p></div>
+        <div className="ix__scene ix__s2"><p className="ix__tk"><i className="ix__guide" aria-hidden="true" /><span className="font-sans">TREND KOREA</span> <b className="font-serif">2027</b><i className="ix__guide" aria-hidden="true" /></p></div>
         <div className="ix__scene ix__s3"><p className="ix__kw font-myeongjo">2027년을 관통하는 키워드</p></div>
         <div className="ix__scene ix__s4">
           <p className="ix__alpha-t font-serif" aria-label={word}>
-            {word.split("").map((c, i) => <span key={i} aria-hidden="true" className={c === " " ? "ix__sp" : "ix__l"} style={{ "--i": i, "--d": (((i * 7) % 5) - 2) / 2, "--x": i - 5 }}>{c === " " ? " " : c}</span>)}
+            {word.split("").map((c, i) => <span key={i} aria-hidden="true" className={c === " " ? "ix__sp" : "ix__l"} style={{ "--i": i }}><i>{c === " " ? " " : c}</i></span>)}
           </p>
+          <i className="ix__alpha-rule" aria-hidden="true" />
         </div>
         <div className="ix__scene ix__s5">
           <p className="ix__mf font-myeongjo"><span>무리에서 벗어난</span> <span>양이 되다.</span></p>
@@ -177,18 +326,16 @@ function IntroSequence() {
           </div>
         </div>
 
-        <p className="ix__cue font-sans" aria-hidden="true"><span>SCROLL TO BEGIN</span><i /></p>
+        <p className="ix__cue font-ko" aria-hidden="true"><span>스크롤하면 빠르게<em> · Esc 바로 본문</em></span><i /></p>
         <p className="ix__credit font-ko">ALPHA SHEEP — 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건을 인용했습니다. ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며, 도서 · 저자와 제휴 관계가 없습니다.</p>
         <i className="ix__bar" aria-hidden="true" />
 
         <div className="ix__ctl font-sans">
-          <button type="button" role="switch" aria-checked="true" className="ix__switch" onClick={() => ixSet(false)} aria-label="인트로 재생 — 끄면 이 브라우저에서는 다음 방문부터 바로 본문이 열립니다" title="끄면 다음 방문부터 바로 본문으로">
-            <span className="font-ko">인트로</span><i aria-hidden="true" />
-          </button>
-          <a className="ix__skip" href="#manifesto" onClick={() => document.documentElement.classList.remove("ix-active")}>SKIP INTRO <span aria-hidden="true">→</span></a>
+          <a className="ix__cv font-ko" href="resume.html" onClick={() => ykIntro.skipSession()}>1페이지 이력 보기</a>
+          <IxSwitch className="ix__switch" />
+          <a className="ix__skip font-ko" href="#manifesto" onClick={(e) => { if (window.__ixStop && window.__ixStop(true)) e.preventDefault(); }}>바로 본문 보기 <span aria-hidden="true">→</span></a>
         </div>
       </div>
-      <i ref={mark} className="ix__mark" aria-hidden="true" />
     </section>
   );
 }
@@ -230,7 +377,7 @@ function HeroClassic() {
           </div>
         </div>
 
-        <button type="button" className="ix-replay font-ko" onClick={() => ixSet(true)}>▶ 인트로 다시 보기</button>
+        <button type="button" className="ix-replay font-ko" onClick={() => ykIntro.replay()}>▶ 인트로 다시 보기</button>
         <a href="#glance" className="scroll-cue" aria-label="다음 내용으로">
           <span className="font-sans">SCROLL</span>
           <i />
@@ -281,6 +428,51 @@ const GLANCE = [
   { n: "03", ko: "판단과 제도로 연결합니다", en: "Human & Institutional Decisions", href: "#policy",
     d: "결과를 판단하는 사람이 이해하도록 만들고, 정책 논의의 자리에 나갑니다.", ev: "변호사 검토로 끝나는 AX 구조 · 국민 대토론회 정책 제안 발표 · 청년 정책 거버넌스" },
 ];
+/* ============================================================ 주요 실무 사례 — cases.html 사례집의 입구(첫 화면 다음)
+ * 목록은 cases-data.js 의 CASES 와 같은 id · 이름 · 범주(test/cases.test.mjs 가 대조). 범주는 실제 수행 · 공개 시연 · 향후 확장만 */
+const CASE_KIND = { actual: "실제 수행", demo: "공개 시연", future: "향후 확장" };
+const CASE_INDEX = [
+  { id: "bid", ko: "정비사업 입찰·용역비 분석 시스템", en: "Redevelopment Bid & Service Fee Analysis", kind: "actual", line: "흩어진 입찰 · 용역비 → 정기 수집해 단가 비교 기준선으로", badge: "사내 내부 기준선" },
+  { id: "gwangmyeong", ko: "광명시흥 공익사업 보상자료 분석", en: "Gwangmyeong-Siheung Compensation Analysis", kind: "actual", line: "방대한 보상자료 → 절차 · 쟁점 뼈대로 재구성", badge: "77장 구조화" },
+  { id: "transformation", ko: "법률회사 AI 전환·업무혁신 사례", en: "Legal AX & Process Innovation", kind: "actual", line: "반대하던 송무팀 설득 → 상급자 검수 후 전사 적용", badge: "AX 3종 전사 온보딩" },
+  { id: "automation", ko: "송무 실무 프로세스 개선 — 고객 메일 분류·급여명세서 자동화", en: "Workflow Automation", kind: "actual", line: "수작업 메일 · 명세서 → 분류 · 발송 자동화와 예외 처리", badge: "급여명세서 사내 운영" },
+  { id: "reg-monitor", ko: "법령·규제 변화 관제 시스템", en: "RE:INTELLIGENCE · Regulatory Monitoring", kind: "actual", line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 검토 큐", badge: "사내 구축" },
+  { id: "assembly", ko: "정비사업 총회결의 위험 검토 시스템", en: "Assembly Risk Engine", kind: "actual", line: "명부 · 위임장 수작업 대조 → 정족수 시뮬레이션", badge: "사내 구축" },
+  { id: "contract", ko: "공사도급계약 변경 위험 분석 시스템", en: "Contract Risk Intelligence", kind: "actual", line: "조항 변경 누락 위험 → 조항 단위 비교 · 승인 흐름", badge: "사내 구축" },
+  { id: "quality", ko: "법률 AI 품질 검증 및 위험 관리", en: "Legal AI Quality Assurance", kind: "demo", line: "그럴듯한 답 → 근거 위치 · 정합성 규칙 R1–R8 로 검증", badge: "가상 사건 15건 전수 검출" },
+];
+const CASE_CAPS = [
+  ["법률산업 업무혁신", "Legal Operations", "법률 실무에서 현업 요구사항을 읽고 업무 프로세스를 개선합니다."],
+  ["AI · 데이터 기반 문제 해결", "AI & Data", "자료 수집 · 데이터 구조화 · 업무 자동화 · AI 시스템 구현과 검증."],
+  ["전략기획 · 사업적 사고", "Strategy", "조직의 문제를 구조화하고 기술과 경영 판단을 잇습니다."],
+];
+function CaseIndex() {
+  const ref = useReveal();
+  return (
+    <section id="cases" ref={ref} className="cx" aria-labelledby="cx-title">
+      <div className="wrap">
+        <header className="cx__head reveal">
+          <p className="cx__k font-ko">주요 실무 사례 <span className="font-sans" lang="en">Case Studies</span></p>
+          <h2 id="cx-title" className="cx__t font-myeongjo">법률 실무를 이해하고,<br />업무체계를 다시 설계하다.</h2>
+          <p className="cx__s font-ko">법무법인 경국 전략기획실의 법률 AI 전환 · 프로세스 개선 · 시스템 구현</p>
+        </header>
+        <p className="cx__chips reveal font-ko">{CASE_CAPS.map(([ko]) => <span key={ko}>{ko}</span>)}</p>
+        <ol className="cx__list reveal">
+          {CASE_INDEX.map((c, i) => (
+            <li key={c.id}><a href={"cases.html#" + c.id}>
+              <span className="cx__no font-sans">{String(i + 1).padStart(2, "0")}</span>
+              <span className="cx__body"><b className="font-ko" title={c.en}>{c.ko}</b><span className="cx__line font-ko">{c.line}</span><span className="cx__badge font-ko">{c.badge}</span></span>
+              <span className={"cx__kind cx__kind--" + c.kind + " font-ko"}>{CASE_KIND[c.kind]}</span>
+            </a></li>
+          ))}
+        </ol>
+        <p className="cx__foot font-ko"><span className="cx__kind cx__kind--actual">실제 수행</span> 경국에서 직접 수행(자료 비공개) <span className="cx__kind cx__kind--demo">공개 시연</span> 가상 데이터 시연 <span className="cx__kind cx__kind--future">향후 확장</span> 미구현 — 세부 맥락은 사례집에서.</p>
+        <p className="cx__cta"><a className="btn" href="cases.html">실무 사례집 전체 보기 <ArrowUpRight size={14} /></a></p>
+      </div>
+    </section>
+  );
+}
+
 function Ledger() {
   const ref = useReveal();
   /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
@@ -312,34 +504,145 @@ function Ledger() {
   );
 }
 
-/* ============================================================ COMPOSITE — 융합 역량 */
-/* 역량은 깊이가 다르다 — 줄기(실증된 깊이) · 적용 영역 · 넓어지는 영역. 숙련도 점수 · 퍼센트는 쓰지 않는다.
- * id(dom-NN)는 고정이고 화면 순서는 tier 순서다. 두 번째 깊이(법률·부동산·제도적 의사결정)는 '형성 중'으로만 적는다 */
-const DOMAINS = [
-  { n: "01", tier: "core", ko: "AI 전략", short: "AI 전략", en: "AI Strategy",
-    desc: "무엇을 먼저 하고 무엇을 AI에 맡길지 정합니다. 광명시흥 3기 신도시 보상자료를 절차와 쟁점별로 구조화했고, 고객 메일 자동 분류에서는 무엇을 ‘급함’으로 볼지 기준을 세웠습니다.",
-    tags: ["문제 정의 · 우선순위", "보상자료 77장 구조화"] },
-  { n: "02", tier: "core", ko: "AX 실행 · 업무 자동화", short: "AX 실행", en: "AX Implementation",
-    desc: "반복되는 판단의 앞단을 시스템으로 옮기고, 사람은 기준을 정하는 자리에 남깁니다. 경국 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류를 만들었고, SSAFY 13기 · 서울대 AIED 4기에서 구조를 익혔습니다.",
-    tags: ["경국 AX 3종", "SSAFY 13기 · 서울대 AIED 4기"] },
-  { n: "03", tier: "core", ko: "데이터 기반 판단", short: "데이터", en: "Data-Based Reasoning",
-    desc: "공공데이터 API와 Google Workspace를 의사결정 가능한 화면으로 번역하고 직접 배포합니다. 전략이 감이 아니라 근거 위에 서도록 데이터 구조를 먼저 설계합니다.",
-    tags: ["공공데이터 API", "GWS 연동"] },
-  { n: "06", tier: "applied", ko: "법률·부동산의 산업 이해", short: "법률·부동산", en: "Legal & Real Estate Intelligence",
-    desc: "정비사업의 법률 위험, 토지보상 절차, 청약·공공임대 공고를 실무와 제품으로 다뤘습니다. 법무법인 경국의 송무·사무, 건국대 스마트건설 교육, KREMA 3기, 분양대행자 자격이 바탕입니다.",
-    tags: ["법무법인 경국", "스마트건설 · KREMA 3기"] },
-  { n: "05", tier: "wide", ko: "정책·공공 의사결정 참여", short: "정책·공공", en: "Policy & Public Decision-Making",
-    desc: "국민 대토론회에서 정책을 제안·발표했고, 서초청년네트워크 9기 운영위원회 부위원장 · 청년정책 패널로 활동합니다. 참석과 제안은 정책 결정이 아니라 논의에 참여한 기록입니다.",
-    tags: ["국민 대토론회 제안 발표", "서초청년네트워크 부위원장"] },
-  { n: "04", tier: "wide", ko: "설명·교육·소통", short: "설명·소통", en: "Knowledge Translation & Communication",
-    desc: "서울대 AIED 4기에서 교수법을 익혔고, 박람회 시연 · SSAFY 홍보 앰배서더 · 서울시민기자단으로 기술과 정책을 이해하기 쉬운 말로 옮겨 왔습니다. 강의는 제안 커리큘럼입니다.",
-    tags: ["서울대 AIED 4기", "SSAFY 홍보 앰배서더"] },
+/* ============================================================ 범용 AX 확장 3종(C) — 개인 구현 · 공개 시연
+ * 앱은 ax-lab/(Vite · React · TypeScript · Vitest) → ax/ 로 빌드. 아래 수치는 ax/eval-report.json(빌드 때 Vitest 와 벤치마크를 실제로 실행한 값)과
+ * 같아야 하며 test/ax-c.test.mjs 가 대조한다. 실제 값이 없으면 url · tests · m 을 null 로 두면 '준비 중'으로 표시된다(가짜 수치 금지) */
+const AX_C_LABEL = "개인 구현 · 공개 시연 (가상 벤치마크 검증)";
+const AX_C = [
+  { code: "C-1", id: "reconcile-gate", ko: "데이터 교차검증 게이트", en: "ReconcileGate · Data Reconciliation & Anomaly Gate",
+    domains: ["부동산 · 자산관리", "구매 · 정산", "경영기획 · 재무"],
+    line: "양식이 다른 대장 · 요약 · API → 단위 환산 뒤 불일치만 승인 큐로",
+    mechanism: "결정론적 파서 → 단위 환산 · 키 매칭 → MATCH · MISMATCH · MISSING · DUP · ANOMALY → 사유 필수 승인 → 정제 CSV · 감사기록",
+    url: "ax/reconcile-gate/", tests: { passed: 13, total: 13 }, m: { planted: 15, detected: 15, falsePositives: 0 } },
+  { code: "C-2", id: "ops-triage", ko: "리스크 차단형 인바운드 트리아지", en: "Ops Triage & Circuit Breaker",
+    domains: ["CS · 운영", "B2B SaaS · 영업", "이커머스"],
+    line: "고위험 · 근거 미달 요청 → 자동 발송을 코드로 잠그고 승인 대기로",
+    mechanism: "의도 · 긴급도 · 위험 등급 → 정책 조항 ID 인용 초안 → 차단 사유 코드 → HARD BLOCK · 승인 발송",
+    url: "ax/ops-triage/", tests: { passed: 12, total: 12 }, m: { trapTotal: 12, trapBlocked: 12, missed: 0, normalTotal: 8, normalAllowed: 8, citeCorrect: 18, citeTotal: 18 } },
+  { code: "C-3", id: "claim-verifier", ko: "의사결정 메모 팩트체커", en: "Claim-to-Source Verifier",
+    domains: ["전략기획", "리서치 · 컨설팅", "경영지원 · 임원 보고"],
+    line: "브리핑의 숫자 · 날짜 · 고유명사 → 원문 줄과 1:1 대조 후 승인",
+    mechanism: "Stage 1 초안 → Stage 2 독립 검증(수치 · 단위 · 기간 · 고유명사 · 인과) → 미해결 시 내보내기 잠금",
+    url: "ax/claim-verifier/", tests: { passed: 11, total: 11 }, m: { cases: 10, detected: 10, located: 10, falsePositives: 0 } },
 ];
-const TIERS = [
-  { key: "core", ko: "줄기 — 실증된 깊이", en: "Core Depth" },
-  { key: "applied", ko: "적용 영역", en: "Applied Domain" },
-  { key: "wide", ko: "넓어지는 영역", en: "Expanding Domains" },
+const axcProof = (c) => {
+  if (!c.m) return null;
+  if (c.code === "C-1") return `심은 결함 ${c.m.planted}건 중 ${c.m.detected}건 검출 · 오탐 ${c.m.falsePositives}건`;
+  if (c.code === "C-2") return `고위험 ${c.m.trapTotal}건 중 ${c.m.trapBlocked}건 차단(미탐지 ${c.m.missed}) · 정상 ${c.m.normalTotal}건 중 ${c.m.normalAllowed}건 자동 발송`;
+  return `고의 왜곡 ${c.m.cases}건 중 ${c.m.detected}건 탐지 · 위치 특정 ${c.m.located}건 · 오탐 ${c.m.falsePositives}건`;
+};
+
+/* ============================================================ COMPOSITE — 6축 역량 지도
+ * 숙련도 점수 · 퍼센트를 쓰지 않는다 — 육각형은 근거가 있는 여섯 영역의 지도이고, 꼭짓점마다 [핵심 한 줄] + [대표 실적 2] + [자격 · 교육]만 보인다.
+ * id(dom-NN)는 챗봇 · 깊은 링크가 쓰므로 고정(dom-04 는 정책 · 소통 축의 별칭). 실적 문장은 사이트 본문 · docs/content-matrix.md 에 근거 */
+const HEX = [
+  { id: "dom-01", ko: "AI 전략 · 문제정의", short: "AI 전략", en: "AI Strategy & Problem Framing", href: "cases.html#gwangmyeong",
+    line: "무엇을 먼저 하고, 무엇을 AI에 맡길지 정합니다",
+    wins: [["광명시흥 공익사업 보상자료 77장 구조화", "actual"], ["고객 메일 ‘급함’ 우선순위 기준 설계", "actual"]],
+    badges: ["법무법인 경국 전략기획실", "명지대 AI 데이터 매니지먼트 그랜드마스터"] },
+  { id: "dom-02", ko: "AX 실행 · 업무자동화", short: "AX 실행", en: "AX Implementation", href: "#ax-desk",
+    line: "반복되는 판단의 앞단을 시스템으로 옮깁니다",
+    wins: [["정비사업 AX 3종 · 급여명세서 자동 발송 — 사내 운영", "actual"], ["범용 AX 3종(C-1 ~ C-3) 구현 · 가상 벤치마크 검증", "demo"]],
+    badges: ["SSAFY 13기", "서울대 AIED 4기"] },
+  { id: "dom-03", ko: "데이터 · 정합성 검증", short: "데이터 검증", en: "Data Integrity & Verification", href: "#ax-c",
+    line: "숫자는 원문과 대조되기 전까지 확정하지 않습니다",
+    wins: [["Trial Brief 정합성 규칙 R1–R8 — 가상 사건 15건 전수 검출", "demo"], [() => `교차검증 결함 ${AX_C[0].m.detected}/${AX_C[0].m.planted} · 왜곡 탐지 ${AX_C[2].m.detected}/${AX_C[2].m.cases}(가상 벤치마크)`, "demo"]],
+    badges: ["공공데이터 API", "서울 핀테크 아카데미 14기"] },
+  { id: "dom-06", ko: "법률 · 부동산 도메인", short: "법률·부동산", en: "Legal & Real Estate", href: "career.html",
+    line: "정비사업 · 보상 · 청약 실무를 제품의 언어로 옮깁니다",
+    wins: [["법무법인 경국 송무 · 정비사업 실무", "actual"], ["제11회 부동산산업의 날 — 집캐치 발표 · 시연", "actual"]],
+    badges: ["KREMA 3기", "분양대행자 자격", "건국대 스마트건설"] },
+  { id: "dom-07", ko: "제품 기획 · 단독 배포", short: "제품·배포", en: "Product & Shipping", href: "#tools",
+    line: "필요한 도구는 혼자 끝까지 만들어 배포합니다",
+    wins: [["집캐치 — 한국경제 · 중앙일보 실명 소개", "demo"], ["법조시장 한눈에 · Atelier AX · 국정 한눈에", "demo"]],
+    badges: ["React", "Vercel", "공공데이터 API"] },
+  { id: "dom-05", alias: ["dom-04"], ko: "정책 · 소통 · 거버넌스", short: "정책·소통", en: "Policy, Communication & Governance", href: "#policy",
+    line: "현장의 문제를 제도의 언어로 옮깁니다",
+    wins: [["국민 대토론회 자산분과 참여 팀 중 1위(제안 · 발표)", "actual"], ["서초청년네트워크 9기 운영위원회 부위원장", "actual"]],
+    badges: ["서울대 AIED 4기", "민선 9기 서울시장 공약평가단"] },
 ];
+const HEX_C = 200, HEX_R = 132;
+const hexPt = (i, r) => { const a = ((-90 + i * 60) * Math.PI) / 180; return [HEX_C + r * Math.cos(a), HEX_C + r * Math.sin(a)]; };
+const hexPts = (r) => HEX.map((_, i) => hexPt(i, r).map((v) => v.toFixed(1)).join(",")).join(" ");
+const hexMid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+
+function HexMap() {
+  const box = React.useRef(null);
+  const [act, setAct] = React.useState(0);
+  const [drawn, setDrawn] = React.useState(false);
+  React.useEffect(() => {
+    const el = box.current;
+    if (!el || !("IntersectionObserver" in window)) { setDrawn(true); return; }
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { setDrawn(true); io.disconnect(); } }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  React.useEffect(() => {
+    /* #dom-01 같은 깊은 링크(챗봇 · 외부)로 들어오면 그 축을 고른다 */
+    const pick = () => { const h = location.hash.slice(1); const i = HEX.findIndex((x) => x.id === h || (x.alias || []).includes(h)); if (i > -1) setAct(i); };
+    pick(); window.addEventListener("hashchange", pick);
+    return () => window.removeEventListener("hashchange", pick);
+  }, []);
+  const cur = HEX[act];
+  const v = hexPt(act, HEX_R), pv = hexPt((act + 5) % 6, HEX_R), nv = hexPt((act + 1) % 6, HEX_R);
+  const sector = [[HEX_C, HEX_C], hexMid(v, pv), v, hexMid(v, nv)].map((p) => p.map((x) => x.toFixed(1)).join(",")).join(" ");
+  const tilt = v[0] > HEX_C + 1 ? 3 : v[0] < HEX_C - 1 ? -3 : 0; /* 고른 축 쪽으로 격자만 살짝 기운다 */
+  const onKey = (e) => {
+    const k = e.key;
+    if (k === "ArrowRight" || k === "ArrowDown") { e.preventDefault(); setAct((act + 1) % 6); }
+    else if (k === "ArrowLeft" || k === "ArrowUp") { e.preventDefault(); setAct((act + 5) % 6); }
+    else if (k === "Home") { e.preventDefault(); setAct(0); } else if (k === "End") { e.preventDefault(); setAct(5); }
+  };
+  React.useEffect(() => { const b = box.current && box.current.querySelector('.hex__tabs [aria-selected="true"]'); if (b && box.current.contains(document.activeElement) && document.activeElement !== b && document.activeElement.closest(".hex__tabs")) b.focus(); }, [act]);
+  return (
+    <div ref={box} className={"hex" + (drawn ? " is-drawn" : "")}>
+      <div className="hex__fig">
+        <svg viewBox="-64 8 528 384" aria-hidden="true" focusable="false">
+          <g className="hex__grid" style={{ transform: `rotate(${tilt}deg)` }}>
+            {[0.25, 0.5, 0.75, 1].map((k, i) => <polygon key={k} points={hexPts(HEX_R * k)} pathLength="1" style={{ "--d": i * 0.12 + "s" }} />)}
+            {HEX.map((x, i) => { const [px, py] = hexPt(i, HEX_R); return <line key={x.id} className={i === act ? "on" : ""} x1={HEX_C} y1={HEX_C} x2={px.toFixed(1)} y2={py.toFixed(1)} pathLength="1" style={{ "--d": 0.3 + i * 0.05 + "s" }} />; })}
+          </g>
+          <polygon className="hex__sector" points={sector} />
+          <g className="hex__orbit" style={{ transform: `rotate(${act * 60}deg)` }}><circle cx={HEX_C} cy={HEX_C - HEX_R - 16} r="4" /></g>
+          {HEX.map((x, i) => {
+            const [nx, ny] = hexPt(i, HEX_R), [lx, ly] = hexPt(i, HEX_R + 34);
+            const anchor = lx > HEX_C + 5 ? "start" : lx < HEX_C - 5 ? "end" : "middle";
+            return (
+              <g key={x.id} className={"hex__node" + (i === act ? " on" : "")} style={{ "--d": 0.55 + i * 0.07 + "s" }} onClick={() => setAct(i)} onMouseEnter={(e) => { if (e.nativeEvent && e.nativeEvent.pointerType !== "touch") setAct(i); }}>
+                <circle className="hex__hit" cx={nx.toFixed(1)} cy={ny.toFixed(1)} r="24" />
+                <circle className="hex__dot" cx={nx.toFixed(1)} cy={ny.toFixed(1)} r="7" />
+                <text x={lx.toFixed(1)} y={(ly + (i === 0 ? -4 : i === 3 ? 8 : 0)).toFixed(1)} textAnchor={anchor} dominantBaseline="middle" className="font-ko">{x.short}</text>
+              </g>
+            );
+          })}
+        </svg>
+        <p className="hex__note font-ko">숙련도 점수가 아니라 근거가 있는 여섯 영역의 지도입니다.</p>
+      </div>
+      <div className="hex__side">
+        <div className="hex__tabs" role="tablist" aria-label="역량 6축" onKeyDown={onKey}>
+          {HEX.map((x, i) => (
+            <button key={x.id} id={x.id} type="button" role="tab" aria-selected={i === act} aria-controls="hex-panel" tabIndex={i === act ? 0 : -1} onClick={() => setAct(i)}>
+              <b className="font-serif">{String(i + 1).padStart(2, "0")}</b><span className="font-ko">{x.short}</span>
+            </button>
+          ))}
+          {HEX.flatMap((x) => (x.alias || []).map((a) => <span key={a} id={a} className="hex__alias" aria-hidden="true" />))}
+        </div>
+        <div id="hex-panel" role="tabpanel" aria-labelledby={cur.id} className="hex__panel" key={cur.id}>
+          <p className="hex__k font-sans">{String(act + 1).padStart(2, "0")} / 06 · <span lang="en">{cur.en}</span></p>
+          <h3 className="hex__t font-ko">{cur.ko}</h3>
+          <p className="hex__line font-myeongjo">{cur.line}</p>
+          <p className="hex__h font-ko">대표 실적</p>
+          <ol className="hex__wins font-ko">
+            {cur.wins.map(([t, k]) => { const txt = typeof t === "function" ? t() : t; return <li key={txt}><span>{txt}</span><i className={"cx__kind cx__kind--" + k}>{k === "actual" ? "실제 수행" : "개인 공개 시연"}</i></li>; })}
+          </ol>
+          <p className="hex__h font-ko">자격 · 교육</p>
+          <p className="hex__badges font-ko">{cur.badges.map((b) => <span key={b}>{b}</span>)}</p>
+          <a className="hex__go font-ko" href={cur.href}>근거 보기 <ArrowUpRight size={14} /></a>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ============================================================ LECTURES — 강의 프로그램 */
 const LECTURE_TRACKS = [
@@ -487,102 +790,17 @@ const CASES = [
     judge: "무엇을 리스크로 볼지 정하는 건 결국 사람 몫이고, 그 기준은 법무 감각에서 나옵니다." },
 ];
 
-/* T/π 역량 구조 — 위 가로줄은 넓이(연결된 영역), 아래 굵은 줄기는 실증된 깊이(AI 전략·AX 실행).
- * 왼쪽의 점선 줄기는 형성 중인 두 번째 깊이(법률·부동산·제도적 의사결정) — 자격이나 완성된 전문성이 아니다 */
-const TMAP = { "06": [5, 28], "01": [29, 58], "05": [58, 79], "04": [79, 100] }; /* 가로줄 칸 — 왼쪽 · 오른쪽 % */
-function TShapeMap({ active, onPick }) {
-  const cur = DOMAINS[active] || DOMAINS[0];
-  const coreOn = cur.tier === "core";
-  const seg = (n) => TMAP[n];
-  const btn = (n, label, i) => {
-    const [l, r] = seg(n);
-    const on = n === "01" ? coreOn : cur.n === n;
-    return (
-      <button key={n} type="button" className={"tmap__seg" + (on ? " on" : "") + (n === "01" ? " tmap__seg--core" : "")} style={{ left: l + "%", width: (r - l) + "%" }}
-        aria-pressed={on} onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
-        <span className="font-ko">{label}</span>
-      </button>
-    );
-  };
-  return (
-    <div className="tmap" role="group" aria-label="T자 · π자 역량 구조 — 칸을 누르면 설명이 바뀝니다">
-      <div className="tmap__bar">
-        {btn("06", "법률·부동산", DOMAINS.findIndex((d) => d.n === "06"))}
-        {btn("01", "AI 전략·AX 실행", coreOn ? active : 0)}
-        {btn("05", "정책·공공", DOMAINS.findIndex((d) => d.n === "05"))}
-        {btn("04", "설명·소통", DOMAINS.findIndex((d) => d.n === "04"))}
-      </div>
-      <div className="tmap__stem" style={{ left: TMAP["01"][0] + "%", width: (TMAP["01"][1] - TMAP["01"][0]) + "%" }}>
-        {DOMAINS.filter((d) => d.tier === "core").map((d) => {
-          const i = DOMAINS.indexOf(d);
-          return (
-            <button key={d.n} type="button" className={"tmap__lv" + (i === active ? " on" : "")} aria-pressed={i === active}
-              onMouseEnter={() => onPick(i)} onFocus={() => onPick(i)} onClick={() => onPick(i)}>
-              <b className="font-serif">{d.n}</b><span className="font-ko">{d.short}</span>
-            </button>
-          );
-        })}
-        <p className="tmap__cap font-ko">실증된 깊이<em className="font-sans" lang="en">Demonstrated</em></p>
-      </div>
-      <div className={"tmap__stem2" + (cur.n === "06" ? " on" : "")} style={{ left: (TMAP["06"][0] + 4) + "%", width: (TMAP["06"][1] - TMAP["06"][0] - 8) + "%" }}>
-        <p className="font-ko">두 번째 깊이<br /><span>법률·부동산 ·<br />제도적 의사결정</span><em>형성 중</em></p>
-      </div>
-    </div>
-  );
-}
-
 function Composite() {
   const ref = useReveal();
   const bandRef = useReveal();
-  const [active, setActive] = React.useState(0);
-  const rows = React.useRef([]);
-
-  React.useEffect(() => {
-    const io = new IntersectionObserver(
-      (es) => es.forEach((e) => { if (e.isIntersecting) setActive(Number(e.target.getAttribute("data-i"))); }),
-      { rootMargin: "-42% 0px -46% 0px" }
-    );
-    rows.current.forEach((n) => n && io.observe(n));
-    return () => io.disconnect();
-  }, []);
-
   return (
     <React.Fragment>
     <section id="composite" ref={ref} style={{ position: "relative", padding: "clamp(80px,12vw,150px) 0 clamp(80px,10vw,120px)" }}>
       <div className="speckle" style={{ opacity: .2 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
-        <SectionHead no="02 역량 구조" ko="AI 전략·AX 실행을 줄기로" en="AI Strategy & AX Implementation"
-          lead="모든 역량의 깊이가 같지 않습니다. 실제 결과물로 증명한 줄기는 하나이고, 법률·부동산은 그 줄기가 쓰이는 영역, 정책·소통은 넓혀 가는 영역입니다." />
-
-        <div className="comp-stage comp-stage--t">
-          <div className="comp-stage__sticky">
-            <TShapeMap active={active} onPick={setActive} />
-            <div className="cmap__cap">
-              <span className="font-sans">{TIERS.find((t) => t.key === DOMAINS[active].tier).ko}</span>
-              <strong className="font-ko">{DOMAINS[active].ko}</strong>
-              <em className="font-sans" lang="en">{DOMAINS[active].en}</em>
-            </div>
-          </div>
-
-          <div className="comp-track">
-            {TIERS.map((t) => (
-              <React.Fragment key={t.key}>
-                <p className={"comp-group font-ko" + (t.key !== "core" ? " comp-group--sub" : "")}>{t.ko} <em className="font-sans" lang="en">{t.en}</em></p>
-                {DOMAINS.filter((d) => d.tier === t.key).map((d) => {
-                  const i = DOMAINS.indexOf(d);
-                  return (
-                    <article key={d.n} data-i={i} id={"dom-" + d.n} ref={(el) => (rows.current[i] = el)}
-                      className={"comp-row comp-row--" + t.key + (i === active ? " on" : "")} onMouseEnter={() => setActive(i)}>
-                      <h3 className="comp-row__t"><span className="font-ko">{d.ko}</span><em className="font-sans" lang="en">{d.en}</em></h3>
-                      <p className="font-ko">{d.desc}</p>
-                      <div className="comp-row__tags font-ko">{d.tags.map((x) => <span key={x}>{x}</span>)}</div>
-                    </article>
-                  );
-                })}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
+        <SectionHead no="02 역량 구조" ko="여섯 축으로 보는 역량 지도" en="Six-Axis Capability Map"
+          lead="꼭짓점을 고르면 핵심 한 줄 · 대표 실적 2개 · 관련 자격과 교육만 보입니다." />
+        <HexMap />
 
         <div className="folds reveal">
         <details className="arsenal fold" id="arsenal">
@@ -730,41 +948,45 @@ function FieldworkStrip() {
 
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
-  { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 — 사원 (Staff)",
-    desc: "정비사업의 법률·경제 위험을 다루는 AX를 기획·구축 — 정비사업 법률 리스크 관제(RE:INTELLIGENCE), 조합 총회결의 하자 사전검증, 계약변경 AI Redline. 광명시흥 3기 신도시 보상자료 분석·구조화(발표자료 77장)를 함께 수행.", proof: "#ax-desk", proofLabel: "AX 현황판 보기" },
-  { id: "tl-krema-intern", group: "work", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 인턴 (2026. 4 ~ 2026. 6)",
-    desc: "한국부동산마케팅협회 인턴으로 근무했습니다(2026. 4 ~ 2026. 6)." },
-  { id: "tl-rei-day", group: "public", year: "2026", color: "var(--pink)", title: "제11회 부동산산업의 날 — 행사 부스 운영 · VIP 응대 및 설명",
-    desc: "한국부동산경제단체연합회가 주최하고 한국공인중개사협회가 주관한 제11회 부동산산업의 날(2026. 11. 11 · 서울 강남구 건설회관)에서 행사장 부스를 운영하며 VIP 내빈을 응대하고 전시 내용을 설명했습니다. 국토교통부 · 한국부동산원 · 주택도시보증공사가 후원한 행사로, 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가가 함께했습니다.", proof: "gallery.html#rei-day", proofLabel: "행사 현장 보기" },
+  { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 전략기획실 — 사원 (2026. 6 – 재직 중)",
+    desc: "법률 AI 전환을 기획·구축 — 법령·규제 변화 관제 · 정비사업 총회결의 위험 검토 · 공사도급계약 변경 위험 분석 시스템을 만들고, 업무를 빼앗긴다며 반발한 송무팀에 역할 분담을 제시해 상급자 검수를 거쳐 전사 업무에 온보딩. 정비사업 공공입찰·용역비 데이터 정기 수집·정형화(단가 비교 기준선), 광명시흥 3기 신도시 보상자료 분석(발표자료 77장), 급여명세서 자동 발송 · 고객 메일 분류, 송무 지원(소장 편집 · 전자공탁 · 법원 외근)과 법률 콘텐츠 제작.", proof: "cases.html", proofLabel: "실무 사례집 보기" },
+  { id: "tl-krema-intern", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 서울시 매력일자리 3기 교육생 (2026. 4 ~ 6)",
+    desc: "서울시 매력일자리 3기 교육생으로 AI 활용 마케팅기획자 양성과정에 참여했습니다(교육과정 · 경력 아님). 수료 후 회원사 매칭으로 법무법인 경국에 입사했습니다." },
+  { id: "tl-rei-day", group: "public", year: "2026", color: "var(--pink)", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
+    desc: "한국부동산경제단체연합회가 주최하고 한국공인중개사협회가 주관한 제11회 부동산산업의 날(2026. 11. 11 · 서울 강남구 건설회관)에서 한국부동산마케팅협회(KREMA) 홍보부스에 참여해 직접 개발한 집캐치를 발표 · 시연하고 내빈을 응대했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다", proof: "gallery.html#rei-day", proofLabel: "행사 현장 보기" },
+  { id: "tl-seoripul-reporter", group: "public", year: "2026", color: "var(--sky)", title: "서초구 제5기 서리풀기자단 — 취재 · 기사 작성",
+    desc: "2026년 제5기 서리풀기자단으로 지역의 공간 · 문화 현장을 취재하고, 서초구 소식지 2026년 11월호에 공동 기명으로 기사가 실렸습니다(서리풀 아트테리어 · 루이스폴센 · 두성종이). 구민 기자단 활동이며 서울시민기자단과 별개입니다.", proof: "gallery.html#seoripul-reporter", proofLabel: "소식지 지면 보기" },
   { id: "tl-moef-youth", group: "public", year: "2026", color: "var(--sky)", title: "재정경제부 제1차관 청년 현장방문 및 간담회 참석",
     desc: "권대영 재정경제부 제1차관이 서울 마포구 창업기업 지원시설 SVC Seoul에서 연 청년 현장방문 및 간담회(2026. 10. 27)에 법무법인 경국 소속으로 참석했습니다. 차관 취임 후 첫 현장 행보로 마련된 자리로, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융 등 3대 사회정책에 대한 현장 의견을 전했습니다.", proof: "gallery.html#moef-youth", proofLabel: "간담회 현장 보기" },
   { id: "tl-gender-forum", group: "public", year: "2026", color: "var(--apple)", title: "성평등가족부 제2차 청년세대 성별균형 공개형 공론장 〈모두의 성평등〉 참석",
     desc: "‘청년이 생각하는 성평등정책, 어디까지?’를 주제로 연세대 백양누리 그랜드볼룸에서 열린 공개형 공론장(2026. 10. 25)에 참석해 청년 세대의 시각으로 정책 토론에 함께했고, 현장에서 성평등가족부 장관과 함께했습니다.", proof: "gallery.html#gender-forum", proofLabel: "공론장 현장 보기" },
   { id: "tl-dyl", group: "public", year: "2026", color: "var(--sky)", title: "2026 민주청년지도자 양성과정 입학 · 수강 중",
-    desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 현장 보기" },
+    desc: "민주연구원이 주최·주관하는 2026 민주청년지도자 양성과정에 입학(2026. 10. 24)해 12월 13일까지 정책·리더십 과정을 이어 가고 있습니다. 입학식에서 김민석 당대표·강득구 민주연구원장과 함께했고, 이광재 예산결산특별위원장의 특강에서 직접 질문했으며, 박홍근 기획예산처 장관과도 현장에서 함께했습니다. 11월 14일 질의 · 발표 세션에서 마이크를 잡고 발언했고, 강득구 민주연구원장 · 김경수 청와대 정무특보, 하정우 부위원장과 함께했습니다.", proof: "gallery.html#dyl", proofLabel: "입학식 · 11. 14 현장 보기" },
   { id: "tl-zipconomy", group: "public", year: "2026", color: "var(--butter)", title: "한경 집코노미 박람회 2026 — KREMA AI 전시관 서비스 시연·발표",
     desc: "코엑스 D홀 KREMA AI 전시관 C-10 부스에서 청약·공공임대 맞춤 추천 서비스 집캐치와 3D 감정평가 필드워크를 소개하고, 제작 배경과 작동 방식을 설명하며 관람객 질문에 답했습니다.", proof: "gallery.html#zipconomy", proofLabel: "박람회 현장 보기" },
-  { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 정책 제안 발표",
-    desc: "〈2026 세대·젠더 분야 현장형 국민대화 국민 대토론회〉(2026. 9. 29 · aT센터) 자산 분야 트랙에서 청년 미래배당펀드팀으로 ‘청년 초과세수 미래배당펀드’를 제안·발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계." },
+  { id: "tl-national-debate", group: "public", year: "2026", color: "var(--apple)", title: "국민통합위원회 2026 국민 대토론회 — 자산분과 정책 제안 발표 · 참여 팀 중 1위",
+    desc: "〈2026 세대·젠더 분야 현장형 국민대화 국민 대토론회〉(2026. 9. 29 · aT센터) 자산 분야 트랙에서 청년 미래배당펀드팀으로 ‘청년 초과세수 미래배당펀드’를 제안·발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계하고, 제안서 · 발표자료를 만들어 본무대에서 발표했습니다(자산분과 참여 팀 중 1위). 제안이며 정책 채택이 아닙니다." },
   { id: "tl-youth-day", group: "public", year: "2026", color: "var(--sky)", title: "청와대 대통령 주관 청년의날 행사 참석",
     desc: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석. 청년 정책의 방향과 현장의 과제를 국정 최고 의사결정 단위에서 직접 청취하고 교류.", proof: "gallery.html#youth-day", proofLabel: "대통령 주관 행사 현장 사진 보기" },
   { id: "tl-value-design", group: "public", year: "2026", color: "var(--sky)", title: "서초구 가치디자인단 위촉",
     desc: "서초구청 위촉식(2026. 9. 18)을 거쳐 가치디자인단으로 위촉되어 구정 현장 활동에 참여하고 있습니다." },
+  { id: "tl-seoul-pledge", group: "public", year: "2026", color: "var(--sky)", title: "민선 9기 서울시장 공약평가단 활동",
+    desc: "민선 9기 서울시장 공약평가단으로 활동했습니다. 시민의 자리에서 공약을 검토하는 참여 활동이며, 평가 결과나 정책 결정 권한을 뜻하지 않습니다." },
   { id: "tl-seocho", group: "public", year: "2026", color: "var(--apple)", title: "서초청년네트워크 9기 운영위원회 부위원장",
     desc: "서초구 청년 정책 거버넌스의 운영위원회 부위원장으로서 분과 의제 설정과 위원회 운영을 총괄하고, 현장의 목소리를 제도로 잇는 민관 협력을 주도." },
   { id: "tl-acrc-panel", group: "public", year: "2026", color: "var(--sky)", title: "국민권익위원회 청년정책 패널 활동",
     desc: "국민권익위원회 청년정책 패널로 활동하며, 청년의 시각에서 정책 과제에 의견을 내고 있습니다." },
   { id: "tl-youth-panel", group: "public", year: "2026", color: "var(--pink)", title: "국무조정실 온라인 청년참여단 활동",
     desc: "국무조정실 온라인 청년참여단으로서 청년 정책 과제에 대한 의견 수렴과 정책 제안에 참여하며, 온라인 공론장을 통해 청년 세대의 목소리를 정부 정책 과정에 전달." },
-  { id: "tl-myongji", group: "edu", year: "2026", color: "var(--apple)", title: "명지대학교 AI 데이터 매니지먼트 과정 — 트랙3 수료 · 트랙1·2·4 수강",
-    desc: "AI 데이터 매니지먼트 과정 네 개 트랙 중 트랙3을 수료했고, 트랙1·2·4를 수강 중이거나 수강할 예정입니다." },
+  { id: "tl-myongji", group: "edu", year: "2026", color: "var(--apple)", title: "명지대학교 AI 데이터 매니지먼트 과정 — 트랙 1·2·3·4 전 과정 수료 · 그랜드마스터 배지",
+    desc: "AI 데이터 매니지먼트 과정의 네 개 트랙을 모두 수료해, 전 과정을 마친 수강생에게 주는 그랜드마스터 배지를 받았습니다." },
   { id: "tl-claude-rag", group: "edu", year: "2026", color: "var(--lilac)", title: "한국부동산마케팅협회(KREMA) — ‘클로드 코드로 완성하는 상담 RAG 챗봇 구축’ 실습 교육 이수 (2026. 7. 25 · 1일 6시간)",
     desc: "문서 검색 · 벡터 DB · 서버리스 RAG API · 상담 화면을 하나로 잇는 구축 실습입니다. 부동산 상담이라는 도메인에 검색증강생성(RAG)을 연결해 본 교육으로, KREMA AI 마케팅 기획자 양성 3기와는 별개입니다." },
   { id: "tl-konkuk", group: "edu", year: "2026", color: "var(--butter)", title: "건국대학교 × 한국건설기술인협회 — 2026 스마트건설기술교육 이수 (2026. 6. 29 – 7. 3 · 5일 35시간)",
     desc: "건국대학교 대학일자리플러스사업단과 한국건설기술인협회가 함께 연 프로그램에서 BIM · 스마트 건설안전 · 드론 · 건설로봇을 현업 전문가와 연구자에게 배웠습니다. 건설산업의 데이터와 현장 기술을 이해하기 위한 교육이며, 법정 건설기술인 의무교육이 아닙니다." },
   { id: "tl-seoul-press", group: "public", year: "2026", color: "var(--apple)", title: "서울시민기자단 취재기자 활동",
     desc: "공공 영역의 미디어 콘텐츠를 구성·편집하고 시정(市政) 현안을 분석하여 정책 제안 과정에 참여." },
-  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 수료 (2026. 11. 7)",
+  { id: "tl-fintech", group: "edu", year: "2026", color: "var(--lilac)", title: "서울 핀테크 아카데미 14기 — 트랙 2·3 수료 (2026. 11. 7)",
     desc: "서울특별시와 금융 교육기관이 협약해 운영하고 금융투자협회 금융투자교육원이 진행하는 핀테크 전문교육을 약 11주 동안 금 · 토요일에 이어 들었습니다. 금융 · 디지털 서비스의 구조와 산업을 이해하는 범위를 넓힌 과정입니다." },
   { id: "tl-krema", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) AI 마케팅 기획자 양성 과정 3기 수료",
     desc: "인공지능 기반의 부동산 시장 데이터 분석과 표적 세그먼트 도출을 학습하고, 매체별 디지털 마케팅 전략 수립 및 자동화 설계 역량을 습득." },
@@ -780,25 +1002,38 @@ const TRAJECTORY = [
     desc: "기초군사훈련 과정에서 분대의 통솔과 임무 수행 성과를 인정받아 최우수 분대로 선정되었으며, 육군훈련소장(소장)의 상장을 수상." },
   { id: "tl-army-signal", group: "honor", year: "2022", color: "var(--lilac)", title: "육군정보통신학교장 상장 수상",
     desc: "軍 특성화고 현장실습 기간 중 희생정신과 학업성적 우수로 타의 모범이 되어 육군정보통신학교장(준장)으로부터 상장을 수상(2022. 7. 1, 제183호)." },
-  { id: "tl-vattenfall", group: "public", year: "2022", color: "var(--butter)", title: "대구광역시교육청 · 독일 Vattenfall Berlin 해외 연수",
-    desc: "독일 베를린에서 유럽 선진 기업의 에너지·인프라 운영 체계와 국제 실무 표준을 조기에 접한 경험." },
+  { id: "tl-vattenfall", group: "work", year: "2022", tag: "INTERNSHIP", color: "var(--butter)", title: "독일 Vattenfall Wärme Berlin AG 기술교육부서 인턴십 (2022. 10. 4 ~ 11. 21)",
+    desc: "독일 베를린 소재 Vattenfall Wärme Berlin AG 기술교육부서(Technical Training Department)에서 전기공학 · 배선 · 보호설비 · 기술기준 관련 실습에 참여했습니다. 2022년 11월 발급된 추천서에는 업무의 신뢰성, 성실한 수행과 팀워크에 대한 긍정적인 평가가 담겨 있습니다. 정규직 재직이 아닌 인턴십이며, 회사명은 2022년 당시 기준입니다.", proof: "career.html#cv-vattenfall", proofLabel: "인턴십 상세 · 증빙 요약" },
+  { id: "tl-osz-tiem", group: "edu", year: "2022", color: "var(--butter)", title: "독일 OSZ TIEM 전기기술 · 직업교육 참여 (2022. 9. 6 ~ 9. 30)",
+    desc: "독일 베를린 OSZ TIEM(Technische Informatik, Industrieelektronik und Energiemanagement)에서 전기공학 · 기술실습과 독일어 · 영어, 수학, 경제 · 사회 분야 수업에 참여했습니다. 교육 참여 증명서에는 과제 수행과 교육 현장에서의 성실한 태도에 대한 긍정적인 평가가 기재돼 있습니다. 학위 · 자격이 아닌 교육 참여 증명입니다.", proof: "gallery.html#germany-2022", proofLabel: "베를린 2022 기록 보기" },
 ];
 
 /* 현장 일지 — 청와대 청년의날 다음 장. 날짜 도장으로 잇는다 (성평등 공론장은 대외활동 목록에만) */
 const DIARY = [
-  { id: "rei-day", date: "11.11", day: "WED", tone: "brick", chip: "부스 운영 · VIP 응대",
-    eyebrow: "Field Diary — 2026. 11. 11", title: "제11회 부동산산업의 날 — 부스 운영 · VIP 응대 및 설명",
-    body: "부동산 관련 단체와 정부 · 공공기관이 함께하는 제11회 부동산산업의 날에서 행사장 부스를 운영했습니다. 찾아온 VIP 내빈을 맞이해 전시 내용을 직접 설명하고 질문에 답했습니다. 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했고, 오후에는 AI · 디지털 혁신 속 부동산산업의 발전 전략을 다루는 세미나가 이어졌습니다.",
+  { id: "dyl-1114", date: "11.14", day: "SAT", tone: "navy", chip: "질의 · 발표",
+    eyebrow: "Field Diary — 2026. 11. 14", title: "2026 민주청년지도자 양성과정 — 질의 · 발표 세션",
+    body: "민주연구원의 2026 민주청년지도자 양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께했고, 하정우 부위원장과도 현장에서 함께했습니다. 10월 24일 입학 뒤 이어 가는 과정입니다.",
+    facts: [["주최·주관", "민주연구원"], ["일자", "2026. 11. 14"], ["함께", "강득구 민주연구원장 · 김경수 청와대 정무특보 · 하정우 부위원장"], ["역할", "질의 · 발표 세션 발언"]],
+    main: { name: "dyl-1114-group", alt: "김유빈 활동 기록 — 2026 민주청년지도자 양성과정(2026. 11. 14) 단체 사진, 강득구 민주연구원장 · 김경수 청와대 정무특보와 함께", pos: "50% 55%", w: 1600, h: 1066 },
+    thumbs: [
+      { name: "dyl-1114-qa", href: "gallery.html#g-dyl-1114-qa", alt: "김유빈 활동 기록 — 질의 · 발표 세션에서 마이크를 잡고 발언하는 모습(2026. 11. 14)", pos: "45% 35%" },
+      { name: "dyl-1114-selfie", href: "gallery.html#g-dyl-1114-selfie", alt: "김유빈 활동 기록 — 하정우 부위원장과 함께(2026. 11. 14)", pos: "50% 35%" },
+    ],
+    href: "gallery.html#dyl-1114", cta: "11. 14 사진 전체 보기" },
+  { id: "rei-day", date: "11.11", day: "WED", tone: "brick", chip: "집캐치 발표 · 내빈 응대",
+    eyebrow: "Field Diary — 2026. 11. 11", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
+    body: "제11회 부동산산업의 날에서 한국부동산마케팅협회(KREMA) 홍보부스에 참여해, 직접 개발한 청약 · 공공임대 공고 탐색 서비스 집캐치를 발표 · 시연하고 찾아온 내빈을 응대했습니다. 한국경제 · 중앙일보가 이날 집캐치를 실명으로 소개했습니다. 보도에 따르면 국토교통부 관계자와 9개 부동산경제단체 대표, 프롭테크 기업인, 학계 전문가 등 400여 명이 참석했습니다.",
     quote: "새로운 가치, 함께하는 부동산! 변화와 혁신으로 미래를 열다!",
-    facts: [["주최·주관", "한국부동산경제단체연합회 · 한국공인중개사협회"], ["후원", "국토교통부 · 한국부동산원 · 주택도시보증공사"], ["장소", "건설회관 · 서울 강남구"], ["역할", "부스 운영 · VIP 응대 및 설명"]],
+    facts: [["주최·주관", "한국부동산경제단체연합회 · 한국공인중개사협회"], ["후원", "국토교통부 · 한국부동산원 · 주택도시보증공사"], ["장소", "건설회관 · 서울 강남구"], ["역할", "KREMA 홍보부스 · 집캐치 발표 · 시연 · 내빈 응대"]],
     main: { name: "rei-day", alt: "김유빈 활동 기록 — 제11회 부동산산업의 날 포토월과 '11th 부동산산업의 날' 조형물 앞에서(2026. 11. 11 · 건설회관)", pos: "52% 50%", w: 1600, h: 900 },
     thumbs: [
-      { name: "rei-day-pose", href: "gallery.html#g-rei-day-pose", alt: "김유빈 활동 기록 — 부동산 관련 단체 로고가 늘어선 포토월 앞에서 주먹을 쥔 모습", pos: "50% 30%" },
-      { name: "rei-day-wall", href: "gallery.html#g-rei-day-wall", alt: "김유빈 활동 기록 — '새로운 가치, 함께하는 부동산! 변화와 혁신으로 미래를 열다!' 행사 슬로건 아래 포토월", pos: "50% 35%" },
-      { name: "rei-day-sign", href: "gallery.html#g-rei-day-sign", alt: "김유빈 활동 기록 — 레드카펫 위 '11th 부동산산업의 날' 입체 조형물", pos: "30% 60%" },
+      { name: "rei-day-booth", href: "gallery.html#g-rei-day-booth", alt: "김유빈 활동 기록 — 제11회 부동산산업의 날 한국부동산마케팅협회(KREMA) 07번 홍보부스 전경(2026. 11. 11 · 건설회관)", pos: "50% 28%" },
+      { name: "rei-day-seminar", href: "gallery.html#g-rei-day-seminar", alt: "김유빈 활동 기록 — 제11회 부동산산업의 날 세미나 배너 ‘부동산산업 40년, 아날로그에서 AI로: 디지털 전환의 성과와 과제’(2026. 11. 11 13:00–17:00)", pos: "50% 30%" },
     ],
-    press: [["헤럴드경제", "https://biz.heraldcorp.com/article/10933818"], ["아시아경제", "https://view.asiae.co.kr/article/2026111114372145206"], ["파이낸셜뉴스", "https://www.fnnews.com/news/202611101420258085"]],
-    href: "gallery.html#rei-day", cta: "행사 사진 전체 보기" },
+    clips: [["한국경제 · 2026. 11. 11", "‘부동산산업의 날’ 43명 표창…마케팅협회, AI 인재 양성 성과 공개", "매력일자리에 참여한 청년 김유빈 씨는 청약홈과 LH 청약플러스의 청약·공공임대 모집공고를 지도에 모아 보여주는 ‘집캐치’를 선보였다.", "https://www.hankyung.com/article/202611110211i"],
+      ["중앙일보 · 2026. 11. 11", "한국부동산마케팅협회 4명, ‘부동산산업의 날’ 국토부 장관 표창", "서울시 매력일자리 참여자 김유빈 씨가 개발한 ‘집캐치(ZIPCATCH)’도 소개됐다.", "https://www.joongang.co.kr/article/25477695"]],
+    press: [["서울파이낸스 · 집캐치 소개", "https://www.seoulfn.com/news/articleView.html?idxno=642571"], ["헤럴드경제 · 행사", "https://biz.heraldcorp.com/article/10933818"]],
+    href: "gallery.html#rei-day", cta: "현장 사진 · 보도 보기" },
   { id: "moef-youth", date: "10.27", day: "TUE", tone: "sage", chip: "간담회 참석",
     eyebrow: "Field Diary — 2026. 10. 27", title: "재정경제부 제1차관 청년 현장방문 및 간담회",
     body: "권대영 재정경제부 제1차관의 취임 후 첫 현장 행보로 마련된 청년 간담회에 법무법인 경국 소속으로 참석했습니다. 간담회에 앞서 SVC Seoul 입주 청년 창업기업의 AI 기반 주거지 탐색 · 공공사업 검색·매칭 서비스 시연 참관이 있었고, 대학생 · 창업가 · 직장인 청년들이 주거 · 일자리 · 서민금융에 대한 현장 의견을 전했습니다.",
@@ -841,13 +1076,16 @@ function FieldDiary() {
             <dl className="diary__facts font-ko">
               {d.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
             </dl>
-            <div className={"tl-feature__thumbs" + (d.thumbs.length === 2 ? " diary__thumbs--2" : "")}>
+            {d.thumbs.length > 0 && <div className={"tl-feature__thumbs" + (d.thumbs.length === 2 ? " diary__thumbs--2" : "")}>
               {d.thumbs.map((t) => (
                 <a key={t.name} href={t.href}><Pic name={t.name} fallback={"images/" + t.name + "-600.jpg"} sizes="(max-width: 900px) 30vw, 16vw" alt={t.alt} loading="lazy" width="600" height="338" style={{ objectPosition: t.pos }} /></a>
               ))}
-            </div>
+            </div>}
+            {d.clips && <div className="diary__clips">{d.clips.map(([src, t, q, u]) => (
+              <a key={u} className="clip" href={u} target="_blank" rel="noreferrer"><span className="clip__src font-sans">{src}</span><b className="clip__t font-ko">{t}</b><q className="clip__q font-myeongjo">{q}</q></a>
+            ))}</div>}
             {d.press && <p className="g-press diary__press font-sans">보도 · {d.press.map(([n, u], k) => <React.Fragment key={u}>{k ? " · " : ""}<a href={u} target="_blank" rel="noreferrer">{n}</a></React.Fragment>)}</p>}
-            <p className="tl-feature__credit font-sans">현장 사진</p>
+            <p className="tl-feature__credit font-sans">{d.clips ? "현장 사진 · 보도 인용은 기사 원문의 한 문장" : "현장 사진"}</p>
             <a href={d.href} className="btn btn--ghost">{d.cta} <ArrowUpRight size={14} /></a>
           </figcaption>
         </figure>
@@ -856,11 +1094,11 @@ function FieldDiary() {
   );
 }
 
-/* 이력 그룹 — 핵심(실무·AI 교육)은 펼쳐 두고, 대외활동·수상은 눌러서 본다 */
+/* 이력 그룹 — 핵심(실무·AI 교육 · 2022 독일 기술교육)은 펼쳐 두고, 대외활동·수상은 눌러서 본다 */
 const TRAJ_GROUPS = [
   { key: "work", en: "Professional", ko: "실무 경력", open: true },
-  { key: "edu", en: "AI · Data Education", ko: "AI · 데이터 전문교육", open: true,
-    order: ["tl-myongji", "tl-fintech", "tl-claude-rag", "tl-snu-aied", "tl-krema", "tl-konkuk", "tl-ssafy"] },
+  { key: "edu", en: "AI · Data & Technical Education", ko: "AI · 데이터 · 기술 전문교육", open: true,
+    order: ["tl-myongji", "tl-fintech", "tl-claude-rag", "tl-snu-aied", "tl-krema", "tl-krema-intern", "tl-konkuk", "tl-ssafy", "tl-osz-tiem"] },
   { key: "public", en: "Leadership & Public", ko: "리더십 · 대외활동", open: false },
   { key: "honor", en: "Honors", ko: "수상 · 표창", open: false },
 ];
@@ -1036,19 +1274,23 @@ const TOOL_META = {
   "09": { name: "ZipCatch · 집캐치", shot: "zc-home", env: "The Housing Landscape", envKo: "지도 위 필지에서 아파트 단지가 솟고, 위치 표시가 꽂힙니다",
     why: "청약홈 분양공고와 LH 임대공고가 따로 흩어져 있어, 내 조건에 맞는 공고를 한곳에서 찾기 어려웠습니다.", use: "내 조건으로 지금 지원할 수 있는 공고와 가까운 마감을 확인할 때 씁니다.",
     made: "두 공고를 공공데이터 API로 모아, 지역 · 주거비 · 가구 조건 3단계 입력으로 지금 지원할 수 있는 후보를 정리하는 서비스.",
-    link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원" },
+    link: "흩어진 주거 정보를 사용자의 판단 기준으로 다시 묶기 — 부동산 영역의 의사결정 지원",
+    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리", extra: "한국경제 · 중앙일보 소개" },
   "16": { name: "법조시장 한눈에", shot: "lp-home", env: "The Regulatory Landscape", envKo: "개발 대상지 위로 법률안 · 법령 · 판례가 층으로 내려앉습니다",
     why: "발의 법률안 · 시행 예정 법령 · 판례 · 변호사 현황이 기관마다 흩어져 있어, 법조 시장의 흐름을 한 번에 보기 어려웠습니다.", use: "법률안 진행과 시행 예정 법령, 불변기간 만료일을 확인할 때 씁니다.",
     made: "국회 · 법제처 · 대한변협 공개 자료를 하루 단위로 갱신하는 상황판과, 민법 기간 계산 조문에 맞춘 기한 계산기.",
-    link: "흩어진 법률 정보를 리서치 흐름으로 — 출처와 연결 상태를 함께 공개" },
+    link: "흩어진 법률 정보를 리서치 흐름으로 — 출처와 연결 상태를 함께 공개",
+    line: "기관마다 흩어진 법조 정보 → 매일 갱신 상황판 · 기한 계산기", extra: "국회 · 법제처 · 대한변협 공개 자료" },
   "17": { name: "Atelier AX", shot: "ax-live", env: "The Agent Workspace", envKo: "사무실 평면 위 네 역할 사이로 업무가 흐르고, 승인 책상에서 끝납니다",
     why: "AI 에이전트가 무엇을 하는지 보이지 않으면 결과를 믿고 맡기기 어려웠습니다.", use: "AI 팀에 일을 맡기고 진행 단계와 승인 대기를 확인할 때 씁니다.",
     made: "AI 직원에게 업무를 배정하고, 실행 과정을 관찰하고, 산출물을 사람이 검증 · 승인하는 관제 대시보드.",
-    link: "배정 · 실행 가시성 · 사람의 승인 — AX 를 운영하는 원칙 그 자체" },
+    link: "배정 · 실행 가시성 · 사람의 승인 — AX 를 운영하는 원칙 그 자체",
+    line: "보이지 않는 AI 작업 → 배정 · 실행 관찰 · 사람 승인 대시보드", extra: "사람 승인 단계" },
   "12": { name: "국정 한눈에", shot: "gk-home", env: "The National Information Landscape", envKo: "정책 · 국회 · 경제 · 시장 네 갈래가 한 판으로 모입니다",
     why: "국정 소식과 경제 지표를 여러 포털과 앱을 오가며 봐야 했습니다.", use: "국정 · 정책 · 증시 · 환율의 흐름을 한 번에 훑을 때 씁니다.",
     made: "공개 뉴스 RSS와 시세를 서버리스 함수로 모아 섹션별로 배정하고 중복 기사를 거른 국정 · 경제 상황판.",
-    link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기" },
+    link: "정책과 시장 정보를 한 장의 개관으로 — 공공 영역의 흐름 읽기",
+    line: "여러 포털의 국정 · 경제 소식 → 중복 거른 한 장 상황판", extra: "RSS · 시세 서버리스 수집" },
 };
 
 /* ============================================================ 경국 AX — 법률 AX 6대 시스템 (V6.1)
@@ -1057,31 +1299,35 @@ const TOOL_META = {
  * 두 그룹을 합쳐 '경국 도입 6종'이라 부르지 않는다. 소속 · 구축 주체 · 운영 상태를 항목마다 따로 적는다.
  * 건축 모형(city.js)은 01 · 03 과 실무(보상자료)에서만 그리고, 04–06 을 고르면 캔버스 장면을 내린다. */
 const AX_SYSTEMS = [
-  { id: "ax-reintel", number: "01", group: "A", koreanTitle: "정비사업 법령·규제 변화 관제", englishName: "RE:INTELLIGENCE",
+  { id: "ax-reintel", number: "01", group: "A", koreanTitle: "법령·규제 변화 관제 시스템", englishName: "RE:INTELLIGENCE · Regulatory Monitoring",
+    line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 변호사 검토 큐", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
     category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
     problem: "정비사업은 사업 단계 · 토지이용규제 · 조례 · 고시 · 행정절차의 변화에 영향을 받습니다. 서로 다른 출처를 손으로 확인하면 검토 누락이 생길 수 있습니다.",
     solution: "사업지를 기준으로 법령 · 고시 · 조례 · 행정 공고의 변화를 모으고, 그 사업의 어느 단계와 부지의 어느 요소에 관련되는지 정리해 변호사 검토로 올리는 구조를 설계했습니다.",
-    built: "법무법인 경국 사내에서 구축했습니다. 실제 화면과 자료는 공개하지 않으며, 이 화면의 사업지 · 변경은 가상입니다.",
+    built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 전사 업무에 온보딩했습니다. 실제 화면과 자료는 공개하지 않으며, 이 화면의 사업지 · 변경은 가상입니다.",
     human: "감지된 변경이 그 사업에 어떤 법적 효력을 갖는지는 변호사가 판단합니다. 시스템은 검토 대상을 드러낼 뿐입니다.",
     interaction: "사업지 A/B/C 를 고르면 필지 · 건물 배치 · 사업 단계가 함께 바뀌고, 규제 레이어를 고르면 그 레이어가 부지의 어느 부분에 걸리는지 보입니다.",
     demoPath: null, evidence: "career.html#practice-strategy" },
-  { id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 절차 검토", englishName: "Assembly Risk Engine",
+  { id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 위험 검토 시스템", englishName: "Assembly Risk Engine",
+    line: "명부 · 위임장 수작업 대조 → 의결권 · 정족수 시뮬레이션", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
     category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
     problem: "조합원 명부 · 의결권 · 위임장 · 소집 통지 · 정족수 · 안건별 결과 사이의 불일치를 사람이 반복해서 대조해야 합니다.",
     solution: "서류를 서로 맞대는 대조 규칙을 정하고, 맞지 않는 곳을 '확인 필요' 예외 목록으로 모으는 구조를 설계했습니다.",
-    built: "법무법인 경국 사내에서 구축했습니다. 실제 명부 · 서류는 공개하지 않으며, 이 화면의 총회 · 조합원 · 수치는 가상입니다.",
+    built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 전사 업무에 온보딩했습니다. 실제 명부 · 서류는 공개하지 않으며, 이 화면의 총회 · 조합원 · 수치는 가상입니다.",
     human: "총회결의의 효력이나 무효 여부는 시스템이 정하지 않습니다. 예외 목록을 보고 변호사가 판단합니다.",
     interaction: "안건을 고르면 의결권 · 정족수 대조가 바뀌고, 검토 규칙을 누르면 그 규칙이 보는 가상 서류와 해당 조합원 자리가 표시됩니다.",
     demoPath: null, evidence: "career.html#practice-strategy" },
-  { id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경사항 검토", englishName: "Contract Risk Intelligence",
+  { id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경 위험 분석 시스템", englishName: "Contract Risk Intelligence",
+    line: "조항 변경 누락 위험 → 조항 단위 비교 · 공사비 증감 · 승인", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
     category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
     problem: "계약 변경에 따라 공사 범위 · 공사비 · 지급조건 · 책임 부담이 달라질 수 있고, 두 계약서를 눈으로 비교하면 바뀐 조항을 놓치기 쉽습니다.",
     solution: "변경 전 · 후 계약서를 조항 단위로 맞대고, 바뀐 조항을 대금 · 책임 · 손해배상 같은 검토 분류에 걸어 표시하는 구조를 설계했습니다.",
-    built: "법무법인 경국 사내에서 구축했습니다. 실제 계약서는 공개하지 않으며, 이 화면의 건축물 · 계약 조항은 가상입니다.",
+    built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 전사 업무에 온보딩했습니다. 실제 계약서는 공개하지 않으며, 이 화면의 건축물 · 계약 조항은 가상입니다.",
     human: "공사비 증액의 크기나 법적 책임의 유불리는 시스템이 계산하지 않습니다. 바뀐 곳만 보여 주고, 판단은 변호사가 내립니다.",
     interaction: "변경 전 · 후 손잡이를 움직이면 건축물의 층수가 바뀌고, 그 변경과 연결된 계약 조항과 검토 항목이 차례로 강조됩니다.",
     demoPath: "legal-ax.html#task=contract&field=realestate", evidence: "career.html#practice-strategy" },
   { id: "ax-evidence", number: "04", group: "B", koreanTitle: "송무기록·쟁점·증거 분석", englishName: "Litigation Evidence Intelligence",
+    line: "흩어진 주장 · 증거 → 원문 문단까지 잇는 근거 지도", badges: ["가상 사건 7개 분야", "규칙 기반 · 모델 호출 없음"],
     category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
     problem: "사건기록에 흩어진 주장 · 사실 · 증거 · 시간의 흐름을 한 번에 파악하기 어렵습니다.",
     solution: "주장마다 근거 자료를 잇고, 근거가 원문의 어느 문단에 있는지 기록하며, 주장과 자료의 기재가 다르면 규칙으로 표시하는 구조를 만들었습니다.",
@@ -1090,6 +1336,7 @@ const AX_SYSTEMS = [
     interaction: "주장을 누르면 관련 증거가 강조되고, 증거를 누르면 그 문서의 원문 문단이 열립니다.",
     demoPath: "legal-ax.html#task=evidence&field=civil", evidence: "legal-ax.html#task=evidence&field=civil" },
   { id: "ax-research", number: "05", group: "B", koreanTitle: "법령·문서 근거 탐색", englishName: "Legal Research Desk",
+    line: "유창한 답 대신 → 조문 원문 · 기준일을 확인하는 탐색", badges: ["색인 조문 · 사건 문서", "판례 원문 미연동"],
     category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
     problem: "법률정보의 정확성은 답변의 유창함이 아니라 근거와 기준일의 확인에서 출발합니다.",
     solution: "색인된 법령 조문과 사건 문서만 찾고, 요약과 원문을 나누어 보여 주며, 원문을 옮긴 시점과 출처 확인 상태를 함께 적었습니다.",
@@ -1098,6 +1345,7 @@ const AX_SYSTEMS = [
     interaction: "검색어와 자료 종류에 따라 결과가 바뀌고, 결과를 고르면 원문 · 요약 · 기준일이 바뀝니다. 사건 문서는 해당 문단으로 이어집니다.",
     demoPath: "legal-ax.html#task=research&field=civil", evidence: "legal-ax.html#task=research&field=civil" },
   { id: "ax-matter", number: "06", group: "B", koreanTitle: "사건 접수·기한·검토 업무관리", englishName: "Matter Operations",
+    line: "흩어진 진행 상태 → 단계 · 기한 · 검토를 한 화면에", badges: ["가상 감사기록", "외부 발송 없음"],
     category: "personal-demo", ownership: "independent", implementationStatus: "public-demo",
     problem: "상담부터 자료 수집 · 담당자 지정 · 기한 확인 · 검토 승인까지 진행 상태가 여러 경로에 흩어집니다.",
     solution: "사건 단계 · 담당자 · 필요 서류 · 기한 · 검토 상태를 한 화면에 두고, 바꾼 내용을 모두 가상 감사기록에 남기는 구조를 만들었습니다.",
@@ -1252,21 +1500,20 @@ function AXCommand() {
     <section id="ax-desk" ref={sec} className="axc" aria-labelledby="axc-title">
       <div className="wrap axc__wrap">
         <header className="axc__mast">
-          <p className="axc__k font-ko">03 법무법인 경국 AX <span className="font-sans" lang="en">Gyunggook AX · Six Legal AX Systems</span></p>
+          <p className="axc__k font-ko">03 법무법인 경국 · 법률 AI 전환 <span className="font-sans" lang="en">Legal AX · Six Systems</span></p>
           <h2 id="axc-title" className="axc__title"><span className="font-ko">법률 실무를 이해하고,<br />업무의 구조를 바꾸는 AX</span><span className="font-serif" lang="en">Legal Operations · Evidence Intelligence · Contract Review · Workflow Automation</span></h2>
           <div className="axc__lead font-ko">
-            <p>정비사업 실무에서 출발한 AX 경험을 바탕으로, 송무기록 분석과 법률정보 탐색, 사건 관리까지 적용 범위를 확장하고 있습니다.</p>
-            <p><b>기술은 정보를 정리하고 검토를 돕지만, 최종 법률 판단은 변호사가 내립니다.</b></p>
+            <p>정비사업 실무의 AX 를 송무 · 정보 탐색 · 범용 기업 운영으로 넓힙니다. <b>최종 법률 판단은 변호사가 내립니다.</b></p>
           </div>
           <ul className="axc__states font-ko" aria-label="실적 상태 구분">
             <li><b className="axc__st axc__st--a">A</b><span><strong>사내 실무 적용</strong> 정비사업 AX 3종(01–03 · 사내 구축 · 화면 비공개) · 급여명세서 자동 발송(사내 운영 적용) · 고객 메일 자동 분류(업무 화면 배포)</span></li>
             <li><b className="axc__st axc__st--b">B</b><span><strong>개인 구현 · 공개 시연</strong> 법률 AX 3종(04–06) — 가상 사건으로 직접 써 보는 시연. 경국에서 도입 · 운영한 시스템이 아닙니다</span></li>
-            <li><b className="axc__st axc__st--c">C</b><span><strong>향후 고도화</strong> 송무기록 분석 · 계약 검토의 실제 사건 적용 — 검증 전이라 완료로 적지 않습니다</span></li>
+            <li><b className="axc__st axc__st--c">C</b><span><strong>범용 AX 확장 3종</strong> 데이터 교차검증 · 인바운드 트리아지 · 의사결정 메모 팩트체크 — {AX_C_LABEL}</span></li>
           </ul>
         </header>
 
         <TrialBriefFeature />
-        <p className="axc__count font-ko"><b>AX 시스템 6종</b> = 경국 실무 기반 3종 + 개인 공개 시연 3종 <span>‘16개 결과물’은 전체 작업 기록 수로, 이 6종과 따로 셉니다.</span></p>
+        <p className="axc__count font-ko"><b>AX 시스템 6종</b> = 경국 실무 기반 3종 + 개인 공개 시연 3종 <span>범용 AX 확장 3종(C)과 ‘16개 결과물’은 따로 셉니다.</span></p>
         <div className="axc__console">
           <nav className="axc__nav" aria-label="AX 6대 시스템 고르기">
             {AX_GROUPS.map((g) => (
@@ -1290,17 +1537,22 @@ function AXCommand() {
             <header className="axc__mh">
               <p className="font-sans"><b>{cur.number}</b> {cur.englishName}<span className={"axc__tag axc__tag--" + cur.group.toLowerCase() + " font-ko"}>{AX_STATUS_KO[cur.implementationStatus]}</span></p>
               <h3 className="font-ko">{cur.koreanTitle}</h3>
-              <p className="axc__how font-ko">{cur.interaction}</p>
+              <p className="axc__line font-ko">{cur.line}</p>
+              <p className="axc__badges font-ko">{cur.badges.map((b) => <span key={b}>{b}</span>)}<i className={"cx__kind cx__kind--" + (cur.group === "A" ? "actual" : "demo")}>{cur.group === "A" ? "실제 수행" : "개인 공개 시연"}</i></p>
             </header>
             <div className="axc__demo-box">
               <Demo key={cur.id} sys={cur} />
             </div>
-            <ol className="axc__story font-ko" aria-label={cur.koreanTitle + " — 문제에서 판단까지"}>
-              <li><b>01 발견한 문제</b>{cur.problem}</li>
-              <li><b>02 설계한 구조</b>{cur.solution}</li>
-              <li><b>03 실제 구현</b>{cur.built}</li>
-              <li><b>04 사람에게 남는 판단</b>{cur.human}</li>
-            </ol>
+            <details className="axc__more font-ko" key={cur.id}>
+              <summary>문제에서 판단까지 4단계 · 조작 방법</summary>
+              <p className="axc__how">{cur.interaction}</p>
+              <ol className="axc__story" aria-label={cur.koreanTitle + " — 문제에서 판단까지"}>
+                <li><b>01 발견한 문제</b>{cur.problem}</li>
+                <li><b>02 설계한 구조</b>{cur.solution}</li>
+                <li><b>03 실제 구현</b>{cur.built}</li>
+                <li><b>04 사람에게 남는 판단</b>{cur.human}</li>
+              </ol>
+            </details>
             <p className="axc__links font-ko">
               {cur.group === "B"
                 ? <a className="axc__go" href={cur.demoPath}>상세 시연에서 직접 써 보기 <ArrowUpRight size={15} /></a>
@@ -1309,6 +1561,8 @@ function AXCommand() {
             </p>
           </div>
         </div>
+
+        <AXCExpansion />
 
         <header className="axc__subhead">
           <h3 className="font-ko">법무법인 경국에서 맡은 실무 <span className="font-sans" lang="en">Practical Execution</span></h3>
@@ -1330,11 +1584,45 @@ function AXCommand() {
     </AXReady.Provider>
   );
 }
+/* C — 범용 AX 확장 3종. 수치 칸은 AX_C(=ax/eval-report.json) 그대로, 값이 없으면 '준비 중' */
+function AXCExpansion() {
+  return (
+    <section id="ax-c" className="axcx" aria-labelledby="axcx-h">
+      <header className="axcx__head">
+        <p className="axc__gh font-ko"><b className="axc__st axc__st--c">C</b><span><strong id="axcx-h">범용 AX 확장 3종</strong><em>정비사업 · 법률 밖 데이터 · 운영 · 기획 현장 — {AX_C_LABEL}</em></span></p>
+        <p className="axcx__rule font-ko">AI 는 구조만 읽고, 계산 · 대조 · 차단은 코드가 합니다. 수치는 빌드 때 실제로 돌린 테스트 결과입니다.</p>
+      </header>
+      <ol className="axcx__list">
+        {AX_C.map((c) => {
+          const proof = axcProof(c);
+          return (
+            <li key={c.code} className="axcx__card">
+              <p className="axcx__k font-sans"><b>{c.code}</b>{c.en}</p>
+              <h4 className="font-ko">{c.ko}</h4>
+              <p className="axcx__line font-ko">{c.line}</p>
+              <p className="axcx__dom font-ko">{c.domains.map((d) => <span key={d}>{d}</span>)}</p>
+              <p className="axcx__mech font-ko">{c.mechanism}</p>
+              <p className="axcx__proof font-ko">
+                {c.tests ? <span className="axcx__t"><b className="font-sans">npm test {c.tests.passed}/{c.tests.total}</b> 통과</span> : <span className="axcx__t axcx__t--wait">테스트 준비 중</span>}
+                {proof ? <span>{proof}</span> : <span className="axcx__t--wait">검증 수치 준비 중</span>}
+              </p>
+              <p className="axcx__st font-ko"><i className="cx__kind cx__kind--demo">{AX_C_LABEL}</i></p>
+              {c.url ? <a className="axc__go" href={c.url}>직접 써 보기 <ArrowUpRight size={15} /></a> : <span className="axc__go axc__go--off font-ko" aria-disabled="true">배포 준비 중</span>}
+            </li>
+          );
+        })}
+      </ol>
+      <p className="axc__note font-ko">모든 데이터는 가상입니다 — 실제 기업 · 고객 자료 없음 · 외부 AI 호출 없음 · 경국 도입 시스템 아님. 실무 도입 · 시간 단축 효과는 측정하지 않았습니다. <a href="ax/eval-report.json">테스트 리포트(JSON)</a></p>
+    </section>
+  );
+}
 /* 대표 프로젝트 — Gyunggook Trial Brief (개인 구현 시제품 · 경국 도입 아님). 성과 칸에는 테스트로 확인한 것만 */
 const TB_CARD = {
   cat: "법률 AX · 업무혁신 · 제품기획",
   title: "재판 준비 업무를 한 장의 브리핑으로 구조화",
   desc: "사건기록과 기일 준비사항을 연결해 변호사가 핵심 쟁점 · 증거 · 미결 과제를 빠르게 확인할 수 있는 1페이지 브리핑 시스템을 설계 · 구현한 프로젝트",
+  line: "사건기록 · 기일 준비 → 쟁점 · 증거 · 미결 과제 1페이지 브리핑",
+  badges: ["불일치 · 누락 15건 전수 검출", "그 밖의 표시 0건", "A4 1장 PDF"],
   roles: ["법률 실무 프로세스 분석", "사건 데이터 · 정보구조 설계", "근거 기반 요약 · 정합성 검증", "사용자 중심 인터페이스 구현", "자동화 테스트 · 품질관리"],
   proof: ["가상 민사사건 3건 — 문서 등록부터 A4 1장 PDF 출력까지 브라우저 자동 테스트 통과(Chromium · WebKit)", "넣어 둔 문서 불일치 · 누락 15건 모두 검출, 그 밖의 항목 표시 0건(테스트 자료 기준)", "실무 도입 · 시간 단축 효과는 측정하지 않음(미도입)"],
 };
@@ -1353,6 +1641,10 @@ function TrialBriefFeature() {
       <div className="axc__tb-txt font-ko">
         <p className="axc__tb-k"><b>대표 프로젝트</b>{TB_CARD.cat}<span className="axc__tag axc__tag--b">개인 구현 시제품 · 경국 도입 아님</span></p>
         <h3 id="tb-card-h"><span className="font-sans" lang="en">Gyunggook Trial Brief</span>{TB_CARD.title}</h3>
+        <p className="axc__line">{TB_CARD.line}</p>
+        <p className="axc__badges">{TB_CARD.badges.map((b) => <span key={b}>{b}</span>)}<i className="cx__kind cx__kind--demo">개인 공개 시연</i></p>
+        <details className="axc__more">
+        <summary>담당 · 기여 · 검증 상세</summary>
         <p className="axc__tb-d">{TB_CARD.desc}</p>
         <dl className="axc__tb-dl">
           <div><dt>담당</dt><dd>개인 프로젝트 · 기획부터 구현 · 테스트까지 단독 수행</dd></div>
@@ -1360,6 +1652,7 @@ function TrialBriefFeature() {
           <div><dt>검증</dt><dd><ul>{TB_CARD.proof.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
           <div><dt>상태</dt><dd>공개 시제품 — 규칙 기반 · AI 모델 미사용 · 실제 사건자료 없음</dd></div>
         </dl>
+        </details>
         <p className="axc__tb-flow">사건 선택 → 자료 확인 → 불일치 탐지 → 담당자 검토 → 1페이지 브리핑 → PDF 출력</p>
         <p className="axc__links"><a className="axc__go" href="trial-brief.html">시제품 직접 써 보기 <ArrowUpRight size={15} /></a><a className="axc__go axc__go--ghost" href="trial-brief.html#tb-case">프로젝트 개요(문제 → 확장)</a></p>
       </div>
@@ -2148,13 +2441,18 @@ function FlagshipTool({ e, onOpen, flip }) {
       <div className="fl__txt">
         <p className="fl__badge font-sans"><b>직접 만들어 사용</b><span>{e.status}</span><span>{e.no} / 04</span></p>
         <h3 id={"fl-" + e.n} className="fl__name"><small className="font-ko">{t1}</small><span className="font-serif">{M.name}</span></h3>
-        <ol className="fl__story font-ko">
-          <li><b>어떤 문제가 있었나</b>{M.why}</li>
-          <li><b>무엇을 만들었나</b>{M.made}</li>
-          <li><b>어떻게 쓰나</b>{M.use}</li>
-        </ol>
-        <p className="fl__link font-ko"><span>이어지는 역량</span>{M.link}</p>
-        <p className="fl__point font-ko"><b>{T.ruleT}</b>{T.rule}</p>
+        <p className="fl__line font-ko">{M.line}</p>
+        <p className="fl__badges font-ko"><span>{M.extra}</span><i className="cx__kind cx__kind--demo">개인 공개 시연</i></p>
+        <details className="fl__more font-ko">
+          <summary>문제 → 제작 → 사용 3단계 보기</summary>
+          <ol className="fl__story">
+            <li><b>어떤 문제가 있었나</b>{M.why}</li>
+            <li><b>무엇을 만들었나</b>{M.made}</li>
+            <li><b>어떻게 쓰나</b>{M.use}</li>
+          </ol>
+          <p className="fl__link"><span>이어지는 역량</span>{M.link}</p>
+          <p className="fl__point"><b>{T.ruleT}</b>{T.rule}</p>
+        </details>
         <div className="fl__acts">
           <button type="button" className="btn fl__open" aria-haspopup="dialog" onClick={open}>실제 화면 펼쳐 보기 <Layers size={16} /></button>
           <a href={e.url} target="_blank" rel="noreferrer" className="btn btn--ghost">{e.cta} <ExternalLink size={15} /></a>
@@ -2173,10 +2471,9 @@ function ArtifactsSection() {
   return (
     <section id="artifacts" ref={ref} className="arts" aria-labelledby="arts-title">
       <div className="wrap">
-        <SectionHead no="04 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Four Independently Developed Products" />
+        <SectionHead no="04 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Selected Works · Four Independent Products" />
         <div id="tools" className="arts__intro reveal">
-          <p className="arts__lead font-ko" id="arts-title">문제를 발견하는 데서 끝내지 않고, 혼자 끝까지 만들어 배포한 <b>개인 제품</b> 네 가지입니다. 회사 시스템이 아닙니다.
-            <span>제품마다 어떤 문제가 있었는지 → 무엇을 만들었는지 → 어떻게 쓰는지 순서로 적었습니다. 법무법인 경국의 AX 는 바로 위에 있습니다.</span></p>
+          <p className="arts__lead font-ko" id="arts-title">혼자 끝까지 만들어 배포한 <b>개인 제품</b> 4종 — 회사 시스템이 아닙니다.</p>
           <ol className="arts__index">
             {TOOLS.map((e) => (
               <li key={e.n}><a href={"#ed-" + e.n}>
@@ -2200,7 +2497,7 @@ function ArtifactsSection() {
 const POLICY = [
   { k: "propose", ko: "제안하다", en: "Propose", items: [
     { t: "국민통합위원회 2026 국민 대토론회 — ‘청년 초과세수 미래배당펀드’ 정책 제안 발표", d: "2026. 9. 29 · aT센터 · 자산 분야 트랙",
-      what: "청년 미래배당펀드팀으로 제안 · 발표. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계했습니다.", kind: "팀 제안 · 발표", href: "gallery.html#national-debate" },
+      what: "청년 미래배당펀드팀으로 제안서 · 발표자료를 만들고 본무대에서 발표 — 자산분과 참여 팀 중 1위. 일회성으로 소진되는 초과세수를 청년 세대가 함께 불리는 자산으로 전환하는 구조를 설계했습니다.", kind: "팀 제안 · 발표 · 1위", href: "gallery.html#national-debate" },
   ] },
   { k: "deliberate", ko: "듣고, 의견을 전하다", en: "Deliberate", items: [
     { t: "재정경제부 제1차관 청년 현장방문 및 간담회", d: "2026. 10. 27 · SVC Seoul", what: "법무법인 경국 소속으로 참석. 주거 · 일자리 · 서민금융에 대한 청년들의 현장 의견이 오간 자리입니다.", kind: "참석", href: "gallery.html#moef-youth" },
@@ -2208,6 +2505,7 @@ const POLICY = [
     { t: "청와대 대통령 주관 2026 청년의날 기념행사", d: "2026", what: "청년 대표로 초청되어 참석했습니다.", kind: "초청 참석", href: "gallery.html#youth-day" },
   ] },
   { k: "participate", ko: "운영에 참여하다", en: "Participate", items: [
+    { t: "민선 9기 서울시장 공약평가단", d: "2026", what: "시민의 자리에서 서울시장 공약을 검토하는 공약평가단으로 활동했습니다.", kind: "평가단 활동", href: "#tl-seoul-pledge" },
     { t: "서초청년네트워크 9기 운영위원회 부위원장", d: "2026", what: "서초구 청년 정책 거버넌스에서 분과 의제 설정과 위원회 운영을 맡고 있습니다.", kind: "위원 · 부위원장", href: "#tl-seocho" },
     { t: "서초구 가치디자인단 · 국민권익위원회 청년정책 패널 · 국무조정실 온라인 청년참여단", d: "2026", what: "구정 현장 활동과 청년 정책 과제에 대한 의견 수렴 · 제안에 참여합니다.", kind: "위촉 · 패널 · 참여단", href: "#tl-acrc-panel" },
   ] },
@@ -2254,7 +2552,7 @@ function PolicySection() {
 
 /* 성장 경로 — 연대순 목록 위에, 다루는 문제의 복잡도로 본 다섯 단계. 마지막 단계는 '지향'으로 따로 표시 */
 const GROWTH = [
-  { ko: "기술을 학습하다", en: "Learn", ev: "삼성청년SW·AI아카데미(SSAFY) 13기 이수(2025) · 서울대 AIED 4기 수료 · KREMA 상담 RAG 실습 · 건국대 스마트건설기술교육 · 서울 핀테크 아카데미 14기 수료", href: "#tl-ssafy" },
+  { ko: "기술을 학습하다", en: "Learn", ev: "삼성청년SW·AI아카데미(SSAFY) 13기 이수(2025) · 서울대 AIED 4기 수료 · KREMA 상담 RAG 실습 · 건국대 스마트건설기술교육 · 서울 핀테크 아카데미 14기 수료 · 명지대 AI 데이터 매니지먼트 전 과정 수료(그랜드마스터)", href: "#tl-ssafy" },
   { ko: "조직의 문제를 해결하다", en: "Solve", ev: "법무법인 경국 — 정비사업 AX 3종 · 급여명세서 자동 발송 · 고객 메일 자동 분류 · 보상자료 77장", href: "#ax-desk" },
   { ko: "독립 제품으로 넓히다", en: "Build", ev: "집캐치 · 법조시장 한눈에 · Atelier AX · 국정 한눈에 — 직접 기획 · 개발 · 배포", href: "#tools" },
   { ko: "제도와 정책의 현장에 서다", en: "Engage", ev: "국민 대토론회 정책 제안 발표 · 서초청년네트워크 부위원장 · 정책 간담회 · 공론장", href: "#policy" },
@@ -2444,6 +2742,12 @@ function Lectures() {
 /* ============================================================ ABOUT — 스크롤 스토리
  * 섹션이 화면에 고정된 동안 스크롤 진행도(0→1)에 따라 문장이 한 줄씩 켜지고,
  * 오른쪽 사진이 프로필 → 발표 → 청년의날 순으로 바뀐다. 좁은 화면·모션 최소화 환경에서는 일반 배치. */
+/* 소개 — 서술 문단 대신 [문제 → 설계] 한 줄 + 실적 배지 + 구분 라벨 */
+const ABOUT_SCAN = [
+  ["반복 송무 → 정비사업 AX 3종 · 급여명세서 자동 발송", "사내 운영", "actual"],
+  ["필요한 도구 → 직접 만들어 배포(집캐치 · Trial Brief · 범용 AX)", "공개 배포", "demo"],
+  ["현장의 문제 → 국민 대토론회 정책 제안 · 발표", "자산분과 1위", "actual"],
+];
 const STORY_LINES = ["조직에서 반복되는 문제를 찾고,", "기술로 풀 수 있는 부분을", "시스템으로 옮깁니다."];
 const STORY_SHOTS = [
   { name: "profile-yubin", src: "images/profile-yubin-450.jpg?v=1", srcSet: "images/profile-yubin-450.jpg?v=1 450w, images/profile-yubin.jpg?v=1 896w",
@@ -2510,11 +2814,11 @@ function About() {
               {STORY_LINES.map((l, i) => <span key={l} className={"story__line" + (lineOn(i) ? " on" : "")}>{l}</span>)}
             </h3>
             <div className={"story__body" + (stage.body ? " on" : "")}>
-              <p className="font-ko">
-                법무법인 경국에서 정비사업 AX 와 전략기획을 맡아, 반복되는 업무를 시스템으로 옮겨 왔습니다.
-                필요한 도구는 직접 만들어 씁니다. 동시에 법률 · 부동산 · 정책의 제약과 이해관계를 공부하며,
-                기술의 결과가 실제 판단과 실행으로 이어지도록 하는 역량을 키우고 있습니다.
-              </p>
+              <ul className="scan font-ko" aria-label="한눈에 보는 소개">
+                {ABOUT_SCAN.map(([line, badge, kind]) => (
+                  <li key={line}><b>{line}</b><span className="scan__badge">{badge}</span><i className={"cx__kind cx__kind--" + kind}>{CASE_KIND[kind]}</i></li>
+                ))}
+              </ul>
               <p className="signature font-script" aria-hidden="true">Yubin Kim</p>
               <p className="story__addr font-ko"><MapPin size={15} /> 서울 서초구 서초대로 264 법조타워 15F — 법무법인 경국</p>
               <div className="story__links">
@@ -2635,9 +2939,9 @@ const JOURNAL = [
   { name: "youth-day-selfie", src: "images/youth-day-selfie.jpg", t: "청와대 청년의날 — 대통령과 함께", when: "2026 청년의날 · 청와대", dz: 0.2, lead: true,
     d: "대통령이 주관한 청년의날 기념행사에 청년 대표로 초청되어 참석했습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#youth-day" }, { l: "블로그 글", h: "https://blog.naver.com/yubinxe/224449296593" }] },
-  { name: "rei-day", src: "images/rei-day.jpg", t: "제11회 부동산산업의 날 — 부스 운영", when: "2026. 11. 11 · 건설회관", dz: 0.5,
-    d: "제11회 부동산산업의 날 행사장 부스를 운영하며 VIP 내빈을 응대하고 전시 내용을 설명했습니다.",
-    links: [{ l: "갤러리에서 보기", h: "gallery.html#rei-day" }, { l: "보도 · 헤럴드경제", h: "https://biz.heraldcorp.com/article/10933818" }] },
+  { name: "dyl-1114-qa2", src: "images/dyl-1114-qa2.jpg", t: "민주청년지도자 양성과정 — 질의 · 발표 세션", when: "2026. 11. 14 · 민주연구원", dz: 0.5,
+    d: "양성과정 질의 · 발표 세션에서 마이크를 잡고 발언했습니다. 이날 강득구 민주연구원장 · 김경수 청와대 정무특보, 하정우 부위원장과 함께했습니다.",
+    links: [{ l: "갤러리에서 보기", h: "gallery.html#dyl-1114" }] },
   { name: "moef-group", src: "images/moef-group.jpg", t: "재정경제부 제1차관 청년 간담회", when: "2026. 10. 27 · SVC Seoul", dz: 1,
     d: "권대영 재정경제부 제1차관의 청년 현장방문 및 간담회에 법무법인 경국 소속으로 참석했습니다.",
     links: [{ l: "갤러리에서 보기", h: "gallery.html#moef-youth" }, { l: "보도 · 노컷뉴스", h: "https://nocutnews.co.kr/news/6597825" }] },
@@ -2793,4 +3097,4 @@ function SectionHead({ no, ko, en, lead }) {
   );
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
