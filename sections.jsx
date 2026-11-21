@@ -2600,14 +2600,15 @@ function ArtifactsSection() {
           <p className="arts__lead font-ko" id="arts-title">혼자 끝까지 만들어 배포한 <b>개인 제품</b> 4종 — 회사 시스템이 아닙니다.</p>
           <p className="wk__hint font-sans" aria-hidden="true">카드를 고르면 아래에 펼쳐집니다</p>
         </div>
-        <ol className="wk reveal" aria-label="직접 만든 도구 4종">
+        <ol className="wk wk--4 reveal" aria-label="직접 만든 도구 4종">
           {TOOLS.map((e, i) => {
             const M = TOOL_META[e.n];
             return (
-              <li key={e.n} className={"wk__c" + (i === 0 ? " wk__c--lead" : "")} style={{ "--i": i }}>
+              <li key={e.n} className="wk__c wk__c--shot" style={{ "--i": i }}>
                 <button type="button" className="wk__b" aria-pressed={sel === i} aria-controls={"ed-" + e.n} onClick={() => pick(i)}>
                   <span className="wk__shot" aria-hidden="true"><TheaterShot name={THEATERS[e.n].layers[0].img} alt="" /></span>
                   <span className="wk__no font-serif" aria-hidden="true">{e.no}</span>
+                  <span className="wk__k font-ko">{e.title.split("\n")[0]}</span>
                   <span className="wk__t"><strong className="font-ko">{M.name}</strong><em className="font-sans" lang="en">{M.env}</em></span>
                   <span className="wk__l font-ko">{M.line}</span>
                   <span className="wk__fig font-sans">Fig. {e.no} — {M.extra}</span>
