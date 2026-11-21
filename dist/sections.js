@@ -2601,14 +2601,15 @@ function ArtifactsSection() {
     React.createElement("p", { className: "arts__lead font-ko", id: "arts-title" }, "\uD63C\uC790 \uB05D\uAE4C\uC9C0 \uB9CC\uB4E4\uC5B4 \uBC30\uD3EC\uD55C ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uC81C\uD488"), " 4\uC885 \u2014 \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("p", { className: "wk__hint font-sans", "aria-hidden": "true" }, "\uCE74\uB4DC\uB97C \uACE0\uB974\uBA74 \uC544\uB798\uC5D0 \uD3BC\uCCD0\uC9D1\uB2C8\uB2E4")
     ), /*#__PURE__*/
-    React.createElement("ol", { className: "wk reveal", "aria-label": "\uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C 4\uC885" },
+    React.createElement("ol", { className: "wk wk--4 reveal", "aria-label": "\uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C 4\uC885" },
     TOOLS.map((e, i) => {
       const M = TOOL_META[e.n];
       return (/*#__PURE__*/
-        React.createElement("li", { key: e.n, className: "wk__c" + (i === 0 ? " wk__c--lead" : ""), style: { "--i": i } }, /*#__PURE__*/
+        React.createElement("li", { key: e.n, className: "wk__c wk__c--shot", style: { "--i": i } }, /*#__PURE__*/
         React.createElement("button", { type: "button", className: "wk__b", "aria-pressed": sel === i, "aria-controls": "ed-" + e.n, onClick: () => pick(i) }, /*#__PURE__*/
         React.createElement("span", { className: "wk__shot", "aria-hidden": "true" }, /*#__PURE__*/React.createElement(TheaterShot, { name: THEATERS[e.n].layers[0].img, alt: "" })), /*#__PURE__*/
         React.createElement("span", { className: "wk__no font-serif", "aria-hidden": "true" }, e.no), /*#__PURE__*/
+        React.createElement("span", { className: "wk__k font-ko" }, e.title.split("\n")[0]), /*#__PURE__*/
         React.createElement("span", { className: "wk__t" }, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, M.name), /*#__PURE__*/React.createElement("em", { className: "font-sans", lang: "en" }, M.env)), /*#__PURE__*/
         React.createElement("span", { className: "wk__l font-ko" }, M.line), /*#__PURE__*/
         React.createElement("span", { className: "wk__fig font-sans" }, "Fig. ", e.no, " \u2014 ", M.extra)

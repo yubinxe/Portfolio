@@ -43,7 +43,7 @@ html.ix-off .ix{display:none}
 html:not(.ix-on):not(.ix-off) header.hnav{background:rgba(247,244,238,.96);border-bottom-color:rgba(14,26,46,.12)}
 .ix__alpha--n{display:none}
 .ix-replay{display:none}
-html.ix-off .ix-replay{display:inline-flex;position:absolute;right:max(16px,env(safe-area-inset-right));bottom:22px;z-index:3;align-items:center;min-height:40px;padding:0 14px;font-size:.78rem;font-weight:600;color:var(--navy,#13284B);background:rgba(255,255,255,.86);border:1px solid rgba(19,40,75,.25);cursor:pointer}
+html.ix-off .ix-replay{display:inline-flex;position:absolute;left:max(16px,env(safe-area-inset-left));bottom:22px;z-index:3;align-items:center;min-height:40px;padding:0 14px;font-size:.78rem;font-weight:600;color:var(--navy,#13284B);background:rgba(255,255,255,.86);border:1px solid rgba(19,40,75,.25);cursor:pointer}
 
 /* ---------------------------------------------------------------- 시네마틱 (html.ix-on · 움직임 허용) — V7.1 시간 기반
  * --t(초)는 sections.jsx 의 재생기 하나만 쓴다(스크롤과 무관). 아래 창(window)은 그 시간표 — IX_T 와 같은 숫자.
