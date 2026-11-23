@@ -2713,27 +2713,48 @@ function GrowthPath() {
 
 /* ============================================================ RESEARCH ARCHIVE — 그 밖의 작업(조용한 목록)
  * 학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠. 네 가지 도구와 겨루지 않도록 카드가 아닌 색인으로 */
-function ArchiveRow({ e, onPlay }) {
+/* 그 밖의 작업 — 무엇인지 첫눈에: 실제 화면 한 장(images/archive · scripts/build-archive-shots.mjs) + 종류 한 줄 + 분류 필터.
+ * 종류 · 분류는 EDITIONS 의 desc · tags 를 짧게 줄인 말 — 새 사실 없음 */
+const ARCHIVE_KIND = {
+  "10": ["3D 학습 시뮬레이터", "learn"], "14": ["피부 진단 · 성분 처방 웹", "svc"], "11": ["말씀 · 인문학 서재 앱(PWA)", "svc"],
+  "13": ["살림 기록 서비스(PWA)", "svc"], "15": ["기능 제안서(PRD)", "learn"], "05": ["청약 데이터 대시보드", "learn"],
+  "01": ["AI 카드뉴스 · 영상", "film"], "02": ["AI 브랜드 필름", "film"], "03": ["AI 캠페인 필름", "film"], "04": ["AI 프로모션 영상", "film"]
+};
+const ARCHIVE_SHOT = { "10": 1, "14": 1, "11": 1, "13": 1, "15": 1, "01": 1, "02": 1, "03": 1, "04": 1 };
+const ARCHIVE_FILTER = [["all", "전체"], ["svc", "생활 서비스"], ["learn", "학습 · 제안 · 데이터"], ["film", "AI 영상"]];
+function ArchiveCard({ e, onPlay, i }) {
   const [open, setOpen] = React.useState(false);
   const [t1, t2] = e.title.split("\n");
+  const K = ARCHIVE_KIND[e.n] || ["", "learn"];
+  const go = e.video ? { as: "button", props: { type: "button", onClick: () => onPlay(e) } } :
+  e.url ? { as: "a", props: { href: e.url, target: "_blank", rel: "noreferrer" } } : null;
+  const Go = go ? go.as : "span";
   return (/*#__PURE__*/
-    React.createElement("li", null, /*#__PURE__*/
-    React.createElement("article", { id: "ed-" + e.n, className: "ra__row" + (open ? " is-open" : "") }, /*#__PURE__*/
-    React.createElement("span", { className: "ra__no font-serif" }, e.no), /*#__PURE__*/
-    React.createElement("div", { className: "ra__main" }, /*#__PURE__*/
-    React.createElement("h3", { className: "ra__t font-ko" }, t1, t2 && /*#__PURE__*/React.createElement("small", null, t2)), /*#__PURE__*/
-    React.createElement("p", { className: "ra__desc font-ko", id: "ra-d-" + e.n }, e.desc),
-    open && e.point && /*#__PURE__*/React.createElement("p", { className: "ra__point font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uC124\uACC4 \uD3EC\uC778\uD2B8"), e.point), /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "ra__more font-sans", "aria-expanded": open, "aria-controls": "ra-d-" + e.n, onClick: () => setOpen(!open) }, open ? "접기" : "자세히")
+    React.createElement("li", { className: "rc", style: { "--i": i } }, /*#__PURE__*/
+    React.createElement("article", { id: "ed-" + e.n, className: "rc__card" + (open ? " is-open" : "") }, /*#__PURE__*/
+    React.createElement(Go, _extends({ className: "rc__shot", "aria-hidden": "true", tabIndex: -1 }, go ? go.props : {}),
+    ARCHIVE_SHOT[e.n] ? /*#__PURE__*/
+    React.createElement("picture", null, /*#__PURE__*/
+    React.createElement("source", { type: "image/avif", srcSet: `images/archive/${e.n}-640.avif` }), /*#__PURE__*/
+    React.createElement("img", { src: `images/archive/${e.n}-640.webp`, alt: "", width: "640", height: "400", loading: "lazy", decoding: "async" })
+    ) : /*#__PURE__*/
+    React.createElement("span", { className: "rc__ph font-serif" }, e.no),
+    e.video && /*#__PURE__*/React.createElement("i", { className: "rc__play" }, /*#__PURE__*/React.createElement(PlayCircle, { size: 22 }))
     ), /*#__PURE__*/
-    React.createElement("div", { className: "ra__meta font-sans" }, /*#__PURE__*/
-    React.createElement("span", { className: "ra__st" }, e.status), /*#__PURE__*/
-    React.createElement("span", { className: "ra__tags" }, e.tags.join(" · "))
+    React.createElement("p", { className: "rc__k font-ko" }, /*#__PURE__*/React.createElement("b", { className: "font-serif" }, e.no), K[0]), /*#__PURE__*/
+    React.createElement("h3", { className: "rc__t font-ko" }, t1, t2 && /*#__PURE__*/React.createElement("small", null, t2)), /*#__PURE__*/
+    React.createElement("p", { className: "rc__st font-sans" }, e.status),
+    open && /*#__PURE__*/
+    React.createElement("div", { className: "rc__more font-ko", id: "rc-d-" + e.n }, /*#__PURE__*/
+    React.createElement("p", null, e.desc),
+    e.point && /*#__PURE__*/React.createElement("p", { className: "ra__point" }, /*#__PURE__*/React.createElement("b", null, "\uC124\uACC4 \uD3EC\uC778\uD2B8"), e.point)
     ), /*#__PURE__*/
-    React.createElement("div", { className: "ra__act" },
+
+    React.createElement("div", { className: "rc__act" },
     e.video ? /*#__PURE__*/React.createElement("button", { type: "button", className: "ra__go font-sans", onClick: () => onPlay(e) }, e.cta, " ", /*#__PURE__*/React.createElement(PlayCircle, { size: 14 })) :
     e.url ? /*#__PURE__*/React.createElement("a", { className: "ra__go font-sans", href: e.url, target: "_blank", rel: "noreferrer" }, e.cta, " ", /*#__PURE__*/React.createElement(ExternalLink, { size: 14 })) : /*#__PURE__*/
-    React.createElement("span", { className: "ra__go ra__go--off font-sans" }, e.cta)
+    React.createElement("span", { className: "ra__go ra__go--off font-sans" }, e.cta), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "rc__tog font-sans", "aria-expanded": open, "aria-controls": "rc-d-" + e.n, onClick: () => setOpen(!open) }, open ? "접기" : "자세히")
     )
     )
     ));
@@ -2741,6 +2762,13 @@ function ArchiveRow({ e, onPlay }) {
 }
 function ResearchArchive() {
   const [playing, setPlaying] = React.useState(null);
+  const [f, setF] = React.useState("all");
+  React.useEffect(() => {
+    /* 걸러진 상태에서 #ed-NN 으로 들어오면 전체로 되돌려 그 카드를 보이게 */
+    const go = () => {const h = location.hash.slice(1);if (/^ed-\d+$/.test(h) && ARCHIVE.some((e) => "ed-" + e.n === h)) setF("all");};
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, []);
   const vframe = React.useRef(null);
   useStageDialog(!!playing, vframe, () => setPlaying(null));
   return (/*#__PURE__*/
@@ -2749,15 +2777,18 @@ function ResearchArchive() {
     React.createElement("header", { className: "ra__head" }, /*#__PURE__*/
     React.createElement("p", { className: "ra__k font-ko" }, "\uC5F0\uAD6C \xB7 \uC2E4\uD5D8 \uAE30\uB85D ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Research Archive")), /*#__PURE__*/
     React.createElement("h2", { id: "ra-title", className: "font-ko" }, "\uADF8 \uBC16\uC758 \uC791\uC5C5 ", /*#__PURE__*/React.createElement("em", { className: "font-serif" }, ARCHIVE.length)), /*#__PURE__*/
-    React.createElement("p", { className: "ra__sub font-ko" }, "\uD559\uC2B5\uC6A9 \uC2DC\uBBAC\uB808\uC774\uD130 \xB7 \uAC1C\uC778 \uC2E4\uD5D8 \xB7 \uC81C\uC548\uC11C \xB7 \uC0DD\uC131\uD615 AI \uCF58\uD150\uCE20\uC785\uB2C8\uB2E4. \uB124 \uAC00\uC9C0 \uB3C4\uAD6C, \uACBD\uAD6D AX \uC640\uB294 \uC131\uACA9\uC774 \uB2E4\uB978 \uAE30\uB85D\uC774\uB77C \uB530\uB85C \uBAA8\uC558\uC2B5\uB2C8\uB2E4.")
+    React.createElement("p", { className: "ra__sub font-ko" }, "\uD559\uC2B5 \uC2DC\uBBAC\uB808\uC774\uD130 \xB7 \uC0DD\uD65C \uC11C\uBE44\uC2A4 \xB7 \uC81C\uC548\uC11C \xB7 AI \uC601\uC0C1 \u2014 \uB124 \uAC00\uC9C0 \uB3C4\uAD6C \xB7 \uBC95\uB960 AX \uC640 \uC131\uACA9\uC774 \uB2EC\uB77C \uB530\uB85C \uBAA8\uC558\uC2B5\uB2C8\uB2E4.")
     ), /*#__PURE__*/
-    React.createElement("ol", { className: "ra__list" }, ARCHIVE.slice(0, 3).map((e) => /*#__PURE__*/React.createElement(ArchiveRow, { key: e.n, e: e, onPlay: setPlaying }))),
-    ARCHIVE.length > 3 && /*#__PURE__*/
-    React.createElement("details", { className: "fold ra__more" }, /*#__PURE__*/
-    React.createElement("summary", null, /*#__PURE__*/React.createElement("span", { className: "fold__t" }, /*#__PURE__*/React.createElement("strong", { className: "font-ko" }, "\uB098\uBA38\uC9C0 ", ARCHIVE.length - 3, "\uAC1C \uBCF4\uAE30")), /*#__PURE__*/React.createElement("i", { className: "fold__icon", "aria-hidden": "true" })), /*#__PURE__*/
-    React.createElement("ol", { className: "ra__list" }, ARCHIVE.slice(3).map((e) => /*#__PURE__*/React.createElement(ArchiveRow, { key: e.n, e: e, onPlay: setPlaying })))
+    React.createElement("div", { className: "rc__filter font-ko", role: "group", "aria-label": "\uC791\uC5C5 \uBD84\uB958" },
+    ARCHIVE_FILTER.map(([k, t]) => /*#__PURE__*/
+    React.createElement("button", { key: k, type: "button", "aria-pressed": f === k, onClick: () => setF(k) },
+    t, /*#__PURE__*/React.createElement("small", { className: "font-sans" }, k === "all" ? ARCHIVE.length : ARCHIVE.filter((e) => (ARCHIVE_KIND[e.n] || [])[1] === k).length)
     )
-
+    )
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "rc__grid", key: f },
+    ARCHIVE.filter((e) => f === "all" || (ARCHIVE_KIND[e.n] || [])[1] === f).map((e, i) => /*#__PURE__*/React.createElement(ArchiveCard, { key: e.n, e: e, i: i, onPlay: setPlaying }))
+    )
     ),
     playing && ReactDOM.createPortal(/*#__PURE__*/
       React.createElement("div", { className: "vlightbox", onClick: () => setPlaying(null), role: "dialog", "aria-modal": "true", "aria-label": playing.title.replace("\n", " · ") }, /*#__PURE__*/

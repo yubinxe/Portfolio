@@ -2712,27 +2712,48 @@ function GrowthPath() {
 
 /* ============================================================ RESEARCH ARCHIVE — 그 밖의 작업(조용한 목록)
  * 학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠. 네 가지 도구와 겨루지 않도록 카드가 아닌 색인으로 */
-function ArchiveRow({ e, onPlay }) {
+/* 그 밖의 작업 — 무엇인지 첫눈에: 실제 화면 한 장(images/archive · scripts/build-archive-shots.mjs) + 종류 한 줄 + 분류 필터.
+ * 종류 · 분류는 EDITIONS 의 desc · tags 를 짧게 줄인 말 — 새 사실 없음 */
+const ARCHIVE_KIND = {
+  "10": ["3D 학습 시뮬레이터", "learn"], "14": ["피부 진단 · 성분 처방 웹", "svc"], "11": ["말씀 · 인문학 서재 앱(PWA)", "svc"],
+  "13": ["살림 기록 서비스(PWA)", "svc"], "15": ["기능 제안서(PRD)", "learn"], "05": ["청약 데이터 대시보드", "learn"],
+  "01": ["AI 카드뉴스 · 영상", "film"], "02": ["AI 브랜드 필름", "film"], "03": ["AI 캠페인 필름", "film"], "04": ["AI 프로모션 영상", "film"],
+};
+const ARCHIVE_SHOT = { "10": 1, "14": 1, "11": 1, "13": 1, "15": 1, "01": 1, "02": 1, "03": 1, "04": 1 };
+const ARCHIVE_FILTER = [["all", "전체"], ["svc", "생활 서비스"], ["learn", "학습 · 제안 · 데이터"], ["film", "AI 영상"]];
+function ArchiveCard({ e, onPlay, i }) {
   const [open, setOpen] = React.useState(false);
   const [t1, t2] = e.title.split("\n");
+  const K = ARCHIVE_KIND[e.n] || ["", "learn"];
+  const go = e.video ? { as: "button", props: { type: "button", onClick: () => onPlay(e) } }
+    : e.url ? { as: "a", props: { href: e.url, target: "_blank", rel: "noreferrer" } } : null;
+  const Go = go ? go.as : "span";
   return (
-    <li>
-      <article id={"ed-" + e.n} className={"ra__row" + (open ? " is-open" : "")}>
-        <span className="ra__no font-serif">{e.no}</span>
-        <div className="ra__main">
-          <h3 className="ra__t font-ko">{t1}{t2 && <small>{t2}</small>}</h3>
-          <p className="ra__desc font-ko" id={"ra-d-" + e.n}>{e.desc}</p>
-          {open && e.point && <p className="ra__point font-ko"><b>설계 포인트</b>{e.point}</p>}
-          <button type="button" className="ra__more font-sans" aria-expanded={open} aria-controls={"ra-d-" + e.n} onClick={() => setOpen(!open)}>{open ? "접기" : "자세히"}</button>
-        </div>
-        <div className="ra__meta font-sans">
-          <span className="ra__st">{e.status}</span>
-          <span className="ra__tags">{e.tags.join(" · ")}</span>
-        </div>
-        <div className="ra__act">
+    <li className="rc" style={{ "--i": i }}>
+      <article id={"ed-" + e.n} className={"rc__card" + (open ? " is-open" : "")}>
+        <Go className="rc__shot" aria-hidden="true" tabIndex={-1} {...(go ? go.props : {})}>
+          {ARCHIVE_SHOT[e.n] ? (
+            <picture>
+              <source type="image/avif" srcSet={`images/archive/${e.n}-640.avif`} />
+              <img src={`images/archive/${e.n}-640.webp`} alt="" width="640" height="400" loading="lazy" decoding="async" />
+            </picture>
+          ) : <span className="rc__ph font-serif">{e.no}</span>}
+          {e.video && <i className="rc__play"><PlayCircle size={22} /></i>}
+        </Go>
+        <p className="rc__k font-ko"><b className="font-serif">{e.no}</b>{K[0]}</p>
+        <h3 className="rc__t font-ko">{t1}{t2 && <small>{t2}</small>}</h3>
+        <p className="rc__st font-sans">{e.status}</p>
+        {open && (
+          <div className="rc__more font-ko" id={"rc-d-" + e.n}>
+            <p>{e.desc}</p>
+            {e.point && <p className="ra__point"><b>설계 포인트</b>{e.point}</p>}
+          </div>
+        )}
+        <div className="rc__act">
           {e.video ? <button type="button" className="ra__go font-sans" onClick={() => onPlay(e)}>{e.cta} <PlayCircle size={14} /></button>
             : e.url ? <a className="ra__go font-sans" href={e.url} target="_blank" rel="noreferrer">{e.cta} <ExternalLink size={14} /></a>
             : <span className="ra__go ra__go--off font-sans">{e.cta}</span>}
+          <button type="button" className="rc__tog font-sans" aria-expanded={open} aria-controls={"rc-d-" + e.n} onClick={() => setOpen(!open)}>{open ? "접기" : "자세히"}</button>
         </div>
       </article>
     </li>
@@ -2740,6 +2761,13 @@ function ArchiveRow({ e, onPlay }) {
 }
 function ResearchArchive() {
   const [playing, setPlaying] = React.useState(null);
+  const [f, setF] = React.useState("all");
+  React.useEffect(() => {
+    /* 걸러진 상태에서 #ed-NN 으로 들어오면 전체로 되돌려 그 카드를 보이게 */
+    const go = () => { const h = location.hash.slice(1); if (/^ed-\d+$/.test(h) && ARCHIVE.some((e) => "ed-" + e.n === h)) setF("all"); };
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, []);
   const vframe = React.useRef(null);
   useStageDialog(!!playing, vframe, () => setPlaying(null));
   return (
@@ -2748,15 +2776,18 @@ function ResearchArchive() {
         <header className="ra__head">
           <p className="ra__k font-ko">연구 · 실험 기록 <span className="font-sans" lang="en">Research Archive</span></p>
           <h2 id="ra-title" className="font-ko">그 밖의 작업 <em className="font-serif">{ARCHIVE.length}</em></h2>
-          <p className="ra__sub font-ko">학습용 시뮬레이터 · 개인 실험 · 제안서 · 생성형 AI 콘텐츠입니다. 네 가지 도구, 경국 AX 와는 성격이 다른 기록이라 따로 모았습니다.</p>
+          <p className="ra__sub font-ko">학습 시뮬레이터 · 생활 서비스 · 제안서 · AI 영상 — 네 가지 도구 · 법률 AX 와 성격이 달라 따로 모았습니다.</p>
         </header>
-        <ol className="ra__list">{ARCHIVE.slice(0, 3).map((e) => <ArchiveRow key={e.n} e={e} onPlay={setPlaying} />)}</ol>
-        {ARCHIVE.length > 3 && (
-          <details className="fold ra__more">
-            <summary><span className="fold__t"><strong className="font-ko">나머지 {ARCHIVE.length - 3}개 보기</strong></span><i className="fold__icon" aria-hidden="true" /></summary>
-            <ol className="ra__list">{ARCHIVE.slice(3).map((e) => <ArchiveRow key={e.n} e={e} onPlay={setPlaying} />)}</ol>
-          </details>
-        )}
+        <div className="rc__filter font-ko" role="group" aria-label="작업 분류">
+          {ARCHIVE_FILTER.map(([k, t]) => (
+            <button key={k} type="button" aria-pressed={f === k} onClick={() => setF(k)}>
+              {t}<small className="font-sans">{k === "all" ? ARCHIVE.length : ARCHIVE.filter((e) => (ARCHIVE_KIND[e.n] || [])[1] === k).length}</small>
+            </button>
+          ))}
+        </div>
+        <ol className="rc__grid" key={f}>
+          {ARCHIVE.filter((e) => f === "all" || (ARCHIVE_KIND[e.n] || [])[1] === f).map((e, i) => <ArchiveCard key={e.n} e={e} i={i} onPlay={setPlaying} />)}
+        </ol>
       </div>
       {playing && ReactDOM.createPortal(
         <div className="vlightbox" onClick={() => setPlaying(null)} role="dialog" aria-modal="true" aria-label={playing.title.replace("\n", " · ")}>

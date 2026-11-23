@@ -107,7 +107,7 @@
 
   /* ---------- 0-2) 글이 긴 문단은 두 줄만(누르면 펼침) · 서브 페이지 끝 ‘다음 장’ ---------- */
   var CLAMP = [[".tl-body > p", 1], [".grow p", 2], [".pol__what", 2], [".diary__item .tl-feature__body > p.font-ko", 2], [".tl-feature__body > p.font-ko", 2],
-    [".lec-track__desc", 2], [".glance__d", 2], [".ra__sub", 1], [".sh__lead", 2], [".g-sec__lead", 3], [".cv-sec__lead", 3]];
+    [".lec-track__desc", 2], [".glance__d", 2], [".sh__lead", 2], [".g-sec__lead", 3], [".cv-sec__lead", 3]];
   function clampAll() {
     CLAMP.forEach(function (c) {
       [].slice.call(D.querySelectorAll(c[0])).forEach(function (p) {
