@@ -159,7 +159,7 @@
 /* ---------- 모바일 메뉴 ---------- */
 html { scroll-padding-top: 84px; }
 .mnav-btn { display: none; }
-@media (max-width: 860px) {
+@media (max-width: 1180px) {
   .mnav-btn {
     display: inline-flex; align-items: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 0 12px;
     font: inherit; font-family: "Pretendard Variable", "Pretendard", sans-serif; font-size: .84rem; font-weight: 650; letter-spacing: .02em;
@@ -170,11 +170,11 @@ html { scroll-padding-top: 84px; }
   .mnav-btn__bars { margin-top: -5px; }
   .mnav-btn__bars::before { content: ""; position: absolute; top: 5px; left: 0; }
   .mnav-btn[aria-expanded="true"] { background: var(--navy); color: var(--ecru); border-color: var(--navy); }
-  header nav[aria-label="주요 메뉴"] { gap: 8px !important; }
-  header nav[aria-label="주요 메뉴"] > .btn { padding: 0 .9em !important; min-height: 44px; display: inline-flex; align-items: center; font-size: .8rem !important; }
+  header nav.hnav__nav, header nav[aria-label="주요 메뉴"] { gap: 8px !important; }
+  header nav.hnav__nav > .btn, header nav[aria-label="주요 메뉴"] > .btn { padding: 0 .9em !important; min-height: 44px; display: inline-flex; align-items: center; font-size: .8rem !important; }
 }
 @media (max-width: 380px) {
-  header nav[aria-label="주요 메뉴"] > .btn svg { display: none; }
+  header nav.hnav__nav > .btn svg, header nav[aria-label="주요 메뉴"] > .btn svg { display: none; }
   header .sticker { display: none; }
 }
 html.mnav-lock, html.mnav-lock body { overflow: hidden; }
@@ -197,7 +197,7 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .mnav__list a:focus-visible, .mnav__cta:focus-visible, .mnav__close:focus-visible { outline: 3px solid #8FB8F2; outline-offset: 2px; }
 .mnav__n { font-size: .66rem; letter-spacing: .16em; color: var(--gold); width: 1.8em; flex: none; }
 .mnav__cta { margin-top: 22px; display: flex; align-items: center; justify-content: center; min-height: 48px; font-size: .9rem; font-weight: 700; letter-spacing: .04em; color: var(--ecru); background: var(--navy); text-decoration: none; }
-@media (max-width: 860px) { .mnav-btn, header nav[aria-label="주요 메뉴"] > .btn { white-space: nowrap; flex: none; } }
+@media (max-width: 1180px) { .mnav-btn, header nav.hnav__nav > .btn, header nav[aria-label="주요 메뉴"] > .btn { white-space: nowrap; flex: none; } header .nav-desktop { display: none !important; } }
 @media (max-width: 400px) { .hnav__name { display: none !important; } }
 /* 좁은 화면에서 사진 칩이 칸보다 길어 가로 스크롤을 만들지 않게 */
 .yd-grid .g-card, .nd-photos .g-card, .award { min-width: 0; }
@@ -280,7 +280,7 @@ html.mnav-lock, html.mnav-lock body { overflow: hidden; }
 .yd-grid .g-card--full{grid-column:1/-1}.yd-grid .g-card--full a{aspect-ratio:32/9}
 .diary__facts dd{word-break:keep-all}
 /* 폴더블·태블릿 — 861–1100px 은 내비 글자를 유지(좁혀서), 860px 이하는 '메뉴' 버튼 */
-@media (min-width:861px) and (max-width:1100px){header .hnav__name small{display:none}header nav[aria-label="주요 메뉴"]{gap:14px!important}html header .nav-desktop{display:flex!important;gap:clamp(10px,1.5vw,18px)!important;font-size:.84rem}header nav[aria-label="주요 메뉴"]>.btn{padding:.55em .9em!important;font-size:.78rem!important;white-space:nowrap}}
+
 /* 가로로 펼친 폴더블·낮은 화면 — 첫 화면 안에 이름·소개·버튼이 다 들어오게 */
 @media (max-height:760px) and (min-width:600px) and (orientation:landscape){#manifesto .hero-scene__sticky{padding-top:82px!important;padding-bottom:40px!important}#manifesto h1{font-size:clamp(2.8rem,16vh,7.5rem)!important}#manifesto .menu-rule{margin-bottom:8px!important}#manifesto .hero-kicker{display:none}#manifesto .hero-eyebrow{margin-bottom:12px}#manifesto .hero-sub>p:first-child{margin-top:14px!important;margin-bottom:8px!important}#manifesto .hero-proof{margin-top:8px}#manifesto .hero-cta{margin-top:18px!important}#manifesto .scroll-cue{display:none}#manifesto .btn.hero-main,#manifesto .btn--ghost{flex:0 0 auto;min-height:44px;font-size:.84rem;box-shadow:none}.yk-teaser{display:none!important}}
 @media (max-height:560px) and (min-width:600px) and (orientation:landscape){#manifesto .hero-proof,#manifesto .hero-eyebrow{display:none}}
@@ -421,7 +421,7 @@ header.hnav .wrap{gap:18px}
 @media (max-width:1280px){header.hnav .hnav__cv{padding:0 9px;font-size:.74rem}.hnav__admin{padding:0 9px;font-size:.72rem}html header .nav-desktop{gap:clamp(8px,.95vw,13px)!important;font-size:.8rem}header.hnav .hnav__contact{padding:0 10px!important}}
 @media (max-width:1600px){.hnav__ix b{display:none}}
 @media (max-width:1240px){.hnav__ix span{display:none}}
-@media (max-width:860px){.hnav__ix{display:none}.hnav__nav{justify-content:flex-end}.hnav__cv{height:36px;padding:0 10px;font-size:.76rem}.hnav__admin{height:36px;padding:0 9px}}
+@media (max-width:1180px){.hnav__ix{display:none}.hnav__nav{justify-content:flex-end}.hnav__cv{height:36px;padding:0 10px;font-size:.76rem}.hnav__admin{height:36px;padding:0 9px}}
 @media (max-width:560px){header .hnav__contact{display:none!important}}
 .axc__admin-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;margin:14px 0 6px;background:#141C3A;color:#F7F4EE;border-left:4px solid #B89758}
 .axc__admin-bar b{color:#E5C98B;font-size:.88rem}
@@ -633,3 +633,6 @@ i.cx__kind{font-style:normal}
 .rec__img--press{display:grid;align-content:center;justify-items:start;gap:8px;min-height:180px;padding:24px;text-decoration:none;color:var(--navy);background:repeating-linear-gradient(0deg,#FFFDF8 0 27px,#F3EEE3 27px 28px)}
 .rec__img--press b{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800}
 .rec__img--press span{font-size:.78rem;letter-spacing:.14em;color:var(--gold-text)}
+
+/* 상단 메뉴 — 넓은 화면에서는 머리띠만 조금 넓혀 한 줄에 담고, 1180px 이하는 메뉴 버튼으로(영문 메뉴가 길다) */
+@media (min-width:1181px){header.hnav .wrap{max-width:min(1400px,calc(100vw - 48px))}}

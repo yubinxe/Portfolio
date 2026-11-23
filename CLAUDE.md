@@ -17,6 +17,7 @@
 - 1페이지 이력 `resume.html`(+`resume.css`, 인쇄 = A4 1쪽 → `resume.pdf`). 상단 메뉴 · 인트로 · 모바일 메뉴에서 연결. 의견 · 협업은 mailto(제목 자동) — 보냈다고 표시하지 않음. 폼 · 저장 백엔드 없음. 전화번호 · 생년 비공개. 사실 근거는 본인 이력서/경력기술서(2026. 11)와 content-matrix
 - 영문 회사명은 Gyunggook(다른 표기 금지). 회사명을 쓴다고 회사 승인 · 도입이 아님 — ‘개인 구현 · 경국 도입 아님’ 병기
 - AX 6종 = A 경국 실무 01–03(사내 구축 · 비공개) + B 개인 공개 시연 04–06(legal-ax 와 같은 데이터 · 같은 탭 저장소). B 를 경국 도입으로 쓰지 않기. 16개 결과물 수와 따로 셈
+- 영문 전환: `i18n.js`(모든 페이지 · ax 앱 head 맨 앞 · KO/EN 스위치 · localStorage `yk.lang` · `?lang=en`) + 사전 `i18n/en.json`(원문 → 영문, 화면 글을 공백 하나로 줄인 그대로가 키) → `npm run build` 가 `i18n-en.js` 생성(EN 일 때만 로드). 화면 문장을 고치거나 새로 쓰면 en.json 에 같은 키로 영문 추가(없으면 한국어로 남음). CSS 선택자로 쓰는 aria-label(‘주요 메뉴’)은 바꾸지 않음. 챗봇은 EN 이면 서버에 lang=en
 - JS: `mnav.js`(모바일 메뉴) · `kb.js`(챗봇 지식) · `chatbot.js` · Vercel 함수 `api/chat.js` · `api/lead.js`
 - 배포: main push → GitHub Pages(canonical https://yubinxe.github.io/Portfolio/) + Vercel `portfolio` 자동. `vercel.json` 의 buildCommand ""·outputDirectory "." 유지.
 
@@ -25,10 +26,10 @@
 - `npm run seed:build` — kb.js 변경 후 필수
 - `npm run build:images` — 사진 추가 시(AVIF/WebP → images/opt/, sections.jsx `OPT` 맵)
 - `npm run build:resume-pdf` — resume.html · resume.css 를 고친 뒤 필수(로컬은 NODE_PATH=gamgak/node_modules CHROME_PATH=설치된 chrome.exe)(A4 1쪽 resume.pdf · 지문 docs/resume-pdf.json, 테스트가 대조)
-- `npm test` — 122건 모두 통과해야 커밋(ax-lab 은 `cd ax-lab && npm test` 36건 별도)
+- `npm test` — 127건 모두 통과해야 커밋(ax-lab 은 `cd ax-lab && npm test` 36건 별도)
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=31` · `dist/sections.js?v=68` · `dist/app.js?v=12` · `chatbot.js?v=18` · `mnav.js?v=10` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=10`(index 전용) · `intro.css?v=5`(index 전용) · `kb.js?v=20261120c` · resume: `resume.css?v=3` · `resume.js?v=1` · 공통 손길 층: `polish.css?v=2` · `polish.js?v=4`(index · gallery · career · lecture · cases · resume) · cases: `cases.css?v=1` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=3` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=2` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=32` · `dist/sections.js?v=68` · `dist/app.js?v=12` · `chatbot.js?v=19` · `mnav.js?v=11` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=10`(index 전용) · `intro.css?v=5`(index 전용) · `kb.js?v=20261120c` · `i18n.js?v=1`(사전 `i18n-en.js?v=1` 은 i18n.js 안에서 지정) · resume: `resume.css?v=3` · `resume.js?v=1` · 공통 손길 층: `polish.css?v=3` · `polish.js?v=5`(index · gallery · career · lecture · cases · resume) · cases: `cases.css?v=1` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=3` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=2` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.

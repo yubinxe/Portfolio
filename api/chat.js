@@ -41,6 +41,8 @@ module.exports = function handler(req, res) {
 
   return readJson(req).then(function (body) {
     var msgs = [{ role: "system", content: systemPrompt() }].concat(sanitize(body.messages));
+    /* 사이트가 영문(EN) 보기일 때 — 같은 근거로 영어로 답한다(i18n.js · chatbot.js 가 lang 을 보낸다) */
+    if (body && body.lang === "en") msgs.splice(1, 0, { role: "system", content: "The visitor is viewing the English version of the site. Answer in natural, professional English, using only the same portfolio facts. Keep proper names (Gyunggook Law Firm, ZipCatch, etc.) in English." });
     var controller = new AbortController();
     var killed = setTimeout(function () { controller.abort(); }, 40000);
     return fetch("https://api.openai.com/v1/chat/completions", {
