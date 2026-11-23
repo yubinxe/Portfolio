@@ -147,14 +147,16 @@
     else D.body.appendChild(nav);
   }
   function always() { clampAll(); }
-  (function boot() {
+  /* EN 보기면 i18n.js 가 글자를 바꾼 뒤에 시작한다 — 먼저 쪼개면 사전과 맞출 수 없다 */
+  var langReady = (W.ykI18n && W.ykI18n.ready) || Promise.resolve();
+  langReady.then(function boot() {
     var r = D.getElementById("root");
     if (r && r.firstElementChild && H.getAttribute("data-app") !== "ready") { W.addEventListener("cine:scan", function () { setTimeout(always, 80); }, { once: true }); setTimeout(always, 5000); }
     else always();
     nextBar();
     if (r && "MutationObserver" in W) { var mt2 = 0; new MutationObserver(function () { if (mt2) return; mt2 = setTimeout(function () { mt2 = 0; clampAll(); }, 300); }).observe(r, { childList: true, subtree: true }); }
     D.addEventListener("toggle", function (e) { if (e.target.open) setTimeout(clampAll, 30); }, true);
-  })();
+  });
 
   if (D.readyState === "complete") setTimeout(lift, 120); else W.addEventListener("load", function () { setTimeout(lift, 120); });
   setTimeout(lift, 1800); /* 안전장치 — 이미지가 늦어도 막은 걷힌다 */
@@ -257,21 +259,23 @@
   }
 
   /* ---------- 5) 내비 글자 섞임 — 올리면 잠깐 흩어졌다 제자리 ---------- */
-  var GLY = "가나다라마바사아자차카타파하ABCDEFGHJKLMNPRSTUVWXYZ0123456789";
-  function scramble(a) {
-    if (a.__pls || a.children.length) return; a.__pls = 1;
-    var text = a.textContent, busy = false;
-    a.addEventListener("pointerenter", function () {
-      if (busy) return; busy = true;
-      a.style.minWidth = a.offsetWidth + "px";
-      var t0 = performance.now(), dur = 420;
-      (function step(t) {
-        var k = Math.min(1, (t - t0) / dur), keep = Math.floor(text.length * k), out = "";
-        for (var i = 0; i < text.length; i++) out += i < keep || text[i] === " " ? text[i] : GLY[(Math.random() * GLY.length) | 0];
-        a.textContent = out;
-        if (k < 1) requestAnimationFrame(step); else { a.textContent = text; a.style.minWidth = ""; busy = false; }
-      })(t0);
+  /* 메뉴 — 호버하면 글자가 한 자씩 위로 넘어가고 같은 글이 아래에서 올라온다(밑줄은 기존 .navlink::after) */
+  function roll(a) {
+    if (a.__plr || a.children.length || !H.classList.contains("pl")) return;
+    var t = a.textContent.replace(/\s+/g, " ").trim();
+    if (!t || t.length > 24) return;
+    a.__plr = 1;
+    a.setAttribute("aria-label", a.getAttribute("aria-label") || t);
+    var top = D.createElement("span"), bot = D.createElement("span");
+    top.className = "pl-roll__a"; bot.className = "pl-roll__b"; bot.setAttribute("aria-hidden", "true"); top.setAttribute("aria-hidden", "true");
+    Array.from(t).forEach(function (ch, i) {
+      [top, bot].forEach(function (row) {
+        var c = D.createElement("span"); c.className = "pl-roll__c"; c.style.setProperty("--i", i);
+        c.textContent = ch === " " ? "\u00a0" : ch; row.appendChild(c);
+      });
     });
+    var box = D.createElement("span"); box.className = "pl-roll__in"; box.appendChild(top); box.appendChild(bot);
+    a.textContent = ""; a.appendChild(box); a.classList.add("pl-roll");
   }
 
   /* ---------- 6) 커서 말풍선 ---------- */
@@ -349,7 +353,7 @@
     if (fine) {
       [].slice.call(D.querySelectorAll(".btn, .hnav__contact, .axc__go, .rv-btn, .tl-ribbon a, .hnav__cv")).forEach(magnet);
       [].slice.call(D.querySelectorAll(".g-card > a, .tl-feature__main")).forEach(tilt);
-      [].slice.call(D.querySelectorAll("header.hnav nav a, .hnav__links a, .g-nav a")).forEach(scramble);
+      [].slice.call(D.querySelectorAll("header.hnav nav a, .hnav__links a, .g-nav a, body > header nav a")).forEach(roll);
       setupRing(); setupHud();
     }
     shs = [].slice.call(D.querySelectorAll(".sh[data-no]"));
@@ -359,6 +363,9 @@
   var root = D.getElementById("root"), started = false;
   function start() {
     if (started) return; started = true;
+    langReady.then(startNow);
+  }
+  function startNow() {
     sweep();
     if (root && "MutationObserver" in W) {
       var mt = 0;

@@ -548,10 +548,10 @@
 .yk-status__time{ grid-column:1; justify-self:center; line-height:20px; font-variant-numeric:tabular-nums; padding-left:6px; }
 .yk-status__icons{ grid-column:3; justify-self:center; display:flex; align-items:center; gap:5.5px; height:20px; padding-right:4px; }
 .yk-cell{ width:17px; height:11px; } .yk-wifi{ width:15.5px; height:11.5px; }
-.yk-bat{ position:relative; width:26px; height:12.5px; border-radius:4.2px; box-shadow:inset 0 0 0 1px rgba(14,26,46,.36); margin-right:2px; }
+.yk-bat{ position:relative; width:27px; height:13px; border-radius:4.2px; box-shadow:inset 0 0 0 1px rgba(14,26,46,.36); margin-right:2px; }
 .yk-bat::after{ content:""; position:absolute; right:-2.6px; top:4px; width:1.6px; height:4.5px; border-radius:0 1.5px 1.5px 0; background:rgba(14,26,46,.4); }
 .yk-bat i{ position:absolute; left:2px; top:2px; bottom:2px; width:calc(100% - 4px); border-radius:2.4px; background:var(--yk-ink); }
-.yk-bat b{ position:absolute; inset:0; display:grid; place-items:center; font-size:8.6px; font-weight:800; color:#fff; letter-spacing:-.04em; }
+.yk-bat b{ position:absolute; inset:0; display:grid; place-items:center; font-size:9px; font-weight:800; color:#fff; letter-spacing:-.05em; font-variant-numeric:tabular-nums; }
 .yk-bat.low i{ background:#E0443A; }
 /* 섬 — 렌즈 반사 · 응답 중 라이브 액티비티(좌: 컨시어지 · 우: 파형) */
 .yk-island{ transition:width .55s var(--yk-spring), height .55s var(--yk-spring); box-shadow:0 0 0 .5px rgba(255,255,255,.04); }
@@ -583,12 +583,13 @@
 @media (prefers-reduced-motion:reduce){ .yk-island__r b{ animation:none; } .yk-island{ transition:none; } }
 /* ---- 모바일 시트에도 다이내믹 아일랜드 — 손잡이 자리, 응답 중엔 라이브 액티비티로 확장 ---- */
 @media (max-width:520px), (max-height:700px){
-  .yk-status{ display:none !important; }
+  /* 모바일 시트에도 상태바(시각 · 신호 · 배터리 100) — 섬 좌우 귀 자리 */
+  .yk-status{ height:40px; padding:13px 14px 0 !important; font-size:14.5px; grid-template-columns:1fr 112px 1fr; }
   .yk-island{ display:block; top:9px; width:104px; height:30px; }
   .yk-busy .yk-island{ width:156px; }
-  .yk-head{ padding-top:48px; }
+  .yk-head{ padding-top:8px; }
   .yk-head::before{ display:none; }
-  .yk-head__close{ top:46px; }
+  .yk-head__close{ top:6px; }
 }
 @media (prefers-reduced-motion:reduce){
   .yk-fab,.yk-panel,.yk-msg,.yk-chip,.yk-send,.yk-teaser,.yk-cta__btn{ transition:none !important; animation:none !important; }
@@ -720,20 +721,7 @@
     panel.appendChild(screen);
     tickClock();
     setInterval(tickClock, 20000);
-    /* 실제 배터리 잔량(지원 브라우저) — 없으면 100 */
-    try {
-      if (navigator.getBattery) navigator.getBattery().then(function (bt) {
-        function upd() {
-          var pct = Math.round(bt.level * 100);
-          var bat = root.querySelector(".yk-bat");
-          if (!bat) return;
-          bat.querySelector("b").textContent = pct;
-          bat.querySelector("i").style.width = "calc((100% - 4px) * " + bt.level + ")";
-          bat.classList.toggle("low", pct <= 20);
-        }
-        upd(); bt.addEventListener("levelchange", upd);
-      });
-    } catch (e) {}
+    /* 배터리는 늘 가득(100) — 방문자 기기 잔량을 읽지 않는다 */
 
     root.appendChild(teaser);
     root.appendChild(panel);
@@ -1348,7 +1336,7 @@
     fetch(CFG.endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: hist.slice(-12).map(function (m) { return { role: m.role, content: m.content }; }), stream: true }),
+      body: JSON.stringify({ messages: hist.slice(-12).map(function (m) { return { role: m.role, content: m.content }; }), stream: true, lang: (window.ykI18n && window.ykI18n.lang) || "ko" }),
       signal: controller.signal,
     })
       .then(function (res) {

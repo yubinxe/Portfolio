@@ -105,6 +105,6 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
   // 화면이 넓어지면(회전 등) 패널을 닫는다 — 데스크톱 메뉴와 겹치지 않게
-  var mq = window.matchMedia("(min-width: 861px)");
+  var mq = window.matchMedia("(min-width: 1181px)");
   (mq.addEventListener ? mq.addEventListener.bind(mq, "change") : mq.addListener.bind(mq))(function (m) { if (m.matches) close(false); });
 })();
