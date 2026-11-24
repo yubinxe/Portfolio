@@ -7,7 +7,7 @@
 .ix{position:relative;z-index:3;padding:140px 20px 72px;background:#080D1A;color:#F5F2EB;text-align:center}
 html.ix-off .ix{display:none}
 .ix__stage{position:relative}
-.ix__bg,.ix__light,.ix__warm,.ix__vig,.ix__flock,.ix__cue,.ix__bar,.ix__brand,.ix__guide,.ix__alpha-rule{display:none}
+.ix__bg,.ix__light,.ix__warm,.ix__vig,.ix__flock,.ix__cue,.ix__bar,.ix__brand,.ix__guide,.ix__alpha-rule,.ix__axis,.ix__lb,.ix__door,.ix__flash,.ix__gen-n{display:none}
 .ix__scene{margin:0 auto 26px}
 .ix__scene p{margin:0}
 .ix__year{font-family:"Cormorant Garamond","Playfair Display",serif;font-weight:500;font-size:clamp(4.2rem,15vw,9rem);line-height:.9;letter-spacing:-.02em;color:#F5F2EB}
@@ -18,6 +18,7 @@ html.ix-off .ix{display:none}
 .ix__kw{font-size:clamp(1.05rem,5.2vw,2.3rem);font-weight:400;letter-spacing:-.01em;white-space:nowrap;color:rgba(245,242,235,.86)}
 .ix__alpha-t{font-family:"Cormorant Garamond","Playfair Display",serif;font-weight:600;font-size:clamp(2.6rem,10.5vw,10rem);line-height:1;letter-spacing:.02em;white-space:nowrap;color:#F5F2EB}
 .ix__l,.ix__sp{display:inline-block}.ix__l i,.ix__sp i{font-style:normal}
+.ix__gen{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .32em;font-size:clamp(1.5rem,5.2vw,3.4rem);font-weight:800;line-height:1.3;letter-spacing:-.025em;color:#F5F2EB}.ix__gen span{white-space:nowrap}
 .ix__mf{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .35em;font-size:clamp(1.55rem,5.4vw,3.6rem);font-weight:700;line-height:1.35;letter-spacing:-.02em}
 .ix__mf span{white-space:nowrap}
 .ix__mf-ko{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .3em;margin-top:14px!important;font-size:clamp(.95rem,2.1vw,1.22rem);font-weight:400;line-height:1.6;color:rgba(245,242,235,.8)}
@@ -47,7 +48,8 @@ html.ix-off .ix-replay{display:inline-flex;position:absolute;left:max(16px,env(s
 
 /* ---------------------------------------------------------------- 시네마틱 (html.ix-on · 움직임 허용) — V7.1 시간 기반
  * --t(초)는 sections.jsx 의 재생기 하나만 쓴다(스크롤과 무관). 아래 창(window)은 그 시간표 — IX_T 와 같은 숫자.
- *  S1 2027 0.1–1.85 · S2 TREND KOREA 1.55–3.2 · S3 키워드 3.1–4.3 · S4 ALPHA SHEEP 3.9–7.05 · S5 선언 7.0–9.05 · S6 김유빈 9.0–11.7(매치 컷 10.9–)
+ *  S1 2027 0.1–1.85 · S2 TREND KOREA 1.55–3.2 · S3 키워드 3.1–4.37 · S4 ALPHA SHEEP 3.9–7.05 · S4b 2004년생의 선두에 서다 7.0–8.65
+ *  S5 선언 8.6–10.65 · S6 김유빈 10.6–13.3(매치 컷 12.5–)
  *  정지 구간(IX_HOLD)은 스크롤로 가속하지 않는다 — 문장이 완전히 보이는 동안의 최소 노출 시간 보장 */
 @media (prefers-reduced-motion:no-preference){
 html.ix-on .ix{position:fixed;inset:0;z-index:80;height:auto;padding:0;background:#080D1A;text-align:center;touch-action:none;overscroll-behavior:none;pointer-events:auto}
@@ -62,14 +64,19 @@ html.ix-on .ix__stage{
   --fl:calc(clamp(0,(var(--t,0) - 3.9) / .5,1) - clamp(0,(var(--t,0) - 6.75) / .3,1)); --rec:clamp(0,(var(--t,0) - 4.9) / .7,1);
   --al:clamp(0,(var(--t,0) - 4.3) / 1.1,1); --alo:clamp(0,(var(--t,0) - 6.75) / .3,1);
   --t4i:clamp(0,(var(--t,0) - 4.7) / .2,1); --t4r:clamp(0,(var(--t,0) - 5.55) / .6,1); --t4o:clamp(0,(var(--t,0) - 6.75) / .3,1);
-  --warm:calc(clamp(0,(var(--t,0) - 4.8) / .8,1) - clamp(0,(var(--t,0) - 8.7) / .5,1));
+  --warm:calc(clamp(0,(var(--t,0) - 4.8) / .8,1) - clamp(0,(var(--t,0) - 10.3) / .5,1));
+  --g4i:clamp(0,(var(--t,0) - 7.0) / .45,1); --g4n:clamp(0,(var(--t,0) - 6.95) / 1.7,1); --g4o:clamp(0,(var(--t,0) - 8.35) / .3,1);
+  --lb:calc(clamp(0,(var(--t,0) - .05) / .6,1) * (1 + .45 * (clamp(0,(var(--t,0) - 5.3) / .5,1) - clamp(0,(var(--t,0) - 6.8) / .4,1))) * (1 - clamp(0,(var(--t,0) - 12.4) / .6,1)));
+  --dr:calc(clamp(0,(var(--t,0) - 4.1) / .25,1) - clamp(0,(var(--t,0) - 4.42) / .4,1));
+  --fx:calc(clamp(0,(var(--t,0) - 5.72) / .05,1) - clamp(0,(var(--t,0) - 5.79) / .22,1));
+  --ax:calc(clamp(0,(var(--t,0) - .02) / .45,1) - clamp(0,(var(--t,0) - .55) / .35,1));
   --dim:calc(clamp(0,(var(--t,0) - 3.0) / .4,1) - clamp(0,(var(--t,0) - 4.2) / .4,1));
-  --t5i:clamp(0,(var(--t,0) - 7.0) / .45,1); --k5:clamp(0,(var(--t,0) - 7.45) / .45,1); --en5:clamp(0,(var(--t,0) - 7.85) / .4,1); --t5o:clamp(0,(var(--t,0) - 8.75) / .3,1);
-  --t6i:clamp(0,(var(--t,0) - 9.0) / .5,1); --t6t:clamp(0,(var(--t,0) - 9.35) / .5,1); --tg:clamp(0,(var(--t,0) - 9.55) / .45,1);
-  --m:clamp(0,(var(--t,0) - 10.9) / .7,1); --fo:clamp(0,(var(--t,0) - 11.2) / .5,1);
+  --t5i:clamp(0,(var(--t,0) - 8.6) / .45,1); --k5:clamp(0,(var(--t,0) - 9.05) / .45,1); --en5:clamp(0,(var(--t,0) - 9.45) / .4,1); --t5o:clamp(0,(var(--t,0) - 10.35) / .3,1);
+  --t6i:clamp(0,(var(--t,0) - 10.6) / .5,1); --t6t:clamp(0,(var(--t,0) - 10.95) / .5,1); --tg:clamp(0,(var(--t,0) - 11.15) / .45,1);
+  --m:clamp(0,(var(--t,0) - 12.5) / .7,1); --fo:clamp(0,(var(--t,0) - 12.8) / .5,1);
 }
 @supports (height:100svh){html.ix-on .ix__stage{--sh:100svh}}
-html.ix-on .ix__bg,html.ix-on .ix__light,html.ix-on .ix__warm,html.ix-on .ix__vig,html.ix-on .ix__flock,html.ix-on .ix__cue,html.ix-on .ix__bar,html.ix-on .ix__brand{display:block}
+html.ix-on .ix__axis,html.ix-on .ix__lb,html.ix-on .ix__door,html.ix-on .ix__flash,html.ix-on .ix__bg,html.ix-on .ix__light,html.ix-on .ix__warm,html.ix-on .ix__vig,html.ix-on .ix__flock,html.ix-on .ix__cue,html.ix-on .ix__bar,html.ix-on .ix__brand{display:block}
 html.ix-on .ix{background:transparent}
 html.ix-on .ix__bg{position:absolute;inset:0;background:radial-gradient(130% 90% at 50% 0%,#14233D 0%,#0B1426 48%,#080D1A 100%);opacity:calc(1 - var(--fo))}
 /* 조명 — 2027 을 가로지르는 한 줄기 빛(장면 1), 그 뒤로는 위에서 내려오는 은은한 빛 */
@@ -115,7 +122,7 @@ html.ix-on .ix__mf-ko{opacity:var(--k5);transform:translate3d(0,calc((1 - var(--
 html.ix-on .ix__mf-en{color:#D6BD88;opacity:var(--en5);transform:translate3d(0,calc((1 - var(--en5)) * .8vh - var(--t5o) * 1vh),0)}
 /* 06 — 이름: 장식이 모두 빠진 뒤 선명하게 머물고, 마지막에 아래 히어로의 이름 자리로 이어진다(매치 컷) */
 html.ix-on .ix__s6{opacity:calc(var(--t6i) * (1 - var(--fo)))}
-html.ix-on .ix__id{opacity:calc(1 - clamp(0,(var(--t,0) - 11.15) / .3,1));transform:translate3d(0,calc((1 - var(--t6i)) * 2.2vh + var(--m) * (var(--hy,50vh) - var(--sh) / 2)),0) scale(calc(1.03 - .03 * var(--t6i) + var(--m) * .12))}
+html.ix-on .ix__id{opacity:calc(1 - clamp(0,(var(--t,0) - 12.75) / .3,1));transform:translate3d(0,calc((1 - var(--t6i)) * 2.2vh + var(--m) * (var(--hy,50vh) - var(--sh) / 2)),0) scale(calc(1.03 - .03 * var(--t6i) + var(--m) * .12))}
 html.ix-on .ix__ko{font-size:clamp(3.4rem,13vw,10rem);letter-spacing:-.04em}
 html.ix-on .ix__tag{font-size:clamp(1rem,2.1vw,1.3rem)}
 html.ix-on .ix__rule{transform:scaleX(var(--t6t));opacity:calc(1 - var(--m))}
@@ -127,8 +134,8 @@ html.ix-on .ix__cue{position:absolute;left:0;right:0;bottom:calc(100% - var(--sh
 html.ix-on .ix__cue em{font-style:normal}
 html.ix-on .ix__cue i{width:1px;height:30px;background:linear-gradient(rgba(245,242,235,.7),rgba(245,242,235,0));transform-origin:top;animation:ixCue 2.4s ease-in-out infinite}
 @keyframes ixCue{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
-html.ix-on .ix__credit{position:absolute;left:max(24px,env(safe-area-inset-left));bottom:calc(100% - var(--sh) + 22px + env(safe-area-inset-bottom));max-width:min(560px,62vw);margin:0!important;text-align:left;font-size:.66rem;opacity:calc(clamp(0,(var(--t,0) - 1.6) / .4,1) * (1 - clamp(0,(var(--t,0) - 8.7) / .4,1)))}
-html.ix-on .ix__bar{position:absolute;left:0;right:0;bottom:calc(100% - var(--sh));height:2px;background:linear-gradient(90deg,#78AFFF,rgba(120,175,255,.25));transform-origin:left;transform:scaleX(calc(var(--t,0) / 11.7));opacity:calc(.8 * (1 - var(--m)))}
+html.ix-on .ix__credit{position:absolute;left:max(24px,env(safe-area-inset-left));bottom:calc(100% - var(--sh) + 22px + env(safe-area-inset-bottom));max-width:min(560px,62vw);margin:0!important;text-align:left;font-size:.66rem;opacity:calc(clamp(0,(var(--t,0) - 1.6) / .4,1) * (1 - clamp(0,(var(--t,0) - 10.3) / .4,1)))}
+html.ix-on .ix__bar{position:absolute;left:0;right:0;bottom:calc(100% - var(--sh));height:2px;background:linear-gradient(90deg,#78AFFF,rgba(120,175,255,.25));transform-origin:left;transform:scaleX(calc(var(--t,0) / 13.3));opacity:calc(.8 * (1 - var(--m)))}
 html.ix-on .ix__ctl{position:absolute;z-index:2;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));opacity:calc(1 - var(--m))}
 /* 인트로가 화면을 차지하는 동안 상단 메뉴 · 진행 표시 · 챗봇을 접는다 */
 html.ix-on.ix-active .rail,html.ix-on.ix-active .scroll-ink,html.ix-on.ix-active .yk-teaser,html.ix-on.ix-active .yk-fab{opacity:0!important;visibility:hidden!important;transition:opacity .3s,visibility .3s}
@@ -143,6 +150,38 @@ html.ix-on header.hnav{transition:transform .45s cubic-bezier(.2,.8,.2,1),opacit
   html.ix-on .ix__cue{bottom:calc(100% - var(--sh) + 18px + env(safe-area-inset-bottom))}
   html.ix-on .ix__alpha--w{display:none}
   html.ix-on .ix__alpha--n{display:block}
+}
+
+/* ---- V7.2 영화적 장치 — 절제된 대칭 · 레터박스 · 문 닫힘 · 섬광 컷 (transform · opacity 만) ---- */
+@media (prefers-reduced-motion:no-preference){
+/* 대칭축 — 첫 순간 화면 한가운데를 세로로 긋는 한 줄. 2027 이 그 축 위에 선다 */
+html.ix-on .ix__axis{position:absolute;left:50%;top:0;bottom:0;width:1px;margin-left:-.5px;background:linear-gradient(transparent,rgba(214,189,136,.85) 30%,rgba(214,189,136,.85) 70%,transparent);transform:scaleY(var(--ax));opacity:calc(var(--ax) * .9)}
+/* 레터박스 — 시네마스코프 띠가 닫히며 시작하고, ALPHA SHEEP 절정에서 한 번 더 좁아졌다가, 이름 뒤 매치 컷에서 열린다 */
+html.ix-on .ix__lb{position:absolute;left:0;right:0;z-index:1;height:calc(var(--sh) * .1);background:#020409}
+html.ix-on .ix__lb--t{top:0;transform-origin:top;transform:scaleY(var(--lb))}
+html.ix-on .ix__lb--b{top:calc(var(--sh) * .9);transform-origin:bottom;transform:scaleY(var(--lb))}
+/* 문 닫힘 — 키워드 뒤 좌우 막이 맞붙어 한 박자 어둠, 다시 갈라지며 무리가 드러난다 */
+html.ix-on .ix__door{position:absolute;top:0;bottom:0;width:50.5%;z-index:1;background:#04070F}
+html.ix-on .ix__door--l{left:0;transform:translate3d(calc((var(--dr) - 1) * 101%),0,0);box-shadow:1px 0 0 rgba(214,189,136,.5)}
+html.ix-on .ix__door--r{right:0;transform:translate3d(calc((1 - var(--dr)) * 101%),0,0)}
+/* 섬광 컷 — 글자가 다 선 순간 한 번(최대 18%), 반복하지 않는다 */
+html.ix-on .ix__flash{position:absolute;inset:0;z-index:1;background:radial-gradient(70% 60% at 50% 52%,#FFF7E6,rgba(255,247,230,.4));opacity:calc(var(--fx) * .18);pointer-events:none}
+/* 레터박스 위에 놓이는 것 — 브랜드 · 출처(자막처럼) · 안내 · 진행선 · 조작 */
+html.ix-on .ix__brand,html.ix-on .ix__credit,html.ix-on .ix__cue,html.ix-on .ix__bar{z-index:2}
+/* 정지 구간의 미세한 전진(push-in) — 머무는 동안에도 화면이 숨 쉬게 */
+html.ix-on .ix__alpha-t{transform:scale(calc(1 + .035 * clamp(0,(var(--t,0) - 5.6) / 1.2,1)))}
+/* 4b — 2004년생의 선두에 서다: 뒤에는 윤곽만 남은 거대한 2004 가 천천히 다가오고, 앞에는 한 줄이 대칭으로 선다 */
+html.ix-on .ix__s4b{opacity:calc(var(--g4i) * (1 - var(--g4o)));row-gap:0}
+html.ix-on .ix__gen-n{display:block;grid-area:1/1;margin:0;font-family:"Cormorant Garamond","Playfair Display",serif;font-weight:500;font-size:clamp(9rem,34vw,30rem);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(214,189,136,.42);transform:scale(calc(1.14 - .1 * var(--g4n)));opacity:calc(.25 + .75 * var(--g4i))}
+html.ix-on .ix__gen{grid-area:1/1;position:relative;font-size:clamp(1.7rem,5.6vw,4rem);text-shadow:0 2px 40px rgba(4,7,15,.9)}
+html.ix-on .ix__gen span:first-child{color:#D6BD88;transform:translate3d(calc((1 - var(--g4i)) * -3vw),0,0)}
+html.ix-on .ix__gen span:last-child{transform:translate3d(calc((1 - var(--g4i)) * 3vw),0,0)}
+html.ix-on .ix__s4b{transform:scale(calc(1 + .04 * var(--g4o)))}
+}
+@media (prefers-reduced-motion:no-preference) and (max-width:760px){
+  html.ix-on .ix__gen-n{font-size:clamp(6rem,44vw,12rem)}
+  html.ix-on .ix__gen{flex-direction:column;align-items:center;font-size:clamp(1.7rem,8.4vw,2.6rem)}
+  html.ix-on .ix__lb{height:calc(var(--sh) * .07)}html.ix-on .ix__lb--b{top:calc(var(--sh) * .93)}
 }
 @media (max-width:760px){
   .ix__ctl{gap:6px}

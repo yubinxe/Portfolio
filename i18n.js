@@ -19,6 +19,11 @@
   var q = /[?&]lang=(en|ko)\b/.exec(location.search);
   if (q) { lang = q[1]; try { localStorage.setItem(KEY, lang); } catch (e) {} }
 
+  /* 밝기 대비 — 선호(localStorage yk.contrast = "hi")를 첫 그리기 전에 반영. 화면 전체의 명암을 또렷하게(글 · 선 · 사진) */
+  var CKEY = "yk.contrast", hc = false;
+  try { hc = localStorage.getItem(CKEY) === "hi"; } catch (e) {}
+  if (hc) H.classList.add("yk-hc");
+
   /* 스위치 · 대기 화면 스타일 — 페이지 CSS 를 고치지 않고 여기서 */
   var css = D.createElement("style");
   css.textContent =
@@ -33,7 +38,13 @@
     "@media (max-width:1366px){html.yk-en .hnav__admin{display:none}}" +
     "@media (min-width:1181px) and (max-width:1300px){.hnav__name small{display:none}}" +
     "@media (max-width:560px){body > header .sticker{display:none!important}html.yk-en body > header nav > .btn{letter-spacing:.04em!important;padding:0 .7em!important;font-size:.72rem!important}}" +
-    "@media print{.yk-lang{display:none!important}}";
+    ".yk-ctr span{min-width:26px}.yk-ctr svg{display:block;width:12px;height:12px}" +
+    /* 고대비 — 문서 뿌리(html)에 거는 filter 는 고정 요소의 기준을 바꾸지 않는다(명세상 예외). 색 토큰도 한 단계 진하게 */
+    "html.yk-hc{filter:contrast(1.18) saturate(1.04);--ink:#000;--ink-soft:#14110E;--gold-text:#4E3D18;--hair:rgba(0,0,0,.3);--hair-strong:rgba(0,0,0,.55)}" +
+    "html.yk-hc .pl-grain{display:none!important}html.yk-hc :focus-visible{outline:3px solid #000!important;outline-offset:2px}" +
+    "@media (max-width:560px){header .yk-ctr{display:none!important}}" +
+    ".mnav__ctr{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;font:inherit;font-size:.9rem;font-weight:700;border:1px solid #13284B;color:#13284B;background:transparent;cursor:pointer}.mnav__ctr[aria-pressed=true]{background:#13284B;color:#F7F4EE}" +
+    "@media print{.yk-lang{display:none!important}html.yk-hc{filter:none}}";
   (D.head || H).appendChild(css);
 
   var DICT = null;
@@ -47,7 +58,7 @@
       function fin() { if (done) return; done = true; H.classList.add("yk-en-done"); res(); }
       setTimeout(fin, 4000); /* 안전장치 — 사전이 늦어도 화면은 보인다 */
       var s = D.createElement("script");
-      s.src = base + "i18n-en.js?v=1";
+      s.src = base + "i18n-en.js?v=2";
       s.onload = function () { DICT = W.YK_EN || null; whenDom(function () { whenApp(function () { if (DICT) { run(D); watch(); } fin(); }); }); };
       s.onerror = fin;
       (D.head || H).appendChild(s);
@@ -150,6 +161,39 @@
     b.innerHTML = '<span data-l="ko">KO</span><span data-l="en">EN</span>';
     return b;
   }
+  var SUN = '<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 .6v1.4M6 10v1.4M.6 6H2M10 6h1.4M2.2 2.2l1 1M8.8 8.8l1 1M2.2 9.8l1-1M8.8 3.2l1-1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>';
+  var HALF = '<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.8" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 1.2a4.8 4.8 0 0 1 0 9.6z" fill="currentColor"/></svg>';
+  function paintC(b) {
+    [].forEach.call(b.querySelectorAll("span[data-c]"), function (x) { x.classList.toggle("is-on", (x.getAttribute("data-c") === "hi") === hc); });
+    b.setAttribute("aria-pressed", hc ? "true" : "false");
+    b.setAttribute("aria-label", lang === "en" ? (hc ? "High contrast on — switch to standard" : "Turn on high contrast") : (hc ? "밝기 대비 높임 — 누르면 기본으로" : "밝기 대비 높이기"));
+    b.title = lang === "en" ? "Contrast" : "밝기 대비";
+  }
+  function makeC() {
+    var b = D.createElement("button");
+    b.type = "button"; b.className = "yk-lang yk-ctr"; b.setAttribute("data-contrast-toggle", "");
+    b.innerHTML = '<span data-c="lo">' + SUN + '</span><span data-c="hi">' + HALF + "</span>";
+    return b;
+  }
+  function setC(on) {
+    hc = on; H.classList.toggle("yk-hc", hc);
+    try { if (hc) localStorage.setItem(CKEY, "hi"); else localStorage.removeItem(CKEY); } catch (e) {}
+    [].forEach.call(D.querySelectorAll("[data-contrast-toggle]"), function (b) { b.classList.contains("mnav__ctr") ? paintM(b) : paintC(b); });
+  }
+  function paintM(b) { b.setAttribute("aria-pressed", hc ? "true" : "false"); b.innerHTML = (hc ? HALF : SUN) + (lang === "en" ? " Contrast " : " 밝기 대비 ") + "<b>" + (hc ? (lang === "en" ? "High" : "높임") : (lang === "en" ? "Standard" : "기본")) + "</b>"; }
+  /* KO/EN 왼쪽에 같은 모양으로, 모바일 메뉴에는 넓은 버튼으로 */
+  function mountC() {
+    [].forEach.call(D.querySelectorAll("[data-lang-toggle]"), function (lb) {
+      if (lb.classList.contains("yk-lang--float")) return;
+      var prev = lb.previousElementSibling;
+      if (prev && prev.hasAttribute("data-contrast-toggle")) return;
+      var c = makeC(); lb.parentNode.insertBefore(c, lb); paintC(c);
+    });
+    var row = D.querySelector(".mnav__row");
+    if (row && !row.querySelector("[data-contrast-toggle]")) {
+      var m = D.createElement("button"); m.type = "button"; m.className = "mnav__ctr"; m.setAttribute("data-contrast-toggle", ""); row.appendChild(m); paintM(m);
+    }
+  }
   var SLOTS = [".hnav__actions", ".cs-top .cs-nav", ".rv-tools", ".tb-top", ".lx-top", ".ax-top", "body > header .wrap > nav", "body > header nav"];
   function mount() {
     var have = D.querySelectorAll("[data-lang-toggle]");
@@ -165,8 +209,12 @@
       if (!b.querySelector("span[data-l]")) b.innerHTML = '<span data-l="ko">KO</span><span data-l="en">EN</span>';
       paint(b);
     });
+    mountC();
   }
   D.addEventListener("click", function (e) {
+    var cb = e.target.closest && e.target.closest("[data-contrast-toggle]");
+    if (cb) { e.preventDefault(); setC(!hc); return; }
+    if (e.target.closest && e.target.closest("[data-mnav-toggle]")) setTimeout(mountC, 0);
     var b = e.target.closest && e.target.closest("[data-lang-toggle]");
     if (!b) return;
     e.preventDefault();
@@ -176,5 +224,6 @@
   whenDom(function () { whenApp(mount); });
   W.addEventListener("load", function () { setTimeout(mount, 200); });
 
+  W.ykContrast = { get: function () { return hc; }, set: setC };
   W.ykI18n = { lang: lang, ready: ready, set: setLang, t: function (s) { return lang === "en" ? tr(s) : s; } };
 })();
