@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<script src="i18n.js?v=3"></script>
+<script src="i18n.js?v=4"></script>
 <script>/* 인트로(ALPHA SHEEP) 켜짐 여부를 첫 그리기 전에 정한다 — 레이아웃 흔들림 없이. 선호(yk.intro · 다음 방문)와 이번 탭 건너뛰기(yk.intro.s)를 나눈다. 움직임 줄이기는 정적 구성, 깊은 링크(#)는 바로 본문. 재생기가 6초 안에 시작하지 않으면(스크립트 실패) 막을 걷는다 */(function(h){var off=false,skip=false;try{off=localStorage.getItem("yk.intro")==="off"}catch(e){}try{skip=sessionStorage.getItem("yk.intro.s")==="skip"}catch(e){}var calm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);if(off)h.classList.add("ix-pref-off");if(off||skip||location.hash)h.classList.add("ix-off");else if(!calm){h.classList.add("ix-on","ix-active","ix-lock");setTimeout(function(){if(!window.__ixRun){h.classList.remove("ix-on","ix-active","ix-lock");h.classList.add("ix-off")}},6000)}})(document.documentElement)</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="google-site-verification" content="TozihGN_6uqz1OZXmfHuN-jzsRmHft7NcmS6NuWU9Hk" />

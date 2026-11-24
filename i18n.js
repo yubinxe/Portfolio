@@ -76,7 +76,7 @@
     var r = D.getElementById("root");
     var react = D.querySelector('script[src*="dist/sections.js"]');
     if (!r || !react || H.getAttribute("data-app") === "ready") return fn();
-    var t = setTimeout(go, 3000), done = false;
+    var t = setTimeout(go, 8000), done = false; /* 안전장치 — React 가 끝내 준비되지 않아도 스위치는 나온다 */
     function go() { if (done) return; done = true; clearTimeout(t); mo.disconnect(); fn(); }
     var mo = new MutationObserver(function () { if (H.getAttribute("data-app") === "ready") go(); });
     mo.observe(H, { attributes: true, attributeFilter: ["data-app"] });
@@ -232,7 +232,8 @@
   });
   /* index 는 React 가 헤더를 그린 뒤에 꽂는다 */
   whenDom(function () { whenApp(mount); });
-  W.addEventListener("load", function () { setTimeout(mount, 200); });
+  /* load 가 React 이어받기(hydrate)보다 먼저 올 수 있다(아이폰 · 느린 폰) — 이어받기 전에 머리띠에 끼우면 React 가 불일치로 다시 그려 스위치가 사라진다. 항상 준비 뒤에 */
+  W.addEventListener("load", function () { whenApp(function () { setTimeout(mount, 200); }); });
 
   W.ykTheme = { get: function () { return dark; }, set: setT };
   W.ykI18n = { lang: lang, ready: ready, set: setLang, t: function (s) { return lang === "en" ? tr(s) : s; } };
