@@ -27,7 +27,7 @@
   if (/\/ax(-lab\/web)?\/[^\/]+\/(index\.html)?$/.test(location.pathname)) dark = false;
   if (dark) H.classList.add("yk-dark");
   (function () {
-    var lk = D.createElement("link"); lk.rel = "stylesheet"; lk.href = base + "dark.css?v=1"; lk.setAttribute("data-yk-dark", "");
+    var lk = D.createElement("link"); lk.rel = "stylesheet"; lk.href = base + "dark.css?v=2"; lk.setAttribute("data-yk-dark", "");
     if (dark) lk.setAttribute("blocking", "render");
     (D.head || H).appendChild(lk);
   })();

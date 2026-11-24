@@ -692,3 +692,8 @@ header.hnav .hnav__cta .hnav__contact svg{display:block!important;width:12px;hei
 }
 @media (max-width:400px){header.hnav .mnav-btn{font-size:0;gap:0;width:40px;justify-content:center;padding:0}header.hnav .mnav-btn__bars{margin-top:-5px}}
 @media (max-width:340px){header.hnav .hnav__cta{display:none}}
+/* V14.1 폰 — ‘현재 섹션’ 칩을 설정 캡슐과 겹치지 않게 머리띠 아래 선에 걸쳐 가운데로 */
+@media(max-width:760px){
+  .yk-now{top:59px;left:50%;height:26px;padding:0 11px;font-size:.74rem;transform:translate(-50%,-6px);box-shadow:0 8px 22px -12px rgba(26,26,26,.4)}
+  .yk-now.on{transform:translate(-50%,0)}
+}
