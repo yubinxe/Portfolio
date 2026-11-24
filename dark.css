@@ -28,7 +28,7 @@ html.yk-dark ::selection{background:#CDB07A;color:#0A0F1A}
 html.yk-theme-swap *,html.yk-theme-swap *::before,html.yk-theme-swap *::after{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease!important}
 
 /* ---------------------------------------------------------------- 상단 메뉴 */
-html.yk-dark header.hnav.is-solid{background:rgba(10,15,26,.9);border-bottom-color:rgba(236,230,218,.12)}
+html.yk-dark header.hnav.is-solid{background:rgba(10,15,26,.97);border-bottom-color:rgba(236,230,218,.12)}
 html.yk-dark .yk-lang{background:rgba(17,26,43,.7);border-color:rgba(236,230,218,.24);color:#E6DECD}
 html.yk-dark .yk-lang span.is-on{background:#E6DECD;color:#0A0F1A}
 html.yk-dark .hnav__util,html.yk-dark header.hnav .hnav__admin{background:rgba(17,26,43,.7);border-color:rgba(236,230,218,.22)}
@@ -131,3 +131,4 @@ html.yk-dark .lx-top,html.yk-dark .tb-top{color-scheme:dark;--navy:#E6DECD;--nav
 html.yk-dark .lx-top a,html.yk-dark .tb-top a{color:#E6DECD}
 html.yk-dark .lx-top__state b{background:#1C2A45;color:#C9D8F2}
 html.yk-dark .tb-role select{background:#111A2B;color:#ECE6DA}
+html.yk-dark .yk-now{background:rgba(17,26,43,.94);border-color:rgba(217,192,143,.4);color:#E6DECD}
