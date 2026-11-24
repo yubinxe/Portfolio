@@ -51,6 +51,23 @@ test("출처 표기 — 공식 슬로건과 개인적 재해석을 구분하고 
   assert.ok(!/<img[^>]*(trend|cover|표지)/i.test(block), "도서 표지 이미지 없음");
 });
 
+test("V7.2 — ALPHA SHEEP 다음 ‘2004년생의 선두에 서다’ · 영화 장치는 transform · opacity 만", () => {
+  assert.ok(block.indexOf("ALPHA SHEEP") < block.indexOf("2004년생의") && block.indexOf("선두에 서다") < block.indexOf("무리에서 벗어난"), "장면 순서");
+  for (const k of ["ix__lb ix__lb--t", "ix__door ix__door--l", "ix__flash", "ix__axis"]) assert.ok(block.includes(k), k);
+  for (const m of css.matchAll(/[{;]\s*([a-z-]+):[^;{}]*var\(--(lb|dr|fx|ax|g4i|g4n|g4o)\)/g)) assert.ok(/^(transform|opacity|--[a-z0-9]+)$/.test(m[1]), "장치 속성: " + m[1]);
+  assert.ok(/opacity:calc\(var\(--fx\) \* \.18\)/.test(css), "섬광은 한 번 · 최대 18%");
+  assert.ok(read("i18n/en.json").includes('"2004년생의"'), "영문 사전");
+});
+
+test("밝기 대비 — KO/EN 왼쪽 같은 모양 · 선호 저장 · 뿌리(html) filter", () => {
+  const i = read("i18n.js");
+  assert.ok(i.includes('className = "yk-lang yk-ctr"') && i.includes('setAttribute("data-contrast-toggle"'), "같은 알약 모양");
+  assert.ok(/lb\.parentNode\.insertBefore\(c, lb\)/.test(i), "KO/EN 바로 왼쪽");
+  assert.ok(i.includes('"yk.contrast"') && /if \(hc\) H\.classList\.add\("yk-hc"\)/.test(i), "첫 그리기 전 적용");
+  assert.ok(/html\.yk-hc\{filter:contrast/.test(i), "뿌리에 거는 filter(고정 요소 기준 유지)");
+  assert.ok(i.includes('setAttribute("aria-pressed"'), "상태 알림");
+});
+
 test("가벼운 구현 — 외부 애니메이션 라이브러리 · 큰 블러 · 동영상 없이 transform · opacity", () => {
   const srcs = [...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map((m) => m[1]).join(" ");
   assert.ok(!/gsap|ScrollTrigger|lenis|three/i.test(srcs), "외부 애니메이션 라이브러리: " + srcs);
@@ -83,7 +100,7 @@ test("보조 문장 · 선 경로 — 문장을 가로지르지 않는 줄, 넓�
 });
 
 test("시간 기반 재생 — 스크롤 속도와 분리, 정지 구간 · 이름 장면은 가속하지 않는다", () => {
-  assert.ok(/const IX_T = \{ end: 11\.7, name: 9\.0, rate: 1\.25, boost: [\d.]+, hold: \d+ \}/.test(jsx), "시간표");
+  assert.ok(/const IX_T = \{ end: 13\.3, name: 10\.6, rate: 1\.25, boost: [\d.]+, hold: \d+ \}/.test(jsx), "시간표");
   assert.ok(/const IX_HOLD = \[\[/.test(jsx) && /t >= IX_T\.name \|\| IX_HOLD\.some/.test(jsx), "정지 구간 · 이름 장면 가속 없음");
   assert.ok(/now < fastUntil && !ixHeld\(t\) \? IX_T\.boost : 1/.test(block), "입력은 가속만");
   assert.ok(/e\.deltaY > 0 \|\| e\.deltaX > 0\) fast\(\)/.test(block) && !/deltaY\s*[*/]/.test(block), "delta 크기를 장면 이동량으로 쓰지 않는다");

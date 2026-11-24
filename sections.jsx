@@ -212,10 +212,11 @@ const IX_ROWS = [0, 1, 2, 3].map((r) => {
   for (let k = 0; k < 16; k++) { const x = -260 + k * 132 + ((r * 47 + k * 29) % 41); out.push([x, y + ((k * 13 + r * 7) % 9) - 4, 34 + ((k * 7 + r * 5) % 26)]); }
   return out;
 });
-/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 9.4초, 스크롤로 가속하면 약 7초 */
-const IX_T = { end: 11.7, name: 9.0, rate: 1.25, boost: 1.6, hold: 650 };
+/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 10.6초, 스크롤로 가속하면 약 8초
+ * V7.2 — ALPHA SHEEP 뒤에 ‘2004년생의 선두에 서다’(7.0~8.65) 장면을 넣고 선언 · 이름을 1.6초 뒤로 */
+const IX_T = { end: 13.3, name: 10.6, rate: 1.25, boost: 1.6, hold: 650 };
 /* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면(9.0~)은 통째로 가속 없음 */
-const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.9, 8.75]];
+const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.5, 8.35], [9.5, 10.35]];
 const ixHeld = (t) => t >= IX_T.name || IX_HOLD.some(([a, b]) => t >= a && t < b);
 function IntroSequence() {
   const sec = React.useRef(null), stage = React.useRef(null);
@@ -307,9 +308,10 @@ function IntroSequence() {
   }, []);
   const word = "ALPHA SHEEP";
   return (
-    <section id="intro" ref={sec} className="ix" aria-label="인트로 — ALPHA SHEEP, 무리에서 벗어난 양이 되다. 김유빈">
+    <section id="intro" ref={sec} className="ix" aria-label="인트로 — ALPHA SHEEP, 2004년생의 선두에 서다, 무리에서 벗어난 양이 되다. 김유빈">
       <div ref={stage} className="ix__stage">
         <div className="ix__bg" aria-hidden="true" />
+        <i className="ix__axis" aria-hidden="true" />
         <div className="ix__light" aria-hidden="true" />
         <div className="ix__warm" aria-hidden="true" />
         <div className="ix__vig" aria-hidden="true" />
@@ -337,6 +339,10 @@ function IntroSequence() {
           </p>
           <i className="ix__alpha-rule" aria-hidden="true" />
         </div>
+        <div className="ix__scene ix__s4b">
+          <p className="ix__gen-n font-serif" aria-hidden="true">2004</p>
+          <p className="ix__gen font-myeongjo"><span>2004년생의</span> <span>선두에 서다</span></p>
+        </div>
         <div className="ix__scene ix__s5">
           <p className="ix__mf font-myeongjo"><span>무리에서 벗어난</span> <span>양이 되다.</span></p>
           <p className="ix__mf-ko font-ko"><span>흐름을 따르는 사람이 아니라,</span> <span>변화를 실행하는 사람.</span></p>
@@ -351,6 +357,10 @@ function IntroSequence() {
           </div>
         </div>
 
+        {/* 영화적 장치 — 레터박스(시네마스코프 띠) · 좌우 문 닫힘 전환 · 한 번의 섬광 컷. 모두 transform · opacity 만 */}
+        <i className="ix__lb ix__lb--t" aria-hidden="true" /><i className="ix__lb ix__lb--b" aria-hidden="true" />
+        <i className="ix__door ix__door--l" aria-hidden="true" /><i className="ix__door ix__door--r" aria-hidden="true" />
+        <i className="ix__flash" aria-hidden="true" />
         <p className="ix__cue font-ko" aria-hidden="true"><span>스크롤하면 빠르게<em> · Esc 바로 본문</em></span><i /></p>
         <p className="ix__credit font-ko">ALPHA SHEEP — 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건을 인용했습니다. ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며, 도서 · 저자와 제휴 관계가 없습니다.</p>
         <i className="ix__bar" aria-hidden="true" />
