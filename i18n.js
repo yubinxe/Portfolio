@@ -19,10 +19,18 @@
   var q = /[?&]lang=(en|ko)\b/.exec(location.search);
   if (q) { lang = q[1]; try { localStorage.setItem(KEY, lang); } catch (e) {} }
 
-  /* 밝기 대비 — 선호(localStorage yk.contrast = "hi")를 첫 그리기 전에 반영. 화면 전체의 명암을 또렷하게(글 · 선 · 사진) */
-  var CKEY = "yk.contrast", hc = false;
-  try { hc = localStorage.getItem(CKEY) === "hi"; } catch (e) {}
-  if (hc) H.classList.add("yk-hc");
+  /* 다크 모드 — 선호(localStorage yk.theme = "dark")를 첫 그리기 전에 반영(html.yk-dark). 고르지 않았으면 밝은 화면.
+   * 색은 dark.css 한 곳에 모은다 — 여기서 바로 붙이고, 다크일 때는 그 파일이 올 때까지 첫 그리기를 기다린다(번쩍임 없음) */
+  var TKEY = "yk.theme", dark = false;
+  try { dark = localStorage.getItem(TKEY) === "dark"; localStorage.removeItem("yk.contrast"); } catch (e) {}
+  /* ax 앱(빌드된 독립 시연 · /ax/* · /ax-lab/web/*)은 밝은 화면 전용 — 선호는 남기고 이 페이지에만 적용하지 않는다 */
+  if (/\/ax(-lab\/web)?\/[^\/]+\/(index\.html)?$/.test(location.pathname)) dark = false;
+  if (dark) H.classList.add("yk-dark");
+  (function () {
+    var lk = D.createElement("link"); lk.rel = "stylesheet"; lk.href = base + "dark.css?v=1"; lk.setAttribute("data-yk-dark", "");
+    if (dark) lk.setAttribute("blocking", "render");
+    (D.head || H).appendChild(lk);
+  })();
 
   /* 스위치 · 대기 화면 스타일 — 페이지 CSS 를 고치지 않고 여기서 */
   var css = D.createElement("style");
@@ -38,13 +46,11 @@
     "@media (max-width:1366px){html.yk-en .hnav__admin{display:none}}" +
     "@media (min-width:1181px) and (max-width:1300px){.hnav__name small{display:none}}" +
     "@media (max-width:560px){body > header .sticker{display:none!important}html.yk-en body > header nav > .btn{letter-spacing:.04em!important;padding:0 .7em!important;font-size:.72rem!important}}" +
-    ".yk-ctr span{min-width:26px}.yk-ctr svg{display:block;width:12px;height:12px}" +
-    /* 고대비 — 문서 뿌리(html)에 거는 filter 는 고정 요소의 기준을 바꾸지 않는다(명세상 예외). 색 토큰도 한 단계 진하게 */
-    "html.yk-hc{filter:contrast(1.18) saturate(1.04);--ink:#000;--ink-soft:#14110E;--gold-text:#4E3D18;--hair:rgba(0,0,0,.3);--hair-strong:rgba(0,0,0,.55)}" +
-    "html.yk-hc .pl-grain{display:none!important}html.yk-hc :focus-visible{outline:3px solid #000!important;outline-offset:2px}" +
-    "@media (max-width:560px){header .yk-ctr{display:none!important}}" +
-    ".mnav__ctr{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;font:inherit;font-size:.9rem;font-weight:700;border:1px solid #13284B;color:#13284B;background:transparent;cursor:pointer}.mnav__ctr[aria-pressed=true]{background:#13284B;color:#F7F4EE}" +
-    "@media print{.yk-lang{display:none!important}html.yk-hc{filter:none}}";
+    ".yk-theme span{min-width:26px}.yk-theme svg{display:block;width:12px;height:12px}" +
+    /* dark.css 가 오기 전 한순간도 흰 바탕이 보이지 않게 — 바탕 · 글자만 먼저 */
+    "html.yk-dark,html.yk-dark body{background:#0A0F1A;color:#E8E2D6;color-scheme:dark}" +
+    ".mnav__theme{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;font:inherit;font-size:.9rem;font-weight:700;border:1px solid #13284B;color:#13284B;background:transparent;cursor:pointer}.mnav__theme svg{width:14px;height:14px}.mnav__theme[aria-pressed=true]{background:#13284B;color:#F7F4EE}" +
+    "@media print{.yk-lang{display:none!important}}";
   (D.head || H).appendChild(css);
 
   var DICT = null;
@@ -58,7 +64,7 @@
       function fin() { if (done) return; done = true; H.classList.add("yk-en-done"); res(); }
       setTimeout(fin, 4000); /* 안전장치 — 사전이 늦어도 화면은 보인다 */
       var s = D.createElement("script");
-      s.src = base + "i18n-en.js?v=2";
+      s.src = base + "i18n-en.js?v=3";
       s.onload = function () { DICT = W.YK_EN || null; whenDom(function () { whenApp(function () { if (DICT) { run(D); watch(); } fin(); }); }); };
       s.onerror = fin;
       (D.head || H).appendChild(s);
@@ -162,46 +168,50 @@
     return b;
   }
   var SUN = '<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 .6v1.4M6 10v1.4M.6 6H2M10 6h1.4M2.2 2.2l1 1M8.8 8.8l1 1M2.2 9.8l1-1M8.8 3.2l1-1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>';
-  var HALF = '<svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.8" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 1.2a4.8 4.8 0 0 1 0 9.6z" fill="currentColor"/></svg>';
-  function paintC(b) {
-    [].forEach.call(b.querySelectorAll("span[data-c]"), function (x) { x.classList.toggle("is-on", (x.getAttribute("data-c") === "hi") === hc); });
-    b.setAttribute("aria-pressed", hc ? "true" : "false");
-    b.setAttribute("aria-label", lang === "en" ? (hc ? "High contrast on — switch to standard" : "Turn on high contrast") : (hc ? "밝기 대비 높임 — 누르면 기본으로" : "밝기 대비 높이기"));
-    b.title = lang === "en" ? "Contrast" : "밝기 대비";
+  var MOON = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M10.2 7.6A4.6 4.6 0 0 1 4.4 1.8a4.6 4.6 0 1 0 5.8 5.8z" fill="currentColor"/></svg>';
+  function paintT(b) {
+    [].forEach.call(b.querySelectorAll("span[data-t]"), function (x) { x.classList.toggle("is-on", (x.getAttribute("data-t") === "dark") === dark); });
+    b.setAttribute("aria-pressed", dark ? "true" : "false");
+    b.setAttribute("aria-label", lang === "en" ? (dark ? "Dark mode on — switch to light" : "Switch to dark mode") : (dark ? "다크 모드 켜짐 — 누르면 밝은 화면" : "다크 모드로 보기"));
+    b.title = lang === "en" ? "Dark mode" : "다크 모드";
   }
-  function makeC() {
+  function makeT() {
     var b = D.createElement("button");
-    b.type = "button"; b.className = "yk-lang yk-ctr"; b.setAttribute("data-contrast-toggle", "");
-    b.innerHTML = '<span data-c="lo">' + SUN + '</span><span data-c="hi">' + HALF + "</span>";
+    b.type = "button"; b.className = "yk-lang yk-theme"; b.setAttribute("data-theme-toggle", "");
+    b.innerHTML = '<span data-t="light">' + SUN + '</span><span data-t="dark">' + MOON + "</span>";
     return b;
   }
-  function setC(on) {
-    hc = on; H.classList.toggle("yk-hc", hc);
-    try { if (hc) localStorage.setItem(CKEY, "hi"); else localStorage.removeItem(CKEY); } catch (e) {}
-    [].forEach.call(D.querySelectorAll("[data-contrast-toggle]"), function (b) { b.classList.contains("mnav__ctr") ? paintM(b) : paintC(b); });
+  function setT(on) {
+    dark = on;
+    H.classList.add("yk-theme-swap");
+    H.classList.toggle("yk-dark", dark);
+    try { if (dark) localStorage.setItem(TKEY, "dark"); else localStorage.removeItem(TKEY); } catch (e) {}
+    [].forEach.call(D.querySelectorAll("[data-theme-toggle]"), function (b) { b.classList.contains("mnav__theme") ? paintMT(b) : paintT(b); });
+    setTimeout(function () { H.classList.remove("yk-theme-swap"); }, 600);
+    try { W.dispatchEvent(new CustomEvent("yk:theme", { detail: { dark: dark } })); } catch (e) {}
   }
-  function paintM(b) { b.setAttribute("aria-pressed", hc ? "true" : "false"); b.innerHTML = (hc ? HALF : SUN) + (lang === "en" ? " Contrast " : " 밝기 대비 ") + "<b>" + (hc ? (lang === "en" ? "High" : "높임") : (lang === "en" ? "Standard" : "기본")) + "</b>"; }
-  /* KO/EN 왼쪽에 같은 모양으로, 모바일 메뉴에는 넓은 버튼으로 */
-  function mountC() {
+  function paintMT(b) { b.setAttribute("aria-pressed", dark ? "true" : "false"); b.innerHTML = (dark ? MOON : SUN) + (lang === "en" ? " Dark mode " : " 다크 모드 ") + "<b>" + (dark ? (lang === "en" ? "On" : "켜짐") : (lang === "en" ? "Off" : "꺼짐")) + "</b>"; }
+  /* KO/EN 왼쪽에 같은 모양으로(메인은 한 캡슐 .hnav__util 안), 모바일 메뉴에는 넓은 버튼으로 */
+  function mountT() {
     [].forEach.call(D.querySelectorAll("[data-lang-toggle]"), function (lb) {
       if (lb.classList.contains("yk-lang--float")) return;
       var prev = lb.previousElementSibling;
-      if (prev && prev.hasAttribute("data-contrast-toggle")) return;
-      var c = makeC(); lb.parentNode.insertBefore(c, lb); paintC(c);
+      if (prev && prev.hasAttribute("data-theme-toggle")) return;
+      var c = makeT(); lb.parentNode.insertBefore(c, lb); paintT(c);
     });
     var row = D.querySelector(".mnav__row");
-    if (row && !row.querySelector("[data-contrast-toggle]")) {
-      var m = D.createElement("button"); m.type = "button"; m.className = "mnav__ctr"; m.setAttribute("data-contrast-toggle", ""); row.appendChild(m); paintM(m);
+    if (row && !row.querySelector("[data-theme-toggle]")) {
+      var m = D.createElement("button"); m.type = "button"; m.className = "mnav__theme"; m.setAttribute("data-theme-toggle", ""); row.appendChild(m); paintMT(m);
     }
   }
-  var SLOTS = [".hnav__actions", ".cs-top .cs-nav", ".rv-tools", ".tb-top", ".lx-top", ".ax-top", "body > header .wrap > nav", "body > header nav"];
+  var SLOTS = [".hnav__util", ".hnav__actions", ".cs-top .cs-nav", ".rv-tools", ".tb-top", ".lx-top", ".ax-top", "body > header .wrap > nav", "body > header nav"];
   function mount() {
     var have = D.querySelectorAll("[data-lang-toggle]");
     if (!have.length) {
       var slot = null;
       for (var i = 0; i < SLOTS.length && !slot; i++) slot = D.querySelector(SLOTS[i]);
       var b = make();
-      if (slot) { if (slot.classList.contains("hnav__actions") || slot.classList.contains("rv-tools")) slot.insertBefore(b, slot.firstChild); else slot.appendChild(b); }
+      if (slot) { if (slot.classList.contains("hnav__util")) slot.appendChild(b); else if (slot.classList.contains("hnav__actions") || slot.classList.contains("rv-tools")) slot.insertBefore(b, slot.firstChild); else slot.appendChild(b); }
       else { b.classList.add("yk-lang--float"); D.body.appendChild(b); }
       have = [b];
     }
@@ -209,12 +219,12 @@
       if (!b.querySelector("span[data-l]")) b.innerHTML = '<span data-l="ko">KO</span><span data-l="en">EN</span>';
       paint(b);
     });
-    mountC();
+    mountT();
   }
   D.addEventListener("click", function (e) {
-    var cb = e.target.closest && e.target.closest("[data-contrast-toggle]");
-    if (cb) { e.preventDefault(); setC(!hc); return; }
-    if (e.target.closest && e.target.closest("[data-mnav-toggle]")) setTimeout(mountC, 0);
+    var tb = e.target.closest && e.target.closest("[data-theme-toggle]");
+    if (tb) { e.preventDefault(); setT(!dark); return; }
+    if (e.target.closest && e.target.closest("[data-mnav-toggle]")) setTimeout(mountT, 0);
     var b = e.target.closest && e.target.closest("[data-lang-toggle]");
     if (!b) return;
     e.preventDefault();
@@ -224,6 +234,6 @@
   whenDom(function () { whenApp(mount); });
   W.addEventListener("load", function () { setTimeout(mount, 200); });
 
-  W.ykContrast = { get: function () { return hc; }, set: setC };
+  W.ykTheme = { get: function () { return dark; }, set: setT };
   W.ykI18n = { lang: lang, ready: ready, set: setLang, t: function (s) { return lang === "en" ? tr(s) : s; } };
 })();

@@ -54,18 +54,32 @@ test("출처 표기 — 공식 슬로건과 개인적 재해석을 구분하고 
 test("V7.2 — ALPHA SHEEP 다음 ‘2004년생의 선두에 서다’ · 영화 장치는 transform · opacity 만", () => {
   assert.ok(block.indexOf("ALPHA SHEEP") < block.indexOf("2004년생의") && block.indexOf("선두에 서다") < block.indexOf("무리에서 벗어난"), "장면 순서");
   for (const k of ["ix__lb ix__lb--t", "ix__door ix__door--l", "ix__flash", "ix__axis"]) assert.ok(block.includes(k), k);
-  for (const m of css.matchAll(/[{;]\s*([a-z-]+):[^;{}]*var\(--(lb|dr|fx|ax|g4i|g4n|g4o)\)/g)) assert.ok(/^(transform|opacity|--[a-z0-9]+)$/.test(m[1]), "장치 속성: " + m[1]);
+  for (const m of css.matchAll(/[{;]\s*([a-z-]+):[^;{}]*var\(--(lb|dr|fx|ax|g4i|g4n|g4o|ch|dk|fl2|fls)\)/g)) assert.ok(/^(transform|opacity|--[a-z0-9]+)$/.test(m[1]), "장치 속성: " + m[1]);
   assert.ok(/opacity:calc\(var\(--fx\) \* \.18\)/.test(css), "섬광은 한 번 · 최대 18%");
   assert.ok(read("i18n/en.json").includes('"2004년생의"'), "영문 사전");
 });
 
-test("밝기 대비 — KO/EN 왼쪽 같은 모양 · 선호 저장 · 뿌리(html) filter", () => {
-  const i = read("i18n.js");
-  assert.ok(i.includes('className = "yk-lang yk-ctr"') && i.includes('setAttribute("data-contrast-toggle"'), "같은 알약 모양");
+test("다크 모드 — KO/EN 왼쪽 같은 모양 · 첫 그리기 전 적용 · 색은 dark.css 한 곳", () => {
+  const i = read("i18n.js"), d = read("dark.css");
+  assert.ok(i.includes('className = "yk-lang yk-theme"') && i.includes('setAttribute("data-theme-toggle"'), "같은 알약 모양");
   assert.ok(/lb\.parentNode\.insertBefore\(c, lb\)/.test(i), "KO/EN 바로 왼쪽");
-  assert.ok(i.includes('"yk.contrast"') && /if \(hc\) H\.classList\.add\("yk-hc"\)/.test(i), "첫 그리기 전 적용");
-  assert.ok(/html\.yk-hc\{filter:contrast/.test(i), "뿌리에 거는 filter(고정 요소 기준 유지)");
-  assert.ok(i.includes('setAttribute("aria-pressed"'), "상태 알림");
+  assert.ok(i.includes('"yk.theme"') && /if \(dark\) H\.classList\.add\("yk-dark"\)/.test(i), "첫 그리기 전 적용");
+  assert.ok(i.includes('dark.css?v=') && i.includes('setAttribute("blocking", "render")'), "다크일 때 색 파일을 기다린다(번쩍임 없음)");
+  assert.ok(i.includes('setAttribute("aria-pressed"') && i.includes("W.ykTheme"), "상태 알림 · 외부 접근");
+  assert.ok(!/yk-hc|data-contrast-toggle/.test(i), "밝기 대비 제거");
+  assert.ok(/^html\.yk-dark\{/m.test(d) && /--ecru:#0A0F1A/.test(d) && /--navy:#E6DECD/.test(d), "토큰 반전");
+  assert.ok(/\.axc__demo-box\{color-scheme:light/.test(d), "시연 보드는 켜 둔 종이");
+  for (const m of d.matchAll(/^([^@/\s}][^{}]*)\{/gm)) for (const sel of m[1].split(",")) assert.ok(/^\s*html\.yk-(dark|theme-swap)/.test(sel), "선택자는 html.yk-dark 로 시작: " + sel);
+});
+
+test("V8 — ALPHA SHEEP 뒤 우상향 차트 · 해 질 녘 도입부(transform · opacity 만)", () => {
+  assert.ok(block.indexOf("ALPHA SHEEP") < block.indexOf("<IxChart />") && block.indexOf("<IxChart />") < block.indexOf("<span>무리에서 벗어난</span>"), "차트는 ALPHA SHEEP 다음");
+  assert.ok(/const IX_CHART = /.test(jsx) && /실제 시세가 아닌 상징 그래픽/.test(jsx), "상징 그래픽 표기");
+  const close = jsx.match(/const close = \[([^\]]+)\]/)[1].split(",").map(Number);
+  assert.ok(close[close.length - 1] > close[0] * 4 && close.length >= 20, "오른쪽 위로");
+  for (const k of ["ix__dusk", "ix__flare", "ix__grain"]) assert.ok(block.includes(k), k);
+  for (const m of css.matchAll(/[{;]\s*([a-z-]+):[^;{}]*var\(--(e|ch)\)/g)) assert.ok(/^(transform|opacity|--[a-z0-9]+)$/.test(m[1]), "차트 속성: " + m[1]);
+  assert.ok(/\.ix__cdl\{--e:clamp/.test(css) && /transform:scaleY\(var\(--e\)\)/.test(css), "봉은 아래에서 선다");
 });
 
 test("가벼운 구현 — 외부 애니메이션 라이브러리 · 큰 블러 · 동영상 없이 transform · opacity", () => {
@@ -100,7 +114,7 @@ test("보조 문장 · 선 경로 — 문장을 가로지르지 않는 줄, 넓�
 });
 
 test("시간 기반 재생 — 스크롤 속도와 분리, 정지 구간 · 이름 장면은 가속하지 않는다", () => {
-  assert.ok(/const IX_T = \{ end: 13\.3, name: 10\.6, rate: 1\.25, boost: [\d.]+, hold: \d+ \}/.test(jsx), "시간표");
+  assert.ok(/const IX_T = \{ end: 13\.75, name: 11\.05, rate: 1\.25, boost: [\d.]+, hold: \d+ \}/.test(jsx), "시간표");
   assert.ok(/const IX_HOLD = \[\[/.test(jsx) && /t >= IX_T\.name \|\| IX_HOLD\.some/.test(jsx), "정지 구간 · 이름 장면 가속 없음");
   assert.ok(/now < fastUntil && !ixHeld\(t\) \? IX_T\.boost : 1/.test(block), "입력은 가속만");
   assert.ok(/e\.deltaY > 0 \|\| e\.deltaX > 0\) fast\(\)/.test(block) && !/deltaY\s*[*/]/.test(block), "delta 크기를 장면 이동량으로 쓰지 않는다");

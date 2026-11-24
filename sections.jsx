@@ -58,11 +58,13 @@ function AdminNavBtn() {
     <button
       type="button"
       className={"hnav__admin font-sans" + (unlocked ? " is-open" : "")}
+      aria-label={unlocked ? "Admin 실무 금고 — 해금됨" : "Admin 로그인"}
       onClick={() => window.ykAdmin && window.ykAdmin.open()}
       title={unlocked ? "Admin 실무 금고 해금됨 (클릭해 열기)" : "Admin 로그인 (PIN / ID·PW)"}
     >
+      <svg className="hnav__lock" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><rect x="2.5" y="6.2" width="9" height="6.3" rx="1" fill="none" stroke="currentColor" strokeWidth="1.2" /><path d={unlocked ? "M4.6 6.2V4.4a2.4 2.4 0 0 1 4.6-1" : "M4.6 6.2V4.4a2.4 2.4 0 0 1 4.8 0v1.8"} fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" /></svg>
       <i aria-hidden="true" />
-      <span>{unlocked ? "Admin · 해금" : "Admin"}</span>
+      <span className="hnav__admin-t">{unlocked ? "Admin · 해금" : "Admin"}</span>
     </button>
   );
 }
@@ -82,8 +84,8 @@ function Nav() {
     <header className={"hnav" + (solid ? " is-solid" : "")} style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
     }}>
-      <div className="wrap hnav__wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
-        <a href="#top" style={{ textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 }}>
+      <div className="wrap hnav__wrap">
+        <a href="#top" className="hnav__brand">
           <img src="images/favicon.svg?v=4" alt="YK — 김유빈 CI" width="32" height="32" style={{ display: "block" }} />
           <span className="hnav__name">
             <b className="font-serif">Yubin Kim</b>
@@ -94,15 +96,19 @@ function Nav() {
           <div className="nav-desktop">
             {links.map(([t, h]) => <a key={t} className="navlink" href={h}>{t}</a>)}
           </div>
+          {/* V14 — 오른쪽 묶음: 화면 설정(다크 모드 · KO/EN 한 캡슐, i18n.js 가 채운다) · Admin(자물쇠) · 이력/연락(한 덩어리) · 메뉴 */}
           <div className="hnav__actions">
+            <span className="hnav__util" />
+            {playing ? <IxSwitch className="hnav__ix" /> : <AdminNavBtn />}
+            <span className="hnav__cta">
+              <a href="resume.html" className="hnav__cv" lang="fr">Résumé</a>
+              <a href="#contact" className="btn hnav__contact">
+                Contact <ArrowUpRight size={14} />
+              </a>
+            </span>
             <button type="button" className="mnav-btn" data-mnav-toggle="" aria-expanded="false" aria-controls="mnav">
               <span className="mnav-btn__bars" aria-hidden="true" />메뉴
             </button>
-            {playing ? <IxSwitch className="hnav__ix" /> : <AdminNavBtn />}
-            <a href="resume.html" className="hnav__cv" lang="fr">Résumé</a>
-            <a href="#contact" className="btn hnav__contact">
-              Contact <ArrowUpRight size={14} />
-            </a>
           </div>
         </nav>
       </div>
@@ -212,11 +218,45 @@ const IX_ROWS = [0, 1, 2, 3].map((r) => {
   for (let k = 0; k < 16; k++) { const x = -260 + k * 132 + ((r * 47 + k * 29) % 41); out.push([x, y + ((k * 13 + r * 7) % 9) - 4, 34 + ((k * 7 + r * 5) % 26)]); }
   return out;
 });
-/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 10.6초, 스크롤로 가속하면 약 8초
- * V7.2 — ALPHA SHEEP 뒤에 ‘2004년생의 선두에 서다’(7.0~8.65) 장면을 넣고 선언 · 이름을 1.6초 뒤로 */
-const IX_T = { end: 13.3, name: 10.6, rate: 1.25, boost: 1.6, hold: 650 };
-/* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면(9.0~)은 통째로 가속 없음 */
-const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.5, 8.35], [9.5, 10.35]];
+/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 11초, 스크롤로 가속하면 약 8.5초
+ * V7.2 — ALPHA SHEEP 뒤에 ‘2004년생의 선두에 서다’ 장면. V8 — 그 장면에 우상향 차트(봉 22개 · 추세선)가 그려지고(7.0~9.1),
+ *   선언 · 이름은 0.45초 뒤로. 해 질 녘 색(호박 · 장밋빛 지평선) · 가로 렌즈 플레어 · 필름 낟알로 도입부의 밀도를 높였다 */
+const IX_T = { end: 13.75, name: 11.05, rate: 1.25, boost: 1.6, hold: 650 };
+/* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면은 통째로 가속 없음 */
+const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.75, 8.8], [9.95, 10.8]];
+/* 우상향 차트 — 실제 시세가 아닌 상징 그래픽(데이터 · 수익률 표기 없음). 눌림(음봉)을 지나며 오른쪽 위로 올라간다.
+ * 봉: 시가 = 앞 봉의 종가. 좌표는 viewBox 0 0 1000 400(아래가 0) */
+const IX_CHART = (() => {
+  const close = [14, 18, 16, 22, 27, 25, 31, 36, 33, 40, 46, 43, 50, 57, 54, 61, 67, 64, 72, 79, 76, 88];
+  let o = 10;
+  return close.map((c, i) => { const d = { x: 40 + i * 43, o, c, hi: Math.max(o, c) + 2 + (i % 3), lo: Math.min(o, c) - 2 - ((i + 1) % 3) }; o = c; return d; });
+})();
+const ixY = (p) => 372 - p * 3.3;
+function IxChart() {
+  const C = IX_CHART, L = C[C.length - 1];
+  const line = C.map((d, i) => (i ? "L" : "M") + " " + d.x + " " + ixY(d.c).toFixed(1)).join(" ");
+  return (
+    <svg className="ix__chart" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="ixArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#EBB774" stopOpacity=".34" /><stop offset="1" stopColor="#EBB774" stopOpacity="0" /></linearGradient>
+      </defs>
+      <g className="ix__grid">{[96, 188, 280].map((y) => <line key={y} x1="0" x2="1000" y1={y} y2={y} />)}<line className="ix__base" x1="0" x2="1000" y1="372" y2="372" /></g>
+      <path className="ix__area" d={line + " L " + L.x + " 372 L " + C[0].x + " 372 Z"} fill="url(#ixArea)" />
+      {C.map((d, i) => (
+        <g key={i} className={"ix__cdl" + (d.c < d.o ? " is-dn" : "")} style={{ "--i": i }}>
+          <line x1={d.x} x2={d.x} y1={ixY(d.hi)} y2={ixY(d.lo)} />
+          <rect x={d.x - 7} width="14" y={ixY(Math.max(d.o, d.c))} height={Math.max(2, Math.abs(d.c - d.o) * 3.3)} />
+        </g>
+      ))}
+      {C.slice(1).map((d, i) => <line key={"g" + i} className="ix__seg ix__seg--glow" style={{ "--i": i }} x1={C[i].x} y1={ixY(C[i].c)} x2={d.x} y2={ixY(d.c)} />)}
+      {C.slice(1).map((d, i) => <line key={"s" + i} className="ix__seg" style={{ "--i": i }} x1={C[i].x} y1={ixY(C[i].c)} x2={d.x} y2={ixY(d.c)} />)}
+      <circle className="ix__tip-ring" cx={L.x} cy={ixY(L.c)} r="16" />
+      <circle className="ix__tip" cx={L.x} cy={ixY(L.c)} r="5.5" />
+      <text className="ix__yr" x={C[0].x - 6} y="394">2004</text>
+      <text className="ix__yr ix__yr--now" x={L.x + 4} y={ixY(L.c) - 28} textAnchor="end">2027</text>
+    </svg>
+  );
+}
 const ixHeld = (t) => t >= IX_T.name || IX_HOLD.some(([a, b]) => t >= a && t < b);
 function IntroSequence() {
   const sec = React.useRef(null), stage = React.useRef(null);
@@ -308,9 +348,10 @@ function IntroSequence() {
   }, []);
   const word = "ALPHA SHEEP";
   return (
-    <section id="intro" ref={sec} className="ix" aria-label="인트로 — ALPHA SHEEP, 2004년생의 선두에 서다, 무리에서 벗어난 양이 되다. 김유빈">
+    <section id="intro" ref={sec} className="ix" aria-label="인트로 — ALPHA SHEEP, 2004년생의 선두에 서다(우상향 그래프), 무리에서 벗어난 양이 되다. 김유빈">
       <div ref={stage} className="ix__stage">
         <div className="ix__bg" aria-hidden="true" />
+        <div className="ix__dusk" aria-hidden="true" />
         <i className="ix__axis" aria-hidden="true" />
         <div className="ix__light" aria-hidden="true" />
         <div className="ix__warm" aria-hidden="true" />
@@ -340,8 +381,8 @@ function IntroSequence() {
           <i className="ix__alpha-rule" aria-hidden="true" />
         </div>
         <div className="ix__scene ix__s4b">
-          <p className="ix__gen-n font-serif" aria-hidden="true">2004</p>
           <p className="ix__gen font-myeongjo"><span>2004년생의</span> <span>선두에 서다</span></p>
+          <IxChart />
         </div>
         <div className="ix__scene ix__s5">
           <p className="ix__mf font-myeongjo"><span>무리에서 벗어난</span> <span>양이 되다.</span></p>
@@ -361,6 +402,8 @@ function IntroSequence() {
         <i className="ix__lb ix__lb--t" aria-hidden="true" /><i className="ix__lb ix__lb--b" aria-hidden="true" />
         <i className="ix__door ix__door--l" aria-hidden="true" /><i className="ix__door ix__door--r" aria-hidden="true" />
         <i className="ix__flash" aria-hidden="true" />
+        <i className="ix__flare" aria-hidden="true" />
+        <i className="ix__grain" aria-hidden="true" />
         <p className="ix__cue font-ko" aria-hidden="true"><span>스크롤하면 빠르게<em> · Esc 바로 본문</em></span><i /></p>
         <p className="ix__credit font-ko">ALPHA SHEEP — 《트렌드 코리아 2027》(김난도 외)의 2027년 슬로건을 인용했습니다. ‘무리에서 벗어난 양이 되다’는 개인적 재해석이며, 도서 · 저자와 제휴 관계가 없습니다.</p>
         <i className="ix__bar" aria-hidden="true" />

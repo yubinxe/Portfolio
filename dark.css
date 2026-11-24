@@ -1,0 +1,133 @@
+/* dark.css — 다크 모드(html.yk-dark) · 모든 페이지 공통. i18n.js 가 head 에 붙이고, 다크를 고른 방문에서는 이 파일이 올 때까지 첫 그리기를 기다린다.
+ * 원칙 — 사이트의 정체성(네이비 · 아이보리 · 샴페인 골드)을 뒤집어 쓴다: 바탕은 밤의 네이비, 글은 따뜻한 아이보리, 강조는 샴페인.
+ *   1) 색 토큰을 바꾼다(대부분의 화면이 따라온다). 네이비(글 · 선 · 버튼 바탕)와 에크루(바탕 · 버튼 글자)가 함께 뒤집혀 짝이 유지된다.
+ *   2) 토큰 없이 직접 쓴 밝은 바탕 · 진한 글자만 선택자로 바로잡는다(자동 점검 스크립트로 찾은 목록).
+ *   3) 사진 · 영상은 바꾸지 않는다. 흰 안개(스크림)만 밤 안개로.
+ * 선택자는 모두 html.yk-dark 로 시작 — 원래 규칙보다 구체적이라 순서와 무관하게 이긴다(!important 원본에는 !important 로). */
+
+html.yk-dark{
+  color-scheme:dark;
+  /* 공통(styles.css) */
+  --ecru:#0A0F1A;--ecru-deep:#0F1727;--paper:#111A2B;--ink:#ECE6DA;--ink-soft:#B9B3A7;--line:#C9C2B4;
+  --navy:#E6DECD;--navy-deep:#F3EDE2;--accent:#E6DECD;--accent-soft:#2A3346;--accent-fill:#E6DECD;
+  --gold:#CDB07A;--gold-text:#D9C08F;--gold-light:#E8D2A2;
+  --hair:rgba(236,230,218,.14);--hair-strong:rgba(236,230,218,.3);
+  --butter:#1A2234;--apple:#162420;--sky:#162238;--lilac:#1E1C2C;--pink:#2A1B24;
+  --shadow-soft:0 1px 0 rgba(0,0,0,.3),0 22px 44px -30px rgba(0,0,0,.8);--shadow-lift:0 1px 0 rgba(0,0,0,.3),0 30px 60px -32px rgba(0,0,0,.9);
+  /* city.css */
+  --v5-ink:#ECE6DA;--v5-navy:#E6DECD;--v5-ecru:#0A0F1A;--v5-paper:#111A2B;--v5-gold:#CDB07A;--v5-gold-t:#D9C08F;--v5-mid:#060A13;--v5-mid2:#0B1222;
+  /* polish.css */
+  --pl-ink:#E6DECD;--pl-gold:#CDB07A;
+  /* cases · legal-ax · trial-brief · resume */
+  --soft:#B3AEA4;--hair2:rgba(236,230,218,.3);--ecru2:#0F1727;--navy2:#050912;--gold-t:#D9C08F;
+  --red-bg:rgba(220,90,70,.14);--green-bg:rgba(70,170,120,.14);
+
+}
+html.yk-dark body{background:var(--ecru);color:var(--ink)}
+html.yk-dark ::selection{background:#CDB07A;color:#0A0F1A}
+html.yk-theme-swap *,html.yk-theme-swap *::before,html.yk-theme-swap *::after{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease!important}
+
+/* ---------------------------------------------------------------- 상단 메뉴 */
+html.yk-dark header.hnav.is-solid{background:rgba(10,15,26,.9);border-bottom-color:rgba(236,230,218,.12)}
+html.yk-dark .yk-lang{background:rgba(17,26,43,.7);border-color:rgba(236,230,218,.24);color:#E6DECD}
+html.yk-dark .yk-lang span.is-on{background:#E6DECD;color:#0A0F1A}
+html.yk-dark .hnav__util,html.yk-dark header.hnav .hnav__admin{background:rgba(17,26,43,.7);border-color:rgba(236,230,218,.22)}
+html.yk-dark .hnav__util .yk-lang{background:transparent}
+html.yk-dark .hnav__util .yk-theme::after{background:rgba(236,230,218,.22)}
+html.yk-dark header.hnav .hnav__admin i{box-shadow:0 0 0 2px #0A0F1A}
+html.yk-dark header.hnav .hnav__admin:hover{background:#18233A}
+html.yk-dark header.hnav .hnav__cta .hnav__cv{background:rgba(17,26,43,.7);color:#E6DECD;border-color:#E6DECD!important}
+html.yk-dark header.hnav .hnav__cta .hnav__cv:hover{background:#E6DECD;color:#0A0F1A}
+html.yk-dark header.hnav .hnav__cta .hnav__contact{background:#E6DECD!important;color:#0A0F1A!important;border-color:#E6DECD!important}
+html.yk-dark header.hnav .hnav__cta .hnav__contact:hover{background:#fff!important}
+html.yk-dark .mnav__theme{border-color:#E6DECD;color:#E6DECD}html.yk-dark .mnav__theme[aria-pressed=true]{background:#E6DECD;color:#0A0F1A}
+
+/* ---------------------------------------------------------------- 첫 화면 — 흰 안개를 밤 안개로, 사진은 조금 낮춘다 */
+html.yk-dark #manifesto{background:#0A0F1A}
+html.yk-dark #manifesto .hero-photo img{filter:brightness(.62) saturate(.9) contrast(1.05)}
+html.yk-dark #manifesto .hero-photo__scrim{background:linear-gradient(180deg,#0A0F1A 0%,#0A0F1A 18%,rgba(10,15,26,.62) 36%,rgba(10,15,26,.34) 58%,rgba(10,15,26,.6) 86%,#0A0F1A 100%)}
+html.yk-dark #manifesto p.font-ko{text-shadow:0 0 18px #0A0F1A,0 0 4px #0A0F1A}
+html.yk-dark .hero-classic .hero-role span,html.yk-dark .hero-classic .hero-proof{color:rgba(236,230,218,.84)!important}
+html.yk-dark html.ix-off .ix-replay,html.yk-dark.ix-off .ix-replay{background:rgba(17,26,43,.86);color:#E6DECD;border-color:rgba(236,230,218,.3)}
+html.yk-dark .pl-hud{background:rgba(10,15,26,.82);border-color:rgba(236,230,218,.16)}
+html.yk-dark .pl-hud em{color:#9A968E}
+
+/* ---------------------------------------------------------------- 원래 어두운 띠 — 네이비 토큰이 뒤집혀도 띠는 밤색으로 남긴다(글자는 원래 밝은색) */
+html.yk-dark .whyc,html.yk-dark #contact,html.yk-dark .toast,html.yk-dark .ixn{background:#0E1830}
+html.yk-dark #contact{background:#070B14;border-top:1px solid rgba(236,230,218,.1)}
+html.yk-dark .rc__shot{background:#0E1830}
+html.yk-dark .pl-curtain,html.yk-dark.pl-enter body::before{background:#070B14}
+html.yk-dark .whyc .btn,html.yk-dark #contact .btn{background:#E6DECD;color:#0A0F1A;border-color:#E6DECD}
+html.yk-dark #contact .btn.btn--ghost{background:transparent;color:#F3EDE2;border-color:rgba(236,230,218,.4)}
+/* 버튼 — 밝은 아이보리 바탕에 밤색 글자(원본이 #FBF8F2 글자를 직접 쓴다) */
+html.yk-dark .btn{color:#0A0F1A}
+html.yk-dark .btn.btn--ghost{color:var(--navy);background:transparent}
+html.yk-dark .cx__kind--actual,html.yk-dark .lec-card__ask,html.yk-dark .mnav__cv{color:#0A0F1A}
+html.yk-dark .lec-card__proof{color:var(--navy)}
+/* 흰 · 미색 카드 */
+html.yk-dark .ledger,html.yk-dark #manifesto + .ledger{background:#0D1422}
+html.yk-dark .ch-card{background:#111A2B;border-color:rgba(236,230,218,.12)}
+html.yk-dark .diary__stamp{background:rgba(17,26,43,.94)}
+html.yk-dark .ax1__cand{background:#111A2B}
+
+/* 어두운 띠 안에서는 토큰을 밝은 화면 때의 짝으로 되돌린다 — 글자(--ecru)는 밝게, 금색은 그대로 */
+html.yk-dark #contact,html.yk-dark .whyc,html.yk-dark .toast,html.yk-dark .ixn{--ecru:#F7F4EE;--ink:#F3EDE2;--navy:#E6DECD}
+html.yk-dark #contact{background:#070B14!important}
+html.yk-dark #contact a.btn:not(.btn--ghost){background:#E6DECD;color:#0A0F1A!important;border-color:#E6DECD}
+/* 고른 상태(밝은 알약 + 밤색 글자) — 원본이 밝은 글자를 직접 쓰는 곳 */
+html.yk-dark .rc__filter button[aria-pressed="true"],html.yk-dark .pol__col--propose .pol__kind,html.yk-dark .wk__b[aria-pressed="true"]{color:#0A0F1A}
+html.yk-dark .wk__b[aria-pressed="true"] *{color:inherit!important}
+html.yk-dark .wk__b[aria-pressed="true"] .wk__k,html.yk-dark .wk__b[aria-pressed="true"] .wk__fig{color:#6B5428!important}
+/* 직접 쓴 밝은 면 */
+html.yk-dark .nw__docs i{background:#1A2336}
+html.yk-dark .fw__cta{background:#E6DECD;color:#0A0F1A}
+html.yk-dark .axc__tb-shot{background:#0E1626}
+html.yk-dark .axc__tag--b{background:#1C2A45;color:#C9D8F2}
+html.yk-dark .ax-fic{background:rgba(17,26,43,.9)}
+html.yk-dark .fl__shot{background:#111A2B}
+html.yk-dark .fl__chrome{background:#1A2336}
+html.yk-dark .fl__point{background:rgba(17,26,43,.75)}
+html.yk-dark .f-links a{color:rgba(249,246,240,.66)}
+html.yk-dark .cx__kind--demo{color:#7FD1A6}
+
+/* 법률 AX 시연 보드 — 밤 속에 켜 둔 종이 한 장. 보드 안은 밝은 화면의 토큰 그대로(눈부심만 한 단계 낮춘 아이보리) */
+html.yk-dark .axc__demo-box{color-scheme:light;--v5-ink:#0E1A2E;--v5-navy:#13284B;--v5-ecru:#ECE6DA;--v5-paper:#F6F1E7;--v5-gold-t:#735C30;--v5-gold:#9C7E48;--ink:#0E1A2E;--ink-soft:#4A5365;--navy:#13284B;--navy-deep:#0B1A33;--ecru:#ECE6DA;--ecru-deep:#E3DCCD;--paper:#F6F1E7;--hair:rgba(14,26,46,.14);--hair-strong:rgba(14,26,46,.3);--gold-text:#735C30;--gold:#9C7E48;--accent:#13284B;background:#ECE6DA;color:#0E1A2E}
+html.yk-dark .axc__demo-box .btn{color:#FBF8F2}
+html.yk-dark .axc__demo-box .ax-fic{background:rgba(250,247,240,.9)}
+html.yk-dark #manifesto .hero-sub > p.font-ko{color:rgba(236,230,218,.86)!important}
+html.yk-dark #manifesto .hero-sub > p.hero-lead{color:#F3EDE2!important}
+html.yk-dark .rc__filter button[aria-pressed="true"] small{color:#6B5428}
+
+/* ---------------------------------------------------------------- 하위 페이지 공통 — 머리띠 · 꼬리(인라인 색) */
+html.yk-dark body > header{background-color:rgba(10,15,26,.9)!important;border-bottom-color:rgba(236,230,218,.12)!important}
+html.yk-dark footer[style*="--ink"]{background:#070B14!important;--ecru:#F7F4EE;border-top:1px solid rgba(236,230,218,.1)}
+html.yk-dark .photo-card__chip--red{color:#0A0F1A!important}
+html.yk-dark .nd-strip__btn span{color:#F7F4EE}
+html.yk-dark .lec-track__label{background:#1A2740}
+html.yk-dark .cx__kind--demo,html.yk-dark .cs-badge--demo{color:#7FD1A6;border-color:rgba(127,209,166,.45)}
+html.yk-dark .cs-badge--actual{color:#0A0F1A}
+html.yk-dark{--green:#7FD1A6;--red:#F0A196}
+
+/* 이력서(resume) */
+html.yk-dark .rv-bar{background:rgba(10,15,26,.94)}
+html.yk-dark .rv-build{background:#111A2B}
+html.yk-dark .rv-press{background:#0E1626}
+html.yk-dark .rv-btn--solid,html.yk-dark .rv-kind{color:#0A0F1A}
+
+/* 실무 사례(cases) 시연 — 메인의 시연 보드와 같은 ‘켜 둔 종이’ */
+html.yk-dark .cs-demo,html.yk-dark .cs-chart{color-scheme:light;--ink:#0E1A2E;--navy:#13284B;--paper:#F6F1E7;--ecru:#ECE6DA;--ecru2:#E3DCCD;--soft:#4A5365;--hair:rgba(14,26,46,.14);--hair2:rgba(14,26,46,.3);--gold:#9C7E48;--gold-t:#735C30;--green:#2F6B4F;--red:#A23B2A;background:#ECE6DA;color:#0E1A2E}
+html.yk-dark .cs-demo .cs-badge--actual,html.yk-dark .cs-demo .cs-btn{color:#fff}
+html.yk-dark .cs-demo .cs-badge--demo{color:#2F6B4F;border-color:rgba(47,107,79,.45)}
+html.yk-dark .pl-next{border-color:rgba(236,230,218,.16)}
+html.yk-dark .pl-next__a{color:#E6DECD}
+html.yk-dark .pl-next__a small{color:#D9C08F}
+
+/* ---------------------------------------------------------------- 작업 도구 페이지(법률 AX · Trial Brief · ax 앱) — 머리띠와 바탕은 밤, 작업 화면은 켜 둔 종이 */
+html.yk-dark #lx-root > :not(header):not(.lx-top),html.yk-dark:has(.tb-top) #root > :not(header):not(.tb-top){
+  color-scheme:light;--ink:#0E1A2E;--navy:#13284B;--navy2:#0B1A33;--paper:#FFFDF9;--ecru:#F2EDE3;--ecru2:#E9E2D4;--soft:#4A5365;--hair:rgba(14,26,46,.14);--hair2:rgba(14,26,46,.3);
+  --gold:#9C7E48;--gold-t:#735C30;--green:#2F6B4F;--red:#A23B2A;--red-bg:#F6E4E0;--green-bg:#E3EFE8;background:#F2EDE3;color:#0E1A2E}
+html.yk-dark #lx-root > :not(.lx-top) .btn,html.yk-dark:has(.tb-top) #root > :not(.tb-top) .btn{color:#FBF8F2}
+html.yk-dark .lx-top,html.yk-dark .tb-top{color-scheme:dark;--navy:#E6DECD;--navy2:#F3EDE2;--ink:#ECE6DA;--soft:#B3AEA4;--gold-t:#D9C08F;--hair:rgba(236,230,218,.12);--hair2:rgba(236,230,218,.3);background:rgba(10,15,26,.94);color:#E6DECD;border-bottom-color:rgba(236,230,218,.12)}
+html.yk-dark .lx-top a,html.yk-dark .tb-top a{color:#E6DECD}
+html.yk-dark .lx-top__state b{background:#1C2A45;color:#C9D8F2}
+html.yk-dark .tb-role select{background:#111A2B;color:#ECE6DA}
