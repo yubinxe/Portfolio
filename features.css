@@ -636,3 +636,59 @@ i.cx__kind{font-style:normal}
 
 /* 상단 메뉴 — 넓은 화면에서는 머리띠만 조금 넓혀 한 줄에 담고, 1180px 이하는 메뉴 버튼으로(영문 메뉴가 길다) */
 @media (min-width:1181px){header.hnav .wrap{max-width:min(1400px,calc(100vw - 48px))}}
+
+/* ============================================================ V14 상단 메뉴 — 세 구역의 균형
+ * 왼쪽 이름 · 가운데 메뉴(화면 정중앙) · 오른쪽 묶음. 오른쪽은 두 층으로 나눈다:
+ *   설정층(둥근 캡슐 — 다크 모드 · KO/EN 을 한 몸으로, Admin 은 자물쇠 원) / 행동층(각진 한 덩어리 — Résumé · Contact)
+ * 높이는 모두 36px(좁은 화면 40px) — 들쭉날쭉한 높이 · 테두리 · 모양을 한 규칙으로 */
+header.hnav .hnav__wrap{position:relative;display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.hnav__brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none;color:var(--ink)}
+.hnav__brand img{display:block}
+header.hnav .hnav__nav{flex:1 1 auto;justify-content:flex-end;gap:0;min-width:0}
+header.hnav .hnav__actions{display:inline-flex;align-items:center;gap:10px;flex:none}
+/* 가운데 메뉴는 이름과 오른쪽 묶음 사이 빈 공간의 정중앙 — 양쪽 여백이 같다 */
+@media (min-width:1181px){header.hnav .hnav__wrap{gap:0}header.hnav .nav-desktop{margin:0 auto;padding:0 20px}}
+/* 폭이 모자라는 구간 — 이름 글자를 접고 로고만(KO 1279px 이하 · EN 1366px 이하). EN 1279px 이하는 메뉴 버튼으로 */
+@media (min-width:1181px) and (max-width:1279px){header.hnav .hnav__name{display:none}}
+@media (min-width:1181px) and (max-width:1366px){html.yk-en header.hnav .hnav__name{display:none}}
+@media (min-width:1181px) and (max-width:1279px){html.yk-en header .nav-desktop{display:none!important}html.yk-en header.hnav .mnav-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 13px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-size:.76rem;font-weight:700;cursor:pointer}html.yk-en header.hnav .mnav-btn__bars,html.yk-en header.hnav .mnav-btn__bars::before{display:block;width:14px;height:1.5px;background:currentColor;position:relative}html.yk-en header.hnav .mnav-btn__bars{margin-top:-5px}html.yk-en header.hnav .mnav-btn__bars::before{content:"";position:absolute;top:5px;left:0}}
+@media (min-width:1181px) and (max-width:1366px){header.hnav .nav-desktop{gap:clamp(9px,1vw,14px)!important;font-size:.84rem}}
+/* 설정 캡슐 */
+.hnav__util{display:inline-flex;align-items:center;height:36px;padding:0 3px;border:1px solid rgba(19,40,75,.2);border-radius:999px;background:rgba(255,255,255,.62)}
+.hnav__util:empty{display:none}
+.hnav__util .yk-lang{height:28px;margin:0;border:0;background:transparent;padding:1px}
+.hnav__util .yk-lang:hover{border:0}
+.hnav__util .yk-theme{position:relative;margin-right:7px}
+.hnav__util .yk-theme::after{content:"";position:absolute;right:-4px;top:6px;bottom:6px;width:1px;background:rgba(19,40,75,.2)}
+/* Admin — 자물쇠 원 · 상태 점(잠김 금색 / 해금 초록) */
+header.hnav .hnav__admin{position:relative;justify-content:center;width:36px;height:36px;padding:0;border-radius:50%;border:1px solid rgba(19,40,75,.2);background:rgba(255,255,255,.62);color:var(--navy)}
+header.hnav .hnav__admin .hnav__lock{width:15px;height:15px;display:block}
+header.hnav .hnav__admin i{position:absolute;top:5px;right:5px;width:6px;height:6px;box-shadow:0 0 0 2px #F7F4EE}
+header.hnav .hnav__admin .hnav__admin-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header.hnav .hnav__admin:hover,header.hnav .hnav__admin:focus-visible{border-color:var(--navy);background:#fff}
+header.hnav .hnav__admin.is-open{background:#141C3A;color:#F7F4EE;border-color:#141C3A}
+/* 행동층 — Résumé · Contact 한 덩어리 */
+.hnav__cta{display:inline-flex;align-items:stretch;height:36px}
+header.hnav .hnav__cta .hnav__cv,header.hnav .hnav__cta .hnav__contact{display:inline-flex;align-items:center;gap:6px;height:36px!important;min-height:0;padding:0 15px!important;margin:0;font:600 .7rem/1 "Inter","Pretendard Variable",sans-serif!important;letter-spacing:.16em!important;text-transform:uppercase;border:1px solid var(--navy)!important;border-radius:0!important;box-shadow:none!important;white-space:nowrap}
+header.hnav .hnav__cta .hnav__cv{border-right:0!important;background:rgba(255,255,255,.62);color:var(--navy)}
+header.hnav .hnav__cta .hnav__cv:hover{background:var(--navy);color:#F7F4EE}
+header.hnav .hnav__cta .hnav__contact{background:var(--navy)!important;color:#F7F4EE!important}
+header.hnav .hnav__cta .hnav__contact:hover{background:#0B1A33!important}
+header.hnav .hnav__cta .hnav__contact svg{display:block!important;width:12px;height:12px}
+/* 메뉴 버튼 — 행동층과 같은 각진 모양 */
+@media (max-width:1180px){
+  header.hnav .mnav-btn{display:inline-flex;align-items:center;gap:8px;height:36px;min-height:0;padding:0 13px;border-radius:0;border:1px solid var(--navy);background:transparent;color:var(--navy);font-size:.76rem;font-weight:700}
+  header.hnav .hnav__nav{justify-content:flex-end}
+}
+@media (max-width:760px){
+  header.hnav .hnav__wrap{gap:10px}
+  header.hnav .hnav__actions{gap:8px}
+  header.hnav .hnav__admin{display:none!important} /* 좁은 화면은 메뉴 안(Admin 줄)에 있다 */
+  header.hnav .hnav__cta .hnav__contact{display:none!important}
+  header.hnav .hnav__cta .hnav__cv{border-right:1px solid var(--navy)!important;padding:0 12px!important}
+  .hnav__util,.hnav__cta,header.hnav .hnav__cta .hnav__cv,header.hnav .mnav-btn{height:40px!important}
+  .hnav__util .yk-lang{height:32px}
+  header.hnav .mnav-btn{padding:0 12px}
+}
+@media (max-width:400px){header.hnav .mnav-btn{font-size:0;gap:0;width:40px;justify-content:center;padding:0}header.hnav .mnav-btn__bars{margin-top:-5px}}
+@media (max-width:340px){header.hnav .hnav__cta{display:none}}

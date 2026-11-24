@@ -51,14 +51,14 @@ html.pl main p a:not([class]):hover,html.pl .tl-body p a:not([class]):hover{back
 .cursor-ring.pl-has-lab .pl-lab{opacity:1;transform:none}
 
 /* 8) 장(章) 표시 — 지금 보는 장면 번호와 이름(데스크톱, 첫 화면 제외) */
-.pl-hud{position:fixed;left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,24px);z-index:60;display:flex;align-items:baseline;gap:10px;padding:7px 12px 7px 10px;pointer-events:none;font:600 .7rem/1 "Inter","Pretendard Variable",sans-serif;letter-spacing:.08em;color:var(--pl-ink);background:rgba(249,246,240,.82);backdrop-filter:blur(6px);border:1px solid rgba(19,40,75,.14);opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s var(--pl-out)}
+.pl-hud{position:fixed;left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,24px);z-index:60;display:flex;align-items:baseline;gap:12.4px;padding:8.7px 14.9px 8.7px 12.4px;pointer-events:none;font:600 .868rem/1 "Inter","Pretendard Variable",sans-serif;letter-spacing:.08em;color:var(--pl-ink);background:rgba(249,246,240,.82);backdrop-filter:blur(6px);border:1px solid rgba(19,40,75,.14);opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s var(--pl-out)}
 .pl-hud.is-on{opacity:1;transform:none}
-.pl-hud b{font:500 1.15rem/1 "Cormorant Garamond",serif;letter-spacing:0;color:var(--pl-gold);min-width:1.4em;display:inline-block}
+.pl-hud b{font:500 1.426rem/1 "Cormorant Garamond",serif;letter-spacing:0;color:var(--pl-gold);min-width:1.4em;display:inline-block}
 .pl-hud em{font-style:normal;font-weight:500;color:#6A6A6A}
 .pl-hud span{display:inline-block;max-width:16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:"Pretendard Variable",sans-serif;letter-spacing:.02em}
 .pl-hud .pl-flip{animation:plFlip .5s var(--pl-out)}
 @keyframes plFlip{from{opacity:0;transform:translateY(60%)}to{opacity:1;transform:none}}
-.pl-hud__bar{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--pl-gold);transform-origin:left;transform:scaleX(var(--pl-p,0))}
+.pl-hud__bar{position:absolute;left:0;bottom:-1px;height:2.5px;width:100%;background:var(--pl-gold);transform-origin:left;transform:scaleX(var(--pl-p,0))}
 
 /* 9) 큰 장 번호 — 섹션 머리 뒤에 윤곽선 숫자가 천천히 흘러간다 */
 .sh{position:relative;isolation:isolate}

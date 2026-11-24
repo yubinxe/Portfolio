@@ -798,3 +798,29 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
   .rc{flex:0 0 74%;scroll-snap-align:start}
 }
 @media (prefers-reduced-motion:reduce){.rc{animation:none}.rc__card,.rc__shot img{transition:none}}
+
+/* ============================================================ V14 첫 화면 — 어떤 화면 높이에서도 한 화면 안에(버튼 · SCROLL 안내가 잘리지 않게)
+ * 글자 크기와 간격을 화면 폭(vw)만이 아니라 높이(vh)에도 묶는다. 1366×768 · 1536×864 · 375×667 에서 아래가 잘리던 문제 */
+@media (min-width:701px){
+  #manifesto.hero-classic .hero-scene__sticky{padding-top:clamp(84px,11.5vh,140px)!important;padding-bottom:clamp(76px,10vh,110px)!important}
+  #manifesto .hero-rule{margin-bottom:clamp(8px,1.6vh,18px)}
+  #manifesto .hero-kicker{margin-bottom:clamp(6px,1.1vh,12px)}
+  #manifesto .hero-eyebrow{margin-bottom:clamp(12px,2.6vh,26px)}
+  #manifesto .hero-name{font-size:clamp(3.4rem,min(12.5vw,16vh),10.5rem)}
+  #manifesto .hero-role{margin-top:clamp(12px,2.6vh,26px)!important}
+  #manifesto .hero-lead{margin-top:clamp(6px,1.6vh,18px)!important;font-size:clamp(1.15rem,min(2.3vw,3.3vh),1.85rem)!important}
+  #manifesto .hero-proof{margin-top:clamp(4px,1.1vh,12px)!important;line-height:1.7}
+  #manifesto .hero-cta{margin-top:clamp(16px,3.4vh,36px)!important}
+  #manifesto .hero-cta .btn{min-height:clamp(44px,5.6vh,50px)}
+}
+@media (max-width:700px) and (max-height:760px){
+  #manifesto.hero-classic .hero-scene__sticky{padding-top:84px!important;padding-bottom:84px!important}
+  #manifesto .hero-kicker{display:none}
+  #manifesto .hero-eyebrow{margin-bottom:12px}
+  #manifesto .hero-name{font-size:clamp(3rem,15vw,4rem)}
+  #manifesto .hero-role{margin-top:14px!important}
+  #manifesto .hero-lead{font-size:1.16rem!important;margin-top:8px!important}
+  #manifesto .hero-proof{font-size:.86rem;line-height:1.6;margin-top:8px!important}
+  #manifesto .hero-cta{margin-top:16px!important}
+  #manifesto .hero-cta .btn{min-height:46px}
+}

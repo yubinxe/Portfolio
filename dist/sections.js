@@ -59,11 +59,13 @@ function AdminNavBtn() {
     React.createElement("button", {
       type: "button",
       className: "hnav__admin font-sans" + (unlocked ? " is-open" : ""),
+      "aria-label": unlocked ? "Admin 실무 금고 — 해금됨" : "Admin 로그인",
       onClick: () => window.ykAdmin && window.ykAdmin.open(),
       title: unlocked ? "Admin 실무 금고 해금됨 (클릭해 열기)" : "Admin 로그인 (PIN / ID·PW)" }, /*#__PURE__*/
 
+    React.createElement("svg", { className: "hnav__lock", viewBox: "0 0 14 14", "aria-hidden": "true", focusable: "false" }, /*#__PURE__*/React.createElement("rect", { x: "2.5", y: "6.2", width: "9", height: "6.3", rx: "1", fill: "none", stroke: "currentColor", strokeWidth: "1.2" }), /*#__PURE__*/React.createElement("path", { d: unlocked ? "M4.6 6.2V4.4a2.4 2.4 0 0 1 4.6-1" : "M4.6 6.2V4.4a2.4 2.4 0 0 1 4.8 0v1.8", fill: "none", stroke: "currentColor", strokeWidth: "1.2", strokeLinecap: "round" })), /*#__PURE__*/
     React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/
-    React.createElement("span", null, unlocked ? "Admin · 해금" : "Admin")
+    React.createElement("span", { className: "hnav__admin-t" }, unlocked ? "Admin · 해금" : "Admin")
     ));
 
 }
@@ -83,8 +85,8 @@ function Nav() {
     React.createElement("header", { className: "hnav" + (solid ? " is-solid" : ""), style: {
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 50
       } }, /*#__PURE__*/
-    React.createElement("div", { className: "wrap hnav__wrap", style: { display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 } }, /*#__PURE__*/
-    React.createElement("a", { href: "#top", style: { textDecoration: "none", color: "var(--ink)", display: "flex", alignItems: "center", gap: 10 } }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap hnav__wrap" }, /*#__PURE__*/
+    React.createElement("a", { href: "#top", className: "hnav__brand" }, /*#__PURE__*/
     React.createElement("img", { src: "images/favicon.svg?v=4", alt: "YK \u2014 \uAE40\uC720\uBE48 CI", width: "32", height: "32", style: { display: "block" } }), /*#__PURE__*/
     React.createElement("span", { className: "hnav__name" }, /*#__PURE__*/
     React.createElement("b", { className: "font-serif" }, "Yubin Kim"), /*#__PURE__*/
@@ -95,14 +97,18 @@ function Nav() {
     React.createElement("div", { className: "nav-desktop" },
     links.map(([t, h]) => /*#__PURE__*/React.createElement("a", { key: t, className: "navlink", href: h }, t))
     ), /*#__PURE__*/
+
     React.createElement("div", { className: "hnav__actions" }, /*#__PURE__*/
-    React.createElement("button", { type: "button", className: "mnav-btn", "data-mnav-toggle": "", "aria-expanded": "false", "aria-controls": "mnav" }, /*#__PURE__*/
-    React.createElement("span", { className: "mnav-btn__bars", "aria-hidden": "true" }), "\uBA54\uB274"
-    ),
+    React.createElement("span", { className: "hnav__util" }),
     playing ? /*#__PURE__*/React.createElement(IxSwitch, { className: "hnav__ix" }) : /*#__PURE__*/React.createElement(AdminNavBtn, null), /*#__PURE__*/
+    React.createElement("span", { className: "hnav__cta" }, /*#__PURE__*/
     React.createElement("a", { href: "resume.html", className: "hnav__cv", lang: "fr" }, "R\xE9sum\xE9"), /*#__PURE__*/
     React.createElement("a", { href: "#contact", className: "btn hnav__contact" }, "Contact ", /*#__PURE__*/
     React.createElement(ArrowUpRight, { size: 14 })
+    )
+    ), /*#__PURE__*/
+    React.createElement("button", { type: "button", className: "mnav-btn", "data-mnav-toggle": "", "aria-expanded": "false", "aria-controls": "mnav" }, /*#__PURE__*/
+    React.createElement("span", { className: "mnav-btn__bars", "aria-hidden": "true" }), "\uBA54\uB274"
     )
     )
     )
@@ -213,11 +219,45 @@ const IX_ROWS = [0, 1, 2, 3].map((r) => {
   for (let k = 0; k < 16; k++) {const x = -260 + k * 132 + (r * 47 + k * 29) % 41;out.push([x, y + (k * 13 + r * 7) % 9 - 4, 34 + (k * 7 + r * 5) % 26]);}
   return out;
 });
-/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 10.6초, 스크롤로 가속하면 약 8초
- * V7.2 — ALPHA SHEEP 뒤에 ‘2004년생의 선두에 서다’(7.0~8.65) 장면을 넣고 선언 · 이름을 1.6초 뒤로 */
-const IX_T = { end: 13.3, name: 10.6, rate: 1.25, boost: 1.6, hold: 650 };
-/* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면(9.0~)은 통째로 가속 없음 */
-const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.5, 8.35], [9.5, 10.35]];
+/* 재생 시간표(초 · 기본 속도 기준) — intro.css 의 장면 창과 같은 숫자. 1.25배속으로 약 11초, 스크롤로 가속하면 약 8.5초
+ * V7.2 — ALPHA SHEEP 뒤에 ‘2004년생의 선두에 서다’ 장면. V8 — 그 장면에 우상향 차트(봉 22개 · 추세선)가 그려지고(7.0~9.1),
+ *   선언 · 이름은 0.45초 뒤로. 해 질 녘 색(호박 · 장밋빛 지평선) · 가로 렌즈 플레어 · 필름 낟알로 도입부의 밀도를 높였다 */
+const IX_T = { end: 13.75, name: 11.05, rate: 1.25, boost: 1.6, hold: 650 };
+/* 정지 구간 — 장면 문장이 완전히 보이는 동안. 여기서는 입력이 있어도 가속하지 않는다(최소 노출 시간 보장). 이름 장면은 통째로 가속 없음 */
+const IX_HOLD = [[0.6, 1.5], [2.0, 2.9], [3.4, 4.12], [5.6, 6.75], [7.75, 8.8], [9.95, 10.8]];
+/* 우상향 차트 — 실제 시세가 아닌 상징 그래픽(데이터 · 수익률 표기 없음). 눌림(음봉)을 지나며 오른쪽 위로 올라간다.
+ * 봉: 시가 = 앞 봉의 종가. 좌표는 viewBox 0 0 1000 400(아래가 0) */
+const IX_CHART = (() => {
+  const close = [14, 18, 16, 22, 27, 25, 31, 36, 33, 40, 46, 43, 50, 57, 54, 61, 67, 64, 72, 79, 76, 88];
+  let o = 10;
+  return close.map((c, i) => {const d = { x: 40 + i * 43, o, c, hi: Math.max(o, c) + 2 + i % 3, lo: Math.min(o, c) - 2 - (i + 1) % 3 };o = c;return d;});
+})();
+const ixY = (p) => 372 - p * 3.3;
+function IxChart() {
+  const C = IX_CHART,L = C[C.length - 1];
+  const line = C.map((d, i) => (i ? "L" : "M") + " " + d.x + " " + ixY(d.c).toFixed(1)).join(" ");
+  return (/*#__PURE__*/
+    React.createElement("svg", { className: "ix__chart", viewBox: "0 0 1000 400", preserveAspectRatio: "xMidYMid meet", "aria-hidden": "true", focusable: "false" }, /*#__PURE__*/
+    React.createElement("defs", null, /*#__PURE__*/
+    React.createElement("linearGradient", { id: "ixArea", x1: "0", y1: "0", x2: "0", y2: "1" }, /*#__PURE__*/React.createElement("stop", { offset: "0", stopColor: "#EBB774", stopOpacity: ".34" }), /*#__PURE__*/React.createElement("stop", { offset: "1", stopColor: "#EBB774", stopOpacity: "0" }))
+    ), /*#__PURE__*/
+    React.createElement("g", { className: "ix__grid" }, [96, 188, 280].map((y) => /*#__PURE__*/React.createElement("line", { key: y, x1: "0", x2: "1000", y1: y, y2: y })), /*#__PURE__*/React.createElement("line", { className: "ix__base", x1: "0", x2: "1000", y1: "372", y2: "372" })), /*#__PURE__*/
+    React.createElement("path", { className: "ix__area", d: line + " L " + L.x + " 372 L " + C[0].x + " 372 Z", fill: "url(#ixArea)" }),
+    C.map((d, i) => /*#__PURE__*/
+    React.createElement("g", { key: i, className: "ix__cdl" + (d.c < d.o ? " is-dn" : ""), style: { "--i": i } }, /*#__PURE__*/
+    React.createElement("line", { x1: d.x, x2: d.x, y1: ixY(d.hi), y2: ixY(d.lo) }), /*#__PURE__*/
+    React.createElement("rect", { x: d.x - 7, width: "14", y: ixY(Math.max(d.o, d.c)), height: Math.max(2, Math.abs(d.c - d.o) * 3.3) })
+    )
+    ),
+    C.slice(1).map((d, i) => /*#__PURE__*/React.createElement("line", { key: "g" + i, className: "ix__seg ix__seg--glow", style: { "--i": i }, x1: C[i].x, y1: ixY(C[i].c), x2: d.x, y2: ixY(d.c) })),
+    C.slice(1).map((d, i) => /*#__PURE__*/React.createElement("line", { key: "s" + i, className: "ix__seg", style: { "--i": i }, x1: C[i].x, y1: ixY(C[i].c), x2: d.x, y2: ixY(d.c) })), /*#__PURE__*/
+    React.createElement("circle", { className: "ix__tip-ring", cx: L.x, cy: ixY(L.c), r: "16" }), /*#__PURE__*/
+    React.createElement("circle", { className: "ix__tip", cx: L.x, cy: ixY(L.c), r: "5.5" }), /*#__PURE__*/
+    React.createElement("text", { className: "ix__yr", x: C[0].x - 6, y: "394" }, "2004"), /*#__PURE__*/
+    React.createElement("text", { className: "ix__yr ix__yr--now", x: L.x + 4, y: ixY(L.c) - 28, textAnchor: "end" }, "2027")
+    ));
+
+}
 const ixHeld = (t) => t >= IX_T.name || IX_HOLD.some(([a, b]) => t >= a && t < b);
 function IntroSequence() {
   const sec = React.useRef(null),stage = React.useRef(null);
@@ -309,9 +349,10 @@ function IntroSequence() {
   }, []);
   const word = "ALPHA SHEEP";
   return (/*#__PURE__*/
-    React.createElement("section", { id: "intro", ref: sec, className: "ix", "aria-label": "\uC778\uD2B8\uB85C \u2014 ALPHA SHEEP, 2004\uB144\uC0DD\uC758 \uC120\uB450\uC5D0 \uC11C\uB2E4, \uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4. \uAE40\uC720\uBE48" }, /*#__PURE__*/
+    React.createElement("section", { id: "intro", ref: sec, className: "ix", "aria-label": "\uC778\uD2B8\uB85C \u2014 ALPHA SHEEP, 2004\uB144\uC0DD\uC758 \uC120\uB450\uC5D0 \uC11C\uB2E4(\uC6B0\uC0C1\uD5A5 \uADF8\uB798\uD504), \uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4. \uAE40\uC720\uBE48" }, /*#__PURE__*/
     React.createElement("div", { ref: stage, className: "ix__stage" }, /*#__PURE__*/
     React.createElement("div", { className: "ix__bg", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("div", { className: "ix__dusk", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("i", { className: "ix__axis", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("div", { className: "ix__light", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("div", { className: "ix__warm", "aria-hidden": "true" }), /*#__PURE__*/
@@ -341,8 +382,8 @@ function IntroSequence() {
     React.createElement("i", { className: "ix__alpha-rule", "aria-hidden": "true" })
     ), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s4b" }, /*#__PURE__*/
-    React.createElement("p", { className: "ix__gen-n font-serif", "aria-hidden": "true" }, "2004"), /*#__PURE__*/
-    React.createElement("p", { className: "ix__gen font-myeongjo" }, /*#__PURE__*/React.createElement("span", null, "2004\uB144\uC0DD\uC758"), " ", /*#__PURE__*/React.createElement("span", null, "\uC120\uB450\uC5D0 \uC11C\uB2E4"))
+    React.createElement("p", { className: "ix__gen font-myeongjo" }, /*#__PURE__*/React.createElement("span", null, "2004\uB144\uC0DD\uC758"), " ", /*#__PURE__*/React.createElement("span", null, "\uC120\uB450\uC5D0 \uC11C\uB2E4")), /*#__PURE__*/
+    React.createElement(IxChart, null)
     ), /*#__PURE__*/
     React.createElement("div", { className: "ix__scene ix__s5" }, /*#__PURE__*/
     React.createElement("p", { className: "ix__mf font-myeongjo" }, /*#__PURE__*/React.createElement("span", null, "\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C"), " ", /*#__PURE__*/React.createElement("span", null, "\uC591\uC774 \uB418\uB2E4.")), /*#__PURE__*/
@@ -362,6 +403,8 @@ function IntroSequence() {
     React.createElement("i", { className: "ix__lb ix__lb--t", "aria-hidden": "true" }), /*#__PURE__*/React.createElement("i", { className: "ix__lb ix__lb--b", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("i", { className: "ix__door ix__door--l", "aria-hidden": "true" }), /*#__PURE__*/React.createElement("i", { className: "ix__door ix__door--r", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("i", { className: "ix__flash", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("i", { className: "ix__flare", "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("i", { className: "ix__grain", "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("p", { className: "ix__cue font-ko", "aria-hidden": "true" }, /*#__PURE__*/React.createElement("span", null, "\uC2A4\uD06C\uB864\uD558\uBA74 \uBE60\uB974\uAC8C", /*#__PURE__*/React.createElement("em", null, " \xB7 Esc \uBC14\uB85C \uBCF8\uBB38")), /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
     React.createElement("p", { className: "ix__credit font-ko" }, "ALPHA SHEEP \u2014 \u300A\uD2B8\uB80C\uB4DC \uCF54\uB9AC\uC544 2027\u300B(\uAE40\uB09C\uB3C4 \uC678)\uC758 2027\uB144 \uC2AC\uB85C\uAC74\uC744 \uC778\uC6A9\uD588\uC2B5\uB2C8\uB2E4. \u2018\uBB34\uB9AC\uC5D0\uC11C \uBC97\uC5B4\uB09C \uC591\uC774 \uB418\uB2E4\u2019\uB294 \uAC1C\uC778\uC801 \uC7AC\uD574\uC11D\uC774\uBA70, \uB3C4\uC11C \xB7 \uC800\uC790\uC640 \uC81C\uD734 \uAD00\uACC4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("i", { className: "ix__bar", "aria-hidden": "true" }), /*#__PURE__*/
