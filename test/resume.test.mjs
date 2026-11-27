@@ -27,15 +27,15 @@ test("정보 순서 — 인물 → 숫자 4 → 보도 → 경력 → 프로젝�
   const order = ['id="rv-name"', 'id="rv-thesis"', 'id="rv-stats"', 'id="rv-press"', 'id="rv-exp"', 'id="rv-builds"', 'id="rv-edu"', 'id="rv-cred"', 'id="rv-contact"'];
   let at = -1;
   for (const k of order) { const i = html.indexOf(k); assert.ok(i > at, "순서: " + k); at = i; }
-  assert.ok(text.includes("법률 현장의 반복 업무를 시스템으로 바꾸고, 반대하던 팀을 설득해 전사 업무에 정착시켰습니다."));
+  assert.ok(text.includes("고위험 법률 · 부동산 업무에서, 담당자가 근거를 확인해 판단하는 AI 업무 절차를 설계합니다."));
   assert.equal((html.match(/class="rv-stat"/g) || []).length, 4);
   assert.equal((html.match(/class="rv-build"/g) || []).length, 4);
   assert.ok((html.match(/<li>/g) || []).length >= 5, "경력 항목");
 });
 
 test("레쥬메 PDF 의 사실 — 숫자 · 경력 · 프로젝트 · 교육 · 자격 · 수상", () => {
-  for (const s of ["data-count=\"3\"", "data-count=\"77\"", "data-count=\"2\"", "data-count=\"1\""]) assert.ok(html.includes(s), s);
-  for (const s of ["법무법인 경국", "전략기획실 · 사원", "2026. 06 – 재직 중", "발표자료 77장", "NAVER WORKS", "전자공탁", "커밋 204건", "LCP 5.2→2.0초", "15건 전부 검출, 오탐 0건",
+  for (const s of ["data-count=\"3\"", "data-count=\"15\"", "data-count=\"2\"", "data-count=\"1\""]) assert.ok(html.includes(s), s);
+  for (const s of ["법무법인 경국", "전략기획실 · 사원", "2026. 06 – 재직 중", "발표자료 77장", "NAVER WORKS", "전자공탁", "LCP 5.2→2.0초", "15개 모두 검출, 오탐 0건",
     "집코노미 박람회 AI 전시관(코엑스)", "서울 핀테크 아카데미 14기 트랙 2 · 3 수료", "서울대 AI 교육 전문가 과정(AIED) 4기 수료", "매력일자리 3기 교육생",
     "SSAFY", "대구일마이스터고등학교 졸업", "한국사 3급", "OPIc IH", "강원열린군대 스타트업 2위", "제2군단장상", "육군훈련소 최우수 분대", "육군 군필", "Claude API"]) assert.ok(text.includes(s), s);
   assert.ok(text.includes("학위가 아닌 비학위 전문교육"));
