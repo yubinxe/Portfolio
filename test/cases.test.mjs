@@ -86,3 +86,15 @@ test("국문 대표 명칭 — 법률 AX 01–03 · 내비게이션", () => {
   assert.ok(jsx.includes('["법률 AI 전환", "#ax-desk"]') && jsx.includes('["실무 사례", "#cases"]'));
   assert.ok(!jsx.includes("Gyunggook AX"), "AX 머리글의 영문 법인명 병기 제거");
 });
+
+test("index 전 → 후 네 줄은 사례집 bid 와 같다(V17)", async () => {
+  const { readFileSync } = await import("node:fs");
+  const jsx = readFileSync("sections.jsx", "utf8");
+  const blk = jsx.slice(jsx.indexOf("const CASE_BA = {"), jsx.indexOf("function CaseIndex"));
+  const arr = (k) => JSON.parse(blk.match(new RegExp(k + ": (\\[[^\\]]+\\])"))[1]);
+  const src = readFileSync("cases-data.js", "utf8");
+  const bid = src.slice(src.indexOf('{ id: "bid"'), src.indexOf('{ id: "gwangmyeong"'));
+  const arr2 = (k) => JSON.parse(bid.match(new RegExp("\\n\\s+" + k + ": (\\[[^\\]]+\\])"))[1]);
+  assert.deepEqual(arr("before"), arr2("before"));
+  assert.deepEqual(arr("after"), arr2("after"));
+});
