@@ -19,14 +19,15 @@ function App() {
       <main>
         <IntroSequence />
         <HeroClassic />
+        <Signature />
         <EntryTracks />
         <Ledger />
         <CaseIndex />
         <About />
         <Composite />
         <AXCommand />
-        <ArtifactsSection />
         <PolicySection />
+        <ArtifactsSection />
         <ResearchArchive />
         <Trajectory />
         <Channels />

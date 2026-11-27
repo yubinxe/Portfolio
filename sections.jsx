@@ -77,7 +77,7 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-    ["소개", "#about"], ["역량", "#composite"], ["실무 사례", "#cases"], ["법률 AI 전환", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
+    ["부동산 AI", "#signature"], ["소개", "#about"], ["역량", "#composite"], ["실무 사례", "#cases"], ["법률 AI 전환", "#ax-desk"], ["정책", "#policy"], ["이력", "#trajectory"],
     ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"],
   ];
   return (
@@ -421,6 +421,65 @@ function IntroSequence() {
 /* ============================================================ HERO — 사진 중심 첫 화면 (V6.1 복구)
  * 기준: 7bfd9a1e780 의 사진형 Hero(강남 사진 · 중앙 YUBIN KIM · 간결한 CTA). 스크롤 고정 · 카메라 연출 · 건축 모형은 넣지 않는다.
  * 첫 화면이 답할 것 — 누구인가(AI 전략·AX 실행) · 무엇을 하는가(구조화 · 실행) · 어디로 가면 근거가 있는가(CTA 셋) */
+/* ============================================================ SIGNATURE — 부동산 × AI 두 작품(V15)
+ * 첫 화면 바로 뒤: 직접 만들어 부동산 현장에서 시연한 서비스 2종. 그다음 흐름이 컨설팅(법률 AX) → 정책.
+ * 사실만 — 보도(한국경제 · 중앙일보 실명, 2026. 11. 11) · 시연(9.30 코엑스 KREMA AI 전시관 · 11.11 부동산산업의 날) ·
+ * 커밋 204 · LCP 5.2→2.0초(Résumé) · 필드워크 태그(실지조사 5단계 · 조문 24 · 지목 28). ‘AI 모델로 추천’이라 쓰지 않는다 — AI 로 만든 부동산 제품 */
+const SIGNATURE = [
+  { id: "sig-zipcatch", no: "Ⅰ", kind: "청약 · 공공임대 맞춤 추천", name: "ZipCatch", ko: "집캐치",
+    line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리",
+    proof: ["한국경제 · 중앙일보 실명 보도", "공개 발표 · 시연 2회", "커밋 204 · LCP 5.2→2.0초"],
+    theater: "zc-home", go: ["써 보기", "https://zipcatch.vercel.app"],
+    more: [["보도 원문", "https://www.hankyung.com/article/202611110211i"], ["제품 상세", "#ed-09"]] },
+  { id: "sig-fieldwork", no: "Ⅱ", kind: "감정평가 3D 실지조사", name: "Appraiser Fieldwork", ko: "감정평가사 필드워크",
+    line: "교재로 외우던 실지조사 → 3D 서울을 걸으며 5단계 수행",
+    proof: ["실지조사 5단계 · 조문 24 · 지목 28", "KREMA AI 전시관 시연 · 9.30", "Three.js · WebGL"],
+    pic: "fw-gwanghwamun", go: ["체험하기", "https://appraiser-fieldwork.vercel.app/"],
+    more: [["현장 기록", "gallery.html#zipconomy"], ["제품 상세", "#ed-10"]] },
+];
+function Signature() {
+  const ref = useReveal();
+  return (
+    <section id="signature" ref={ref} className="sig" aria-labelledby="sig-title">
+      <div className="wrap">
+        <header className="sig__head reveal">
+          <p className="sig__k font-sans"><span lang="en">Signature</span><b className="font-ko">부동산 × AI</b></p>
+          <h2 id="sig-title" className="sig__t font-ko"><span className="sig__ta">부동산 현장의 질문에,</span> <span className="sig__tb">직접 만든 제품으로 답합니다</span></h2>
+          <p className="sig__lead font-ko">KREMA AI 전시관과 부동산산업의 날에서 직접 시연한 두 작품. 같은 판단이 컨설팅과 정책으로 이어집니다.</p>
+        </header>
+        <ol className="sig__list">
+          {SIGNATURE.map((x, i) => (
+            <li key={x.id} id={x.id} className={"sig__item reveal" + (i % 2 ? " sig__item--flip" : "")} style={{ "--i": i }}>
+              <a className="sig__shot" href={x.go[1]} target="_blank" rel="noreferrer" aria-label={x.ko + " " + x.go[0]}>
+                {x.theater ? <TheaterShot name={x.theater} alt="" />
+                  : <Pic name={x.pic} fallback={"images/" + x.pic + ".jpg"} sizes="(max-width: 860px) 92vw, 56vw" alt="" loading="lazy" decoding="async" />}
+                <span className="sig__no font-serif" aria-hidden="true">{x.no}</span>
+              </a>
+              <div className="sig__body">
+                <p className="sig__kind font-ko">{x.kind}</p>
+                <h3 className="sig__name"><span className="font-serif" lang="en">{x.name}</span><small className="font-ko">{x.ko}</small></h3>
+                <p className="sig__line font-ko">{x.line}</p>
+                <ul className="sig__proof font-ko">{x.proof.map((p) => <li key={p}>{p}</li>)}</ul>
+                <p className="sig__acts font-ko">
+                  <a className="sig__go" href={x.go[1]} target="_blank" rel="noreferrer">{x.go[0]} <ArrowUpRight size={15} /></a>
+                  {x.more.map(([t, h]) => <a key={h} className="sig__more" href={h} {...(/^https?:/.test(h) ? { target: "_blank", rel: "noreferrer" } : {})}>{t}</a>)}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <nav className="sig__flow font-ko reveal" aria-label="이어지는 흐름">
+          <span className="sig__step is-now"><b className="font-sans">01</b>부동산 AI</span>
+          <i aria-hidden="true" />
+          <a className="sig__step" href="#ax-desk"><b className="font-sans">02</b>컨설팅 · 법률 AX</a>
+          <i aria-hidden="true" />
+          <a className="sig__step" href="#policy"><b className="font-sans">03</b>정책 · 제도</a>
+        </nav>
+      </div>
+    </section>
+  );
+}
+
 function HeroClassic() {
   const ref = useReveal();
   return (
@@ -435,7 +494,7 @@ function HeroClassic() {
         <div className="wrap reveal hero-copy">
           <div className="menu-rule hero-rule"><i /></div>
           <p className="font-sans hero-kicker">Seoul · Portfolio 2026</p>
-          <p className="eyebrow hero-eyebrow">AI Strategy &amp; Consulting</p>
+          <p className="eyebrow hero-eyebrow">Real Estate AI · Strategy · Policy</p>
           <h1 id="hero-title" className="font-serif hero-name">
             <span className="sr-only">김유빈 Yubin Kim — AI 전략 · AX 실행 </span>
             <span aria-hidden="true" className="hero-name__rows">
@@ -444,14 +503,14 @@ function HeroClassic() {
             </span>
           </h1>
           <div className="hero-sub">
-            <p className="font-ko hero-role"><b>현업의 문제를 기술로 해결하는 AX·전략기획 실무자</b></p>
+            <p className="font-ko hero-role"><b>부동산을 AI로 읽고, 컨설팅과 정책으로 잇는 실무자</b></p>
             <p className="font-ko hero-lead">복잡한 문제를 구조화하고,<br />기술로 실행합니다.</p>
-            <p className="font-ko hero-proof">법률·부동산 분야의 실무 경험을 바탕으로 업무 프로세스를 분석하고, AI와 자동화를 활용한 개선 과제를 설계·구현합니다. 현장에서 확인한 문제를 실행 가능한 시스템으로 전환하는 데 집중합니다.</p>
+            <p className="font-ko hero-proof">청약 · 공공임대 추천 서비스와 감정평가 3D 실지조사를 직접 만들어 부동산 현장에서 시연했습니다. 법률 · 부동산 실무에서 다진 판단을 AI 전략 컨설팅과 정책 제안으로 잇습니다.</p>
           </div>
           <div className="hero-cta">
-            <a href="#trial-brief" className="btn hero-main">대표 프로젝트 보기 <ArrowDown size={15} /></a>
-            <a href="#ax-desk" className="btn btn--ghost">법률 AX 6대 시스템</a>
-            <a href="#contact" className="btn btn--ghost">협업 문의</a>
+            <a href="#signature" className="btn hero-main">부동산 AI 2종 보기 <ArrowDown size={15} /></a>
+            <a href="#ax-desk" className="btn btn--ghost">컨설팅 · 법률 AX</a>
+            <a href="#policy" className="btn btn--ghost">정책 참여</a>
           </div>
         </div>
 
@@ -2648,7 +2707,7 @@ function ArtifactsSection() {
   return (
     <section id="artifacts" ref={ref} className="arts" aria-labelledby="arts-title">
       <div className="wrap">
-        <SectionHead no="04 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Selected Works · Four Independent Products" />
+        <SectionHead no="05 직접 만든 도구" ko="필요한 도구는 직접 만들고, 실제로 사용합니다" en="Selected Works · Four Independent Products" />
         <div id="tools" className="arts__intro reveal">
           <p className="arts__lead font-ko" id="arts-title">혼자 끝까지 만들어 배포한 <b>개인 제품</b> 4종 — 회사 시스템이 아닙니다.</p>
           <p className="wk__hint font-sans" aria-hidden="true">카드를 고르면 아래에 펼쳐집니다</p>
@@ -2707,7 +2766,7 @@ function PolicySection() {
     <section id="policy" ref={ref} className="pol" aria-labelledby="pol-title">
       <div className="wrap">
         <header className="pol__head reveal">
-          <p className="sh__no font-ko">05 정책 참여 <span className="font-sans" lang="en">Policy Participation & Public Deliberation</span></p>
+          <p className="sh__no font-ko">04 정책 참여 <span className="font-sans" lang="en">Policy Participation & Public Deliberation</span></p>
           <h2 id="pol-title" className="pol__t font-ko">현장에서 발견한 문제를<br />제도의 언어로 옮깁니다</h2>
           <p className="pol__lead font-ko">법률 · 부동산 현장의 문제는 결국 제도와 이해관계의 문제로 이어집니다. 그래서 소프트웨어를 만드는 데서 멈추지 않고,
             정책 논의의 자리에 나가 듣고, 제안하고, 운영에 참여합니다.</p>
@@ -3366,4 +3425,4 @@ function SectionHead({ no, ko, en, lead }) {
   );
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

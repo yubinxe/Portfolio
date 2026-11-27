@@ -824,3 +824,59 @@ html.axs-lock,html.axs-lock body{overflow:hidden}
   #manifesto .hero-cta{margin-top:16px!important}
   #manifesto .hero-cta .btn{min-height:46px}
 }
+
+/* ---- V15 Signature — 부동산 × AI 두 작품(첫 화면 바로 뒤 · 깊은 남색 띠 · 은은한 금빛) ---- */
+.sig{position:relative;padding:clamp(72px,10vw,132px) 0 clamp(56px,8vw,96px);color:#F4EEE2;background:radial-gradient(120% 70% at 85% 0%,rgba(201,174,122,.13),transparent 60%),linear-gradient(180deg,#0B1A33 0%,#0E2142 100%);overflow:hidden;isolation:isolate;scroll-margin-top:64px}
+.sig::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(90deg,rgba(244,238,226,.035) 0 1px,transparent 1px 120px);mask:linear-gradient(180deg,#000,transparent 85%)}
+.sig__head{max-width:760px}
+.sig__k{display:flex;align-items:center;gap:12px;margin:0 0 18px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#C9AE7A}
+.sig__k span{padding-right:12px;border-right:1px solid rgba(201,174,122,.45)}
+.sig__k b{font-size:.84rem;font-weight:700;letter-spacing:.06em;text-transform:none;color:#E9DCC0}
+.sig__t{margin:0;font-size:clamp(1.9rem,4.2vw,3.25rem);font-weight:800;line-height:1.22;letter-spacing:-.025em;word-break:keep-all}
+.sig__ta{display:block;color:rgba(244,238,226,.5)}
+.sig__tb{display:block;color:#FBF7EF}
+.sig__lead{margin:18px 0 0;max-width:620px;font-size:.98rem;line-height:1.8;color:rgba(244,238,226,.72);word-break:keep-all}
+.sig__list{display:grid;gap:clamp(40px,6vw,84px);margin:clamp(44px,6vw,72px) 0 0;padding:0;list-style:none}
+.sig__item{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr);gap:clamp(24px,4vw,64px);align-items:center;scroll-margin-top:84px}
+.sig__item--flip{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)}
+.sig__item--flip .sig__shot{order:2}
+.sig__shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;border-radius:14px;background:#08142A;box-shadow:0 40px 80px -40px rgba(0,0,0,.7),0 0 0 1px rgba(201,174,122,.28);isolation:isolate}
+.sig__shot picture,.sig__shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 1.4s cubic-bezier(.16,1,.3,1),filter .8s}
+.sig__shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,20,42,.55));pointer-events:none}
+.sig__shot:hover img{transform:scale(1.045)}
+.sig__no{position:absolute;right:18px;bottom:6px;z-index:2;font-size:clamp(3.4rem,7vw,5.6rem);font-weight:400;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(233,220,192,.85)}
+.sig__kind{margin:0 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.08em;color:#C9AE7A}
+.sig__name{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.sig__name span{font-size:clamp(2rem,3.6vw,2.9rem);font-weight:500;line-height:1.05;color:#FBF7EF}
+.sig__name small{font-size:1rem;font-weight:700;color:rgba(244,238,226,.7)}
+.sig__line{margin:16px 0 0;font-size:1.02rem;font-weight:600;line-height:1.6;color:#F4EEE2;word-break:keep-all}
+.sig__proof{display:grid;gap:8px;margin:20px 0 0;padding:16px 0 0;list-style:none;border-top:1px solid rgba(201,174,122,.28)}
+.sig__proof li{position:relative;padding-left:18px;font-size:.9rem;line-height:1.5;color:rgba(244,238,226,.8)}
+.sig__proof li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:#C9AE7A}
+.sig__acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:24px 0 0}
+.sig__go{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;font-size:.86rem;font-weight:700;letter-spacing:.04em;color:#0B1A33;background:linear-gradient(135deg,#E9DCC0,#C9AE7A);text-decoration:none;transition:filter .3s,transform .3s}
+.sig__go:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.sig__more{font-size:.86rem;font-weight:600;color:#E9DCC0;text-decoration:none;border-bottom:1px solid rgba(233,220,192,.4);padding-bottom:2px}
+.sig__more:hover{border-bottom-color:#E9DCC0}
+.sig__go:focus-visible,.sig__more:focus-visible,.sig__shot:focus-visible,.sig__step:focus-visible{outline:3px solid #8FB8F2;outline-offset:3px}
+/* 흐름 — 부동산 AI → 컨설팅 → 정책 */
+.sig__flow{display:flex;align-items:center;gap:14px;margin:clamp(48px,7vw,84px) 0 0;padding-top:24px;border-top:1px solid rgba(201,174,122,.22)}
+.sig__flow i{flex:1 1 40px;height:1px;background:linear-gradient(90deg,rgba(201,174,122,.7),rgba(201,174,122,.15))}
+.sig__step{display:inline-flex;align-items:baseline;gap:10px;font-size:.95rem;font-weight:700;color:rgba(244,238,226,.62);text-decoration:none;white-space:nowrap;transition:color .3s}
+.sig__step b{font-size:.7rem;letter-spacing:.14em;color:#C9AE7A}
+.sig__step.is-now{color:#FBF7EF}
+a.sig__step:hover{color:#FBF7EF}
+/* 등장 — 사진은 커튼이 걷히듯, 글은 뒤따라 */
+.sig__item.reveal .sig__shot{clip-path:inset(0 0 0 0 round 14px);transition:clip-path 1.2s cubic-bezier(.16,1,.3,1)}
+.sig__item.reveal:not(.in) .sig__shot{clip-path:inset(0 100% 0 0 round 14px)}
+.sig__item--flip.reveal:not(.in) .sig__shot{clip-path:inset(0 0 0 100% round 14px)}
+.sig__item.reveal .sig__body{transition:opacity .9s .25s,transform .9s .25s cubic-bezier(.16,1,.3,1)}
+.sig__item.reveal:not(.in) .sig__body{opacity:0;transform:translateY(24px)}
+@media (max-width:860px){
+  .sig__item,.sig__item--flip{grid-template-columns:1fr}
+  .sig__item--flip .sig__shot{order:0}
+  .sig__flow{flex-wrap:wrap;gap:10px 12px}
+  .sig__flow i{flex:0 0 18px}
+}
+@media (prefers-reduced-motion:reduce){.sig__item.reveal .sig__shot,.sig__item.reveal .sig__body{transition:none;clip-path:none;opacity:1;transform:none}}
+html.yk-en .sig__name small{display:none}
