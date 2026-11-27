@@ -1,0 +1,111 @@
+/* story.css — The Story. 깊은 남색 밤하늘 · 금빛 입자 상징 · 한 장면에 한 문장. 사이트 팔레트(남색 · 아이보리 · 금) 그대로 */
+:root{--sn:#0B1A33;--sn2:#0E2142;--iv:#F4EEE2;--iv2:rgba(244,238,226,.72);--iv3:rgba(244,238,226,.5);--gd:#C9AE7A;--gd2:#E9DCC0;--line:rgba(201,174,122,.28)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sn);color:var(--iv);font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;font-size:16px;line-height:1.7;word-break:keep-all;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid #8FB8F2;outline-offset:3px}
+.st-skip{position:absolute;left:-999px;top:8px;z-index:50;padding:8px 12px;background:var(--iv);color:var(--sn)}
+.st-skip:focus{left:12px}
+.st-sky{position:fixed;inset:0;z-index:0;width:100vw;height:100vh;pointer-events:none;background:radial-gradient(90% 70% at 70% 20%,#132a52 0%,var(--sn) 60%),var(--sn)}
+/* 머리띠 */
+.st-top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px clamp(16px,3vw,36px);background:linear-gradient(180deg,rgba(11,26,51,.85),rgba(11,26,51,0))}
+.st-brand{display:inline-flex;align-items:baseline;gap:10px;text-decoration:none;font-family:Inter,system-ui,sans-serif}
+.st-brand__mark{color:var(--gd);font-size:1.1rem}
+.st-brand b{font-size:.78rem;letter-spacing:.24em;font-weight:600}
+.st-brand small{font-size:.66rem;letter-spacing:.2em;color:var(--iv3)}
+.st-top__r{display:flex;align-items:center;gap:10px}
+.st-motion,.st-top__back{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;font:600 .7rem/1 Inter,"Pretendard Variable",sans-serif;letter-spacing:.12em;color:var(--iv);background:transparent;border:1px solid var(--line);border-radius:999px;text-decoration:none;cursor:pointer;white-space:nowrap}
+.st-motion[aria-pressed="false"]{color:var(--iv3)}
+.st-motion:hover,.st-top__back:hover{border-color:var(--gd)}
+/* KO/EN 은 i18n.js 알약을 밤하늘 색으로 · 다크 모드 스위치는 이 페이지에선 숨김(원래 어두운 화면) */
+.st-top .yk-lang{background:rgba(244,238,226,.06);border-color:var(--line);color:var(--iv)}
+.st-top .yk-theme{display:none!important}
+html.yk-dark body{background:var(--sn);color:var(--iv)}
+html.yk-dark body>header.st-top{background:linear-gradient(180deg,rgba(11,26,51,.85),rgba(11,26,51,0))!important;border:0!important}
+/* 오른쪽 장 레일 */
+.st-rail{position:fixed;right:clamp(10px,2vw,28px);top:50%;z-index:15;display:flex;flex-direction:column;gap:6px;transform:translateY(-50%)}
+.st-rail a{display:grid;place-items:center;width:34px;height:26px;font:600 .66rem/1 Inter,sans-serif;letter-spacing:.08em;color:var(--iv3);text-decoration:none;border-radius:999px;transition:color .3s,background .3s}
+.st-rail a.is-on{color:var(--sn);background:var(--gd2)}
+.st-rail a:hover{color:var(--iv)}
+.st-bar{position:fixed;left:0;right:0;bottom:0;z-index:20;height:2px;background:rgba(244,238,226,.08)}
+.st-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--gd),var(--gd2));transform-origin:left;transform:scaleX(var(--p,0))}
+/* 장면 */
+.st{position:relative;z-index:1}
+.st-scene{min-height:110vh;display:flex;align-items:center;padding:120px clamp(20px,6vw,96px) 80px;scroll-margin-top:0}
+.st-copy{width:min(560px,100%)}
+.st-copy--wide{width:min(620px,100%)}
+.st-hello{margin:0;font-size:clamp(2.2rem,5.2vw,4rem);font-weight:500;line-height:1.28;letter-spacing:-.02em}
+.st-ln{display:block}
+.st-ln--b{font-weight:800}
+.st-sub{margin:28px 0 0;font-size:1rem;color:var(--iv2)}
+.st-hint{margin:8px 0 0;font-size:.82rem;color:var(--gd)}
+.st-down,.st-up{display:inline-block;margin-top:34px;font-size:.88rem;font-weight:600;color:var(--gd2);text-decoration:none;border-bottom:1px solid rgba(233,220,192,.4);padding-bottom:3px}
+.st-k{margin:0 0 16px;font:600 .72rem/1.4 Inter,"Pretendard Variable",sans-serif;letter-spacing:.2em;color:var(--gd)}
+.st-t{margin:0;font-size:clamp(1.7rem,3.6vw,2.7rem);font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.st-p{margin:20px 0 0;font-size:1.02rem;line-height:1.85;color:var(--iv2)}
+.st-p--em{color:var(--iv);font-weight:700}
+.st-p--note{font-size:.88rem;color:var(--iv3)}
+.st-line{margin:30px 0 0;padding:0 0 0 18px;list-style:none;border-left:1px solid var(--line)}
+.st-line li{position:relative;display:grid;grid-template-columns:132px minmax(0,1fr);gap:4px 14px;padding:7px 0;font-size:.92rem}
+.st-line li::before{content:"";position:absolute;left:-22px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--gd)}
+.st-line time{font:600 .78rem/1.9 Inter,sans-serif;letter-spacing:.06em;color:var(--gd2)}
+.st-line span{color:var(--iv2)}
+.st-facts{display:grid;gap:9px;margin:24px 0 0;padding:16px 0 0;list-style:none;border-top:1px solid var(--line)}
+.st-facts li{position:relative;padding-left:18px;font-size:.95rem;color:var(--iv)}
+.st-facts li::before{content:"";position:absolute;left:0;top:.8em;width:8px;height:1px;background:var(--gd)}
+.st-quote{margin:24px 0 0;padding:16px 18px;border-left:2px solid var(--gd);background:rgba(244,238,226,.04)}
+.st-quote p{margin:0;font-family:"Cormorant Garamond","Pretendard Variable",serif;font-size:1.05rem;font-style:italic;line-height:1.7;color:var(--iv)}
+.st-quote cite{display:block;margin-top:8px;font-style:normal;font-size:.78rem;color:var(--gd)}
+.st-acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:28px 0 0}
+.st-go{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;font-size:.88rem;font-weight:700;color:var(--sn);background:linear-gradient(135deg,var(--gd2),var(--gd));text-decoration:none;transition:filter .3s,transform .3s}
+.st-go:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.st-more{font-size:.88rem;font-weight:600;color:var(--gd2);text-decoration:none;border-bottom:1px solid rgba(233,220,192,.4);padding-bottom:2px}
+/* 기대한 경로 vs 실제 경로 */
+.st-path{position:relative;margin:30px 0 48px;aspect-ratio:640/230}
+.st-path svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.st-path circle{fill:var(--gd2)}
+.st-path__exp{fill:none;stroke:rgba(244,238,226,.35);stroke-width:1.5;stroke-dasharray:6 8}
+.st-path__real{fill:none;stroke:var(--gd);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
+.st-path__dot{fill:var(--gd)!important}
+.st-path__l{position:absolute;margin:0;font-size:clamp(.66rem,1.5vw,.8rem);line-height:1.35;color:var(--iv2);max-width:30%}
+.st-path__l--a{left:0;top:34%;max-width:18%}
+.st-path__l--b{right:0;top:34%;max-width:18%;text-align:right;color:var(--gd2);font-weight:700}
+.st-path__l--exp{left:36%;top:10%;color:var(--iv3)}
+.st-path__l--1{left:12%;top:80%;color:#F2B8A8}
+.st-path__l--2{left:45%;top:66%;max-width:28%}
+.st-path__l--3{left:76%;top:76%;max-width:22%}
+/* 장면 등장 — st-live 일 때만 숨김에서 시작 */
+.st-live .st-copy>*{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1)}
+.st-live .st-scene.is-in .st-copy>*{opacity:1;transform:none}
+.st-live .st-scene.is-in .st-copy>*:nth-child(2){transition-delay:.08s}
+.st-live .st-scene.is-in .st-copy>*:nth-child(3){transition-delay:.16s}
+.st-live .st-scene.is-in .st-copy>*:nth-child(4){transition-delay:.24s}
+.st-live .st-scene.is-in .st-copy>*:nth-child(5){transition-delay:.32s}
+.st-live .st-scene.is-in .st-copy>*:nth-child(n+6){transition-delay:.4s}
+.st-live .st-hello .st-ln{opacity:0;transform:translateY(.4em);transition:opacity 1s ease,transform 1s cubic-bezier(.16,1,.3,1)}
+.st-live .is-in .st-hello .st-ln{opacity:1;transform:none}
+.st-live .is-in .st-hello .st-ln:nth-child(2){transition-delay:.25s}
+.st-live .is-in .st-hello .st-ln:nth-child(3){transition-delay:.5s}
+.st-live .st-path__real{stroke-dashoffset:900;transition:stroke-dashoffset 2.2s cubic-bezier(.65,0,.35,1) .3s}
+.st-live .is-in .st-path__real{stroke-dashoffset:0}
+.st-live .st-path__l{opacity:0;transition:opacity .6s}
+.st-live .is-in .st-path__l{opacity:1}
+.st-live .is-in .st-path__l--1{transition-delay:1s}.st-live .is-in .st-path__l--2{transition-delay:1.5s}.st-live .is-in .st-path__l--3{transition-delay:1.9s}.st-live .is-in .st-path__l--b{transition-delay:2.3s}
+@media (max-width:760px){
+  .st-scene{min-height:100vh;align-items:flex-end;padding:96px 18px 72px}
+  .st-rail{right:6px}
+  .st-rail a{width:28px;height:22px;font-size:.6rem}
+  .st-copy{padding-right:26px}
+  .st-line li{grid-template-columns:1fr}
+  .st-brand small{display:none}
+  .st-path{display:flex;flex-direction:column;gap:6px;aspect-ratio:auto}
+  .st-path svg{position:relative;height:auto;aspect-ratio:640/230;margin-bottom:8px}
+  .st-path__l{position:static;max-width:none;font-size:.8rem;text-align:left!important}
+  .st-path__l::before{content:"— ";color:var(--gd)}
+  .st-path__l--a{order:1}.st-path__l--1{order:2}.st-path__l--2{order:3}.st-path__l--3{order:4}.st-path__l--b{order:5}.st-path__l--exp{order:6}
+}
+@media (max-width:430px){.st-top__back{display:none}.st-brand b{white-space:nowrap}}
+@media (hover:none){.st-hint{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.st-sky,.st-top,.st-rail,.st-bar{display:none}body{background:#fff;color:#000}}

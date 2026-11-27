@@ -512,7 +512,8 @@ function HeroClassic() {
     React.createElement("a", { href: "#signature", className: "btn hero-main" }, "\uBD80\uB3D9\uC0B0 AI 2\uC885 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
     React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uCEE8\uC124\uD305 \xB7 \uBC95\uB960 AX"), /*#__PURE__*/
     React.createElement("a", { href: "#policy", className: "btn btn--ghost" }, "\uC815\uCC45 \uCC38\uC5EC")
-    )
+    ), /*#__PURE__*/
+    React.createElement("a", { href: "story.html", className: "hero-story font-ko" }, "\u2733 3\uBD84 \uC774\uC57C\uAE30\uB85C \uBCF4\uAE30 ", /*#__PURE__*/React.createElement("span", { "aria-hidden": "true" }, "\u2192"))
     ), /*#__PURE__*/
 
     React.createElement("button", { type: "button", className: "ix-replay font-ko", onClick: () => ykIntro.replay() }, "\u25B6 \uC778\uD2B8\uB85C \uB2E4\uC2DC \uBCF4\uAE30"), /*#__PURE__*/
