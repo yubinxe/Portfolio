@@ -45,7 +45,7 @@
     "@media (min-width:1181px) and (max-width:1500px){header.hnav .nav-desktop{gap:clamp(8px,1.05vw,20px)!important}}" +
     "@media (max-width:1366px){html.yk-en .hnav__admin{display:none}}" +
     "@media (min-width:1181px) and (max-width:1300px){.hnav__name small{display:none}}" +
-    "@media (max-width:560px){body > header .sticker{display:none!important}html.yk-en body > header nav > .btn{letter-spacing:.04em!important;padding:0 .7em!important;font-size:.72rem!important}}" +
+    "@media (max-width:560px){body > header .sticker{display:none!important}html.yk-en body > header nav > .btn{letter-spacing:.04em!important;padding:0 .7em!important;font-size:.72rem!important}}@media (max-width:430px){html.yk-en body > header nav > .btn{display:none!important}}" +
     ".yk-theme span{min-width:26px}.yk-theme svg{display:block;width:12px;height:12px}" +
     /* dark.css 가 오기 전 한순간도 흰 바탕이 보이지 않게 — 바탕 · 글자만 먼저 */
     "html.yk-dark,html.yk-dark body{background:#0A0F1A;color:#E8E2D6;color-scheme:dark}" +
