@@ -512,6 +512,7 @@ function HeroClassic() {
             <a href="#ax-desk" className="btn btn--ghost">컨설팅 · 법률 AX</a>
             <a href="#policy" className="btn btn--ghost">정책 참여</a>
           </div>
+          <a href="story.html" className="hero-story font-ko">✳ 3분 이야기로 보기 <span aria-hidden="true">→</span></a>
         </div>
 
         <button type="button" className="ix-replay font-ko" onClick={() => ykIntro.replay()}>▶ 인트로 다시 보기</button>

@@ -697,3 +697,8 @@ header.hnav .hnav__cta .hnav__contact svg{display:block!important;width:12px;hei
   .yk-now{top:59px;left:50%;height:26px;padding:0 11px;font-size:.74rem;transform:translate(-50%,-6px);box-shadow:0 8px 22px -12px rgba(26,26,26,.4)}
   .yk-now.on{transform:translate(-50%,0)}
 }
+
+/* V16 첫 화면 — 3분 이야기(story.html)로 가는 조용한 글자 링크 */
+.hero-classic .hero-story{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:.86rem;font-weight:700;color:var(--gold-text);text-decoration:none;border-bottom:1px solid rgba(115,92,48,.35);padding-bottom:2px}
+.hero-classic .hero-story span{transition:transform .35s ease}
+.hero-classic .hero-story:hover span{transform:translateX(4px)}
