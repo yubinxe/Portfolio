@@ -78,7 +78,7 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   const links = [
-  ["소개", "#about"], ["역량", "#composite"], ["실무 사례", "#cases"], ["법률 AI 전환", "#ax-desk"], ["도구", "#artifacts"], ["정책", "#policy"], ["이력", "#trajectory"],
+  ["부동산 AI", "#signature"], ["소개", "#about"], ["역량", "#composite"], ["실무 사례", "#cases"], ["법률 AI 전환", "#ax-desk"], ["정책", "#policy"], ["이력", "#trajectory"],
   ["강의", "#lectures"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"]];
 
   return (/*#__PURE__*/
@@ -422,6 +422,65 @@ function IntroSequence() {
 /* ============================================================ HERO — 사진 중심 첫 화면 (V6.1 복구)
  * 기준: 7bfd9a1e780 의 사진형 Hero(강남 사진 · 중앙 YUBIN KIM · 간결한 CTA). 스크롤 고정 · 카메라 연출 · 건축 모형은 넣지 않는다.
  * 첫 화면이 답할 것 — 누구인가(AI 전략·AX 실행) · 무엇을 하는가(구조화 · 실행) · 어디로 가면 근거가 있는가(CTA 셋) */
+/* ============================================================ SIGNATURE — 부동산 × AI 두 작품(V15)
+ * 첫 화면 바로 뒤: 직접 만들어 부동산 현장에서 시연한 서비스 2종. 그다음 흐름이 컨설팅(법률 AX) → 정책.
+ * 사실만 — 보도(한국경제 · 중앙일보 실명, 2026. 11. 11) · 시연(9.30 코엑스 KREMA AI 전시관 · 11.11 부동산산업의 날) ·
+ * LCP 5.2→2.0초 · 느린 4G(커밋 b876cb9 · 커밋 수는 배지에 쓰지 않음) · 필드워크 태그(실지조사 5단계 · 조문 24 · 지목 28). ‘AI 모델로 추천’이라 쓰지 않는다 — AI 로 만든 부동산 제품 */
+const SIGNATURE = [
+{ id: "sig-zipcatch", no: "Ⅰ", kind: "청약 · 공공임대 맞춤 추천", name: "ZipCatch", ko: "집캐치",
+  line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리",
+  proof: ["한국경제 · 중앙일보 실명 보도", "공개 발표 · 시연 2회", "LCP 5.2→2.0초 · 느린 4G"],
+  theater: "zc-home", go: ["써 보기", "https://zipcatch.vercel.app"],
+  more: [["보도 원문", "https://www.hankyung.com/article/202611110211i"], ["제품 상세", "#ed-09"]] },
+{ id: "sig-fieldwork", no: "Ⅱ", kind: "감정평가 3D 실지조사", name: "Appraiser Fieldwork", ko: "감정평가사 필드워크",
+  line: "교재로 외우던 실지조사 → 3D 서울을 걸으며 5단계 수행",
+  proof: ["실지조사 5단계 · 조문 24 · 지목 28", "KREMA AI 전시관 시연 · 9.30", "Three.js · WebGL"],
+  pic: "fw-gwanghwamun", go: ["체험하기", "https://appraiser-fieldwork.vercel.app/"],
+  more: [["현장 기록", "gallery.html#zipconomy"], ["제품 상세", "#ed-10"]] }];
+
+function Signature() {
+  const ref = useReveal();
+  return (/*#__PURE__*/
+    React.createElement("section", { id: "signature", ref: ref, className: "sig", "aria-labelledby": "sig-title" }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap" }, /*#__PURE__*/
+    React.createElement("header", { className: "sig__head reveal" }, /*#__PURE__*/
+    React.createElement("p", { className: "sig__k font-sans" }, /*#__PURE__*/React.createElement("span", { lang: "en" }, "Signature"), /*#__PURE__*/React.createElement("b", { className: "font-ko" }, "\uBD80\uB3D9\uC0B0 \xD7 AI")), /*#__PURE__*/
+    React.createElement("h2", { id: "sig-title", className: "sig__t font-ko" }, /*#__PURE__*/React.createElement("span", { className: "sig__ta" }, "\uBD80\uB3D9\uC0B0 \uD604\uC7A5\uC758 \uC9C8\uBB38\uC5D0,"), " ", /*#__PURE__*/React.createElement("span", { className: "sig__tb" }, "\uC9C1\uC811 \uB9CC\uB4E0 \uC81C\uD488\uC73C\uB85C \uB2F5\uD569\uB2C8\uB2E4")), /*#__PURE__*/
+    React.createElement("p", { className: "sig__lead font-ko" }, "KREMA AI \uC804\uC2DC\uAD00\uACFC \uBD80\uB3D9\uC0B0\uC0B0\uC5C5\uC758 \uB0A0\uC5D0\uC11C \uC9C1\uC811 \uC2DC\uC5F0\uD55C \uB450 \uC791\uD488. \uAC19\uC740 \uD310\uB2E8\uC774 \uCEE8\uC124\uD305\uACFC \uC815\uCC45\uC73C\uB85C \uC774\uC5B4\uC9D1\uB2C8\uB2E4.")
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "sig__list" },
+    SIGNATURE.map((x, i) => /*#__PURE__*/
+    React.createElement("li", { key: x.id, id: x.id, className: "sig__item reveal" + (i % 2 ? " sig__item--flip" : ""), style: { "--i": i } }, /*#__PURE__*/
+    React.createElement("a", { className: "sig__shot", href: x.go[1], target: "_blank", rel: "noreferrer", "aria-label": x.ko + " " + x.go[0] },
+    x.theater ? /*#__PURE__*/React.createElement(TheaterShot, { name: x.theater, alt: "" }) : /*#__PURE__*/
+    React.createElement(Pic, { name: x.pic, fallback: "images/" + x.pic + ".jpg", sizes: "(max-width: 860px) 92vw, 56vw", alt: "", loading: "lazy", decoding: "async" }), /*#__PURE__*/
+    React.createElement("span", { className: "sig__no font-serif", "aria-hidden": "true" }, x.no)
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "sig__body" }, /*#__PURE__*/
+    React.createElement("p", { className: "sig__kind font-ko" }, x.kind), /*#__PURE__*/
+    React.createElement("h3", { className: "sig__name" }, /*#__PURE__*/React.createElement("span", { className: "font-serif", lang: "en" }, x.name), /*#__PURE__*/React.createElement("small", { className: "font-ko" }, x.ko)), /*#__PURE__*/
+    React.createElement("p", { className: "sig__line font-ko" }, x.line), /*#__PURE__*/
+    React.createElement("ul", { className: "sig__proof font-ko" }, x.proof.map((p) => /*#__PURE__*/React.createElement("li", { key: p }, p))), /*#__PURE__*/
+    React.createElement("p", { className: "sig__acts font-ko" }, /*#__PURE__*/
+    React.createElement("a", { className: "sig__go", href: x.go[1], target: "_blank", rel: "noreferrer" }, x.go[0], " ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 15 })),
+    x.more.map(([t, h]) => /*#__PURE__*/React.createElement("a", _extends({ key: h, className: "sig__more", href: h }, /^https?:/.test(h) ? { target: "_blank", rel: "noreferrer" } : {}), t))
+    )
+    )
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("nav", { className: "sig__flow font-ko reveal", "aria-label": "\uC774\uC5B4\uC9C0\uB294 \uD750\uB984" }, /*#__PURE__*/
+    React.createElement("span", { className: "sig__step is-now" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "01"), "\uBD80\uB3D9\uC0B0 AI"), /*#__PURE__*/
+    React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("a", { className: "sig__step", href: "#ax-desk" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "02"), "\uCEE8\uC124\uD305 \xB7 \uBC95\uB960 AX"), /*#__PURE__*/
+    React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/
+    React.createElement("a", { className: "sig__step", href: "#policy" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "03"), "\uC815\uCC45 \xB7 \uC81C\uB3C4")
+    )
+    )
+    ));
+
+}
+
 function HeroClassic() {
   const ref = useReveal();
   return (/*#__PURE__*/
@@ -436,7 +495,7 @@ function HeroClassic() {
     React.createElement("div", { className: "wrap reveal hero-copy" }, /*#__PURE__*/
     React.createElement("div", { className: "menu-rule hero-rule" }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/
     React.createElement("p", { className: "font-sans hero-kicker" }, "Seoul \xB7 Portfolio 2026"), /*#__PURE__*/
-    React.createElement("p", { className: "eyebrow hero-eyebrow" }, "AI Strategy & Consulting"), /*#__PURE__*/
+    React.createElement("p", { className: "eyebrow hero-eyebrow" }, "Real Estate AI \xB7 Strategy \xB7 Policy"), /*#__PURE__*/
     React.createElement("h1", { id: "hero-title", className: "font-serif hero-name" }, /*#__PURE__*/
     React.createElement("span", { className: "sr-only" }, "\uAE40\uC720\uBE48 Yubin Kim \u2014 AI \uC804\uB7B5 \xB7 AX \uC2E4\uD589 "), /*#__PURE__*/
     React.createElement("span", { "aria-hidden": "true", className: "hero-name__rows" }, /*#__PURE__*/
@@ -445,14 +504,14 @@ function HeroClassic() {
     )
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-sub" }, /*#__PURE__*/
-    React.createElement("p", { className: "font-ko hero-role" }, /*#__PURE__*/React.createElement("b", null, "\uD604\uC5C5\uC758 \uBB38\uC81C\uB97C \uAE30\uC220\uB85C \uD574\uACB0\uD558\uB294 AX\xB7\uC804\uB7B5\uAE30\uD68D \uC2E4\uBB34\uC790")), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko hero-role" }, /*#__PURE__*/React.createElement("b", null, "\uBD80\uB3D9\uC0B0\uC744 AI\uB85C \uC77D\uACE0, \uCEE8\uC124\uD305\uACFC \uC815\uCC45\uC73C\uB85C \uC787\uB294 \uC2E4\uBB34\uC790")), /*#__PURE__*/
     React.createElement("p", { className: "font-ko hero-lead" }, "\uBCF5\uC7A1\uD55C \uBB38\uC81C\uB97C \uAD6C\uC870\uD654\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uAE30\uC220\uB85C \uC2E4\uD589\uD569\uB2C8\uB2E4."), /*#__PURE__*/
-    React.createElement("p", { className: "font-ko hero-proof" }, "\uBC95\uB960\xB7\uBD80\uB3D9\uC0B0 \uBD84\uC57C\uC758 \uC2E4\uBB34 \uACBD\uD5D8\uC744 \uBC14\uD0D5\uC73C\uB85C \uC5C5\uBB34 \uD504\uB85C\uC138\uC2A4\uB97C \uBD84\uC11D\uD558\uACE0, AI\uC640 \uC790\uB3D9\uD654\uB97C \uD65C\uC6A9\uD55C \uAC1C\uC120 \uACFC\uC81C\uB97C \uC124\uACC4\xB7\uAD6C\uD604\uD569\uB2C8\uB2E4. \uD604\uC7A5\uC5D0\uC11C \uD655\uC778\uD55C \uBB38\uC81C\uB97C \uC2E4\uD589 \uAC00\uB2A5\uD55C \uC2DC\uC2A4\uD15C\uC73C\uB85C \uC804\uD658\uD558\uB294 \uB370 \uC9D1\uC911\uD569\uB2C8\uB2E4.")
+    React.createElement("p", { className: "font-ko hero-proof" }, "\uCCAD\uC57D \xB7 \uACF5\uACF5\uC784\uB300 \uCD94\uCC9C \uC11C\uBE44\uC2A4\uC640 \uAC10\uC815\uD3C9\uAC00 3D \uC2E4\uC9C0\uC870\uC0AC\uB97C \uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uBD80\uB3D9\uC0B0 \uD604\uC7A5\uC5D0\uC11C \uC2DC\uC5F0\uD588\uC2B5\uB2C8\uB2E4. \uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0 \uC2E4\uBB34\uC5D0\uC11C \uB2E4\uC9C4 \uD310\uB2E8\uC744 AI \uC804\uB7B5 \uCEE8\uC124\uD305\uACFC \uC815\uCC45 \uC81C\uC548\uC73C\uB85C \uC787\uC2B5\uB2C8\uB2E4.")
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-cta" }, /*#__PURE__*/
-    React.createElement("a", { href: "#trial-brief", className: "btn hero-main" }, "\uB300\uD45C \uD504\uB85C\uC81D\uD2B8 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
-    React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uBC95\uB960 AX 6\uB300 \uC2DC\uC2A4\uD15C"), /*#__PURE__*/
-    React.createElement("a", { href: "#contact", className: "btn btn--ghost" }, "\uD611\uC5C5 \uBB38\uC758")
+    React.createElement("a", { href: "#signature", className: "btn hero-main" }, "\uBD80\uB3D9\uC0B0 AI 2\uC885 \uBCF4\uAE30 ", /*#__PURE__*/React.createElement(ArrowDown, { size: 15 })), /*#__PURE__*/
+    React.createElement("a", { href: "#ax-desk", className: "btn btn--ghost" }, "\uCEE8\uC124\uD305 \xB7 \uBC95\uB960 AX"), /*#__PURE__*/
+    React.createElement("a", { href: "#policy", className: "btn btn--ghost" }, "\uC815\uCC45 \uCC38\uC5EC")
     )
     ), /*#__PURE__*/
 
@@ -2649,7 +2708,7 @@ function ArtifactsSection() {
   return (/*#__PURE__*/
     React.createElement("section", { id: "artifacts", ref: ref, className: "arts", "aria-labelledby": "arts-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
-    React.createElement(SectionHead, { no: "04 \uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C", ko: "\uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC2E4\uC81C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4", en: "Selected Works \xB7 Four Independent Products" }), /*#__PURE__*/
+    React.createElement(SectionHead, { no: "05 \uC9C1\uC811 \uB9CC\uB4E0 \uB3C4\uAD6C", ko: "\uD544\uC694\uD55C \uB3C4\uAD6C\uB294 \uC9C1\uC811 \uB9CC\uB4E4\uACE0, \uC2E4\uC81C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4", en: "Selected Works \xB7 Four Independent Products" }), /*#__PURE__*/
     React.createElement("div", { id: "tools", className: "arts__intro reveal" }, /*#__PURE__*/
     React.createElement("p", { className: "arts__lead font-ko", id: "arts-title" }, "\uD63C\uC790 \uB05D\uAE4C\uC9C0 \uB9CC\uB4E4\uC5B4 \uBC30\uD3EC\uD55C ", /*#__PURE__*/React.createElement("b", null, "\uAC1C\uC778 \uC81C\uD488"), " 4\uC885 \u2014 \uD68C\uC0AC \uC2DC\uC2A4\uD15C\uC774 \uC544\uB2D9\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("p", { className: "wk__hint font-sans", "aria-hidden": "true" }, "\uCE74\uB4DC\uB97C \uACE0\uB974\uBA74 \uC544\uB798\uC5D0 \uD3BC\uCCD0\uC9D1\uB2C8\uB2E4")
@@ -2708,7 +2767,7 @@ function PolicySection() {
     React.createElement("section", { id: "policy", ref: ref, className: "pol", "aria-labelledby": "pol-title" }, /*#__PURE__*/
     React.createElement("div", { className: "wrap" }, /*#__PURE__*/
     React.createElement("header", { className: "pol__head reveal" }, /*#__PURE__*/
-    React.createElement("p", { className: "sh__no font-ko" }, "05 \uC815\uCC45 \uCC38\uC5EC ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Policy Participation & Public Deliberation")), /*#__PURE__*/
+    React.createElement("p", { className: "sh__no font-ko" }, "04 \uC815\uCC45 \uCC38\uC5EC ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Policy Participation & Public Deliberation")), /*#__PURE__*/
     React.createElement("h2", { id: "pol-title", className: "pol__t font-ko" }, "\uD604\uC7A5\uC5D0\uC11C \uBC1C\uACAC\uD55C \uBB38\uC81C\uB97C", /*#__PURE__*/React.createElement("br", null), "\uC81C\uB3C4\uC758 \uC5B8\uC5B4\uB85C \uC62E\uAE41\uB2C8\uB2E4"), /*#__PURE__*/
     React.createElement("p", { className: "pol__lead font-ko" }, "\uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0 \uD604\uC7A5\uC758 \uBB38\uC81C\uB294 \uACB0\uAD6D \uC81C\uB3C4\uC640 \uC774\uD574\uAD00\uACC4\uC758 \uBB38\uC81C\uB85C \uC774\uC5B4\uC9D1\uB2C8\uB2E4. \uADF8\uB798\uC11C \uC18C\uD504\uD2B8\uC6E8\uC5B4\uB97C \uB9CC\uB4DC\uB294 \uB370\uC11C \uBA48\uCD94\uC9C0 \uC54A\uACE0, \uC815\uCC45 \uB17C\uC758\uC758 \uC790\uB9AC\uC5D0 \uB098\uAC00 \uB4E3\uACE0, \uC81C\uC548\uD558\uACE0, \uC6B4\uC601\uC5D0 \uCC38\uC5EC\uD569\uB2C8\uB2E4."
     ), /*#__PURE__*/
@@ -3367,4 +3426,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

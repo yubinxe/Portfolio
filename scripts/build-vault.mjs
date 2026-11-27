@@ -56,7 +56,7 @@ const vaultPayload = {
     { fig: "222,486", unit: "INDEXED FILES", sub: "1,183.57 GB · Zero-Copy NAS", label: "Gyunggook 전사 지식 엔진" },
     { fig: "674,953", unit: "FTS5 CHUNKS", sub: "Trigram 색인 · 외부 유출 0건", label: "온디바이스 검색 파이프라인" },
     { fig: "77", unit: "SLIDES", sub: "광명시흥 3기 신도시 보상 구조화", label: "공익사업 수용·재결 분석" },
-    { fig: "160", unit: "HOURS / 16 DAYS", sub: "204 커밋 · LCP 5.2s → 2.0s", label: "집캐치 독학·단독 배포 몰입" }
+    { fig: "2.0", unit: "SEC · MOBILE LCP", sub: "5.2s → 2.0s · 느린 4G · CPU 4배 감속", label: "집캐치 첫 화면 개선" }
   ],
   shares: bench.shares.map((s) => ({
     domain:

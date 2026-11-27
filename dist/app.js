@@ -20,14 +20,15 @@ function App() {
     React.createElement("main", null, /*#__PURE__*/
     React.createElement(IntroSequence, null), /*#__PURE__*/
     React.createElement(HeroClassic, null), /*#__PURE__*/
+    React.createElement(Signature, null), /*#__PURE__*/
     React.createElement(EntryTracks, null), /*#__PURE__*/
     React.createElement(Ledger, null), /*#__PURE__*/
     React.createElement(CaseIndex, null), /*#__PURE__*/
     React.createElement(About, null), /*#__PURE__*/
     React.createElement(Composite, null), /*#__PURE__*/
     React.createElement(AXCommand, null), /*#__PURE__*/
-    React.createElement(ArtifactsSection, null), /*#__PURE__*/
     React.createElement(PolicySection, null), /*#__PURE__*/
+    React.createElement(ArtifactsSection, null), /*#__PURE__*/
     React.createElement(ResearchArchive, null), /*#__PURE__*/
     React.createElement(Trajectory, null), /*#__PURE__*/
     React.createElement(Channels, null), /*#__PURE__*/

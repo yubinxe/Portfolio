@@ -11,7 +11,7 @@
   var onIndex = path === "index.html";
   var base = onIndex ? "" : "index.html";
   var LINKS = [
-    ["소개", base + "#about"], ["역량", base + "#composite"], ["실무 사례", base + "#cases"], ["법률 AI 전환", base + "#ax-desk"], ["직접 만든 도구", base + "#artifacts"], ["정책 참여", base + "#policy"], ["이력", base + "#trajectory"],
+    ["부동산 AI", base + "#signature"], ["소개", base + "#about"], ["역량", base + "#composite"], ["실무 사례", base + "#cases"], ["법률 AI 전환", base + "#ax-desk"], ["정책 참여", base + "#policy"], ["직접 만든 도구", base + "#artifacts"], ["이력", base + "#trajectory"],
     ["강의", onIndex ? "#lectures" : "lecture.html"], ["채널", base + "#channels"], ["갤러리", "gallery.html"], ["경력 상세", "career.html"], ["연락", base + "#contact"],
   ];
   var current = { "gallery.html": "갤러리", "lecture.html": "강의", "career.html": "경력 상세" }[path];
@@ -19,7 +19,7 @@
 
   // 메인: 폰 헤더에 현재 섹션·읽은 정도 표시
   if (onIndex) (function () {
-    var S = "glance:한눈에,cases:실무 사례,about:소개,composite:역량,ax-desk:법률 AI 전환,artifacts:네 가지 도구,policy:정책 참여,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
+    var S = "signature:부동산 AI,glance:한눈에,cases:실무 사례,about:소개,composite:역량,ax-desk:법률 AI 전환,policy:정책 참여,artifacts:네 가지 도구,research:연구 기록,trajectory:이력,channels:채널,lectures:강의,contact:연락".split(",");
     var bar = document.createElement("div"), tag = document.createElement("a"), cur = "", tk = 0;
     bar.className = "yk-prog"; tag.className = "yk-now font-sans"; tag.href = "#top"; tag.setAttribute("aria-label", "현재 섹션, 맨 위로");
     document.body.append(bar, tag);
