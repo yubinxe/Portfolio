@@ -64,7 +64,7 @@
       function fin() { if (done) return; done = true; H.classList.add("yk-en-done"); res(); }
       setTimeout(fin, 4000); /* 안전장치 — 사전이 늦어도 화면은 보인다 */
       var s = D.createElement("script");
-      s.src = base + "i18n-en.js?v=5";
+      s.src = base + "i18n-en.js?v=6";
       s.onload = function () { DICT = W.YK_EN || null; whenDom(function () { whenApp(function () { if (DICT) { run(D); watch(); } fin(); }); }); };
       s.onerror = fin;
       (D.head || H).appendChild(s);

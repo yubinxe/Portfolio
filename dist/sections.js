@@ -585,6 +585,11 @@ const CASE_CAPS = [
 ["AI · 데이터 기반 문제 해결", "AI & Data", "자료 수집 · 데이터 구조화 · 업무 자동화 · AI 시스템 구현과 검증."],
 ["전략기획 · 사업적 사고", "Strategy", "조직의 문제를 구조화하고 기술과 경영 판단을 잇습니다."]];
 
+/* 사례집(cases-data.js · bid)의 전 → 후 네 줄 그대로 — test/cases.test.mjs 가 같은지 확인 */
+const CASE_BA = {
+  before: ["유사 사업을 검색어로 하나씩 찾는다", "세대수 · 연면적 기준이 사례마다 달라 비교가 어긋난다", "높거나 낮은 금액을 감으로 짚는다", "보고서에 비교 근거가 남지 않는다"],
+  after: ["사업 유형 · 용역 종류로 비교군을 고정한다", "세대수 단가(계약금액 ÷ 세대수)로 규모를 맞춘다", "비교군 중앙값 대비 배율로 검토 필요 금액을 표시한다", "필터 조건 · 기준일 · 비교 사례가 보고서에 함께 남는다"]
+};
 function CaseIndex() {
   const ref = useReveal();
   return (/*#__PURE__*/
@@ -603,6 +608,14 @@ function CaseIndex() {
     React.createElement("span", { className: "cx__body" }, /*#__PURE__*/React.createElement("b", { className: "font-ko", title: c.en }, c.ko), /*#__PURE__*/React.createElement("span", { className: "cx__line font-ko" }, c.line), /*#__PURE__*/React.createElement("span", { className: "cx__badge font-ko" }, c.badge)), /*#__PURE__*/
     React.createElement("span", { className: "cx__kind cx__kind--" + c.kind + " font-ko" }, CASE_KIND[c.kind])
     ))
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "cx__ba reveal" }, /*#__PURE__*/
+    React.createElement("p", { className: "cx__ba-k font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uB2EC\uB77C\uC9C4 \uC77C\uD558\uB294 \uBC29\uC2DD"), " \u2014 \uC815\uBE44\uC0AC\uC5C5 \uC785\uCC30\xB7\uC6A9\uC5ED\uBE44 \uBD84\uC11D ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--actual" }, "\uC2E4\uC81C \uC218\uD589")), /*#__PURE__*/
+    React.createElement("ol", { className: "cx__ba-list font-ko" },
+    CASE_BA.before.map((b, i) => /*#__PURE__*/
+    React.createElement("li", { key: b, style: { "--i": i } }, /*#__PURE__*/React.createElement("s", null, b), /*#__PURE__*/React.createElement("i", { "aria-hidden": "true" }, "\u2192"), /*#__PURE__*/React.createElement("b", null, CASE_BA.after[i]))
+    )
     )
     ), /*#__PURE__*/
     React.createElement("p", { className: "cx__foot font-ko" }, /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--actual" }, "\uC2E4\uC81C \uC218\uD589"), " \uACBD\uAD6D\uC5D0\uC11C \uC9C1\uC811 \uC218\uD589(\uC790\uB8CC \uBE44\uACF5\uAC1C) ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--demo" }, "\uACF5\uAC1C \uC2DC\uC5F0"), " \uAC00\uC0C1 \uB370\uC774\uD130 \uC2DC\uC5F0 ", /*#__PURE__*/React.createElement("span", { className: "cx__kind cx__kind--future" }, "\uD5A5\uD6C4 \uD655\uC7A5"), " \uBBF8\uAD6C\uD604 \u2014 \uC138\uBD80 \uB9E5\uB77D\uC740 \uC0AC\uB840\uC9D1\uC5D0\uC11C."), /*#__PURE__*/
@@ -640,6 +653,21 @@ function EntryTracks() {
 
 function Ledger() {
   const ref = useReveal();
+  /* 숫자 — 화면에 들어오면 0에서 제 값까지(움직임 줄이기면 그대로). 글자 자체는 프리렌더된 최종값 */
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el || !("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      const b = e.target,to = parseInt(b.getAttribute("data-count"), 10);let t0 = 0;
+      if (!(to > 0)) return;
+      const run = (ts) => {if (!t0) t0 = ts;const p = Math.min(1, (ts - t0) / 1200);b.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));if (p < 1) requestAnimationFrame(run);};
+      requestAnimationFrame(run);
+    }), { threshold: 0.6 });
+    el.querySelectorAll("[data-count]").forEach((b) => io.observe(b));
+    return () => io.disconnect();
+  }, []);
   /* 작업 목록(EDITIONS)에서 바로 센다 — 항목을 더하거나 빼도 숫자가 어긋나지 않게 */
   const facts = [
   [String(EDITIONS.length), "결과물"], [String(EDITIONS.filter((e) => /배포 완료|사내 운영/.test(e.status)).length), "배포 · 사내 운영"],

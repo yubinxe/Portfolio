@@ -2,6 +2,7 @@
 
 ## 구조
 - The Story `story.html`(V16 · 3분 장면형 이야기: `story.css` · `story.js` — 금빛 입자가 장면 data-shape 마다 모양을 바꿈 · 생년 금지 · 문장은 docs/content-matrix V16 · test/story.test.mjs 가 영문 사전 누락 검사). 첫 화면 `.hero-story` · 모바일 메뉴 ‘이야기(3분)’에서 연결
+- 배경음악(V17) `bgm.js`: 음원 파일 없이 Web Audio 로 생성하는 앰비언트 · 기본 꺼짐 · 켠 상태 localStorage `yk.bgm`(다음 페이지는 첫 클릭에서 이어 재생) · 단추 .yk-bgm(설정 캡슐 / KO·EN 옆) · 첫 화면 금빛 파형 .yk-wave. 외부 음원 · 자동 재생 금지(test/bgm.test.mjs). index #cases 아래 전 → 후 4줄(CASE_BA = cases-data bid)
 - 정적 페이지: `index.html` · `gallery.html` · `lecture.html` · `career.html` · `legal-ax.html`(법률 AX 공개 시연: `legal-ax-data.js` · `legal-ax-domain.js` · `legal-ax.jsx` → `dist/legal-ax.js` · `legal-ax.css`) · `trial-brief.html`(대표 프로젝트 Gyunggook Trial Brief · 개인 시제품: `trial-brief-data.js` · `trial-brief-domain.js` · `trial-brief.jsx` → `dist/trial-brief.js` · `trial-brief.css` · 문서 `docs/trial-brief.md`)
 - React 18 UMD: `sections.jsx` → `npm run build` → `dist/sections.js` (dist 도 커밋)
 - CSS: `styles.css`(예산 96KB) + `features.css`(V3 추가분, 예산 24KB). 새 스타일은 features.css 끝에.
@@ -30,10 +31,10 @@
 - `npm run seed:build` — kb.js 변경 후 필수
 - `npm run build:images` — 사진 추가 시(AVIF/WebP → images/opt/, sections.jsx `OPT` 맵)
 - `npm run build:resume-pdf` — resume.html · resume.css 를 고친 뒤 필수(로컬은 NODE_PATH=gamgak/node_modules CHROME_PATH=설치된 chrome.exe)(A4 1쪽 resume.pdf · 지문 docs/resume-pdf.json, 테스트가 대조)
-- `npm test` — 136건 모두 통과해야 커밋(ax-lab 은 `cd ax-lab && npm test` 36건 별도)
+- `npm test` — 140건 모두 통과해야 커밋(ax-lab 은 `cd ax-lab && npm test` 36건 별도)
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=35` · `dist/sections.js?v=72` · `dist/app.js?v=13` · `chatbot.js?v=19` · `mnav.js?v=13` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=11`(index 전용) · `intro.css?v=6`(index 전용) · `kb.js?v=20261127a` · `i18n.js?v=6`(사전 `i18n-en.js?v=5` 은 i18n.js 안에서 지정 — 사전 바꾸면 둘 다) · story: `story.css?v=1` · `story.js?v=1` · resume: `resume.css?v=3` · `resume.js?v=1` · 공통 손길 층: `polish.css?v=3` · `polish.js?v=6`(index · gallery · career · lecture · cases · resume) · cases: `cases.css?v=1` · `cases-data.js?v=2` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=3` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=2` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=36` · `dist/sections.js?v=73` · `bgm.js?v=1`(index · gallery · career · lecture · cases · resume · story) · `dist/app.js?v=13` · `chatbot.js?v=19` · `mnav.js?v=13` · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=11`(index 전용) · `intro.css?v=6`(index 전용) · `kb.js?v=20261127a` · `i18n.js?v=7`(사전 `i18n-en.js?v=6` 은 i18n.js 안에서 지정 — 사전 바꾸면 둘 다) · story: `story.css?v=1` · `story.js?v=1` · resume: `resume.css?v=3` · `resume.js?v=1` · 공통 손길 층: `polish.css?v=3` · `polish.js?v=6`(index · gallery · career · lecture · cases · resume) · cases: `cases.css?v=1` · `cases-data.js?v=2` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=3` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=2` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.
