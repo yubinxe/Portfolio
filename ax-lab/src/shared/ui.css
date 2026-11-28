@@ -81,3 +81,5 @@ a{color:var(--navy)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 @media print{.ax-top,.ax-tabs,.ax-label,.noprint{display:none!important}body{background:#fff}}
+/* 폰 — 16px 미만 입력칸은 아이폰이 초점 때 확대한 채 둔다 */
+@media (max-width:760px){input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important}}

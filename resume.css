@@ -189,3 +189,11 @@ a{color:var(--navy)}
   a{color:var(--navy);text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* V18 폰 — 도구 막대는 화면을 따라오지 않게(세 줄이 화면 5분의 1을 가리던 문제), 같은 이름(Résumé) 제목은 숨김 */
+@media screen and (max-width:560px){
+  .rv-bar{position:static;gap:8px;padding:8px 14px 10px}
+  .rv-bar__t{display:none}
+  .rv-back{display:inline-flex;align-items:center;min-height:40px;margin-right:auto}
+  .rv-tools{display:contents}
+  .rv-tools .rv-btn{flex:1 1 30%;justify-content:center;min-height:42px;padding:0 8px;white-space:nowrap}
+}
