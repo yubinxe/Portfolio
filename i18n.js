@@ -40,6 +40,9 @@
     ".yk-lang span{display:grid;place-items:center;min-width:24px;height:22px;padding:0 5px;border-radius:999px;transition:background .3s,color .3s}" +
     ".yk-lang span.is-on{background:#13284B;color:#F7F4EE}.yk-lang:hover{border-color:#13284B}.yk-lang:focus-visible{outline:3px solid #8FB8F2;outline-offset:2px}" +
     ".yk-lang--float{position:fixed;top:12px;right:12px;z-index:9000}" +
+    /* 폰: 떠 있는 KO/EN 이 표 · 제목 위를 덮지 않게 왼쪽 아래로 · 28px 알약은 보이는 크기 그대로 두고 누르는 범위만 44px 로 */
+    "@media (max-width:760px){.yk-lang--float{top:auto;right:auto;left:max(12px,env(safe-area-inset-left));bottom:calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);box-shadow:0 6px 18px -8px rgba(19,40,75,.45)}}" +
+    "@media (pointer:coarse){.yk-lang,.yk-bgm{position:relative}.yk-lang::after,.yk-bgm::after{content:'';position:absolute;inset:-8px -2px}.yk-lang--float{position:fixed}}" +
     /* 영문은 메뉴 글이 길다 — 이름 밑줄 문구를 접고 간격을 줄여 한 줄에 맞춘다 */
     "@media (min-width:1181px){html.yk-en .hnav__name small{display:none}html.yk-en header .nav-desktop{gap:clamp(8px,.95vw,16px)!important;font-size:.82rem!important}}" +
     "@media (min-width:1181px) and (max-width:1500px){header.hnav .nav-desktop{gap:clamp(8px,1.05vw,20px)!important}}" +

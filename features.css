@@ -714,3 +714,37 @@ header.hnav .hnav__cta .hnav__contact svg{display:block!important;width:12px;hei
 .cx__ba.in .cx__ba-list s::after{transform:scaleX(1)}.cx__ba.in .cx__ba-list i,.cx__ba.in .cx__ba-list b{opacity:1;transform:none}
 @media (max-width:760px){.cx__ba-list li{grid-template-columns:1fr;gap:4px}.cx__ba-list i{display:none}.cx__ba-list b::before{content:"→ ";color:var(--gold-text)}}
 @media (prefers-reduced-motion:reduce){.cx__ba-list s::after,.cx__ba-list i,.cx__ba-list b{transition:none}}
+/* V18 폰 정밀 점검 — 첫 화면 겹침 · 4칸 넘침 · 작은 글자 · 버튼 줄 · 하위 페이지 머리띠 넘침 */
+@media (max-width:760px){
+  .scroll-ink{display:none}                                   /* 위쪽 읽기 막대가 둘(.yk-prog) — 하나만 */
+  .hero-classic .scroll-cue{display:none}                     /* 3분 이야기 링크 · 인트로 단추와 겹침 */
+  html.ix-off .hero-classic .ix-replay{bottom:calc(14px + env(safe-area-inset-bottom));min-height:40px;padding:0 13px;font-size:.78rem}
+  .hero-classic .hero-story{min-height:40px;margin-top:10px}
+  html body .axp__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body .axp__steps li:nth-child(2) button{border-right:0}
+  html body .axp__steps li:nth-child(-n+2) button{border-bottom:1px solid var(--v5-on-faint)}
+  html body .axp__steps b,html body .axp__steps em{font-size:11px}
+  html body .axp__fic,html body .ax-fic{font-size:11px}
+  .wcase__lbl,.wcase__tag,.wcase__badge,.photo-card__chip,.de22__tag,.sticker,.wk__fig,.g-credit,.nd-label,.nd-steps__role,.g-src,.lec-track__label{font-size:11px!important}
+  .pl-more{margin-right:14px}
+  .pl-more + a{display:inline-flex;align-items:center;min-height:40px}
+  .sig__more,.sig__step,.entry a,.hex__go,.axc__vault,.lc-cta,.lec-card__case{display:inline-flex;align-items:center;min-height:40px}
+  .cx__ba-list li{padding:11px 14px}
+}
+@media (max-width:560px){
+  .cx__list a{grid-template-columns:26px 1fr;row-gap:6px}
+  .cx__list .cx__body{grid-column:2;grid-row:1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+  .cx__list .cx__body > b,.cx__list .cx__line{flex:1 1 100%}
+  .cx__list .cx__kind{grid-column:2;grid-row:1;justify-self:end;align-self:start;margin-top:2px}
+  .cx__list .cx__body > b{padding-right:64px}
+  #contact div:has(> #copyMail){display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important}
+  #contact div:has(> #copyMail) > *{width:100%;justify-content:center;padding-left:8px;padding-right:8px}
+  #contact div:has(> #copyMail) > :first-child{grid-column:1/-1}
+  /* 하위 페이지(갤러리 · 경력 · 강의) 머리띠 — 메뉴는 아이콘만, ‘연락하기’는 메뉴 안으로(오른쪽 넘침 해소) */
+  body > header .wrap{gap:8px}
+  body > header nav[aria-label="주요 메뉴"]{gap:6px!important}
+  body > header nav[aria-label="주요 메뉴"] > .btn{display:none!important}
+  body > header .mnav-btn{font-size:0;gap:0;padding:0;width:44px;justify-content:center}
+}
+@media (max-width:560px){html body .axo__lanes{padding:18px 14px 36px;gap:8px}}
+@media (max-width:430px){html body #manifesto .hero-eyebrow,html body .hero-classic .hero-eyebrow{letter-spacing:.16em!important;font-size:.68rem!important;text-wrap:balance}}

@@ -109,3 +109,13 @@ html.yk-dark body>header.st-top{background:linear-gradient(180deg,rgba(11,26,51,
 @media (hover:none){.st-hint{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{.st-sky,.st-top,.st-rail,.st-bar{display:none}body{background:#fff;color:#000}}
+/* V18 폰 — 장 번호 레일은 본문 오른쪽 끝과 맞닿아 숨김(아래 진행 막대가 같은 일을 함) · 머리띠 바탕을 채워 지나가는 글자와 겹치지 않게 */
+@media (max-width:760px){
+  .st-rail{display:none}
+  .st-copy{padding-right:0}
+  .st-top{padding:10px 14px;background:rgba(11,26,51,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,174,122,.14)}
+  .st-motion{min-height:36px}
+  .st-more,.st-down,.st-up{display:inline-flex;align-items:center;min-height:40px}
+  .st-top__r{gap:6px}
+}
+@media (max-width:360px){.st-brand b{display:none}.st-brand__mark{font-size:1.3rem}}

@@ -129,3 +129,5 @@ html.pl .pl-roll__b .pl-roll__c{transform:translateY(105%)}
 html.pl .pl-roll:hover .pl-roll__a .pl-roll__c,html.pl .pl-roll:focus-visible .pl-roll__a .pl-roll__c{transform:translateY(-105%)}
 html.pl .pl-roll:hover .pl-roll__b .pl-roll__c,html.pl .pl-roll:focus-visible .pl-roll__b .pl-roll__c{transform:translateY(0)}
 @media (prefers-reduced-motion:reduce){.pl-roll__c{transition:none}}
+/* V18 터치 — ‘더 보기’ 누르는 높이 */
+@media (pointer:coarse){.pl-more{min-height:34px;padding:8px 0}}

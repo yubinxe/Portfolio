@@ -392,7 +392,7 @@
 .yk-teaser__txt b{ display:flex; justify-content:space-between; font-size:13px; font-weight:650; margin-bottom:1px; }
 .yk-teaser__txt b small{ font-weight:400; font-size:12px; color:var(--yk-ink-soft); }
 .yk-teaser__close{ position:absolute; top:-9px; right:-9px; width:28px; height:28px; border-radius:50%; display:grid; place-items:center;
-  background:#1B2A4A; color:#fff; border:2px solid #FAF8F3; font-size:17px; font-weight:700; cursor:pointer; line-height:1;
+  background:#1B2A4A; color:#fff; border:2px solid #FAF8F3; padding:0; font-size:15px; font-weight:700; cursor:pointer; line-height:1;
   box-shadow:0 4px 12px -4px rgba(11,26,51,.6); transition:transform .2s; }
 .yk-teaser__close:hover,.yk-teaser__close:focus-visible{ transform:scale(1.1); }
 .yk-teaser__close:focus-visible{ outline:2px solid var(--yk-gold-lt); outline-offset:2px; }
@@ -533,7 +533,12 @@
   .yk-head{ padding-top:14px; }
   .yk-head::before{ content:""; display:block; width:38px; height:5px; border-radius:3px; background:rgba(14,26,46,.2); margin:0 auto 10px; }
   .yk-head__close{ top:20px; }
-  .yk-fab{ right:16px; bottom:16px; } .yk-teaser{ right:12px; left:12px; width:auto; top:auto; bottom:calc(84px + env(safe-area-inset-bottom)); transform-origin:bottom center; } /* 상단에 두면 헤더의 메뉴 버튼을 가린다 */
+  /* 폰 — 말풍선 단추를 줄이고, 아래로 읽는 동안에는 화면 밖으로 비켜 본문 끝줄을 가리지 않는다(위로 올리면 다시) */
+  .yk-fab{ right:max(14px,env(safe-area-inset-right)); bottom:calc(14px + env(safe-area-inset-bottom)); width:54px; height:54px; translate:0 0; transition:translate .4s var(--yk-ease), transform .45s var(--yk-spring), box-shadow .4s var(--yk-ease); }
+  .yk-fab svg{ width:22px; height:22px; } .yk-fab__ping{ top:7px; right:7px; }
+  html.yk-sdown .yk-chat:not(.open) .yk-fab{ translate:0 calc(100% + 28px); }
+  html.yk-sdown .yk-teaser{ opacity:0; pointer-events:none; }
+  .yk-teaser{ right:12px; left:12px; width:auto; top:auto; bottom:calc(84px + env(safe-area-inset-bottom)); transform-origin:bottom center; } /* 상단에 두면 헤더의 메뉴 버튼을 가린다 */
   .yk-chat.open .yk-fab{ opacity:0; pointer-events:none; }
 }
 
