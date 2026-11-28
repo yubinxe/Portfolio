@@ -625,6 +625,32 @@ function CaseIndex() {
 
 }
 
+/* V19 폰 첫머리 — 글 대신 사진으로: 현장 기록(JOURNAL 과 같은 사진 · 같은 캡션)을 옆으로 넘겨 본다. 폰(≤760)에서만 보이고, PC 화면 보기(html.yk-pc)면 숨김 */
+function MobileReel() {
+  return (/*#__PURE__*/
+    React.createElement("section", { className: "mreel", "aria-labelledby": "mreel-h" }, /*#__PURE__*/
+    React.createElement("div", { className: "mreel__head" }, /*#__PURE__*/
+    React.createElement("h2", { id: "mreel-h", className: "font-ko" }, "\uC0AC\uC9C4\uC73C\uB85C \uBCF4\uB294 \uAE30\uB85D"), /*#__PURE__*/
+    React.createElement("span", { className: "font-sans", "aria-hidden": "true" }, "SWIPE \u2192")
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "mreel__list" },
+    JOURNAL.map((j) => /*#__PURE__*/
+    React.createElement("li", { key: j.t }, /*#__PURE__*/
+    React.createElement("a", { href: j.links[0].h, className: "mreel__card" }, /*#__PURE__*/
+    React.createElement("span", { className: "mreel__img" },
+    j.name ? /*#__PURE__*/React.createElement(Pic, { name: j.name, fallback: j.src, sizes: "82vw", alt: "", loading: "lazy" }) : /*#__PURE__*/
+    React.createElement("img", { src: j.img, alt: "", loading: "lazy", decoding: "async" })
+    ), /*#__PURE__*/
+    React.createElement("span", { className: "mreel__cap" }, /*#__PURE__*/React.createElement("small", { className: "font-sans" }, j.when), /*#__PURE__*/React.createElement("b", { className: "font-ko" }, j.t))
+    )
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "mreel__note font-ko" }, "\uAE00\uC774 \uAE34 \uC124\uBA85\uC740 \uC811\uC5C8\uC2B5\uB2C8\uB2E4 \u2014 \uC804\uCCB4 \uAE00\uC740 ", /*#__PURE__*/React.createElement("button", { type: "button", "data-view-toggle": "pc" }, "PC \uD654\uBA74\uC73C\uB85C \uBCF4\uAE30"))
+    ));
+
+}
+
 /* 목적별 입구 — 처음 온 사람이 1–2분 안에 다음 장으로 넘어가도록 세 갈래 */
 const ENTRY = [
 { k: "01", who: "채용 담당자", hint: "1–2분 요약", line: "한 장 이력과 실무 사례 8선", steps: [["Résumé", "resume.html"], ["실무 사례집", "cases.html"]] },
@@ -3455,4 +3481,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, MobileReel, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

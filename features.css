@@ -649,7 +649,7 @@ header.hnav .hnav__actions{display:inline-flex;align-items:center;gap:10px;flex:
 /* 가운데 메뉴는 이름과 오른쪽 묶음 사이 빈 공간의 정중앙 — 양쪽 여백이 같다 */
 @media (min-width:1181px){header.hnav .hnav__wrap{gap:0}header.hnav .nav-desktop{margin:0 auto;padding:0 20px}}
 /* 폭이 모자라는 구간 — 이름 글자를 접고 로고만(KO 1279px 이하 · EN 1366px 이하). EN 1279px 이하는 메뉴 버튼으로 */
-@media (min-width:1181px) and (max-width:1279px){header.hnav .hnav__name{display:none}}
+@media (min-width:1181px) and (max-width:1420px){header.hnav .hnav__name{display:none}}
 @media (min-width:1181px) and (max-width:1366px){html.yk-en header.hnav .hnav__name{display:none}}
 @media (min-width:1181px) and (max-width:1279px){html.yk-en header .nav-desktop{display:none!important}html.yk-en header.hnav .mnav-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 13px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-size:.76rem;font-weight:700;cursor:pointer}html.yk-en header.hnav .mnav-btn__bars,html.yk-en header.hnav .mnav-btn__bars::before{display:block;width:14px;height:1.5px;background:currentColor;position:relative}html.yk-en header.hnav .mnav-btn__bars{margin-top:-5px}html.yk-en header.hnav .mnav-btn__bars::before{content:"";position:absolute;top:5px;left:0}}
 @media (min-width:1181px) and (max-width:1366px){header.hnav .nav-desktop{gap:clamp(9px,1vw,14px)!important;font-size:.84rem}}
@@ -748,3 +748,43 @@ header.hnav .hnav__cta .hnav__contact svg{display:block!important;width:12px;hei
 }
 @media (max-width:560px){html body .axo__lanes{padding:18px 14px 36px;gap:8px}}
 @media (max-width:430px){html body #manifesto .hero-eyebrow,html body .hero-classic .hero-eyebrow{letter-spacing:.16em!important;font-size:.68rem!important;text-wrap:balance}}
+/* V19 폰 = 사진 · 자료 위주 — 긴 설명은 접고(제목 · 사진 · 배지 · 버튼만), 사진은 연출 없이 바로 선명하게.
+   전체 글은 ‘PC 화면’(i18n.js · html.yk-pc → 화면 폭 1280 이라 이 규칙 밖) */
+.mreel{display:none}
+@media (max-width:760px){
+  .hnav__name{display:none!important}
+  header.hnav .hnav__util .yk-theme{display:none}            /* 다크 모드는 메뉴 안(.mnav__theme) — 상단은 음악 · 언어 · PC 만 */
+  /* 사진: 흐림 · 세피아 현상 · 걷힘 연출 없이 */
+  #trajectory.tlx [data-tlx="diary"] .tl-feature__main img{filter:none!important}
+  .tlx [data-tlx="diary"],.tlx [data-tlx="diary"] .diary__facts>div,.tlx [data-tlx="diary"] .tl-feature__thumbs>a{opacity:1!important;transform:none!important}
+  html.pl .pl-unveil{clip-path:none!important}html.pl .pl-unveil img{transform:none!important}
+  /* 글: 긴 설명 접기 */
+  #manifesto .hero-proof,.glance__ev,.sh__lead,.sh__lead + .pl-more,.whyc__en,.whyc__intro,.whyc__closesub,.fw__sub,.wcase__flow,
+  #trajectory .tl-feature__body > p.font-ko,#trajectory .tl-feature__body > p.font-ko + .pl-more,.diary__quote,.diary__facts,.diary__clips .clip__q,.tl-feature__credit,
+  #trajectory li > a > p.font-ko,.tl-row .tl-body > p.font-ko,.tl-row .tl-body > .pl-more,
+  .axp__desc,.axp__desc + .pl-more,.axo__desc,.axo__point,.axp__work,.axc__tb-d,.axc__how,.pol__lead,.pol__lead + .pl-more,.pol__what,.pol__what + .pl-more,
+  .fl__point,.fl__capnote,.ch-pitch,.jr__note,.lec-track__desc,.lec-track__desc + .pl-more,.wk__l,.lec-basis__item > span.font-ko{display:none!important}
+  /* 사진으로 보는 기록 — 옆으로 넘기는 큰 카드 */
+  .mreel{display:block;padding:34px 0 30px;background:var(--ecru)}
+  .mreel__head{display:flex;align-items:baseline;justify-content:space-between;padding:0 18px 14px}
+  .mreel__head h2{margin:0;font-size:1.25rem;font-weight:800;color:var(--navy)}
+  .mreel__head span{font-size:.7rem;font-weight:700;letter-spacing:.2em;color:var(--gold-text)}
+  .mreel__list{display:flex;gap:12px;margin:0;padding:0 18px 6px;list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .mreel__list::-webkit-scrollbar{display:none}
+  .mreel__list li{flex:0 0 82%;scroll-snap-align:start}
+  .mreel__card{display:block;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid rgba(17,17,17,.1);box-shadow:0 14px 30px -20px rgba(19,40,75,.45)}
+  .mreel__img{display:block;aspect-ratio:4/3;overflow:hidden;background:#E8E2D6}
+  .mreel__img img,.mreel__img picture{display:block;width:100%;height:100%;object-fit:cover}
+  .mreel__cap{display:grid;gap:3px;padding:12px 14px 14px}
+  .mreel__cap small{font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--gold-text)}
+  .mreel__cap b{font-size:.98rem;line-height:1.4}
+  .mreel__note{margin:12px 18px 0;font-size:.8rem;color:var(--ink-soft)}
+  .mreel__note button{display:none;padding:0;font:inherit;font-weight:700;color:var(--navy);background:none;border:0;border-bottom:1px solid currentColor;cursor:pointer}
+  html.yk-phone .mreel__note button{display:inline}
+  html:not(.yk-phone) .mreel__note{display:none}
+}
+/* V19 데스크톱 머리띠 — BGM 알약(V17)이 들어오며 이름 · 첫 메뉴가 맞닿음 → 상단에서는 BGM 글자 없이 아이콘만 */
+header.hnav .hnav__util .yk-bgm__t{display:none}header.hnav .hnav__util .yk-bgm{padding:0 8px}
+/* 영문 메뉴는 항목이 길어 이름 글자와 맞닿음 — EN 에서는 YK 표식만 */
+@media (min-width:1181px){html.yk-en header.hnav .hnav__name{display:none}}
+@media (max-width:380px){body > header nav[aria-label="주요 메뉴"] .yk-theme{display:none}}

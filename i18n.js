@@ -32,6 +32,22 @@
     (D.head || H).appendChild(lk);
   })();
 
+  /* PC 화면 보기(V19) — 폰에서 ‘PC’를 누르면 화면 폭(viewport)을 1280 으로 바꿔 데스크톱 배치를 그대로(포멀하게) 보여 준다.
+   * 선택은 localStorage "yk.view" = "pc". 폰(짧은 변 ≤ 820 · 터치)에서만 쓰고, 돌아오기 단추는 화면 아래 가운데 */
+  var VKEY = "yk.view", phone = false, pc = false;
+  try { phone = Math.min(screen.width, screen.height) <= 820 && W.matchMedia("(pointer: coarse)").matches; pc = phone && localStorage.getItem(VKEY) === "pc"; } catch (e) {}
+  if (phone) H.classList.add("yk-phone");
+  if (pc) {
+    H.classList.add("yk-pc");
+    var setVp = function () { [].forEach.call(D.querySelectorAll('meta[name="viewport"]'), function (m) { if (m.getAttribute("content") !== "width=1280") m.setAttribute("content", "width=1280"); }); };
+    if ("MutationObserver" in W) {
+      var vmo = new MutationObserver(function () { if (D.querySelector('meta[name="viewport"]')) setVp(); });
+      vmo.observe(H, { childList: true, subtree: true });
+      D.addEventListener("DOMContentLoaded", function () { setVp(); vmo.disconnect(); });
+    } else D.addEventListener("DOMContentLoaded", setVp);
+  }
+  function setView(v) { try { if (v === "pc") localStorage.setItem(VKEY, "pc"); else localStorage.removeItem(VKEY); } catch (e) {} location.reload(); }
+
   /* 스위치 · 대기 화면 스타일 — 페이지 CSS 를 고치지 않고 여기서 */
   var css = D.createElement("style");
   css.textContent =
@@ -40,6 +56,13 @@
     ".yk-lang span{display:grid;place-items:center;min-width:24px;height:22px;padding:0 5px;border-radius:999px;transition:background .3s,color .3s}" +
     ".yk-lang span.is-on{background:#13284B;color:#F7F4EE}.yk-lang:hover{border-color:#13284B}.yk-lang:focus-visible{outline:3px solid #8FB8F2;outline-offset:2px}" +
     ".yk-lang--float{position:fixed;top:12px;right:12px;z-index:9000}" +
+    /* PC 화면 단추(폰 · 좁은 화면에서만) · PC 화면일 때 돌아오기 단추(축소된 화면에서도 손가락 크기) */
+    ".yk-view,.yk-view-back{display:none}" +
+    "@media (max-width:760px){html.yk-phone:not(.yk-pc) .yk-view{display:inline-flex;align-items:center;gap:4px;flex:none;height:28px;padding:0 9px;margin:0 2px;border:1px solid rgba(19,40,75,.28);border-radius:999px;background:rgba(255,255,255,.7);color:#13284B;font:700 10px/1 Inter,'Pretendard Variable',system-ui,sans-serif;letter-spacing:.1em;cursor:pointer;vertical-align:middle;position:relative}html.yk-phone:not(.yk-pc) .yk-view svg{width:13px;height:13px}html.yk-phone:not(.yk-pc) .yk-view::after{content:'';position:absolute;inset:-8px -2px}}" +
+    "html.yk-pc .yk-view-back{display:inline-flex;align-items:center;gap:14px;position:fixed;left:50%;bottom:28px;z-index:9500;transform:translateX(-50%);padding:22px 40px;border:0;border-radius:999px;background:#13284B;color:#F7F4EE;font:700 34px/1 'Pretendard Variable',system-ui,sans-serif;box-shadow:0 18px 44px -14px rgba(11,26,51,.6);cursor:pointer}html.yk-pc .yk-view-back svg{width:36px;height:36px}" +
+    "html.yk-dark .yk-view{background:rgba(255,255,255,.06)!important;border-color:rgba(236,230,218,.24)!important;color:#ECE6DA!important}.st-top .yk-view{background:rgba(244,238,226,.06)!important;border-color:rgba(201,174,122,.28)!important;color:#E9DCC0!important}" +
+    ".mnav__view{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;font:inherit;font-size:.9rem;font-weight:700;border:1px solid #13284B;color:#13284B;background:transparent;cursor:pointer}.mnav__view svg{width:15px;height:15px}" +
+    "@media print{.yk-view,.yk-view-back{display:none!important}}" +
     /* 폰: 떠 있는 KO/EN 이 표 · 제목 위를 덮지 않게 왼쪽 아래로 · 28px 알약은 보이는 크기 그대로 두고 누르는 범위만 44px 로 */
     "@media (max-width:760px){.yk-lang--float{top:auto;right:auto;left:max(12px,env(safe-area-inset-left));bottom:calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);box-shadow:0 6px 18px -8px rgba(19,40,75,.45)}}" +
     "@media (pointer:coarse){.yk-lang,.yk-bgm{position:relative}.yk-lang::after,.yk-bgm::after{content:'';position:absolute;inset:-8px -2px}.yk-lang--float{position:fixed}}" +
@@ -67,7 +90,7 @@
       function fin() { if (done) return; done = true; H.classList.add("yk-en-done"); res(); }
       setTimeout(fin, 4000); /* 안전장치 — 사전이 늦어도 화면은 보인다 */
       var s = D.createElement("script");
-      s.src = base + "i18n-en.js?v=6";
+      s.src = base + "i18n-en.js?v=7";
       s.onload = function () { DICT = W.YK_EN || null; whenDom(function () { whenApp(function () { if (DICT) { run(D); watch(); } fin(); }); }); };
       s.onerror = fin;
       (D.head || H).appendChild(s);
@@ -194,8 +217,26 @@
     try { W.dispatchEvent(new CustomEvent("yk:theme", { detail: { dark: dark } })); } catch (e) {}
   }
   function paintMT(b) { b.setAttribute("aria-pressed", dark ? "true" : "false"); b.innerHTML = (dark ? MOON : SUN) + (lang === "en" ? " Dark mode " : " 다크 모드 ") + "<b>" + (dark ? (lang === "en" ? "On" : "켜짐") : (lang === "en" ? "Off" : "꺼짐")) + "</b>"; }
+  var MON = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="8.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 14h5M8 11v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+  var PHN = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="1.5" width="8" height="13" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 12.4h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+  function mountV() {
+    if (!phone) return;
+    if (pc) {
+      if (!D.querySelector(".yk-view-back")) { var r = D.createElement("button"); r.type = "button"; r.className = "yk-view-back"; r.setAttribute("data-view-toggle", "m"); r.innerHTML = PHN + (lang === "en" ? "Mobile view" : "모바일 화면으로"); D.body.appendChild(r); }
+      return;
+    }
+    [].forEach.call(D.querySelectorAll("[data-lang-toggle]"), function (lb) {
+      if (lb.classList.contains("yk-lang--float") || (lb.nextElementSibling && lb.nextElementSibling.classList.contains("yk-view"))) return;
+      var v = D.createElement("button"); v.type = "button"; v.className = "yk-view"; v.setAttribute("data-view-toggle", "pc");
+      v.setAttribute("aria-label", lang === "en" ? "Show the desktop (PC) layout" : "PC 화면(데스크톱 배치)으로 보기"); v.innerHTML = MON + "PC";
+      lb.parentNode.insertBefore(v, lb.nextSibling);
+    });
+    var row = D.querySelector(".mnav__row");
+    if (row && !row.querySelector(".mnav__view")) { var m = D.createElement("button"); m.type = "button"; m.className = "mnav__view"; m.setAttribute("data-view-toggle", "pc"); m.innerHTML = MON + (lang === "en" ? " Desktop view" : " PC 화면으로 보기"); row.appendChild(m); }
+  }
   /* KO/EN 왼쪽에 같은 모양으로(메인은 한 캡슐 .hnav__util 안), 모바일 메뉴에는 넓은 버튼으로 */
   function mountT() {
+    mountV();
     [].forEach.call(D.querySelectorAll("[data-lang-toggle]"), function (lb) {
       if (lb.classList.contains("yk-lang--float")) return;
       var prev = lb.previousElementSibling;
@@ -225,6 +266,8 @@
     mountT();
   }
   D.addEventListener("click", function (e) {
+    var vt = e.target.closest && e.target.closest("[data-view-toggle]");
+    if (vt) { e.preventDefault(); e.stopPropagation(); setView(vt.getAttribute("data-view-toggle") === "pc" ? "pc" : "m"); return; }
     var tb = e.target.closest && e.target.closest("[data-theme-toggle]");
     if (tb) { e.preventDefault(); setT(!dark); return; }
     if (e.target.closest && e.target.closest("[data-mnav-toggle]")) setTimeout(mountT, 0);
@@ -239,5 +282,6 @@
   W.addEventListener("load", function () { whenApp(function () { setTimeout(mount, 200); }); });
 
   W.ykTheme = { get: function () { return dark; }, set: setT };
+  W.ykView = { phone: phone, pc: pc, set: setView };
   W.ykI18n = { lang: lang, ready: ready, set: setLang, t: function (s) { return lang === "en" ? tr(s) : s; } };
 })();
