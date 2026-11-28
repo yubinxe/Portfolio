@@ -624,6 +624,32 @@ function CaseIndex() {
   );
 }
 
+/* V19 폰 첫머리 — 글 대신 사진으로: 현장 기록(JOURNAL 과 같은 사진 · 같은 캡션)을 옆으로 넘겨 본다. 폰(≤760)에서만 보이고, PC 화면 보기(html.yk-pc)면 숨김 */
+function MobileReel() {
+  return (
+    <section className="mreel" aria-labelledby="mreel-h">
+      <div className="mreel__head">
+        <h2 id="mreel-h" className="font-ko">사진으로 보는 기록</h2>
+        <span className="font-sans" aria-hidden="true">SWIPE →</span>
+      </div>
+      <ol className="mreel__list">
+        {JOURNAL.map((j) => (
+          <li key={j.t}>
+            <a href={j.links[0].h} className="mreel__card">
+              <span className="mreel__img">
+                {j.name ? <Pic name={j.name} fallback={j.src} sizes="82vw" alt="" loading="lazy" />
+                  : <img src={j.img} alt="" loading="lazy" decoding="async" />}
+              </span>
+              <span className="mreel__cap"><small className="font-sans">{j.when}</small><b className="font-ko">{j.t}</b></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <p className="mreel__note font-ko">글이 긴 설명은 접었습니다 — 전체 글은 <button type="button" data-view-toggle="pc">PC 화면으로 보기</button></p>
+    </section>
+  );
+}
+
 /* 목적별 입구 — 처음 온 사람이 1–2분 안에 다음 장으로 넘어가도록 세 갈래 */
 const ENTRY = [
   { k: "01", who: "채용 담당자", hint: "1–2분 요약", line: "한 장 이력과 실무 사례 8선", steps: [["Résumé", "resume.html"], ["실무 사례집", "cases.html"]] },
@@ -3454,4 +3480,4 @@ function SectionHead({ no, ko, en, lead }) {
   );
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, MobileReel, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

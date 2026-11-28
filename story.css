@@ -119,3 +119,5 @@ html.yk-dark body>header.st-top{background:linear-gradient(180deg,rgba(11,26,51,
   .st-top__r{gap:6px}
 }
 @media (max-width:360px){.st-brand b{display:none}.st-brand__mark{font-size:1.3rem}}
+/* V19 폰 — 머리띠 이름 글자 없이 표식 · 단추만 */
+@media (max-width:760px){.st-brand b,.st-brand small{display:none}.st-brand__mark{font-size:1.35rem}}
