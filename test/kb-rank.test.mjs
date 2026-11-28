@@ -57,6 +57,8 @@ const CASES = [
   ["총회결의 하자 검증은 뭐예요", ["ax-assembly", "ax-desk"]],
   ["계약변경 레드라인", ["ax-contract", "ax-desk"]],
   ["경국 AX 현황판", ["ax-desk"]],
+  ["아뜰리에 AX 뭐예요", ["atelier-biz"]],
+  ["개인사업 하고 계세요", ["atelier-biz"]],
   ["광명시흥 보상자료", ["ax-compensation"]],
   ["급여명세서 자동화", ["ed-07"]],
   ["집캐치가 뭔가요", ["ed-09"]],
