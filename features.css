@@ -788,3 +788,44 @@ header.hnav .hnav__util .yk-bgm__t{display:none}header.hnav .hnav__util .yk-bgm{
 /* 영문 메뉴는 항목이 길어 이름 글자와 맞닿음 — EN 에서는 YK 표식만 */
 @media (min-width:1181px){html.yk-en header.hnav .hnav__name{display:none}}
 @media (max-width:380px){body > header nav[aria-label="주요 메뉴"] .yk-theme{display:none}}
+/* V20 개인사업 — 아뜰리에 AX(#atelier) · 첫 화면 한 줄(.hero-biz) */
+.hero-classic .hero-biz{margin:10px 0 0!important}
+.hero-classic .hero-biz a{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;font-size:.86rem;font-weight:700;color:var(--navy);text-decoration:none;background:rgba(255,255,255,.72);border:1px solid rgba(19,40,75,.22);border-radius:999px;transition:border-color .3s,background .3s}
+.hero-classic .hero-biz a:hover{border-color:var(--gold-text);background:#fff}
+.hero-classic .hero-biz span{padding:2px 8px;font-size:.7rem;color:#F7F4EE;background:var(--navy);border-radius:999px}
+.atl{padding:clamp(72px,9vw,120px) 0;background:var(--paper);border-top:1px solid rgba(17,17,17,.08)}
+.atl__k{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.82rem;font-weight:700;color:var(--gold-text)}
+.atl__k .font-sans{font-size:.72rem;letter-spacing:.16em;color:var(--ink-soft)}
+.atl__badge{padding:3px 10px;font-size:.72rem;color:#F7F4EE;background:var(--navy);border-radius:999px}
+.atl__t{margin:0;font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:800;line-height:1.25;letter-spacing:-.02em;color:var(--navy)}
+.atl__lead{max-width:700px;margin:18px 0 0;font-size:1.02rem;line-height:1.8;color:var(--ink-soft)}
+.atl__motto{margin:14px 0 0;font-size:1.08rem;color:var(--ink)}
+.atl__grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:40px}
+.atl__shot{margin:0}
+.atl__shot a{display:block;overflow:hidden;border:1px solid rgba(17,17,17,.12);box-shadow:0 26px 50px -30px rgba(19,40,75,.55);transition:transform .5s var(--ease)}
+.atl__shot a:hover{transform:translateY(-3px)}
+.atl__shot img{display:block;width:100%;height:auto}
+.atl__shot figcaption{margin-top:8px;font-size:.78rem;color:var(--ink-soft)}
+.atl__svc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0;padding:0;list-style:none}
+.atl__svc li{padding:18px 16px;background:var(--ecru);border:1px solid rgba(17,17,17,.08)}
+.atl__svc b{font-size:.74rem;letter-spacing:.14em;color:var(--gold-text)}
+.atl__svc h3{margin:6px 0 6px;font-size:1rem;font-weight:800;color:var(--navy)}
+.atl__svc p{margin:0;font-size:.86rem;line-height:1.6;color:var(--ink-soft)}
+.atl__studio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:36px;padding:24px;background:var(--ecru);border:1px solid rgba(17,17,17,.08)}
+.atl__k2{margin:0 0 6px;font-size:.72rem;font-weight:700;letter-spacing:.2em;color:var(--gold-text)}
+.atl__studio h3{margin:0;font-size:1.2rem;font-weight:800;color:var(--navy)}
+.atl__steps{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+.atl__steps li{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:.86rem;font-weight:700;color:var(--navy);background:var(--paper);border:1px solid rgba(19,40,75,.18)}
+.atl__steps i{font-style:normal;font-size:.72rem;color:var(--gold-text)}
+.atl__gate{margin:14px 0 0;font-size:.9rem;line-height:1.7;color:var(--ink-soft)}.atl__gate b{color:var(--ink)}
+.atl__facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:32px 0 0;border-top:2px solid var(--navy)}
+.atl__facts div{padding:14px 14px 14px 0}
+.atl__facts dt{font-size:.74rem;font-weight:700;color:var(--gold-text)}
+.atl__facts dd{margin:4px 0 0;font-size:.9rem;line-height:1.55;color:var(--ink)}
+.atl__acts{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.atl__note{margin:16px 0 0;font-size:.8rem;line-height:1.7;color:var(--ink-soft)}
+.atl .reveal.in .atl__steps li{animation:atlIn .5s var(--ease) both}
+@keyframes atlIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:900px){.atl__grid,.atl__studio{grid-template-columns:1fr}.atl__facts{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.atl__svc{grid-template-columns:1fr 1fr;gap:8px}.atl__svc li{padding:14px 12px}.atl__svc p{font-size:.8rem}.atl__studio{padding:16px}.atl__facts{grid-template-columns:1fr}.atl__acts .btn{flex:1 1 100%;justify-content:center}.hero-classic .hero-biz a{font-size:.8rem}}
+@media (prefers-reduced-motion:reduce){.atl .reveal.in .atl__steps li{animation:none}}

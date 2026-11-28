@@ -26,6 +26,7 @@ function App() {
         <CaseIndex />
         <About />
         <Composite />
+        <AtelierSection />
         <AXCommand />
         <PolicySection />
         <ArtifactsSection />

@@ -306,7 +306,7 @@
   }
 
   /* ---------- 7) 장 표시 · 큰 장 번호 흐름(index) ---------- */
-  var CH = { signature: "부동산 AI", cases: "실무 사례", about: "소개", composite: "역량 지도", "ax-desk": "법률 AI 전환", "ax-c": "범용 AX 3종", policy: "정책 참여", artifacts: "직접 만든 도구", research: "연구 기록", archive: "작업 기록", trajectory: "성장 경로 · 이력", lectures: "강의", channels: "기록 · 채널", contact: "연락" };
+  var CH = { signature: "부동산 AI", cases: "실무 사례", about: "소개", composite: "역량 지도", atelier: "아뜰리에 AX", "ax-desk": "법률 AI 전환", "ax-c": "범용 AX 3종", policy: "정책 참여", artifacts: "직접 만든 도구", research: "연구 기록", archive: "작업 기록", trajectory: "성장 경로 · 이력", lectures: "강의", channels: "기록 · 채널", contact: "연락" };
   var hud = null, hudN = null, hudT = null, chapters = [], lastCh = "";
   function setupHud() {
     if (!fine || hud || !D.getElementById("cases")) return;

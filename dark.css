@@ -132,3 +132,6 @@ html.yk-dark .lx-top a,html.yk-dark .tb-top a{color:#E6DECD}
 html.yk-dark .lx-top__state b{background:#1C2A45;color:#C9D8F2}
 html.yk-dark .tb-role select{background:#111A2B;color:#ECE6DA}
 html.yk-dark .yk-now{background:rgba(17,26,43,.94);border-color:rgba(217,192,143,.4);color:#E6DECD}
+/* V20 아뜰리에 AX — 배지는 토큰 반전과 무관하게 금빛 바탕 · 밤색 글자 */
+html.yk-dark .atl__badge,html.yk-dark .hero-classic .hero-biz span{background:#C9AE7A;color:#14181F}
+html.yk-dark .hero-classic .hero-biz a{background:rgba(255,255,255,.06);border-color:rgba(236,230,218,.24);color:#ECE6DA}

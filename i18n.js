@@ -27,7 +27,7 @@
   if (/\/ax(-lab\/web)?\/[^\/]+\/(index\.html)?$/.test(location.pathname)) dark = false;
   if (dark) H.classList.add("yk-dark");
   (function () {
-    var lk = D.createElement("link"); lk.rel = "stylesheet"; lk.href = base + "dark.css?v=2"; lk.setAttribute("data-yk-dark", "");
+    var lk = D.createElement("link"); lk.rel = "stylesheet"; lk.href = base + "dark.css?v=3"; lk.setAttribute("data-yk-dark", "");
     if (dark) lk.setAttribute("blocking", "render");
     (D.head || H).appendChild(lk);
   })();
@@ -90,7 +90,7 @@
       function fin() { if (done) return; done = true; H.classList.add("yk-en-done"); res(); }
       setTimeout(fin, 4000); /* 안전장치 — 사전이 늦어도 화면은 보인다 */
       var s = D.createElement("script");
-      s.src = base + "i18n-en.js?v=6";
+      s.src = base + "i18n-en.js?v=7";
       s.onload = function () { DICT = W.YK_EN || null; whenDom(function () { whenApp(function () { if (DICT) { run(D); watch(); } fin(); }); }); };
       s.onerror = fin;
       (D.head || H).appendChild(s);
