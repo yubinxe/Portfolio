@@ -471,7 +471,7 @@ function Signature() {
         <nav className="sig__flow font-ko reveal" aria-label="이어지는 흐름">
           <span className="sig__step is-now"><b className="font-sans">01</b>부동산 AI</span>
           <i aria-hidden="true" />
-          <a className="sig__step" href="#ax-desk"><b className="font-sans">02</b>컨설팅 · 법률 AX</a>
+          <a className="sig__step" href="#atelier"><b className="font-sans">02</b>컨설팅 · 아뜰리에 AX</a>
           <i aria-hidden="true" />
           <a className="sig__step" href="#policy"><b className="font-sans">03</b>정책 · 제도</a>
         </nav>
@@ -504,6 +504,7 @@ function HeroClassic() {
           </h1>
           <div className="hero-sub">
             <p className="font-ko hero-role"><b>부동산을 AI로 읽고, 컨설팅과 정책으로 잇는 실무자</b></p>
+            <p className="font-ko hero-biz"><a href="#atelier"><span>개인사업</span>아뜰리에 AX 대표 — 독립 AX 컨설팅 스튜디오</a></p>
             <p className="font-ko hero-lead">복잡한 문제를 구조화하고,<br />기술로 실행합니다.</p>
             <p className="font-ko hero-proof">청약 · 공공임대 추천 서비스와 감정평가 3D 실지조사를 직접 만들어 부동산 현장에서 시연했습니다. 법률 · 부동산 실무에서 다진 판단을 AI 전략 컨설팅과 정책 제안으로 잇습니다.</p>
           </div>
@@ -1454,8 +1455,8 @@ const EDITIONS = [
     desc: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집한다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계.",
     status: "Vercel 배포 완료", cta: "필드워크 체험", url: "https://appraiser-fieldwork.vercel.app/", tags: ["Three.js · WebGL", "실지조사 5단계", "조문 24 · 지목 28"],
     point: "법조문을 글이 아니라 장소로 기억하게 만드는 것이 설계의 목표 — 서울의 실제 시간과 햇빛 아래에서 조사 절차를 몸으로 익힌다." },
-  { n: "17", color: "var(--apple)", Icon: Cpu, title: "AI 에이전트 인력 운영 관제\nAtelier AX",
-    desc: "AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 사람이 일하는 사무실처럼 보여 준다. 서버 없이 브라우저 안에서만 도는 공개 시연 모드를 함께 제공. 2.0에서는 아이디어를 설명하면 AI 팀(기획·디자인·개발·검수)이 6단계로 일하는 과정을 쉬운 말로 보여 주고 범위·설계·검토·공개 4곳에서 사용자 승인을 받는 ‘프로젝트 스튜디오’를 더했다.",
+  { n: "17", color: "var(--apple)", Icon: Cpu, title: "AX 컨설팅 스튜디오 · 에이전트 관제\nAtelier AX",
+    desc: "개인사업자로 운영하는 독립 AX 컨설팅 스튜디오 아뜰리에 AX의 자사 시연 제품. AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 사람이 일하는 사무실처럼 보여 준다. 서버 없이 브라우저 안에서만 도는 공개 시연 모드를 함께 제공. 2.0에서는 아이디어를 설명하면 AI 팀(기획·디자인·개발·검수)이 6단계로 일하는 과정을 쉬운 말로 보여 주고 범위·설계·검토·공개 4곳에서 사용자 승인을 받는 ‘프로젝트 스튜디오’를 더했다.",
     status: "Vercel 배포 완료", cta: "관제 화면 보기", url: "https://atelier-ax.vercel.app/performance/", tags: ["AI Agent 관제", "프로젝트 스튜디오", "승인 워크플로"],
     group: "everyday-tools", origin: "independent", usage: "personal", point: "에이전트가 한 일을 사람이 검증·승인해야 끝나는 구조 — 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않는다." },
   { n: "12", color: "var(--sky)", Icon: LayoutGrid, title: "국민용 국정 상황판\n국정 한눈에",
@@ -1735,6 +1736,71 @@ function useLaxState() {
   return [st, (a) => setSt((s) => L.reduce(s, a))];
 }
 const laxCase = (fid) => { const D = window.LAX_DATA; return D.cases.find((c) => c.id === D.fields.find((f) => f.id === fid).caseId); };
+
+/* V20 개인사업 — 아뜰리에 AX(Atelier AX). 공식 사이트(atelier-ax.vercel.app · 회사 소개 · 서비스 · 작업)에 적힌 사실만.
+ * 고객 실적 · 성과 수치 · 후기는 싣지 않는다(공식 사이트 원칙과 같음). 법무법인 경국은 아뜰리에 AX 의 고객 · 협력 기관이 아니다 */
+const ATELIER = {
+  url: "https://atelier-ax.vercel.app/",
+  facts: [["상호", "아뜰리에 AX (Atelier AX)"], ["형태", "개인사업자 · 2026년 사업자등록"], ["주요 사업", "경영컨설팅 · AI 전환(AX) · 프로세스 혁신(PI) · 업무 자동화 · AI 소프트웨어 개발"], ["소재지", "서울"]],
+  services: [
+    ["01", "AX 전략 · 업무 진단", "어디부터 AI를 적용해야 하는지, 근거를 갖고 정합니다."],
+    ["02", "AI 워크플로 자동화", "반복되는 정리 · 전달 · 입력을, 기록이 남는 자동화로 바꿉니다."],
+    ["03", "AI 제품 · 소프트웨어 개발", "업무에 맞는 도구가 없을 때, 직접 만들어 운영까지 넘깁니다."],
+    ["04", "AI 거버넌스 · 운영 신뢰성", "AI가 한 일을 누가 확인했는지, 어디서 멈추는지 정해 둡니다."],
+  ],
+  steps: ["기획", "설계", "제작", "검증", "검토", "공개"],
+};
+function AtelierSection() {
+  const ref = useReveal();
+  return (
+    <section id="atelier" ref={ref} className="atl" aria-labelledby="atl-h">
+      <div className="wrap">
+        <header className="atl__head reveal">
+          <p className="atl__k font-ko"><span className="atl__badge">개인사업</span> 직접 운영하는 AX 컨설팅 스튜디오 <span className="font-sans" lang="en">Atelier AX</span></p>
+          <h2 id="atl-h" className="atl__t font-ko">아뜰리에 AX — 업무를 다시 설계하고,<br />작동하는 AI까지.</h2>
+          <p className="atl__lead font-ko">2026년 서울에서 개인사업자로 출범한 1인 AX 컨설팅 스튜디오의 대표입니다. 기업의 업무를 진단하고, AI와 자동화를 결합해 실제로 운영할 수 있는 시스템으로 구현합니다.</p>
+          <p className="atl__motto font-myeongjo">“기획한 사람이 만들고, 만든 사람이 설명합니다.”</p>
+        </header>
+        <div className="atl__grid">
+          <figure className="atl__shot atl__shot--home reveal">
+            <a href={ATELIER.url} target="_blank" rel="noreferrer" aria-label="아뜰리에 AX 공식 사이트 열기">
+              <img src="images/atelier/home-1280.jpg" alt="아뜰리에 AX 공식 사이트 첫 화면 — ‘업무를 다시 설계하고, 작동하는 AI까지.’" width="1280" height="800" loading="lazy" decoding="async" />
+            </a>
+            <figcaption className="font-ko">공식 사이트 · atelier-ax.vercel.app</figcaption>
+          </figure>
+          <ol className="atl__svc reveal">
+            {ATELIER.services.map(([n, t, d]) => (
+              <li key={n}><b className="font-sans">{n}</b><h3 className="font-ko">{t}</h3><p className="font-ko">{d}</p></li>
+            ))}
+          </ol>
+        </div>
+        <div className="atl__studio reveal">
+          <figure className="atl__shot">
+            <a href={ATELIER.url + "studio/"} target="_blank" rel="noreferrer" aria-label="Atelier AX Studio Demo 열기">
+              <img src="images/atelier/studio-1280.jpg" alt="Atelier AX Studio Demo — 아이디어를 설명하면 AI 팀이 기획부터 검증까지 단계별로 보여 주는 공개 시연" width="1280" height="800" loading="lazy" decoding="async" />
+            </a>
+            <figcaption className="font-ko">Studio Demo · 공개 시연(가상 데이터)</figcaption>
+          </figure>
+          <div className="atl__studio-txt">
+            <p className="atl__k2 font-sans">STUDIO DEMO</p>
+            <h3 className="font-ko">AI 팀이 일하는 과정을 직접 조작해 보는 시연</h3>
+            <ol className="atl__steps font-ko">{ATELIER.steps.map((s, i) => <li key={s}><i className="font-sans">{i + 1}</i>{s}</li>)}</ol>
+            <p className="atl__gate font-ko"><b>사람이 승인하는 관문 4곳</b> — AI는 실행하고, 사람은 승인하며, 모든 단계가 기록으로 남습니다.</p>
+          </div>
+        </div>
+        <dl className="atl__facts font-ko reveal">
+          {ATELIER.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+        <p className="atl__acts reveal">
+          <a className="btn atl__go" href={ATELIER.url} target="_blank" rel="noreferrer">공식 사이트 <ArrowUpRight size={14} /></a>
+          <a className="btn btn--ghost" href={ATELIER.url + "studio/"} target="_blank" rel="noreferrer">Studio Demo <ArrowUpRight size={14} /></a>
+          <a className="btn btn--ghost" href={ATELIER.url + "contact/"} target="_blank" rel="noreferrer">AX 상담 신청 <ArrowUpRight size={14} /></a>
+        </p>
+        <p className="atl__note font-ko">확인된 정보만 적습니다 — 고객 실적 · 성과 수치 · 후기는 싣지 않습니다. 법무법인 경국은 아뜰리에 AX의 고객이나 협력 기관이 아니며, 집캐치 · 국정 한눈에 등은 대표 개인 프로젝트입니다.</p>
+      </div>
+    </section>
+  );
+}
 
 function AXCommand() {
   const sec = React.useRef(null), stage = React.useRef(null);
@@ -3480,4 +3546,4 @@ function SectionHead({ no, ko, en, lead }) {
   );
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, MobileReel, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, MobileReel, AtelierSection, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });

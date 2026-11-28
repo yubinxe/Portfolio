@@ -472,7 +472,7 @@ function Signature() {
     React.createElement("nav", { className: "sig__flow font-ko reveal", "aria-label": "\uC774\uC5B4\uC9C0\uB294 \uD750\uB984" }, /*#__PURE__*/
     React.createElement("span", { className: "sig__step is-now" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "01"), "\uBD80\uB3D9\uC0B0 AI"), /*#__PURE__*/
     React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/
-    React.createElement("a", { className: "sig__step", href: "#ax-desk" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "02"), "\uCEE8\uC124\uD305 \xB7 \uBC95\uB960 AX"), /*#__PURE__*/
+    React.createElement("a", { className: "sig__step", href: "#atelier" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "02"), "\uCEE8\uC124\uD305 \xB7 \uC544\uB730\uB9AC\uC5D0 AX"), /*#__PURE__*/
     React.createElement("i", { "aria-hidden": "true" }), /*#__PURE__*/
     React.createElement("a", { className: "sig__step", href: "#policy" }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, "03"), "\uC815\uCC45 \xB7 \uC81C\uB3C4")
     )
@@ -505,6 +505,7 @@ function HeroClassic() {
     ), /*#__PURE__*/
     React.createElement("div", { className: "hero-sub" }, /*#__PURE__*/
     React.createElement("p", { className: "font-ko hero-role" }, /*#__PURE__*/React.createElement("b", null, "\uBD80\uB3D9\uC0B0\uC744 AI\uB85C \uC77D\uACE0, \uCEE8\uC124\uD305\uACFC \uC815\uCC45\uC73C\uB85C \uC787\uB294 \uC2E4\uBB34\uC790")), /*#__PURE__*/
+    React.createElement("p", { className: "font-ko hero-biz" }, /*#__PURE__*/React.createElement("a", { href: "#atelier" }, /*#__PURE__*/React.createElement("span", null, "\uAC1C\uC778\uC0AC\uC5C5"), "\uC544\uB730\uB9AC\uC5D0 AX \uB300\uD45C \u2014 \uB3C5\uB9BD AX \uCEE8\uC124\uD305 \uC2A4\uD29C\uB514\uC624")), /*#__PURE__*/
     React.createElement("p", { className: "font-ko hero-lead" }, "\uBCF5\uC7A1\uD55C \uBB38\uC81C\uB97C \uAD6C\uC870\uD654\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uAE30\uC220\uB85C \uC2E4\uD589\uD569\uB2C8\uB2E4."), /*#__PURE__*/
     React.createElement("p", { className: "font-ko hero-proof" }, "\uCCAD\uC57D \xB7 \uACF5\uACF5\uC784\uB300 \uCD94\uCC9C \uC11C\uBE44\uC2A4\uC640 \uAC10\uC815\uD3C9\uAC00 3D \uC2E4\uC9C0\uC870\uC0AC\uB97C \uC9C1\uC811 \uB9CC\uB4E4\uC5B4 \uBD80\uB3D9\uC0B0 \uD604\uC7A5\uC5D0\uC11C \uC2DC\uC5F0\uD588\uC2B5\uB2C8\uB2E4. \uBC95\uB960 \xB7 \uBD80\uB3D9\uC0B0 \uC2E4\uBB34\uC5D0\uC11C \uB2E4\uC9C4 \uD310\uB2E8\uC744 AI \uC804\uB7B5 \uCEE8\uC124\uD305\uACFC \uC815\uCC45 \uC81C\uC548\uC73C\uB85C \uC787\uC2B5\uB2C8\uB2E4.")
     ), /*#__PURE__*/
@@ -1455,8 +1456,8 @@ const EDITIONS = [
   desc: "광화문에서 잠실까지 서울을 직접 걸으며 의뢰를 수행하는 3D 학습 게임. 의뢰 수임 → 현장조사 → 지적측량 → 토지이동 → 등기촉탁의 5단계를 그대로 따라가고, 조문 카드 24장과 지목 도감 28종을 장소에서 수집한다. 감정평가에 관한 규칙·공간정보관리법·건축법·민법 조문을 현장 상황에 붙여 기억하도록 설계.",
   status: "Vercel 배포 완료", cta: "필드워크 체험", url: "https://appraiser-fieldwork.vercel.app/", tags: ["Three.js · WebGL", "실지조사 5단계", "조문 24 · 지목 28"],
   point: "법조문을 글이 아니라 장소로 기억하게 만드는 것이 설계의 목표 — 서울의 실제 시간과 햇빛 아래에서 조사 절차를 몸으로 익힌다." },
-{ n: "17", color: "var(--apple)", Icon: Cpu, title: "AI 에이전트 인력 운영 관제\nAtelier AX",
-  desc: "AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 사람이 일하는 사무실처럼 보여 준다. 서버 없이 브라우저 안에서만 도는 공개 시연 모드를 함께 제공. 2.0에서는 아이디어를 설명하면 AI 팀(기획·디자인·개발·검수)이 6단계로 일하는 과정을 쉬운 말로 보여 주고 범위·설계·검토·공개 4곳에서 사용자 승인을 받는 ‘프로젝트 스튜디오’를 더했다.",
+{ n: "17", color: "var(--apple)", Icon: Cpu, title: "AX 컨설팅 스튜디오 · 에이전트 관제\nAtelier AX",
+  desc: "개인사업자로 운영하는 독립 AX 컨설팅 스튜디오 아뜰리에 AX의 자사 시연 제품. AI 직원에게 업무를 배정하고, 실행 과정을 실시간으로 관찰하고, 산출물을 검증·승인하는 관제 대시보드. 라이브·업무·승인·인력·성과 5개 화면에서 도구 호출(웹 검색·파일 수정·코드 실행)과 하위 에이전트 위임·업무 인계, 정책 차단, 결재 대기를 사람이 일하는 사무실처럼 보여 준다. 서버 없이 브라우저 안에서만 도는 공개 시연 모드를 함께 제공. 2.0에서는 아이디어를 설명하면 AI 팀(기획·디자인·개발·검수)이 6단계로 일하는 과정을 쉬운 말로 보여 주고 범위·설계·검토·공개 4곳에서 사용자 승인을 받는 ‘프로젝트 스튜디오’를 더했다.",
   status: "Vercel 배포 완료", cta: "관제 화면 보기", url: "https://atelier-ax.vercel.app/performance/", tags: ["AI Agent 관제", "프로젝트 스튜디오", "승인 워크플로"],
   group: "everyday-tools", origin: "independent", usage: "personal", point: "에이전트가 한 일을 사람이 검증·승인해야 끝나는 구조 — 시연 모드의 가상 활동은 실제 성과 지표에 합산하지 않는다." },
 { n: "12", color: "var(--sky)", Icon: LayoutGrid, title: "국민용 국정 상황판\n국정 한눈에",
@@ -1736,6 +1737,71 @@ function useLaxState() {
   return [st, (a) => setSt((s) => L.reduce(s, a))];
 }
 const laxCase = (fid) => {const D = window.LAX_DATA;return D.cases.find((c) => c.id === D.fields.find((f) => f.id === fid).caseId);};
+
+/* V20 개인사업 — 아뜰리에 AX(Atelier AX). 공식 사이트(atelier-ax.vercel.app · 회사 소개 · 서비스 · 작업)에 적힌 사실만.
+ * 고객 실적 · 성과 수치 · 후기는 싣지 않는다(공식 사이트 원칙과 같음). 법무법인 경국은 아뜰리에 AX 의 고객 · 협력 기관이 아니다 */
+const ATELIER = {
+  url: "https://atelier-ax.vercel.app/",
+  facts: [["상호", "아뜰리에 AX (Atelier AX)"], ["형태", "개인사업자 · 2026년 사업자등록"], ["주요 사업", "경영컨설팅 · AI 전환(AX) · 프로세스 혁신(PI) · 업무 자동화 · AI 소프트웨어 개발"], ["소재지", "서울"]],
+  services: [
+  ["01", "AX 전략 · 업무 진단", "어디부터 AI를 적용해야 하는지, 근거를 갖고 정합니다."],
+  ["02", "AI 워크플로 자동화", "반복되는 정리 · 전달 · 입력을, 기록이 남는 자동화로 바꿉니다."],
+  ["03", "AI 제품 · 소프트웨어 개발", "업무에 맞는 도구가 없을 때, 직접 만들어 운영까지 넘깁니다."],
+  ["04", "AI 거버넌스 · 운영 신뢰성", "AI가 한 일을 누가 확인했는지, 어디서 멈추는지 정해 둡니다."]],
+
+  steps: ["기획", "설계", "제작", "검증", "검토", "공개"]
+};
+function AtelierSection() {
+  const ref = useReveal();
+  return (/*#__PURE__*/
+    React.createElement("section", { id: "atelier", ref: ref, className: "atl", "aria-labelledby": "atl-h" }, /*#__PURE__*/
+    React.createElement("div", { className: "wrap" }, /*#__PURE__*/
+    React.createElement("header", { className: "atl__head reveal" }, /*#__PURE__*/
+    React.createElement("p", { className: "atl__k font-ko" }, /*#__PURE__*/React.createElement("span", { className: "atl__badge" }, "\uAC1C\uC778\uC0AC\uC5C5"), " \uC9C1\uC811 \uC6B4\uC601\uD558\uB294 AX \uCEE8\uC124\uD305 \uC2A4\uD29C\uB514\uC624 ", /*#__PURE__*/React.createElement("span", { className: "font-sans", lang: "en" }, "Atelier AX")), /*#__PURE__*/
+    React.createElement("h2", { id: "atl-h", className: "atl__t font-ko" }, "\uC544\uB730\uB9AC\uC5D0 AX \u2014 \uC5C5\uBB34\uB97C \uB2E4\uC2DC \uC124\uACC4\uD558\uACE0,", /*#__PURE__*/React.createElement("br", null), "\uC791\uB3D9\uD558\uB294 AI\uAE4C\uC9C0."), /*#__PURE__*/
+    React.createElement("p", { className: "atl__lead font-ko" }, "2026\uB144 \uC11C\uC6B8\uC5D0\uC11C \uAC1C\uC778\uC0AC\uC5C5\uC790\uB85C \uCD9C\uBC94\uD55C 1\uC778 AX \uCEE8\uC124\uD305 \uC2A4\uD29C\uB514\uC624\uC758 \uB300\uD45C\uC785\uB2C8\uB2E4. \uAE30\uC5C5\uC758 \uC5C5\uBB34\uB97C \uC9C4\uB2E8\uD558\uACE0, AI\uC640 \uC790\uB3D9\uD654\uB97C \uACB0\uD569\uD574 \uC2E4\uC81C\uB85C \uC6B4\uC601\uD560 \uC218 \uC788\uB294 \uC2DC\uC2A4\uD15C\uC73C\uB85C \uAD6C\uD604\uD569\uB2C8\uB2E4."), /*#__PURE__*/
+    React.createElement("p", { className: "atl__motto font-myeongjo" }, "\u201C\uAE30\uD68D\uD55C \uC0AC\uB78C\uC774 \uB9CC\uB4E4\uACE0, \uB9CC\uB4E0 \uC0AC\uB78C\uC774 \uC124\uBA85\uD569\uB2C8\uB2E4.\u201D")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "atl__grid" }, /*#__PURE__*/
+    React.createElement("figure", { className: "atl__shot atl__shot--home reveal" }, /*#__PURE__*/
+    React.createElement("a", { href: ATELIER.url, target: "_blank", rel: "noreferrer", "aria-label": "\uC544\uB730\uB9AC\uC5D0 AX \uACF5\uC2DD \uC0AC\uC774\uD2B8 \uC5F4\uAE30" }, /*#__PURE__*/
+    React.createElement("img", { src: "images/atelier/home-1280.jpg", alt: "\uC544\uB730\uB9AC\uC5D0 AX \uACF5\uC2DD \uC0AC\uC774\uD2B8 \uCCAB \uD654\uBA74 \u2014 \u2018\uC5C5\uBB34\uB97C \uB2E4\uC2DC \uC124\uACC4\uD558\uACE0, \uC791\uB3D9\uD558\uB294 AI\uAE4C\uC9C0.\u2019", width: "1280", height: "800", loading: "lazy", decoding: "async" })
+    ), /*#__PURE__*/
+    React.createElement("figcaption", { className: "font-ko" }, "\uACF5\uC2DD \uC0AC\uC774\uD2B8 \xB7 atelier-ax.vercel.app")
+    ), /*#__PURE__*/
+    React.createElement("ol", { className: "atl__svc reveal" },
+    ATELIER.services.map(([n, t, d]) => /*#__PURE__*/
+    React.createElement("li", { key: n }, /*#__PURE__*/React.createElement("b", { className: "font-sans" }, n), /*#__PURE__*/React.createElement("h3", { className: "font-ko" }, t), /*#__PURE__*/React.createElement("p", { className: "font-ko" }, d))
+    )
+    )
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "atl__studio reveal" }, /*#__PURE__*/
+    React.createElement("figure", { className: "atl__shot" }, /*#__PURE__*/
+    React.createElement("a", { href: ATELIER.url + "studio/", target: "_blank", rel: "noreferrer", "aria-label": "Atelier AX Studio Demo \uC5F4\uAE30" }, /*#__PURE__*/
+    React.createElement("img", { src: "images/atelier/studio-1280.jpg", alt: "Atelier AX Studio Demo \u2014 \uC544\uC774\uB514\uC5B4\uB97C \uC124\uBA85\uD558\uBA74 AI \uD300\uC774 \uAE30\uD68D\uBD80\uD130 \uAC80\uC99D\uAE4C\uC9C0 \uB2E8\uACC4\uBCC4\uB85C \uBCF4\uC5EC \uC8FC\uB294 \uACF5\uAC1C \uC2DC\uC5F0", width: "1280", height: "800", loading: "lazy", decoding: "async" })
+    ), /*#__PURE__*/
+    React.createElement("figcaption", { className: "font-ko" }, "Studio Demo \xB7 \uACF5\uAC1C \uC2DC\uC5F0(\uAC00\uC0C1 \uB370\uC774\uD130)")
+    ), /*#__PURE__*/
+    React.createElement("div", { className: "atl__studio-txt" }, /*#__PURE__*/
+    React.createElement("p", { className: "atl__k2 font-sans" }, "STUDIO DEMO"), /*#__PURE__*/
+    React.createElement("h3", { className: "font-ko" }, "AI \uD300\uC774 \uC77C\uD558\uB294 \uACFC\uC815\uC744 \uC9C1\uC811 \uC870\uC791\uD574 \uBCF4\uB294 \uC2DC\uC5F0"), /*#__PURE__*/
+    React.createElement("ol", { className: "atl__steps font-ko" }, ATELIER.steps.map((s, i) => /*#__PURE__*/React.createElement("li", { key: s }, /*#__PURE__*/React.createElement("i", { className: "font-sans" }, i + 1), s))), /*#__PURE__*/
+    React.createElement("p", { className: "atl__gate font-ko" }, /*#__PURE__*/React.createElement("b", null, "\uC0AC\uB78C\uC774 \uC2B9\uC778\uD558\uB294 \uAD00\uBB38 4\uACF3"), " \u2014 AI\uB294 \uC2E4\uD589\uD558\uACE0, \uC0AC\uB78C\uC740 \uC2B9\uC778\uD558\uBA70, \uBAA8\uB4E0 \uB2E8\uACC4\uAC00 \uAE30\uB85D\uC73C\uB85C \uB0A8\uC2B5\uB2C8\uB2E4.")
+    )
+    ), /*#__PURE__*/
+    React.createElement("dl", { className: "atl__facts font-ko reveal" },
+    ATELIER.facts.map(([k, v]) => /*#__PURE__*/React.createElement("div", { key: k }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "atl__acts reveal" }, /*#__PURE__*/
+    React.createElement("a", { className: "btn atl__go", href: ATELIER.url, target: "_blank", rel: "noreferrer" }, "\uACF5\uC2DD \uC0AC\uC774\uD2B8 ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })), /*#__PURE__*/
+    React.createElement("a", { className: "btn btn--ghost", href: ATELIER.url + "studio/", target: "_blank", rel: "noreferrer" }, "Studio Demo ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 })), /*#__PURE__*/
+    React.createElement("a", { className: "btn btn--ghost", href: ATELIER.url + "contact/", target: "_blank", rel: "noreferrer" }, "AX \uC0C1\uB2F4 \uC2E0\uCCAD ", /*#__PURE__*/React.createElement(ArrowUpRight, { size: 14 }))
+    ), /*#__PURE__*/
+    React.createElement("p", { className: "atl__note font-ko" }, "\uD655\uC778\uB41C \uC815\uBCF4\uB9CC \uC801\uC2B5\uB2C8\uB2E4 \u2014 \uACE0\uAC1D \uC2E4\uC801 \xB7 \uC131\uACFC \uC218\uCE58 \xB7 \uD6C4\uAE30\uB294 \uC2E3\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4. \uBC95\uBB34\uBC95\uC778 \uACBD\uAD6D\uC740 \uC544\uB730\uB9AC\uC5D0 AX\uC758 \uACE0\uAC1D\uC774\uB098 \uD611\uB825 \uAE30\uAD00\uC774 \uC544\uB2C8\uBA70, \uC9D1\uCE90\uCE58 \xB7 \uAD6D\uC815 \uD55C\uB208\uC5D0 \uB4F1\uC740 \uB300\uD45C \uAC1C\uC778 \uD504\uB85C\uC81D\uD2B8\uC785\uB2C8\uB2E4.")
+    )
+    ));
+
+}
 
 function AXCommand() {
   const sec = React.useRef(null),stage = React.useRef(null);
@@ -3481,4 +3547,4 @@ function SectionHead({ no, ko, en, lead }) {
 
 }
 
-Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, MobileReel, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
+Object.assign(window, { Nav, IntroSequence, HeroClassic, Signature, MobileReel, AtelierSection, EntryTracks, CaseIndex, AXCommand, ArtifactsSection, PolicySection, ResearchArchive, Marquee, Composite, Ledger, Trajectory, Lectures, Channels, About, Contact, Footer, SectionHead });
