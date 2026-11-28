@@ -425,11 +425,11 @@ function IntroSequence() {
 /* ============================================================ SIGNATURE — 부동산 × AI 두 작품(V15)
  * 첫 화면 바로 뒤: 직접 만들어 부동산 현장에서 시연한 서비스 2종. 그다음 흐름이 컨설팅(법률 AX) → 정책.
  * 사실만 — 보도(한국경제 · 중앙일보 실명, 2026. 11. 11) · 시연(9.30 코엑스 KREMA AI 전시관 · 11.11 부동산산업의 날) ·
- * 커밋 204 · LCP 5.2→2.0초(Résumé) · 필드워크 태그(실지조사 5단계 · 조문 24 · 지목 28). ‘AI 모델로 추천’이라 쓰지 않는다 — AI 로 만든 부동산 제품 */
+ * LCP 5.2→2.0초 · 느린 4G(커밋 b876cb9 · 커밋 수는 배지에 쓰지 않음) · 필드워크 태그(실지조사 5단계 · 조문 24 · 지목 28). ‘AI 모델로 추천’이라 쓰지 않는다 — AI 로 만든 부동산 제품 */
 const SIGNATURE = [
 { id: "sig-zipcatch", no: "Ⅰ", kind: "청약 · 공공임대 맞춤 추천", name: "ZipCatch", ko: "집캐치",
   line: "흩어진 청약 · 임대 공고 → 조건 3단계로 지원 가능 후보 정리",
-  proof: ["한국경제 · 중앙일보 실명 보도", "공개 발표 · 시연 2회", "커밋 204 · LCP 5.2→2.0초"],
+  proof: ["한국경제 · 중앙일보 실명 보도", "공개 발표 · 시연 2회", "LCP 5.2→2.0초 · 느린 4G"],
   theater: "zc-home", go: ["써 보기", "https://zipcatch.vercel.app"],
   more: [["보도 원문", "https://www.hankyung.com/article/202611110211i"], ["제품 상세", "#ed-09"]] },
 { id: "sig-fieldwork", no: "Ⅱ", kind: "감정평가 3D 실지조사", name: "Appraiser Fieldwork", ko: "감정평가사 필드워크",
@@ -574,7 +574,7 @@ const CASE_KIND = { actual: "실제 수행", demo: "공개 시연", future: "향
 const CASE_INDEX = [
 { id: "bid", ko: "정비사업 입찰·용역비 분석 시스템", en: "Redevelopment Bid & Service Fee Analysis", kind: "actual", line: "흩어진 입찰 · 용역비 → 정기 수집해 단가 비교 기준선으로", badge: "사내 내부 기준선" },
 { id: "gwangmyeong", ko: "광명시흥 공익사업 보상자료 분석", en: "Gwangmyeong-Siheung Compensation Analysis", kind: "actual", line: "방대한 보상자료 → 절차 · 쟁점 뼈대로 재구성", badge: "77장 구조화" },
-{ id: "transformation", ko: "법률회사 AI 전환·업무혁신 사례", en: "Legal AX & Process Innovation", kind: "actual", line: "반대하던 송무팀 설득 → 상급자 검수 후 전사 적용", badge: "AX 3종 전사 온보딩" },
+{ id: "transformation", ko: "법률회사 AI 전환·업무혁신 사례", en: "Legal AX & Process Innovation", kind: "actual", line: "담당자와 역할 분담 공동 설계 → 상급자 검수 후 공식 도입", badge: "AX 3종 공식 도입" },
 { id: "automation", ko: "송무 실무 프로세스 개선 — 고객 메일 분류·급여명세서 자동화", en: "Workflow Automation", kind: "actual", line: "수작업 메일 · 명세서 → 분류 · 발송 자동화와 예외 처리", badge: "급여명세서 사내 운영" },
 { id: "reg-monitor", ko: "법령·규제 변화 관제 시스템", en: "RE:INTELLIGENCE · Regulatory Monitoring", kind: "actual", line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 검토 큐", badge: "사내 구축" },
 { id: "assembly", ko: "정비사업 총회결의 위험 검토 시스템", en: "Assembly Risk Engine", kind: "actual", line: "명부 · 위임장 수작업 대조 → 정족수 시뮬레이션", badge: "사내 구축" },
@@ -1169,7 +1169,7 @@ function FieldworkStrip() {
 /* ============================================================ TRAJECTORY */
 const TRAJECTORY = [
 { id: "tl-gyunggook", group: "work", year: "Now", tag: "PRESENT", color: "var(--sky)", title: "법무법인 경국 전략기획실 — 사원 (2026. 6 – 재직 중)",
-  desc: "법률 AI 전환을 기획·구축 — 법령·규제 변화 관제 · 정비사업 총회결의 위험 검토 · 공사도급계약 변경 위험 분석 시스템을 만들고, 업무를 빼앗긴다며 반발한 송무팀에 역할 분담을 제시해 상급자 검수를 거쳐 전사 업무에 온보딩. 정비사업 공공입찰·용역비 데이터 정기 수집·정형화(단가 비교 기준선), 광명시흥 3기 신도시 보상자료 분석(발표자료 77장), 급여명세서 자동 발송 · 고객 메일 분류, 송무 지원(소장 편집 · 전자공탁 · 법원 외근)과 법률 콘텐츠 제작.", proof: "cases.html", proofLabel: "실무 사례집 보기" },
+  desc: "법률 AI 전환을 기획·구축 — 법령·규제 변화 관제 · 정비사업 총회결의 위험 검토 · 공사도급계약 변경 위험 분석 시스템을 만들고, 송무 담당자들과 역할 분담(반복 대조는 프로그램, 판단은 담당자)을 함께 정해 상급자 검수를 거쳐 공식 도입(전 구성원 사용). 정비사업 공공입찰·용역비 데이터 정기 수집·정형화(단가 비교 기준선), 광명시흥 3기 신도시 보상자료 분석(발표자료 77장), 급여명세서 자동 발송 · 고객 메일 분류, 송무 지원(소장 편집 · 전자공탁 · 법원 외근)과 법률 콘텐츠 제작.", proof: "cases.html", proofLabel: "실무 사례집 보기" },
 { id: "tl-krema-intern", group: "edu", year: "2026", color: "var(--pink)", title: "한국부동산마케팅협회 (KREMA) — 서울시 매력일자리 3기 교육생 (2026. 4 ~ 6)",
   desc: "서울시 매력일자리 3기 교육생으로 AI 활용 마케팅기획자 양성과정에 참여했습니다(교육과정 · 경력 아님). 수료 후 회원사 매칭으로 법무법인 경국에 입사했습니다." },
 { id: "tl-rei-day", group: "public", year: "2026", color: "var(--pink)", title: "제11회 부동산산업의 날 — KREMA 홍보부스 집캐치 발표 · 시연 · 내빈 응대",
@@ -1557,29 +1557,29 @@ const TOOL_META = {
  * 건축 모형(city.js)은 01 · 03 과 실무(보상자료)에서만 그리고, 04–06 을 고르면 캔버스 장면을 내린다. */
 const AX_SYSTEMS = [
 { id: "ax-reintel", number: "01", group: "A", koreanTitle: "법령·규제 변화 관제 시스템", englishName: "RE:INTELLIGENCE · Regulatory Monitoring",
-  line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 변호사 검토 큐", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
+  line: "흩어진 법령 · 고시 변화 → 사업지 · 단계별 변호사 검토 큐", badges: ["사내 구축", "상급자 검수 · 공식 도입"],
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "정비사업은 사업 단계 · 토지이용규제 · 조례 · 고시 · 행정절차의 변화에 영향을 받습니다. 서로 다른 출처를 손으로 확인하면 검토 누락이 생길 수 있습니다.",
   solution: "사업지를 기준으로 법령 · 고시 · 조례 · 행정 공고의 변화를 모으고, 그 사업의 어느 단계와 부지의 어느 요소에 관련되는지 정리해 변호사 검토로 올리는 구조를 설계했습니다.",
-  built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 전사 업무에 온보딩했습니다. 실제 화면과 자료는 공개하지 않으며, 이 화면의 사업지 · 변경은 가상입니다.",
+  built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 사무소에 공식 도입했고, 전 구성원이 사용합니다. 실제 화면과 자료는 공개하지 않으며, 이 화면의 사업지 · 변경은 가상입니다.",
   human: "감지된 변경이 그 사업에 어떤 법적 효력을 갖는지는 변호사가 판단합니다. 시스템은 검토 대상을 드러낼 뿐입니다.",
   interaction: "사업지 A/B/C 를 고르면 필지 · 건물 배치 · 사업 단계가 함께 바뀌고, 규제 레이어를 고르면 그 레이어가 부지의 어느 부분에 걸리는지 보입니다.",
   demoPath: null, evidence: "career.html#practice-strategy" },
 { id: "ax-assembly", number: "02", group: "A", koreanTitle: "정비사업 총회결의 위험 검토 시스템", englishName: "Assembly Risk Engine",
-  line: "명부 · 위임장 수작업 대조 → 의결권 · 정족수 시뮬레이션", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
+  line: "명부 · 위임장 수작업 대조 → 의결권 · 정족수 시뮬레이션", badges: ["사내 구축", "상급자 검수 · 공식 도입"],
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "조합원 명부 · 의결권 · 위임장 · 소집 통지 · 정족수 · 안건별 결과 사이의 불일치를 사람이 반복해서 대조해야 합니다.",
   solution: "서류를 서로 맞대는 대조 규칙을 정하고, 맞지 않는 곳을 '확인 필요' 예외 목록으로 모으는 구조를 설계했습니다.",
-  built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 전사 업무에 온보딩했습니다. 실제 명부 · 서류는 공개하지 않으며, 이 화면의 총회 · 조합원 · 수치는 가상입니다.",
+  built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 사무소에 공식 도입했고, 전 구성원이 사용합니다. 실제 명부 · 서류는 공개하지 않으며, 이 화면의 총회 · 조합원 · 수치는 가상입니다.",
   human: "총회결의의 효력이나 무효 여부는 시스템이 정하지 않습니다. 예외 목록을 보고 변호사가 판단합니다.",
   interaction: "안건을 고르면 의결권 · 정족수 대조가 바뀌고, 검토 규칙을 누르면 그 규칙이 보는 가상 서류와 해당 조합원 자리가 표시됩니다.",
   demoPath: null, evidence: "career.html#practice-strategy" },
 { id: "ax-contract", number: "03", group: "A", koreanTitle: "공사도급계약 변경 위험 분석 시스템", englishName: "Contract Risk Intelligence",
-  line: "조항 변경 누락 위험 → 조항 단위 비교 · 공사비 증감 · 승인", badges: ["사내 구축", "상급자 검수 · 전사 온보딩"],
+  line: "조항 변경 누락 위험 → 조항 단위 비교 · 공사비 증감 · 승인", badges: ["사내 구축", "상급자 검수 · 공식 도입"],
   category: "firm-practice", ownership: "law-firm-work", implementationStatus: "internal-built",
   problem: "계약 변경에 따라 공사 범위 · 공사비 · 지급조건 · 책임 부담이 달라질 수 있고, 두 계약서를 눈으로 비교하면 바뀐 조항을 놓치기 쉽습니다.",
   solution: "변경 전 · 후 계약서를 조항 단위로 맞대고, 바뀐 조항을 대금 · 책임 · 손해배상 같은 검토 분류에 걸어 표시하는 구조를 설계했습니다.",
-  built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 전사 업무에 온보딩했습니다. 실제 계약서는 공개하지 않으며, 이 화면의 건축물 · 계약 조항은 가상입니다.",
+  built: "법무법인 경국 사내에서 구축했고, 상급자 검수를 거쳐 사무소에 공식 도입했고, 전 구성원이 사용합니다. 실제 계약서는 공개하지 않으며, 이 화면의 건축물 · 계약 조항은 가상입니다.",
   human: "공사비 증액의 크기나 법적 책임의 유불리는 시스템이 계산하지 않습니다. 바뀐 곳만 보여 주고, 판단은 변호사가 내립니다.",
   interaction: "변경 전 · 후 손잡이를 움직이면 건축물의 층수가 바뀌고, 그 변경과 연결된 계약 조항과 검토 항목이 차례로 강조됩니다.",
   demoPath: "legal-ax.html#task=contract&field=realestate", evidence: "career.html#practice-strategy" },

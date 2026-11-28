@@ -34,10 +34,10 @@
 - `npm run seed:build` — kb.js 변경 후 필수
 - `npm run build:images` — 사진 추가 시(AVIF/WebP → images/opt/, sections.jsx `OPT` 맵)
 - `npm run build:resume-pdf` — resume.html · resume.css 를 고친 뒤 필수(로컬은 NODE_PATH=gamgak/node_modules CHROME_PATH=설치된 chrome.exe)(A4 1쪽 resume.pdf · 지문 docs/resume-pdf.json, 테스트가 대조)
-- `npm test` — 130건 모두 통과해야 커밋(ax-lab 은 `cd ax-lab && npm test` 36건 별도)
+- `npm test` — 143건 모두 통과해야 커밋(ax-lab 은 `cd ax-lab && npm test` 36건 별도)
 
 ## 캐시 버전 (파일 바꾸면 4페이지 모두 올리기)
-`styles.css?v=42` · `features.css?v=39` · `dist/sections.js?v=74` · `bgm.js?v=1`(index · gallery · career · lecture · cases · resume · story) · `dist/app.js?v=15` · `chatbot.js?v=20` · `mnav.js?v=15` · `dark.css?v=3`(i18n.js 안에서 지정) · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=11`(index 전용) · `intro.css?v=6`(index 전용) · `kb.js?v=20261128a` · `i18n.js?v=9`(사전 `i18n-en.js?v=7` 은 i18n.js 안에서 지정 — 사전 바꾸면 둘 다) · story: `story.css?v=3` · `story.js?v=1` · resume: `resume.css?v=4` · `resume.js?v=1` · 공통 손길 층: `polish.css?v=5` · `polish.js?v=7`(index · gallery · career · lecture · cases · resume) · cases: `cases.css?v=2` · `cases-data.js?v=1` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=4` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=3` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
+`styles.css?v=42` · `features.css?v=39` · `dist/sections.js?v=75` · `bgm.js?v=1`(index · gallery · career · lecture · cases · resume · story) · `dist/app.js?v=15` · `chatbot.js?v=20` · `mnav.js?v=15` · `dark.css?v=3`(i18n.js 안에서 지정) · `cine.js?v=3` · `cine.css?v=4` · `city.js?v=3`(지연 로드 · AX_ASSETS) · `city.css?v=11`(index 전용) · `intro.css?v=6`(index 전용) · `kb.js?v=20261128b` · `i18n.js?v=10`(사전 `i18n-en.js?v=8` 은 i18n.js 안에서 지정 — 사전 바꾸면 둘 다) · story: `story.css?v=3` · `story.js?v=1` · resume: `resume.css?v=4` · `resume.js?v=1` · 공통 손길 층: `polish.css?v=5` · `polish.js?v=7`(index · gallery · career · lecture · cases · resume) · cases: `cases.css?v=2` · `cases-data.js?v=2` · `cases-render.js?v=1` · `cases.js?v=1` · legal-ax: `legal-ax.css?v=4` · `dist/legal-ax.js?v=2` · `legal-ax-data.js?v=1` · `legal-ax-domain.js?v=1` · trial-brief: `trial-brief.css?v=3` · `dist/trial-brief.js?v=1` · `trial-brief-data.js?v=1` · `trial-brief-domain.js?v=1`
 
 ## 규칙
 - 요청 = 바로 병합·배포. PR 만들고 대기 금지. 답변 짧게.
@@ -49,3 +49,5 @@
 - GitHub Pages 는 `.nojekyll` 로 Jekyll 을 건너뛴다(2026-11-10 Jekyll 빌드 실패로 인트로가 canonical 에 안 올라갔던 일) — 지우지 말 것.
 - Berlin 2022(OSZ TIEM 교육 · Vattenfall Wärme Berlin AG 인턴십): Vattenfall 추천서는 회사 내부 등급 문서 — 원문 · 사본 · 변형본을 저장소에 넣지 않는다(test/germany.test.mjs 가 검사). 사진은 참가자 얼굴 비식별, OSZ 증명서는 교장 서명 가림. 학위 · 자격 · 정규직으로 쓰지 않기
 - 증빙 PDF `assets/evidence/`(gallery #evidence-pdf): 공개본은 생년월일만 가림(성명 · 직인 · 발급번호 원본). 주민등록번호 · 주소가 있는 재직증명서 · 건강보험 확인서는 저장소에 넣지 않는다 — 제출용 원본은 로컬 `Documents/# 김유빈/증빙/` 에만. test/evidence.test.mjs 가 생년월일 · 주민번호 형식을 검사
+- 표현 원칙(서초청년센터 피드백 2026-11-25 · `docs/content-matrix.md` 표): ‘전사 온보딩’ 대신 ‘공식 도입 · 전 구성원 사용’, 반대 · 반발 · 설득 서사 대신 ‘역할 분담 공동 설계’, 조건 없는 0건 · 100% · 원천 차단 금지(대상 · 기간 · 방식 병기), 커밋 수 · 코드량 · 투입 시간은 첫 줄 · 배지에 쓰지 않음, 구현은 ‘AI 코딩 도구’ · 설계 · 검수는 본인으로 구분, Trial Brief 수치는 ‘가상 민사사건 3건 · 사전 삽입 15개 항목’ 조건과 함께
+- 금고(vault) 열쇠는 저장소에 두지 않는다 — `scripts/build-vault.mjs` 는 YK_VAULT_ID · YK_VAULT_PW · YK_VAULT_PIN 환경 변수로만(test/secrets.test.mjs)
