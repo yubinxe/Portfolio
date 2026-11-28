@@ -20,6 +20,7 @@ function App() {
         <IntroSequence />
         <HeroClassic />
         <Signature />
+        <MobileReel />
         <EntryTracks />
         <Ledger />
         <CaseIndex />
