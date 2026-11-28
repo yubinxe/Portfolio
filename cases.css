@@ -169,3 +169,10 @@ button,select,input,textarea{font:inherit;color:inherit}
   body.cs-print-bid .cs-hero,body.cs-print-bid .cs-case:not(#bid),body.cs-print-bid .cs-foot{display:none}
   body.cs-print-bid #bid .cs-b:not(:has(.cs-demo)){display:none}
 }
+/* V18 폰 — 머리띠 한 줄(뒤로 + 설정), 입력칸 16px(아이폰 확대 방지) */
+@media (max-width:560px){
+  .cs-top{flex-wrap:nowrap;gap:8px;padding:6px 14px}
+  .cs-back{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap}
+  .cs-nav{flex-wrap:nowrap;gap:6px;margin-left:auto}.cs-nav > a{display:none}
+}
+@media (max-width:760px){.cs input:not([type=checkbox]):not([type=radio]):not([type=range]),.cs select,.cs textarea{font-size:16px}}

@@ -31,8 +31,26 @@
       tag.classList.toggle("solo", !!(hd && hd.classList.contains("nav-hide")));
       if (nm !== cur) { cur = nm; tag.textContent = nm; /* 섹션 번호는 각 섹션 머리에만 — 여기 번호와 어긋나지 않게 이름만 */ tag.classList.toggle("on", !!nm); }
     }
-    addEventListener("scroll", function () { if (!tk) { tk = 1; requestAnimationFrame(upd); } }, { passive: true });
+    /* 이름표는 스크롤하는 동안만 — 멈추면 1.4초 뒤 접어 본문 첫 줄을 가리지 않는다 */
+    var idle = 0;
+    addEventListener("scroll", function () {
+      if (!tk) { tk = 1; requestAnimationFrame(upd); }
+      if (cur) tag.classList.add("on");
+      clearTimeout(idle); idle = setTimeout(function () { if (!tag.matches(":hover,:focus")) tag.classList.remove("on"); }, 1400);
+    }, { passive: true });
     addEventListener("resize", upd); setTimeout(upd, 600);
+  })();
+  /* 읽는 방향 — 아래로 내려 읽는 동안 html.yk-sdown(폰에서 말풍선 단추가 비켜 섬) · 위로 올리거나 맨 끝이면 해제 */
+  (function () {
+    var y0 = scrollY, t = 0, H = document.documentElement;
+    addEventListener("scroll", function () {
+      if (t) return; t = requestAnimationFrame(function () {
+        t = 0; var y = scrollY, end = y + innerHeight >= H.scrollHeight - 80;
+        if (y > y0 + 8 && y > 240 && !end) H.classList.add("yk-sdown");
+        else if (y < y0 - 8 || end || y < 240) H.classList.remove("yk-sdown");
+        if (Math.abs(y - y0) > 8) y0 = y;
+      });
+    }, { passive: true });
   })();
   var panel = document.createElement("div");
   panel.id = "mnav";

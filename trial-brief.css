@@ -269,3 +269,9 @@ a{color:var(--navy)}
 
 /* 상단바 고정 — 인쇄에서는 풀기 */
 @media print{.tb-top{position:static;background:none;backdrop-filter:none}}
+/* V18 폰 — 머리띠 고정 해제(세 줄이 화면 4분의 1), 입력칸 16px(아이폰 확대 방지) */
+@media (max-width:760px){
+  .tb-top{position:static;gap:8px 14px;padding:10px 0}
+  .tb-back{display:inline-flex;align-items:center;min-height:40px}
+  .tb input:not([type=checkbox]):not([type=radio]),.tb select,.tb textarea,.tb-top select{font-size:16px}
+}

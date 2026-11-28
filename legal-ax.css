@@ -309,3 +309,10 @@ h4 small{margin-left:6px;font-size:.72rem;font-weight:600;color:var(--soft)}
 
 /* 상단바 고정 — 인쇄에서는 풀기 */
 @media print{.lx-top{position:static;background:none;backdrop-filter:none}}
+/* V18 폰 — 머리띠 한 줄(상태 표시는 바로 아래 안내문과 같은 말이라 숨김), 입력칸 16px */
+@media (max-width:560px){
+  .lx-top{gap:8px;padding:8px 0}
+  .lx-top__state{display:none}
+  .lx-back{display:inline-flex;align-items:center;min-height:40px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+@media (max-width:760px){.lx input:not([type=checkbox]):not([type=radio]),.lx select,.lx textarea{font-size:16px}}
